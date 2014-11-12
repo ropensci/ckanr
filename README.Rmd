@@ -23,8 +23,63 @@ devtools::install_github("sckott/ckanr")
 library('ckanr')
 ```
 
-## NCDC v2 API data
+> Note: the default URL is for http://data.techno-science.ca/. You can change that in the `url` parameter
+
+## Changes
 
 ```{r}
+changes(limit = 2, as = "table")
+```
 
+## List datasets
+
+```{r}
+datasets(as = "table")
+```
+
+## List tags
+
+```{r}
+tag_list('aviation', as='table')
+```
+
+## Show tags
+
+Subset for readme brevity
+
+```{r}
+tag_show('Aviation')$packages[[1]][1:3]	
+```
+
+## List groups
+
+```{r}
+group_list(as='table')
+```
+
+## Show groups
+
+Subset for readme brevity
+
+```{r}
+group_show('communications', as='table')$users
+```
+
+## Show a package
+
+```{r}
+package_show('34d60b13-1fd5-430e-b0ec-c8bc7f4841cf', as='table')$resources
+```
+
+## Search for packages
+
+```{r}
+out <- package_search(q = '*:*', rows = 2, as="table")$results
+out[, !names(out) %in% 'resources']
+```
+
+## Search for resources
+
+```{r}
+resource_search(q = 'name:data', limit = 2, as='table')
 ```
