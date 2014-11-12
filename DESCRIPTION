@@ -1,0 +1,15 @@
+Package: ckanr
+Title: R clent for CKAN API.
+Description: R clent for CKAN API.
+Version: 0.0.1.99
+Date: 2014-11-12
+Authors@R: "Scott Chamberlain <myrmecocystus@gmail.com> [aut, cre]"
+License: MIT + file LICENSE
+LazyData: true
+URL: https://github.com/sckott/ckanr
+BugReports: http://www.github.com/sckott/ckanr/issues
+Imports:
+    httr,
+    jsonlite
+Suggests:
+    roxygen2

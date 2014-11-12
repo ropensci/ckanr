@@ -1,0 +1,30 @@
+ckanr
+=====
+
+```{r echo=FALSE}
+knitr::opts_chunk$set(
+  comment = "#>",
+  collapse = TRUE,
+  warning = FALSE, 
+  message = FALSE
+)
+```
+
+`ckanr` is an R client for the generic CKAN API - that is, plug in a base url for the CKAN instance of interest. 
+
+## Installation
+
+```{r eval=FALSE}
+install.packages("devtools")
+devtools::install_github("sckott/ckanr")
+```
+
+```{r}
+library('ckanr')
+```
+
+## NCDC v2 API data
+
+```{r}
+
+```
