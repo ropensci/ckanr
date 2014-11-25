@@ -10,7 +10,7 @@ ckanr
 
 ```r
 install.packages("devtools")
-devtools::install_github("sckott/ckanr")
+devtools::install_github("ropensci/ckanr")
 ```
 
 
@@ -300,8 +300,8 @@ out[, !names(out) %in% 'resources']
 #> 1                         NA, Location, Location, 2014-10-28T20:13:11.572558, active, da88c5a2-3766-41ea-a75b-9c87047cc528
 #> 2 NA, Computing Technology, Computing Technology, 2014-10-28T14:59:21.386177, active, 5371dc28-9ce8-4f21-9afb-1f155f132bfe
 #>   tracking_summary.total tracking_summary.recent
-#> 1                     28                      26
-#> 2                     22                      19
+#> 1                     34                       9
+#> 2                     24                       8
 #>                                                                                                                                                                                                       groups
 #> 1                                                      Location, , http://data.techno-science.ca/uploads/group/20141024-162528.8786547location.jpg, Location, 770fc9c0-d4f3-48b0-a4ee-e00c6882df1d, location
 #> 2 Scientific Instrumentation, , http://data.techno-science.ca/uploads/group/20141024-162549.1925831sciinst.jpg, Scientific Instrumentation, b98ff457-2031-48b6-b681-9adb3afc501b, scientific-instrumentation
@@ -374,3 +374,11 @@ resource_search(q = 'name:data', limit = 2, as='table')
 #> 1           NA        0 a22e6741-3e89-4db0-a802-ba594b1c1fad            NA
 #> 2           NA        1 da1f8585-521d-47ef-8ead-7832474a3421            NA
 ```
+
+## Meta
+
+* Please [report any issues or bugs](https://github.com/ropensci/ckanr/issues).
+* License: MIT
+* Get citation information for `ckanr` in R doing `citation(package = 'ckanr')`
+
+[![ropensci](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
