@@ -21,7 +21,7 @@
 #' resource_search(q = 'name:data', as='table')
 #' resource_search(q = 'name:data', limit = 2, as='table')
 #' }
-resource_search <- function(q='*:*', sort=NULL, offset=NULL, limit=NULL,
+resource_search <- function(q, sort=NULL, offset=NULL, limit=NULL,
   url = 'http://data.techno-science.ca', as='list', ...)
 {
   body <- cc(list(query=q, order_by=sort, offset=offset, limit=limit))

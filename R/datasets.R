@@ -13,6 +13,6 @@
 datasets <- function(offset = 0, limit = 31, url = 'http://data.techno-science.ca', as='list', ...)
 {
   body <- cc(list(offset = offset, limit = limit))
-  res <- ckan_POST(url, 'package_list', body = body, ...)
+  res <- ckan_POST(url, method='package_list', body = body, ...)
   switch(as, json = res, list = jsl(res), table = jsd(res))
 }
