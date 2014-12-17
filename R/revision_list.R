@@ -1,4 +1,4 @@
-#' Return a list of the IDs of the site’s revisions.
+#' Return a list of the IDs of the site's revisions.
 #'
 #' @export
 #' @template args

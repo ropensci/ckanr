@@ -13,10 +13,6 @@ ping(url = "http://data.techno-science.ca", as = "logical", ...)
 returns json.}
 
 \item{...}{Curl args passed on to \code{\link[httr]{POST}}}
-
-\item{offset}{(numeric) Where to start getting activity items from (optional, default: 0)}
-
-\item{limit}{(numeric) The maximum number of activities to return (optional, default: 31)}
 }
 \description{
 Ping a CKAN server to test that it's up or down.

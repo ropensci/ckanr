@@ -2,7 +2,7 @@
 % Please edit documentation in R/revision_list.R
 \name{revision_list}
 \alias{revision_list}
-\title{Return a list of the IDs of the site’s revisions.}
+\title{Return a list of the IDs of the site's revisions.}
 \usage{
 revision_list(url = "http://data.techno-science.ca", as = "list", ...)
 }
@@ -16,7 +16,7 @@ data to data.frame's when possible, so the result can vary.}
 \item{...}{Curl args passed on to \code{\link[httr]{POST}}}
 }
 \description{
-Return a list of the IDs of the site’s revisions.
+Return a list of the IDs of the site's revisions.
 }
 \examples{
 \donttest{
