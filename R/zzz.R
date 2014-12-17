@@ -17,7 +17,7 @@ jsd <- function(x){
 }
 
 ckan_POST <- function(url, method, body=NULL, ...){
-  res <- if(is.null(body)) POST(file.path(url, ck(), method), ctj(), ...) else POST(file.path(url, ck(), method), body = body, ctj(), ...)
+  res <- if(is.null(body)) POST(file.path(url, ck(), method), ctj(), ...) else POST(file.path(url, ck(), method), body = body, ...)
   stop_for_status(res)
   content(res, "text")
 }
@@ -30,4 +30,4 @@ pluck <- function(x, name, type) {
   }
 }
 
-ctj <- function() content_type_json()
+ctj <- function() httr::content_type_json()
