@@ -20,3 +20,7 @@ resource_show <- function(id, url = 'http://data.techno-science.ca', as='list', 
 
 # nhmbase <- "http://data.nhm.ac.uk"
 # key <- "e0deeb4b-7d00-41a2-8679-8cb588718513"
+
+# res <- GET("http://data.nhm.ac.uk/api/3/action/dashboard_activity_list",
+#     add_headers(`Authorization` = key))
+# content(res)
