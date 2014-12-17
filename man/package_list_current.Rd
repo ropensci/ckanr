@@ -2,7 +2,7 @@
 % Please edit documentation in R/package_list_current.R
 \name{package_list_current}
 \alias{package_list_current}
-\title{List groups.}
+\title{List current packages with resources.}
 \usage{
 package_list_current(offset = 0, limit = 31,
   url = "http://data.techno-science.ca", as = "list", ...)
@@ -31,7 +31,7 @@ names are in this list will be returned}
 \item{all_fields}{(logical) Return full group dictionaries instead of just names. Default: FALSE}
 }
 \description{
-List groups.
+List current packages with resources.
 }
 \examples{
 \donttest{

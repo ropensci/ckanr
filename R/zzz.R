@@ -16,8 +16,8 @@ jsd <- function(x){
   tmp$result
 }
 
-ckan_POST <- function(url, method, body, ...){
-  res <- POST(file.path(url, ck(), method), body = body, ...)
+ckan_POST <- function(url, method, body=NULL, ...){
+  res <- if(is.null(body)) POST(file.path(url, ck(), method), ctj(), ...) else POST(file.path(url, ck(), method), body = body, ctj(), ...)
   stop_for_status(res)
   content(res, "text")
 }
@@ -29,3 +29,5 @@ pluck <- function(x, name, type) {
     vapply(x, "[[", name, FUN.VALUE = type)
   }
 }
+
+ctj <- function() content_type_json()

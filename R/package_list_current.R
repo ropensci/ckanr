@@ -1,4 +1,4 @@
-#' List groups.
+#' List current packages with resources.
 #'
 #' @export
 #'
