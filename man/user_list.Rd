@@ -2,7 +2,7 @@
 % Please edit documentation in R/user_list.R
 \name{user_list}
 \alias{user_list}
-\title{Return a list of the site’s user accounts.}
+\title{Return a list of the site's user accounts.}
 \usage{
 user_list(q = NULL, order_by = NULL,
   url = "http://data.techno-science.ca", as = "list", ...)
@@ -21,7 +21,7 @@ data to data.frame's when possible, so the result can vary.}
 \item{...}{Curl args passed on to \code{\link[httr]{POST}}}
 }
 \description{
-Return a list of the site’s user accounts.
+Return a list of the site's user accounts.
 }
 \examples{
 \donttest{

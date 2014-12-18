@@ -2,7 +2,7 @@
 % Please edit documentation in R/package_revision_list.R
 \name{package_revision_list}
 \alias{package_revision_list}
-\title{Return a dataset (package)’s revisions as a list of dictionaries.}
+\title{Return a dataset (package's) revisions as a list of dictionaries.}
 \usage{
 package_revision_list(id, url = "http://data.techno-science.ca",
   as = "list", ...)
@@ -19,7 +19,7 @@ data to data.frame's when possible, so the result can vary.}
 \item{...}{Curl args passed on to \code{\link[httr]{POST}}}
 }
 \description{
-Return a dataset (package)’s revisions as a list of dictionaries.
+Return a dataset (package's) revisions as a list of dictionaries.
 }
 \examples{
 \donttest{

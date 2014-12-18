@@ -1,8 +1,7 @@
-#' Return a list of the site’s user accounts.
+#' Return a list of the site's user accounts.
 #'
 #' @export
 #' @param id (character) Package identifier.
-#' @param order_by (character) Which field to sort the list by (optional, default: 'name')
 #' @param offset (numeric) Where to start getting activity items from (optional, default: 0)
 #' @param limit (numeric) The maximum number of activities to return (optional, default: 31)
 #' @template args

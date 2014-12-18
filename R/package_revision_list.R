@@ -1,4 +1,4 @@
-#' Return a dataset (package)’s revisions as a list of dictionaries.
+#' Return a dataset (package's) revisions as a list of dictionaries.
 #'
 #' @export
 #' @param id (character) Package identifier.

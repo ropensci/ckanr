@@ -2,7 +2,7 @@
 % Please edit documentation in R/package_activity_list.R
 \name{package_activity_list}
 \alias{package_activity_list}
-\title{Return a list of the site’s user accounts.}
+\title{Return a list of the site's user accounts.}
 \usage{
 package_activity_list(id, offset = 0, limit = 31,
   url = "http://data.techno-science.ca", as = "list", ...)
@@ -21,11 +21,9 @@ uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to
 data to data.frame's when possible, so the result can vary.}
 
 \item{...}{Curl args passed on to \code{\link[httr]{POST}}}
-
-\item{order_by}{(character) Which field to sort the list by (optional, default: 'name')}
 }
 \description{
-Return a list of the site’s user accounts.
+Return a list of the site's user accounts.
 }
 \examples{
 \donttest{

@@ -1,4 +1,4 @@
-#' Return a list of the site’s user accounts.
+#' Return a list of the site's user accounts.
 #'
 #' @export
 #' @param q (character) Restrict the users returned to those whose names contain a string
