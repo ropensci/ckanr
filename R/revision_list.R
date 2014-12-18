@@ -12,4 +12,3 @@ revision_list <- function(url = 'http://data.techno-science.ca', as="list", ...)
   res <- ckan_POST(url, 'revision_list', ...)
   switch(as, json = res, list = jsl(res), table = jsd(res))
 }
-
