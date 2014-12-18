@@ -94,7 +94,7 @@ List datasets
 
 ```{r}
 nhmbase <- "http://data.nhm.ac.uk"
-datasets(as = "table", url = nhmbase)
+package_list(as = "table", url = nhmbase)
 ```
 
 List tags
