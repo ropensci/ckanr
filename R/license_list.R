@@ -1,4 +1,4 @@
-#' Return a dataset’s related items.
+#' Return the list of licenses available for datasets on the site.
 #'
 #' @export
 #' @param id (character) Package identifier.

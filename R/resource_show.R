@@ -13,7 +13,6 @@ resource_show <- function(id, url = 'http://data.techno-science.ca', as='list', 
   switch(as, json = res, list = jsl(res), table = jsd(res))
 }
 
-
 # res <- GET("http://data.nhm.ac.uk/api/3/action/resource_show?id=fefa4aca-61e0-4978-9507-040db59c1641&",
 #     add_headers(`Authorization` = key))
 # content(res)

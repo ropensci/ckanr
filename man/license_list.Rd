@@ -2,7 +2,7 @@
 % Please edit documentation in R/license_list.R
 \name{license_list}
 \alias{license_list}
-\title{Return a dataset’s related items.}
+\title{Return the list of licenses available for datasets on the site.}
 \usage{
 license_list(id, url = "http://data.techno-science.ca", as = "list", ...)
 }
@@ -18,7 +18,7 @@ data to data.frame's when possible, so the result can vary.}
 \item{...}{Curl args passed on to \code{\link[httr]{POST}}}
 }
 \description{
-Return a dataset’s related items.
+Return the list of licenses available for datasets on the site.
 }
 \examples{
 \donttest{
