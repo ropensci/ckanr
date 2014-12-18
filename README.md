@@ -68,37 +68,7 @@ changes(limit = 2, as = "table")
 
 ```r
 datasets(as = "table")
-#>  [1] "artifact-data-agriculture"                                  
-#>  [2] "artifact-data-aviation"                                     
-#>  [3] "artifact-data-bookbinding"                                  
-#>  [4] "artifact-data-chemistry"                                    
-#>  [5] "artifact-data-communications"                               
-#>  [6] "artifact-data-computing-technology"                         
-#>  [7] "artifact-data-domestic-technology"                          
-#>  [8] "artifact-data-energy-electric"                              
-#>  [9] "artifact-data-exploration-and-survey"                       
-#> [10] "artifact-data-fisheries"                                    
-#> [11] "artifact-data-forestry"                                     
-#> [12] "artifact-data-horology"                                     
-#> [13] "artifact-data-industrial-technology"                        
-#> [14] "artifact-data-lighting-technology"                          
-#> [15] "artifact-data-location-canada-agriculture-and-food-museum"  
-#> [16] "artifact-data-location-canada-aviation-and-space-museum"    
-#> [17] "artifact-data-location-canada-science-and-technology-museum"
-#> [18] "artifact-data-marine-transportation"                        
-#> [19] "artifact-data-mathematics"                                  
-#> [20] "artifact-data-medical-technology"                           
-#> [21] "artifact-data-meteorology"                                  
-#> [22] "artifact-data-metrology"                                    
-#> [23] "artifact-data-mining-and-metallurgy"                        
-#> [24] "artifact-data-motorized-ground-transportation"              
-#> [25] "artifact-data-non-motorized-ground-transportation"          
-#> [26] "artifact-data-on-loan"                                      
-#> [27] "artifact-data-photography"                                  
-#> [28] "artifact-data-physics"                                      
-#> [29] "artifact-data-printing"                                     
-#> [30] "artifact-data-railway-transportation"                       
-#> [31] "artifact-dataset-fire-fighting"
+#> Error in eval(expr, envir, enclos): could not find function "datasets"
 ```
 
 ## List tags
@@ -300,8 +270,8 @@ out[, !names(out) %in% 'resources']
 #> 1                         NA, Location, Location, 2014-10-28T20:13:11.572558, active, da88c5a2-3766-41ea-a75b-9c87047cc528
 #> 2 NA, Computing Technology, Computing Technology, 2014-10-28T14:59:21.386177, active, 5371dc28-9ce8-4f21-9afb-1f155f132bfe
 #>   tracking_summary.total tracking_summary.recent
-#> 1                     34                       9
-#> 2                     24                       8
+#> 1                     39                       2
+#> 2                     27                       3
 #>                                                                                                                                                                                                       groups
 #> 1                                                      Location, , http://data.techno-science.ca/uploads/group/20141024-162528.8786547location.jpg, Location, 770fc9c0-d4f3-48b0-a4ee-e00c6882df1d, location
 #> 2 Scientific Instrumentation, , http://data.techno-science.ca/uploads/group/20141024-162549.1925831sciinst.jpg, Scientific Instrumentation, b98ff457-2031-48b6-b681-9adb3afc501b, scientific-instrumentation
@@ -373,6 +343,349 @@ resource_search(q = 'name:data', limit = 2, as='table')
 #>   webstore_url position                          revision_id resource_type
 #> 1           NA        0 a22e6741-3e89-4db0-a802-ba594b1c1fad            NA
 #> 2           NA        1 da1f8585-521d-47ef-8ead-7832474a3421            NA
+```
+
+## Examples of different CKAN APIs
+
+### The Natural History Museum
+
+Website: [http://data.nhm.ac.uk/](http://data.nhm.ac.uk/)
+
+List datasets
+
+
+```r
+nhmbase <- "http://data.nhm.ac.uk"
+package_list(as = "table", url = nhmbase)
+#> [1] "bioacoustica"                               
+#> [2] "collection-artefacts"                       
+#> [3] "collection-indexlots"                       
+#> [4] "collection-specimens"                       
+#> [5] "crowdsourcing-the-collection"               
+#> [6] "natural-history-museum-library-and-archives"
+#> [7] "natural-history-museum-picture-library"     
+#> [8] "notes-from-nature"
+```
+
+List tags
+
+
+```r
+tag_list(as="table", url = nhmbase)
+#>   vocabulary_id      display_name                                   id
+#> 1            NA        arthropods f9245868-f4cb-4c85-a59d-11692db19e86
+#> 2            NA      bioacoustics 11faa593-7ccb-4a6f-8a97-c88ca8939624
+#> 3            NA      biodiversity bd09adfa-22d6-4318-9883-dde4595bcd10
+#> 4            NA Science uncovered 39440d40-f005-47c0-a8ae-2ac52a720236
+#> 5            NA             sound 4ae4457a-0f0e-4e0d-a168-cc27969ecd20
+#> 6            NA            su2014 0283e601-ae8a-4772-8031-4c76688bd4d3
+#> 7            NA          taxonomy c091064c-81c2-4cc8-a54e-2ff8ca8e28b0
+#>                name
+#> 1        arthropods
+#> 2      bioacoustics
+#> 3      biodiversity
+#> 4 Science uncovered
+#> 5             sound
+#> 6            su2014
+#> 7          taxonomy
+```
+
+
+```r
+tag_show('arthropods', as='table', url = nhmbase)
+#> $vocabulary_id
+#> NULL
+#> 
+#> $packages
+#> list()
+#> 
+#> $display_name
+#> [1] "arthropods"
+#> 
+#> $id
+#> [1] "f9245868-f4cb-4c85-a59d-11692db19e86"
+#> 
+#> $name
+#> [1] "arthropods"
+```
+
+Packages
+
+
+```r
+package_search(q = '*:*', rows = 2, as='table', url = nhmbase)
+#> $count
+#> [1] 8
+#> 
+#> $sort
+#> [1] "promoted asc, metadata_modified desc"
+#> 
+#> $facets
+#> named list()
+#> 
+#> $results
+#>             license_title maintainer relationships_as_object private
+#> 1 Creative Commons CCZero         NA                    NULL   FALSE
+#> 2 Creative Commons CCZero         NA                    NULL   FALSE
+#>   maintainer_email num_tags update_frequency
+#> 1               NA        1           weekly
+#> 2               NA        1           weekly
+#>                                     id           metadata_created
+#> 1 56e711e6-c847-4f99-915a-6894bb5c5dea 2014-12-08T16:39:22.346941
+#> 2 9dfb777e-2296-4800-a053-b1c80fd30bac 2014-12-15T13:20:25.858259
+#>            metadata_modified                 author author_email
+#> 1 2014-12-17T10:25:53.899364 Natural History Museum             
+#> 2 2014-12-17T10:27:59.426858 Natural History Museum         <NA>
+#>   temporal_extent  state version
+#> 1                 active      NA
+#> 2                 active      NA
+#>                                                                                  spatial
+#> 1 {"type":"Polygon","coordinates":[[[-180,82],[180,82],[180,-82],[-180,-82],[-180,82]]]}
+#> 2                                                                                       
+#>   license_id    type
+#> 1    cc-zero dataset
+#> 2    cc-zero dataset
+#>                                                                                                                                                                                                                                                                                                                                                                                                                                              resources
+#> 1                                                             fefa4aca-61e0-4978-9507-040db59c1641, datastore, NA, 2014-12-15T15:01:51.030533, NA, associatedMedia, 05ff2255-c38a-40c9-b657-4ccb55ab2feb, NA, cc-by, active, , Specimen records, dwc, 0, 0, NA, None, NA, NA, Specimens, 2014-12-08T16:43:25.016679, /datastore/dump/05ff2255-c38a-40c9-b657-4ccb55ab2feb, NA, 2014-12-15T15:01:50.892842, 0, 057be190-dc60-48ae-810a-e853af85b850, NA
+#> 2 c0775a70-a11b-4fb0-8c70-bf7830cd5bc3, datastore, NA, 2014-12-16T13:40:32.438294, NA, None, bb909597-dedf-427d-8c04-4c02b3a24db3, NA, , active, , Species level record denoting the presence of a taxon in the Museum collection., CSV, 0, 0, NA, Catalogue number, NA, NA, Index Lots, 2014-12-15T13:20:27.010266, /datastore/dump/bb909597-dedf-427d-8c04-4c02b3a24db3, NA, 2014-12-15T18:36:56.213560, 0, 9d0ee18c-1153-430e-8d55-d2273d7c5fa0, NA
+#>   num_resources tracking_summary.total tracking_summary.recent
+#> 1             1                      8                       8
+#> 2             1                     10                      10
+#>   dataset_type groups                      creator_user_id
+#> 1  Collections   NULL adf402e6-f82f-4545-8bbe-68634a349107
+#> 2  Collections   NULL adf402e6-f82f-4545-8bbe-68634a349107
+#>   relationships_as_subject         revision_timestamp
+#> 1                     NULL 2014-12-16T10:56:07.533454
+#> 2                     NULL 2014-12-15T13:20:25.858259
+#>   organization.description       organization.created
+#> 1                          2014-12-08T16:35:24.247079
+#> 2                          2014-12-08T16:35:24.247079
+#>       organization.title organization.name organization.revision_timestamp
+#> 1 Natural History Museum               nhm      2014-12-08T16:35:24.188888
+#> 2 Natural History Museum               nhm      2014-12-08T16:35:24.188888
+#>   organization.is_organization organization.state organization.image_url
+#> 1                         TRUE             active                       
+#> 2                         TRUE             active                       
+#>               organization.revision_id organization.type
+#> 1 a11d1487-e85b-453a-9ea7-d5ed17f875ed      organization
+#> 2 a11d1487-e85b-453a-9ea7-d5ed17f875ed      organization
+#>                        organization.id organization.approval_status
+#> 1 7854c918-d7eb-4341-96e9-3adfb8d636a0                     approved
+#> 2 7854c918-d7eb-4341-96e9-3adfb8d636a0                     approved
+#>                   name isopen url
+#> 1 collection-specimens   TRUE  NA
+#> 2 collection-indexlots   TRUE  NA
+#>                                                            notes
+#> 1  Specimen records from the Natural History Museum's collection
+#> 2 Index Lot records from the Natural History Museum's collection
+#>                              owner_org
+#> 1 7854c918-d7eb-4341-96e9-3adfb8d636a0
+#> 2 7854c918-d7eb-4341-96e9-3adfb8d636a0
+#>                                      license_url promoted
+#> 1 http://www.opendefinition.org/licenses/cc-zero     True
+#> 2 http://www.opendefinition.org/licenses/cc-zero     <NA>
+#>                  title                          revision_id
+#> 1 Collection specimens 406f4a2c-1bd7-4474-bb9c-68b71d60925e
+#> 2 Index Lot collection 85a92d0f-4081-4c58-a4be-2f27a7aced41
+#> 
+#> $search_facets
+#> named list()
+```
+
+
+```r
+package_show(id = "56e711e6-c847-4f99-915a-6894bb5c5dea", as="table", url = nhmbase)
+#> $domain
+#> [1] "data.nhm.ac.uk"
+#> 
+#> $owner_org
+#> [1] "7854c918-d7eb-4341-96e9-3adfb8d636a0"
+#> 
+#> $maintainer
+#> NULL
+#> 
+#> $relationships_as_object
+#> list()
+#> 
+#> $private
+#> [1] FALSE
+#> 
+#> $maintainer_email
+#> NULL
+#> 
+#> $revision_timestamp
+#> [1] "2014-12-16T10:56:07.533454"
+#> 
+#> $id
+#> [1] "56e711e6-c847-4f99-915a-6894bb5c5dea"
+#> 
+#> $metadata_created
+#> [1] "2014-12-08T16:39:22.346941"
+#> 
+#> $metadata_modified
+#> [1] "2014-12-17T10:25:53.899364"
+#> 
+#> $author
+#> [1] "Natural History Museum"
+#> 
+#> $author_email
+#> [1] ""
+#> 
+#> $state
+#> [1] "active"
+#> 
+#> $version
+#> NULL
+#> 
+#> $creator_user_id
+#> [1] "adf402e6-f82f-4545-8bbe-68634a349107"
+#> 
+#> $type
+#> [1] "dataset"
+#> 
+#> $resources
+#>                      resource_group_id _title_field cache_last_updated
+#> 1 fefa4aca-61e0-4978-9507-040db59c1641         None                 NA
+#>           revision_timestamp webstore_last_updated webstore_url
+#> 1 2014-12-15T15:01:51.030533                    NA           NA
+#>   datastore_active                                   id size
+#> 1             TRUE 05ff2255-c38a-40c9-b657-4ccb55ab2feb   NA
+#>   _image_licence  state hash      description format
+#> 1          cc-by active      Specimen records    dwc
+#>   tracking_summary.total tracking_summary.recent mimetype_inner  url_type
+#> 1                      0                       0             NA datastore
+#>   mimetype cache_url      name                    created
+#> 1       NA        NA Specimens 2014-12-08T16:43:25.016679
+#>                                                    url    _image_field
+#> 1 /datastore/dump/05ff2255-c38a-40c9-b657-4ccb55ab2feb associatedMedia
+#>                last_modified position                          revision_id
+#> 1 2014-12-15T15:01:50.892842        0 057be190-dc60-48ae-810a-e853af85b850
+#>   resource_type
+#> 1            NA
+#> 
+#> $num_resources
+#> [1] 1
+#> 
+#> $tags
+#>                          vocabulary_id display_name        name
+#> 1 7e4e2739-1697-4c99-82ee-e3c9fdebc468  Collections Collections
+#>           revision_timestamp  state                                   id
+#> 1 2014-12-08T16:39:22.346941 active d0ce043d-f8b5-4c57-9fad-58640b764f63
+#> 
+#> $title
+#> [1] "Collection specimens"
+#> 
+#> $tracking_summary
+#> $tracking_summary$total
+#> [1] 10
+#> 
+#> $tracking_summary$recent
+#> [1] 10
+#> 
+#> 
+#> $groups
+#> list()
+#> 
+#> $license_id
+#> [1] "cc-zero"
+#> 
+#> $relationships_as_subject
+#> list()
+#> 
+#> $validated_data_dict
+#> [1] "{\"owner_org\": \"7854c918-d7eb-4341-96e9-3adfb8d636a0\", \"maintainer\": null, \"relationships_as_object\": [], \"private\": false, \"maintainer_email\": null, \"num_tags\": 1, \"update_frequency\": \"weekly\", \"id\": \"56e711e6-c847-4f99-915a-6894bb5c5dea\", \"metadata_created\": \"2014-12-08T16:39:22.346941\", \"metadata_modified\": \"2014-12-17T10:25:53.899364\", \"author\": \"Natural History Museum\", \"author_email\": \"\", \"temporal_extent\": \"\", \"state\": \"active\", \"version\": null, \"spatial\": \"{\\\"type\\\":\\\"Polygon\\\",\\\"coordinates\\\":[[[-180,82],[180,82],[180,-82],[-180,-82],[-180,82]]]}\", \"license_id\": \"cc-zero\", \"type\": \"dataset\", \"resources\": [{\"resource_group_id\": \"fefa4aca-61e0-4978-9507-040db59c1641\", \"url_type\": \"datastore\", \"cache_last_updated\": null, \"revision_timestamp\": \"2014-12-15T15:01:51.030533\", \"webstore_last_updated\": null, \"webstore_url\": null, \"id\": \"05ff2255-c38a-40c9-b657-4ccb55ab2feb\", \"size\": null, \"_image_licence\": \"cc-by\", \"state\": \"active\", \"hash\": \"\", \"description\": \"Specimen records\", \"format\": \"dwc\", \"tracking_summary\": {\"total\": 0, \"recent\": 0}, \"mimetype_inner\": null, \"_title_field\": \"None\", \"mimetype\": null, \"cache_url\": null, \"name\": \"Specimens\", \"created\": \"2014-12-08T16:43:25.016679\", \"url\": \"/datastore/dump/05ff2255-c38a-40c9-b657-4ccb55ab2feb\", \"_image_field\": \"associatedMedia\", \"last_modified\": \"2014-12-15T15:01:50.892842\", \"position\": 0, \"revision_id\": \"057be190-dc60-48ae-810a-e853af85b850\", \"resource_type\": null}], \"num_resources\": 1, \"title\": \"Collection specimens\", \"tracking_summary\": {\"total\": 8, \"recent\": 8}, \"dataset_type\": [\"Collections\"], \"groups\": [], \"creator_user_id\": \"adf402e6-f82f-4545-8bbe-68634a349107\", \"relationships_as_subject\": [], \"revision_timestamp\": \"2014-12-16T10:56:07.533454\", \"name\": \"collection-specimens\", \"isopen\": true, \"url\": null, \"notes\": \"Specimen records from the Natural History Museum's collection\", \"license_title\": \"Creative Commons CCZero\", \"license_url\": \"http://www.opendefinition.org/licenses/cc-zero\", \"promoted\": \"True\", \"organization\": {\"description\": \"\", \"title\": \"Natural History Museum\", \"created\": \"2014-12-08T16:35:24.247079\", \"approval_status\": \"approved\", \"revision_timestamp\": \"2014-12-08T16:35:24.188888\", \"is_organization\": true, \"state\": \"active\", \"image_url\": \"\", \"revision_id\": \"a11d1487-e85b-453a-9ea7-d5ed17f875ed\", \"type\": \"organization\", \"id\": \"7854c918-d7eb-4341-96e9-3adfb8d636a0\", \"name\": \"nhm\"}, \"revision_id\": \"406f4a2c-1bd7-4474-bb9c-68b71d60925e\"}"
+#> 
+#> $num_tags
+#> [1] 1
+#> 
+#> $doi
+#> [1] "10.5519/0002965"
+#> 
+#> $name
+#> [1] "collection-specimens"
+#> 
+#> $isopen
+#> [1] TRUE
+#> 
+#> $url
+#> NULL
+#> 
+#> $notes
+#> [1] "Specimen records from the Natural History Museum's collection"
+#> 
+#> $license_title
+#> [1] "Creative Commons CCZero"
+#> 
+#> $extras
+#>                             package_id
+#> 1 56e711e6-c847-4f99-915a-6894bb5c5dea
+#> 2 56e711e6-c847-4f99-915a-6894bb5c5dea
+#> 3 56e711e6-c847-4f99-915a-6894bb5c5dea
+#> 4 56e711e6-c847-4f99-915a-6894bb5c5dea
+#>                                                                                    value
+#> 1                                                                                   True
+#> 2 {"type":"Polygon","coordinates":[[[-180,82],[180,82],[180,-82],[-180,-82],[-180,82]]]}
+#> 3                                                                                       
+#> 4                                                                                 weekly
+#>           revision_timestamp  state              key
+#> 1 2014-12-17T10:25:53.896847 active         promoted
+#> 2 2014-12-15T13:00:35.296296 active          spatial
+#> 3 2014-12-08T16:39:22.346941 active  temporal_extent
+#> 4 2014-12-08T16:39:22.346941 active update_frequency
+#>                            revision_id
+#> 1 3c599446-214f-462f-be0e-0f7abc2f2d8b
+#> 2 04dc3a9b-d2e8-4d29-95ca-3877b59f8ecb
+#> 3 74152f29-bd09-4633-8d23-e773e727dfdf
+#> 4 74152f29-bd09-4633-8d23-e773e727dfdf
+#>                                     id
+#> 1 f9441b1b-2bf0-4e85-943b-718c8ced51b9
+#> 2 7c3fb58e-bb2d-4335-bc7c-ec9f8627a188
+#> 3 fc8ac857-8784-4daa-983c-23152f822615
+#> 4 be39fa30-3dd4-4558-bbc7-edea6b3cd41c
+#> 
+#> $license_url
+#> [1] "http://www.opendefinition.org/licenses/cc-zero"
+#> 
+#> $organization
+#> $organization$description
+#> [1] ""
+#> 
+#> $organization$created
+#> [1] "2014-12-08T16:35:24.247079"
+#> 
+#> $organization$title
+#> [1] "Natural History Museum"
+#> 
+#> $organization$name
+#> [1] "nhm"
+#> 
+#> $organization$revision_timestamp
+#> [1] "2014-12-08T16:35:24.188888"
+#> 
+#> $organization$is_organization
+#> [1] TRUE
+#> 
+#> $organization$state
+#> [1] "active"
+#> 
+#> $organization$image_url
+#> [1] ""
+#> 
+#> $organization$revision_id
+#> [1] "a11d1487-e85b-453a-9ea7-d5ed17f875ed"
+#> 
+#> $organization$type
+#> [1] "organization"
+#> 
+#> $organization$id
+#> [1] "7854c918-d7eb-4341-96e9-3adfb8d636a0"
+#> 
+#> $organization$approval_status
+#> [1] "approved"
+#> 
+#> 
+#> $revision_id
+#> [1] "406f4a2c-1bd7-4474-bb9c-68b71d60925e"
 ```
 
 ## Meta

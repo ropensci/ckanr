@@ -117,16 +117,6 @@ package_search(q = '*:*', rows = 2, as='table', url = nhmbase)
 package_show(id = "56e711e6-c847-4f99-915a-6894bb5c5dea", as="table", url = nhmbase)
 ```
 
-Resources
-
-```{r}
-resource_search(q = 'name:data', as='table', url = nhmbase)
-```
-
-```{r}
-resource_show(id = "fefa4aca-61e0-4978-9507-040db59c1641", as="table", url = nhmbase)
-```
-
 ## Meta
 
 * Please [report any issues or bugs](https://github.com/ropensci/ckanr/issues).
