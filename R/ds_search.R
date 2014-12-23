@@ -29,6 +29,9 @@
 #' ds_search(resource_id='f4129802-22aa-4437-b9f9-8a8f3b7b2a53', url=url)
 #' ds_search(resource_id='f4129802-22aa-4437-b9f9-8a8f3b7b2a53', url=url, as="table")
 #' ds_search(resource_id='f4129802-22aa-4437-b9f9-8a8f3b7b2a53', url=url, as="json")
+#'
+#' ds_search(resource_id='f4129802-22aa-4437-b9f9-8a8f3b7b2a53', url=url, limit=1, as="table")
+#' ds_search(resource_id='f4129802-22aa-4437-b9f9-8a8f3b7b2a53', url=url, q="a*")
 #' }
 
 ds_search <- function(resource_id=NULL, filters=NULL, q=NULL, plain=NULL, language=NULL,
@@ -36,7 +39,7 @@ ds_search <- function(resource_id=NULL, filters=NULL, q=NULL, plain=NULL, langua
 {
   args <- cc(list(resource_id=resource_id, filters=filters, q=q, plain=plain, language=language,
                   fields=fields, offset=offset, limit=limit, sort=sort))
-  res <- POST(file.path(url, 'api/action/datastore_search'), ctj(), query = args, ...)
+  res <- POST(file.path(url, '/api/action/datastore_search'), ctj(), query = args, ...)
   res <- content(res, "text")
   switch(as, json = res, list = jsl(res), table = jsd(res))
 }

@@ -3,6 +3,7 @@
 export(changes)
 export(ds_create)
 export(ds_search)
+export(ds_search_sql)
 export(group_list)
 export(group_show)
 export(license_list)
