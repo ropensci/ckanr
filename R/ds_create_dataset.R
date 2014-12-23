@@ -1,6 +1,7 @@
 #' Datastore - create a dataset
 #'
 #' @export
+#' @importFrom httr upload_file add_headers
 #'
 #' @param package_id (character) Package ID to add dataset to (required)
 #' @param name (character) Name of the new dataset (required)
