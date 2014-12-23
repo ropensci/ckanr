@@ -12,13 +12,13 @@ user_list(q = NULL, order_by = NULL,
 
 \item{order_by}{(character) Which field to sort the list by (optional, default: 'name')}
 
-\item{url}{Base url to use. Default: \url{http://data.techno-science.ca}}
+\item{url}{Base url to use. Default: \url{http://data.techno-science.ca} (required)}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse
-data to data.frame's when possible, so the result can vary.}
+data to data.frame's when possible, so the result can vary. (required)}
 
-\item{...}{Curl args passed on to \code{\link[httr]{POST}}}
+\item{...}{Curl args passed on to \code{\link[httr]{POST}} (optional)}
 }
 \description{
 Return a list of the site's user accounts.

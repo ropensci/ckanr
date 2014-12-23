@@ -23,13 +23,13 @@ names are in this list will be returned}
 
 \item{all_fields}{(logical) Return full group dictionaries instead of just names. Default: FALSE}
 
-\item{url}{Base url to use. Default: \url{http://data.techno-science.ca}}
+\item{url}{Base url to use. Default: \url{http://data.techno-science.ca} (required)}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse
-data to data.frame's when possible, so the result can vary.}
+data to data.frame's when possible, so the result can vary. (required)}
 
-\item{...}{Curl args passed on to \code{\link[httr]{POST}}}
+\item{...}{Curl args passed on to \code{\link[httr]{POST}} (optional)}
 }
 \description{
 List groups.

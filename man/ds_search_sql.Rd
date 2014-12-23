@@ -9,13 +9,13 @@ ds_search_sql(sql, url = "http://demo.ckan.org", as = "list", ...)
 \arguments{
 \item{sql}{(character) A single SQL select statement. (required)}
 
-\item{url}{Base url to use. Default: \url{http://data.techno-science.ca}}
+\item{url}{Base url to use. Default: \url{http://data.techno-science.ca} (required)}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse
-data to data.frame's when possible, so the result can vary.}
+data to data.frame's when possible, so the result can vary. (required)}
 
-\item{...}{Curl args passed on to \code{\link[httr]{POST}}}
+\item{...}{Curl args passed on to \code{\link[httr]{POST}} (optional)}
 }
 \description{
 Datastore - search or get a dataset from CKRAN datastore

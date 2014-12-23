@@ -13,13 +13,13 @@ package_show(id, use_default_schema = FALSE,
 \item{use_default_schema}{(logical) Use default package schema instead of a custom
 schema defined with an IDatasetForm plugin. Default: FALSE}
 
-\item{url}{Base url to use. Default: \url{http://data.techno-science.ca}}
+\item{url}{Base url to use. Default: \url{http://data.techno-science.ca} (required)}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse
-data to data.frame's when possible, so the result can vary.}
+data to data.frame's when possible, so the result can vary. (required)}
 
-\item{...}{Curl args passed on to \code{\link[httr]{POST}}}
+\item{...}{Curl args passed on to \code{\link[httr]{POST}} (optional)}
 }
 \description{
 Show a package.
