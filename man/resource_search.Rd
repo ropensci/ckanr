@@ -5,7 +5,7 @@
 \title{Search for resources.}
 \usage{
 resource_search(q, sort = NULL, offset = NULL, limit = NULL,
-  url = "http://data.techno-science.ca", as = "list", ...)
+  url = get_ckanr_url(), as = "list", ...)
 }
 \arguments{
 \item{q}{Query terms, defaults to '*:*', or everything. It is a string of the form
@@ -24,7 +24,8 @@ x_f and y_f in a descending order).}
 
 \item{limit}{Number of records to return.}
 
-\item{url}{Base url to use. Default: \url{http://data.techno-science.ca} (required)}
+\item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
+also \code{\link{get_ckanr_url}} and \code{\link{set_ckanr_url}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse

@@ -6,7 +6,7 @@
 \usage{
 package_search(q = "*:*", fq = NULL, sort = NULL, rows = NULL,
   start = NULL, facet = FALSE, facet.limit = NULL, facet.field = NULL,
-  url = "http://data.techno-science.ca", as = "list", ...)
+  url = get_ckanr_url(), as = "list", ...)
 }
 \arguments{
 \item{q}{Query terms, defaults to '*:*', or everything.}
@@ -35,7 +35,8 @@ multiple times to indicate multiple facet fields. None of the other params in
 this section will have any effect without specifying at least one field name
 using this param.}
 
-\item{url}{Base url to use. Default: \url{http://data.techno-science.ca} (required)}
+\item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
+also \code{\link{get_ckanr_url}} and \code{\link{set_ckanr_url}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse

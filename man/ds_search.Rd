@@ -31,7 +31,8 @@ descending (e.g., score asc), sort by two fields (e.g., score desc, price asc),
 or sort by a function (e.g., sum(x_f, y_f) desc, which sorts by the sum of
 x_f and y_f in a descending order). (optional)}
 
-\item{url}{Base url to use. Default: \url{http://data.techno-science.ca} (required)}
+\item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
+also \code{\link{get_ckanr_url}} and \code{\link{set_ckanr_url}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse
