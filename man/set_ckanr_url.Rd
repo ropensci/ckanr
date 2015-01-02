@@ -3,21 +3,14 @@
 \name{set_ckanr_url}
 \alias{get_ckanr_url}
 \alias{set_ckanr_url}
-\title{Set the default CKAN URL}
+\title{Set/get the default CKAN URL}
 \usage{
 set_ckanr_url(url = "http://data.techno-science.ca")
 
 get_ckanr_url()
 }
 \arguments{
-\item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
-also \code{\link{get_ckanr_url}} and \code{\link{set_ckanr_url}}}
-
-\item{as}{(character) One of list (default), table, or json. Parsing with table option
-uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse
-data to data.frame's when possible, so the result can vary. (required)}
-
-\item{...}{Curl args passed on to \code{\link[httr]{POST}} (optional)}
+\item{url}{Base url to use. Default: \url{http://data.techno-science.ca}.}
 }
 \value{
 sets the \code{ckanr.default.url} option with \code{\link{options}}.
@@ -25,7 +18,7 @@ sets the \code{ckanr.default.url} option with \code{\link{options}}.
 \description{
 The default CKAN URL is set to the \href{http://data.techno-science.ca}{CSTMC open data portal}
 when the \code{ckanr} package is loaded. This base URL is then passed to
-\code{ckanr} functions.
+\code{ckanr} functions using \code{get_ckan_url()}.
 }
 \examples{
 \dontrun{

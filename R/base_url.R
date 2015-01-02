@@ -1,10 +1,10 @@
-#' Set the default CKAN URL
+#' Set/get the default CKAN URL
 #'
 #' The default CKAN URL is set to the \href{http://data.techno-science.ca}{CSTMC open data portal}
 #' when the \code{ckanr} package is loaded. This base URL is then passed to
-#' \code{ckanr} functions.
+#' \code{ckanr} functions using \code{get_ckan_url()}.
 #'
-#' @template args
+#' @param url Base url to use. Default: \url{http://data.techno-science.ca}.
 #' @return sets the \code{ckanr.default.url} option with \code{\link{options}}.
 #' @examples
 #' \dontrun{
