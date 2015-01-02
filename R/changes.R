@@ -10,7 +10,7 @@
 #' changes(as='json')
 #' changes(as='table')
 #' }
-changes <- function(offset = 0, limit = 31, url = 'http://data.techno-science.ca', as='list', ...)
+changes <- function(offset = 0, limit = 31, url = get_ckanr_url(), as='list', ...)
 {
   body <- cc(list(offset = offset, limit = limit))
   res <- ckan_POST(url, 'recently_changed_packages_activity_list', body = body, ...)

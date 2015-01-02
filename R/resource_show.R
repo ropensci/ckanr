@@ -7,7 +7,7 @@
 #' @examples \donttest{
 #' resource_show(id = "e179e910-27fb-44f4-a627-99822af49ffa", as="table")
 #' }
-resource_show <- function(id, url = 'http://data.techno-science.ca', as='list', ...)
+resource_show <- function(id, url = get_ckanr_url(), as='list', ...)
 {
   res <- ckan_POST(url, 'resource_show', body = list(id=id), ...)
   switch(as, json = res, list = jsl(res), table = jsd(res))
