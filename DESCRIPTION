@@ -1,7 +1,7 @@
 Package: ckanr
 Title: R Client for the Comprehensive Knowledge Archive Network (CKAN) API
 Description: R client for CKAN API. more description later...
-Version: 0.0.2.99
+Version: 0.0.3.99
 Date: 2015-01-02
 Authors@R: c(person("Scott", "Chamberlain", email="myrmecocystus@gmail.com",
                     role = c("aut", "cre")),
