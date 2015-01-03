@@ -4,15 +4,16 @@
 \alias{group_show}
 \title{Show a package.}
 \usage{
-group_show(id, include_datasets = TRUE,
-  url = "http://data.techno-science.ca", as = "list", ...)
+group_show(id, include_datasets = TRUE, url = get_ckanr_url(),
+  as = "list", ...)
 }
 \arguments{
 \item{id}{(character) Package identifier.}
 
 \item{include_datasets}{(logical) Include a list of the group's datasets. Default: TRUE}
 
-\item{url}{Base url to use. Default: \url{http://data.techno-science.ca} (required)}
+\item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
+also \code{\link{get_ckanr_url}} and \code{\link{set_ckanr_url}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse

@@ -4,13 +4,13 @@
 \alias{package_revision_list}
 \title{Return a dataset (package's) revisions as a list of dictionaries.}
 \usage{
-package_revision_list(id, url = "http://data.techno-science.ca",
-  as = "list", ...)
+package_revision_list(id, url = get_ckanr_url(), as = "list", ...)
 }
 \arguments{
 \item{id}{(character) Package identifier.}
 
-\item{url}{Base url to use. Default: \url{http://data.techno-science.ca} (required)}
+\item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
+also \code{\link{get_ckanr_url}} and \code{\link{set_ckanr_url}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse

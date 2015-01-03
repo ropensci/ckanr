@@ -23,7 +23,7 @@ devtools::install_github("ropensci/ckanr")
 library('ckanr')
 ```
 
-> Note: the default URL is for http://data.techno-science.ca/. You can change that in the `url` parameter
+Note: the default base CKAN URL is set to [http://data.techno-science.ca/](http://data.techno-science.ca/). You can change this using `set_ckanr_url()`.
 
 ## Changes
 

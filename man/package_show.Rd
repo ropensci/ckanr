@@ -4,8 +4,8 @@
 \alias{package_show}
 \title{Show a package.}
 \usage{
-package_show(id, use_default_schema = FALSE,
-  url = "http://data.techno-science.ca", as = "list", ...)
+package_show(id, use_default_schema = FALSE, url = get_ckanr_url(),
+  as = "list", ...)
 }
 \arguments{
 \item{id}{(character) Package identifier.}
@@ -13,7 +13,8 @@ package_show(id, use_default_schema = FALSE,
 \item{use_default_schema}{(logical) Use default package schema instead of a custom
 schema defined with an IDatasetForm plugin. Default: FALSE}
 
-\item{url}{Base url to use. Default: \url{http://data.techno-science.ca} (required)}
+\item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
+also \code{\link{get_ckanr_url}} and \code{\link{set_ckanr_url}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse

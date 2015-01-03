@@ -1,4 +1,5 @@
-#' @param url Base url to use. Default: \url{http://data.techno-science.ca} (required)
+#' @param url Base url to use. Default: \url{http://data.techno-science.ca}. See
+#' also \code{\link{get_ckanr_url}} and \code{\link{set_ckanr_url}}
 #' @param as (character) One of list (default), table, or json. Parsing with table option
 #' uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse
 #' data to data.frame's when possible, so the result can vary. (required)

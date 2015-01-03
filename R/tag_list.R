@@ -14,7 +14,7 @@
 #' tag_list('aviation', as='table')
 #' }
 tag_list <- function(query = NULL, vocabulary_id = NULL, all_fields = FALSE,
-  url = 'http://data.techno-science.ca', as='list', ...)
+  url = get_ckanr_url(), as='list', ...)
 {
   body <- cc(list(query = query, vocabulary_id = vocabulary_id, all_fields = as_log(all_fields)))
   res <- ckan_POST(url, 'tag_list', body = body, ...)
