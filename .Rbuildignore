@@ -2,3 +2,5 @@
 ^\.Rproj\.user$
 README.Rmd
 man-roxygen
+.travis.yml
+appveyor.yml
