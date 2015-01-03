@@ -3,6 +3,9 @@ ckanr
 
 
 
+[![Build Status](https://api.travis-ci.org/ropensci/ckanr.png)](https://travis-ci.org/ropensci/ckanr)
+[![Build status](https://ci.appveyor.com/api/projects/status/5yqd882v4fbeggd5?svg=true)](https://ci.appveyor.com/project/sckott/ckanr)
+
 `ckanr` is an R client for the generic CKAN API - that is, plug in a base url for the CKAN instance of interest. 
 
 ## Installation
@@ -26,49 +29,40 @@ Note: the default base CKAN URL is set to [http://data.techno-science.ca/](http:
 ```r
 changes(limit = 2, as = "table")
 #>                                user_id                  timestamp
-#> 1 912a30c8-8915-4e6d-a721-00f759b62efa 2015-01-02T20:01:55.215629
-#> 2 912a30c8-8915-4e6d-a721-00f759b62efa 2015-01-02T20:01:42.121999
+#> 1 b50449ea-1dcc-4d52-b620-fc95bf56034b 2014-11-06T18:58:08.001743
+#> 2 b50449ea-1dcc-4d52-b620-fc95bf56034b 2014-11-06T18:55:55.059527
 #>                              object_id
-#> 1 559708e5-480e-4f94-8429-c49571e82761
-#> 2 559708e5-480e-4f94-8429-c49571e82761
+#> 1 cc6a523c-cecf-4a95-836b-295a11ce2bce
+#> 2 cc6a523c-cecf-4a95-836b-295a11ce2bce
 #>                            revision_id data.package.maintainer
-#> 1 a94e642d-a974-41aa-8adf-79facea1e171            datagovaubot
-#> 2 94a19fbb-3874-467d-afa0-a0ecbbff8ed4            datagovaubot
-#>                        data.package.name data.package.metadata_modified
-#> 1 energy-rating-for-household-appliances     2015-01-02T20:01:49.873819
-#> 2 energy-rating-for-household-appliances     2015-01-02T20:01:37.683213
-#>   data.package.author                data.package.url
-#> 1           Tim Laris http://www.energyrating.gov.au/
-#> 2           Tim Laris http://www.energyrating.gov.au/
-#>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        data.package.notes
-#> 1 ![Energy Rating](http://www.energyrating.gov.au/wp-content/uploads/2011/02/ERL_3.5_star1.gif "Optional title")\r\n\r\nThese datasets contain information about the energy efficiency of the following products that carry the Energy Rating Label.\r\n\r\n-\tAir Conditioners\r\n\r\n-\tClothes dryers\r\n\r\n-\tDishwashers\r\n\r\n-\tClothes Washers\r\n\r\n-\tFridges and Freezers\r\n\r\n-\tTelevisions\r\n\r\n-\tComputer monitors\r\n\r\n\r\nThe data is collected from suppliers when they register appliances that are going to be sold in Australia and New Zealand.\r\n\r\nFields depend on the exact dataset but generally include:\r\n\r\n-\tBrand Name (and URL)\r\n\r\n-\tOutput range (kilowatts used)\r\n\r\n-\tModel Number/name\r\n\r\n-\tCountry of Origin and where sold\r\n\r\n-\tAvailability \r\n\r\n-\tStar Rating\r\n\r\n-\tVarious other fields depending on the product type
-#> 2 ![Energy Rating](http://www.energyrating.gov.au/wp-content/uploads/2011/02/ERL_3.5_star1.gif "Optional title")\r\n\r\nThese datasets contain information about the energy efficiency of the following products that carry the Energy Rating Label.\r\n\r\n-\tAir Conditioners\r\n\r\n-\tClothes dryers\r\n\r\n-\tDishwashers\r\n\r\n-\tClothes Washers\r\n\r\n-\tFridges and Freezers\r\n\r\n-\tTelevisions\r\n\r\n-\tComputer monitors\r\n\r\n\r\nThe data is collected from suppliers when they register appliances that are going to be sold in Australia and New Zealand.\r\n\r\nFields depend on the exact dataset but generally include:\r\n\r\n-\tBrand Name (and URL)\r\n\r\n-\tOutput range (kilowatts used)\r\n\r\n-\tModel Number/name\r\n\r\n-\tCountry of Origin and where sold\r\n\r\n-\tAvailability \r\n\r\n-\tStar Rating\r\n\r\n-\tVarious other fields depending on the product type
-#>                 data.package.owner_org data.package.private
-#> 1 90153a8c-6a29-4068-a97d-7cf06dbef700                FALSE
-#> 2 90153a8c-6a29-4068-a97d-7cf06dbef700                FALSE
-#>   data.package.maintainer_email data.package.author_email
-#> 1          tim.laris@ret.gov.au      tim.laris@ret.gov.au
-#> 2          tim.laris@ret.gov.au      tim.laris@ret.gov.au
-#>   data.package.state data.package.version
-#> 1             active                     
-#> 2             active                     
+#> 1 5d11079e-fc05-4121-9fd5-fe086f5e5f33                        
+#> 2 4a591538-0584-487b-8ed1-3260d1d09d77                        
+#>   data.package.name data.package.metadata_modified data.package.author
+#> 1              test     2014-11-06T18:55:54.772675                    
+#> 2              test     2014-11-06T18:55:54.772675                    
+#>   data.package.url data.package.notes               data.package.owner_org
+#> 1                                     fafa260d-e2bf-46cd-9c35-34c1dfa46c57
+#> 2                                     fafa260d-e2bf-46cd-9c35-34c1dfa46c57
+#>   data.package.private data.package.maintainer_email
+#> 1                FALSE                              
+#> 2                FALSE                              
+#>   data.package.author_email data.package.state data.package.version
+#> 1                                      deleted                     
+#> 2                                       active                     
 #>           data.package.creator_user_id
-#> 1 91af4eef-efb1-4e4e-87f2-171d81977ae0
-#> 2 91af4eef-efb1-4e4e-87f2-171d81977ae0
-#>                        data.package.id
-#> 1 559708e5-480e-4f94-8429-c49571e82761
-#> 2 559708e5-480e-4f94-8429-c49571e82761
-#>                                                data.package.title
-#> 1 Energy Rating Data for household appliances – Labelled Products
-#> 2 Energy Rating Data for household appliances – Labelled Products
+#> 1 b50449ea-1dcc-4d52-b620-fc95bf56034b
+#> 2 b50449ea-1dcc-4d52-b620-fc95bf56034b
+#>                        data.package.id data.package.title
+#> 1 cc6a523c-cecf-4a95-836b-295a11ce2bce               test
+#> 2 cc6a523c-cecf-4a95-836b-295a11ce2bce               test
 #>               data.package.revision_id data.package.type
-#> 1 51d8ccc1-c40c-4b45-9f6a-fd7bf49db5df           dataset
-#> 2 51d8ccc1-c40c-4b45-9f6a-fd7bf49db5df           dataset
+#> 1 5d11079e-fc05-4121-9fd5-fe086f5e5f33           dataset
+#> 2 4a591538-0584-487b-8ed1-3260d1d09d77           dataset
 #>   data.package.license_id                                   id
-#> 1                   cc-by 43be37ee-6b85-4def-8798-d308799d1f6e
-#> 2                   cc-by 7a41b604-87c5-4fb0-9d30-53a4946a0ce8
+#> 1            notspecified 59c308c8-68b2-4b92-bc57-129378d31882
+#> 2            notspecified a8577e2c-f742-49c2-bef3-ca3299e58704
 #>     activity_type
-#> 1 changed package
+#> 1 deleted package
 #> 2 changed package
 ```
 
@@ -85,7 +79,12 @@ datasets(as = "table")
 
 ```r
 tag_list('aviation', as='table')
-#> list()
+#>   vocabulary_id                     display_name
+#> 1            NA                         Aviation
+#> 2            NA Canada Aviation and Space Museum
+#>                                     id                             name
+#> 1 cc1db2db-b08b-4888-897f-a17eade2461b                         Aviation
+#> 2 8d05a650-bc7b-4b89-bcc8-c10177e60119 Canada Aviation and Space Museum
 ```
 
 ## Show tags
@@ -95,7 +94,14 @@ Subset for readme brevity
 
 ```r
 tag_show('Aviation')$packages[[1]][1:3]	
-#> Error in ckan_POST(url, "tag_show", body = list(id = id), ...): client error: (404) Not Found
+#> $owner_org
+#> [1] "fafa260d-e2bf-46cd-9c35-34c1dfa46c57"
+#> 
+#> $maintainer
+#> [1] ""
+#> 
+#> $relationships_as_object
+#> list()
 ```
 
 ## List groups
@@ -103,136 +109,62 @@ tag_show('Aviation')$packages[[1]][1:3]
 
 ```r
 group_list(as='table')
-#>                       display_name
-#> 1  Business Support and Regulation
-#> 2             Civic Infrastructure
-#> 3                   Communications
-#> 4               Community Services
-#> 5                 Cultural Affairs
-#> 6                          Defence
-#> 7           Education and Training
-#> 8                       Employment
-#> 9                      Environment
-#> 10              Finance Management
-#> 11                      Governance
-#> 12                     Health Care
-#> 13                     Immigration
-#> 14              Indigenous Affairs
-#> 15         International Relations
-#> 16          Justice Administration
-#> 17               Maritime Services
-#> 18               Natural Resources
-#> 19              Primary Industries
-#> 20                         Science
-#> 21                        Security
-#> 22            Sport and Recreation
-#> 23                         Tourism
-#> 24                           Trade
-#> 25                       Transport
-#>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        description
-#> 1                                                                                                                                                                                                             Formulating policy to regulate and support the private sector, including small business and non-profit organisations. Developing strategies to assist business growth and management. Implementing advocacy programs, providing funding and administering regulatory bodies.\r\n\r\nIncludes components listed at http://agift.naa.gov.au/000411.htm
-#> 2                                                                                                                                                                                                                          Developing policy to support the growth of towns and cities. Implementing programs to manage urban development and maintain essential services. Installing buildings and services to meet the administrative, social and recreational needs of local residents.\r\n\r\nIncludes components listed at http://agift.naa.gov.au/000424.htm
-#> 3                                                                  Supporting the growth and management of industries that facilitate the transmission of information. Regulating the provision of postal and telecommunication services to all citizens. Encouraging the development of standards for information management, information dissemination and information technology.\r\n\r\nIncludes components listed at http://agift.naa.gov.au/000433.htm\r\nIncludes components found at AGIFT definition of Communications http://agift.naa.gov.au/000433.htm
-#> 4                                                                                                                                                                                        Developing policy to assist citizens in a particular district or those with common interests and needs. Providing welfare services and financial support. Administering disaster and emergency assistance programs.\r\n\r\nIncludes components listed at http://agift.naa.gov.au/000435.htm\r\nIncludes components defined by AGIFT at http://agift.naa.gov.au/000435.htm
-#> 5                                                                                                                                                  Developing policy to support the arts and cultural organisations such as museums, libraries and galleries. Establishing programs to develop and manage cultural collections and artefacts, and to stimulate growth in cultural industries. Sponsoring activities and events to celebrate the diversity of Australian culture.\r\n\r\nIncludes components defined by AGIFT at http://agift.naa.gov.au/000442.htm
-#> 6                                                                                                                                                           Ensuring the safety of Australia by building, maintaining and deploying military resources. Developing policy and programs for defence of the nation, region and allies. Includes high-level administration of the Australian Defence Forces (ADF).\r\n\r\nIncludes components listed at http://agift.naa.gov.au/000449.htm\r\n\r\nIncludes component from AGIFT at http://agift.naa.gov.au/000449.htm
-#> 7  EducationaFormulating policy to support programs that provide skills and knowledge to citizens. Developing strategies to make education available to the broadest possible cross-section of the community. Providing funding to schools, universities, colleges, academies or community groups that provide education and training. Establishing programs to develop and manage educational institutions.\r\n\r\nIncludes components listed at http://agift.naa.gov.au/000467.htm\r\nIncludes components defined by AGIFT at http://agift.naa.gov.au/000467.htm
-#> 8                                                                                                                                                        Formulating policy to support employment growth and regulate public or private sector working environments. Developing strategies to improve workplace relations, productivity and performance. Implementing labour market programs and providing funding. Administering regulatory bodies and arbitration services.\r\n\r\nIncludes components as defined in AGIFT at http://agift.naa.gov.au/000016.htm
-#> 9                                                                                    Developing policy to support the management of the surrounding natural and built environments. Balancing competing requirements to generate long term sustainable benefits for industry, tourism and the community. Protecting elements of the natural and built environment that are of special significance. Includes conservation of the national estate and world heritage concerns.\r\n\r\nInvolves components identified by AGIFT at http://agift.naa.gov.au/000478.htm
-#> 10                                                                                                                                                                                                                                Developing policy for the administration of public funds and other resources. Determining appropriate strategies for raising revenue and regulating expenditure. Monitoring economic indicators and forecasting trends to enable financial planning.\r\n\r\nInvolves components from AGIFT at http://agift.naa.gov.au/000001.htm
-#> 11       Executing legislative processes in Houses of Parliament, assemblies or councils, where officers are elected to represent citizens. Administering committees that report to legislative bodies. Managing elections of government representatives and sponsoring major community celebrations. Includes official duties carried out by the titular head of the government or municipality. Includes managing the machinery of government processes at all levels of government.\r\n\r\nInvolves components from AGIFT at http://agift.naa.gov.au/000002.htm
-#> 12                                                                                                                                                                                                       Providing and coordinating programs for the prevention, diagnosis and treatment of disease or injury. Developing policy to support the provision of health care services and medical research. Administering regulatory schemes for health care products and pharmaceuticals.\r\n\r\nInvolves components from AGIFT at http://agift.naa.gov.au/000003.htm
-#> 13                                                                                       Assisting people wishing to enter Australia on a permanent or temporary basis. Developing policy to establish entry or deportation requirements for migrants and visitors. Includes strategies for the management of illegal immigrants.\r\n\r\nIncludes components listed at http://agift.naa.gov.au/000004.htm\r\n\r\nSee also CULTURAL AFFAIRS: for activities to celebrate multiculturalism\r\n\r\nInvolves components in AGIFT at http://agift.naa.gov.au/000004.htm
-#> 14                                                                                                                                                                  Developing policy to support the advancement of Aboriginal and Torres Strait Islander people. Establishing programs to develop, manage and deliver services to Aboriginal and Torres Strait Islander people. Includes protecting areas directly associated with Aboriginal and Torres Strait Islander culture.\r\n\r\nIncludes elements defined in AGIFT at http://agift.naa.gov.au/002285.htm
-#> 15                                                                                                                                         Building and maintaining relationships with other countries and international organisations. Developing strategies to protect and advance national interests. Contributing to international security, economic development, the environment, democratic principles and human rights through aid programs, treaties and diplomatic services.\r\n\r\nIncludes components listed at http://agift.naa.gov.au/000005.htm\r\n
-#> 16                                                                                                                                                                                                                Developing, interpreting and applying legislation, regulations or by-laws. Regulating the conduct of individuals, business and government, to conform to agreed rules and principles. Establishing programs and services to support the operation of the justice system.\r\n\r\nIncludes components listed at http://agift.naa.gov.au/000006.htm
-#> 17                                                                                                               Developing policy to regulate use of the sea as a means of transport. Negotiating passage for sea transport and maritime jurisdiction. Planning and managing maritime infrastructure. Monitoring the safety of seagoing vessels, pilots and personnel. Administering programs for marine search and rescue. Providing resources for the development of navigational aids.\r\n\r\nIncludes components listed at http://agift.naa.gov.au/000007.htm
-#> 18                                                                                                                                                                                                        Developing policy for the sustainable use and management of energy, mineral, land and water supplies. Administering programs to evaluate resource consumption and exploitation practices. Regulating and supporting industries that realise the economic potential of resources.\r\n\r\nIncludes components listed at http://agift.naa.gov.au/000009.htm
-#> 19                                                                                                                                 Developing policy to support and regulate rural and marine industries. Promoting strategies for efficient and sustainable operations. Administering programs to monitor current practices, to meet national and international standards. Includes liaison with industry bodies and across jurisdictions in relation to the needs of primary industries.\r\n\r\nIncludes components listed at http://agift.naa.gov.au/000008.htm
-#> 20                                                                                                                Developing policy and standards to support research and systematic studies. Administering scientific bodies and monitoring industry research and development programs. Providing funding and implementing promotional strategies. Includes research into living things and their environments, natural laws and the application of knowledge to practical problems. \r\n\r\nIncludes components listed at http://agift.naa.gov.au/000010.htm\r\n
-#> 21                                                                                                                                                      Maintaining the safety of Australia at all levels of society. Developing policy and programs to guard against internal or external threats to peace and stability. Providing funding for law enforcement, community protection and corrective services. Coordinating intelligence gathering and international security activities.\r\n\r\nIncludes components listed at http://agift.naa.gov.au/000011.htm
-#> 22                                                                                                                                                                                                                                                                              Developing policy and programs to encourage community participation in organised games or leisure activities. Implementing promotional strategies, providing funding and administering regulatory bodies. \r\n\r\nIncludes components listed at http://agift.naa.gov.au/000012.htm
-#> 23                                                                                                                                                                                    Developing policy and programs to encourage recreational visitors to a region. Supporting and regulating the tourism industry. Implementing long-term strategies for tourism development and coordinating across jurisdictions on large-scale projects. Providing funding for promotional campaigns.\r\n\r\nIncludes components listed at http://agift.naa.gov.au/000013.htm
-#> 24                                                                                                                                                                                                              Developing policy to regulate the purchase, sale or exchange of commodities. Monitoring the balance of trade, industry protection and subsidy schemes. Includes foreign and domestic activities, and liaison across jurisdictions to support trade agreement negotiations.\r\n\r\nIncludes components listed at http://agift.naa.gov.au/000014.htm
-#> 25                                                                                                                                                                                                               Developing policy to regulate road, rail and air transportation systems. Planning and managing schemes for the movement of people or freight. Monitoring the safety of vehicles and their operators. Providing resources for the development of transport infrastructure.\r\n\r\nIncludes components listed at http://agift.naa.gov.au/000015.htm
-#>                              title image_display_url approval_status
-#> 1  Business Support and Regulation                          approved
-#> 2             Civic Infrastructure                          approved
-#> 3                   Communications                          approved
-#> 4               Community Services                          approved
-#> 5                 Cultural Affairs                          approved
-#> 6                          Defence                          approved
-#> 7           Education and Training                          approved
-#> 8                       Employment                          approved
-#> 9                      Environment                          approved
-#> 10              Finance Management                          approved
-#> 11                      Governance                          approved
-#> 12                     Health Care                          approved
-#> 13                     Immigration                          approved
-#> 14              Indigenous Affairs                          approved
-#> 15         International Relations                          approved
-#> 16          Justice Administration                          approved
-#> 17               Maritime Services                          approved
-#> 18               Natural Resources                          approved
-#> 19              Primary Industries                          approved
-#> 20                         Science                          approved
-#> 21                        Security                          approved
-#> 22            Sport and Recreation                          approved
-#> 23                         Tourism                          approved
-#> 24                           Trade                          approved
-#> 25                       Transport                          approved
-#>    is_organization  state image_url                          revision_id
-#> 1            FALSE active           fa48d58f-b402-465b-b17d-6faa86fdf1fa
-#> 2            FALSE active           6d7d2b1f-ea57-4014-9bd3-b64baec958e4
-#> 3            FALSE active           64de0f0c-b727-4073-98d8-46339827f7fc
-#> 4            FALSE active           11650f28-6a42-4d95-a72f-2016f084ce4a
-#> 5            FALSE active           09c20dec-1bec-4f2e-be0d-1d0eae18a532
-#> 6            FALSE active           d532d33e-6da4-41e5-8b40-a50ccce10934
-#> 7            FALSE active           4de79ba6-bea9-485d-9574-ec690a696eac
-#> 8            FALSE active           3901a66d-5ac6-4d6a-8e49-f6c87377558a
-#> 9            FALSE active           ba7a2eca-c4f5-4c0e-9d80-fb5d1295ffb9
-#> 10           FALSE active           b9a97227-9873-4694-ad05-604bd7a0a6c0
-#> 11           FALSE active           faaa8079-4a56-48a8-811d-38d258af35c0
-#> 12           FALSE active           2be70ee1-3b6a-44fd-bdff-2e8503175174
-#> 13           FALSE active           e1ab36d0-9882-4b22-8b5b-aab31c1565fb
-#> 14           FALSE active           444cd47b-9bcf-49a5-ad99-02a4ce9dabfb
-#> 15           FALSE active           a04e7a6c-1a9c-4dbb-bd68-25491255707d
-#> 16           FALSE active           940283b5-5293-4173-b9c7-a597af0ac51e
-#> 17           FALSE active           d660ee4b-3a5b-41a8-9eb6-2936ed919940
-#> 18           FALSE active           2f63d9b1-2b2f-4323-9abc-6a431d781512
-#> 19           FALSE active           25ba2994-75c1-445c-a60b-8393d7c33a93
-#> 20           FALSE active           9b9715ba-4f56-467f-845a-7453ced1d264
-#> 21           FALSE active           38d59393-6aed-4b91-b2af-a20d21c632fc
-#> 22           FALSE active           d261292d-16ca-46ef-8926-821e86add81d
-#> 23           FALSE active           4c22cb32-a637-4114-8663-81dcf265436c
-#> 24           FALSE active           129e5fb1-277d-4601-a161-cf918cd2078c
-#> 25           FALSE active           6f4b94af-4500-4fb4-a7ac-48de29820e24
-#>    packages  type                                   id           name
-#> 1       103 group ada735db-98c9-42cb-8969-dc356ea4281e       business
-#> 2         0 group 7d67a152-2ac6-4f5f-b1e5-f6a2791067cc          civic
-#> 3        15 group cf4060c4-f279-43a9-ab5c-4fbe7889b7ba communications
-#> 4       131 group bd09f325-4aea-4873-9204-66cdf638fc34      community
-#> 5        19 group e95def3e-5061-44d0-ad1e-4cd355a3a897       cultural
-#> 6         0 group 1923cbaf-000b-4e9a-bbe7-805fc206afd7        defence
-#> 7        13 group 32f2e899-6198-410d-97e5-2c675d25ca78      education
-#> 8         9 group 83562e4e-2850-4063-8f4e-26352b903f22     employment
-#> 9        66 group 707bd86f-3a3f-4810-93da-04e2b6d59a11    environment
-#> 10       56 group 7170b37f-994d-4056-b5fc-5ada01041f5a        finance
-#> 11        4 group 757e2041-51f1-45ce-871d-9b292d617601     governance
-#> 12       31 group 104574bd-92b3-4866-97c0-373797dbca43         health
-#> 13        0 group 1d8af52d-65fe-48ac-b256-a3e0eb691202    immigration
-#> 14        3 group 980b8179-746b-4ff8-b7e6-f8f8ee3cc865     indigenous
-#> 15        0 group 42a3cfce-63ca-4386-a52d-416d8aa24094  international
-#> 16        0 group 0d2300ca-dda4-47da-b533-cddd8d0776f4        justice
-#> 17        0 group 68cb2a35-4bd0-4522-9265-5ddf37d6790b       maritime
-#> 18        0 group c5cd3a09-753f-423d-97e6-300cec4dcdba        natural
-#> 19        0 group 4695b1f2-5fbd-4bfd-9d09-4db32fb84e89        primary
-#> 20       92 group 049a32a5-dac6-48c0-9add-e7847e85b7b3       sciences
-#> 21        0 group 84e5ab19-4de6-4cbd-ba6b-457a4273c982       security
-#> 22       50 group 79e3bdb0-071a-408d-b1d7-1dd20173b65b          sport
-#> 23        6 group b0ded30e-bf78-43d1-9fee-1d90818c30c3        tourism
-#> 24        0 group 25780283-7622-4cbd-b254-efbcaa9a647d          trade
-#> 25       24 group 29fe1336-5109-464d-b6f1-743b8dd772c6      transport
+#>                         display_name description
+#> 1                     Communications            
+#> 2 Domestic and Industrial Technology            
+#> 3                         Everything            
+#> 4                           Location            
+#> 5                          Resources            
+#> 6         Scientific Instrumentation            
+#> 7                     Transportation            
+#>                                title
+#> 1                     Communications
+#> 2 Domestic and Industrial Technology
+#> 3                         Everything
+#> 4                           Location
+#> 5                          Resources
+#> 6         Scientific Instrumentation
+#> 7                     Transportation
+#>                                                                   image_display_url
+#> 1       http://data.techno-science.ca/uploads/group/20141024-162305.6896412comm.jpg
+#> 2    http://data.techno-science.ca/uploads/group/20141024-162324.3636615domtech.jpg
+#> 3 http://data.techno-science.ca/uploads/group/20141024-162448.0656596everything.jpg
+#> 4   http://data.techno-science.ca/uploads/group/20141024-162528.8786547location.jpg
+#> 5     http://data.techno-science.ca/uploads/group/20141024-162608.3732604resour.jpg
+#> 6    http://data.techno-science.ca/uploads/group/20141024-162549.1925831sciinst.jpg
+#> 7  http://data.techno-science.ca/uploads/group/20141024-162624.1872823transport.jpg
+#>   approval_status is_organization  state
+#> 1        approved           FALSE active
+#> 2        approved           FALSE active
+#> 3        approved           FALSE active
+#> 4        approved           FALSE active
+#> 5        approved           FALSE active
+#> 6        approved           FALSE active
+#> 7        approved           FALSE active
+#>                               image_url
+#> 1       20141024-162305.6896412comm.jpg
+#> 2    20141024-162324.3636615domtech.jpg
+#> 3 20141024-162448.0656596everything.jpg
+#> 4   20141024-162528.8786547location.jpg
+#> 5     20141024-162608.3732604resour.jpg
+#> 6    20141024-162549.1925831sciinst.jpg
+#> 7  20141024-162624.1872823transport.jpg
+#>                            revision_id packages  type
+#> 1 cc302424-2e68-4fcc-9a3a-6de60748c2e4        5 group
+#> 2 b7d95b87-5999-45f9-8775-c64094842551        2 group
+#> 3 c2f0c59a-a543-4d67-a61f-4f387068ba53        1 group
+#> 4 6816d571-d2bd-4131-b99d-80e7e6797492        4 group
+#> 5 e37ee30d-577b-4349-8f0e-eaa4543497e8        6 group
+#> 6 74eba42e-08b3-4400-b40f-3d6159ae6e9d       10 group
+#> 7 a6cc4aab-eae9-42ba-9ab4-cbf45d5c6a0e        7 group
+#>                                     id                               name
+#> 1 5268ce18-e3b8-4802-b29e-30740b46e52d                     communications
+#> 2 5a9a8095-9e0c-485e-84f6-77f577607991 domestic-and-industrial-technology
+#> 3 d7dd233e-a1cc-43da-8152-f7ed15d26756                         everything
+#> 4 770fc9c0-d4f3-48b0-a4ee-e00c6882df1d                           location
+#> 5 f6c205de-cc95-4308-ac9f-5a63f1a5c7ee                          resources
+#> 6 b98ff457-2031-48b6-b681-9adb3afc501b         scientific-instrumentation
+#> 7 a73bf7be-310d-472e-83e1-43a3d87602ba                     transportation
 ```
 
 ## Show groups
@@ -242,16 +174,21 @@ Subset for readme brevity
 
 ```r
 group_show('communications', as='table')$users
-#>   openid about capacity      name                    created
-#> 1     NA          admin custodian 2013-04-17T08:00:59.243065
+#>   openid about capacity     name                    created
+#> 1     NA  <NA>    admin     marc 2014-10-24T14:44:29.885262
+#> 2     NA          admin sepandar 2014-10-23T19:40:42.056418
 #>                         email_hash sysadmin
-#> 1 99e31a948195fdebcba0afc9313801e2     TRUE
+#> 1 a32002c960476614370a16e9fb81f436    FALSE
+#> 2 10b930a228afd1da2647d62e70b71bf8     TRUE
 #>   activity_streams_email_notifications  state number_of_edits
-#> 1                                FALSE active            2925
-#>   number_administered_packages          display_name              fullname
-#> 1                         1118 data.gov.au Custodian data.gov.au Custodian
+#> 1                                FALSE active             376
+#> 2                                FALSE active              44
+#>   number_administered_packages display_name fullname
+#> 1                           39         marc     <NA>
+#> 2                            1     sepandar         
 #>                                     id
-#> 1 91af4eef-efb1-4e4e-87f2-171d81977ae0
+#> 1 27778230-2e90-4818-9f00-bbf778c8fa09
+#> 2 b50449ea-1dcc-4d52-b620-fc95bf56034b
 ```
 
 ## Show a package
@@ -259,7 +196,56 @@ group_show('communications', as='table')$users
 
 ```r
 package_show('34d60b13-1fd5-430e-b0ec-c8bc7f4841cf', as='table')$resources
-#> Error in ckan_POST(url, "package_show", body = body, ...): client error: (404) Not Found
+#>                      resource_group_id cache_last_updated
+#> 1 ea8533d9-cdc6-4e0e-97b9-894e06d50b92                 NA
+#> 2 ea8533d9-cdc6-4e0e-97b9-894e06d50b92                 NA
+#> 3 ea8533d9-cdc6-4e0e-97b9-894e06d50b92                 NA
+#> 4 ea8533d9-cdc6-4e0e-97b9-894e06d50b92                 NA
+#>           revision_timestamp webstore_last_updated
+#> 1 2014-10-28T18:13:22.213530                    NA
+#> 2 2014-11-04T02:59:50.567068                    NA
+#> 3 2014-11-05T21:23:58.533397                    NA
+#> 4 2014-11-05T21:25:16.848423                    NA
+#>                                     id size  state hash
+#> 1 be2b0af8-24a8-4a55-8b30-89f5459b713a   NA active     
+#> 2 7d65910e-4bdc-4f06-a213-e24e36762767   NA active     
+#> 3 97622ad7-1507-4f6a-8acb-14e826447389   NA active     
+#> 4 7a72498a-c49c-4e84-8b10-58991de10df6   NA active     
+#>                                    description format
+#> 1                                  XML Dataset    XML
+#> 2 Data dictionary for CSTMC artifact datasets.    XLS
+#> 3       Tips for using the artifacts datasets.   .php
+#> 4       Tips for using the artifacts datasets.   .php
+#>   tracking_summary.total tracking_summary.recent mimetype_inner url_type
+#> 1                      0                       0             NA       NA
+#> 2                      0                       0             NA       NA
+#> 3                      0                       0             NA       NA
+#> 4                      0                       0             NA       NA
+#>   mimetype cache_url                               name
+#> 1       NA        NA Artifact Data - Vacuum Tubes (XML)
+#> 2       NA        NA                    Data Dictionary
+#> 3       NA        NA                     Tips (English)
+#> 4       NA        NA                      Tips (French)
+#>                      created
+#> 1 2014-10-28T18:13:22.240393
+#> 2 2014-11-04T02:59:50.643658
+#> 3 2014-11-04T18:14:23.952937
+#> 4 2014-11-05T21:25:16.887796
+#>                                                                                                                                                    url
+#> 1                         http://source.techno-science.ca/datasets-donn%C3%A9es/artifacts-artefacts/groups-groupes/vacuum-tubes-tubes-electronique.xml
+#> 2 http://source.techno-science.ca/datasets-donn%C3%A9es/artifacts-artefacts/cstmc-artifact-data-dictionary-dictionnaire-de-donnees-artefacts-smstc.xls
+#> 3                                                                          http://techno-science.ca/en/open-data/tips-using-artifact-open-data-set.php
+#> 4                                                                 http://techno-science.ca/fr/donnees-ouvertes/conseils-donnees-ouvertes-artefacts.php
+#>   webstore_url last_modified position                          revision_id
+#> 1           NA            NA        0 9a27d884-f181-4842-ab47-cda35a8bf99a
+#> 2           NA            NA        1 5d27b3e6-7870-4c12-a122-9e9f5adee4a0
+#> 3           NA            NA        2 40993f16-402b-439c-9288-2f2b177e4b8f
+#> 4           NA            NA        3 57f1488e-a140-4eb6-9329-fc13202a73af
+#>   resource_type
+#> 1            NA
+#> 2            NA
+#> 3            NA
+#> 4            NA
 ```
 
 ## Search for packages
@@ -268,93 +254,66 @@ package_show('34d60b13-1fd5-430e-b0ec-c8bc7f4841cf', as='table')$resources
 ```r
 out <- package_search(q = '*:*', rows = 2, as="table")$results
 out[, !names(out) %in% 'resources']
-#>                                license_title   maintainer
-#> 1 Creative Commons Attribution 3.0 Australia datagovaubot
-#> 2 Creative Commons Attribution 3.0 Australia  goldcoastcc
-#>   relationships_as_object     jurisdiction temporal_coverage_to private
-#> 1                    NULL          Federal                        FALSE
-#> 2                    NULL Local Government                        FALSE
-#>       maintainer_email         revision_timestamp geospatial_topic
-#> 1 tim.laris@ret.gov.au 2014-08-31T23:08:43.751622             NULL
-#> 2                 <NA> 2014-09-05T02:47:41.774647             NULL
+#>                      license_title maintainer relationships_as_object
+#> 1 Open Government Licence - Canada                               NULL
+#> 2 Open Government Licence - Canada                               NULL
+#>   private maintainer_email         revision_timestamp
+#> 1   FALSE                  2014-11-05T23:17:46.220002
+#> 2   FALSE                  2014-11-05T23:17:04.923594
 #>                                     id           metadata_created
-#> 1 559708e5-480e-4f94-8429-c49571e82761 2013-04-17T23:01:23.823563
-#> 2 6b992102-1163-46dc-bbe0-bb997d2ffdb4 2014-09-04T23:42:51.066701
-#>                                                     spatial_coverage
-#> 1                                             Australia, New Zealand
-#> 2 http://www.ga.gov.au/place-names/PlaceDetails.jsp?submit1=QLD42078
-#>            metadata_modified             author         author_email
-#> 1 2015-01-02T20:01:49.873819          Tim Laris tim.laris@ret.gov.au
-#> 2 2015-01-02T08:21:09.525501 City of Gold Coast                 <NA>
-#>    state version license_id                 contact_point    type
-#> 1 active              cc-by  energyrating@industry.gov.au dataset
-#> 2 active    <NA>      cc-by opendata@goldcoast.qld.gov.au dataset
-#>   num_resources
-#> 1             7
-#> 2             2
-#>                                                                                                                                                                                                                                                                                                                                                                                                           tags
-#> 1 NA, NA, NA, NA, appliance, efficiency, energy, greenhouse, appliance, efficiency, energy, greenhouse, 2013-08-19T05:46:44.216374, 2013-08-19T05:44:44.364527, 2013-04-17T23:01:23.823563, 2013-08-19T05:45:50.076973, active, active, active, active, 32d8ef45-bfa2-4b0f-b3e5-3b34bec34bc4, b5b9efa2-5938-4361-a32d-e425776070ac, 37c6e5a5-2036-44bd-a4d0-6820265cf814, 748b1d38-cdd1-45ed-af5f-f85f2f674ebc
-#> 2                                                                                                                                                                                                                                                                                                         NA, gold coast, gold coast, 2014-09-04T23:42:51.066701, active, 9e60a75e-538a-4e5f-995b-d8455e833ffc
-#>   temporal_coverage_from language tracking_summary.total
-#> 1                Current  English                   2792
-#> 2             2014-09-05  English                    176
-#>   tracking_summary.recent
-#> 1                      60
-#> 2                      12
-#>                                                                                                                                                                                                                                                                                                                                                                                                                                                                     groups
-#> 1 Business Support and Regulation, Formulating policy to regulate and support the private sector, including small business and non-profit organisations. Developing strategies to assist business growth and management. Implementing advocacy programs, providing funding and administering regulatory bodies.\r\n\r\nIncludes components listed at http://agift.naa.gov.au/000411.htm, , Business Support and Regulation, ada735db-98c9-42cb-8969-dc356ea4281e, business
-#> 2                                                                                                                                                                                                                                                                                                                                                                                                                                                                     NULL
-#>                        creator_user_id field_of_research
-#> 1 91af4eef-efb1-4e4e-87f2-171d81977ae0              NULL
-#> 2 68b91a41-7b08-47f1-8434-780eb9f4332d              NULL
-#>   relationships_as_subject num_tags
-#> 1                     NULL        4
-#> 2                     NULL        1
-#>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            organization.description
-#> 1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          The department helps industry to become more efficient, competitive and innovative. \r\n
-#> 2 City of Gold Coast (the City) is the second largest local government in Australia (based on the city's resident population). Defined by its spectacular beaches, hinterland ranges, forests, waterways and vibrant communities, the Gold Coast is a global city which is proudly looking towards the future.  \r\n\r\nThe City is developing an Open Data framework and is committed to proactively publishing datasets for reuse and championing the use of open government data.\r\nObjectives of the City’s Open Data project include development of innovative solutions for Gold Coast residents, increased City transparency and accountability, improved data quality, reduction in Customer Contact enquiries and response times, building local ICT capabilities and providing local innovation and commercialisation opportunities.\r\n
-#>         organization.created      organization.title
-#> 1 2013-04-18T15:36:47.465027 Department of Industry 
-#> 2 2013-05-31T00:13:58.069733      City of Gold Coast
-#>        organization.name organization.revision_timestamp
-#> 1 department-of-industry      2013-11-13T01:20:46.166597
-#> 2     city-of-gold-coast      2013-11-04T03:23:28.369786
-#>   organization.is_organization organization.state
-#> 1                         TRUE             active
-#> 2                         TRUE             active
-#>                                                                          organization.image_url
-#> 1 http://frds.dairyaustralia.com.au/wp-content/uploads/2013/10/dept-ind_stacked-tif-300x201.jpg
-#> 2                          https://www.goldcoast.qld.gov.au/_images/structural/gccc-logo-v2.png
+#> 1 35d5484d-38ce-495e-8722-7857c4fd17bf 2014-10-28T20:13:11.572558
+#> 2 da65507d-b018-4d3b-bde3-5419cf29d144 2014-10-28T14:59:21.386177
+#>            metadata_modified author author_email  state version
+#> 1 2014-11-05T23:17:46.220657                     active        
+#> 2 2014-11-05T23:17:04.924229                     active        
+#>                        creator_user_id    type num_resources
+#> 1 27778230-2e90-4818-9f00-bbf778c8fa09 dataset             4
+#> 2 27778230-2e90-4818-9f00-bbf778c8fa09 dataset             4
+#>                                                                                                                       tags
+#> 1                         NA, Location, Location, 2014-10-28T20:13:11.572558, active, da88c5a2-3766-41ea-a75b-9c87047cc528
+#> 2 NA, Computing Technology, Computing Technology, 2014-10-28T14:59:21.386177, active, 5371dc28-9ce8-4f21-9afb-1f155f132bfe
+#>   tracking_summary.total tracking_summary.recent
+#> 1                     42                       3
+#> 2                     27                       3
+#>                                                                                                                                                                                                       groups
+#> 1                                                      Location, , http://data.techno-science.ca/uploads/group/20141024-162528.8786547location.jpg, Location, 770fc9c0-d4f3-48b0-a4ee-e00c6882df1d, location
+#> 2 Scientific Instrumentation, , http://data.techno-science.ca/uploads/group/20141024-162549.1925831sciinst.jpg, Scientific Instrumentation, b98ff457-2031-48b6-b681-9adb3afc501b, scientific-instrumentation
+#>   license_id relationships_as_subject num_tags organization.description
+#> 1 ca-ogl-lgo                     NULL        1                         
+#> 2 ca-ogl-lgo                     NULL        1                         
+#>         organization.created organization.title organization.name
+#> 1 2014-10-24T14:49:36.878579              CSTMC             cstmc
+#> 2 2014-10-24T14:49:36.878579              CSTMC             cstmc
+#>   organization.revision_timestamp organization.is_organization
+#> 1      2014-10-24T14:49:36.813670                         TRUE
+#> 2      2014-10-24T14:49:36.813670                         TRUE
+#>   organization.state organization.image_url
+#> 1             active                       
+#> 2             active                       
 #>               organization.revision_id organization.type
-#> 1 fd9c2253-0d46-40d2-b140-e69886b5b093      organization
-#> 2 18b5045f-56ee-4326-b36b-d21855ac53d0      organization
+#> 1 7a325a56-46f1-419c-b7b2-ec7501edb35a      organization
+#> 2 7a325a56-46f1-419c-b7b2-ec7501edb35a      organization
 #>                        organization.id organization.approval_status
-#> 1 90153a8c-6a29-4068-a97d-7cf06dbef700                     approved
-#> 2 c9301f4c-e741-44de-b4d4-33ac61e0eeba                     approved
-#>                                     name isopen
-#> 1 energy-rating-for-household-appliances   TRUE
-#> 2       city-of-gold-coast-road-closures   TRUE
-#>                               url
-#> 1 http://www.energyrating.gov.au/
-#> 2                            <NA>
-#>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     notes
-#> 1 ![Energy Rating](http://www.energyrating.gov.au/wp-content/uploads/2011/02/ERL_3.5_star1.gif "Optional title")\r\n\r\nThese datasets contain information about the energy efficiency of the following products that carry the Energy Rating Label.\r\n\r\n-\tAir Conditioners\r\n\r\n-\tClothes dryers\r\n\r\n-\tDishwashers\r\n\r\n-\tClothes Washers\r\n\r\n-\tFridges and Freezers\r\n\r\n-\tTelevisions\r\n\r\n-\tComputer monitors\r\n\r\n\r\nThe data is collected from suppliers when they register appliances that are going to be sold in Australia and New Zealand.\r\n\r\nFields depend on the exact dataset but generally include:\r\n\r\n-\tBrand Name (and URL)\r\n\r\n-\tOutput range (kilowatts used)\r\n\r\n-\tModel Number/name\r\n\r\n-\tCountry of Origin and where sold\r\n\r\n-\tAvailability \r\n\r\n-\tStar Rating\r\n\r\n-\tVarious other fields depending on the product type
-#> 2                                                                                                                                                                                                                                                           This data set contains details of City of Gold Coast (City) planned road closures, due to local works and events. It is updated daily and, while the information presented here is believed to be accurate at the time of publication, no assurance can be provided past this point. Unplanned road closures due to emergency works are not included. Please note that the technical support services that facilitate this data publication service are provided under a service level agreeement with a 10 day service response time. In the event that there is a technical failure of this service it may take up to 10 days to reinstate.
-#>                              owner_org
-#> 1 90153a8c-6a29-4068-a97d-7cf06dbef700
-#> 2 c9301f4c-e741-44de-b4d4-33ac61e0eeba
-#>                                      license_url data_state
-#> 1 http://creativecommons.org/licenses/by/3.0/au/     active
-#> 2 http://creativecommons.org/licenses/by/3.0/au/     active
+#> 1 fafa260d-e2bf-46cd-9c35-34c1dfa46c57                     approved
+#> 2 fafa260d-e2bf-46cd-9c35-34c1dfa46c57                     approved
+#>                                                          name isopen url
+#> 1 artifact-data-location-canada-science-and-technology-museum  FALSE    
+#> 2                          artifact-data-computing-technology  FALSE    
+#>                                                                                                                                                                        notes
+#> 1 This dataset includes artifacts in the collection of the Canada Science and Technology Museums Corporation that are currently in the Canada Science and Technology Museum.
+#> 2                                This dataset includes artifacts in the collection of the Canada Science and Technology Museums Corporation related to computing technology.
+#>                              owner_org extras
+#> 1 fafa260d-e2bf-46cd-9c35-34c1dfa46c57   NULL
+#> 2 fafa260d-e2bf-46cd-9c35-34c1dfa46c57   NULL
+#>                                            license_url
+#> 1 http://data.gc.ca/eng/open-government-licence-canada
+#> 2 http://data.gc.ca/eng/open-government-licence-canada
 #>                                                             title
-#> 1 Energy Rating Data for household appliances – Labelled Products
-#> 2                                City of Gold Coast Road Closures
-#>                            revision_id update_freq
-#> 1 51d8ccc1-c40c-4b45-9f6a-fd7bf49db5df       daily
-#> 2 27b28d36-46a3-4c48-b624-bb3cc2b61535       daily
-#>                                                                     spatial
-#> 1                                                                      <NA>
-#> 2 {"type": "Point","coordinates": [153.33439640000000,-27.998399729999999]}
+#> 1 Artifact Data - Location - Canada Science and Technology Museum
+#> 2                            Artifact Data - Computing Technology
+#>                            revision_id
+#> 1 694a977a-c238-47a4-8671-caddca4edfca
+#> 2 858cb240-76a0-406a-800c-e4ae6cc56ab9
 ```
 
 ## Search for resources
@@ -363,36 +322,30 @@ out[, !names(out) %in% 'resources']
 ```r
 resource_search(q = 'name:data', limit = 2, as='table')
 #> $count
-#> [1] 4179
+#> [1] 71
 #> 
 #> $results
 #>                      resource_group_id cache_last_updated
-#> 1 001fec9d-21f6-4a11-ae93-8fd16124301e                 NA
-#> 2 001fec9d-21f6-4a11-ae93-8fd16124301e                 NA
+#> 1 01a82e52-01bf-4a9c-9b45-c4f9b92529fa                 NA
+#> 2 01a82e52-01bf-4a9c-9b45-c4f9b92529fa                 NA
 #>   webstore_last_updated                                   id size  state
-#> 1                    NA 0e433c7f-3c98-40d6-aa4c-6ba5ad047a18   NA active
-#> 2                    NA c4c31577-660a-422b-8089-5b90d20b2d73   NA active
-#>   last_modified hash description format mimetype_inner url_type
-#> 1            NA                    HTML             NA       NA
-#> 2            NA                    HTML             NA       NA
-#>         resource_locator_protocol mimetype cache_url
-#> 1         WWW:LINK-1.0-http--link       NA        NA
-#> 2 WWW:LINK-1.0-http--metadata-URL       NA        NA
-#>                                                                                                                   name
-#> 1 Automatically checked Water Temperature at surface data from 20 Nov 2008 until 27 Oct 2014 (Quality Controlled Data)
-#> 2                                                                           Point of truth URL of this metadata record
-#>                      created
-#> 1 2014-11-21T08:27:58.389084
-#> 2 2014-11-21T08:27:58.389105
-#>                                                                                                 url
-#> 1                              http://data.aims.gov.au/aimsrtds/datatool.xhtml?qc=level1&channels=2
-#> 2 http://data.aims.gov.au/metadataviewer/faces/view.xhtml?uuid=a0b44257-1652-4f4e-ae46-7a3fe20ef839
-#>   webstore_url resource_locator_function position
-#> 1           NA                                  0
-#> 2           NA                                  1
-#>                            revision_id resource_type
-#> 1 ce9ca2ca-e682-4a79-94c2-5aeca64b1659            NA
-#> 2 ce9ca2ca-e682-4a79-94c2-5aeca64b1659            NA
+#> 1                    NA e179e910-27fb-44f4-a627-99822af49ffa   NA active
+#> 2                    NA ba84e8b7-b388-4d2a-873a-7b107eb7f135   NA active
+#>   last_modified hash                                  description format
+#> 1            NA                                       XML Dataset    XML
+#> 2            NA      Data dictionary for CSTMC artifact datasets.    XLS
+#>   mimetype_inner url_type mimetype cache_url
+#> 1             NA       NA       NA        NA
+#> 2             NA       NA       NA        NA
+#>                                           name                    created
+#> 1 Artifact Data - Exploration and Survey (XML) 2014-10-28T15:50:35.374303
+#> 2                              Data Dictionary 2014-11-03T18:01:02.094210
+#>                                                                                                                                                    url
+#> 1              http://source.techno-science.ca/datasets-donn%C3%A9es/artifacts-artefacts/groups-groupes/exploration-and-survey-exploration-et-leve.xml
+#> 2 http://source.techno-science.ca/datasets-donn%C3%A9es/artifacts-artefacts/cstmc-artifact-data-dictionary-dictionnaire-de-donnees-artefacts-smstc.xls
+#>   webstore_url position                          revision_id resource_type
+#> 1           NA        0 a22e6741-3e89-4db0-a802-ba594b1c1fad            NA
+#> 2           NA        1 da1f8585-521d-47ef-8ead-7832474a3421            NA
 ```
 
 ## Examples of different CKAN APIs
