@@ -20,7 +20,7 @@ organization_list <- function(order_by = c("name", "package"),
 {
   stopifnot(length(order_by) > 0)
   stopifnot(order_by[1] %in% c("name", "package"))
-  body <- list(sort = sprintf("%s %s", order_by[1], ifelse(decreasing, "dsc", "asc")))
+  body <- list(sort = sprintf("%s %s", order_by[1], ifelse(decreasing, "", "asc")))
   if (all_fields) body[["all_fields"]] <- TRUE
   res <- ckan_POST(url, method='organization_list', body = body, ...)
   switch(as, json = res, list = jsl(res), table = jsd(res))
