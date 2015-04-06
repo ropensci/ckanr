@@ -9,14 +9,14 @@ organization_list(order_by = c("name", "package"), decreasing = FALSE,
   as = "list", ...)
 }
 \arguments{
-\item{order_by}{character string (only the first element is used).
+\item{order_by}{(character, only the first element is used).
 The field to sort the list by, must be \code{name} or \code{packages}.}
 
-\item{decreasing}{logical value. Is the sort-order is decreasing or not.}
+\item{decreasing}{(logical). Is the sort-order is decreasing or not.}
 
 \item{organizations}{NOT IMPLEMENTED YET}
 
-\item{all_fields}{logical value. Return the name or all fields of the object.}
+\item{all_fields}{(logical). Return the name or all fields of the object.}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{get_ckanr_url}} and \code{\link{set_ckanr_url}}}

@@ -2,18 +2,21 @@
 #'
 #' @export
 #'
-#' @param order_by character string (only the first element is used).
+#' @param order_by (character, only the first element is used).
 #' The field to sort the list by, must be \code{name} or \code{packages}.
-#' @param decreasing logical value. Is the sort-order is decreasing or not.
+#' @param decreasing (logical). Is the sort-order is decreasing or not.
 #' @param organizations NOT IMPLEMENTED YET
-#' @param all_fields logical value. Return the name or all fields of the object.
+#' @param all_fields (logical). Return the name or all fields of the object.
 #' @template args
 #' @examples \donttest{
 #' organization_list()
 #' organization_list(as='json')
 #' organization_list(as='table')
 #' }
-organization_list <- function(order_by = c("name", "package"), decreasing = FALSE, organizations = NULL, all_fields = TRUE, url = get_ckanr_url(), as='list', ...)
+organization_list <- function(order_by = c("name", "package"),
+                              decreasing = FALSE, organizations = NULL,
+                              all_fields = TRUE, url = get_ckanr_url(),
+                              as='list', ...)
 {
   stopifnot(length(order_by) > 0)
   stopifnot(order_by[1] %in% c("name", "package"))
