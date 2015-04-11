@@ -3,7 +3,7 @@
 #' @export
 #'
 #' @param id (character) Organization id or name.
-#' @param include_datasets (logical). Whether to include a list of the organization’s datasets
+#' @param include_datasets (logical). Whether to include a list of the organization datasets
 #' @template args
 #' @details By default the help and success slots are dropped, and only the result
 #' slot is returned. You can request raw json with \code{as='json'} then parse yourself

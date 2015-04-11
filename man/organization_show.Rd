@@ -10,7 +10,7 @@ organization_show(id, include_datasets = FALSE, url = get_ckanr_url(),
 \arguments{
 \item{id}{(character) Organization id or name.}
 
-\item{include_datasets}{(logical). Whether to include a list of the organization’s datasets}
+\item{include_datasets}{(logical). Whether to include a list of the organization datasets}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{get_ckanr_url}} and \code{\link{set_ckanr_url}}}
