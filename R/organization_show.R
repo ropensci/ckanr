@@ -13,8 +13,8 @@
 organization_show <- function(id, include_datasets = FALSE,
   url = get_ckanr_url(), as='list', ...)
 {
-  body <- cc(list(id = id))
-  if (include_datasets) body[["include_datasets"]] <- "True"
-  res <- ckan_POST(url, 'organization_show', body = body, ...)
+  body <- cc(list(id = id),
+             include_datasets = ifelse(include_datasets, "True", "False"))
+  res <- ckan_POST(url, 'organization_show', body = cc(body), ...)
   switch(as, json = res, list = jsl(res), table = jsd(res))
 }

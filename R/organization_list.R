@@ -5,7 +5,8 @@
 #' @param order_by (character, only the first element is used).
 #' The field to sort the list by, must be \code{name} or \code{packages}.
 #' @param decreasing (logical). Is the sort-order is decreasing or not.
-#' @param organizations NOT IMPLEMENTED YET
+#' @param organizations (character or NULL). A list of names of the
+#' organizations to return. NULL returns all organizations.
 #' @param all_fields (logical). Return the name or all fields of the object.
 #' @template args
 #' @examples \donttest{
@@ -20,8 +21,8 @@ organization_list <- function(order_by = c("name", "package"),
 {
   stopifnot(length(order_by) > 0)
   stopifnot(order_by[1] %in% c("name", "package"))
-  body <- list(sort = sprintf("%s %s", order_by[1], ifelse(decreasing, "", "asc")))
-  if (all_fields) body[["all_fields"]] <- TRUE
-  res <- ckan_POST(url, method='organization_list', body = body, ...)
+  body <- list(sort = sprintf("%s %s", order_by[1], ifelse(decreasing, "", "asc")),
+               all_fields = ifelse(all_fields, "True", "False"), organizations = organizations)
+  res <- ckan_POST(url, method='organization_list', body = cc(body), ...)
   switch(as, json = res, list = jsl(res), table = jsd(res))
 }
