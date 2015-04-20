@@ -38,11 +38,11 @@ data to data.frame's when possible, so the result can vary. (required)}
 \item{...}{Curl args passed on to \code{\link[httr]{POST}} (optional)}
 }
 \description{
-Add a new table to a datastore
+BEWARE: This function still doesn't quite work yet.
 }
 \examples{
 \donttest{
-ds_create(resource_id=, records=mtcars, key=getOption('ckan_demo_key'))
+ds_create(resource_id="iris2", records=iris, key=getOption('ckan_demo_key'))
 }
 }
 \references{

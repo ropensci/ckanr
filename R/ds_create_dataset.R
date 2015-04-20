@@ -30,6 +30,8 @@ ds_create_dataset <- function(package_id, name, path, key,
 
 #' Add a new table to a datastore
 #'
+#' BEWARE: This function still doesn't quite work yet.
+#'
 #' @export
 #' @param resource_id (string) Resource id that the data is going to be stored against.
 #' @param force (logical) Set to \code{TRUE} to edit a read-only resource. Default: FALSE
@@ -44,7 +46,7 @@ ds_create_dataset <- function(package_id, name, path, key,
 #' @template args
 #' @references \url{http://bit.ly/1G9cnBl}
 #' @examples \donttest{
-#' ds_create(resource_id=, records=mtcars, key=getOption('ckan_demo_key'))
+#' ds_create(resource_id="iris2", records=iris, key=getOption('ckan_demo_key'))
 #' }
 
 ds_create <- function(resource_id = NULL, resource = NULL, force = FALSE, aliases = NULL,
@@ -52,7 +54,7 @@ ds_create <- function(resource_id = NULL, resource = NULL, force = FALSE, aliase
   key, url = 'http://demo.ckan.org', as='list', ...) {
   body <- cc(list(resource_id = resource_id, resource = resource, force = force, aliases = aliases,
                fields = fields, records = convert(records), primary_key = primary_key, indexes = indexes))
-  res <- POST(file.path(url, 'api/action/datastore_create'), add_headers(Authorization = key), body = body)
+  res <- POST(file.path(url, 'api/action/datastore_create'), add_headers(Authorization = key), body = body, ...)
   stop_for_status(res)
   res <- content(res, "text")
   switch(as, json = res, list = jsl(res), table = jsd(res))
