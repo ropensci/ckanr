@@ -20,7 +20,7 @@ Use instead of \code{resource_id} (optional)}
 
 \item{fields}{(list) Fields/columns and their extra metadata. (optional)}
 
-\item{records}{(list) The data, eg: \code{[{“dob”: “2005”, “some_stuff”: [“a”, “b”]}]} (optional)}
+\item{records}{(list) The data, eg: \code{[{"dob": "2005", "some_stuff": ["a", "b"]}]} (optional)}
 
 \item{primary_key}{(character) Fields that represent a unique key (optional)}
 
