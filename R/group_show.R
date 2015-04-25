@@ -1,4 +1,4 @@
-#' Show a package.
+#' Show a package
 #'
 #' @export
 #'
@@ -13,8 +13,7 @@
 #' group_show('communications', as='json')
 #' group_show('communications', as='table')
 #' }
-group_show <- function(id, include_datasets = TRUE, url = get_ckanr_url(), as='list', ...)
-{
+group_show <- function(id, include_datasets = TRUE, url = get_ckanr_url(), as='list', ...) {
   body <- cc(list(id = id, include_datasets = as_log(include_datasets)))
   res <- ckan_POST(url, 'group_show', body = body, ...)
   switch(as, json = res, list = jsl(res), table = jsd(res))

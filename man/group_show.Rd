@@ -2,7 +2,7 @@
 % Please edit documentation in R/group_show.R
 \name{group_show}
 \alias{group_show}
-\title{Show a package.}
+\title{Show a package}
 \usage{
 group_show(id, include_datasets = TRUE, url = get_ckanr_url(),
   as = "list", ...)
@@ -22,7 +22,7 @@ data to data.frame's when possible, so the result can vary. (required)}
 \item{...}{Curl args passed on to \code{\link[httr]{POST}} (optional)}
 }
 \description{
-Show a package.
+Show a package
 }
 \details{
 By default the help and success slots are dropped, and only the result
