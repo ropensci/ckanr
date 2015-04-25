@@ -4,7 +4,7 @@ ck <- function() 'api/3/action'
 
 as_log <- function(x){
   stopifnot(is.logical(x))
-  if(x) 'true' else 'false'
+  if (x) 'true' else 'false'
 }
 
 jsl <- function(x){
@@ -17,9 +17,22 @@ jsd <- function(x){
 }
 
 ckan_POST <- function(url, method, body=NULL, ...){
-  res <- if(is.null(body)) POST(file.path(url, ck(), method), ctj(), ...) else POST(file.path(url, ck(), method), body = body, ...)
-  stop_for_status(res)
+  if (is.null(body)) {
+    res <- POST(file.path(url, ck(), method), ctj(), ...)
+  } else {
+    res <- POST(file.path(url, ck(), method), body = body, ...)
+  }
+  err_handler(res)
   content(res, "text")
+}
+
+err_handler <- function(x) {
+  if (x$status_code > 201) {
+    err <- content(x)$error
+    tmp <- err[names(err) != "__type"]
+    errmssg <- paste(names(tmp), unlist(tmp[[1]]))
+    stop(sprintf("%s - %s\n  %s", x$status_code, err$`__type`, errmssg), call. = FALSE)
+  }
 }
 
 pluck <- function(x, name, type) {
