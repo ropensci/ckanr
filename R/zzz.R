@@ -17,7 +17,14 @@ jsd <- function(x){
 }
 
 ckan_POST <- function(url, method, body=NULL, ...){
-  res <- if(is.null(body)) POST(file.path(url, ck(), method), ctj(), ...) else POST(file.path(url, ck(), method), body = body, ...)
+  api_key_header <- api_key()
+  if (is.null(api_key_header)) {
+    # no authentication
+    res <- if(is.null(body)) POST(file.path(url, ck(), method), ctj(), ...) else POST(file.path(url, ck(), method), body = body, ...)
+  } else {
+    # authentication
+    res <- if(is.null(body)) POST(file.path(url, ck(), method), ctj(), api_key_header, ...) else POST(file.path(url, ck(), method), body = body, api_key_header, ...)
+  }
   stop_for_status(res)
   content(res, "text")
 }
