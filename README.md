@@ -5,6 +5,7 @@ ckanr
 
 [![Build Status](https://api.travis-ci.org/ropensci/ckanr.png)](https://travis-ci.org/ropensci/ckanr)
 [![Build status](https://ci.appveyor.com/api/projects/status/5yqd882v4fbeggd5?svg=true)](https://ci.appveyor.com/project/sckott/ckanr)
+[![Coverage Status](https://coveralls.io/repos/ropensci/ckanr/badge.svg)](https://coveralls.io/r/ropensci/ckanr)
 
 `ckanr` is an R client for the generic CKAN API - that is, plug in a base url for the CKAN instance of interest. 
 
@@ -259,10 +260,11 @@ package_list(as = "table", url = nhmbase)
 #> [12] "natural-history-museum-library-and-archives"                         
 #> [13] "natural-history-museum-picture-library"                              
 #> [14] "notes-from-nature"                                                   
-#> [15] "predicts-site-level-summary-biodiversity-and-pressure-data"          
-#> [16] "supporting-information-for-collins-ra-britz-r-ruber-l-2015"          
-#> [17] "uk-species-inventory-master-copy"                                    
-#> [18] "uk-species-inventory-simplified-copy"
+#> [15] "notes-from-nature-crowd-sourcing-raw-data-set"                       
+#> [16] "predicts-site-level-summary-biodiversity-and-pressure-data"          
+#> [17] "supporting-information-for-collins-ra-britz-r-ruber-l-2015"          
+#> [18] "uk-species-inventory-master-copy"                                    
+#> [19] "uk-species-inventory-simplified-copy"
 ```
 
 List tags
@@ -325,10 +327,10 @@ out$results[, 1:10]
 #> 2               NA        1                 
 #>                                     id           metadata_created
 #> 1 56e711e6-c847-4f99-915a-6894bb5c5dea 2014-12-08T16:39:22.346941
-#> 2 7b79f6d8-e2d7-4907-9bc7-a25ea11e2a5a 2015-04-20T09:33:19.595183
+#> 2 b99a29cc-5d74-4c62-ad82-51473d403cbe 2015-04-23T08:33:47.736376
 #>            metadata_modified
 #> 1 2015-03-03T12:40:11.196427
-#> 2 2015-04-20T09:43:15.635405
+#> 2 2015-04-23T08:38:48.328908
 ```
 
 _show_
