@@ -20,5 +20,4 @@ test_that("changes works giving back json output", {
 test_that("changes fails correctly", {
   expect_error(changes("adf"), "offset Invalid integer")
   expect_error(changes(limit = "Adf"), "limit Invalid integer")
-  expect_error(changes(url = "adf"), "Could not resolve host: adf")
 })
