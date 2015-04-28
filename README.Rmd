@@ -62,7 +62,7 @@ changes(limit = 2, as = "table")[, 1:4]
 
 ## List datasets
 
-```{r}
+```{r output.lines=1:10}
 package_list(as = "table")
 ```
 
@@ -121,12 +121,12 @@ Website: [http://data.nhm.ac.uk/](http://data.nhm.ac.uk/)
 
 List datasets
 
-```{r}
+```{r output.lines=1:10}
 nhmbase <- "http://data.nhm.ac.uk"
 package_list(as = "table", url = nhmbase)
 ```
 
-List tags
+Tags
 
 _list_
 
