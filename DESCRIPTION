@@ -16,4 +16,5 @@ Imports:
     jsonlite
 Suggests:
     roxygen2,
-    testthat
+    testthat,
+    XML
