@@ -55,27 +55,7 @@ package_list(as = "table")
 #>  [8] "artifact-data-energy-electric"                              
 #>  [9] "artifact-data-exploration-and-survey"                       
 #> [10] "artifact-data-fisheries"                                    
-#> [11] "artifact-data-forestry"                                     
-#> [12] "artifact-data-horology"                                     
-#> [13] "artifact-data-industrial-technology"                        
-#> [14] "artifact-data-lighting-technology"                          
-#> [15] "artifact-data-location-canada-agriculture-and-food-museum"  
-#> [16] "artifact-data-location-canada-aviation-and-space-museum"    
-#> [17] "artifact-data-location-canada-science-and-technology-museum"
-#> [18] "artifact-data-marine-transportation"                        
-#> [19] "artifact-data-mathematics"                                  
-#> [20] "artifact-data-medical-technology"                           
-#> [21] "artifact-data-meteorology"                                  
-#> [22] "artifact-data-metrology"                                    
-#> [23] "artifact-data-mining-and-metallurgy"                        
-#> [24] "artifact-data-motorized-ground-transportation"              
-#> [25] "artifact-data-non-motorized-ground-transportation"          
-#> [26] "artifact-data-on-loan"                                      
-#> [27] "artifact-data-photography"                                  
-#> [28] "artifact-data-physics"                                      
-#> [29] "artifact-data-printing"                                     
-#> [30] "artifact-data-railway-transportation"                       
-#> [31] "artifact-dataset-fire-fighting"
+...
 ```
 
 ## List tags
@@ -256,18 +236,10 @@ package_list(as = "table", url = nhmbase)
 #>  [8] "collection-specimens"                                                
 #>  [9] "crowdsourcing-the-collection"                                        
 #> [10] "images-for-the-evaluation-of-automatic-image-segmentation-algorithms"
-#> [11] "imp"                                                                 
-#> [12] "natural-history-museum-library-and-archives"                         
-#> [13] "natural-history-museum-picture-library"                              
-#> [14] "notes-from-nature"                                                   
-#> [15] "notes-from-nature-crowd-sourcing-raw-data-set"                       
-#> [16] "predicts-site-level-summary-biodiversity-and-pressure-data"          
-#> [17] "supporting-information-for-collins-ra-britz-r-ruber-l-2015"          
-#> [18] "uk-species-inventory-master-copy"                                    
-#> [19] "uk-species-inventory-simplified-copy"
+...
 ```
 
-List tags
+Tags
 
 _list_
 
