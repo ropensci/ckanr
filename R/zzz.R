@@ -29,9 +29,22 @@ ckan_POST <- function(url, method, body=NULL, ...){
 #' @importFrom httr http_condition
 err_handler <- function(x) {
   if (x$status_code > 201) {
-    err <- http_condition(x, "error")
-    errmssg <- content(x, "text")
-    stop(sprintf("%s - %s\n  %s", x$status_code, err[["message"]], errmssg), call. = FALSE)
+    obj <- try({
+      err <- content(x)$error
+      tmp <- err[names(err) != "__type"]
+      errmsg <- paste(names(tmp), unlist(tmp[[1]]))
+      list(err = err, errmsg = errmsg)
+    }, silent = TRUE)
+    if (class(obj) != "try-error") {
+      stop(sprintf("%s - %s\n  %s", x$status_code, obj$err$`__type`, obj$errmsg), call. = FALSE)
+    } else {
+      obj <- {
+        err <- http_condition(x, "error")
+        errmsg <- content(x, "text")
+        list(err = err, errmsg = errmsg)
+      }
+      stop(sprintf("%s - %s\n  %s", x$status_code, obj$err[["message"]], obj$errmsg), call. = FALSE)
+    }
   }
 }
 
