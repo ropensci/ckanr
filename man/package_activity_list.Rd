@@ -2,7 +2,7 @@
 % Please edit documentation in R/package_activity_list.R
 \name{package_activity_list}
 \alias{package_activity_list}
-\title{Return a list of the site's user accounts.}
+\title{Return a list of the package's activity}
 \usage{
 package_activity_list(id, offset = 0, limit = 31, url = get_ckanr_url(),
   as = "list", ...)
@@ -24,7 +24,7 @@ data to data.frame's when possible, so the result can vary. (required)}
 \item{...}{Curl args passed on to \code{\link[httr]{POST}} (optional)}
 }
 \description{
-Return a list of the site's user accounts.
+Return a list of the package's activity
 }
 \examples{
 \donttest{

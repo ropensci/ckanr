@@ -10,8 +10,7 @@
 #' ping()
 #' ping(as="json")
 #' }
-ping <- function(url = get_ckanr_url(), as="logical", ...)
-{
+ping <- function(url = get_ckanr_url(), as="logical", ...) {
   retval <- tryCatch({
     res <- ckan_POST(url, 'site_read', ...)
     switch(as, json = res, logical = jsd(res))

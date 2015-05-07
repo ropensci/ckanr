@@ -35,10 +35,10 @@
 #' }
 
 ds_search <- function(resource_id=NULL, filters=NULL, q=NULL, plain=NULL, language=NULL,
-  fields=NULL, offset=NULL, limit=NULL, sort=NULL, url = 'http://demo.ckan.org', as='list', ...)
-{
-  args <- cc(list(resource_id=resource_id, filters=filters, q=q, plain=plain, language=language,
-                  fields=fields, offset=offset, limit=limit, sort=sort))
+  fields=NULL, offset=NULL, limit=NULL, sort=NULL, url = 'http://demo.ckan.org', as='list', ...) {
+
+  args <- cc(list(resource_id  = resource_id, filters = filters, q = q, plain = plain, language = language,
+                  fields = fields, offset = offset, limit = limit, sort = sort))
   res <- POST(file.path(url, '/api/action/datastore_search'), ctj(), query = args, ...)
   res <- content(res, "text")
   switch(as, json = res, list = jsl(res), table = jsd(res))

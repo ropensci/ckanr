@@ -15,9 +15,7 @@
 #' package_show('34d60b13-1fd5-430e-b0ec-c8bc7f4841cf', as='table')
 #' package_show('34d60b13-1fd5-430e-b0ec-c8bc7f4841cf', TRUE)
 #' }
-package_show <- function(id, use_default_schema = FALSE,
-  url = get_ckanr_url(), as='list', ...)
-{
+package_show <- function(id, use_default_schema = FALSE, url = get_ckanr_url(), as='list', ...) {
   body <- cc(list(id = id, use_default_schema = use_default_schema))
   res <- ckan_POST(url, 'package_show', body = body, ...)
   switch(as, json = res, list = jsl(res), table = jsd(res))

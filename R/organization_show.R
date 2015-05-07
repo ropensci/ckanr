@@ -13,6 +13,7 @@
 #' }
 organization_show <- function(id, include_datasets = FALSE,
                               url = get_ckanr_url(), as='list', ...) {
+
   body <- cc(list(id = id, include_datasets = include_datasets))
   res <- ckan_POST(url, 'organization_show', body = cc(body), ...)
   switch(as, json = res, list = jsl(res), table = jsd(res))
