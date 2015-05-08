@@ -8,7 +8,7 @@
 #' to this vocabulary will be returned
 #' @param all_fields (logical) Return full tag dictionaries instead of just names. Default: FALSE
 #' @template args
-#' @examples \donttest{
+#' @examples \dontrun{
 #' tag_list('aviation')
 #' tag_list('aviation', as='json')
 #' tag_list('aviation', as='table')

@@ -4,7 +4,7 @@
 #' @param id (character) Package identifier.
 #' @template paging
 #' @template args
-#' @examples \donttest{
+#' @examples \dontrun{
 #' package_activity_list("34d60b13-1fd5-430e-b0ec-c8bc7f4841cf")
 #' package_activity_list("34d60b13-1fd5-430e-b0ec-c8bc7f4841cf", as="table")
 #' package_activity_list("34d60b13-1fd5-430e-b0ec-c8bc7f4841cf", as="json")

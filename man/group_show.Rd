@@ -30,7 +30,7 @@ slot is returned. You can request raw json with \code{as='json'} then parse your
 to get the help slot.
 }
 \examples{
-\donttest{
+\dontrun{
 group_show('communications')
 group_show('communications', as='json')
 group_show('communications', as='table')

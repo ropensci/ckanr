@@ -4,7 +4,7 @@
 #' @param q (character) Restrict the users returned to those whose names contain a string
 #' @param order_by (character) Which field to sort the list by (optional, default: 'name')
 #' @template args
-#' @examples \donttest{
+#' @examples \dontrun{
 #' user_list()
 #' user_list(as="table")
 #' user_list(as="json")

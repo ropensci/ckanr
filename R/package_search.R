@@ -23,7 +23,7 @@
 #' this section will have any effect without specifying at least one field name
 #' using this param.
 #' @template args
-#' @examples \donttest{
+#' @examples \dontrun{
 #' package_search(q = '*:*')
 #' package_search(q = '*:*', rows = 2, as='json')
 #' package_search(q = '*:*', rows = 2, as='table')

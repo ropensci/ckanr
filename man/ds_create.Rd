@@ -41,7 +41,7 @@ data to data.frame's when possible, so the result can vary. (required)}
 BEWARE: This function still doesn't quite work yet.
 }
 \examples{
-\donttest{
+\dontrun{
 ds_create(resource_id="iris2", records=iris, key=getOption('ckan_demo_key'))
 }
 }

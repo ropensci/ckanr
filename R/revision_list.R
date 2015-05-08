@@ -2,7 +2,7 @@
 #'
 #' @export
 #' @template args
-#' @examples \donttest{
+#' @examples \dontrun{
 #' revision_list()
 #' revision_list(as="table")
 #' revision_list(as="json")

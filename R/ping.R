@@ -6,7 +6,7 @@
 #' @param as (character) One of logical (default) or json. logical returns a logical, json
 #' returns json.
 #' @param ... Curl args passed on to \code{\link[httr]{POST}}
-#' @examples \donttest{
+#' @examples \dontrun{
 #' ping()
 #' ping(as="json")
 #' }

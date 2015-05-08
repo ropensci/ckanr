@@ -3,7 +3,7 @@
 #' @export
 #' @template paging
 #' @template args
-#' @examples \donttest{
+#' @examples \dontrun{
 #' changes()
 #' changes(as='json')
 #' changes(as='table')

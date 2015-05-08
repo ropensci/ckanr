@@ -8,7 +8,7 @@
 #' to this vocabulary will be returned
 #' @template paging
 #' @template args
-#' @examples \donttest{
+#' @examples \dontrun{
 #' tag_search('aviation')
 #' tag_search('aviation', as='json')
 #' tag_search('aviation', as='table')

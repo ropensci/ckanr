@@ -11,7 +11,7 @@
 #' @param all_fields (logical) Return full group dictionaries instead of just names. Default: FALSE
 #' @template paging
 #' @template args
-#' @examples \donttest{
+#' @examples \dontrun{
 #' group_list()
 #' group_list(as='json')
 #' group_list(as='table')

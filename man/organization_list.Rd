@@ -32,7 +32,7 @@ data to data.frame's when possible, so the result can vary. (required)}
 List organization
 }
 \examples{
-\donttest{
+\dontrun{
 organization_list()
 organization_list(as='json')
 organization_list(as='table')

@@ -29,7 +29,7 @@ data to data.frame's when possible, so the result can vary. (required)}
 List tags.
 }
 \examples{
-\donttest{
+\dontrun{
 tag_list('aviation')
 tag_list('aviation', as='json')
 tag_list('aviation', as='table')

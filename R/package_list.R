@@ -3,7 +3,7 @@
 #' @export
 #' @template paging
 #' @template args
-#' @examples \donttest{
+#' @examples \dontrun{
 #' package_list()
 #' package_list(as='json')
 #' package_list(as='table')

@@ -4,7 +4,7 @@
 #'
 #' @param id (character) The name or id of the tag
 #' @template args
-#' @examples \donttest{
+#' @examples \dontrun{
 #' tag_show('Aviation')
 #' tag_show('Aviation', as='json')
 #' tag_show('Aviation', as='table')

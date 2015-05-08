@@ -10,7 +10,7 @@
 #' @template args
 #' @references
 #' \url{http://docs.ckan.org/en/latest/api/index.html#ckan.logic.action.create.resource_create}
-#' @examples \donttest{
+#' @examples \dontrun{
 #' ds_create_dataset(package_id='testingagain', name="mydata",
 #'                    path="~/github/sac/theplantlist/Actinidiaceae.csv",
 #'                    key=getOption('ckan_demo_key'))
@@ -45,7 +45,7 @@ ds_create_dataset <- function(package_id, name, path, key,
 #' @param key API key (required)
 #' @template args
 #' @references \url{http://bit.ly/1G9cnBl}
-#' @examples \donttest{
+#' @examples \dontrun{
 #' ds_create(resource_id="iris2", records=iris, key=getOption('ckan_demo_key'))
 #' }
 

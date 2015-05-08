@@ -9,7 +9,7 @@
 #' organizations to return. NULL returns all organizations.
 #' @param all_fields (logical). Return the name or all fields of the object.
 #' @template args
-#' @examples \donttest{
+#' @examples \dontrun{
 #' organization_list()
 #' organization_list(as='json')
 #' organization_list(as='table')

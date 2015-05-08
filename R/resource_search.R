@@ -15,7 +15,7 @@
 #' @param offset Record to start at, default to beginning.
 #' @param limit Number of records to return.
 #' @template args
-#' @examples \donttest{
+#' @examples \dontrun{
 #' resource_search(q = 'name:data')
 #' resource_search(q = 'name:data', as='json')
 #' resource_search(q = 'name:data', as='table')

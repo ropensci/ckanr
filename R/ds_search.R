@@ -24,7 +24,7 @@
 #' A listing of all available resources can be found at the alias \emph{table_metadata}
 #' full text search query language:
 #' \url{http://www.postgresql.org/docs/9.1/static/datatype-textsearch.html#DATATYPE-TSQUERY}.
-#' @examples \donttest{
+#' @examples \dontrun{
 #' url <- 'http://demo.ckan.org/'
 #' ds_search(resource_id='f4129802-22aa-4437-b9f9-8a8f3b7b2a53', url=url)
 #' ds_search(resource_id='f4129802-22aa-4437-b9f9-8a8f3b7b2a53', url=url, as="table")

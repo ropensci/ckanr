@@ -3,7 +3,7 @@
 #' @export
 #' @param id (character) Package identifier.
 #' @template args
-#' @examples \donttest{
+#' @examples \dontrun{
 #' license_list()
 #' license_list(as="table")
 #' license_list(as="json")
