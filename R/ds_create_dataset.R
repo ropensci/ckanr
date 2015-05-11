@@ -11,13 +11,13 @@
 #' @references
 #' \url{http://docs.ckan.org/en/latest/api/index.html#ckan.logic.action.create.resource_create}
 #' @examples \dontrun{
-#' ds_create_dataset(package_id='testingagain', name="mydata",
-#'                    path="~/github/sac/theplantlist/Actinidiaceae.csv",
-#'                    key=getOption('ckan_demo_key'))
+#' file <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
+#' key <- getOption('ckan_demo_key')
+#' ds_create_dataset(package_id='testingagain', name="mydata", path=file, key)
 #' }
 
 ds_create_dataset <- function(package_id, name, path, key,
-                              url = 'http://demo.ckan.org', as='list', ...) {
+                              url = 'http://demo.ckan.org', as = 'list', ...) {
   path <- path.expand(path)
   ext <- strsplit(basename(path), "\\.")[[1]]
   ext <- ext[length(ext)]
@@ -46,12 +46,14 @@ ds_create_dataset <- function(package_id, name, path, key,
 #' @template args
 #' @references \url{http://bit.ly/1G9cnBl}
 #' @examples \dontrun{
-#' ds_create(resource_id="iris2", records=iris, key=getOption('ckan_demo_key'))
+#' ds_create(resource_id="f4129802-22aa-4437-b9f9-8a8f3b7b2a53",
+#'          records=iris, force = TRUE, key=getOption('ckan_demo_key'))
 #' }
 
 ds_create <- function(resource_id = NULL, resource = NULL, force = FALSE, aliases = NULL,
   fields = NULL, records = NULL, primary_key = NULL, indexes = NULL,
-  key, url = 'http://demo.ckan.org', as='list', ...) {
+  key, url = 'http://demo.ckan.org', as = 'list', ...) {
+
   body <- cc(list(resource_id = resource_id, resource = resource, force = force, aliases = aliases,
                fields = fields, records = convert(records), primary_key = primary_key, indexes = indexes))
   res <- POST(file.path(url, 'api/action/datastore_create'), add_headers(Authorization = key), body = body, ...)

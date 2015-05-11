@@ -30,9 +30,9 @@ Datastore - create a dataset
 }
 \examples{
 \dontrun{
-ds_create_dataset(package_id='testingagain', name="mydata",
-                   path="~/github/sac/theplantlist/Actinidiaceae.csv",
-                   key=getOption('ckan_demo_key'))
+file <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
+key <- getOption('ckan_demo_key')
+ds_create_dataset(package_id='testingagain', name="mydata", path=file, key)
 }
 }
 \references{
