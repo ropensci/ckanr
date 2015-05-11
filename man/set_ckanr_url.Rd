@@ -27,4 +27,8 @@ set_ckanr_url("https://data.gov.au")
 get_ckanr_url()
 }
 }
+\seealso{
+Other ckanr.options: \code{\link{ckanr_options}};
+  \code{\link{set_api_key}}
+}
 

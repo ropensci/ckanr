@@ -11,6 +11,7 @@
 #' \code{ckanr} will use the value as api key to authenticate with CKAN service.
 #'
 #' @param api_key (character). The api key of the user.
+#' @family ckanr options
 #' @examples
 #' \dontrun{
 #' set_api_key("xxx")

@@ -26,4 +26,8 @@ set_api_key("xxx")
 organization_show("some_name", include_datasets = TRUE)[["packages"]]
 }
 }
+\seealso{
+Other ckanr.options: \code{\link{ckanr_options}};
+  \code{\link{get_ckanr_url}}, \code{\link{set_ckanr_url}}
+}
 

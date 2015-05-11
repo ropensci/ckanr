@@ -10,6 +10,10 @@ R client for the CKAN API
 }
 \author{
 Scott Chamberlain \email{myrmecocystus@gmail.com}
+
+Imanuel Costigan \email{i.costigan@me.com}
+
+Wush Wu
 }
 \keyword{package}
 
