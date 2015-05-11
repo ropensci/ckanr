@@ -11,4 +11,5 @@ Some CKAN API functions require authentication.
 The \code{set_api_key} is a helper function to set the API-KEY and
 the \code{api_key} is a helper function to enable authentication.
 }
+\keyword{internal}
 

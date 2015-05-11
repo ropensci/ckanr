@@ -29,6 +29,7 @@ set_api_key <- function(api_key) {
 #' The \code{set_api_key} is a helper function to set the API-KEY and
 #' the \code{api_key} is a helper function to enable authentication.
 #' @importFrom httr add_headers
+#' @keywords internal
 api_key <- function() {
   value <- getOption("X-CKAN-API-Key", NULL)
   if (is.null(value)) NULL else add_headers("X-CKAN-API-Key" = value)
