@@ -35,7 +35,7 @@ data to data.frame's when possible, so the result can vary. (required)}
 List groups.
 }
 \examples{
-\donttest{
+\dontrun{
 group_list()
 group_list(as='json')
 group_list(as='table')

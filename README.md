@@ -5,6 +5,7 @@ ckanr
 
 [![Build Status](https://api.travis-ci.org/ropensci/ckanr.png)](https://travis-ci.org/ropensci/ckanr)
 [![Build status](https://ci.appveyor.com/api/projects/status/5yqd882v4fbeggd5?svg=true)](https://ci.appveyor.com/project/sckott/ckanr)
+[![Coverage Status](https://coveralls.io/repos/ropensci/ckanr/badge.svg)](https://coveralls.io/r/ropensci/ckanr)
 
 `ckanr` is an R client for the generic CKAN API - that is, plug in a base url for the CKAN instance of interest. 
 
@@ -54,27 +55,7 @@ package_list(as = "table")
 #>  [8] "artifact-data-energy-electric"                              
 #>  [9] "artifact-data-exploration-and-survey"                       
 #> [10] "artifact-data-fisheries"                                    
-#> [11] "artifact-data-forestry"                                     
-#> [12] "artifact-data-horology"                                     
-#> [13] "artifact-data-industrial-technology"                        
-#> [14] "artifact-data-lighting-technology"                          
-#> [15] "artifact-data-location-canada-agriculture-and-food-museum"  
-#> [16] "artifact-data-location-canada-aviation-and-space-museum"    
-#> [17] "artifact-data-location-canada-science-and-technology-museum"
-#> [18] "artifact-data-marine-transportation"                        
-#> [19] "artifact-data-mathematics"                                  
-#> [20] "artifact-data-medical-technology"                           
-#> [21] "artifact-data-meteorology"                                  
-#> [22] "artifact-data-metrology"                                    
-#> [23] "artifact-data-mining-and-metallurgy"                        
-#> [24] "artifact-data-motorized-ground-transportation"              
-#> [25] "artifact-data-non-motorized-ground-transportation"          
-#> [26] "artifact-data-on-loan"                                      
-#> [27] "artifact-data-photography"                                  
-#> [28] "artifact-data-physics"                                      
-#> [29] "artifact-data-printing"                                     
-#> [30] "artifact-data-railway-transportation"                       
-#> [31] "artifact-dataset-fire-fighting"
+...
 ```
 
 ## List tags
@@ -255,17 +236,10 @@ package_list(as = "table", url = nhmbase)
 #>  [8] "collection-specimens"                                                
 #>  [9] "crowdsourcing-the-collection"                                        
 #> [10] "images-for-the-evaluation-of-automatic-image-segmentation-algorithms"
-#> [11] "imp"                                                                 
-#> [12] "natural-history-museum-library-and-archives"                         
-#> [13] "natural-history-museum-picture-library"                              
-#> [14] "notes-from-nature"                                                   
-#> [15] "predicts-site-level-summary-biodiversity-and-pressure-data"          
-#> [16] "supporting-information-for-collins-ra-britz-r-ruber-l-2015"          
-#> [17] "uk-species-inventory-master-copy"                                    
-#> [18] "uk-species-inventory-simplified-copy"
+...
 ```
 
-List tags
+Tags
 
 _list_
 
@@ -325,10 +299,10 @@ out$results[, 1:10]
 #> 2               NA        1                 
 #>                                     id           metadata_created
 #> 1 56e711e6-c847-4f99-915a-6894bb5c5dea 2014-12-08T16:39:22.346941
-#> 2 7b79f6d8-e2d7-4907-9bc7-a25ea11e2a5a 2015-04-20T09:33:19.595183
+#> 2 b99a29cc-5d74-4c62-ad82-51473d403cbe 2015-04-23T08:33:47.736376
 #>            metadata_modified
 #> 1 2015-03-03T12:40:11.196427
-#> 2 2015-04-20T09:43:15.635405
+#> 2 2015-04-23T08:38:48.328908
 ```
 
 _show_

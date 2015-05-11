@@ -7,7 +7,7 @@
 resource_show(id, url = get_ckanr_url(), as = "list", ...)
 }
 \arguments{
-\item{id}{A resource ID}
+\item{id}{(character) Resource identifier.}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{get_ckanr_url}} and \code{\link{set_ckanr_url}}}
@@ -22,8 +22,9 @@ data to data.frame's when possible, so the result can vary. (required)}
 Show a resource.
 }
 \examples{
-\donttest{
+\dontrun{
 resource_show(id = "e179e910-27fb-44f4-a627-99822af49ffa", as="table")
+resource_show(id = "05ff2255-c38a-40c9-b657-4ccb55ab2feb", url = "http://data.nhm.ac.uk")
 }
 }
 

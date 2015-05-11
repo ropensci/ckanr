@@ -22,7 +22,7 @@ data to data.frame's when possible, so the result can vary. (required)}
 Datastore - search or get a dataset from CKRAN datastore
 }
 \examples{
-\donttest{
+\dontrun{
 url <- 'http://demo.ckan.org/'
 sql = 'SELECT * from "f4129802-22aa-4437-b9f9-8a8f3b7b2a53" LIMIT 2'
 ds_search_sql(sql, url=url, as="table")

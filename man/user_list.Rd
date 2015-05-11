@@ -25,7 +25,7 @@ data to data.frame's when possible, so the result can vary. (required)}
 Return a list of the site's user accounts.
 }
 \examples{
-\donttest{
+\dontrun{
 user_list()
 user_list(as="table")
 user_list(as="json")

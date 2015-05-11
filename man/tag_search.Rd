@@ -31,7 +31,7 @@ data to data.frame's when possible, so the result can vary. (required)}
 List tags.
 }
 \examples{
-\donttest{
+\dontrun{
 tag_search('aviation')
 tag_search('aviation', as='json')
 tag_search('aviation', as='table')

@@ -31,7 +31,7 @@ slot is returned. You can request raw json with \code{as='json'} then parse your
 to get the help slot.
 }
 \examples{
-\donttest{
+\dontrun{
 package_show('34d60b13-1fd5-430e-b0ec-c8bc7f4841cf')
 package_show('34d60b13-1fd5-430e-b0ec-c8bc7f4841cf', as='json')
 package_show('34d60b13-1fd5-430e-b0ec-c8bc7f4841cf', as='table')

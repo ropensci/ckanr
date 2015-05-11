@@ -2,13 +2,12 @@
 #'
 #' @export
 #' @template args
-#' @examples \donttest{
+#' @examples \dontrun{
 #' revision_list()
 #' revision_list(as="table")
 #' revision_list(as="json")
 #' }
-revision_list <- function(url = get_ckanr_url(), as="list", ...)
-{
+revision_list <- function(url = get_ckanr_url(), as = "list", ...) {
   res <- ckan_POST(url, 'revision_list', ...)
   switch(as, json = res, list = jsl(res), table = jsd(res))
 }

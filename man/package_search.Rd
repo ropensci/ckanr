@@ -48,7 +48,7 @@ data to data.frame's when possible, so the result can vary. (required)}
 Search for packages.
 }
 \examples{
-\donttest{
+\dontrun{
 package_search(q = '*:*')
 package_search(q = '*:*', rows = 2, as='json')
 package_search(q = '*:*', rows = 2, as='table')

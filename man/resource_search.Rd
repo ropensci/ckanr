@@ -37,7 +37,7 @@ data to data.frame's when possible, so the result can vary. (required)}
 Search for resources.
 }
 \examples{
-\donttest{
+\dontrun{
 resource_search(q = 'name:data')
 resource_search(q = 'name:data', as='json')
 resource_search(q = 'name:data', as='table')

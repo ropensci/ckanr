@@ -24,7 +24,7 @@
 #' A listing of all available resources can be found at the alias \emph{table_metadata}
 #' full text search query language:
 #' \url{http://www.postgresql.org/docs/9.1/static/datatype-textsearch.html#DATATYPE-TSQUERY}.
-#' @examples \donttest{
+#' @examples \dontrun{
 #' url <- 'http://demo.ckan.org/'
 #' ds_search(resource_id='f4129802-22aa-4437-b9f9-8a8f3b7b2a53', url=url)
 #' ds_search(resource_id='f4129802-22aa-4437-b9f9-8a8f3b7b2a53', url=url, as="table")
@@ -35,10 +35,10 @@
 #' }
 
 ds_search <- function(resource_id=NULL, filters=NULL, q=NULL, plain=NULL, language=NULL,
-  fields=NULL, offset=NULL, limit=NULL, sort=NULL, url = 'http://demo.ckan.org', as='list', ...)
-{
-  args <- cc(list(resource_id=resource_id, filters=filters, q=q, plain=plain, language=language,
-                  fields=fields, offset=offset, limit=limit, sort=sort))
+  fields=NULL, offset=NULL, limit=NULL, sort=NULL, url = 'http://demo.ckan.org', as='list', ...) {
+
+  args <- cc(list(resource_id  = resource_id, filters = filters, q = q, plain = plain, language = language,
+                  fields = fields, offset = offset, limit = limit, sort = sort))
   res <- POST(file.path(url, '/api/action/datastore_search'), ctj(), query = args, ...)
   res <- content(res, "text")
   switch(as, json = res, list = jsl(res), table = jsd(res))

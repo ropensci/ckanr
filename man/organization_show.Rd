@@ -30,7 +30,7 @@ slot is returned. You can request raw json with \code{as='json'} then parse your
 to get the help slot.
 }
 \examples{
-\donttest{
+\dontrun{
 organization_show("fafa260d-e2bf-46cd-9c35-34c1dfa46c57")
 }
 }
