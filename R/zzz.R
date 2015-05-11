@@ -17,7 +17,7 @@ jsd <- function(x){
 }
 
 ckan_POST <- function(url, method, body=NULL, ...){
-  if (is.null(body)) {
+  if (is.null(body) || length(body) == 0) {
     res <- POST(file.path(url, ck(), method), ctj(), ...)
   } else {
     res <- POST(file.path(url, ck(), method), body = body, ...)
