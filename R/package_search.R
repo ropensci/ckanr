@@ -23,7 +23,7 @@
 #' this section will have any effect without specifying at least one field name
 #' using this param.
 #' @template args
-#' @examples \donttest{
+#' @examples \dontrun{
 #' package_search(q = '*:*')
 #' package_search(q = '*:*', rows = 2, as='json')
 #' package_search(q = '*:*', rows = 2, as='table')
@@ -34,10 +34,10 @@
 #' package_search(q = '*:*', fq = 'num_tags:[1 TO *]')$count
 #' }
 package_search <- function(q='*:*', fq=NULL, sort=NULL, rows=NULL, start=NULL, facet=FALSE,
-  facet.limit=NULL, facet.field=NULL, url = get_ckanr_url(), as='list', ...)
-{
-  body <- cc(list(q=q, fq=fq, sort=sort, rows=rows, start=start, facet=as_log(facet),
-                  facet.limit=facet.limit, facet.field=facet.field))
+  facet.limit=NULL, facet.field=NULL, url = get_ckanr_url(), as='list', ...) {
+
+  body <- cc(list(q = q, fq = fq, sort = sort, rows = rows, start = start, facet = as_log(facet),
+                  facet.limit = facet.limit, facet.field = facet.field))
   res <- ckan_POST(url, 'package_search', body = body, ...)
   switch(as, json = res, list = jsl(res), table = jsd(res))
 }

@@ -24,7 +24,7 @@ data to data.frame's when possible, so the result can vary. (required)}
 Get an activity stream of recently changed datasets on a site.
 }
 \examples{
-\donttest{
+\dontrun{
 changes()
 changes(as='json')
 changes(as='table')

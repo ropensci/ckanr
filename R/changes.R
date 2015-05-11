@@ -1,11 +1,9 @@
 #' Get an activity stream of recently changed datasets on a site.
 #'
 #' @export
-#'
-#' @param offset (numeric) Where to start getting activity items from (optional, default: 0)
-#' @param limit (numeric) The maximum number of activities to return (optional, default: 31)
+#' @template paging
 #' @template args
-#' @examples \donttest{
+#' @examples \dontrun{
 #' changes()
 #' changes(as='json')
 #' changes(as='table')

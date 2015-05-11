@@ -22,7 +22,7 @@ data to data.frame's when possible, so the result can vary. (required)}
 Show a tag.
 }
 \examples{
-\donttest{
+\dontrun{
 tag_show('Aviation')
 tag_show('Aviation', as='json')
 tag_show('Aviation', as='table')

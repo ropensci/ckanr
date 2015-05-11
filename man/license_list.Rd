@@ -22,7 +22,7 @@ data to data.frame's when possible, so the result can vary. (required)}
 Return the list of licenses available for datasets on the site.
 }
 \examples{
-\donttest{
+\dontrun{
 license_list()
 license_list(as="table")
 license_list(as="json")

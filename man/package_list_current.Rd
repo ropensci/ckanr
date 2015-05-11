@@ -25,7 +25,7 @@ data to data.frame's when possible, so the result can vary. (required)}
 List current packages with resources.
 }
 \examples{
-\donttest{
+\dontrun{
 package_list_current()
 package_list_current(as='json')
 package_list_current(as='table')

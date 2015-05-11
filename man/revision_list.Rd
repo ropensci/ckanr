@@ -20,7 +20,7 @@ data to data.frame's when possible, so the result can vary. (required)}
 Return a list of the IDs of the site's revisions.
 }
 \examples{
-\donttest{
+\dontrun{
 revision_list()
 revision_list(as="table")
 revision_list(as="json")

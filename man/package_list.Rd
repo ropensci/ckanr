@@ -25,7 +25,7 @@ data to data.frame's when possible, so the result can vary. (required)}
 List datasets.
 }
 \examples{
-\donttest{
+\dontrun{
 package_list()
 package_list(as='json')
 package_list(as='table')

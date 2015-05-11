@@ -18,7 +18,7 @@ returns json.}
 Ping a CKAN server to test that it's up or down.
 }
 \examples{
-\donttest{
+\dontrun{
 ping()
 ping(as="json")
 }

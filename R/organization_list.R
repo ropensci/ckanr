@@ -9,7 +9,7 @@
 #' organizations to return. NULL returns all organizations.
 #' @param all_fields (logical). Return the name or all fields of the object.
 #' @template args
-#' @examples \donttest{
+#' @examples \dontrun{
 #' organization_list()
 #' organization_list(as='json')
 #' organization_list(as='table')
@@ -18,6 +18,7 @@ organization_list <- function(order_by = c("name", "package"),
                               decreasing = FALSE, organizations = NULL,
                               all_fields = TRUE, url = get_ckanr_url(),
                               as='list', ...) {
+
   stopifnot(length(order_by) > 0)
   stopifnot(order_by[1] %in% c("name", "package"))
   body <- list(sort = sprintf("%s %s", order_by[1], ifelse(decreasing, "", "asc")),

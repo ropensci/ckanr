@@ -29,7 +29,7 @@ data to data.frame's when possible, so the result can vary. (required)}
 Datastore - create a dataset
 }
 \examples{
-\donttest{
+\dontrun{
 ds_create_dataset(package_id='testingagain', name="mydata",
                    path="~/github/sac/theplantlist/Actinidiaceae.csv",
                    key=getOption('ckan_demo_key'))
