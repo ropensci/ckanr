@@ -1,12 +1,13 @@
 Package: ckanr
 Title: R Client for the Comprehensive Knowledge Archive Network (CKAN) API
 Description: R client for CKAN API. more description later...
-Version: 0.0.4.995
-Date: 2015-05-07
-Authors@R: c(person("Scott", "Chamberlain", email="myrmecocystus@gmail.com",
-                    role = c("aut", "cre")),
-             person("Imanuel", "Costigan", email="i.costigan@me.com",
-                    role = "ctb"))
+Version: 0.0.4.999
+Date: 2015-05-11
+Authors@R: c(
+    person("Scott", "Chamberlain", email="myrmecocystus@gmail.com", role = c("aut", "cre")),
+    person("Imanuel", "Costigan", email="i.costigan@me.com", role = "ctb"),
+    person("Wush", "Wu", role = "ctb")
+  )
 License: MIT + file LICENSE
 LazyData: true
 URL: https://github.com/ropensci/ckanr
