@@ -20,10 +20,18 @@ ckan_POST <- function(url, method, body=NULL, ...){
   api_key_header <- api_key()
   if (is.null(api_key_header)) {
     # no authentication
-    res <- if(is.null(body)) POST(file.path(url, ck(), method), ctj(), ...) else POST(file.path(url, ck(), method), body = body, ...)
+    if (is.null(body) || length(body) == 0) {
+      res <- POST(file.path(url, ck(), method), ctj(), ...)
+    } else {
+      res <- POST(file.path(url, ck(), method), body = body, ...)
+    }
   } else {
     # authentication
-    res <- if(is.null(body)) POST(file.path(url, ck(), method), ctj(), api_key_header, ...) else POST(file.path(url, ck(), method), body = body, api_key_header, ...)
+    if (is.null(body) || length(body) == 0) {
+      res <- POST(file.path(url, ck(), method), ctj(), api_key_header, ...)
+    } else {
+      res <- POST(file.path(url, ck(), method), body = body, api_key_header, ...)
+    }
   }
   err_handler(res)
   content(res, "text")
