@@ -22,7 +22,7 @@ ds_create_dataset <- function(package_id, name, path, key,
   ext <- strsplit(basename(path), "\\.")[[1]]
   ext <- ext[length(ext)]
   body <- list(package_id = package_id, name = name, format = ext, url = 'upload', upload = upload_file(path))
-  res <- POST(file.path(url, 'api/action/resource_create'), add_headers(Authorization = key), body = body, ...)
+  res <- POST(file.path(url, ck(), 'resource_create'), add_headers(Authorization = key), body = body, ...)
   stop_for_status(res)
   res <- content(res, "text")
   switch(as, json = res, list = jsl(res), table = jsd(res))
