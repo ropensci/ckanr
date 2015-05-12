@@ -9,7 +9,10 @@
 #' ckanr_options()
 ckanr_options <- function() {
   ops <- list(url = getOption("ckanr.default.url", NULL),
-              key = getOption("X-CKAN-API-Key", NULL)
+              key = getOption("X-CKAN-API-Key", NULL),
+              ckan.demo.url = getOption("ckan.demo.url", NULL),
+              ckan.demo.key = getOption("ckan.demo.key", NULL),
+              ckan.demo.resource.id = getOption("ckan.demo.resource.id", NULL)
   )
   structure(ops, class = "ckanr_options")
 }

@@ -42,7 +42,8 @@ BEWARE: This function still doesn't quite work yet.
 }
 \examples{
 \dontrun{
-ds_create(resource_id="iris2", records=iris, key=getOption('ckan_demo_key'))
+ds_create(resource_id="f4129802-22aa-4437-b9f9-8a8f3b7b2a53",
+         records=iris, force = TRUE, key=getOption('ckan_demo_key'))
 }
 }
 \references{
