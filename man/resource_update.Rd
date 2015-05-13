@@ -5,7 +5,7 @@
 \title{Update a resource's file attachment}
 \usage{
 resource_update(id, path, url = get_ckanr_url(),
-  key = api_key()$httpheader[[1]], as = "list", ...)
+  key = getOption("X-CKAN-API-Key", NULL), as = "list", ...)
 }
 \arguments{
 \item{id}{(character) Resource ID to update (required)}
