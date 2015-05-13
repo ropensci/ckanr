@@ -8,9 +8,9 @@ ds_create_dataset(package_id, name, path, key, url = "http://demo.ckan.org",
   as = "list", ...)
 }
 \arguments{
-\item{package_id}{(character) Package ID to add dataset to (required)}
+\item{package_id}{(character) Existing package ID to add a resource to (required)}
 
-\item{name}{(character) Name of the new dataset (required)}
+\item{name}{(character) Name of the new resource (required)}
 
 \item{path}{(character) Path of the file to add (required)}
 
