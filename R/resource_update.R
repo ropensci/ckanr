@@ -40,7 +40,7 @@
 #' }
 resource_update <- function(id, path,
                             url=get_ckanr_url(),
-                            key=api_key()$httpheader[[1]],
+                            key=getOption("X-CKAN-API-Key", NULL),
                             as = 'list', ...) {
   require(httr)
   path <- path.expand(path)
