@@ -3,8 +3,8 @@
 #' @export
 #' @importFrom httr upload_file add_headers
 #'
-#' @param package_id (character) Package ID to add dataset to (required)
-#' @param name (character) Name of the new dataset (required)
+#' @param package_id (character) Existing package ID to add a resource to (required)
+#' @param name (character) Name of the new resource (required)
 #' @param path (character) Path of the file to add (required)
 #' @param key API key (required)
 #' @template args
@@ -15,7 +15,6 @@
 #' key <- getOption('ckan_demo_key')
 #' ds_create_dataset(package_id='testingagain', name="mydata", path=file, key)
 #' }
-
 ds_create_dataset <- function(package_id, name, path, key,
                               url = 'http://demo.ckan.org', as = 'list', ...) {
   path <- path.expand(path)
