@@ -1,7 +1,7 @@
 #' Datastore - create a dataset
 #'
 #' @export
-#' @importFrom httr upload_file add_headers
+#' @importFrom httr upload_file add_headers POST
 #'
 #' @param package_id (character) Existing package ID to add a resource to (required)
 #' @param name (character) Name of the new resource (required)
