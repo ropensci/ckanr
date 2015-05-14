@@ -15,17 +15,18 @@ test_that("A CKAN resource ID must be set", { expect_is(rid, "character") })
 # Helper functions to test CKAN environment
 check_ckan <- function(){
   if(!ping(url)) {
-    skip(paste0("CKAN is offline. Tests for resource_update require a live ",
-                "CKAN URL to be set with set_ckanr_url('your_ckan_url')."))
+    skip(paste("CKAN is offline.",
+               "Did you set CKAN test settings with ?set_test_env ?",
+               "Does the test CKAN server run at", url, "?"))
   }
 }
 
 check_resource <- function(){
   res <- resource_show(rid, url=url)
-  if(class(res)!="list"){
-   skip(paste0("The CKAN resource doesn't seem to exist. Tests for ",
-               "resource_update require an existing CKAN resource ID to be",
-               "consult ?set_test_env"))
+  if(class(res)!="list" && res$id!=rid){
+   skip(paste("The CKAN test resource wasn't found.",
+               "Did you set CKAN test settings with ?set_test_env ?",
+               "Does Resource with ID", rid, "exist on", url, "?"))
   }
 }
 
