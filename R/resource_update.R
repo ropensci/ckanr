@@ -40,7 +40,7 @@
 #' }
 resource_update <- function(id, path,
                             url=get_ckanr_url(),
-                            key=getOption("X-CKAN-API-Key", NULL),
+                            key=getOption("X-CKAN-API-Key"),
                             as = 'list', ...) {
   path <- path.expand(path)
   body <- list(id = id,
@@ -48,9 +48,8 @@ resource_update <- function(id, path,
                upload = upload_file(path),
                last_modified=Sys.time())
   res <- POST(file.path(url, ck(), 'resource_update'),
-                    add_headers(Authorization = key),
-                    body = body,
-                    ...)
+              add_headers(Authorization = key),
+              body = body, ...)
   stop_for_status(res)
   res <- content(res, "text")
   switch(as, json = res, list = jsl(res), table = jsd(res))
