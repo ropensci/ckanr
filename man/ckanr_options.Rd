@@ -7,7 +7,8 @@
 ckanr_options()
 }
 \value{
-Prints your base url, and API key (if used)
+Prints your base url, API key (if used), and optional test server
+ settings (URL, API key, a dataset ID and a resource ID)
 }
 \description{
 Get ckanr options

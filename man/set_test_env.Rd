@@ -19,4 +19,8 @@ set_test_env(url, key, did, rid)
 Tests require a valid CKAN URL, a privileged API key for that URL,
  plus the IDs of an existing dataset and an existing resource, repectively.
 }
+\details{
+The settings are written to both options and Sys.env. Testthat can only
+ access Sys.env.
+}
 
