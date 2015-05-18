@@ -6,7 +6,8 @@ Date: 2015-05-18
 Authors@R: c(
     person("Scott", "Chamberlain", email="myrmecocystus@gmail.com", role = c("aut", "cre")),
     person("Imanuel", "Costigan", email="i.costigan@me.com", role = "ctb"),
-    person("Wush", "Wu", role = "ctb")
+    person("Wush", "Wu", role = "ctb"),
+    person("Florian", "Mayer", email="Florian.Mayer@DPaW.wa.gov.au", role = "ctb")
   )
 License: MIT + file LICENSE
 LazyData: true
