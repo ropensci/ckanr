@@ -1,0 +1,164 @@
+<!--
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{ckanr vignette}
+-->
+
+```{r echo=FALSE}
+library("knitr")
+hook_output <- knitr::knit_hooks$get("output")
+knitr::knit_hooks$set(output = function(x, options) {
+   lines <- options$output.lines
+   if (is.null(lines)) {
+     return(hook_output(x, options))  # pass to default hook
+   }
+   x <- unlist(strsplit(x, "\n"))
+   more <- "..."
+   if (length(lines)==1) {        # first n lines
+     if (length(x) > lines) {
+       # truncate the output, but add ....
+       x <- c(head(x, lines), more)
+     }
+   } else {
+     x <- c(if (abs(lines[1])>1) more else NULL, 
+            x[lines], 
+            if (length(x)>lines[abs(length(lines))]) more else NULL
+           )
+   }
+   # paste these lines together
+   x <- paste(c(x, ""), collapse = "\n")
+   hook_output(x, options)
+ })
+
+knitr::opts_chunk$set(
+  comment = "#>",
+  collapse = TRUE,
+  warning = FALSE, 
+  message = FALSE
+)
+```
+
+ckanr vignette
+==============
+
+`ckanr` is an R client for the generic CKAN API - that is, plug in a base url for the CKAN instance of interest. 
+
+## Install
+
+Stable version from CRAN
+
+```{r eval=FALSE}
+install.packages("ckanr")
+```
+
+Development version from GitHub
+
+```{r eval=FALSE}
+devtools::install_github("ropensci/ckanr")
+```
+
+```{r}
+library("ckanr")
+```
+
+Note: the default base CKAN URL is set to [http://data.techno-science.ca/](http://data.techno-science.ca/). You can change this using `set_ckanr_url()`, or change the URL using the `url` parameter in each function call.
+
+## Changes
+
+```{r}
+changes(limit = 2, as = "table")[, 1:4]
+```
+
+## List datasets
+
+```{r output.lines=1:10}
+package_list(as = "table")
+```
+
+## List tags
+
+```{r}
+tag_list('aviation', as = 'table')
+```
+
+## Show tags
+
+Subset for readme brevity
+
+```{r}
+tag_show('Aviation')$packages[[1]][1:3]	
+```
+
+## List groups
+
+```{r}
+group_list(as = 'table')[, 1:3]
+```
+
+## Show groups
+
+Subset for readme brevity
+
+```{r}
+group_show('communications', as = 'table')$users
+```
+
+## Show a package
+
+```{r}
+package_show('34d60b13-1fd5-430e-b0ec-c8bc7f4841cf', as = 'table')$resources[, 1:10]
+```
+
+## Search for packages
+
+```{r}
+out <- package_search(q = '*:*', rows = 2, as = "table")$results
+out[, !names(out) %in% 'resources'][, 1:10]
+```
+
+## Search for resources
+
+```{r}
+resource_search(q = 'name:data', limit = 2, as = 'table')
+```
+
+## Examples of different CKAN APIs
+
+### The Natural History Museum
+
+Website: [http://data.nhm.ac.uk/](http://data.nhm.ac.uk/)
+
+List datasets
+
+```{r output.lines=1:10}
+nhmbase <- "http://data.nhm.ac.uk"
+package_list(as = "table", url = nhmbase)
+```
+
+Tags
+
+_list_
+
+```{r}
+head(tag_list(as = "table", url = nhmbase))
+```
+
+_show_
+
+```{r}
+tag_show('arthropods', as = 'table', url = nhmbase)
+```
+
+Packages
+
+_search_
+
+```{r}
+out <- package_search(q = '*:*', rows = 2, as = 'table', url = nhmbase)
+out$results[, 1:10]
+```
+
+_show_
+
+```{r output.lines=1:10}
+package_show(id = "56e711e6-c847-4f99-915a-6894bb5c5dea", as = "table", url = nhmbase)
+```
