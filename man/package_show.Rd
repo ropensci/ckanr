@@ -5,7 +5,7 @@
 \title{Show a package.}
 \usage{
 package_show(id, use_default_schema = FALSE, url = get_ckanr_url(),
-  as = "list", ...)
+  key = NULL, as = "list", ...)
 }
 \arguments{
 \item{id}{(character) Package identifier.}

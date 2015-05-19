@@ -16,7 +16,7 @@ jsd <- function(x){
   tmp$result
 }
 
-ckan_POST <- function(url, method, body=NULL, ...){
+ckan_POST <- function(url, method, body=NULL, key=NULL, ...){
   api_key_header <- api_key()
   if (is.null(api_key_header)) {
     # no authentication

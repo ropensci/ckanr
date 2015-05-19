@@ -6,11 +6,20 @@ check_ckan <- function(url){
   }
 }
 
-check_gen <- function(url, x){
-  res <- package_show(did, url = url)
+check_resource <- function(url, x){
+  res <- resource_show(x, url = url)
+  if (!is(res, "list") && res$id != x) {
+    skip(paste("The CKAN test resource wasn't found.",
+               "Did you set CKAN test settings with ?set_test_env ?",
+               "Does a resource with ID", x, "exist on", url, "?"))
+  }
+}
+
+check_dataset <- function(url, x){
+  res <- package_show(x, url = url)
   if (!is(res, "list") && res$id != x) {
     skip(paste("The CKAN test dataset wasn't found.",
                "Did you set CKAN test settings with ?set_test_env ?",
-               "Does a dataset with ID", x, "exist on", url, "?"))
+               "Does a dataset with ID", did, "exist on", url, "?"))
   }
 }

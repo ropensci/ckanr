@@ -13,25 +13,23 @@ test_that("The CKAN API key must be set", { expect_is(key, "character") })
 test_that("A CKAN resource ID must be set", { expect_is(rid, "character") })
 
 # Test update_resource
-test_that("resource_update gives back expected class types", {
+test_that("resource_update gives back expected class types and output", {
   check_ckan(url)
-  check_gen(url, rid)
-  a <- resource_update(id = rid, path=path, url=url, key=key)
+  check_resource(url, rid)
+  a <- resource_update(id = rid, path = path, url = url, key = key)
+
+  # class types
   expect_is(a, "list")
   expect_is(a$id, "character")
-})
 
-test_that("resource_update gives back expected output", {
-  check_ckan(url)
-  check_gen(url, rid)
-  a <- resource_update(id = rid, path=path, url=url, key=key)
+  # expected output
   expect_equal(a$id, rid)
   expect_true(grepl("actinidiaceae", a$url))
 })
 
 test_that("resource_update fails well", {
   check_ckan(url)
-  check_gen(url, rid)
+  check_resource(url, rid)
 
   # all parameters missing
   expect_error(resource_update(), "argument \"path\" is missing, with no default")
@@ -42,11 +40,11 @@ test_that("resource_update fails well", {
 
   # bad file path: local file does not exist
   expect_error(resource_update(rid, "invalid-file-path", url=url, key=key),
-               "file does not exist")
+               "is not TRUE")
 
   # bad url
   expect_error(resource_update(rid, path=path, url="invalid-URL", key=key),
-               "Could not resolve host")
+               "Couldn't resolve host name")
 
   # bad key
   expect_error(resource_update(rid, path=path, url=url, key="invalid-key"),

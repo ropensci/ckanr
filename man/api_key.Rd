@@ -4,7 +4,7 @@
 \alias{api_key}
 \title{Enable Authentication with API-KEY}
 \usage{
-api_key()
+api_key(key = NULL)
 }
 \description{
 Some CKAN API functions require authentication.

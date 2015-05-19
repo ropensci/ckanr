@@ -4,7 +4,7 @@
 \alias{resource_show}
 \title{Show a resource.}
 \usage{
-resource_show(id, url = get_ckanr_url(), as = "list", ...)
+resource_show(id, url = get_ckanr_url(), as = "list", key = NULL, ...)
 }
 \arguments{
 \item{id}{(character) Resource identifier.}
