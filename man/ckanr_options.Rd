@@ -2,16 +2,49 @@
 % Please edit documentation in R/ckanr_options.R
 \name{ckanr_options}
 \alias{ckanr_options}
-\title{Get ckanr options}
+\alias{get_test_did}
+\alias{get_test_key}
+\alias{get_test_rid}
+\alias{get_test_url}
+\alias{set_test_env}
+\title{Get or set ckanr options}
 \usage{
 ckanr_options()
+
+set_test_env(url, key, did, rid)
+
+get_test_url()
+
+get_test_key()
+
+get_test_did()
+
+get_test_rid()
+}
+\arguments{
+\item{url}{(character) A valid CKAN URL for testing purposes}
+
+\item{key}{(character) A valid CKAN API key privileged to create datasets at URL}
+
+\item{did}{(character) A valid CKAN dataset ID, existing at url}
+
+\item{rid}{(character) A valid CKAN resource ID, attached to did}
 }
 \value{
-Prints your base url, API key (if used), and optional test server
- settings (URL, API key, a dataset ID and a resource ID)
+\code{ckanr_options} prints your base url, API key (if used), and optional
+test server settings (URL, API key, a dataset ID and a resource ID).
+\code{set_test_env} sets your test settings, while \code{get_test_url},
+\code{get_test_key}, \code{get_test_did}, and \code{get_test_rid} get
+each of those respective settings.
 }
 \description{
-Get ckanr options
+Get or set ckanr options
+}
+\details{
+\code{set_test_env}: Set options for CKAN test environment. Tests require a
+valid CKAN URL, a privileged API key for that URL, plus the IDs of an existing
+dataset and an existing resource, repectively. The settings are written as
+environment variables.
 }
 \examples{
 ckanr_options()

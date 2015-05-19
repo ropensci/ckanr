@@ -1,7 +1,6 @@
 .onLoad <- function(libname, pkgname) {
-  op <- options()
-  op.ckanr <- list(ckanr.default.url = "http://data.techno-science.ca")
-  toset <- !(names(op.ckanr) %in% names(op))
-  if (any(toset)) options(op.ckanr[toset])
+  envs <- Sys.getenv()
+  ckanr <- list(CKANR_DEFAULT_URL = "http://data.techno-science.ca")
+  if (!(names(ckanr) %in% names(envs))) do.call(Sys.setenv, ckanr)
   invisible()
 }

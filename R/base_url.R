@@ -15,11 +15,11 @@
 #' }
 #' @export
 set_ckanr_url <- function(url = "http://data.techno-science.ca") {
-  options(ckanr.default.url = url)
+  Sys.setenv(CKANR_DEFAULT_URL = url)
 }
 
 #' @rdname set_ckanr_url
 #' @export
 get_ckanr_url <- function() {
-  getOption("ckanr.default.url")
+  Sys.getenv("CKANR_DEFAULT_URL")
 }

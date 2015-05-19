@@ -1,4 +1,4 @@
-#' Set API KEY of CKAN
+#' Set CKAN API KEY
 #'
 #' Some CKAN API functions require authentication.
 #' The \code{set_api_key} is a helper function to set the api key and
@@ -20,7 +20,7 @@
 #' }
 #' @export
 set_api_key <- function(api_key) {
-  options("X-CKAN-API-Key" = api_key)
+  Sys.setenv("X-CKAN-API-Key" = api_key)
 }
 
 #' Enable Authentication with API-KEY
@@ -31,6 +31,10 @@ set_api_key <- function(api_key) {
 #' @importFrom httr add_headers
 #' @keywords internal
 api_key <- function() {
-  value <- getOption("X-CKAN-API-Key", NULL)
-  if (is.null(value)) NULL else add_headers("X-CKAN-API-Key" = value)
+  value <- Sys.getenv("X-CKAN-API-Key", "")
+  if (nchar(value) == 0) {
+    NULL
+  } else {
+    add_headers("X-CKAN-API-Key" = value)
+  }
 }
