@@ -39,12 +39,11 @@ test_that("resource_update fails well", {
                "client error")
 
   # bad file path: local file does not exist
-  expect_error(resource_update(rid, "invalid-file-path", url=url, key=key),
-               "is not TRUE")
+  expect_error(resource_update(rid, "invalid-file-path", url=url, key=key))
 
   # bad url
   expect_error(resource_update(rid, path=path, url="invalid-URL", key=key),
-               "Couldn't resolve host name")
+               "Couldn't resolve host")
 
   # bad key
   expect_error(resource_update(rid, path=path, url=url, key="invalid-key"),

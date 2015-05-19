@@ -44,6 +44,5 @@ test_that("ds_create_dataset fails well", {
   expect_error(ds_create_dataset(did, ds_title, file, "badkey", url),
                "Forbidden")
   # bad file path
-  expect_error(ds_create_dataset(did, ds_title, "asdfasdf", key, url),
-               "is not TRUE")
+  expect_error(ds_create_dataset(did, ds_title, "asdfasdf", key, url))
 })
