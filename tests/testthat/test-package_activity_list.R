@@ -5,8 +5,7 @@ id <- package_list(url = "http://demo.ckan.org", limit = 1)
 package_activity_num <- local({
   res <- httr::GET(sprintf("http://demo.ckan.org/dataset/activity/%s", id))
   httr::stop_for_status(res)
-  html <- httr::content(res, as = "parsed")
-  length(XML::xpathApply(html, '//ul[@data-module="activity-stream"]/li'))
+  length(xml2::xml_find_all(xml2::read_html(content(res, "text")), '//ul[@data-module="activity-stream"]/li'))
 })
 
 test_that("package_activity_list gives back expected class types", {

@@ -23,4 +23,4 @@ Suggests:
     roxygen2,
     testthat,
     knitr,
-    XML
+    xml2
