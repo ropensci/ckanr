@@ -22,4 +22,5 @@ Imports:
 Suggests:
     roxygen2,
     testthat,
+    knitr,
     XML
