@@ -14,10 +14,11 @@ test_that("set_ckanr_url correctly functions", {
 
 test_that("Directly set the options", {
   original_url <- get_ckanr_url()
-  expect_equal(getOption("ckanr.default.url"), original_url)
-  options("ckanr.default.url" = (changed_url <- "http://www.google.com"))
+  expect_equal(Sys.getenv("CKANR_DEFAULT_URL"), original_url)
+  changed_url <- "http://www.google.com"
+  Sys.setenv(CKANR_DEFAULT_URL = changed_url)
   expect_equal(get_ckanr_url(), changed_url)
-  options("ckanr.default.url" = original_url)
+  Sys.setenv(CKANR_DEFAULT_URL = original_url)
   expect_equal(get_ckanr_url(), original_url)
 })
 

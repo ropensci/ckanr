@@ -17,17 +17,9 @@ test_that("The CKAN API key is set", { expect_is(key, "character") })
 test_that("The CKAN Dataset ID is set", { expect_is(did, "character") })
 
 # Helper functions to test CKAN environment
-check_ckan <- function(){
-  if(!ping(url)) {
-    skip(paste("CKAN is offline.",
-               "Did you set CKAN test settings with ?set_test_env ?",
-               "Does the test CKAN server run at", url, "?"))
-  }
-}
-
 check_dataset <- function(){
-  p <- package_show(did, url=url)
-  if(class(p)!="list" && p$id!=did){
+  p <- package_show(did, url = url)
+  if (!is(p, "list") && p$id != did) {
     skip(paste("The CKAN test dataset wasn't found.",
                "Did you set CKAN test settings with ?set_test_env ?",
                "Does a dataset with ID", did, "exist on", url, "?"))

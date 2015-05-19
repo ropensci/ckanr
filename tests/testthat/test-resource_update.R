@@ -13,14 +13,6 @@ test_that("The CKAN API key must be set", { expect_is(key, "character") })
 test_that("A CKAN resource ID must be set", { expect_is(rid, "character") })
 
 # Helper functions to test CKAN environment
-check_ckan <- function(){
-  if(!ping(url)) {
-    skip(paste("CKAN is offline.",
-               "Did you set CKAN test settings with ?set_test_env ?",
-               "Does the test CKAN server run at", url, "?"))
-  }
-}
-
 check_resource <- function(){
   res <- resource_show(rid, url=url)
   if(class(res)!="list" && res$id!=rid){
