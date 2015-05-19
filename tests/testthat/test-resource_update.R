@@ -12,36 +12,26 @@ test_that("The CKAN URL must be set", { expect_is(url, "character") })
 test_that("The CKAN API key must be set", { expect_is(key, "character") })
 test_that("A CKAN resource ID must be set", { expect_is(rid, "character") })
 
-# Helper functions to test CKAN environment
-check_resource <- function(){
-  res <- resource_show(rid, url=url)
-  if(class(res)!="list" && res$id!=rid){
-   skip(paste("The CKAN test resource wasn't found.",
-               "Did you set CKAN test settings with ?set_test_env ?",
-               "Does Resource with ID", rid, "exist on", url, "?"))
-  }
-}
-
 # Test update_resource
 test_that("resource_update gives back expected class types", {
-  check_ckan()
-  check_resource()
+  check_ckan(url)
+  check_gen(url, rid)
   a <- resource_update(id = rid, path=path, url=url, key=key)
   expect_is(a, "list")
   expect_is(a$id, "character")
 })
 
 test_that("resource_update gives back expected output", {
-  check_ckan()
-  check_resource()
+  check_ckan(url)
+  check_gen(url, rid)
   a <- resource_update(id = rid, path=path, url=url, key=key)
   expect_equal(a$id, rid)
   expect_true(grepl("actinidiaceae", a$url))
 })
 
 test_that("resource_update fails well", {
-  check_ckan()
-  check_resource()
+  check_ckan(url)
+  check_gen(url, rid)
 
   # all parameters missing
   expect_error(resource_update(), "argument \"path\" is missing, with no default")

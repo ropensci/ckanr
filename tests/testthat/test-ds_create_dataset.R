@@ -4,9 +4,9 @@ context("ds_create_dataset")
 file <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
 
 # Set CKAN connection from ckanr_options
-url = get_test_url()
-key = get_test_key()
-did = get_test_did()
+url <- get_test_url()
+key <- get_test_key()
+did <- get_test_did()
 
 # Dataset fields
 ds_title <- "ckanR test resource"
@@ -16,20 +16,10 @@ test_that("The CKAN URL is set", { expect_is(url, "character") })
 test_that("The CKAN API key is set", { expect_is(key, "character") })
 test_that("The CKAN Dataset ID is set", { expect_is(did, "character") })
 
-# Helper functions to test CKAN environment
-check_dataset <- function(){
-  p <- package_show(did, url = url)
-  if (!is(p, "list") && p$id != did) {
-    skip(paste("The CKAN test dataset wasn't found.",
-               "Did you set CKAN test settings with ?set_test_env ?",
-               "Does a dataset with ID", did, "exist on", url, "?"))
-  }
-}
-
 # Test ds_dataset_create
 test_that("ds_create_dataset gives back expected class types", {
-  check_ckan()
-  check_dataset()
+  check_ckan(url)
+  check_gen(url, did)
 
   a <- ds_create_dataset(package_id=did, name=ds_title, file, key, url)
   expect_is(a, "list")
@@ -37,8 +27,8 @@ test_that("ds_create_dataset gives back expected class types", {
 })
 
 test_that("ds_create_dataset gives back expected output", {
-  check_ckan()
-  check_dataset()
+  check_ckan(url)
+  check_gen(url, did)
 
   a <- ds_create_dataset(package_id=did, name=ds_title, file, key, url)
   expect_equal(a$name, ds_title)
@@ -47,8 +37,8 @@ test_that("ds_create_dataset gives back expected output", {
 })
 
 test_that("ds_create_dataset fails well", {
-  check_ckan()
-  check_dataset()
+  check_ckan(url)
+  check_gen(url, did)
 
   # all parameters missing
   expect_error(ds_create_dataset(),
