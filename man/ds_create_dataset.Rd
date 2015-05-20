@@ -2,19 +2,19 @@
 % Please edit documentation in R/ds_create_dataset.R
 \name{ds_create_dataset}
 \alias{ds_create_dataset}
-\title{Datastore - create a dataset}
+\title{Datastore - create a new resource on an existing dataset}
 \usage{
-ds_create_dataset(package_id, name, path, key, url = "http://demo.ckan.org",
-  as = "list", ...)
+ds_create_dataset(package_id, name, path, key = getOption("X-CKAN-API-Key"),
+  url = get_ckanr_url(), as = "list", ...)
 }
 \arguments{
-\item{package_id}{(character) Existing package ID to add a resource to (required)}
+\item{package_id}{(character) Existing package ID (required)}
 
 \item{name}{(character) Name of the new resource (required)}
 
 \item{path}{(character) Path of the file to add (required)}
 
-\item{key}{API key (required)}
+\item{key}{A privileged CKAN API key, default: your key set with \code{set_api_key()}}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{get_ckanr_url}} and \code{\link{set_ckanr_url}}}
@@ -26,13 +26,24 @@ data to data.frame's when possible, so the result can vary. (required)}
 \item{...}{Curl args passed on to \code{\link[httr]{POST}} (optional)}
 }
 \description{
-Datastore - create a dataset
+Datastore - create a new resource on an existing dataset
 }
 \examples{
 \dontrun{
-file <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
-key <- getOption('ckan_demo_key')
-ds_create_dataset(package_id='testingagain', name="mydata", path=file, key)
+path <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
+set_ckanr_url("http://demo.ckan.org/")
+set_api_key("my-demo-ckan-org-api-key")
+ds_create_dataset(package_id='testingagain', name="mydata", path=path)
+
+# Testing: see ?set_test_env to set default test CKAN url, key, package id
+set_test_env("http://my-ckan.org/", "my-ckan-api-key",
+             "an-existing-package-id", "an-existing-resource-id")
+ds_create_dataset(package_id=get_test_pid(), name="mydata",
+                  path=system.file("examples",
+                                   "actinidiaceae.csv",
+                                   package = "ckanr"),
+                  key=get_test_key(),
+                  url=get_test_url())
 }
 }
 \references{

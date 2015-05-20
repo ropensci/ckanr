@@ -5,13 +5,13 @@
 \title{Show a package.}
 \usage{
 package_show(id, use_default_schema = FALSE, url = get_ckanr_url(),
-  key = NULL, as = "list", ...)
+  as = "list", ...)
 }
 \arguments{
 \item{id}{(character) Package identifier.}
 
-\item{use_default_schema}{(logical) Use default package schema instead of a custom
-schema defined with an IDatasetForm plugin. Default: FALSE}
+\item{use_default_schema}{(logical) Use default package schema instead of a
+custom schema defined with an IDatasetForm plugin. Default: FALSE}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{get_ckanr_url}} and \code{\link{set_ckanr_url}}}
@@ -26,9 +26,9 @@ data to data.frame's when possible, so the result can vary. (required)}
 Show a package.
 }
 \details{
-By default the help and success slots are dropped, and only the result
-slot is returned. You can request raw json with \code{as='json'} then parse yourself
-to get the help slot.
+By default the help and success slots are dropped, and only the
+  result slot is returned. You can request raw json with \code{as='json'}
+  then parse yourself to get the help slot.
 }
 \examples{
 \dontrun{

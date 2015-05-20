@@ -17,8 +17,7 @@
 #'
 #' @param id (character) Resource ID to update (required)
 #' @param path (character) Local path of the file to upload (required)
-#' @param key A CKAN API key with write permissions to the resource's dataset
-#'    (default: \code{api_key()})
+#' @template key
 #' @template args
 #' @return The HTTP response from CKAN, formatted as list (default), table, or JSON.
 #' @references
@@ -27,8 +26,11 @@
 #' # Using an existing file and explicit CKAN URL and API key
 #' # Note: enter valid values for id, url, and key
 #' resource_update(id="an-existing-resource-id",
-#'                 path=system.file("examples", "actinidiaceae.csv", package = "ckanr"),
-#'                 url="http://my-ckan-instance.org/", key="my-ckan-api-key")
+#'                 path=system.file("examples",
+#'                                  "actinidiaceae.csv",
+#'                                  package = "ckanr"),
+#'                 key="my-ckan-api-key",
+#'                 url="http://my-ckan-instance.org/")
 #'
 #' # Using an R object written to a tempfile, and implicit CKAN URL and API key
 #' data <- installed.packages()
@@ -37,10 +39,20 @@
 #' set_ckanr_url("http://demo.ckan.org/")
 #' set_api_key("my-demo-ckan-org-api-key")
 #' resource_update(id="an-existing-resource-id", path=path)
+#'
+#' # Testing: see ?set_test_env to set default test CKAN url, key, package id
+#' set_test_env("http://my-ckan.org/", "my-ckan-api-key",
+#'              "an-existing-package-id", "an-existing-resource-id")
+#' resource_update(id=get_test_rid(),
+#'                 path=system.file("examples",
+#'                                  "actinidiaceae.csv",
+#'                                  package = "ckanr"),
+#'                 key=get_test_key(),
+#'                 url=get_test_url())
 #' }
 resource_update <- function(id, path,
-                            url=get_ckanr_url(),
                             key=getOption("X-CKAN-API-Key"),
+                            url=get_ckanr_url(),
                             as = 'list', ...) {
   path <- path.expand(path)
   body <- list(id = id,
