@@ -1,3 +1,4 @@
+# NOTE superseded by ckanr_settings
 #' Set/get the default CKAN URL
 #'
 #' The default CKAN URL is set to the \href{http://data.techno-science.ca}{CSTMC open data portal}
@@ -14,7 +15,7 @@
 #' get_ckanr_url()
 #' }
 #' @export
-set_ckanr_url <- function(url = "http://data.techno-science.ca") {
+set_ckanr_url <- function(url = "http://data.techno-science.ca/") {
   Sys.setenv(CKANR_DEFAULT_URL = url)
 }
 

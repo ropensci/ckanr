@@ -23,22 +23,23 @@ set_api_key <- function(api_key) {
   Sys.setenv("X-CKAN-API-Key" = api_key)
 }
 
-#' Enable Authentication with API-KEY
-#'
-#' Some CKAN API functions require authentication.
-#' The \code{set_api_key} is a helper function to set the API-KEY and
-#' the \code{api_key} is a helper function to enable authentication.
-#' @importFrom httr add_headers
-#' @keywords internal
-api_key <- function(key = NULL) {
-  if (!is.null(key)) {
-    value <- key
-  } else {
-    value <- Sys.getenv("X-CKAN-API-Key", "")
-  }
-  if (nchar(value) == 0) {
-    NULL
-  } else {
-    add_headers("X-CKAN-API-Key" = value)
-  }
-}
+# NOTE: superseded by ckanr_settings>api_key
+# #' Enable Authentication with API-KEY
+# #'
+# #' Some CKAN API functions require authentication.
+# #' The \code{set_api_key} is a helper function to set the API-KEY and
+# #' the \code{api_key} is a helper function to enable authentication.
+# #' @importFrom httr add_headers
+# #' @keywords internal
+# api_key <- function(key = NULL) {
+#   if (!is.null(key)) {
+#     value <- key
+#   } else {
+#     value <- Sys.getenv("X-CKAN-API-Key", "")
+#   }
+#   if (nchar(value) == 0) {
+#     NULL
+#   } else {
+#     add_headers("X-CKAN-API-Key" = value)
+#   }
+# }

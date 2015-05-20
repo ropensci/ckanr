@@ -27,10 +27,7 @@ organization_show("some_name", include_datasets = TRUE)[["packages"]]
 }
 }
 \seealso{
-Other ckanr.options: \code{\link{ckanr_options}},
-  \code{\link{get_test_did}}, \code{\link{get_test_key}},
-  \code{\link{get_test_rid}}, \code{\link{get_test_url}},
-  \code{\link{set_test_env}}; \code{\link{get_ckanr_url}},
+Other ckanr options: \code{\link{get_ckanr_url}},
   \code{\link{set_ckanr_url}}
 }
 

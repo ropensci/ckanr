@@ -9,8 +9,7 @@
 #' file, e.g. using \code{tempfile()} - see example.
 #'
 #' For convenience, CKAN base url and API key default to the global options,
-#' which are set by \code{set_ckanr_url("http://my-ckan.org/")} and
-#' \code{set_api_key("my-ckan-api-key")}, respectively.
+#' which are set by \code{setup_ckanr}.
 #'
 #' @export
 #' @importFrom httr upload_file add_headers POST
@@ -36,13 +35,14 @@
 #' data <- installed.packages()
 #' path <- tempfile(fileext=".csv")
 #' write.csv(data, path)
-#' set_ckanr_url("http://demo.ckan.org/")
-#' set_api_key("my-demo-ckan-org-api-key")
+#' setup_ckanr(url="http://demo.ckan.org/", key="my-demo-ckan-org-api-key")
 #' resource_update(id="an-existing-resource-id", path=path)
 #'
 #' # Testing: see ?set_test_env to set default test CKAN url, key, package id
-#' set_test_env("http://my-ckan.org/", "my-ckan-api-key",
-#'              "an-existing-package-id", "an-existing-resource-id")
+#' setup_ckanr(test_url="http://my-ckan.org/",
+#'             test_key="my-ckan-api-key",
+#'             test_did="an-existing-package-id",
+#'             test_rid="an-existing-resource-id")
 #' resource_update(id=get_test_rid(),
 #'                 path=system.file("examples",
 #'                                  "actinidiaceae.csv",
@@ -51,8 +51,8 @@
 #'                 url=get_test_url())
 #' }
 resource_update <- function(id, path,
-                            key=getOption("X-CKAN-API-Key"),
-                            url=get_ckanr_url(),
+                            key=get_default_key(),
+                            url=get_default_url(),
                             as = 'list', ...) {
   path <- path.expand(path)
   body <- list(id = id,

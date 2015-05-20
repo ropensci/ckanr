@@ -3,7 +3,7 @@ context("resource_update")
 # Use a local example file from package ckanR
 path <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
 
-# Set CKAN connection from ckanr_options
+# Set CKAN connection from ckanr_settings
 url <- get_test_url()
 key <- get_test_key()
 rid <- get_test_rid()

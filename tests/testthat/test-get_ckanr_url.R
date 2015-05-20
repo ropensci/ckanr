@@ -1,7 +1,7 @@
 context("get_ckanr_url")
 
 test_that("default get_ckanr_url is demo site of ckan", {
-  expect_equal(get_ckanr_url(), "http://data.techno-science.ca")
+  expect_equal(get_ckanr_url(), "http://data.techno-science.ca/")
 })
 
 test_that("set_ckanr_url correctly functions", {

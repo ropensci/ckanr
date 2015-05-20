@@ -4,8 +4,8 @@
 \alias{resource_update}
 \title{Update a resource's file attachment}
 \usage{
-resource_update(id, path, key = getOption("X-CKAN-API-Key"),
-  url = get_ckanr_url(), as = "list", ...)
+resource_update(id, path, key = get_default_key(), url = get_default_url(),
+  as = "list", ...)
 }
 \arguments{
 \item{id}{(character) Resource ID to update (required)}
@@ -36,8 +36,7 @@ The new file must exist on a local path. R objects have to be written to a
 file, e.g. using \code{tempfile()} - see example.
 
 For convenience, CKAN base url and API key default to the global options,
-which are set by \code{set_ckanr_url("http://my-ckan.org/")} and
-\code{set_api_key("my-ckan-api-key")}, respectively.
+which are set by \code{setup_ckanr}.
 }
 \examples{
 \dontrun{
@@ -54,13 +53,14 @@ resource_update(id="an-existing-resource-id",
 data <- installed.packages()
 path <- tempfile(fileext=".csv")
 write.csv(data, path)
-set_ckanr_url("http://demo.ckan.org/")
-set_api_key("my-demo-ckan-org-api-key")
+setup_ckanr(url="http://demo.ckan.org/", key="my-demo-ckan-org-api-key")
 resource_update(id="an-existing-resource-id", path=path)
 
 # Testing: see ?set_test_env to set default test CKAN url, key, package id
-set_test_env("http://my-ckan.org/", "my-ckan-api-key",
-             "an-existing-package-id", "an-existing-resource-id")
+setup_ckanr(test_url="http://my-ckan.org/",
+            test_key="my-ckan-api-key",
+            test_did="an-existing-package-id",
+            test_rid="an-existing-resource-id")
 resource_update(id=get_test_rid(),
                 path=system.file("examples",
                                  "actinidiaceae.csv",

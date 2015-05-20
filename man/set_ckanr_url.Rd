@@ -5,7 +5,7 @@
 \alias{set_ckanr_url}
 \title{Set/get the default CKAN URL}
 \usage{
-set_ckanr_url(url = "http://data.techno-science.ca")
+set_ckanr_url(url = "http://data.techno-science.ca/")
 
 get_ckanr_url()
 }
@@ -28,9 +28,6 @@ get_ckanr_url()
 }
 }
 \seealso{
-Other ckanr.options: \code{\link{ckanr_options}},
-  \code{\link{get_test_did}}, \code{\link{get_test_key}},
-  \code{\link{get_test_rid}}, \code{\link{get_test_url}},
-  \code{\link{set_test_env}}; \code{\link{set_api_key}}
+Other ckanr options: \code{\link{set_api_key}}
 }
 
