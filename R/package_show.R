@@ -20,6 +20,6 @@ package_show <- function(id,
                          url = get_ckanr_url(),
                          as='list', ...) {
   body <- cc(list(id = id, use_default_schema = use_default_schema))
-  res <- ckan_POST(url, 'package_show', body = body, key = key, ...)
+  res <- ckan_POST(url, 'package_show', body = body, ...)
   switch(as, json = res, list = jsl(res), table = jsd(res))
 }
