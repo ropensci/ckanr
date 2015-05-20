@@ -4,19 +4,18 @@
 \alias{resource_update}
 \title{Update a resource's file attachment}
 \usage{
-resource_update(id, path, url = get_ckanr_url(),
-  key = getOption("X-CKAN-API-Key"), as = "list", ...)
+resource_update(id, path, key = getOption("X-CKAN-API-Key"),
+  url = get_ckanr_url(), as = "list", ...)
 }
 \arguments{
 \item{id}{(character) Resource ID to update (required)}
 
 \item{path}{(character) Local path of the file to upload (required)}
 
+\item{key}{A privileged CKAN API key, default: your key set with \code{set_api_key()}}
+
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{get_ckanr_url}} and \code{\link{set_ckanr_url}}}
-
-\item{key}{A CKAN API key with write permissions to the resource's dataset
-(default: \code{api_key()})}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse
@@ -45,8 +44,11 @@ which are set by \code{set_ckanr_url("http://my-ckan.org/")} and
 # Using an existing file and explicit CKAN URL and API key
 # Note: enter valid values for id, url, and key
 resource_update(id="an-existing-resource-id",
-                path=system.file("examples", "actinidiaceae.csv", package = "ckanr"),
-                url="http://my-ckan-instance.org/", key="my-ckan-api-key")
+                path=system.file("examples",
+                                 "actinidiaceae.csv",
+                                 package = "ckanr"),
+                key="my-ckan-api-key",
+                url="http://my-ckan-instance.org/")
 
 # Using an R object written to a tempfile, and implicit CKAN URL and API key
 data <- installed.packages()
@@ -55,6 +57,16 @@ write.csv(data, path)
 set_ckanr_url("http://demo.ckan.org/")
 set_api_key("my-demo-ckan-org-api-key")
 resource_update(id="an-existing-resource-id", path=path)
+
+# Testing: see ?set_test_env to set default test CKAN url, key, package id
+set_test_env("http://my-ckan.org/", "my-ckan-api-key",
+             "an-existing-package-id", "an-existing-resource-id")
+resource_update(id=get_test_rid(),
+                path=system.file("examples",
+                                 "actinidiaceae.csv",
+                                 package = "ckanr"),
+                key=get_test_key(),
+                url=get_test_url())
 }
 }
 \references{
