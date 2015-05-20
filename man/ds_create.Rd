@@ -6,27 +6,32 @@
 \usage{
 ds_create(resource_id = NULL, resource = NULL, force = FALSE,
   aliases = NULL, fields = NULL, records = NULL, primary_key = NULL,
-  indexes = NULL, key, url = "http://demo.ckan.org", as = "list", ...)
+  indexes = NULL, key = getOption("X-CKAN-API-Key"),
+  url = get_ckanr_url(), as = "list", ...)
 }
 \arguments{
-\item{resource_id}{(string) Resource id that the data is going to be stored against.}
+\item{resource_id}{(string) Resource id that the data is going to be stored
+against.}
 
-\item{resource}{(dictionary) Resource dictionary that is passed to resource_create().
-Use instead of \code{resource_id} (optional)}
+\item{resource}{(dictionary) Resource dictionary that is passed to
+resource_create(). Use instead of \code{resource_id} (optional)}
 
-\item{force}{(logical) Set to \code{TRUE} to edit a read-only resource. Default: FALSE}
+\item{force}{(logical) Set to \code{TRUE} to edit a read-only resource.
+Default: FALSE}
 
-\item{aliases}{(character) Names for read only aliases of the resource. (optional)}
+\item{aliases}{(character) Names for read only aliases of the resource.
+(optional)}
 
 \item{fields}{(list) Fields/columns and their extra metadata. (optional)}
 
-\item{records}{(list) The data, eg: \code{[{"dob": "2005", "some_stuff": ["a", "b"]}]} (optional)}
+\item{records}{(list) The data, eg: \code{[{"dob": "2005", "some_stuff":
+["a", "b"]}]} (optional)}
 
 \item{primary_key}{(character) Fields that represent a unique key (optional)}
 
 \item{indexes}{(character) Indexes on table (optional)}
 
-\item{key}{API key (required)}
+\item{key}{A privileged CKAN API key, default: your key set with \code{set_api_key()}}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{get_ckanr_url}} and \code{\link{set_ckanr_url}}}
