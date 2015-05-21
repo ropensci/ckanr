@@ -43,7 +43,7 @@ test_that("resource_update fails well", {
 
   # bad url
   expect_error(resource_update(rid, path=path, url="invalid-URL", key=key),
-               "Couldn't resolve host")
+               "Could not resolve host")
 
   # bad key
   expect_error(resource_update(rid, path=path, url=url, key="invalid-key"),
