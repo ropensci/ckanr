@@ -27,24 +27,20 @@ get_test_rid()
 \value{
 \code{ckanr_settings} prints your base url, API key (if used), and
 optional test server settings (URL, API key, a dataset ID and a resource ID).
-\code{set_test_env} sets your test settings, while \code{get_test_url},
-\code{get_test_key}, \code{get_test_did}, and \code{get_test_rid} get
-each of those respective settings.
+\code{setup_ckanr} sets your production and test settings, while
+\code{get_test_url}, \code{get_test_key}, \code{get_test_did}, and
+\code{get_test_rid} get each of those respective settings.
 }
 \description{
 Get or set ckanr CKAN settings
-}
-\details{
-\code{set_test_env}: Set options for CKAN test environment. Tests require a
-valid CKAN URL, a privileged API key for that URL, plus the IDs of an existing
-dataset and an existing resource, repectively. The settings are written as
-environment variables.
 }
 \examples{
 ckanr_settings()
 }
 \seealso{
-\code{\link{set_ckanr_url}}, \code{\link{get_ckanr_url}},
-\code{\link{set_api_key}}
+\code{\link{setup_ckanr}}, \code{\link{set_ckanr_url}},
+\code{\link{get_ckanr_url}}, \code{\link{set_api_key}},
+\code{\link{get_test_url}}, \code{\link{get_test_key}},
+\code{\link{get_test_did}}, \code{\link{get_test_rid}}.
 }
 

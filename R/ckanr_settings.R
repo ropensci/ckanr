@@ -3,18 +3,14 @@
 #' @export
 #' @return \code{ckanr_settings} prints your base url, API key (if used), and
 #' optional test server settings (URL, API key, a dataset ID and a resource ID).
-#' \code{set_test_env} sets your test settings, while \code{get_test_url},
-#' \code{get_test_key}, \code{get_test_did}, and \code{get_test_rid} get
-#' each of those respective settings.
-#' @seealso \code{\link{set_ckanr_url}}, \code{\link{get_ckanr_url}},
-#' \code{\link{set_api_key}}
+#' \code{setup_ckanr} sets your production and test settings, while
+#' \code{get_test_url}, \code{get_test_key}, \code{get_test_did}, and
+#' \code{get_test_rid} get each of those respective settings.
+#' @seealso  \code{\link{setup_ckanr}}, \code{\link{set_ckanr_url}},
+#' \code{\link{get_ckanr_url}}, \code{\link{set_api_key}},
+#' \code{\link{get_test_url}}, \code{\link{get_test_key}},
+#' \code{\link{get_test_did}}, \code{\link{get_test_rid}}.
 #' @family ckanr settings
-#' @details
-#' \code{set_test_env}: Set options for CKAN test environment. Tests require a
-#' valid CKAN URL, a privileged API key for that URL, plus the IDs of an existing
-#' dataset and an existing resource, repectively. The settings are written as
-#' environment variables.
-#'
 #' @examples
 #' ckanr_settings()
 ckanr_settings <- function() {
@@ -52,27 +48,29 @@ print.ckanr_settings <- function(x, ...) {
 #'    at \code{test_url}
 #' @param test_did (optional) A valid CKAN dataset ID, existing at \code{test_url}
 #' @param test_rid (optional) A valid CKAN resource ID, attached to \code{did}
+#' @details
+#' \code{setup_ckanr} sets CKAN connection details. \code{ckanr}'s functions
+#' default to use the default URL and API key unless specified explicitly.
+#' \code{ckanr}'s automated tests require a valid CKAN URL, a privileged API key
+#' for that URL, plus the IDs of an existing dataset and an existing resource,
+#' repectively.
 #' @usage
-#' # An unprivileged read-only user could run either of:
+#' # CKAN users without admin/editor privileges could run either of:
 #' setup_ckanr("http://data-demo.dpaw.wa.gov.au/")
 #' setup_ckanr(url="http://data-demo.dpaw.wa.gov.au/")
 #'
-#' # A privileged CKAN editor/admin user can run either of:
+#' # Privileged CKAN editor/admin users can run either of:
 #' setup_ckanr("http://data-demo.dpaw.wa.gov.au/", "some-CKAN-API-key")
 #' setup_ckanr(url="http://data-demo.dpaw.wa.gov.au/", key="some-CKAN-API-key")
 #' set_ckanr_url("http://data-demo.dpaw.wa.gov.au/"); set_api_key("some-CKAN-api-key")
 #'
-#' # ckanR developer/tester can run either of:
+#' # ckanR developers/testers can run either of:
 #' setup_ckanr("http://data-demo.dpaw.wa.gov.au/", "some-CKAN-API-key",
 #'            "http://test-ckan.dpaw.wa.gov.au/","test-ckan-API-key",
 #'            "test-ckan-dataset-id","test-ckan-resource-id")
 #' setup_ckanr(url="http://data-demo.dpaw.wa.gov.au/", key="some-CKAN-API-key",
 #'            test_url="http://test-ckan.dpaw.wa.gov.au/",test_key="test-ckan-API-key",
 #'            test_did="test-ckan-dataset-id",test_rid="test-ckan-resource-id")
-#'
-#' set_ckanr_url("http://data-demo.dpaw.wa.gov.au/"); set_api_key("some-CKAN-api-key")
-#' set_test_env(url="http://test-ckan.dpaw.wa.gov.au/", key="test-ckan-API-key",
-#'              did="test-ckan-dataset-id", rid="test-ckan-resource-id")
 #'
 #' # This will set the CKAN URL to its default:
 #' setup_ckanr()

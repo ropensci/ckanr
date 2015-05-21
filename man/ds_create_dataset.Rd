@@ -35,9 +35,9 @@ set_ckanr_url("http://demo.ckan.org/")
 set_api_key("my-demo-ckan-org-api-key")
 ds_create_dataset(package_id='testingagain', name="mydata", path=path)
 
-# Testing: see ?set_test_env to set default test CKAN url, key, package id
-set_test_env("http://my-ckan.org/", "my-ckan-api-key",
-             "an-existing-package-id", "an-existing-resource-id")
+# Testing: see ?setup_ckanr to set default test url, key, package and resource id
+setup_ckanr(test_url="http://my-ckan.org/", test_key="my-ckan-api-key",
+            test_did="an-existing-package-id", test_rid="an-existing-resource-id")
 ds_create_dataset(package_id=get_test_pid(), name="mydata",
                   path=system.file("examples",
                                    "actinidiaceae.csv",

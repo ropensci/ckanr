@@ -4,26 +4,22 @@
 \alias{setup_ckanr}
 \title{Configure default CKAN settings}
 \usage{
-# An unprivileged read-only user could run either of:
+# CKAN users without admin/editor privileges could run either of:
 setup_ckanr("http://data-demo.dpaw.wa.gov.au/")
 setup_ckanr(url="http://data-demo.dpaw.wa.gov.au/")
 
-# A privileged CKAN editor/admin user can run either of:
+# Privileged CKAN editor/admin users can run either of:
 setup_ckanr("http://data-demo.dpaw.wa.gov.au/", "some-CKAN-API-key")
 setup_ckanr(url="http://data-demo.dpaw.wa.gov.au/", key="some-CKAN-API-key")
 set_ckanr_url("http://data-demo.dpaw.wa.gov.au/"); set_api_key("some-CKAN-api-key")
 
-# ckanR developer/tester can run either of:
+# ckanR developers/testers can run either of:
 setup_ckanr("http://data-demo.dpaw.wa.gov.au/", "some-CKAN-API-key",
            "http://test-ckan.dpaw.wa.gov.au/","test-ckan-API-key",
            "test-ckan-dataset-id","test-ckan-resource-id")
 setup_ckanr(url="http://data-demo.dpaw.wa.gov.au/", key="some-CKAN-API-key",
            test_url="http://test-ckan.dpaw.wa.gov.au/",test_key="test-ckan-API-key",
            test_did="test-ckan-dataset-id",test_rid="test-ckan-resource-id")
-
-set_ckanr_url("http://data-demo.dpaw.wa.gov.au/"); set_api_key("some-CKAN-api-key")
-set_test_env(url="http://test-ckan.dpaw.wa.gov.au/", key="test-ckan-API-key",
-             did="test-ckan-dataset-id", rid="test-ckan-resource-id")
 
 # This will set the CKAN URL to its default:
 setup_ckanr()
@@ -44,5 +40,12 @@ at \code{test_url}}
 }
 \description{
 Configure default CKAN settings
+}
+\details{
+\code{setup_ckanr} sets CKAN connection details. \code{ckanr}'s functions
+default to use the default URL and API key unless specified explicitly.
+\code{ckanr}'s automated tests require a valid CKAN URL, a privileged API key
+for that URL, plus the IDs of an existing dataset and an existing resource,
+repectively.
 }
 

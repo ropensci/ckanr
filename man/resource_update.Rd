@@ -56,7 +56,7 @@ write.csv(data, path)
 setup_ckanr(url="http://demo.ckan.org/", key="my-demo-ckan-org-api-key")
 resource_update(id="an-existing-resource-id", path=path)
 
-# Testing: see ?set_test_env to set default test CKAN url, key, package id
+# Testing: see ?setup_ckanr to set default test CKAN url, key, package id
 setup_ckanr(test_url="http://my-ckan.org/",
             test_key="my-ckan-api-key",
             test_did="an-existing-package-id",
