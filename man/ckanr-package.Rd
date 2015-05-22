@@ -14,6 +14,8 @@ Scott Chamberlain \email{myrmecocystus@gmail.com}
 Imanuel Costigan \email{i.costigan@me.com}
 
 Wush Wu
+
+Florian Mayer \email{florian.wendelin.mayer@gmail.com}
 }
 \keyword{package}
 

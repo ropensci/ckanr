@@ -4,15 +4,17 @@
 \alias{ping}
 \title{Ping a CKAN server to test that it's up or down.}
 \usage{
-ping(url = get_ckanr_url(), as = "logical", ...)
+ping(url = get_default_url(), as = "logical", ...)
 }
 \arguments{
-\item{url}{Base url to use. Default: \url{http://data.techno-science.ca}}
+\item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
+also \code{\link{setup_ckanr}} and \code{\link{get_default_url}}.}
 
-\item{as}{(character) One of logical (default) or json. logical returns a logical, json
-returns json.}
+\item{as}{(character) One of list (default), table, or json. Parsing with table option
+uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse
+data to data.frame's when possible, so the result can vary. (required)}
 
-\item{...}{Curl args passed on to \code{\link[httr]{POST}}}
+\item{...}{Curl args passed on to \code{\link[httr]{POST}} (optional)}
 }
 \description{
 Ping a CKAN server to test that it's up or down.

@@ -5,19 +5,20 @@
 \title{List tags.}
 \usage{
 tag_list(query = NULL, vocabulary_id = NULL, all_fields = FALSE,
-  url = get_ckanr_url(), as = "list", ...)
+  url = get_default_url(), as = "list", ...)
 }
 \arguments{
-\item{query}{(character) A tag name query to search for, if given only tags whose names contain
-this string will be returned}
+\item{query}{(character) A tag name query to search for, if given only tags
+whose names contain this string will be returned}
 
-\item{vocabulary_id}{(character) The id or name of a vocabulary, if give only tags that belong
-to this vocabulary will be returned}
+\item{vocabulary_id}{(character) The id or name of a vocabulary, if given,
+only tags that belong to this vocabulary will be returned}
 
-\item{all_fields}{(logical) Return full tag dictionaries instead of just names. Default: FALSE}
+\item{all_fields}{(logical) Return full tag dictionaries instead of
+just names. Default: FALSE}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
-also \code{\link{get_ckanr_url}} and \code{\link{set_ckanr_url}}}
+also \code{\link{setup_ckanr}} and \code{\link{get_default_url}}.}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse

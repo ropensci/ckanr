@@ -4,13 +4,13 @@
 \alias{resource_show}
 \title{Show a resource.}
 \usage{
-resource_show(id, url = get_ckanr_url(), as = "list", ...)
+resource_show(id, url = get_default_url(), as = "list", ...)
 }
 \arguments{
 \item{id}{(character) Resource identifier.}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
-also \code{\link{get_ckanr_url}} and \code{\link{set_ckanr_url}}}
+also \code{\link{setup_ckanr}} and \code{\link{get_default_url}}.}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse
@@ -24,7 +24,8 @@ Show a resource.
 \examples{
 \dontrun{
 resource_show(id = "e179e910-27fb-44f4-a627-99822af49ffa", as="table")
-resource_show(id = "05ff2255-c38a-40c9-b657-4ccb55ab2feb", url = "http://data.nhm.ac.uk")
+resource_show(id = "05ff2255-c38a-40c9-b657-4ccb55ab2feb",
+              url = "http://data.nhm.ac.uk")
 }
 }
 

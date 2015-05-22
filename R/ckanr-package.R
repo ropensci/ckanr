@@ -7,5 +7,6 @@
 #' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}
 #' @author Imanuel Costigan \email{i.costigan@@me.com}
 #' @author Wush Wu
+#' @author Florian Mayer \email{florian.wendelin.mayer@@gmail.com}
 #' @keywords package
 NULL

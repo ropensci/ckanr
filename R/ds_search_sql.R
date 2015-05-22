@@ -12,8 +12,10 @@
 #' ds_search_sql(sql2, url=url, as="table")
 #' }
 
-ds_search_sql <- function(sql, url = 'http://demo.ckan.org', as='list', ...) {
-  res <- POST(file.path(url, '/api/action/datastore_search_sql'), ctj(), query = list(sql = sql), ...)
+ds_search_sql <- function(sql, url=get_default_url(), as='list', ...) {
+  res <- POST(file.path(url, '/api/action/datastore_search_sql'),
+              ctj(),
+              query=list(sql = sql), ...)
   res <- content(res, "text")
-  switch(as, json = res, list = jsl(res), table = jsd(res))
+  switch(as, json=res, list=jsl(res), table=jsd(res))
 }

@@ -12,10 +12,10 @@ resource_update(id, path, key = get_default_key(), url = get_default_url(),
 
 \item{path}{(character) Local path of the file to upload (required)}
 
-\item{key}{A privileged CKAN API key, default: your key set with \code{set_api_key()}}
+\item{key}{A privileged CKAN API key, default: your key set with \code{setup_ckanr()}}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
-also \code{\link{get_ckanr_url}} and \code{\link{set_ckanr_url}}}
+also \code{\link{setup_ckanr}} and \code{\link{get_default_url}}.}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse
@@ -41,18 +41,20 @@ which are set by \code{setup_ckanr}.
 \examples{
 \dontrun{
 # Using an existing file and explicit CKAN URL and API key
+path <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
 # Note: enter valid values for id, url, and key
 resource_update(id="an-existing-resource-id",
-                path=system.file("examples",
-                                 "actinidiaceae.csv",
-                                 package = "ckanr"),
+                path=path,
                 key="my-ckan-api-key",
-                url="http://my-ckan-instance.org/")
+                url="http://my-ckan.org/")
+
+# Using default settings
+setup_ckanr(url="http://demo.ckan.org/", key="my-demo-ckan-org-api-key")
+path <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
+resource_update(id="an-existing-resource-id", path=path)
 
 # Using an R object written to a tempfile, and implicit CKAN URL and API key
-data <- installed.packages()
-path <- tempfile(fileext=".csv")
-write.csv(data, path)
+write.csv(data <- installed.packages(), path <- tempfile(fileext=".csv"))
 setup_ckanr(url="http://demo.ckan.org/", key="my-demo-ckan-org-api-key")
 resource_update(id="an-existing-resource-id", path=path)
 

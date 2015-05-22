@@ -4,13 +4,13 @@
 \alias{ds_search_sql}
 \title{Datastore - search or get a dataset from CKRAN datastore}
 \usage{
-ds_search_sql(sql, url = "http://demo.ckan.org", as = "list", ...)
+ds_search_sql(sql, url = get_default_url(), as = "list", ...)
 }
 \arguments{
 \item{sql}{(character) A single SQL select statement. (required)}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
-also \code{\link{get_ckanr_url}} and \code{\link{set_ckanr_url}}}
+also \code{\link{setup_ckanr}} and \code{\link{get_default_url}}.}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse

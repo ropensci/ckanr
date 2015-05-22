@@ -57,6 +57,16 @@ test_that("ckanr_settings can set and get test resource ID", {
   expect_equal(get_test_rid(), x)
 })
 
+test_that("ckanr_settings can set and get test_behaviour", {
+  x <- get_test_behaviour()
+  setup_ckanr(test_behaviour="FAIL")
+  expect_equal(get_test_behaviour(), "FAIL")
+  setup_ckanr(test_behaviour="SKIP")
+  expect_equal(get_test_behaviour(), "SKIP")
+  setup_ckanr(test_behaviour=x)
+  expect_equal(get_test_behaviour(), x)
+})
+
 test_that("ckanr_settings default to set default CKAN URL", {
   # Preserve original setting
   x <- get_default_url()

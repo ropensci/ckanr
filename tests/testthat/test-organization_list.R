@@ -1,7 +1,9 @@
 context("organization_list")
+u <- get_test_url()
 
 organization_num <- local({
-  res <- httr::GET("http://demo.ckan.org/organization")
+  check_ckan(u)
+  res <- httr::GET(file.path(u, "organization"))
   httr::stop_for_status(res)
   html <- httr::content(res, as = "text")
   tmp <- regmatches(html, regexec("(\\d+) organizations found", html))
@@ -9,16 +11,17 @@ organization_num <- local({
 })
 
 test_that("organization_list gives back expected class types", {
-  a <- organization_list(url = "http://demo.ckan.org")
+  check_ckan(u)
+  a <- organization_list(url=u)
 
   expect_is(a, "list")
   expect_is(a[[1]], "list")
   expect_is(a[[1]]$state, "character")
-  expect_equal(length(a), organization_num)
+  expect_equal(as.integer(length(a)), organization_num)
 })
 
 test_that("organization_list works giving back json output", {
-  b <- organization_list(url = "http://demo.ckan.org", as = 'json')
+  b <- organization_list(url=u, as = 'json')
   b_df <- jsonlite::fromJSON(b)
   expect_is(b, "character")
   expect_is(b_df, "list")

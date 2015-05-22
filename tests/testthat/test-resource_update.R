@@ -36,7 +36,7 @@ test_that("resource_update fails well", {
 
   # bad resource id
   expect_error(resource_update("invalid-resource-id", path=path, url=url, key=key),
-               "client error")
+               "Not Found Error")
 
   # bad file path: local file does not exist
   expect_error(resource_update(rid, "invalid-file-path", url=url, key=key))
@@ -47,5 +47,5 @@ test_that("resource_update fails well", {
 
   # bad key
   expect_error(resource_update(rid, path=path, url=url, key="invalid-key"),
-               "Forbidden")
+               "Authorization Error")
 })
