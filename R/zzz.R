@@ -1,21 +1,3 @@
-cc <- function (l) Filter(Negate(is.null), l)
-
-ck <- function() 'api/3/action'
-
-as_log <- function(x){
-  stopifnot(is.logical(x))
-  if (x) 'true' else 'false'
-}
-
-jsl <- function(x){
-  tmp <- jsonlite::fromJSON(x, FALSE)
-  tmp$result
-}
-jsd <- function(x){
-  tmp <- jsonlite::fromJSON(x)
-  tmp$result
-}
-
 #' Send an httr::POST request and handle the response
 #'
 #' @details This method is a thin wrapper around httr::POST, which is a wrapper
@@ -54,6 +36,18 @@ ckan_POST <- function(url, method, body=NULL, key=NULL, ...){
   content(res, "text")
 }
 
+#------------------------------------------------------------------------------#
+# Helpers
+#
+
+cc <- function (l) Filter(Negate(is.null), l)
+ck <- function() 'api/3/action'
+as_log <- function(x){ stopifnot(is.logical(x)); if (x) 'true' else 'false' }
+jsl <- function(x){ tmp <- jsonlite::fromJSON(x, FALSE); tmp$result }
+jsd <- function(x){ tmp <- jsonlite::fromJSON(x); tmp$result }
+ctj <- function() httr::content_type_json()
+
+
 #' @importFrom httr http_condition
 err_handler <- function(x) {
   if (x$status_code > 201) {
@@ -91,5 +85,3 @@ pluck <- function(x, name, type) {
     vapply(x, "[[", name, FUN.VALUE = type)
   }
 }
-
-ctj <- function() httr::content_type_json()
