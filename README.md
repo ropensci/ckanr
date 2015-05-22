@@ -28,7 +28,7 @@ Functions requiring write permissions in CKAN additionally require a privileged
 CKAN API key. 
 You can change this using `setup_ckanr()`, or change the URL using the `url` 
 parameter in each function call.
-To set one or both, run \code{ckanr}:
+To set one or both, run:
 ```r
 setup_ckanr() # restores default CKAN url to http://data.techno-science.ca/
 setup_ckanr(url="http://data.techno-science.ca/")
