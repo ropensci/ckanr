@@ -31,11 +31,11 @@ Datastore - create a new resource on an existing dataset
 \examples{
 \dontrun{
 path <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
-setup_ckanr(url="http://demo.ckan.org/", key="my-demo-ckan-org-api-key")
+ckanr_setup(url="http://demo.ckan.org/", key="my-demo-ckan-org-api-key")
 ds_create_dataset(package_id='testingagain', name="mydata", path=path)
 
-# Testing: see ?setup_ckanr to set test settings
-setup_ckanr(test_url="http://my-ckan.org/",
+# Testing: see ?ckanr_setup to set test settings
+ckanr_setup(test_url="http://my-ckan.org/",
             test_key="my-ckan-api-key",
             test_did="an-existing-package-id",
             test_rid="an-existing-resource-id")

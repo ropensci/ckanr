@@ -36,7 +36,7 @@ The new file must exist on a local path. R objects have to be written to a
 file, e.g. using \code{tempfile()} - see example.
 
 For convenience, CKAN base url and API key default to the global options,
-which are set by \code{setup_ckanr}.
+which are set by \code{ckanr_setup}.
 }
 \examples{
 \dontrun{
@@ -49,17 +49,17 @@ resource_update(id="an-existing-resource-id",
                 url="http://my-ckan.org/")
 
 # Using default settings
-setup_ckanr(url="http://demo.ckan.org/", key="my-demo-ckan-org-api-key")
+ckanr_setup(url="http://demo.ckan.org/", key="my-demo-ckan-org-api-key")
 path <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
 resource_update(id="an-existing-resource-id", path=path)
 
 # Using an R object written to a tempfile, and implicit CKAN URL and API key
 write.csv(data <- installed.packages(), path <- tempfile(fileext=".csv"))
-setup_ckanr(url="http://demo.ckan.org/", key="my-demo-ckan-org-api-key")
+ckanr_setup(url="http://demo.ckan.org/", key="my-demo-ckan-org-api-key")
 resource_update(id="an-existing-resource-id", path=path)
 
-# Testing: see ?setup_ckanr to set default test CKAN url, key, package id
-setup_ckanr(test_url="http://my-ckan.org/",
+# Testing: see ?ckanr_setup to set default test CKAN url, key, package id
+ckanr_setup(test_url="http://my-ckan.org/",
             test_key="my-ckan-api-key",
             test_did="an-existing-package-id",
             test_rid="an-existing-resource-id")

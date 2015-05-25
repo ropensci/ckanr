@@ -36,7 +36,7 @@ get_test_behaviour()
 \value{
 \code{ckanr_settings} prints your base url, API key (if used), and
 optional test server settings (URL, API key, a dataset ID and a resource ID).
-\code{setup_ckanr} sets your production and test settings, while
+\code{ckanr_setup} sets your production and test settings, while
 \code{get_test_*} get each of those respective settings.
 \code{test_behaviour} indicates whether the CKANR test suite will skip
 ("SKIP") or fail ("FAIL") writing tests in case the configured test
@@ -49,7 +49,7 @@ Get or set ckanr CKAN settings
 ckanr_settings()
 }
 \seealso{
-\code{\link{setup_ckanr}},
+\code{\link{ckanr_setup}},
 \code{\link{get_default_url}}, \code{\link{get_default_key}},
 \code{\link{get_test_url}}, \code{\link{get_test_key}},
 \code{\link{get_test_did}}, \code{\link{get_test_rid}},
