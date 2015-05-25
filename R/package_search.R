@@ -36,8 +36,8 @@
 #' }
 package_search <- function(q = '*:*', fq = NULL, sort = NULL, rows = NULL,
                            start = NULL, facet = FALSE, facet.limit = NULL,
-                           facet.field = NULL, url = get_default_url(),
-                           as = 'list', ...) {
+                           facet.field = NULL,
+                           url = get_default_url(), as = 'list', ...) {
 
   body <- cc(list(q = q, fq = fq, sort = sort, rows = rows, start = start,
                   facet = as_log(facet), facet.limit = facet.limit,

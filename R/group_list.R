@@ -18,8 +18,7 @@
 #' group_list(as = 'table')
 #' }
 group_list <- function(offset = 0, limit = 31, sort = NULL, groups = NULL,
-                       all_fields = FALSE, url = get_default_url(), as = 'list',
-                       ...) {
+                       all_fields = FALSE, url = get_default_url(), as = 'list', ...) {
 
   body <- cc(list(offset = offset, limit = limit, sort = sort,
                   groups = groups, all_fields = as_log(all_fields)))

@@ -10,7 +10,8 @@ group_show(id, include_datasets = TRUE, url = get_default_url(),
 \arguments{
 \item{id}{(character) Package identifier.}
 
-\item{include_datasets}{(logical) Include a list of the group's datasets. Default: TRUE}
+\item{include_datasets}{(logical) Include a list of the group's datasets.
+Default: TRUE}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{setup_ckanr}} and \code{\link{get_default_url}}.}
@@ -25,9 +26,9 @@ data to data.frame's when possible, so the result can vary. (required)}
 Show a package
 }
 \details{
-By default the help and success slots are dropped, and only the result
-slot is returned. You can request raw json with \code{as = 'json'} then parse yourself
-to get the help slot.
+By default the help and success slots are dropped, and only the
+   result slot is returned. You can request raw json with \code{as = 'json'}
+   then parse yourself to get the help slot.
 }
 \examples{
 \dontrun{

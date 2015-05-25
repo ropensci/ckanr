@@ -17,10 +17,11 @@ descending (e.g., score asc), sort by two fields (e.g., score desc, price asc),
 or sort by a function (e.g., sum(x_f, y_f) desc, which sorts by the sum of
 x_f and y_f in a descending order).}
 
-\item{groups}{(character) A list of names of the groups to return, if given only groups whose
-names are in this list will be returned}
+\item{groups}{(character) A list of names of the groups to return, if given
+only groups whose names are in this list will be returned}
 
-\item{all_fields}{(logical) Return full group dictionaries instead of just names. Default: FALSE}
+\item{all_fields}{(logical) Return full group dictionaries instead of just
+names. Default: FALSE}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{setup_ckanr}} and \code{\link{get_default_url}}.}

@@ -16,8 +16,8 @@
 #' }
 organization_list <- function(order_by = c("name", "package"),
                               decreasing = FALSE, organizations = NULL,
-                              all_fields = TRUE, url = get_default_url(),
-                              as = 'list', ...) {
+                              all_fields = TRUE,
+                              url = get_default_url(), as = 'list', ...) {
   stopifnot(length(order_by) > 0)
   stopifnot(order_by[1] %in% c("name", "package"))
   body <- list(sort = sprintf("%s %s", order_by[1],

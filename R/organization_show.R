@@ -13,8 +13,7 @@
 #' organization_show("fafa260d-e2bf-46cd-9c35-34c1dfa46c57")
 #' }
 organization_show <- function(id, include_datasets = FALSE,
-                              url = get_default_url(),
-                              as = 'list', ...) {
+                              url = get_default_url(), as = 'list', ...) {
   body <- cc(list(id = id, include_datasets = include_datasets))
   res <- ckan_POST(url, 'organization_show', body = cc(body), ...)
   switch(as, json = res, list = jsl(res), table = jsd(res))

@@ -36,8 +36,8 @@
 
 ds_search <- function(resource_id = NULL, filters = NULL, q = NULL, plain = NULL,
                       language = NULL, fields = NULL, offset = NULL,
-                      limit = NULL, sort = NULL, url = get_default_url(),
-                      as = 'list', ...) {
+                      limit = NULL, sort = NULL,
+                      url = get_default_url(), as = 'list', ...) {
   args <- cc(list(resource_id = resource_id, filters = filters,q = q,
                   plain = plain, language = language, fields = fields,
                   offset = offset, limit = limit, sort = sort))

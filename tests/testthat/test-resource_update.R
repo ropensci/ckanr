@@ -49,3 +49,4 @@ test_that("resource_update fails well", {
   expect_error(resource_update(rid, path=path, url=url, key="invalid-key"),
                "Authorization Error")
 })
+
