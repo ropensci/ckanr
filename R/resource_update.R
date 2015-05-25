@@ -52,14 +52,10 @@
 #'                 key = get_test_key(),
 #'                 url = get_test_url())
 #' }
-resource_update <- function(id, path,
-                            key = get_default_key(),
-                            url = get_default_url(),
-                            as = 'list', ...) {
+resource_update <- function(id, path, key = get_default_key(),
+                            url = get_default_url(), as = 'list', ...) {
   path <- path.expand(path)
-  body <- list(id = id,
-               url = 'upload',
-               upload = upload_file(path),
+  body <- list(id = id, url = 'upload', upload = upload_file(path),
                last_modified = Sys.time())
   res <- ckan_POST(url, method = 'resource_update', body = body, key = key, ...)
   switch(as, json = res, list = jsl(res), table = jsd(res))

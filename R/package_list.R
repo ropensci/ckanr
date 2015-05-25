@@ -8,9 +8,7 @@
 #' package_list(as = 'json')
 #' package_list(as = 'table')
 #' }
-package_list <- function(offset = 0,
-                         limit = 31,
-                         url = get_default_url(),
+package_list <- function(offset = 0, limit = 31, url = get_default_url(),
                          as = 'list', ...) {
   body <- cc(list(offset = offset, limit = limit))
   res <- ckan_POST(url, method = 'package_list', body = body, ...)

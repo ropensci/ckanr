@@ -13,8 +13,7 @@
 #' }
 
 ds_search_sql <- function(sql, url = get_default_url(), as = 'list', ...) {
-  res <- POST(file.path(url, '/api/action/datastore_search_sql'),
-              ctj(),
+  res <- POST(file.path(url, '/api/action/datastore_search_sql'), ctj(),
               query=list(sql = sql), ...)
   res <- content(res, "text")
   switch(as, json = res, list = jsl(res), table = jsd(res))

@@ -27,10 +27,8 @@
 #'                   key = get_test_key(),
 #'                   url = get_test_url())
 #' }
-ds_create_dataset <- function(package_id, name, path,
-                              key = get_default_key(),
-                              url = get_default_url(),
-                              as = 'list', ...) {
+ds_create_dataset <- function(package_id, name, path, key = get_default_key(),
+                              url = get_default_url(), as = 'list', ...) {
   path <- path.expand(path)
   ext <- strsplit(basename(path), "\\.")[[1]]
   ext <- ext[length(ext)]
@@ -69,8 +67,7 @@ ds_create_dataset <- function(package_id, name, path,
 ds_create <- function(resource_id = NULL, resource = NULL, force = FALSE,
                       aliases = NULL, fields = NULL, records = NULL,
                       primary_key = NULL, indexes = NULL,
-                      key = get_default_key(),
-                      url = get_default_url(),
+                      key = get_default_key(), url = get_default_url(),
                       as = 'list', ...) {
 
   body <- cc(list(resource_id = resource_id, resource = resource, force = force,

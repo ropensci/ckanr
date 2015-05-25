@@ -13,16 +13,11 @@
 #' tag_search('aviation', as = 'json')
 #' tag_search('aviation', as = 'table')
 #' }
-tag_search <- function(query = NULL,
-                       vocabulary_id = NULL,
-                       offset = 0,
-                       limit = 31,
-                       url = get_default_url(),
-                       as = 'list', ...) {
-  body <- cc(list(query = query,
-                  vocabulary_id = vocabulary_id,
-                  offset = offset,
-                  limit = limit))
+tag_search <- function(query = NULL, vocabulary_id = NULL,
+                       offset = 0, limit = 31,
+                       url = get_default_url(), as = 'list', ...) {
+  body <- cc(list(query = query, vocabulary_id = vocabulary_id,
+                  offset = offset, limit = limit))
   res <- ckan_POST(url, 'tag_search', body = body, ...)
   switch(as, json = res, list = jsl(res), table = jsd(res))
 }

@@ -9,9 +9,7 @@
 #' package_list_current(as = 'json')
 #' package_list_current(as = 'table')
 #' }
-package_list_current <- function(offset = 0,
-                                 limit = 31,
-                                 url = get_default_url(),
+package_list_current <- function(offset = 0, limit = 31, url = get_default_url(),
                                  as = 'list', ...) {
   body <- cc(list(offset = offset, limit = limit))
   res <- ckan_POST(url, 'current_package_list_with_resources', body = body, ...)
