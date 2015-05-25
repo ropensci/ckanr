@@ -22,8 +22,8 @@ Return a list of the IDs of the site's revisions.
 \examples{
 \dontrun{
 revision_list()
-revision_list(as="table")
-revision_list(as="json")
+revision_list(as = "table")
+revision_list(as = "json")
 }
 }
 

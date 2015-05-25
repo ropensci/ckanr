@@ -51,8 +51,8 @@ Search for packages.
 \examples{
 \dontrun{
 package_search(q = '*:*')
-package_search(q = '*:*', rows = 2, as='json')
-package_search(q = '*:*', rows = 2, as='table')
+package_search(q = '*:*', rows = 2, as = 'json')
+package_search(q = '*:*', rows = 2, as = 'table')
 
 package_search(q = '*:*', sort = 'score asc')
 package_search(q = '*:*', fq = 'num_tags:[3 TO *]')$count

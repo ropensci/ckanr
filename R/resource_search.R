@@ -17,17 +17,17 @@
 #' @template args
 #' @examples \dontrun{
 #' resource_search(q = 'name:data')
-#' resource_search(q = 'name:data', as='json')
-#' resource_search(q = 'name:data', as='table')
-#' resource_search(q = 'name:data', limit = 2, as='table')
+#' resource_search(q = 'name:data', as = 'json')
+#' resource_search(q = 'name:data', as = 'table')
+#' resource_search(q = 'name:data', limit = 2, as = 'table')
 #' }
 resource_search <- function(q,
-                            sort=NULL,
-                            offset=NULL,
-                            limit=NULL,
-                            url=get_default_url(),
-                            as='list', ...) {
-  body <- cc(list(query=q, order_by=sort, offset=offset, limit=limit))
-  res <- ckan_POST(url, 'resource_search', body=body, ...)
-  switch(as, json=res, list=jsl(res), table=jsd(res))
+                            sort = NULL,
+                            offset = NULL,
+                            limit = NULL,
+                            url = get_default_url(),
+                            as = 'list', ...) {
+  body <- cc(list(query = q, order_by=sort, offset = offset, limit = limit))
+  res <- ckan_POST(url, 'resource_search', body = body, ...)
+  switch(as, json = res, list = jsl(res), table = jsd(res))
 }

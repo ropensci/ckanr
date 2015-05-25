@@ -27,8 +27,8 @@ List datasets.
 \examples{
 \dontrun{
 package_list()
-package_list(as='json')
-package_list(as='table')
+package_list(as = 'json')
+package_list(as = 'table')
 }
 }
 

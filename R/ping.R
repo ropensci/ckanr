@@ -5,12 +5,12 @@
 #' @template args
 #' @examples \dontrun{
 #' ping()
-#' ping(as="json")
+#' ping(as = "json")
 #' }
-ping <- function(url=get_default_url(), as="logical", ...) {
+ping <- function(url = get_default_url(), as = "logical", ...) {
   retval <- tryCatch({
     res <- ckan_POST(url, 'site_read', ...)
-    switch(as, json=res, logical=jsd(res))
+    switch(as, json = res, logical = jsd(res))
   }, error = function(e) FALSE)
   retval
 }

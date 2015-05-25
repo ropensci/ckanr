@@ -15,7 +15,7 @@
 #' @param body The request body (a dictionary as named R list) (optional)
 #' @param key A CKAN API key (optional)
 #' @return The content of the response as text
-ckan_POST <- function(url, method, body=NULL, key=NULL, ...){
+ckan_POST <- function(url, method, body = NULL, key = NULL, ...){
   if (is.null(key)) {
     # no authentication
     if (is.null(body) || length(body) == 0) {

@@ -11,17 +11,17 @@
 #' @template args
 #' @examples \dontrun{
 #' tag_list('aviation')
-#' tag_list('aviation', as='json')
-#' tag_list('aviation', as='table')
+#' tag_list('aviation', as = 'json')
+#' tag_list('aviation', as = 'table')
 #' }
-tag_list <- function(query=NULL,
-                     vocabulary_id=NULL,
-                     all_fields=FALSE,
+tag_list <- function(query = NULL,
+                     vocabulary_id = NULL,
+                     all_fields = FALSE,
                      url = get_default_url(),
-                     as='list', ...) {
-  body <- cc(list(query=query,
-                  vocabulary_id=vocabulary_id,
-                  all_fields=as_log(all_fields)))
-  res <- ckan_POST(url, 'tag_list', body=body, ...)
-  switch(as, json=res, list=jsl(res), table=jsd(res))
+                     as = 'list', ...) {
+  body <- cc(list(query = query,
+                  vocabulary_id = vocabulary_id,
+                  all_fields = as_log(all_fields)))
+  res <- ckan_POST(url, 'tag_list', body = body, ...)
+  switch(as, json = res, list = jsl(res), table = jsd(res))
 }

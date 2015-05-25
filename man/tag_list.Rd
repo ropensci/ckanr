@@ -32,8 +32,8 @@ List tags.
 \examples{
 \dontrun{
 tag_list('aviation')
-tag_list('aviation', as='json')
-tag_list('aviation', as='table')
+tag_list('aviation', as = 'json')
+tag_list('aviation', as = 'table')
 }
 }
 

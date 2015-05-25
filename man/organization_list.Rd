@@ -34,8 +34,8 @@ List organization
 \examples{
 \dontrun{
 organization_list()
-organization_list(as='json')
-organization_list(as='table')
+organization_list(as = 'json')
+organization_list(as = 'table')
 }
 }
 

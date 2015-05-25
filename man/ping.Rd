@@ -22,7 +22,7 @@ Ping a CKAN server to test that it's up or down.
 \examples{
 \dontrun{
 ping()
-ping(as="json")
+ping(as = "json")
 }
 }
 

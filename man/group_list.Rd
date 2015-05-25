@@ -37,8 +37,8 @@ List groups.
 \examples{
 \dontrun{
 group_list()
-group_list(as='json')
-group_list(as='table')
+group_list(as = 'json')
+group_list(as = 'table')
 }
 }
 

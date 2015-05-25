@@ -24,8 +24,8 @@ Return the list of licenses available for datasets on the site.
 \examples{
 \dontrun{
 license_list()
-license_list(as="table")
-license_list(as="json")
+license_list(as = "table")
+license_list(as = "json")
 }
 }
 

@@ -27,8 +27,8 @@ List current packages with resources.
 \examples{
 \dontrun{
 package_list_current()
-package_list_current(as='json')
-package_list_current(as='table')
+package_list_current(as = 'json')
+package_list_current(as = 'table')
 }
 }
 

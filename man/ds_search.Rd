@@ -56,12 +56,12 @@ full text search query language:
 \examples{
 \dontrun{
 url <- 'http://demo.ckan.org/'
-ds_search(resource_id='f4129802-22aa-4437-b9f9-8a8f3b7b2a53', url=url)
-ds_search(resource_id='f4129802-22aa-4437-b9f9-8a8f3b7b2a53', url=url, as="table")
-ds_search(resource_id='f4129802-22aa-4437-b9f9-8a8f3b7b2a53', url=url, as="json")
+ds_search(resource_id = 'f4129802-22aa-4437-b9f9-8a8f3b7b2a53', url = url)
+ds_search(resource_id = 'f4129802-22aa-4437-b9f9-8a8f3b7b2a53', url = url, as = "table")
+ds_search(resource_id = 'f4129802-22aa-4437-b9f9-8a8f3b7b2a53', url = url, as = "json")
 
-ds_search(resource_id='f4129802-22aa-4437-b9f9-8a8f3b7b2a53', url=url, limit=1, as="table")
-ds_search(resource_id='f4129802-22aa-4437-b9f9-8a8f3b7b2a53', url=url, q="a*")
+ds_search(resource_id = 'f4129802-22aa-4437-b9f9-8a8f3b7b2a53', url = url, limit = 1, as = "table")
+ds_search(resource_id = 'f4129802-22aa-4437-b9f9-8a8f3b7b2a53', url = url, q = "a*")
 }
 }
 

@@ -29,8 +29,8 @@ Return a list of the site's user accounts.
 \examples{
 \dontrun{
 user_list()
-user_list(as="table")
-user_list(as="json")
+user_list(as = "table")
+user_list(as = "json")
 }
 }
 

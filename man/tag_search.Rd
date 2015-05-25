@@ -33,8 +33,8 @@ List tags.
 \examples{
 \dontrun{
 tag_search('aviation')
-tag_search('aviation', as='json')
-tag_search('aviation', as='table')
+tag_search('aviation', as = 'json')
+tag_search('aviation', as = 'table')
 }
 }
 
