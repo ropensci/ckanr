@@ -3,7 +3,7 @@ context("resource_update")
 # Use a local example file from package ckanR
 path <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
 
-# Set CKAN connection from ckanr_options
+# Set CKAN connection from ckanr_settings
 url <- get_test_url()
 key <- get_test_key()
 rid <- get_test_rid()
@@ -36,16 +36,17 @@ test_that("resource_update fails well", {
 
   # bad resource id
   expect_error(resource_update("invalid-resource-id", path=path, url=url, key=key),
-               "client error")
+               "Not Found Error")
 
   # bad file path: local file does not exist
   expect_error(resource_update(rid, "invalid-file-path", url=url, key=key))
 
   # bad url
   expect_error(resource_update(rid, path=path, url="invalid-URL", key=key),
-               "Couldn't resolve host")
+               "Could not resolve host")
 
   # bad key
   expect_error(resource_update(rid, path=path, url=url, key="invalid-key"),
-               "Forbidden")
+               "Authorization Error")
 })
+

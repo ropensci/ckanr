@@ -4,8 +4,8 @@
 \alias{ds_create_dataset}
 \title{Datastore - create a new resource on an existing dataset}
 \usage{
-ds_create_dataset(package_id, name, path, key = getOption("X-CKAN-API-Key"),
-  url = get_ckanr_url(), as = "list", ...)
+ds_create_dataset(package_id, name, path, key = get_default_key(),
+  url = get_default_url(), as = "list", ...)
 }
 \arguments{
 \item{package_id}{(character) Existing package ID (required)}
@@ -14,10 +14,10 @@ ds_create_dataset(package_id, name, path, key = getOption("X-CKAN-API-Key"),
 
 \item{path}{(character) Path of the file to add (required)}
 
-\item{key}{A privileged CKAN API key, default: your key set with \code{set_api_key()}}
+\item{key}{A privileged CKAN API key, default: your key set with \code{setup_ckanr()}}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
-also \code{\link{get_ckanr_url}} and \code{\link{set_ckanr_url}}}
+also \code{\link{setup_ckanr}} and \code{\link{get_default_url}}.}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse
@@ -31,19 +31,20 @@ Datastore - create a new resource on an existing dataset
 \examples{
 \dontrun{
 path <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
-set_ckanr_url("http://demo.ckan.org/")
-set_api_key("my-demo-ckan-org-api-key")
-ds_create_dataset(package_id='testingagain', name="mydata", path=path)
+ckanr_setup(url = "http://demo.ckan.org/", key = "my-demo-ckan-org-api-key")
+ds_create_dataset(package_id='testingagain', name="mydata", path = path)
 
-# Testing: see ?set_test_env to set default test CKAN url, key, package id
-set_test_env("http://my-ckan.org/", "my-ckan-api-key",
-             "an-existing-package-id", "an-existing-resource-id")
+# Testing: see ?ckanr_setup to set test settings
+ckanr_setup(test_url = "http://my-ckan.org/",
+            test_key = "my-ckan-api-key",
+            test_did="an-existing-package-id",
+            test_rid="an-existing-resource-id")
 ds_create_dataset(package_id=get_test_pid(), name="mydata",
                   path=system.file("examples",
                                    "actinidiaceae.csv",
                                    package = "ckanr"),
-                  key=get_test_key(),
-                  url=get_test_url())
+                  key = get_test_key(),
+                  url = get_test_url())
 }
 }
 \references{

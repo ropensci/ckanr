@@ -4,11 +4,11 @@
 \alias{revision_list}
 \title{Return a list of the IDs of the site's revisions.}
 \usage{
-revision_list(url = get_ckanr_url(), as = "list", ...)
+revision_list(url = get_default_url(), as = "list", ...)
 }
 \arguments{
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
-also \code{\link{get_ckanr_url}} and \code{\link{set_ckanr_url}}}
+also \code{\link{setup_ckanr}} and \code{\link{get_default_url}}.}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse
@@ -22,8 +22,8 @@ Return a list of the IDs of the site's revisions.
 \examples{
 \dontrun{
 revision_list()
-revision_list(as="table")
-revision_list(as="json")
+revision_list(as = "table")
+revision_list(as = "json")
 }
 }
 
