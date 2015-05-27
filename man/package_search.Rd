@@ -37,7 +37,7 @@ other params in this section will have any effect without specifying at least
 one field name using this param.}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
-also \code{\link{setup_ckanr}} and \code{\link{get_default_url}}.}
+also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse
