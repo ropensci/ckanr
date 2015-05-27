@@ -6,7 +6,7 @@
 \usage{
 package_search(q = "*:*", fq = NULL, sort = NULL, rows = NULL,
   start = NULL, facet = FALSE, facet.limit = NULL, facet.field = NULL,
-  url = get_ckanr_url(), as = "list", ...)
+  url = get_default_url(), as = "list", ...)
 }
 \arguments{
 \item{q}{Query terms, defaults to '*:*', or everything.}
@@ -24,19 +24,20 @@ x_f and y_f in a descending order).}
 
 \item{facet}{(logical) Whether to return facet results or not. Default: FALSE}
 
-\item{facet.limit}{(numeric) This param indicates the maximum number of constraint counts
-that should be returned for the facet fields. A negative value means unlimited.
-Default: 100. Can be specified on a per field basis.}
+\item{facet.limit}{(numeric) This param indicates the maximum number of
+constraint counts that should be returned for the facet fields.
+A negative value means unlimited. Default: 100.
+Can be specified on a per field basis.}
 
-\item{facet.field}{(charcter) This param allows you to specify a field which should be
-treated as a facet. It will iterate over each Term in the field and generate a
-facet count using that Term as the constraint. This parameter can be specified
-multiple times to indicate multiple facet fields. None of the other params in
-this section will have any effect without specifying at least one field name
-using this param.}
+\item{facet.field}{(charcter) This param allows you to specify a field which
+should be treated as a facet. It will iterate over each Term in the field and
+generate a facet count using that Term as the constraint. This parameter can
+be specified multiple times to indicate multiple facet fields. None of the
+other params in this section will have any effect without specifying at least
+one field name using this param.}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
-also \code{\link{get_ckanr_url}} and \code{\link{set_ckanr_url}}}
+also \code{\link{setup_ckanr}} and \code{\link{get_default_url}}.}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse
@@ -50,8 +51,8 @@ Search for packages.
 \examples{
 \dontrun{
 package_search(q = '*:*')
-package_search(q = '*:*', rows = 2, as='json')
-package_search(q = '*:*', rows = 2, as='table')
+package_search(q = '*:*', rows = 2, as = 'json')
+package_search(q = '*:*', rows = 2, as = 'table')
 
 package_search(q = '*:*', sort = 'score asc')
 package_search(q = '*:*', fq = 'num_tags:[3 TO *]')$count

@@ -4,7 +4,7 @@
 \alias{package_list_current}
 \title{List current packages with resources.}
 \usage{
-package_list_current(offset = 0, limit = 31, url = get_ckanr_url(),
+package_list_current(offset = 0, limit = 31, url = get_default_url(),
   as = "list", ...)
 }
 \arguments{
@@ -13,7 +13,7 @@ package_list_current(offset = 0, limit = 31, url = get_ckanr_url(),
 \item{limit}{(numeric) The maximum number of activities to return (optional, default: 31)}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
-also \code{\link{get_ckanr_url}} and \code{\link{set_ckanr_url}}}
+also \code{\link{setup_ckanr}} and \code{\link{get_default_url}}.}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse
@@ -27,8 +27,8 @@ List current packages with resources.
 \examples{
 \dontrun{
 package_list_current()
-package_list_current(as='json')
-package_list_current(as='table')
+package_list_current(as = 'json')
+package_list_current(as = 'table')
 }
 }
 

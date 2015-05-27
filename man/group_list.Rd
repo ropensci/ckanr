@@ -5,7 +5,7 @@
 \title{List groups.}
 \usage{
 group_list(offset = 0, limit = 31, sort = NULL, groups = NULL,
-  all_fields = FALSE, url = get_ckanr_url(), as = "list", ...)
+  all_fields = FALSE, url = get_default_url(), as = "list", ...)
 }
 \arguments{
 \item{offset}{(numeric) Where to start getting activity items from (optional, default: 0)}
@@ -17,13 +17,14 @@ descending (e.g., score asc), sort by two fields (e.g., score desc, price asc),
 or sort by a function (e.g., sum(x_f, y_f) desc, which sorts by the sum of
 x_f and y_f in a descending order).}
 
-\item{groups}{(character) A list of names of the groups to return, if given only groups whose
-names are in this list will be returned}
+\item{groups}{(character) A list of names of the groups to return, if given
+only groups whose names are in this list will be returned}
 
-\item{all_fields}{(logical) Return full group dictionaries instead of just names. Default: FALSE}
+\item{all_fields}{(logical) Return full group dictionaries instead of just
+names. Default: FALSE}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
-also \code{\link{get_ckanr_url}} and \code{\link{set_ckanr_url}}}
+also \code{\link{setup_ckanr}} and \code{\link{get_default_url}}.}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse
@@ -37,8 +38,8 @@ List groups.
 \examples{
 \dontrun{
 group_list()
-group_list(as='json')
-group_list(as='table')
+group_list(as = 'json')
+group_list(as = 'table')
 }
 }
 

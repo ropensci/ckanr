@@ -1,14 +1,17 @@
 context("resource_show")
+u <- get_test_url()
 
 test_that("resource_show gives back expected class types", {
-  .a <- resource_search("name:data", limit = 1)
-  a <- resource_show(.a$results[[1]]$name)
+  check_ckan(u)
+  .a <- resource_search("name:test", url=u, limit=1)
+  a <- resource_show(.a$results[[1]]$id, url=u)
   expect_is(a, "list")
 })
 
 test_that("resource_show works giving back json output", {
-  .b <- resource_search("name:data", limit = 1)
-  b <- resource_show(.b$results[[1]]$name, as = "json")
+  check_ckan(u)
+  .b <- resource_search("name:test", url=u, limit=1)
+  b <- resource_show(.b$results[[1]]$id, url=u, as="json")
   expect_is(b, "character")
   b_df <- jsonlite::fromJSON(b)
   expect_is(b_df, "list")

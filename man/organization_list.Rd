@@ -5,7 +5,7 @@
 \title{List organization}
 \usage{
 organization_list(order_by = c("name", "package"), decreasing = FALSE,
-  organizations = NULL, all_fields = TRUE, url = get_ckanr_url(),
+  organizations = NULL, all_fields = TRUE, url = get_default_url(),
   as = "list", ...)
 }
 \arguments{
@@ -20,7 +20,7 @@ organizations to return. NULL returns all organizations.}
 \item{all_fields}{(logical). Return the name or all fields of the object.}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
-also \code{\link{get_ckanr_url}} and \code{\link{set_ckanr_url}}}
+also \code{\link{setup_ckanr}} and \code{\link{get_default_url}}.}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse
@@ -34,8 +34,8 @@ List organization
 \examples{
 \dontrun{
 organization_list()
-organization_list(as='json')
-organization_list(as='table')
+organization_list(as = 'json')
+organization_list(as = 'table')
 }
 }
 

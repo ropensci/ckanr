@@ -4,16 +4,18 @@
 \alias{user_list}
 \title{Return a list of the site's user accounts.}
 \usage{
-user_list(q = NULL, order_by = NULL, url = get_ckanr_url(), as = "list",
-  ...)
+user_list(q = NULL, order_by = NULL, url = get_default_url(),
+  as = "list", ...)
 }
 \arguments{
-\item{q}{(character) Restrict the users returned to those whose names contain a string}
+\item{q}{(character) Restrict the users returned to those whose names
+contain a string}
 
-\item{order_by}{(character) Which field to sort the list by (optional, default: 'name')}
+\item{order_by}{(character) Which field to sort the list by
+(optional, default: 'name')}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
-also \code{\link{get_ckanr_url}} and \code{\link{set_ckanr_url}}}
+also \code{\link{setup_ckanr}} and \code{\link{get_default_url}}.}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse
@@ -27,8 +29,8 @@ Return a list of the site's user accounts.
 \examples{
 \dontrun{
 user_list()
-user_list(as="table")
-user_list(as="json")
+user_list(as = "table")
+user_list(as = "json")
 }
 }
 

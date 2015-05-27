@@ -4,13 +4,13 @@
 \alias{tag_show}
 \title{Show a tag.}
 \usage{
-tag_show(id, url = get_ckanr_url(), as = "list", ...)
+tag_show(id, url = get_default_url(), as = "list", ...)
 }
 \arguments{
 \item{id}{(character) The name or id of the tag}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
-also \code{\link{get_ckanr_url}} and \code{\link{set_ckanr_url}}}
+also \code{\link{setup_ckanr}} and \code{\link{get_default_url}}.}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse
@@ -24,8 +24,8 @@ Show a tag.
 \examples{
 \dontrun{
 tag_show('Aviation')
-tag_show('Aviation', as='json')
-tag_show('Aviation', as='table')
+tag_show('Aviation', as = 'json')
+tag_show('Aviation', as = 'table')
 }
 }
 

@@ -4,7 +4,7 @@
 \alias{package_show}
 \title{Show a package.}
 \usage{
-package_show(id, use_default_schema = FALSE, url = get_ckanr_url(),
+package_show(id, use_default_schema = FALSE, url = get_default_url(),
   as = "list", ...)
 }
 \arguments{
@@ -14,7 +14,7 @@ package_show(id, use_default_schema = FALSE, url = get_ckanr_url(),
 custom schema defined with an IDatasetForm plugin. Default: FALSE}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
-also \code{\link{get_ckanr_url}} and \code{\link{set_ckanr_url}}}
+also \code{\link{setup_ckanr}} and \code{\link{get_default_url}}.}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse
@@ -27,14 +27,14 @@ Show a package.
 }
 \details{
 By default the help and success slots are dropped, and only the
-  result slot is returned. You can request raw json with \code{as='json'}
+  result slot is returned. You can request raw json with \code{as = 'json'}
   then parse yourself to get the help slot.
 }
 \examples{
 \dontrun{
 package_show('34d60b13-1fd5-430e-b0ec-c8bc7f4841cf')
-package_show('34d60b13-1fd5-430e-b0ec-c8bc7f4841cf', as='json')
-package_show('34d60b13-1fd5-430e-b0ec-c8bc7f4841cf', as='table')
+package_show('34d60b13-1fd5-430e-b0ec-c8bc7f4841cf', as = 'json')
+package_show('34d60b13-1fd5-430e-b0ec-c8bc7f4841cf', as = 'table')
 package_show('34d60b13-1fd5-430e-b0ec-c8bc7f4841cf', TRUE)
 }
 }

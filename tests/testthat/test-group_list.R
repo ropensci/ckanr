@@ -1,7 +1,9 @@
 context("group_list")
+u <- get_test_url()
 
 test_that("group_list gives back expected class types", {
-  a <- group_list(url = "http://demo.ckan.org")
+  check_ckan(u)
+  a <- group_list(url=u)
 
   expect_is(a, "list")
   expect_is(a[[1]], "list")
@@ -9,7 +11,8 @@ test_that("group_list gives back expected class types", {
 })
 
 test_that("group_list works giving back json output", {
-  b <- group_list(url = "http://demo.ckan.org", as = 'json')
+  check_ckan(u)
+  b <- group_list(url=u, as='json')
   b_df <- jsonlite::fromJSON(b)
   expect_is(b, "character")
   expect_is(b_df, "list")
@@ -17,6 +20,7 @@ test_that("group_list works giving back json output", {
 })
 
 test_that("group_list fails correctly", {
-  expect_error(group_list(sort = "adf"), "Cannot sort by field `adf`")
-  expect_equal(group_list(groups = 4), list())
+  check_ckan(u)
+  expect_error(group_list(sort = "adf", url=u), "Cannot sort by field `adf`")
+  expect_equal(group_list(groups = 4, url=u), list())
 })

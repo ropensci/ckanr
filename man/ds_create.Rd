@@ -6,8 +6,8 @@
 \usage{
 ds_create(resource_id = NULL, resource = NULL, force = FALSE,
   aliases = NULL, fields = NULL, records = NULL, primary_key = NULL,
-  indexes = NULL, key = getOption("X-CKAN-API-Key"),
-  url = get_ckanr_url(), as = "list", ...)
+  indexes = NULL, key = get_default_key(), url = get_default_url(),
+  as = "list", ...)
 }
 \arguments{
 \item{resource_id}{(string) Resource id that the data is going to be stored
@@ -31,10 +31,10 @@ Default: FALSE}
 
 \item{indexes}{(character) Indexes on table (optional)}
 
-\item{key}{A privileged CKAN API key, default: your key set with \code{set_api_key()}}
+\item{key}{A privileged CKAN API key, default: your key set with \code{setup_ckanr()}}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
-also \code{\link{get_ckanr_url}} and \code{\link{set_ckanr_url}}}
+also \code{\link{setup_ckanr}} and \code{\link{get_default_url}}.}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse
@@ -47,8 +47,8 @@ BEWARE: This function still doesn't quite work yet.
 }
 \examples{
 \dontrun{
-ds_create(resource_id="f4129802-22aa-4437-b9f9-8a8f3b7b2a53",
-         records=iris, force = TRUE, key=getOption('ckan_demo_key'))
+ds_create(resource_id = "f4129802-22aa-4437-b9f9-8a8f3b7b2a53",
+         records = iris, force = TRUE, key = "my-api-key")
 }
 }
 \references{

@@ -6,7 +6,7 @@
 \usage{
 ds_search(resource_id = NULL, filters = NULL, q = NULL, plain = NULL,
   language = NULL, fields = NULL, offset = NULL, limit = NULL,
-  sort = NULL, url = "http://demo.ckan.org", as = "list", ...)
+  sort = NULL, url = get_default_url(), as = "list", ...)
 }
 \arguments{
 \item{resource_id}{(character) id or alias of the resource to be searched against}
@@ -32,7 +32,7 @@ or sort by a function (e.g., sum(x_f, y_f) desc, which sorts by the sum of
 x_f and y_f in a descending order). (optional)}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
-also \code{\link{get_ckanr_url}} and \code{\link{set_ckanr_url}}}
+also \code{\link{setup_ckanr}} and \code{\link{get_default_url}}.}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse
@@ -56,12 +56,12 @@ full text search query language:
 \examples{
 \dontrun{
 url <- 'http://demo.ckan.org/'
-ds_search(resource_id='f4129802-22aa-4437-b9f9-8a8f3b7b2a53', url=url)
-ds_search(resource_id='f4129802-22aa-4437-b9f9-8a8f3b7b2a53', url=url, as="table")
-ds_search(resource_id='f4129802-22aa-4437-b9f9-8a8f3b7b2a53', url=url, as="json")
+ds_search(resource_id = 'f4129802-22aa-4437-b9f9-8a8f3b7b2a53', url = url)
+ds_search(resource_id = 'f4129802-22aa-4437-b9f9-8a8f3b7b2a53', url = url, as = "table")
+ds_search(resource_id = 'f4129802-22aa-4437-b9f9-8a8f3b7b2a53', url = url, as = "json")
 
-ds_search(resource_id='f4129802-22aa-4437-b9f9-8a8f3b7b2a53', url=url, limit=1, as="table")
-ds_search(resource_id='f4129802-22aa-4437-b9f9-8a8f3b7b2a53', url=url, q="a*")
+ds_search(resource_id = 'f4129802-22aa-4437-b9f9-8a8f3b7b2a53', url = url, limit = 1, as = "table")
+ds_search(resource_id = 'f4129802-22aa-4437-b9f9-8a8f3b7b2a53', url = url, q = "a*")
 }
 }
 
