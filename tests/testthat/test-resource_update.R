@@ -42,8 +42,7 @@ test_that("resource_update fails well", {
   expect_error(resource_update(rid, "invalid-file-path", url=url, key=key))
 
   # bad url
-  expect_error(resource_update(rid, path=path, url="invalid-URL", key=key),
-               "Could not resolve host")
+  expect_error(resource_update(rid, path=path, url="invalid-URL", key=key))
 
   # bad key
   expect_error(resource_update(rid, path=path, url=url, key="invalid-key"),
