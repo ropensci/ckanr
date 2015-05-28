@@ -10,6 +10,7 @@ servers()
 CKAN server URLS and other info
 }
 \examples{
+\dontrun{
 servers()
 ckan_info("http://data.gov.au/")
 ckan_info(servers()[5])
@@ -17,5 +18,6 @@ ckan_info(servers()[5])
 # what version is each CKAN server running
 out <- lapply(servers()[4:6], ckan_info)
 vapply(out, "[[", "", "ckan_version")
+}
 }
 

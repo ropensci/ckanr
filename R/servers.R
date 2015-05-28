@@ -1,7 +1,7 @@
 #' CKAN server URLS and other info
 #'
 #' @export
-#' @examples
+#' @examples \dontrun{
 #' servers()
 #' ckan_info("http://data.gov.au/")
 #' ckan_info(servers()[5])
@@ -9,6 +9,7 @@
 #' # what version is each CKAN server running
 #' out <- lapply(servers()[4:6], ckan_info)
 #' vapply(out, "[[", "", "ckan_version")
+#' }
 servers <- function() server_urls
 
 server_urls <- c("http://africaopendata.org/",

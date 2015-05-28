@@ -18,6 +18,7 @@ Get information on a CKAN server
 \examples{
 \dontrun{
 ckan_info()
+ckan_info(servers()[5])
 }
 }
 
