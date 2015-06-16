@@ -31,17 +31,19 @@ devtools::install_github("ropensci/ckanr")
 library("ckanr")
 ```
 
-Note: the default base CKAN URL is set to 
-[http://data.techno-science.ca/](http://data.techno-science.ca/). 
-Functions requiring write permissions in CKAN additionally require a privileged
-CKAN API key. 
-You can change this using `ckanr_setup()`, or change the URL using the `url` 
+Note: the default base CKAN URL is set to [http://data.techno-science.ca/](http://data.techno-science.ca/). You can change this using `ckanr_setup()`, or change the URL using the `url` 
 parameter in each function call.
+
 To set one or both, run:
+
+
 ```r
-ckanr_setup() # restores default CKAN url to http://data.techno-science.ca/
-ckanr_setup(url="http://data.techno-science.ca/")
-ckanr_setup(url="http://data.techno-science.ca/", key="my-ckan-api-key")
+# restores default CKAN url to http://data.techno-science.ca/
+ckanr_setup() 
+# Just set url
+ckanr_setup(url = "http://data.techno-science.ca/")
+# set url and key
+ckanr_setup(url = "http://data.techno-science.ca/", key = "my-ckan-api-key")
 ```
 
 ## Changes
@@ -248,14 +250,14 @@ nhmbase <- "http://data.nhm.ac.uk"
 package_list(as = "table", url = nhmbase)
 #>  [1] "bibliography-scleractinia"                                           
 #>  [2] "bioacoustica"                                                        
-#>  [3] "bothriocephalidea-phylogeny"                                         
-#>  [4] "checklist-of-the-lepidoptera-of-the-british-isles-data"              
-#>  [5] "chrysoperla-carnea-lectotype"                                        
-#>  [6] "collection-artefacts"                                                
-#>  [7] "collection-indexlots"                                                
-#>  [8] "collection-specimens"                                                
-#>  [9] "crowdsourcing-the-collection"                                        
-#> [10] "images-for-the-evaluation-of-automatic-image-segmentation-algorithms"
+#>  [3] "biodiversity-heritage-library"                                       
+#>  [4] "bothriocephalidea-phylogeny"                                         
+#>  [5] "checklist-of-the-lepidoptera-of-the-british-isles-data"              
+#>  [6] "chrysoperla-carnea-lectotype"                                        
+#>  [7] "collection-artefacts"                                                
+#>  [8] "collection-indexlots"                                                
+#>  [9] "collection-specimens"                                                
+#> [10] "crowdsourcing-the-collection"                                        
 ...
 ```
 
@@ -266,13 +268,20 @@ _list_
 
 ```r
 head(tag_list(as = "table", url = nhmbase))
-#>   vocabulary_id    display_name                                   id            name
-#> 1            NA alpha diversity 05935722-6507-4f07-ac82-83d48555d251 alpha diversity
-#> 2            NA    archival DNA b93861ac-0e31-42bd-87aa-7a7bd2af8043    archival DNA
-#> 3            NA      arthropods f9245868-f4cb-4c85-a59d-11692db19e86      arthropods
-#> 4            NA       Barcoding ea0cda10-2d9e-4a80-b8b5-15d24e693ace       Barcoding
-#> 5            NA    Bibliography 73c85f3f-49b4-416a-80fe-4eb77e99a58d    Bibliography
-#> 6            NA    bioacoustics 11faa593-7ccb-4a6f-8a97-c88ca8939624    bioacoustics
+#>   vocabulary_id    display_name                                   id
+#> 1            NA    Aleyrodoidea 4b98c497-28eb-4969-ba0c-c4431265e581
+#> 2            NA alpha diversity 05935722-6507-4f07-ac82-83d48555d251
+#> 3            NA    archival DNA b93861ac-0e31-42bd-87aa-7a7bd2af8043
+#> 4            NA      arthropods f9245868-f4cb-4c85-a59d-11692db19e86
+#> 5            NA       Barcoding ea0cda10-2d9e-4a80-b8b5-15d24e693ace
+#> 6            NA    Bibliography 73c85f3f-49b4-416a-80fe-4eb77e99a58d
+#>              name
+#> 1    Aleyrodoidea
+#> 2 alpha diversity
+#> 3    archival DNA
+#> 4      arthropods
+#> 5       Barcoding
+#> 6    Bibliography
 ```
 
 _show_
@@ -304,15 +313,18 @@ _search_
 ```r
 out <- package_search(q = '*:*', rows = 2, as = 'table', url = nhmbase)
 out$results[, 1:10]
-#>             license_title maintainer relationships_as_object private maintainer_email num_tags
-#> 1 Creative Commons CCZero         NA                    NULL   FALSE               NA        1
-#> 2   License not specified         NA                    NULL   FALSE               NA        1
-#>   update_frequency                                   id           metadata_created
-#> 1           weekly 56e711e6-c847-4f99-915a-6894bb5c5dea 2014-12-08T16:39:22.346941
-#> 2                  b99a29cc-5d74-4c62-ad82-51473d403cbe 2015-04-23T08:33:47.736376
+#>              license_title maintainer relationships_as_object private
+#> 1 Creative Commons CC0 1.0         NA                    NULL   FALSE
+#> 2    License Not Specified         NA                    NULL   FALSE
+#>   maintainer_email num_tags update_frequency
+#> 1               NA        1           weekly
+#> 2               NA        6        quarterly
+#>                                     id           metadata_created
+#> 1 56e711e6-c847-4f99-915a-6894bb5c5dea 2014-12-08T16:39:22.346941
+#> 2 c7984247-f22f-4742-bab4-1bbf81d4d00d 2015-06-11T14:20:05.101619
 #>            metadata_modified
-#> 1 2015-03-03T12:40:11.196427
-#> 2 2015-04-23T08:38:48.328908
+#> 1 2015-05-28T11:54:20.066554
+#> 2 2015-06-11T14:28:12.933889
 ```
 
 _show_
