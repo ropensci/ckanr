@@ -12,7 +12,7 @@ resource_update(id, path, key = get_default_key(), url = get_default_url(),
 
 \item{path}{(character) Local path of the file to upload (required)}
 
-\item{key}{A privileged CKAN API key, default: your key set with \code{setup_ckanr()}}
+\item{key}{A privileged CKAN API key, default: your key set with \code{ckanr_setup()}}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
