@@ -11,7 +11,7 @@ tag_test_num <- local({
 
 test_that("tag_show gives back expected class types", {
   check_ckan(u)
-  a <- tag_show("test", url=u)
+  a <- tag_show("test", include_datasets = TRUE, url=u)
 
   expect_is(a, "list")
   expect_is(a[[2]], "list")
@@ -20,7 +20,7 @@ test_that("tag_show gives back expected class types", {
 
 test_that("tag_show works giving back json output", {
   check_ckan(u)
-  b <- tag_show("test", url=u, as = 'json')
+  b <- tag_show("test", include_datasets = TRUE, url=u, as = 'json')
   b_df <- jsonlite::fromJSON(b)
   expect_is(b, "character")
   expect_is(b_df, "list")
