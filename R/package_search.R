@@ -1,7 +1,5 @@
 #' Search for packages.
 #'
-#' @importFrom httr POST content stop_for_status
-#' @importFrom jsonlite fromJSON
 #' @export
 #'
 #' @param q Query terms, defaults to '*:*', or everything.

@@ -9,7 +9,6 @@
 #' may default to \code{ckanr_settings} for convenience of use.
 #'
 #' @keywords internal
-#' @importFrom httr POST add_headers
 #' @param url A CKAN base URL
 #' @param method The GET method as part of the CKAN API URL
 #' @param body The request body (a dictionary as named R list) (optional)
@@ -36,19 +35,53 @@ ckan_POST <- function(url, method, body = NULL, key = NULL, ...){
   content(res, "text")
 }
 
+# ckan_GET
+ckan_GET <- function(x, store, path, args = NULL, ...) {
+  if (store == "session") {
+    if (file_fmt(x) == "xls") {
+      fmt <- file_fmt(x)
+      dat <- NULL
+      path <- paste0(path, ".xls")
+      res <- GET(x, query = args, write_disk(path, TRUE), ...)
+      path <- res$request$output$path
+    } else if (file_fmt(x) %in% c("shp", "zip")) {
+      fmt <- "shp"
+      dat <- NULL
+      path <- paste0(path, ".zip")
+      res <- GET(x, query = args, write_disk(path, TRUE), ...)
+      dir <- tempdir()
+      unzip(path, exdir = dir)
+      path <- list.files(dir, pattern = ".shp$", full.names = TRUE)
+    } else {
+      fmt <- file_fmt(x)
+      path <- NULL
+      res <- GET(x, query = args, ...)
+      err_handler(res)
+      dat <- content(res, "text")
+    }
+    list(store = store, fmt = fmt, data = dat, path = path)
+  } else {
+    # if (!file.exists(path)) stop("path does not exist", call. = FALSE)
+    res <- GET(x, query = args, write_disk(path, TRUE), ...)
+    list(store = store, fmt = file_fmt(x), data = NULL, path = res$request$output$path)
+  }
+}
+
+file_fmt <- function(x) {
+  gsub("\\.", "", strextract(x, "\\.[A-Za-z0-9]+$"))
+}
+
+strextract <- function(str, pattern) regmatches(str, regexpr(pattern, str))
+
 #------------------------------------------------------------------------------#
 # Helpers
-#
-
-cc <- function (l) Filter(Negate(is.null), l)
+cc <- function(l) Filter(Negate(is.null), l)
 ck <- function() 'api/3/action'
 as_log <- function(x){ stopifnot(is.logical(x)); if (x) 'true' else 'false' }
 jsl <- function(x){ tmp <- jsonlite::fromJSON(x, FALSE); tmp$result }
 jsd <- function(x){ tmp <- jsonlite::fromJSON(x); tmp$result }
 ctj <- function() httr::content_type_json()
 
-
-#' @importFrom httr http_condition
 err_handler <- function(x) {
   if (x$status_code > 201) {
     obj <- try({

@@ -59,6 +59,7 @@ CKAN API key.
 You can change this using `ckanr_setup()`, or change the URL using the `url` 
 parameter in each function call.
 To set one or both, run:
+
 ```{r}
 ckanr_setup() # restores default CKAN url to http://data.techno-science.ca/
 ckanr_setup(url="http://data.techno-science.ca/")

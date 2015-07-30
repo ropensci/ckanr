@@ -3,8 +3,9 @@
 #' @export
 #'
 #' @param id (character) The name or id of the tag
-#' @param include_datasets include a list of up to 1000 of the tag’s datasets.
-#'  Limit 1000 datasets, use `package_search` for more. (optional, default: False)
+#' @param include_datasets include a list of up to 1000 of the tag's datasets.
+#'  Limit 1000 datasets, use \code{\link{package_search}} for more.
+#'  (optional, default: False)
 #' @template args
 #' @examples \dontrun{
 #' tag_show('Aviation')

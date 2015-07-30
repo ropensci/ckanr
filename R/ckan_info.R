@@ -1,6 +1,5 @@
 #' Get information on a CKAN server
 #'
-#' @importFrom httr GET
 #' @export
 #' @param url Base url to use. Default: \url{http://data.techno-science.ca}. See
 #' also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}. (required)

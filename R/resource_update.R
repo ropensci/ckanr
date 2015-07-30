@@ -12,7 +12,6 @@
 #' which are set by \code{ckanr_setup}.
 #'
 #' @export
-#' @importFrom httr upload_file
 #'
 #' @param id (character) Resource ID to update (required)
 #' @param path (character) Local path of the file to upload (required)

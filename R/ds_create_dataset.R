@@ -1,7 +1,6 @@
 #' Datastore - create a new resource on an existing dataset
 #'
 #' @export
-#' @importFrom httr upload_file
 #'
 #' @param package_id (character) Existing package ID (required)
 #' @param name (character) Name of the new resource (required)
