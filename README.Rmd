@@ -17,8 +17,8 @@ knitr::knit_hooks$set(output = function(x, options) {
        x <- c(head(x, lines), more)
      }
    } else {
-     x <- c(if (abs(lines[1])>1) more else NULL, 
-            x[lines], 
+     x <- c(if (abs(lines[1])>1) more else NULL,
+            x[lines],
             if (length(x)>lines[abs(length(lines))]) more else NULL
            )
    }
@@ -30,16 +30,16 @@ knitr::knit_hooks$set(output = function(x, options) {
 knitr::opts_chunk$set(
   comment = "#>",
   collapse = TRUE,
-  warning = FALSE, 
+  warning = FALSE,
   message = FALSE
 )
 ```
 
 [![Build Status](https://api.travis-ci.org/ropensci/ckanr.png)](https://travis-ci.org/ropensci/ckanr)
 [![Build status](https://ci.appveyor.com/api/projects/status/5yqd882v4fbeggd5?svg=true)](https://ci.appveyor.com/project/sckott/ckanr)
-[![Coverage Status](https://coveralls.io/repos/ropensci/ckanr/badge.svg)](https://coveralls.io/r/ropensci/ckanr)
+[![codecov.io](https://codecov.io/github/ropensci/ckanr/coverage.svg?branch=master)](https://codecov.io/github/ropensci/ckanr?branch=master)
 
-`ckanr` is an R client for the generic CKAN API - that is, plug in a base url for the CKAN instance of interest. 
+`ckanr` is an R client for the generic CKAN API - that is, plug in a base url for the CKAN instance of interest.
 
 ## Installation
 
@@ -52,11 +52,11 @@ devtools::install_github("ropensci/ckanr")
 library('ckanr')
 ```
 
-Note: the default base CKAN URL is set to 
-[http://data.techno-science.ca/](http://data.techno-science.ca/). 
+Note: the default base CKAN URL is set to
+[http://data.techno-science.ca/](http://data.techno-science.ca/).
 Functions requiring write permissions in CKAN additionally require a privileged
-CKAN API key. 
-You can change this using `ckanr_setup()`, or change the URL using the `url` 
+CKAN API key.
+You can change this using `ckanr_setup()`, or change the URL using the `url`
 parameter in each function call.
 To set one or both, run:
 
@@ -89,7 +89,7 @@ tag_list('aviation', as = 'table')
 Subset for readme brevity
 
 ```{r}
-tag_show('Aviation')$packages[[1]][1:3]	
+tag_show('Aviation')$packages[[1]][1:3]
 ```
 
 ## List groups

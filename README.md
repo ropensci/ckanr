@@ -5,7 +5,7 @@ ckanr
 
 [![Build Status](https://api.travis-ci.org/ropensci/ckanr.png)](https://travis-ci.org/ropensci/ckanr)
 [![Build status](https://ci.appveyor.com/api/projects/status/5yqd882v4fbeggd5?svg=true)](https://ci.appveyor.com/project/sckott/ckanr)
-[![Coverage Status](https://coveralls.io/repos/ropensci/ckanr/badge.svg)](https://coveralls.io/r/ropensci/ckanr)
+[![codecov.io](https://codecov.io/github/ropensci/ckanr/coverage.svg?branch=master)](https://codecov.io/github/ropensci/ckanr?branch=master)
 
 `ckanr` is an R client for the generic CKAN API - that is, plug in a base url for the CKAN instance of interest. 
 
