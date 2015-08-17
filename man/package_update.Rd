@@ -17,9 +17,6 @@ uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to
 data to data.frame's when possible, so the result can vary. (required)}
 
 \item{...}{Curl args passed on to \code{\link[httr]{POST}} (optional)}
-
-\item{use_default_schema}{(logical) Use default package schema instead of a
-custom schema defined with an IDatasetForm plugin. Default: FALSE}
 }
 \description{
 Update a package

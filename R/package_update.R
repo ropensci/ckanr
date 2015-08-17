@@ -3,8 +3,6 @@
 #' @export
 #'
 #' @param id (character) Package identifier.
-#' @param use_default_schema (logical) Use default package schema instead of a
-#'   custom schema defined with an IDatasetForm plugin. Default: FALSE
 #' @template args
 #' @details By default the help and success slots are dropped, and only the
 #'   result slot is returned. You can request raw json with \code{as = 'json'}
@@ -23,7 +21,7 @@
 #' package_update(res)
 #' }
 package_update <- function(id, url = get_default_url(), as = 'list', ...) {
-  body <- cc(list(id = id, use_default_schema = use_default_schema))
+  body <- list(id = id)
   res <- ckan_POST(url, 'package_update', body = body, ...)
   switch(as, json = res, list = jsl(res), table = jsd(res))
 }

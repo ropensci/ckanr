@@ -8,7 +8,7 @@ dashboard_count(key = get_default_key(), url = get_default_url(),
   as = "list", ...)
 }
 \arguments{
-\item{key}{A privileged CKAN API key, default: your key set with \code{ckanr_setup()}}
+\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
@@ -24,7 +24,7 @@ Number of new activities of an authorized user
 }
 \details{
 Important: Activities from the user herself are not counted by this
-function even though they appear in the dashboard (users don’t want to be notified
+function even though they appear in the dashboard (users don't want to be notified
 about things they did themselves).
 }
 \examples{

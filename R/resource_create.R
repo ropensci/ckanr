@@ -20,8 +20,9 @@
 #' @param last_modified (character) iso date string (optional)
 #' @param cache_last_updated (character) iso date string (optional)
 #' @param webstore_last_updated (character) iso date string (optional)
-#' @param upload (FieldStorage needs multipart/form-data) – (optional)
+#' @param upload (FieldStorage needs multipart/form-data) - (optional)
 #' @template args
+#' @template key
 #'
 #' @examples \dontrun{
 #' # Setup

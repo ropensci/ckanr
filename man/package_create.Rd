@@ -18,22 +18,22 @@ long and contain only lowercase alphanumeric characters, - and _, e.g. 'warandpe
 
 \item{title}{(character) the title of the dataset (optional, default: same as name)}
 
-\item{author}{(character) the name of the dataset’s author (optional)}
+\item{author}{(character) the name of the dataset's author (optional)}
 
-\item{author_email}{(character) the email address of the dataset’s author (optional)}
+\item{author_email}{(character) the email address of the dataset's author (optional)}
 
-\item{maintainer}{(character) the name of the dataset’s maintainer (optional)}
+\item{maintainer}{(character) the name of the dataset's maintainer (optional)}
 
-\item{maintainer_email}{(character) the email address of the dataset’s maintainer (optional)}
+\item{maintainer_email}{(character) the email address of the dataset's maintainer (optional)}
 
-\item{license_id}{(license id string) – the id of the dataset’s license, see license_list()
+\item{license_id}{(license id string) - the id of the dataset's license, see license_list()
 for available values (optional)}
 
 \item{notes}{(character) a description of the dataset (optional)}
 
-\item{package_url}{(character) a URL for the dataset’s source (optional)}
+\item{package_url}{(character) a URL for the dataset's source (optional)}
 
-\item{version}{(string, no longer than 100 characters) – (optional)}
+\item{version}{(string, no longer than 100 characters) - (optional)}
 
 \item{state}{(character) the current state of the dataset, e.g. 'active' or 'deleted',
 only active datasets show up in search results and other lists of datasets, this parameter
@@ -44,29 +44,31 @@ default: 'active')}
 themselves with different dataset types and provide custom dataset handling behaviour
 for these types}
 
-\item{resources}{(list of resource dictionaries) – the dataset’s resources, see
+\item{resources}{(list of resource dictionaries) - the dataset's resources, see
 resource_create() for the format of resource dictionaries (optional)}
 
-\item{tags}{(list of tag dictionaries) – the dataset’s tags, see tag_create() for the
+\item{tags}{(list of tag dictionaries) - the dataset's tags, see tag_create() for the
 format of tag dictionaries (optional)}
 
-\item{extras}{(list of dataset extra dictionaries) – the dataset’s extras (optional),
+\item{extras}{(list of dataset extra dictionaries) - the dataset's extras (optional),
 extras are arbitrary (key: value) metadata items that can be added to datasets, each
 extra dictionary should have keys 'key' (a string), 'value' (a string)}
 
-\item{relationships_as_object}{(list of relationship dictionaries) – see
+\item{relationships_as_object}{(list of relationship dictionaries) - see
 package_relationship_create() for the format of relationship dictionaries (optional)}
 
-\item{relationships_as_subject}{(list of relationship dictionaries) – see
+\item{relationships_as_subject}{(list of relationship dictionaries) - see
 package_relationship_create() for the format of relationship dictionaries (optional)}
 
-\item{groups}{(list of dictionaries) – the groups to which the dataset belongs (optional),
+\item{groups}{(list of dictionaries) - the groups to which the dataset belongs (optional),
 each group dictionary should have one or more of the following keys which identify an
 existing group: 'id' (the id of the group, string), or 'name' (the name of the group,
 string), to see which groups exist call group_list()}
 
-\item{owner_org}{(character) the id of the dataset’s owning organization, see
+\item{owner_org}{(character) the id of the dataset's owning organization, see
 organization_list() or organization_list_for_user() for available values (optional)}
+
+\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}

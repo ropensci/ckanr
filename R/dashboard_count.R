@@ -5,7 +5,7 @@
 #' @template args
 #' @template key
 #' @details Important: Activities from the user herself are not counted by this
-#' function even though they appear in the dashboard (users don’t want to be notified
+#' function even though they appear in the dashboard (users don't want to be notified
 #' about things they did themselves).
 #'
 #' @examples \dontrun{

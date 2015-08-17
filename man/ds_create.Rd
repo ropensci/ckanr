@@ -31,7 +31,7 @@ Default: FALSE}
 
 \item{indexes}{(character) Indexes on table (optional)}
 
-\item{key}{A privileged CKAN API key, default: your key set with \code{ckanr_setup()}}
+\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}

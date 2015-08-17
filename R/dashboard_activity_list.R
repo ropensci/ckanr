@@ -4,7 +4,7 @@
 #'
 #' @param limit (integer) The maximum number of activities to return (optional).
 #' Default: 31
-#' @param off Where to start getting activity items from (optional).
+#' @param offset (integer) Where to start getting activity items from (optional).
 #' Default: 0
 #' @template args
 #' @template key

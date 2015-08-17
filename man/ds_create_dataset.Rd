@@ -14,7 +14,7 @@ ds_create_dataset(package_id, name, path, key = get_default_key(),
 
 \item{path}{(character) Path of the file to add (required)}
 
-\item{key}{A privileged CKAN API key, default: your key set with \code{ckanr_setup()}}
+\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}

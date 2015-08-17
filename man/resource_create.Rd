@@ -48,7 +48,9 @@ This should be an alphanumeric string. Required.}
 
 \item{webstore_last_updated}{(character) iso date string (optional)}
 
-\item{upload}{(FieldStorage needs multipart/form-data) – (optional)}
+\item{upload}{(FieldStorage needs multipart/form-data) - (optional)}
+
+\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}

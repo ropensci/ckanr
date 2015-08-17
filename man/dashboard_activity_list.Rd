@@ -11,7 +11,10 @@ dashboard_activity_list(limit = 31, offset = 0, key = get_default_key(),
 \item{limit}{(integer) The maximum number of activities to return (optional).
 Default: 31}
 
-\item{key}{A privileged CKAN API key, default: your key set with \code{ckanr_setup()}}
+\item{offset}{(integer) Where to start getting activity items from (optional).
+Default: 0}
+
+\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
@@ -21,9 +24,6 @@ uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to
 data to data.frame's when possible, so the result can vary. (required)}
 
 \item{...}{Curl args passed on to \code{\link[httr]{POST}} (optional)}
-
-\item{off}{Where to start getting activity items from (optional).
-Default: 0}
 }
 \description{
 Authorized user's dashboard activity stream
