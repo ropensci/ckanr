@@ -5,7 +5,7 @@
 \title{List datasets.}
 \usage{
 package_list(offset = 0, limit = 31, url = get_default_url(),
-  as = "list", ...)
+  key = get_default_key(), as = "list", ...)
 }
 \arguments{
 \item{offset}{(numeric) Where to start getting activity items from (optional, default: 0)}

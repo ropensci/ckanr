@@ -27,11 +27,10 @@ data to data.frame's when possible, so the result can vary. (required)}
 The HTTP response from CKAN, formatted as list (default), table, or JSON.
 }
 \description{
-This function will only update a resource's file attachment and the metadata
-key "last_updated". Other metadata, such as name or description, are not
-updated.
-}
-\details{
+This function will only update a resource's file attachment and
+the metadata key "last_updated". Other metadata, such as name or description,
+are not updated.
+
 The new file must exist on a local path. R objects have to be written to a
 file, e.g. using \code{tempfile()} - see example.
 
