@@ -118,3 +118,15 @@ pluck <- function(x, name, type) {
     vapply(x, "[[", name, FUN.VALUE = type)
   }
 }
+
+asl <- function(z) {
+  if (is.logical(z) || tolower(z) == "true" || tolower(z) == "false") {
+    if (z) {
+      return('true')
+    } else {
+      return('false')
+    }
+  } else {
+    return(z)
+  }
+}

@@ -4,10 +4,12 @@
 \alias{package_update}
 \title{Update a package}
 \usage{
-package_update(id, url = get_default_url(), as = "list", ...)
+package_update(x, id, url = get_default_url(), as = "list", ...)
 }
 \arguments{
-\item{id}{(character) Package identifier.}
+\item{x}{(list) A list with key-value pairs}
+
+\item{id}{(character) Package identifier}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
@@ -21,24 +23,21 @@ data to data.frame's when possible, so the result can vary. (required)}
 \description{
 Update a package
 }
-\details{
-By default the help and success slots are dropped, and only the
-  result slot is returned. You can request raw json with \code{as = 'json'}
-  then parse yourself to get the help slot.
-}
 \examples{
 \dontrun{
 # Setup
 ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
 
-# First, show a package
-res <- package_show('34d60b13-1fd5-430e-b0ec-c8bc7f4841cf')
+# First, show a package to see the fields
+res <- package_show('585d7ea2-ded0-4fed-9b08-61f7e83a3cb2')
+res
 
+## update just chosen things
 # Make some changes
-res$author <- "Jane Doe"
+x <- list(maintainer_email = "stuff@things.com")
 
 # Then update the packge
-package_update(res)
+package_update(x, '585d7ea2-ded0-4fed-9b08-61f7e83a3cb2')
 }
 }
 
