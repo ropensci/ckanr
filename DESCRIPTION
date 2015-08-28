@@ -25,3 +25,5 @@ Suggests:
     xml2,
     readxl,
     maptools
+Depends:
+    DBI
