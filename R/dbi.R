@@ -1,3 +1,7 @@
+.read_only <- function(fname) {
+  stop(sprintf("(%s) This interface is read-only currently", fname))
+}
+
 ## DBI Interface
 
 setClass("CKANDriver", representation("DBIDriver"))
@@ -43,17 +47,19 @@ setMethod("dbDisconnect", "CKANConnection",
           valueClass = "logical"
           )
 
-setClass("CKANResult", representation("DBIResult", value = "list"))
+setClass("CKANResult", representation("DBIResult", value = "list", cache = "environment"))
 
 setMethod("initialize", "CKANResult", function(.Object, value, ...) {
   .Object@value <- value
+  .Object@cache <- new.env()
+  .Object@cache$fetch <- 0L
   .Object
 })
 
 setMethod("dbSendQuery",
           signature(conn = "CKANConnection", statement = "character"),
           def = function(conn, statement,...) {
-            retval <- ds_search_sql(statement, url = conn@url, as = "table")
+            retval <- ds_search_sql(as.character(statement), url = conn@url, as = "table")
             new("CKANResult", value = retval)
           },
           valueClass = "CKANResult"
@@ -108,7 +114,7 @@ setMethod("dbReadTable", signature(conn="CKANConnection", name="character"),
 setMethod("dbWriteTable",
           signature(conn="CKANConnection", name="character", value="data.frame"),
           def = function(conn, name, value, ...){
-              stop("(dbWriteTable) This interface is read-only currently")
+              .read_only("dbWriteTable")
           },
           valueClass = "logical"
           )
@@ -124,7 +130,7 @@ setMethod("dbExistsTable",
 setMethod("dbRemoveTable",
           signature(conn="CKANConnection", name="character"),
           def = function(conn, name, ...){
-              stop("(dbRemoveTable) This interface is read-only currently")
+            .read_only("dbRemoveTable")
           },
           valueClass = "logical"
           )
@@ -166,7 +172,15 @@ setMethod("dbClearResult", "CKANResult",
 
 setMethod("fetch", signature(res="CKANResult", n="numeric"),
           def = function(res, n, ...){
-              stop("TODO: fetch")
+            if (n < 1) {
+              res@cache$fetch <- nrow(res@value$records)
+              return(res@value$records)
+            }
+            if (res@cache$fetch + 1 > nrow(res@value$records)) stop("Empty CKANResult")
+            end <- min(nrow(res@value$records), res@cache$fetch + n)
+            .i <- seq(res@cache$fetch + 1, end, by = 1)
+            retval <- res@value$records[.i,]
+            res@cache$fetch <- end
           },
           valueClass = "data.frame"
           )
@@ -196,7 +210,8 @@ setMethod("dbGetStatement", "CKANResult",
 setMethod("dbListFields",
           signature(conn="CKANResult", name="missing"),
           def = function(conn, name, ...){
-              dbGetInfo(res)$fields
+              retval <- as.character(conn@value$fields$id)
+              retval
           },
           valueClass = "character"
           )
