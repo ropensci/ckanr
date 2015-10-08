@@ -14,21 +14,55 @@
 #' @param body The request body (a dictionary as named R list) (optional)
 #' @param key A CKAN API key (optional)
 #' @return The content of the response as text
+# ckan_POST <- function(url, method, body = NULL, key = NULL, ...){
+#   if (is.null(key)) {
+#     # no authentication
+#     if (is.null(body) || length(body) == 0) {
+#       res <- POST(file.path(url, ck(), method), ctj(), ...)
+#     } else {
+#       res <- POST(file.path(url, ck(), method), body = body, ...)
+#     }
+#   } else {
+#     # authentication
+#     api_key_header <- add_headers("X-CKAN-API-Key" = key)
+#     if (is.null(body) || length(body) == 0) {
+#       res <- POST(file.path(url, ck(), method), ctj(), api_key_header, ...)
+#     } else {
+#       res <- POST(file.path(url, ck(), method), body = body, api_key_header, ...)
+#     }
+#   }
+#   err_handler(res)
+#   content(res, "text")
+# }
+
 ckan_POST <- function(url, method, body = NULL, key = NULL, ...){
+  ckan_VERB("POST", url, method, body, key, ...)
+}
+
+ckan_PATCH <- function(url, method, body = NULL, key = NULL, ...){
+  ckan_VERB("PATCH", url, method, body, key, ...)
+}
+
+ckan_DELETE <- function(url, method, body = NULL, key = NULL, ...){
+  ckan_VERB("DELETE", url, method, body, key, ...)
+}
+
+ckan_VERB <- function(verb, url, method, body, key, ...) {
+  VERB <- getExportedValue("httr", verb)
   if (is.null(key)) {
     # no authentication
     if (is.null(body) || length(body) == 0) {
-      res <- POST(file.path(url, ck(), method), ctj(), ...)
+      res <- VERB(file.path(url, ck(), method), ctj(), ...)
     } else {
-      res <- POST(file.path(url, ck(), method), body = body, ...)
+      res <- VERB(file.path(url, ck(), method), body = body, ...)
     }
   } else {
     # authentication
     api_key_header <- add_headers("X-CKAN-API-Key" = key)
     if (is.null(body) || length(body) == 0) {
-      res <- POST(file.path(url, ck(), method), ctj(), api_key_header, ...)
+      res <- VERB(file.path(url, ck(), method), ctj(), api_key_header, ...)
     } else {
-      res <- POST(file.path(url, ck(), method), body = body, api_key_header, ...)
+      res <- VERB(file.path(url, ck(), method), body = body, api_key_header, ...)
     }
   }
   err_handler(res)
@@ -128,5 +162,15 @@ asl <- function(z) {
     }
   } else {
     return(z)
+  }
+}
+
+tojun <- function(x, unbox = TRUE) {
+  jsonlite::toJSON(x, auto_unbox = unbox)
+}
+
+check4X <- function(x) {
+  if (!requireNamespace(x, quietly = TRUE)) {
+    stop("Please install ", x, call. = FALSE)
   }
 }

@@ -31,7 +31,13 @@ List tags.
 }
 \examples{
 \dontrun{
-tag_list('aviation')
+# list all tags
+tag_list()
+
+# search for a specific tag
+tag_list(query = 'aviation')
+
+# give back different data formats
 tag_list('aviation', as = 'json')
 tag_list('aviation', as = 'table')
 }

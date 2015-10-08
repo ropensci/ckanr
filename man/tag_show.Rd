@@ -28,9 +28,16 @@ Show a tag.
 }
 \examples{
 \dontrun{
-tag_show('Aviation')
-tag_show('Aviation', as = 'json')
-tag_show('Aviation', as = 'table')
+# get tags with tag_list()
+tags <- tag_list()
+tags[[30]]$id
+
+# show a tag
+tag_show(tags[[30]]$id)
+
+# give back different data formats
+tag_show(tags[[30]]$id, as = 'json')
+tag_show(tags[[30]]$id, as = 'table')
 }
 }
 

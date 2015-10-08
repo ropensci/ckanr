@@ -67,6 +67,8 @@ package_create <- function(name = NULL, title = NULL, author = NULL, author_emai
     relationships_as_object = relationships_as_object,
     relationships_as_subject = relationships_as_subject, groups = groups,
     owner_org = owner_org))
-  res <- ckan_POST(url, 'package_create', body = body, key = key, ...)
+  res <- ckan_POST(url, 'package_create',
+                   body = tojun(body, TRUE), key = key,
+                   encode = "json", ctj(), ...)
   switch(as, json = res, list = jsl(res), table = jsd(res))
 }

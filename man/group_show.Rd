@@ -32,9 +32,10 @@ By default the help and success slots are dropped, and only the
 }
 \examples{
 \dontrun{
-group_show('communications')
-group_show('communications', as = 'json')
-group_show('communications', as = 'table')
+res <- group_list()
+group_show(res[[1]]$name)
+group_show(res[[1]]$name, as = 'json')
+group_show(res[[1]]$name, as = 'table')
 }
 }
 

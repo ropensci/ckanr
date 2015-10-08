@@ -74,9 +74,3 @@ read_session <- function(fmt, dat, path) {
          }
   )
 }
-
-check4X <- function(x) {
-  if (!requireNamespace(x, quietly = TRUE)) {
-    stop("Please install ", x, call. = FALSE)
-  }
-}

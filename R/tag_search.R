@@ -9,9 +9,11 @@
 #' @template paging
 #' @template args
 #' @examples \dontrun{
-#' tag_search('aviation')
-#' tag_search('aviation', as = 'json')
-#' tag_search('aviation', as = 'table')
+#' tag_search(query = 'ta')
+#'
+#' # different formats back
+#' tag_search(query = 'ta', as = 'json')
+#' tag_search(query = 'ta', as = 'table')
 #' }
 tag_search <- function(query = NULL, vocabulary_id = NULL,
                        offset = 0, limit = 31,

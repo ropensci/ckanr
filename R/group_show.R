@@ -10,9 +10,10 @@
 #'    result slot is returned. You can request raw json with \code{as = 'json'}
 #'    then parse yourself to get the help slot.
 #' @examples \dontrun{
-#' group_show('communications')
-#' group_show('communications', as = 'json')
-#' group_show('communications', as = 'table')
+#' res <- group_list()
+#' group_show(res[[1]]$name)
+#' group_show(res[[1]]$name, as = 'json')
+#' group_show(res[[1]]$name, as = 'table')
 #' }
 group_show <- function(id, include_datasets = TRUE,
                        url = get_default_url(), as = 'list', ...) {
