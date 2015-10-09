@@ -14,9 +14,12 @@
 #' ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
 #'
 #' # create a package
-#' (res <- package_create("purposeful"))
+#' (res <- package_create("purposeful55"))
 #'
 #' # show package
+#' ## From the output of package_create
+#' package_show(res)
+#' ## Or, from the ID
 #' package_show(res$id)
 #'
 #' # get data back in different formats
@@ -24,11 +27,12 @@
 #' package_show(res$id, as = 'table')
 #'
 #' # use default schema or not
-#' package_show('34d60b13-1fd5-430e-b0ec-c8bc7f4841cf', TRUE)
+#' package_show(res$id, TRUE)
 #' }
 package_show <- function(id, use_default_schema = FALSE,
                          url = get_default_url(), as = 'list', ...) {
-  body <- cc(list(id = id, use_default_schema = use_default_schema))
+  id <- as.ckan_package(id)
+  body <- cc(list(id = id$id, use_default_schema = use_default_schema))
   res <- ckan_POST(url, 'package_show', body = body, ...)
-  switch(as, json = res, list = jsl(res), table = jsd(res))
+  switch(as, json = res, list = as_ck(jsl(res), "ckan_package"), table = jsd(res))
 }

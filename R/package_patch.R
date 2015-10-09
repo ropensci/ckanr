@@ -10,7 +10,7 @@
 #' ckanr_setup(url = "http://demo.ckan.org", key = getOption("ckan_demo_key"))
 #'
 #' # Create a package
-#' (res <- package_create("hello-world4", author="Jane Doe"))
+#' (res <- package_create("hello-world7", author="Jane Doe"))
 #'
 #' # Get a resource
 #' res <- package_show(res$id)
@@ -18,15 +18,16 @@
 #' res$author_email
 #'
 #' # Make some changes
-#' x <- list(title = "!hello world!", maintainer_email = "hello@@world.com")
+#' x <- list(title = "!hello there world! bye")
 #' package_patch(x, id = res$id)
 #' }
 package_patch <- function(x, id, key = get_default_key(),
                            url = get_default_url(), as = 'list', ...) {
+  id <- as.ckan_package(id)
   if (!is(x, "list")) {
     stop("x must be of class list", call. = FALSE)
   }
-  x$id <- id
+  x$id <- id$id
   res <- ckan_POST(url, method = 'package_patch', body = x, key = key, ...)
-  switch(as, json = res, list = jsl(res), table = jsd(res))
+  switch(as, json = res, list = as_ck(jsl(res), "ckan_package"), table = jsd(res))
 }

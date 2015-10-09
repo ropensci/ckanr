@@ -112,9 +112,14 @@ strextract <- function(str, pattern) regmatches(str, regexpr(pattern, str))
 cc <- function(l) Filter(Negate(is.null), l)
 ck <- function() 'api/3/action'
 as_log <- function(x){ stopifnot(is.logical(x)); if (x) 'true' else 'false' }
-jsl <- function(x){ tmp <- jsonlite::fromJSON(x, FALSE); tmp$result }
-jsd <- function(x){ tmp <- jsonlite::fromJSON(x); tmp$result }
+jsl <- function(x) jsonlite::fromJSON(x, FALSE)$result
+jsd <- function(x) jsonlite::fromJSON(x)$result
 ctj <- function() httr::content_type_json()
+
+# fxn to attach classes
+as_ck <- function(x, class) {
+  structure(x, class = class)
+}
 
 err_handler <- function(x) {
   if (x$status_code > 201) {

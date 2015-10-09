@@ -32,10 +32,19 @@ Return a list of the package's activity
 ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
 
 # create a package
-(res <- package_create("owls"))
+(res <- package_create("owls6"))
 
 # list package activity
 package_activity_list(res$id)
+
+# make a change
+x <- list(maintainer = "Jane Forest")
+package_update(x, res)
+
+# list activity again
+package_activity_list(res)
+
+# output different data formats
 package_activity_list(res$id, as = "table")
 package_activity_list(res$id, as = "json")
 }
