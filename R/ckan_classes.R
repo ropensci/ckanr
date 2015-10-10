@@ -29,6 +29,7 @@ as.ckan_package.character <- function(x, ...) get_package(x, ...)
 #' @export
 as.ckan_package.ckan_package <- function(x, ...) x
 
+#' @export
 as.ckan_package.list <- function(x, ...) structure(x, class = "ckan_package")
 
 #' @export
