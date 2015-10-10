@@ -43,6 +43,10 @@ ckan_PATCH <- function(url, method, body = NULL, key = NULL, ...){
   ckan_VERB("PATCH", url, method, body, key, ...)
 }
 
+ckan_GET <- function(url, method, body = NULL, key = NULL, ...){
+  ckan_VERB("GET", url, method, body, key, ...)
+}
+
 ckan_DELETE <- function(url, method, body = NULL, key = NULL, ...){
   ckan_VERB("DELETE", url, method, body, key, ...)
 }
@@ -69,8 +73,8 @@ ckan_VERB <- function(verb, url, method, body, key, ...) {
   content(res, "text")
 }
 
-# ckan_GET
-ckan_GET <- function(x, store, path, args = NULL, ...) {
+# GET fxn for fetch()
+fetch_GET <- function(x, store, path, args = NULL, ...) {
   if (store == "session") {
     if (file_fmt(x) == "xls") {
       fmt <- file_fmt(x)

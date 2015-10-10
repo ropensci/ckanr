@@ -48,15 +48,19 @@ print.ckan_package <- function(x, ...) {
 
 sift_res <- function(z) {
   if (!is.null(z) && length(z) > 0) {
-    tmp <- pluck(z, "name", "")
-    paste0(na.omit(tmp[1:5]), collapse = ", ")
+    tmp <- pluck(z, "name")
+    paste0(cc(na.omit(tmp[1:5])), collapse = ", ")
   } else {
     NULL
   }
 }
 
-get_package <- function(id, use_default_schema = FALSE, url = get_default_url(), ...) {
-  body <- cc(list(id = id, use_default_schema = use_default_schema))
-  res <- ckan_POST(url, 'package_show', body = body, ...)
+get_package <- function(id, url = get_default_url(), ...) {
+  # body <- cc(list(id = id, use_default_schema = use_default_schema))
+  # res <- ckan_POST(url, 'package_show', body = body, ...)
+  # args <- cc(list(id = id, use_default_schema = use_default_schema))
+  # res <- ckan_GET(url, 'package_show', query = args, ...)
+  res <- ckan_POST(url = url, method = 'package_show', key = NULL,
+                   body = tojun(list(id = id), TRUE), encode = "json", ctj(), ...)
   as_ck(jsl(res), "ckan_package")
 }

@@ -44,7 +44,7 @@
 #' }
 fetch <- function(x, store = "session", path = "file", ...) {
   store <- match.arg(store, c("session", "disk"))
-  res <- ckan_GET(x, store, path, ...)
+  res <- fetch_GET(x, store, path, ...)
   if (store == "session") {
     read_session(res$fmt, res$data, res$path)
   } else {

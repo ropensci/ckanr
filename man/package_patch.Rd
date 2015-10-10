@@ -32,7 +32,7 @@ Update a package's metadata
 ckanr_setup(url = "http://demo.ckan.org", key = getOption("ckan_demo_key"))
 
 # Create a package
-(res <- package_create("hello-world7", author="Jane Doe"))
+(res <- package_create("hello-world8", author="Jane Doe"))
 
 # Get a resource
 res <- package_show(res$id)

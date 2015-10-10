@@ -42,7 +42,8 @@ package_search <- function(q = '*:*', fq = NULL, sort = NULL, rows = NULL,
   body <- cc(list(q = q, fq = fq, sort = sort, rows = rows, start = start,
                   facet = as_log(facet), facet.limit = facet.limit,
                   facet.field = facet.field))
-  res <- ckan_POST(url, 'package_search', body = body, ...)
+  res <- ckan_POST(url, 'package_search', key = NULL,
+                   body = tojun(body, TRUE), encode = "json", ctj(), ...)
   switch(as, json = res,
          list = {
            tmp <- jsl(res)
