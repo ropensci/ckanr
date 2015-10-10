@@ -5,7 +5,7 @@ test_that("package_show gives back expected class types", {
   check_ckan(u)
   .a <- package_list(limit=1, url=u)
   a <- package_show(.a[[1]], url=u)
-  expect_is(a, "list")
+  expect_is(a, "ckan_package")
 })
 
 test_that("package_show works giving back json output", {

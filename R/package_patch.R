@@ -23,7 +23,7 @@
 #' }
 package_patch <- function(x, id, key = get_default_key(),
                            url = get_default_url(), as = 'list', ...) {
-  id <- as.ckan_package(id)
+  id <- as.ckan_package(id, url = url)
   if (!is(x, "list")) {
     stop("x must be of class list", call. = FALSE)
   }

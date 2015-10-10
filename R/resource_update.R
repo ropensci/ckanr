@@ -69,9 +69,8 @@
 #' }
 resource_update <- function(id, path, key = get_default_key(),
                             url = get_default_url(), as = 'list', ...) {
-  stop("Not working right now", call. = FALSE)
-  # path <- path.expand(path)
-  # body <- list(id = id, upload = upload_file(path), last_modified = Sys.time())
-  # res <- ckan_POST(url, 'resource_update', body = body, encode = "multipart", key = key, config=verbose())
-  # switch(as, json = res, list = jsl(res), table = jsd(res))
+  path <- path.expand(path)
+  body <- list(id = id, upload = upload_file(path), last_modified = Sys.time())
+  res <- ckan_POST(url, 'resource_update', body = body, key = key, ...)
+  switch(as, json = res, list = jsl(res), table = jsd(res))
 }
