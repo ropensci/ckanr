@@ -25,12 +25,14 @@ Delete a related item.
 ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
 
 # create a package and a related item
-res <- package_create("hello-venus") \%>\%
+res <- package_create("hello-venus2") \%>\%
    related_create(title = "my resource",
                   type = "visualization")
 
 # show the related item
-related_delete(res$id)
+related_delete(res)
+## or with id itself:
+## related_delete(res$id)
 }
 }
 

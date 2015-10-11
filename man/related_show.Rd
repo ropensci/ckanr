@@ -7,7 +7,7 @@
 related_show(id, url = get_default_url(), as = "list", ...)
 }
 \arguments{
-\item{id}{(character) Package identifier.}
+\item{id}{(character) Related item identifier.}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
@@ -17,9 +17,6 @@ uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to
 data to data.frame's when possible, so the result can vary. (required)}
 
 \item{...}{Curl args passed on to \code{\link[httr]{POST}} (optional)}
-
-\item{use_default_schema}{(logical) Use default package schema instead of a
-custom schema defined with an IDatasetForm plugin. Default: FALSE}
 }
 \description{
 Show a related item
@@ -35,16 +32,17 @@ By default the help and success slots are dropped, and only the
 ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
 
 # create a package and a related item
-res <- package_create("hello-pluto") \%>\%
+res <- package_create("hello-pluto2") \%>\%
    related_create(title = "my resource",
                   type = "visualization")
 
 # show the related item
+related_show(res)
 related_show(res$id)
 
 # get data back in different formats
-related_show(res$id, as = 'json')
-related_show(res$id, as = 'table')
+related_show(res, as = 'json')
+related_show(res, as = 'table')
 }
 }
 
