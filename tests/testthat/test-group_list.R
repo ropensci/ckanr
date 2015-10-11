@@ -6,7 +6,7 @@ test_that("group_list gives back expected class types", {
   a <- group_list(url=u)
 
   expect_is(a, "list")
-  expect_is(a[[1]], "list")
+  expect_is(a[[1]], "ckan_group")
   expect_is(a[[1]]$state, "character")
 })
 
