@@ -23,5 +23,7 @@ group_list <- function(offset = 0, limit = 31, sort = NULL, groups = NULL,
   body <- cc(list(offset = offset, limit = limit, sort = sort,
                   groups = groups, all_fields = as_log(all_fields)))
   res <- ckan_POST(url, 'group_list', body = body, ...)
-  switch(as, json = res, list = jsl(res), table = jsd(res))
+  switch(as, json = res,
+         list = lapply(jsl(res), as.ckan_group),
+         table = jsd(res))
 }

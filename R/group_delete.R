@@ -18,10 +18,12 @@
 #' group_show(res$id)
 #'
 #' # delete the group
-#' group_delete(res$id)
+#' group_delete(res)
+#' ## or with it's id
+#' # group_delete(res$id)
 #' }
 group_delete <- function(id, key = get_default_key(), url = get_default_url(), ...) {
-  body <- list(id = id)
-  tmp <- ckan_POST(url, 'group_delete', body = body, key = key, ...)
+  id <- as.ckan_group(id, url = url)
+  tmp <- ckan_POST(url, 'group_delete', body = list(id = id$id), key = key, ...)
   jsonlite::fromJSON(tmp)$success
 }

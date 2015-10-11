@@ -71,7 +71,7 @@ Create a group
 ckanr_setup(url = "http://demo.ckan.org", key = getOption("ckan_demo_key"))
 
 # create a group
-(res <- group_create("fruitloops", description="A group about fruitloops"))
+(res <- group_create("fruitloops2", description="A group about fruitloops"))
 res$users
 res$num_followers
 }

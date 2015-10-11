@@ -38,7 +38,7 @@
 #' ckanr_setup(url = "http://demo.ckan.org", key = getOption("ckan_demo_key"))
 #'
 #' # create a group
-#' (res <- group_create("fruitloops", description="A group about fruitloops"))
+#' (res <- group_create("fruitloops2", description="A group about fruitloops"))
 #' res$users
 #' res$num_followers
 #' }
@@ -54,5 +54,5 @@ group_create <- function(name = NULL, id = NULL, title = NULL, description = NUL
   res <- ckan_POST(url, 'group_create',
                    body = tojun(body, TRUE), key = key,
                    encode = "json", ctj(), ...)
-  switch(as, json = res, list = jsl(res), table = jsd(res))
+  switch(as, json = res, list = as_ck(jsl(res), "ckan_group"), table = jsd(res))
 }

@@ -32,7 +32,7 @@ Update a group's metadata
 ckanr_setup(url = "http://demo.ckan.org", key = getOption("ckan_demo_key"))
 
 # Create a package
-(res <- group_create("hello-my-world"))
+(res <- group_create("hello-my-world2"))
 
 # Get a resource
 grp <- group_show(res$id)
@@ -41,7 +41,7 @@ grp$author_email
 
 # Make some changes
 x <- list(title = "!hello world!", maintainer_email = "hello@world.com")
-group_patch(x, id = grp$id)
+group_patch(x, id = grp)
 }
 }
 

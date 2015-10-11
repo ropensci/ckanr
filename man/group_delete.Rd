@@ -31,7 +31,9 @@ ckanr_setup(url = "http://demo.ckan.org", key = getOption("ckan_demo_key"))
 group_show(res$id)
 
 # delete the group
-group_delete(res$id)
+group_delete(res)
+## or with it's id
+# group_delete(res$id)
 }
 }
 

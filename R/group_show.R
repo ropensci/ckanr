@@ -11,13 +11,21 @@
 #'    then parse yourself to get the help slot.
 #' @examples \dontrun{
 #' res <- group_list()
+#'
+#' # via a group name/id
 #' group_show(res[[1]]$name)
+#'
+#' # or via an object of class ckan_group
+#' group_show(res[[1]])
+#'
+#' # return different data formats
 #' group_show(res[[1]]$name, as = 'json')
 #' group_show(res[[1]]$name, as = 'table')
 #' }
 group_show <- function(id, include_datasets = TRUE,
                        url = get_default_url(), as = 'list', ...) {
-  body <- cc(list(id = id, include_datasets = as_log(include_datasets)))
+  id <- as.ckan_group(id, url = url)
+  body <- cc(list(id = id$id, include_datasets = as_log(include_datasets)))
   res <- ckan_POST(url, 'group_show', body = body, ...)
-  switch(as, json = res, list = jsl(res), table = jsd(res))
+  switch(as, json = res, list = as_ck(jsl(res), "ckan_group"), table = jsd(res))
 }

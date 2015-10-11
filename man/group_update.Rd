@@ -32,15 +32,15 @@ Update a group
 ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
 
 # First, create a group
-grp <- group_create("water-bears")
-group_show(grp$id)
+grp <- group_create("water-bears2")
+group_show(grp)
 
 ## update just chosen things
 # Make some changes
 x <- list(description = "A group about water bears and people that love them")
 
 # Then update the packge
-group_update(x, id = grp$id)
+group_update(x, id = grp)
 }
 }
 
