@@ -33,7 +33,7 @@ tags <- tag_list()
 tags[[30]]$id
 
 # show a tag
-tag_show(tags[[30]]$id)
+(x <- tag_show(tags[[30]]$id))
 
 # give back different data formats
 tag_show(tags[[30]]$id, as = 'json')

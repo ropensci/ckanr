@@ -21,5 +21,5 @@ tag_search <- function(query = NULL, vocabulary_id = NULL,
   body <- cc(list(query = query, vocabulary_id = vocabulary_id,
                   offset = offset, limit = limit))
   res <- ckan_POST(url, 'tag_search', body = body, ...)
-  switch(as, json = res, list = jsl(res), table = jsd(res))
+  switch(as, json = res, list = lapply(jsl(res)$results, as.ckan_tag), table = jsd(res))
 }
