@@ -15,10 +15,6 @@ resource_delete(id, key = get_default_key(), url = get_default_url(), ...)
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
 \item{...}{Curl args passed on to \code{\link[httr]{POST}} (optional)}
-
-\item{as}{(character) One of list (default), table, or json. Parsing with table option
-uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse
-data to data.frame's when possible, so the result can vary. (required)}
 }
 \description{
 Delete a resource.

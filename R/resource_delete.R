@@ -3,7 +3,9 @@
 #' @export
 #'
 #' @param id (character) Resource identifier.
-#' @template args
+#' @param url Base url to use. Default: \url{http://data.techno-science.ca}. See
+#' also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.
+#' @param ... Curl args passed on to \code{\link[httr]{POST}} (optional)
 #' @template key
 #' @examples \dontrun{
 #' # Setup

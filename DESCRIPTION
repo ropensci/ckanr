@@ -20,7 +20,8 @@ Imports:
     stats,
     utils,
     httr,
-    jsonlite
+    jsonlite,
+    magrittr
 Suggests:
     roxygen2,
     testthat,
