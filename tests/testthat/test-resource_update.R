@@ -19,7 +19,7 @@ test_that("resource_update gives back expected class types and output", {
   a <- resource_update(id = rid, path = path, url = url, key = key)
 
   # class types
-  expect_is(a, "list")
+  expect_is(a, "ckan_resource")
   expect_is(a$id, "character")
 
   # expected output
@@ -32,7 +32,7 @@ test_that("resource_update fails well", {
   check_resource(url, rid)
 
   # all parameters missing
-  expect_error(resource_update(), "argument \"path\" is missing, with no default")
+  expect_error(resource_update(), "argument \"id\" is missing, with no default")
 
   # bad resource id
   expect_error(resource_update("invalid-resource-id", path=path, url=url, key=key),
@@ -48,4 +48,3 @@ test_that("resource_update fails well", {
   expect_error(resource_update(rid, path=path, url=url, key="invalid-key"),
                "Authorization Error")
 })
-
