@@ -29,7 +29,7 @@ as.ckan_resource.ckan_resource <- function(x, ...) x
 as.ckan_resource.list <- function(x, ...) structure(x, class = "ckan_resource")
 
 #' @export
-#' @rdname ckan_classes
+#' @rdname as.ckan_resource
 is.ckan_resource <- function(x) is(x, "ckan_resource")
 
 #' @export

@@ -2,9 +2,12 @@
 % Please edit documentation in R/as-ckan_resource.R
 \name{as.ckan_resource}
 \alias{as.ckan_resource}
+\alias{is.ckan_resource}
 \title{ckan_resource class helpers}
 \usage{
 as.ckan_resource(x, ...)
+
+is.ckan_resource(x)
 }
 \arguments{
 \item{x}{Variety of things, character, list, or ckan_package class object}

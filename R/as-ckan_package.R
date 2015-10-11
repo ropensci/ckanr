@@ -29,7 +29,7 @@ as.ckan_package.ckan_package <- function(x, ...) x
 as.ckan_package.list <- function(x, ...) structure(x, class = "ckan_package")
 
 #' @export
-#' @rdname ckan_classes
+#' @rdname as.ckan_package
 is.ckan_package <- function(x) is(x, "ckan_package")
 
 #' @export
