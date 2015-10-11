@@ -45,7 +45,7 @@ ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
 path <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
 
 # Create package, then a resource within that package
-(res <- package_create("newpackage"))
+(res <- package_create("newpackage3"))
 (xx <- resource_create(package_id = res$id,
                        description = "my resource",
                        name = "bears",
@@ -60,7 +60,11 @@ newpath <- tempfile(fileext = ".csv")
 write.csv(dat, file = newpath, row.names = FALSE)
 
 # Upload modified dataset
-resource_update(id=xx$id, path=newpath)
+## Directly from output of resource_create
+resource_update(xx, path=newpath)
+
+## or from the resource id
+resource_update(xx$id, path=newpath)
 
 #######
 # Using default settings

@@ -29,7 +29,7 @@
 #' ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
 #'
 #' # create a package
-#' (res <- package_create("foobar", author="Jane Doe"))
+#' (res <- package_create("foobarrrr", author="Jane Doe"))
 #'
 #' # then create a resource
 #' file <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
@@ -39,6 +39,10 @@
 #'                        upload = file,
 #'                        rcurl = "http://google.com"
 #' ))
+#'
+#' package_create("foobbbbbarrrr") %>%
+#'    resource_create(description = "my resource",
+#'    name = "bearsareus", upload = file, rcurl = "http://google.com")
 #' }
 resource_create <- function(package_id = NULL, rcurl = NULL, revision_id = NULL, description = NULL,
   format = NULL, hash = NULL, name = NULL, resource_type = NULL, mimetype = NULL,
@@ -47,7 +51,8 @@ resource_create <- function(package_id = NULL, rcurl = NULL, revision_id = NULL,
   webstore_last_updated = NULL, upload = NULL, key = get_default_key(),
   url = get_default_url(), as = 'list', ...) {
 
-  body <- cc(list(package_id = package_id, url = rcurl, revision_id = revision_id,
+  id <- as.ckan_package(package_id, url = url)
+  body <- cc(list(package_id = id$id, url = rcurl, revision_id = revision_id,
                   description = description, format = format, hash = hash,
                   name = name, resource_type = resource_type, mimetype = mimetype,
                   mimetype_inner = mimetype_inner, webstore_url = webstore_url,
@@ -57,5 +62,5 @@ resource_create <- function(package_id = NULL, rcurl = NULL, revision_id = NULL,
                   webstore_last_updated = webstore_last_updated,
                   upload = upload_file(upload)))
   res <- ckan_POST(url, 'resource_create', body = body, key = key, ...)
-  switch(as, json = res, list = jsl(res), table = jsd(res))
+  switch(as, json = res, list = as_ck(jsl(res), "ckan_resource"), table = jsd(res))
 }

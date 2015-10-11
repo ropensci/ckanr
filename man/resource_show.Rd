@@ -27,7 +27,7 @@ Show a resource.
 ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
 
 # create a package
-(res <- package_create("yellow5"))
+(res <- package_create("yellow7"))
 
 # then create a resource
 file <- system.file("examples", "actinidiaceae.csv", package = "ckanr")

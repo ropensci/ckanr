@@ -9,7 +9,7 @@
 #' ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
 #'
 #' # create a package
-#' (res <- package_create("yellow5"))
+#' (res <- package_create("yellow7"))
 #'
 #' # then create a resource
 #' file <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
@@ -29,6 +29,7 @@
 #'               url = "http://data.nhm.ac.uk")
 #' }
 resource_show <- function(id, url = get_default_url(), as = 'list', ...) {
-  res <- ckan_POST(url, 'resource_show', body = list(id = id), ...)
-  switch(as, json = res, list = jsl(res), table = jsd(res))
+  id <- as.ckan_resource(id, url = url)
+  res <- ckan_POST(url, 'resource_show', body = list(id = id$id), ...)
+  switch(as, json = res, list = as_ck(jsl(res), "ckan_resource"), table = jsd(res))
 }

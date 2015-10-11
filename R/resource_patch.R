@@ -15,15 +15,18 @@
 #'
 #' # Make some changes
 #' x <- list(description = "My newer description")
-#' resource_patch(x, id = res$id)
+#' resource_patch(x, id = res)
+#' # or pass id in directly
+#' # resource_patch(x, id = res$id)
 #' }
 resource_patch <- function(x, id, key = get_default_key(),
                            url = get_default_url(), as = 'list', ...) {
+  id <- as.ckan_resource(id, url = url)
   if (!is(x, "list")) {
     stop("x must be of class list", call. = FALSE)
   }
-  x$id <- id
+  x$id <- id$id
   res <- ckan_POST(url, method = 'resource_patch', body = x, key = key,
                    encode = "json", content_type_json(), ...)
-  switch(as, json = res, list = jsl(res), table = jsd(res))
+  switch(as, json = res, list = as_ck(jsl(res), "ckan_resource"), table = jsd(res))
 }

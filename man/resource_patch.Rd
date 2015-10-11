@@ -37,7 +37,9 @@ res$description
 
 # Make some changes
 x <- list(description = "My newer description")
-resource_patch(x, id = res$id)
+resource_patch(x, id = res)
+# or pass id in directly
+# resource_patch(x, id = res$id)
 }
 }
 

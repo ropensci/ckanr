@@ -70,7 +70,7 @@ Create a resource
 ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
 
 # create a package
-(res <- package_create("foobar", author="Jane Doe"))
+(res <- package_create("foobarrrr", author="Jane Doe"))
 
 # then create a resource
 file <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
@@ -80,6 +80,10 @@ file <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
                        upload = file,
                        rcurl = "http://google.com"
 ))
+
+package_create("foobbbbbarrrr") \%>\%
+   resource_create(description = "my resource",
+   name = "bearsareus", upload = file, rcurl = "http://google.com")
 }
 }
 

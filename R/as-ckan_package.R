@@ -1,7 +1,6 @@
-#' ckanr S3 classes
+#' ckan_package class helpers
 #'
 #' @export
-#' @name ckan_classes
 #' @param x Variety of things, character, list, or ckan_package class object
 #' @param ... Further args passed on to \code{\link{package_show}} if character given
 #' @examples \dontrun{
@@ -18,9 +17,6 @@
 #' (x <- as.ckan_package("0699f475-6978-473a-8448-42585074b6f1"))
 #' as.ckan_package(x)
 #' }
-
-#' @export
-#' @rdname ckan_classes
 as.ckan_package <- function(x, ...) UseMethod("as.ckan_package")
 
 #' @export
@@ -57,11 +53,8 @@ sift_res <- function(z) {
 }
 
 get_package <- function(id, url = get_default_url(), ...) {
-  # body <- cc(list(id = id, use_default_schema = use_default_schema))
-  # res <- ckan_POST(url, 'package_show', body = body, ...)
-  # args <- cc(list(id = id, use_default_schema = use_default_schema))
-  # res <- ckan_GET(url, 'package_show', query = args, ...)
   res <- ckan_POST(url = url, method = 'package_show', key = NULL,
-                   body = tojun(list(id = id), TRUE), encode = "json", ctj(), ...)
+                   body = tojun(list(id = id), TRUE),
+                   encode = "json", ctj(), ...)
   as_ck(jsl(res), "ckan_package")
 }
