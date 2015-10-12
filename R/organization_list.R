@@ -10,7 +10,13 @@
 #' @param all_fields (logical). Return the name or all fields of the object.
 #' @template args
 #' @examples \dontrun{
-#' organization_list()
+#' ckanr_setup(url = "http://demo.ckan.org/")
+#'
+#' # list organizations
+#' res <- organization_list()
+#' res[1:2]
+#'
+#' # Different data formats
 #' organization_list(as = 'json')
 #' organization_list(as = 'table')
 #' }
@@ -25,5 +31,5 @@ organization_list <- function(order_by = c("name", "package"),
                all_fields = ifelse(all_fields, "True", "False"),
                organizations = organizations))
   res <- ckan_POST(url, method = 'organization_list', body = body, ...)
-  switch(as, json = res, list = jsl(res), table = jsd(res))
+  switch(as, json = res, list = lapply(jsl(res), as.ckan_organization), table = jsd(res))
 }

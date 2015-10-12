@@ -34,7 +34,9 @@ By default the help and success slots are dropped, and only the
 }
 \examples{
 \dontrun{
-res <- organization_create("stuffthings")
+ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
+
+res <- organization_create("stuffthings2")
 organization_show(res$id)
 }
 }

@@ -45,5 +45,5 @@ organization_create <- function(name = NULL, id = NULL, title = NULL, descriptio
   res <- ckan_POST(url, 'organization_create',
                    body = tojun(body, TRUE), key = key,
                    encode = "json", ctj(), ...)
-  switch(as, json = res, list = jsl(res), table = jsd(res))
+  switch(as, json = res, list = as_ck(jsl(res), "ckan_organization"), table = jsd(res))
 }
