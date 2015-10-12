@@ -170,7 +170,7 @@ tag_show('Aviation')$packages[[1]][1:3]
 List organizations
 
 ```{r}
-organization_list(as = "json")
+organization_list()
 ```
 
 ## Examples of different CKAN APIs

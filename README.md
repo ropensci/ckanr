@@ -285,8 +285,13 @@ List organizations
 
 
 ```r
-organization_list(as = "json")
-#> [1] "{\"help\": \"Return a list of the names of the site's organizations.\\n\\n    :param order_by: the field to sort the list by, must be ``'name'`` or\\n      ``'packages'`` (optional, default: ``'name'``) Deprecated use sort.\\n    :type order_by: string\\n    :param sort: sorting of the search results.  Optional.  Default:\\n        \\\"name asc\\\" string of field name and sort-order. The allowed fields are\\n        'name' and 'packages'\\n    :type sort: string\\n    :param organizations: a list of names of the groups to return, if given only\\n        groups whose names are in this list will be returned (optional)\\n    :type organizations: list of strings\\n    :param all_fields: return full group dictionaries instead of  just names\\n        (optional, default: ``False``)\\n    :type all_fields: boolean\\n\\n    :rtype: list of strings\\n\\n    \", \"success\": true, \"result\": [{\"display_name\": \"CSTMC\", \"description\": \"\", \"title\": \"CSTMC\", \"image_display_url\": \"\", \"approval_status\": \"approved\", \"is_organization\": true, \"state\": \"active\", \"image_url\": \"\", \"revision_id\": \"7a325a56-46f1-419c-b7b2-ec7501edb35a\", \"packages\": 36, \"type\": \"organization\", \"id\": \"fafa260d-e2bf-46cd-9c35-34c1dfa46c57\", \"name\": \"cstmc\"}]}"
+organization_list()
+#> [[1]]
+#> <CKAN Organization> fafa260d-e2bf-46cd-9c35-34c1dfa46c57 
+#>   Name: cstmc
+#>   Display name: CSTMC
+#>   No. Packages: 
+#>   No. Users: 0
 ```
 
 ## Examples of different CKAN APIs
