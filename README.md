@@ -7,7 +7,7 @@ ckanr
 [![Build status](https://ci.appveyor.com/api/projects/status/5yqd882v4fbeggd5?svg=true)](https://ci.appveyor.com/project/sckott/ckanr)
 [![codecov.io](https://codecov.io/github/ropensci/ckanr/coverage.svg?branch=master)](https://codecov.io/github/ropensci/ckanr?branch=master)
 
-`ckanr` is an R client for the generic CKAN API - that is, plug in a base url for the CKAN instance of interest. 
+`ckanr` is an R client for the generic CKAN API - that is, plug in a base url for the CKAN instance of interest.
 
 ## Installation
 
@@ -22,37 +22,51 @@ devtools::install_github("ropensci/ckanr")
 library('ckanr')
 ```
 
-Note: the default base CKAN URL is set to 
-[http://data.techno-science.ca/](http://data.techno-science.ca/). 
+Note: the default base CKAN URL is set to
+[http://data.techno-science.ca/](http://data.techno-science.ca/).
 Functions requiring write permissions in CKAN additionally require a privileged
-CKAN API key. 
-You can change this using `ckanr_setup()`, or change the URL using the `url` 
+CKAN API key.
+You can change this using `ckanr_setup()`, or change the URL using the `url`
 parameter in each function call.
 To set one or both, run:
+
+
 ```r
 ckanr_setup() # restores default CKAN url to http://data.techno-science.ca/
 ckanr_setup(url="http://data.techno-science.ca/")
 ckanr_setup(url="http://data.techno-science.ca/", key="my-ckan-api-key")
 ```
 
+## ckanr package API
 
-## Changes
+There are a suite of CKAN things (package, resource, etc.) that each have a set of functions in this package. The functions for each CKAN thing have an S3 class that is returned from most functions, and can be passed to most other functions (this also facilitates piping). The following is a list of the function groups for certain CKAN things, with the prefix for the functions that work with that thing, and the name of the S3 class:
 
++ Packages (aka packages) - `package_*()` - `ckan_package`
++ Resources - `resource_*()` - `ckan_resource`
++ Related - `related_*()` - `ckan_related`
++ Users - `user_*()` - `ckan_user`
++ Groups - `group_*()` - `ckan_group`
++ Tags - `tag_*()` - `ckan_tag`
++ Organizations  - `organization_*()` - `ckan_organization`
+
+The S3 class objects all look very similar; for example:
 
 ```r
-changes(limit = 2, as = "table")[, 1:4]
-#>                                user_id                  timestamp
-#> 1 27778230-2e90-4818-9f00-bbf778c8fa09 2015-03-30T15:06:55.500589
-#> 2 27778230-2e90-4818-9f00-bbf778c8fa09 2015-01-09T23:33:14.303237
-#>                              object_id
-#> 1 f4406699-3e11-4856-be48-b55da98b3c14
-#> 2 0a801729-aa94-4d76-a5e0-7b487303f4e5
-#>                            revision_id
-#> 1 12381b05-9e46-4d26-a356-7baed60e8471
-#> 2 100c4915-f995-4925-956e-bcacfdd8de89
+<CKAN Resource> 8abc92ad-7379-4fb8-bba0-549f38a26ddb
+  Name: Data From Digital Portal 
+  Description: 
+  Creator/Modified: 2015-08-18T19:20:59.732601 / 2015-08-18T19:20:59.657943
+  Size: 
+  Format: CSV 
 ```
 
-## List datasets
+All classes state the type of object, have the ID to the right of the type, then have a varying set of key-value fields deemed important. This printed object is just a summary of an R list, so you can index to specific values (e.g., `result$description`). If you feel there are important fields left out of these printed summaries, let us know.
+
+> note: Many examples are given in brief for readme brevity
+
+## Packages
+
+List packages
 
 
 ```r
@@ -70,37 +84,127 @@ package_list(as = "table")
 ...
 ```
 
-## List tags
+Show a package
 
 
 ```r
-tag_list('aviation', as = 'table')
-#>   vocabulary_id                     display_name
-#> 1            NA                         Aviation
-#> 2            NA Canada Aviation and Space Museum
-#>                                     id                             name
-#> 1 cc1db2db-b08b-4888-897f-a17eade2461b                         Aviation
-#> 2 8d05a650-bc7b-4b89-bcc8-c10177e60119 Canada Aviation and Space Museum
+package_show('34d60b13-1fd5-430e-b0ec-c8bc7f4841cf')
+#> <CKAN Package> 
+#>   Title: Artifact Data - Vacuum Tubes
+#>   ID: 34d60b13-1fd5-430e-b0ec-c8bc7f4841cf
+#>   Creator/Modified: 2014-10-28T18:12:11.453636 / 2014-11-05T21:25:16.848989
+#>   Resources (up to 5): Artifact Data - Vacuum Tubes (XML), Data Dictionary, Tips (English), Tips (French)
+#>   Tags (up to 5): Vacuum Tubes
+#>   Groups (up to 5): communications
 ```
 
-## Show tags
-
-Subset for readme brevity
+Search for packages
 
 
 ```r
-tag_show('Aviation')$packages[[1]][1:3]	
-#> $owner_org
-#> [1] "fafa260d-e2bf-46cd-9c35-34c1dfa46c57"
+x <- package_search(q = '*:*', rows = 2)
+x$results
+#> [[1]]
+#> <CKAN Package> 
+#>   Title: Artifact Data - Horology
+#>   ID: f4406699-3e11-4856-be48-b55da98b3c14
+#>   Creator/Modified: 2014-10-28T16:50:30.068996 / 2015-03-30T15:06:55.218176
+#>   Resources (up to 5): Artifact Data - Horology (XML), Data Dictionary, Tips (English), Tips (French)
+#>   Tags (up to 5): Horology
+#>   Groups (up to 5): scientific-instrumentation
 #> 
-#> $maintainer
-#> [1] ""
-#> 
-#> $relationships_as_object
-#> list()
+#> [[2]]
+#> <CKAN Package> 
+#>   Title: Artifact Data - Astronomy
+#>   ID: 0a801729-aa94-4d76-a5e0-7b487303f4e5
+#>   Creator/Modified: 2014-10-24T19:16:59.160533 / 2015-01-09T23:33:13.972898
+#>   Resources (up to 5): Artifact Data - Astronomy (XML), Data Dictionary, Tips (English), Tips (French)
+#>   Tags (up to 5): Astronomy, Scientific Instrumentation
+#>   Groups (up to 5): scientific-instrumentation
 ```
 
-## List groups
+## Resources
+
+Search for resources
+
+
+```r
+x <- resource_search(q = 'name:data', limit = 2)
+x$results
+#> [[1]]
+#> <CKAN Resource> 
+#>   Name: Artifact Data - Exploration and Survey (XML)
+#>   ID: e179e910-27fb-44f4-a627-99822af49ffa
+#>   Description: XML Dataset
+#>   Creator/Modified: 2014-10-28T15:50:35.374303 / 
+#>   Size: 
+#>   Format: XML
+#> 
+#> [[2]]
+#> <CKAN Resource> 
+#>   Name: Data Dictionary
+#>   ID: ba84e8b7-b388-4d2a-873a-7b107eb7f135
+#>   Description: Data dictionary for CSTMC artifact datasets.
+#>   Creator/Modified: 2014-11-03T18:01:02.094210 / 
+#>   Size: 
+#>   Format: XLS
+```
+
+## Related
+
+
+```r
+related_list(url = "http://demo.ckan.org")[1:2]
+#> [[1]]
+#> <CKAN Related Item> 
+#>   Title: my resource
+#>   ID: 05483807-aa57-4f69-8df2-ffd7a6fbc883
+#>   Description: 
+#>   Type: visualization
+#>   Views: 0
+#>   Creator: 2015-10-11T16:29:17.696462
+#> 
+#> [[2]]
+#> <CKAN Related Item> 
+#>   Title: my resource
+#>   ID: feff48ca-56a4-4d54-9933-4f662e46fe7f
+#>   Description: 
+#>   Type: visualization
+#>   Views: 0
+#>   Creator: 2015-10-11T16:33:59.392169
+```
+
+## Users
+
+List users
+
+
+```r
+user_list()[1:2]
+#> [[1]]
+#> <CKAN User> 
+#>   Name: CSTMC
+#>   Display Name: CSTMC
+#>   Full Name: 
+#>   ID: ee100ca6-2363-4db8-b24b-066e865c33ec
+#>   No. Packages: 
+#>   No. Edits: 0
+#>   Created: 2014-10-16T18:15:03.685929
+#> 
+#> [[2]]
+#> <CKAN User> 
+#>   Name: default
+#>   Display Name: default
+#>   Full Name: 
+#>   ID: de64d5d4-86ab-4510-820b-f0bd86ea7a79
+#>   No. Packages: 
+#>   No. Edits: 0
+#>   Created: 2014-03-20T02:55:40.628968
+```
+
+## Groups
+
+List groups
 
 
 ```r
@@ -123,9 +227,7 @@ group_list(as = 'table')[, 1:3]
 #> 7                     Transportation
 ```
 
-## Show groups
-
-Subset for readme brevity
+Show a group
 
 
 ```r
@@ -147,192 +249,86 @@ group_show('communications', as = 'table')$users
 #> 2 b50449ea-1dcc-4d52-b620-fc95bf56034b
 ```
 
-## Show a package
+## Tags
+
+List tags
 
 
 ```r
-package_show('34d60b13-1fd5-430e-b0ec-c8bc7f4841cf', as = 'table')$resources[, 1:10]
-#>                      resource_group_id cache_last_updated
-#> 1 ea8533d9-cdc6-4e0e-97b9-894e06d50b92                 NA
-#> 2 ea8533d9-cdc6-4e0e-97b9-894e06d50b92                 NA
-#> 3 ea8533d9-cdc6-4e0e-97b9-894e06d50b92                 NA
-#> 4 ea8533d9-cdc6-4e0e-97b9-894e06d50b92                 NA
-#>           revision_timestamp webstore_last_updated
-#> 1 2014-10-28T18:13:22.213530                    NA
-#> 2 2014-11-04T02:59:50.567068                    NA
-#> 3 2014-11-05T21:23:58.533397                    NA
-#> 4 2014-11-05T21:25:16.848423                    NA
-#>                                     id size  state hash
-#> 1 be2b0af8-24a8-4a55-8b30-89f5459b713a   NA active     
-#> 2 7d65910e-4bdc-4f06-a213-e24e36762767   NA active     
-#> 3 97622ad7-1507-4f6a-8acb-14e826447389   NA active     
-#> 4 7a72498a-c49c-4e84-8b10-58991de10df6   NA active     
-#>                                    description format
-#> 1                                  XML Dataset    XML
-#> 2 Data dictionary for CSTMC artifact datasets.    XLS
-#> 3       Tips for using the artifacts datasets.   .php
-#> 4       Tips for using the artifacts datasets.   .php
+tag_list('aviation', as = 'table')
+#>   vocabulary_id                     display_name
+#> 1            NA                         Aviation
+#> 2            NA Canada Aviation and Space Museum
+#>                                     id                             name
+#> 1 cc1db2db-b08b-4888-897f-a17eade2461b                         Aviation
+#> 2 8d05a650-bc7b-4b89-bcc8-c10177e60119 Canada Aviation and Space Museum
 ```
 
-## Search for packages
+Show tags
 
 
 ```r
-out <- package_search(q = '*:*', rows = 2, as = "table")$results
-out[, !names(out) %in% 'resources'][, 1:10]
-#>                      license_title maintainer relationships_as_object
-#> 1 Open Government Licence - Canada                               NULL
-#> 2 Open Government Licence - Canada                               NULL
-#>   private maintainer_email         revision_timestamp
-#> 1   FALSE                  2014-10-28T21:18:27.068320
-#> 2   FALSE                  2014-10-28T21:18:58.958555
-#>                                     id           metadata_created
-#> 1 f4406699-3e11-4856-be48-b55da98b3c14 2014-10-28T16:50:30.068996
-#> 2 0a801729-aa94-4d76-a5e0-7b487303f4e5 2014-10-24T19:16:59.160533
-#>            metadata_modified author
-#> 1 2015-03-30T15:06:55.218176       
-#> 2 2015-01-09T23:33:13.972898
-```
-
-## Search for resources
-
-
-```r
-resource_search(q = 'name:data', limit = 2, as = 'table')
-#> $count
-#> [1] 71
+tag_show('Aviation')$packages[[1]][1:3]
+#> $owner_org
+#> [1] "fafa260d-e2bf-46cd-9c35-34c1dfa46c57"
 #> 
-#> $results
-#>                      resource_group_id cache_last_updated
-#> 1 01a82e52-01bf-4a9c-9b45-c4f9b92529fa                 NA
-#> 2 01a82e52-01bf-4a9c-9b45-c4f9b92529fa                 NA
-#>   webstore_last_updated                                   id size  state
-#> 1                    NA e179e910-27fb-44f4-a627-99822af49ffa   NA active
-#> 2                    NA ba84e8b7-b388-4d2a-873a-7b107eb7f135   NA active
-#>   last_modified hash                                  description format
-#> 1            NA                                       XML Dataset    XML
-#> 2            NA      Data dictionary for CSTMC artifact datasets.    XLS
-#>   mimetype_inner url_type mimetype cache_url
-#> 1             NA       NA       NA        NA
-#> 2             NA       NA       NA        NA
-#>                                           name                    created
-#> 1 Artifact Data - Exploration and Survey (XML) 2014-10-28T15:50:35.374303
-#> 2                              Data Dictionary 2014-11-03T18:01:02.094210
-#>                                                                                                                                                    url
-#> 1              http://source.techno-science.ca/datasets-donn%C3%A9es/artifacts-artefacts/groups-groupes/exploration-and-survey-exploration-et-leve.xml
-#> 2 http://source.techno-science.ca/datasets-donn%C3%A9es/artifacts-artefacts/cstmc-artifact-data-dictionary-dictionnaire-de-donnees-artefacts-smstc.xls
-#>   webstore_url position                          revision_id resource_type
-#> 1           NA        0 a22e6741-3e89-4db0-a802-ba594b1c1fad            NA
-#> 2           NA        1 da1f8585-521d-47ef-8ead-7832474a3421            NA
+#> $maintainer
+#> [1] ""
+#> 
+#> $relationships_as_object
+#> list()
+```
+
+## Organizations
+
+List organizations
+
+
+```r
+organization_list(as = "json")
+#> [1] "{\"help\": \"Return a list of the names of the site's organizations.\\n\\n    :param order_by: the field to sort the list by, must be ``'name'`` or\\n      ``'packages'`` (optional, default: ``'name'``) Deprecated use sort.\\n    :type order_by: string\\n    :param sort: sorting of the search results.  Optional.  Default:\\n        \\\"name asc\\\" string of field name and sort-order. The allowed fields are\\n        'name' and 'packages'\\n    :type sort: string\\n    :param organizations: a list of names of the groups to return, if given only\\n        groups whose names are in this list will be returned (optional)\\n    :type organizations: list of strings\\n    :param all_fields: return full group dictionaries instead of  just names\\n        (optional, default: ``False``)\\n    :type all_fields: boolean\\n\\n    :rtype: list of strings\\n\\n    \", \"success\": true, \"result\": [{\"display_name\": \"CSTMC\", \"description\": \"\", \"title\": \"CSTMC\", \"image_display_url\": \"\", \"approval_status\": \"approved\", \"is_organization\": true, \"state\": \"active\", \"image_url\": \"\", \"revision_id\": \"7a325a56-46f1-419c-b7b2-ec7501edb35a\", \"packages\": 36, \"type\": \"organization\", \"id\": \"fafa260d-e2bf-46cd-9c35-34c1dfa46c57\", \"name\": \"cstmc\"}]}"
 ```
 
 ## Examples of different CKAN APIs
+
+See `ckanr::servers()` for a list of CKAN servers. Ther are 115 as of 2015-10-11.
 
 ### The Natural History Museum
 
 Website: [http://data.nhm.ac.uk/](http://data.nhm.ac.uk/)
 
-List datasets
-
 
 ```r
-nhmbase <- "http://data.nhm.ac.uk"
-package_list(as = "table", url = nhmbase)
-#>  [1] "bibliography-scleractinia"                                           
-#>  [2] "bioacoustica"                                                        
-#>  [3] "bothriocephalidea-phylogeny"                                         
-#>  [4] "checklist-of-the-lepidoptera-of-the-british-isles-data"              
-#>  [5] "chrysoperla-carnea-lectotype"                                        
-#>  [6] "collection-artefacts"                                                
-#>  [7] "collection-indexlots"                                                
-#>  [8] "collection-specimens"                                                
-#>  [9] "crowdsourcing-the-collection"                                        
-#> [10] "images-for-the-evaluation-of-automatic-image-segmentation-algorithms"
-...
+nhm_base <- "http://data.nhm.ac.uk"
+x <- package_search(q = '*:*', rows = 1, url = nhm_base)
+x$results
+#> [[1]]
+#> <CKAN Package> 
+#>   Title: Collection specimens
+#>   ID: 56e711e6-c847-4f99-915a-6894bb5c5dea
+#>   Creator/Modified: 2014-12-08T16:39:22.346941 / 2015-09-30T13:42:02.859838
+#>   Resources (up to 5): Specimens
+#>   Tags (up to 5): 
+#>   Groups (up to 5):
 ```
 
-Tags
+### The National Geothermal Data System
 
-_list_
-
-
-```r
-head(tag_list(as = "table", url = nhmbase))
-#>   vocabulary_id    display_name                                   id
-#> 1            NA alpha diversity 05935722-6507-4f07-ac82-83d48555d251
-#> 2            NA    archival DNA b93861ac-0e31-42bd-87aa-7a7bd2af8043
-#> 3            NA      arthropods f9245868-f4cb-4c85-a59d-11692db19e86
-#> 4            NA       Barcoding ea0cda10-2d9e-4a80-b8b5-15d24e693ace
-#> 5            NA    Bibliography 73c85f3f-49b4-416a-80fe-4eb77e99a58d
-#> 6            NA    bioacoustics 11faa593-7ccb-4a6f-8a97-c88ca8939624
-#>              name
-#> 1 alpha diversity
-#> 2    archival DNA
-#> 3      arthropods
-#> 4       Barcoding
-#> 5    Bibliography
-#> 6    bioacoustics
-```
-
-_show_
+Website: [http://geothermaldata.org/](http://geothermaldata.org/)
 
 
 ```r
-tag_show('arthropods', as = 'table', url = nhmbase)
-#> $vocabulary_id
-#> NULL
-#> 
-#> $packages
-#> list()
-#> 
-#> $display_name
-#> [1] "arthropods"
-#> 
-#> $id
-#> [1] "f9245868-f4cb-4c85-a59d-11692db19e86"
-#> 
-#> $name
-#> [1] "arthropods"
-```
-
-Packages
-
-_search_
-
-
-```r
-out <- package_search(q = '*:*', rows = 2, as = 'table', url = nhmbase)
-out$results[, 1:10]
-#>             license_title maintainer relationships_as_object private
-#> 1 Creative Commons CCZero         NA                    NULL   FALSE
-#> 2   License not specified         NA                    NULL   FALSE
-#>   maintainer_email num_tags update_frequency
-#> 1               NA        1           weekly
-#> 2               NA        1                 
-#>                                     id           metadata_created
-#> 1 56e711e6-c847-4f99-915a-6894bb5c5dea 2014-12-08T16:39:22.346941
-#> 2 b99a29cc-5d74-4c62-ad82-51473d403cbe 2015-04-23T08:33:47.736376
-#>            metadata_modified
-#> 1 2015-03-03T12:40:11.196427
-#> 2 2015-04-23T08:38:48.328908
-```
-
-_show_
-
-
-```r
-package_show(id = "56e711e6-c847-4f99-915a-6894bb5c5dea", as = "table", url = nhmbase)
-#> $domain
-#> [1] "data.nhm.ac.uk"
-#> 
-#> $owner_org
-#> [1] "7854c918-d7eb-4341-96e9-3adfb8d636a0"
-#> 
-#> $maintainer
-#> NULL
-#> 
-#> $relationships_as_object
-...
+ngds_base <- "http://search.geothermaldata.org"
+x <- package_search(q = '*:*', rows = 1, url = ngds_base)
+x$results
+#> [[1]]
+#> <CKAN Package> 
+#>   Title: Pagosa Springs borehole lithology intervals
+#>   ID: 428701c7-1b99-424a-a2ae-829cfe37794c
+#>   Creator/Modified: 2015-10-08T20:37:41.620696 / 2015-10-08T20:38:56.525277
+#>   Resources (up to 5): Borehole Lithology of Pagosa Springs Temperature Gradient wells
+#>   Tags (up to 5): 
+#>   Groups (up to 5):
 ```
 
 ## Meta
