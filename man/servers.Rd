@@ -9,6 +9,9 @@ servers()
 \description{
 CKAN server URLS and other info
 }
+\details{
+Comes from the links at http://ckan.org/instances
+}
 \examples{
 \dontrun{
 servers()

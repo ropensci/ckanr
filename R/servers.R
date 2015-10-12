@@ -1,6 +1,7 @@
 #' CKAN server URLS and other info
 #'
 #' @export
+#' @details Comes from the links at http://ckan.org/instances
 #' @examples \dontrun{
 #' servers()
 #' ckan_info("http://data.gov.au/")

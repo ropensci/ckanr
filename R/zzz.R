@@ -43,8 +43,8 @@ ckan_PATCH <- function(url, method, body = NULL, key = NULL, ...){
   ckan_VERB("PATCH", url, method, body, key, ...)
 }
 
-ckan_GET <- function(url, method, body = NULL, key = NULL, ...){
-  ckan_VERB("GET", url, method, body, key, ...)
+ckan_GET <- function(url, method, query = NULL, key = NULL, ...){
+  ckan_VERB("GET", url, method, body = NULL, key, query = query, ...)
 }
 
 ckan_DELETE <- function(url, method, body = NULL, key = NULL, ...){
