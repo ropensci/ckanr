@@ -11,6 +11,10 @@ CKAN server URLS and other info
 }
 \details{
 Comes from the links at http://ckan.org/instances
+
+There were a number of other URLs for CKAN instances in the CKAN URL
+above, but some sites are now gone completely, or if they do exist,
+I can't figure out how to get access to the CKAN API on their instance.
 }
 \examples{
 \dontrun{
@@ -19,7 +23,7 @@ ckan_info("http://data.gov.au/")
 ckan_info(servers()[5])
 
 # what version is each CKAN server running
-out <- lapply(servers()[4:6], ckan_info)
+out <- lapply(servers()[1:6], ckan_info)
 vapply(out, "[[", "", "ckan_version")
 }
 }
