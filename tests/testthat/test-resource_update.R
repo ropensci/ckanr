@@ -6,15 +6,17 @@ path <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
 # Set CKAN connection from ckanr_settings
 url <- get_test_url()
 key <- get_test_key()
-rid <- get_test_rid()
+did <- get_test_did()
+ds_title <- "ckanR test resource"
 
 test_that("The CKAN URL must be set", { expect_is(url, "character") })
 test_that("The CKAN API key must be set", { expect_is(key, "character") })
-test_that("A CKAN resource ID must be set", { expect_is(rid, "character") })
 
 # Test update_resource
 test_that("resource_update gives back expected class types and output", {
   check_ckan(url)
+  a0 <- ds_create_dataset(package_id = did, name = ds_title, path, key, url)
+  rid <- a0$id
   check_resource(url, rid)
   a <- resource_update(id = rid, path = path, url = url, key = key)
 
@@ -24,11 +26,14 @@ test_that("resource_update gives back expected class types and output", {
 
   # expected output
   expect_equal(a$id, rid)
-  expect_true(grepl("actinidiaceae", a$url))
+  # expect_true(grepl("actinidiaceae", a$url))
+  expect_true(resource_delete(id = rid, url = url, key = key))
 })
 
 test_that("resource_update fails well", {
   check_ckan(url)
+  p <- package_show(get_test_did(), url = url)
+  rid <- p$resources[[1]]$id
   check_resource(url, rid)
 
   # all parameters missing

@@ -1,7 +1,6 @@
 context("package_activity_list")
 u <- get_test_url()
-
-id <- package_list(limit = 1, url=u)[[1]]
+id <- get_test_did()
 
 package_activity_num <- local({
   check_ckan(u)
@@ -26,14 +25,18 @@ test_that("package_activity_list works giving back json output", {
   b_df <- jsonlite::fromJSON(b)
   expect_is(b, "character")
   expect_is(b_df, "list")
-  expect_is(b_df$result, "data.frame")
-  expect_less_than(nrow(b_df$result), 30 + 1)
+  if (length(b_df$result) > 0) {
+    expect_is(b_df$result, "data.frame")
+    expect_less_than(nrow(b_df$result), 30 + 1)
+  }
 
   b <- package_activity_list(id, url=u, as='json', limit=NULL)
   b_df <- jsonlite::fromJSON(b)
   expect_is(b, "character")
-  expect_is(b_df, "list")
-  expect_is(b_df$result, "data.frame")
-  expect_equal(nrow(b_df$result), package_activity_num)
+  if (length(b_df$result) > 0) {
+    expect_is(b_df, "list")
+    expect_is(b_df$result, "data.frame")
+    expect_equal(nrow(b_df$result), package_activity_num)
+  }
 })
 
