@@ -18,7 +18,7 @@ test_that("organization_show gives back expected class types", {
   check_organization(u, o)
   a <- organization_show(o, url=u)
 
-  expect_is(a, "list")
+  expect_is(a, "ckan_organization")
   expect_is(a[[1]], "list")
   expect_is(a[[1]][[1]]$name, "character")
   expect_equal(as.integer(length(a)), 19L)

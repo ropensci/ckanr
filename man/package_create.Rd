@@ -89,7 +89,7 @@ ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
 
 # create a package
 ## Example 1
-(res <- package_create("foobar", author="Jane Doe"))
+(res <- package_create("foobar4", author="Jane Doe"))
 res$author
 
 ## Example 2 - create package, add a resource

@@ -14,7 +14,7 @@ test_that("tag_list gives back expected class types", {
   a <- tag_list(url=u)
 
   expect_is(a, "list")
-  expect_is(a[[1]], "list")
+  expect_is(a[[1]], "ckan_tag")
   expect_equal(length(a), tag_num)
 
 })

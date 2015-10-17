@@ -1,7 +1,7 @@
 context("package_activity_list")
 u <- get_test_url()
 
-id <- package_list(url=u, limit = 1)[[1]]
+id <- package_list(limit = 1, url=u)[[1]]
 
 package_activity_num <- local({
   check_ckan(u)

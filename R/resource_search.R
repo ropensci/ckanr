@@ -23,7 +23,13 @@
 #' }
 resource_search <- function(q, sort = NULL, offset = NULL, limit = NULL,
                             url = get_default_url(), as = 'list', ...) {
-  body <- cc(list(query = q, order_by=sort, offset = offset, limit = limit))
+  body <- cc(list(query = q, order_by = sort, offset = offset, limit = limit))
   res <- ckan_POST(url, 'resource_search', body = body, ...)
-  switch(as, json = res, list = jsl(res), table = jsd(res))
+  switch(as, json = res,
+         list = {
+           tmp <- jsl(res)
+           tmp$results <- lapply(tmp$results, as.ckan_resource)
+           tmp
+         },
+         table = jsd(res))
 }

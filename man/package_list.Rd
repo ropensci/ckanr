@@ -29,6 +29,8 @@ List datasets.
 package_list()
 package_list(as = 'json')
 package_list(as = 'table')
+
+package_list(url = 'http://data.nhm.ac.uk')
 }
 }
 

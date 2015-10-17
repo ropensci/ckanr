@@ -4,9 +4,25 @@
 #' @param id (character) Package identifier.
 #' @template args
 #' @examples \dontrun{
-#' package_revision_list('34d60b13-1fd5-430e-b0ec-c8bc7f4841cf')
-#' package_revision_list('34d60b13-1fd5-430e-b0ec-c8bc7f4841cf', as = "table")
-#' package_revision_list('34d60b13-1fd5-430e-b0ec-c8bc7f4841cf', as = "json")
+#' # Setup
+#' ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
+#'
+#' # create a package
+#' (res <- package_create("dolphins"))
+#'
+#' # list package revisions
+#' package_revision_list(res$id)
+#'
+#' # Make change to the package
+#' x <- list(title = "dolphins and things")
+#' package_patch(x, id = res$id)
+#'
+#' # list package revisions
+#' package_revision_list(res$id)
+#'
+#' # Output different formats
+#' package_revision_list(res$id, as = "table")
+#' package_revision_list(res$id, as = "json")
 #' }
 package_revision_list <- function(id, url = get_default_url(), as = "list", ...) {
   res <- ckan_POST(url, 'package_revision_list', body = list(id = id), ...)

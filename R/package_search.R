@@ -23,6 +23,8 @@
 #' one field name using this param.
 #' @template args
 #' @examples \dontrun{
+#' ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
+#'
 #' package_search(q = '*:*')
 #' package_search(q = '*:*', rows = 2, as = 'json')
 #' package_search(q = '*:*', rows = 2, as = 'table')
@@ -40,6 +42,13 @@ package_search <- function(q = '*:*', fq = NULL, sort = NULL, rows = NULL,
   body <- cc(list(q = q, fq = fq, sort = sort, rows = rows, start = start,
                   facet = as_log(facet), facet.limit = facet.limit,
                   facet.field = facet.field))
-  res <- ckan_POST(url, 'package_search', body = body, ...)
-  switch(as, json = res, list = jsl(res), table = jsd(res))
+  res <- ckan_POST(url, 'package_search', key = NULL,
+                   body = tojun(body, TRUE), encode = "json", ctj(), ...)
+  switch(as, json = res,
+         list = {
+           tmp <- jsl(res)
+           tmp$results <- lapply(tmp$results, as.ckan_package)
+           tmp
+         },
+         table = jsd(res))
 }

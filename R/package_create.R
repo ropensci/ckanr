@@ -47,7 +47,7 @@
 #'
 #' # create a package
 #' ## Example 1
-#' (res <- package_create("foobar", author="Jane Doe"))
+#' (res <- package_create("foobar4", author="Jane Doe"))
 #' res$author
 #'
 #' ## Example 2 - create package, add a resource
@@ -67,6 +67,8 @@ package_create <- function(name = NULL, title = NULL, author = NULL, author_emai
     relationships_as_object = relationships_as_object,
     relationships_as_subject = relationships_as_subject, groups = groups,
     owner_org = owner_org))
-  res <- ckan_POST(url, 'package_create', body = body, key = key, ...)
-  switch(as, json = res, list = jsl(res), table = jsd(res))
+  res <- ckan_POST(url, 'package_create',
+                   body = tojun(body, TRUE), key = key,
+                   encode = "json", ctj(), ...)
+  switch(as, json = res, list = as_ck(jsl(res), "ckan_package"), table = jsd(res))
 }

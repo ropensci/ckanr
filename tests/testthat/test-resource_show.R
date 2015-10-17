@@ -5,7 +5,7 @@ test_that("resource_show gives back expected class types", {
   check_ckan(u)
   .a <- resource_search("name:test", url=u, limit=1)
   a <- resource_show(.a$results[[1]]$id, url=u)
-  expect_is(a, "list")
+  expect_is(a, "ckan_resource")
 })
 
 test_that("resource_show works giving back json output", {

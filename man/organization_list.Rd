@@ -33,7 +33,13 @@ List organization
 }
 \examples{
 \dontrun{
-organization_list()
+ckanr_setup(url = "http://demo.ckan.org/")
+
+# list organizations
+res <- organization_list()
+res[1:2]
+
+# Different data formats
 organization_list(as = 'json')
 organization_list(as = 'table')
 }

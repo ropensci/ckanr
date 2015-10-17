@@ -44,7 +44,7 @@
 #' }
 fetch <- function(x, store = "session", path = "file", ...) {
   store <- match.arg(store, c("session", "disk"))
-  res <- ckan_GET(x, store, path, ...)
+  res <- fetch_GET(x, store, path, ...)
   if (store == "session") {
     read_session(res$fmt, res$data, res$path)
   } else {
@@ -73,10 +73,4 @@ read_session <- function(fmt, dat, path) {
            maptools::readShapePoints(path)
          }
   )
-}
-
-check4X <- function(x) {
-  if (!requireNamespace(x, quietly = TRUE)) {
-    stop("Please install ", x, call. = FALSE)
-  }
 }

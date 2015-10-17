@@ -28,9 +28,25 @@ Return a list of the package's activity
 }
 \examples{
 \dontrun{
-package_activity_list("34d60b13-1fd5-430e-b0ec-c8bc7f4841cf")
-package_activity_list("34d60b13-1fd5-430e-b0ec-c8bc7f4841cf", as = "table")
-package_activity_list("34d60b13-1fd5-430e-b0ec-c8bc7f4841cf", as = "json")
+# Setup
+ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
+
+# create a package
+(res <- package_create("owls6"))
+
+# list package activity
+package_activity_list(res$id)
+
+# make a change
+x <- list(maintainer = "Jane Forest")
+package_update(x, res)
+
+# list activity again
+package_activity_list(res)
+
+# output different data formats
+package_activity_list(res$id, as = "table")
+package_activity_list(res$id, as = "json")
 }
 }
 

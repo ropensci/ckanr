@@ -4,7 +4,8 @@
 \alias{package_update}
 \title{Update a package}
 \usage{
-package_update(x, id, url = get_default_url(), as = "list", ...)
+package_update(x, id, url = get_default_url(), key = get_default_key(),
+  as = "list", ...)
 }
 \arguments{
 \item{x}{(list) A list with key-value pairs}
@@ -13,6 +14,8 @@ package_update(x, id, url = get_default_url(), as = "list", ...)
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
+
+\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse
@@ -34,7 +37,7 @@ res
 
 ## update just chosen things
 # Make some changes
-x <- list(maintainer_email = "stuff@things.com")
+x <- list(maintainer_email = "heythere2@things.com")
 
 # Then update the packge
 package_update(x, '585d7ea2-ded0-4fed-9b08-61f7e83a3cb2')

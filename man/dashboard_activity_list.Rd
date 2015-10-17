@@ -33,7 +33,7 @@ Authorized user's dashboard activity stream
 # Setup
 ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
 
-# create a package
+# get activity
 (res <- dashboard_activity_list())
 }
 }

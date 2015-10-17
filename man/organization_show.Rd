@@ -5,7 +5,7 @@
 \title{Show an organization}
 \usage{
 organization_show(id, include_datasets = FALSE, url = get_default_url(),
-  as = "list", ...)
+  key = get_default_key(), as = "list", ...)
 }
 \arguments{
 \item{id}{(character) Organization id or name.}
@@ -15,6 +15,8 @@ organization datasets}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
+
+\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse
@@ -32,7 +34,10 @@ By default the help and success slots are dropped, and only the
 }
 \examples{
 \dontrun{
-organization_show("fafa260d-e2bf-46cd-9c35-34c1dfa46c57")
+ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
+
+res <- organization_create("stuffthings2")
+organization_show(res$id)
 }
 }
 

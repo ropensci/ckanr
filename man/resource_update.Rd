@@ -39,14 +39,34 @@ which are set by \code{ckanr_setup}.
 }
 \examples{
 \dontrun{
-# Using an existing file and explicit CKAN URL and API key
-path <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
-# Note: enter valid values for id, url, and key
-resource_update(id = "an-existing-resource-id",
-                path = path,
-                key = "my-ckan-api-key",
-                url = "http://my-ckan.org/")
+ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
 
+# Get file
+path <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
+
+# Create package, then a resource within that package
+(res <- package_create("newpackage3"))
+(xx <- resource_create(package_id = res$id,
+                       description = "my resource",
+                       name = "bears",
+                       upload = path,
+                       rcurl = "http://google.com"
+))
+
+# Modify dataset, here lowercase strings in one column
+dat <- read.csv(path, stringsAsFactors = FALSE)
+dat$Family <- tolower(dat$Family)
+newpath <- tempfile(fileext = ".csv")
+write.csv(dat, file = newpath, row.names = FALSE)
+
+# Upload modified dataset
+## Directly from output of resource_create
+resource_update(xx, path=newpath)
+
+## or from the resource id
+resource_update(xx$id, path=newpath)
+
+#######
 # Using default settings
 ckanr_setup(url = "http://demo.ckan.org/", key = "my-demo-ckan-org-api-key")
 path <- system.file("examples", "actinidiaceae.csv", package = "ckanr")

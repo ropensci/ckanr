@@ -28,9 +28,15 @@ Return a list of the site's user accounts.
 }
 \examples{
 \dontrun{
+# all users
 user_list()
-user_list(as = "table")
-user_list(as = "json")
+
+# search for a user
+user_list(q = "j")
+
+# different data formats
+user_list(q = "j", as = "table")
+user_list(q = "j", as = "json")
 }
 }
 

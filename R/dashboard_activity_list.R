@@ -13,7 +13,7 @@
 #' # Setup
 #' ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
 #'
-#' # create a package
+#' # get activity
 #' (res <- dashboard_activity_list())
 #' }
 dashboard_activity_list <- function(limit = 31, offset = 0, key = get_default_key(),

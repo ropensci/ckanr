@@ -9,9 +9,11 @@
 #' @template paging
 #' @template args
 #' @examples \dontrun{
-#' tag_search('aviation')
-#' tag_search('aviation', as = 'json')
-#' tag_search('aviation', as = 'table')
+#' tag_search(query = 'ta')
+#'
+#' # different formats back
+#' tag_search(query = 'ta', as = 'json')
+#' tag_search(query = 'ta', as = 'table')
 #' }
 tag_search <- function(query = NULL, vocabulary_id = NULL,
                        offset = 0, limit = 31,
@@ -19,5 +21,5 @@ tag_search <- function(query = NULL, vocabulary_id = NULL,
   body <- cc(list(query = query, vocabulary_id = vocabulary_id,
                   offset = offset, limit = limit))
   res <- ckan_POST(url, 'tag_search', body = body, ...)
-  switch(as, json = res, list = jsl(res), table = jsd(res))
+  switch(as, json = res, list = lapply(jsl(res)$results, as.ckan_tag), table = jsd(res))
 }

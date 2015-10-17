@@ -28,8 +28,11 @@
 #'  and show a specific organization with \code{\link{organization_show}}
 #' }
 #'
+#' @importFrom methods is
+#' @importFrom stats na.omit
+#' @importFrom utils read.csv unzip
 #' @importFrom httr GET POST upload_file write_disk add_headers content
-#' stop_for_status http_condition
+#' stop_for_status http_condition content_type_json
 #' @importFrom jsonlite fromJSON
 #' @name ckanr-package
 #' @aliases ckanr

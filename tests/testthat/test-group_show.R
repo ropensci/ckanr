@@ -7,7 +7,7 @@ test_that("changes gives back expected class types", {
   check_group(u,g)
   a <- group_show(g, url=u)
 
-  expect_is(a, "list")
+  expect_is(a, "ckan_group")
   expect_is(a[[1]], "list")
   expect_is(a[[1]][[1]]$name, "character")
 })
