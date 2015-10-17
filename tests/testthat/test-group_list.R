@@ -16,7 +16,7 @@ test_that("group_list works giving back json output", {
   b_df <- jsonlite::fromJSON(b)
   expect_is(b, "character")
   expect_is(b_df, "list")
-  expect_is(b_df$result, "data.frame")
+  # expect_is(b_df$result, "data.frame")
 })
 
 test_that("group_list fails correctly", {

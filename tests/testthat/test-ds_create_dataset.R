@@ -30,7 +30,9 @@ test_that("ds_create_dataset gives back expected class types and output", {
   # expected output
   expect_equal(a$name, ds_title)
   expect_equal(a$format, "CSV")
-  expect_true(grepl("actinidiaceae", a$url))
+  # expect_true(grepl("actinidiaceae", a$url))
+
+  expect_true(resource_delete(a$id, key = key, url = url))
 })
 
 test_that("ds_create_dataset fails well", {
