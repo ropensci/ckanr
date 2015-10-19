@@ -75,7 +75,7 @@ resource_update <- function(id, path, key = get_default_key(),
                             url = get_default_url(), as = 'list', ...) {
   id <- as.ckan_resource(id, url = url)
   path <- path.expand(path)
-  body <- list(id = id$id, upload = upload_file(path), last_modified = Sys.time())
+  body <- list(id = id$id, upload = upload_file(path), last_modified = Sys.time(), url = "update")
   res <- ckan_POST(url, 'resource_update', body = body, key = key, ...)
   switch(as, json = res, list = as_ck(jsl(res), "ckan_resource"), table = jsd(res))
 }
