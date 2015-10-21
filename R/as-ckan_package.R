@@ -34,9 +34,8 @@ is.ckan_package <- function(x) is(x, "ckan_package")
 
 #' @export
 print.ckan_package <- function(x, ...) {
-  cat("<CKAN Package>", "\n")
+  cat(paste0("<CKAN Package> ", x$id), "\n")
   cat("  Title: ", x$title, "\n", sep = "")
-  cat("  ID: ", x$id, "\n", sep = "")
   cat("  Creator/Modified: ", x$metadata_created, " / ", x$metadata_modified, "\n", sep = "")
   cat("  Resources (up to 5): ", sift_res(x$resources), "\n", sep = "")
   cat("  Tags (up to 5): ", sift_res(x$tags), "\n", sep = "")

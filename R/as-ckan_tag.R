@@ -7,7 +7,6 @@
 #' ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
 #'
 #' (tags <- tag_search(query = 'ta'))
-#' tags
 #' tags[[3]]
 #'
 #' # create item class from only an item ID
@@ -34,10 +33,9 @@ is.ckan_tag <- function(x) is(x, "ckan_tag")
 
 #' @export
 print.ckan_tag <- function(x, ...) {
-  cat("<CKAN Tag>", "\n")
+  cat(paste0("<CKAN Tag> ", x$id), "\n")
   cat("  Name: ", x$name, "\n", sep = "")
   cat("  Display name: ", x$display_name, "\n", sep = "")
-  cat("  ID: ", x$id, "\n", sep = "")
   cat("  Vocabulary id: ", x$vocabulary_id, "\n", sep = "")
   cat("  No. Packages: ", length(x$packages), "\n", sep = "")
   cat("  Packages (up to 5): ", sift_res(x$packages), "\n", sep = "")

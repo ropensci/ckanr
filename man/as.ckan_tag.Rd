@@ -22,7 +22,6 @@ ckan_tag class helpers
 ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
 
 (tags <- tag_search(query = 'ta'))
-tags
 tags[[3]]
 
 # create item class from only an item ID
