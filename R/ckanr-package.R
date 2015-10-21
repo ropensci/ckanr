@@ -31,6 +31,7 @@
 #'  other functions starting with \code{group_*}
 #'  \item Users - List users with \code{\link{user_list}}, and see
 #'  other functions starting with \code{user_*}
+#'  \item Related items - See functions starting with \code{related_*}
 #' }
 #'
 #' @section Datastore:

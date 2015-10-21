@@ -47,8 +47,8 @@ resources, tags, organizations, groups, and users.
 
 
 We are also working on supporting the Datastore extension
-(\url{http://docs.ckan.org/en/latest/maintaining/datastore.html}). We currently have
-these functions:
+(\url{http://docs.ckan.org/en/latest/maintaining/datastore.html}).
+We currently have these functions:
 
 \itemize{
  \item \code{\link{ds_create}}
