@@ -8,9 +8,20 @@ ckanr
 [![codecov.io](https://codecov.io/github/ropensci/ckanr/coverage.svg?branch=master)](https://codecov.io/github/ropensci/ckanr?branch=master)
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/ckanr?color=FAB657)](https://github.com/metacran/cranlogs.app)
 
-`ckanr` is an R client for the generic CKAN API - that is, plug in a base url for the CKAN instance of interest.
+`ckanr` is an R client for the CKAN API. 
+
+It is meant to be as general as possible, allowing you to work with any CKAN instance.
 
 ## Installation
+
+Stable CRAN version
+
+
+```r
+install.packages("ckanr")
+```
+
+Development version
 
 
 ```r
@@ -149,28 +160,6 @@ x$results
 #>   Format: XLS
 ```
 
-## Related
-
-
-```r
-related_list(url = "http://demo.ckan.org")[1:2]
-#> [[1]]
-#> <CKAN Related Item> 05483807-aa57-4f69-8df2-ffd7a6fbc883 
-#>   Title: my resource
-#>   Description: 
-#>   Type: visualization
-#>   Views: 0
-#>   Creator: 2015-10-11T16:29:17.696462
-#> 
-#> [[2]]
-#> <CKAN Related Item> feff48ca-56a4-4d54-9933-4f662e46fe7f 
-#>   Title: my resource
-#>   Description: 
-#>   Type: visualization
-#>   Views: 0
-#>   Creator: 2015-10-11T16:33:59.392169
-```
-
 ## Users
 
 List users
@@ -291,7 +280,7 @@ organization_list()
 
 ## Examples of different CKAN APIs
 
-See `ckanr::servers()` for a list of CKAN servers. Ther are 124 as of 2015-10-20.
+See `ckanr::servers()` for a list of CKAN servers. Ther are 124 as of 2015-10-21.
 
 ### The Natural History Museum
 
@@ -299,8 +288,8 @@ Website: [http://data.nhm.ac.uk/](http://data.nhm.ac.uk/)
 
 
 ```r
-nhm_base <- "http://data.nhm.ac.uk"
-x <- package_search(q = '*:*', rows = 1, url = nhm_base)
+ckanr_setup(url = "http://data.nhm.ac.uk")
+x <- package_search(q = '*:*', rows = 1)
 x$results
 #> [[1]]
 #> <CKAN Package> 56e711e6-c847-4f99-915a-6894bb5c5dea 
@@ -318,8 +307,8 @@ Website: [http://geothermaldata.org/](http://geothermaldata.org/)
 
 
 ```r
-ngds_base <- "http://search.geothermaldata.org"
-x <- package_search(q = '*:*', rows = 1, url = ngds_base)
+ckanr_setup("http://search.geothermaldata.org")
+x <- package_search(q = '*:*', rows = 1)
 x$results
 #> [[1]]
 #> <CKAN Package> 428701c7-1b99-424a-a2ae-829cfe37794c 

@@ -137,12 +137,6 @@ x <- resource_search(q = 'name:data', limit = 2)
 x$results
 ```
 
-## Related
-
-```{r}
-related_list(url = "http://demo.ckan.org")[1:2]
-```
-
 ## Users
 
 List users
@@ -196,8 +190,8 @@ See `ckanr::servers()` for a list of CKAN servers. Ther are `r length(ckanr::ser
 Website: [http://data.nhm.ac.uk/](http://data.nhm.ac.uk/)
 
 ```{r output.lines=1:8}
-nhm_base <- "http://data.nhm.ac.uk"
-x <- package_search(q = '*:*', rows = 1, url = nhm_base)
+ckanr_setup(url = "http://data.nhm.ac.uk")
+x <- package_search(q = '*:*', rows = 1)
 x$results
 ```
 
@@ -206,8 +200,8 @@ x$results
 Website: [http://geothermaldata.org/](http://geothermaldata.org/)
 
 ```{r output.lines=1:8}
-ngds_base <- "http://search.geothermaldata.org"
-x <- package_search(q = '*:*', rows = 1, url = ngds_base)
+ckanr_setup("http://search.geothermaldata.org")
+x <- package_search(q = '*:*', rows = 1)
 x$results
 ```
 
