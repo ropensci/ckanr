@@ -8,8 +8,8 @@
 \description{
 ckanr is a full client for the CKAN API, wrapping all
 APIs, including for reading and writing data. Please get in touch
-(\url{https://github.com/ropensci/ckanr/issues}) if you have problems, or
-have use cases that we don't cover yet.
+(\url{https://github.com/ropensci/ckanr/issues} or \url{https://discuss.ropensci.org/})
+if you have problems, or have use cases that we don't cover yet.
 }
 \section{CKAN API}{
 
@@ -22,7 +22,7 @@ We'll always be following the lastest version of the API.
 
 
 The functions can be grouped into those for setup, packages,
-resources, tags, organizations, and groups.
+resources, tags, organizations, groups, and users.
 
 \itemize{
  \item Setup - The main one is \code{\link{ckanr_setup}} - and many related
@@ -34,17 +34,56 @@ resources, tags, organizations, and groups.
  \item Tags - List tags with \code{\link{tag_list}}, and see
  other functions starting with \code{tag_*}
  \item Organizations - List organizations with \code{\link{organization_list}},
- and show a specific organization with \code{\link{organization_show}}
+ show a specific organization with \code{\link{organization_show}}, and
+ create with \code{\link{organization_create}}
+ \item Groups - List groups with \code{\link{group_list}}, and see
+ other functions starting with \code{group_*}
+ \item Users - List users with \code{\link{user_list}}, and see
+ other functions starting with \code{user_*}
 }
+}
+
+\section{Datastore}{
+
+
+We are also working on supporting the Datastore extension
+(\url{http://docs.ckan.org/en/latest/maintaining/datastore.html}). We currently have
+these functions:
+
+\itemize{
+ \item \code{\link{ds_create}}
+ \item \code{\link{ds_create_dataset}}
+ \item \code{\link{ds_search}}
+ \item \code{\link{ds_search_sql}}
+}
+}
+
+\section{Fetch}{
+
+
+Data can come back in a huge variety of formats. We've attempted a function to
+help you fetch not just metadata but the actual data for a link to a file on
+a CKAN instance. Though if you know what you're doing, you can easily use
+whatever is your preferred tool for the job (e.g., maybe you like
+\code{\link{read.csv}} for reading csv files).
+}
+
+\section{CKAN Instances}{
+
+
+We have a helper function (\code{\link{servers}}) that spits out the current
+CKAN instances we know about, with URLs to their base URLs that should work
+using this package. That is, not necessarily landing pages of each instance,
+although, the URL may be the landing page and the base API URL.
 }
 \author{
 Scott Chamberlain \email{myrmecocystus@gmail.com}
 
-Imanuel Costigan \email{i.costigan@me.com}
+Florian Mayer \email{florian.wendelin.mayer@gmail.com}
 
 Wush Wu
 
-Florian Mayer \email{florian.wendelin.mayer@gmail.com}
+Imanuel Costigan \email{i.costigan@me.com}
 }
 \keyword{package}
 
