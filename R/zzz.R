@@ -1,40 +1,4 @@
-#' Send an httr::POST request and handle the response
-#'
-#' @details This method is a thin wrapper around httr::POST, which is a wrapper
-#' around RCurl::POST, which is a wrapper around curl.
-#'
-#' If the POST request requires authentication, a privileged CKAN API key has
-#' to be supplied. The method does not default to \code{ckanr_settings}.
-#' As the method is an internal method only, other functions of \code{ckanr}
-#' may default to \code{ckanr_settings} for convenience of use.
-#'
-#' @keywords internal
-#' @param url A CKAN base URL
-#' @param method The GET method as part of the CKAN API URL
-#' @param body The request body (a dictionary as named R list) (optional)
-#' @param key A CKAN API key (optional)
-#' @return The content of the response as text
-# ckan_POST <- function(url, method, body = NULL, key = NULL, ...){
-#   if (is.null(key)) {
-#     # no authentication
-#     if (is.null(body) || length(body) == 0) {
-#       res <- POST(file.path(url, ck(), method), ctj(), ...)
-#     } else {
-#       res <- POST(file.path(url, ck(), method), body = body, ...)
-#     }
-#   } else {
-#     # authentication
-#     api_key_header <- add_headers("X-CKAN-API-Key" = key)
-#     if (is.null(body) || length(body) == 0) {
-#       res <- POST(file.path(url, ck(), method), ctj(), api_key_header, ...)
-#     } else {
-#       res <- POST(file.path(url, ck(), method), body = body, api_key_header, ...)
-#     }
-#   }
-#   err_handler(res)
-#   content(res, "text")
-# }
-
+# httr helpers -----------------------
 ckan_POST <- function(url, method, body = NULL, key = NULL, ...){
   ckan_VERB("POST", url, method, body, key, ...)
 }
@@ -53,6 +17,7 @@ ckan_DELETE <- function(url, method, body = NULL, key = NULL, ...){
 
 ckan_VERB <- function(verb, url, method, body, key, ...) {
   VERB <- getExportedValue("httr", verb)
+  url <- sub("/$", "", url)
   if (is.null(key)) {
     # no authentication
     if (is.null(body) || length(body) == 0) {
