@@ -38,10 +38,21 @@ knitr::opts_chunk$set(
 [![Build Status](https://api.travis-ci.org/ropensci/ckanr.png)](https://travis-ci.org/ropensci/ckanr)
 [![Build status](https://ci.appveyor.com/api/projects/status/5yqd882v4fbeggd5?svg=true)](https://ci.appveyor.com/project/sckott/ckanr)
 [![codecov.io](https://codecov.io/github/ropensci/ckanr/coverage.svg?branch=master)](https://codecov.io/github/ropensci/ckanr?branch=master)
+[![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/ckanr?color=FAB657)](https://github.com/metacran/cranlogs.app)
 
-`ckanr` is an R client for the generic CKAN API - that is, plug in a base url for the CKAN instance of interest.
+`ckanr` is an R client for the CKAN API. 
+
+It is meant to be as general as possible, allowing you to work with any CKAN instance.
 
 ## Installation
+
+Stable CRAN version
+
+```{r eval=FALSE}
+install.packages("ckanr")
+```
+
+Development version
 
 ```{r eval=FALSE}
 install.packages("devtools")
@@ -62,8 +73,8 @@ To set one or both, run:
 
 ```{r}
 ckanr_setup() # restores default CKAN url to http://data.techno-science.ca/
-ckanr_setup(url="http://data.techno-science.ca/")
-ckanr_setup(url="http://data.techno-science.ca/", key="my-ckan-api-key")
+ckanr_setup(url = "http://data.techno-science.ca/")
+ckanr_setup(url = "http://data.techno-science.ca/", key = "my-ckan-api-key")
 ```
 
 ## ckanr package API
@@ -77,6 +88,9 @@ There are a suite of CKAN things (package, resource, etc.) that each have a set 
 + Groups - `group_*()` - `ckan_group`
 + Tags - `tag_*()` - `ckan_tag`
 + Organizations  - `organization_*()` - `ckan_organization`
++ Groups - `group_*()` - `ckan_group`
++ Users - `user_*()` - `ckan_user`
++ Related items - `related_*()` - `ckan_related`
 
 The S3 class objects all look very similar; for example:
 
