@@ -39,8 +39,9 @@ knitr::opts_chunk$set(
 [![Build status](https://ci.appveyor.com/api/projects/status/5yqd882v4fbeggd5?svg=true)](https://ci.appveyor.com/project/sckott/ckanr)
 [![codecov.io](https://codecov.io/github/ropensci/ckanr/coverage.svg?branch=master)](https://codecov.io/github/ropensci/ckanr?branch=master)
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/ckanr?color=FAB657)](https://github.com/metacran/cranlogs.app)
+[![cran version](http://www.r-pkg.org/badges/version/ckanr)](http://cran.rstudio.com/web/packages/ckanr)
 
-`ckanr` is an R client for the CKAN API. 
+`ckanr` is an R client for the CKAN API.
 
 It is meant to be as general as possible, allowing you to work with any CKAN instance.
 
@@ -96,11 +97,11 @@ The S3 class objects all look very similar; for example:
 
 ```r
 <CKAN Resource> 8abc92ad-7379-4fb8-bba0-549f38a26ddb
-  Name: Data From Digital Portal 
-  Description: 
+  Name: Data From Digital Portal
+  Description:
   Creator/Modified: 2015-08-18T19:20:59.732601 / 2015-08-18T19:20:59.657943
-  Size: 
-  Format: CSV 
+  Size:
+  Format: CSV
 ```
 
 All classes state the type of object, have the ID to the right of the type, then have a varying set of key-value fields deemed important. This printed object is just a summary of an R list, so you can index to specific values (e.g., `result$description`). If you feel there are important fields left out of these printed summaries, let us know.
