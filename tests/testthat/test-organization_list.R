@@ -6,7 +6,7 @@ organization_num <- local({
   res <- httr::GET(file.path(u, "organization"))
   httr::stop_for_status(res)
   html <- httr::content(res, as = "text")
-  tmp <- regmatches(html, regexec("(\\d+) organizations found", html))
+  tmp <- regmatches(html, regexec("(\\d+) organi[sz]ations found", html))
   as.integer(tmp[[1]][2])
 })
 

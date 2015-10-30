@@ -17,7 +17,7 @@ ckan_DELETE <- function(url, method, body = NULL, key = NULL, ...){
 
 ckan_VERB <- function(verb, url, method, body, key, ...) {
   VERB <- getExportedValue("httr", verb)
-  url <- sub("/$", "", url)
+  url <- notrail(url)
   if (is.null(key)) {
     # no authentication
     if (is.null(body) || length(body) == 0) {
@@ -147,4 +147,8 @@ check4X <- function(x) {
   if (!requireNamespace(x, quietly = TRUE)) {
     stop("Please install ", x, call. = FALSE)
   }
+}
+
+notrail <- function(x) {
+  gsub("/+$", "", x)
 }
