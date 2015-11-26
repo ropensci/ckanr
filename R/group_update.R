@@ -1,4 +1,4 @@
-#' @title Update a group
+#' Update a group
 #'
 #' @export
 #' @param x (list) A list with key-value pairs

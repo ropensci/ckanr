@@ -24,6 +24,9 @@ data.frame. (required)}
 
 \item{...}{Curl args passed on to \code{\link[httr]{POST}} (optional)}
 }
+\description{
+Update a group
+}
 \examples{
 \dontrun{
 # Setup
