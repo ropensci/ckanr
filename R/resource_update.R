@@ -27,7 +27,7 @@
 #' path <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
 #'
 #' # Create package, then a resource within that package
-#' (res <- package_create("newpackage3"))
+#' (res <- package_create("newpackage9"))
 #' (xx <- resource_create(package_id = res$id,
 #'                        description = "my resource",
 #'                        name = "bears",
@@ -75,7 +75,14 @@ resource_update <- function(id, path, key = get_default_key(),
                             url = get_default_url(), as = 'list', ...) {
   id <- as.ckan_resource(id, url = url)
   path <- path.expand(path)
-  body <- list(id = id$id, upload = upload_file(path), last_modified = Sys.time(), url = "update")
+  up <- upload_file(path)
+  format <- pick_type(up$type)
+  body <- list(id = id$id, format = format, upload = up, last_modified = Sys.time(), url = "update")
   res <- ckan_POST(url, 'resource_update', body = body, key = key, ...)
   switch(as, json = res, list = as_ck(jsl(res), "ckan_resource"), table = jsd(res))
+}
+
+pick_type <- function(x) {
+  switch(x,
+         `text/csv` = "csv")
 }
