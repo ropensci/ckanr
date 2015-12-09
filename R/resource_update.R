@@ -84,5 +84,6 @@ resource_update <- function(id, path, key = get_default_key(),
 
 pick_type <- function(x) {
   switch(x,
-         `text/csv` = "csv")
+         `text/csv` = "csv",
+         `text/html` = "html")
 }
