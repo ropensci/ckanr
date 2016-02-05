@@ -1,6 +1,7 @@
 context("ds_search")
 u <- get_test_url()
-r <- get_test_rid()
+#r <- get_test_rid()
+r <- "83b5b18d-9ef6-4af6-83b2-99bdaffbf272"
 
 test_that("ds_search gives back expected class types", {
   check_ckan(u)

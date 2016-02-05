@@ -19,7 +19,7 @@ test_that("The CKAN Dataset ID is set", { expect_is(did, "character") })
 # Test ds_dataset_create
 test_that("ds_create_dataset gives back expected class types and output", {
   check_ckan(url)
-  check_dataset(url, did)
+  #check_dataset(url, did)
 
   a <- ds_create_dataset(package_id = did, name = ds_title, file, key, url)
 
@@ -35,7 +35,7 @@ test_that("ds_create_dataset gives back expected class types and output", {
 
 test_that("ds_create_dataset fails well", {
   check_ckan(url)
-  check_dataset(url, did)
+  #check_dataset(url, did)
 
   # all parameters missing
   expect_error(ds_create_dataset(),
