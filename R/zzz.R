@@ -35,7 +35,7 @@ ckan_VERB <- function(verb, url, method, body, key, ...) {
     }
   }
   err_handler(res)
-  content(res, "text")
+  content(res, "text", encoding = "UTF-8")
 }
 
 # GET fxn for fetch()
@@ -60,7 +60,7 @@ fetch_GET <- function(x, store, path, args = NULL, ...) {
       path <- NULL
       res <- GET(x, query = args, ...)
       err_handler(res)
-      dat <- content(res, "text")
+      dat <- content(res, "text", encoding = "UTF-8")
     }
     list(store = store, fmt = fmt, data = dat, path = path)
   } else {
@@ -93,7 +93,8 @@ as_ck <- function(x, class) {
 err_handler <- function(x) {
   if (x$status_code > 201) {
     obj <- try({
-      err <- content(x)$error
+      err <- jsonlite::fromJSON(content(x, "text", encoding = "UTF-8"))$error
+      #err <- content(x, encoding = "UTF-8")$error
       tmp <- err[names(err) != "__type"]
       errmsg <- paste(names(tmp), unlist(tmp[[1]]))
       list(err = err, errmsg = errmsg)
@@ -107,7 +108,7 @@ err_handler <- function(x) {
     } else {
       obj <- {
         err <- http_condition(x, "error")
-        errmsg <- content(x, "text")
+        errmsg <- content(x, "text", encoding = "UTF-8")
         list(err = err, errmsg = errmsg)
       }
       stop(sprintf("%s - %s\n  %s",
