@@ -84,5 +84,17 @@ resource_update <- function(id, path, key = get_default_key(),
 
 pick_type <- function(x) {
   switch(x,
-         `text/csv` = "csv")
+         `text/html` = "html",
+         `text/csv` = "csv",
+         `text/plain` = "txt",
+         `application/vnd.openxmlformats-officedocument.wordprocessingml.document` = "docx",
+         `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet` = "xlsx",
+         `application/vnd.ms-excel.sheet.macroEnabled.12` = "xlsm",
+         `application/json` = "json",
+         `application/vnd.geo+json` = "geojson",
+         `application/pdf` = "pdf",
+         `image/jpeg` = "jpeg",
+         `image/png` = "png",
+         `image/bmp` = "bmp"
+         )
 }
