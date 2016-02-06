@@ -70,6 +70,31 @@
 #'                                    package = "ckanr"),
 #'                 key = get_test_key(),
 #'                 url = get_test_url())
+#'
+#' # other file formats
+#' ## html
+#' path <- system.file("examples", "mapbox.html", package = "ckanr")
+#'
+#' # Create package, then a resource within that package
+#' (res <- package_create("mappkg"))
+#' (xx <- resource_create(package_id = res$id,
+#'                        description = "a map, yay",
+#'                        name = "mapyay",
+#'                        upload = path,
+#'                        rcurl = "http://google.com"
+#' ))
+#' browseURL(xx$url)
+#'
+#' # Modify dataset, here lowercase strings in one column
+#' dat <- readLines(path)
+#' dat <- sub("-111.06", "-115.06", dat)
+#' newpath <- tempfile(fileext = ".html")
+#' cat(dat, file = newpath, sep = "\n")
+#'
+#' # Upload modified dataset
+#' ## Directly from output of resource_create
+#' (xxx <- resource_update(xx, path=newpath))
+#' browseURL(xxx$url)
 #' }
 resource_update <- function(id, path, key = get_default_key(),
                             url = get_default_url(), as = 'list', ...) {
