@@ -7,7 +7,6 @@
 #' ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
 #'
 #' (grps <- group_list())
-#' grps
 #' grps[[3]]
 #'
 #' # create item class from only an item ID
@@ -34,10 +33,9 @@ is.ckan_group <- function(x) is(x, "ckan_group")
 
 #' @export
 print.ckan_group <- function(x, ...) {
-  cat("<CKAN Group>", "\n")
+  cat(paste0("<CKAN Group> ", x$id), "\n")
   cat("  Name: ", x$name, "\n", sep = "")
   cat("  Display Name: ", x$display_name, "\n", sep = "")
-  cat("  ID: ", x$id, "\n", sep = "")
   cat("  No. users: ", length(x$users), "\n", sep = "")
   cat("  No. packages: ", x$package_count, "\n", sep = "")
   cat("  No. followers: ", x$num_followers, "\n", sep = "")

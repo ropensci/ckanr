@@ -34,11 +34,10 @@ is.ckan_user <- function(x) is(x, "ckan_user")
 
 #' @export
 print.ckan_user <- function(x, ...) {
-  cat("<CKAN User>", "\n")
+  cat(paste0("<CKAN User> ", x$id), "\n")
   cat("  Name: ", x$name, "\n", sep = "")
   cat("  Display Name: ", x$display_name, "\n", sep = "")
   cat("  Full Name: ", x$fullname, "\n", sep = "")
-  cat("  ID: ", x$id, "\n", sep = "")
   cat("  No. Packages: ", x$number_created_packages, "\n", sep = "")
   cat("  No. Edits: ", x$number_of_edits, "\n", sep = "")
   cat("  Created: ", x$created, "\n", sep = "")

@@ -76,7 +76,7 @@ ds_create <- function(resource_id = NULL, resource = NULL, force = FALSE,
               add_headers(Authorization = key),
               body = body, ...)
   stop_for_status(res)
-  res <- content(res, "text")
+  res <- content(res, "text", encoding = "UTF-8")
   switch(as, json = res, list = jsl(res), table = jsd(res))
 }
 

@@ -3,7 +3,7 @@ u <- get_test_url()
 
 tag_num <- local({
   check_ckan(u)
-  res <- httr::GET(file.path(u, "/api/3/action/tag_list"))
+  res <- httr::GET(file.path(u, "api/3/action/tag_list"))
   httr::stop_for_status(res)
   json <- httr::content(res, as = "parsed")
   length(json$result)

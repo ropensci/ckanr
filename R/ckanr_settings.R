@@ -111,7 +111,8 @@ ckanr_setup <- function(
   test_rid = NULL,
   test_gid = NULL,
   test_oid = NULL,
-  test_behaviour = NULL){
+  test_behaviour = NULL) {
+
   Sys.setenv("CKANR_DEFAULT_URL" = url)
   if (!is.null(key)) Sys.setenv("CKANR_DEFAULT_KEY" = key)
   if (!is.null(test_url)) Sys.setenv("CKANR_TEST_URL" = test_url)

@@ -41,8 +41,8 @@ ds_search <- function(resource_id = NULL, filters = NULL, q = NULL, plain = NULL
   args <- cc(list(resource_id = resource_id, filters = filters,q = q,
                   plain = plain, language = language, fields = fields,
                   offset = offset, limit = limit, sort = sort))
-  res <- POST(file.path(url, '/api/action/datastore_search'), ctj(),
+  res <- POST(file.path(notrail(url), 'api/action/datastore_search'), ctj(),
               query = args, ...)
-  res <- content(res, "text")
+  res <- content(res, "text", encoding = "UTF-8")
   switch(as, json = res, list = jsl(res), table = jsd(res))
 }

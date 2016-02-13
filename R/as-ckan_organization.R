@@ -7,7 +7,6 @@
 #' ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
 #'
 #' (orgs <- organization_list())
-#' orgs
 #' orgs[[3]]
 #'
 #' # create item class from only an item ID

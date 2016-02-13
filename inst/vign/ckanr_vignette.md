@@ -1,14 +1,13 @@
 <!--
 %\VignetteEngine{knitr::knitr}
 %\VignetteIndexEntry{ckanr vignette}
+%\VignetteEncoding{UTF-8}
 -->
 
 
 
 ckanr vignette
 ==============
-
-`ckanr` is an R client for the generic CKAN API - that is, plug in a base url for the CKAN instance of interest. 
 
 ## Install
 
@@ -99,15 +98,13 @@ Subset for readme brevity
 
 
 ```r
-tag_show('Aviation')$packages[[1]][1:3]	
-#> $owner_org
-#> [1] "fafa260d-e2bf-46cd-9c35-34c1dfa46c57"
-#> 
-#> $maintainer
-#> [1] ""
-#> 
-#> $relationships_as_object
-#> list()
+tag_show('Aviation')
+#> <CKAN Tag> cc1db2db-b08b-4888-897f-a17eade2461b 
+#>   Name: Aviation
+#>   Display name: Aviation
+#>   Vocabulary id: 
+#>   No. Packages: 2
+#>   Packages (up to 5): artifact-data-aviation, cstmc-smstc-artifacts-artefact
 ```
 
 ## List groups
@@ -236,9 +233,9 @@ resource_search(q = 'name:data', limit = 2, as = 'table')
 #> 2           NA        1 da1f8585-521d-47ef-8ead-7832474a3421            NA
 ```
 
-## Examples of different CKAN APIs
+## Example of using a different CKAN API
 
-### The Natural History Museum
+### The UK Natural History Museum
 
 Website: [http://data.nhm.ac.uk/](http://data.nhm.ac.uk/)
 
@@ -246,18 +243,18 @@ List datasets
 
 
 ```r
-nhmbase <- "http://data.nhm.ac.uk"
-package_list(as = "table", url = nhmbase)
+ckanr_setup(url = "http://data.nhm.ac.uk")
+package_list(as = "table")
 #>  [1] "bibliography-scleractinia"                                           
 #>  [2] "bioacoustica"                                                        
-#>  [3] "biodiversity-heritage-library"                                       
-#>  [4] "bothriocephalidea-phylogeny"                                         
-#>  [5] "checklist-of-the-lepidoptera-of-the-british-isles-data"              
-#>  [6] "chrysoperla-carnea-lectotype"                                        
-#>  [7] "collection-artefacts"                                                
-#>  [8] "collection-indexlots"                                                
-#>  [9] "collection-specimens"                                                
-#> [10] "crowdsourcing-the-collection"                                        
+#>  [3] "bioacoustica-talks-insect-natural-history"                           
+#>  [4] "biodiversity-heritage-library"                                       
+#>  [5] "bothriocephalidea-phylogeny"                                         
+#>  [6] "checklist-of-the-lepidoptera-of-the-british-isles-data"              
+#>  [7] "chemistry-samples-central-system-carbonate-clays"                    
+#>  [8] "chrysoperla-carnea-lectotype"                                        
+#>  [9] "collection-artefacts"                                                
+#> [10] "collection-indexlots"                                                
 ...
 ```
 
@@ -267,28 +264,28 @@ _list_
 
 
 ```r
-head(tag_list(as = "table", url = nhmbase))
+head(tag_list(as = "table"))
 #>   vocabulary_id    display_name                                   id
 #> 1            NA    Aleyrodoidea 4b98c497-28eb-4969-ba0c-c4431265e581
 #> 2            NA alpha diversity 05935722-6507-4f07-ac82-83d48555d251
 #> 3            NA    archival DNA b93861ac-0e31-42bd-87aa-7a7bd2af8043
 #> 4            NA      arthropods f9245868-f4cb-4c85-a59d-11692db19e86
 #> 5            NA       Barcoding ea0cda10-2d9e-4a80-b8b5-15d24e693ace
-#> 6            NA    Bibliography 73c85f3f-49b4-416a-80fe-4eb77e99a58d
+#> 6            NA        Batoidea 16ed5b31-5548-4421-af03-93438e15be22
 #>              name
 #> 1    Aleyrodoidea
 #> 2 alpha diversity
 #> 3    archival DNA
 #> 4      arthropods
 #> 5       Barcoding
-#> 6    Bibliography
+#> 6        Batoidea
 ```
 
 _show_
 
 
 ```r
-tag_show('arthropods', as = 'table', url = nhmbase)
+tag_show('arthropods', as = 'table')
 #> $vocabulary_id
 #> NULL
 #> 
@@ -311,32 +308,32 @@ _search_
 
 
 ```r
-out <- package_search(q = '*:*', rows = 2, as = 'table', url = nhmbase)
+out <- package_search(q = '*:*', rows = 2, as = 'table')
 out$results[, 1:10]
 #>              license_title maintainer relationships_as_object private
 #> 1 Creative Commons CC0 1.0         NA                    NULL   FALSE
-#> 2    License Not Specified         NA                    NULL   FALSE
+#> 2             Other (Open)         NA                    NULL   FALSE
 #>   maintainer_email num_tags update_frequency
 #> 1               NA        1           weekly
-#> 2               NA        6        quarterly
+#> 2               NA        1                 
 #>                                     id           metadata_created
 #> 1 56e711e6-c847-4f99-915a-6894bb5c5dea 2014-12-08T16:39:22.346941
-#> 2 c7984247-f22f-4742-bab4-1bbf81d4d00d 2015-06-11T14:20:05.101619
+#> 2 69cb2fad-3623-4553-a859-238f73862891 2015-10-16T15:51:10.783113
 #>            metadata_modified
-#> 1 2015-05-28T11:54:20.066554
-#> 2 2015-06-11T14:28:12.933889
+#> 1 2015-09-30T13:42:02.859838
+#> 2 2015-10-16T15:53:21.034651
 ```
 
 _show_
 
 
 ```r
-package_show(id = "56e711e6-c847-4f99-915a-6894bb5c5dea", as = "table", url = nhmbase)
+package_show(id = "56e711e6-c847-4f99-915a-6894bb5c5dea", as = "table")
 #> $domain
 #> [1] "data.nhm.ac.uk"
 #> 
-#> $owner_org
-#> [1] "7854c918-d7eb-4341-96e9-3adfb8d636a0"
+#> $license_title
+#> [1] "Creative Commons CC0 1.0"
 #> 
 #> $maintainer
 #> NULL

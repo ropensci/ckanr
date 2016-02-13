@@ -34,9 +34,8 @@ is.ckan_related <- function(x) is(x, "ckan_related")
 
 #' @export
 print.ckan_related <- function(x, ...) {
-  cat("<CKAN Related Item>", "\n")
+  cat(paste0("<CKAN Related Item> ", x$id), "\n")
   cat("  Title: ", x$title, "\n", sep = "")
-  cat("  ID: ", x$id, "\n", sep = "")
   cat("  Description: ", x$description, "\n", sep = "")
   cat("  Type: ", x$type, "\n", sep = "")
   cat("  Views: ", x$view_count, "\n", sep = "")

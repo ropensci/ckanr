@@ -34,9 +34,8 @@ is.ckan_resource <- function(x) is(x, "ckan_resource")
 
 #' @export
 print.ckan_resource <- function(x, ...) {
-  cat("<CKAN Resource>", "\n")
+  cat(paste0("<CKAN Resource> ", x$id), "\n")
   cat("  Name: ", x$name, "\n", sep = "")
-  cat("  ID: ", x$id, "\n", sep = "")
   cat("  Description: ", x$description, "\n", sep = "")
   cat("  Creator/Modified: ", x$created, " / ", x$last_modified, "\n", sep = "")
   cat("  Size: ", x$size, "\n", sep = "")

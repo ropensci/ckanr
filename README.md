@@ -6,10 +6,23 @@ ckanr
 [![Build Status](https://api.travis-ci.org/ropensci/ckanr.png)](https://travis-ci.org/ropensci/ckanr)
 [![Build status](https://ci.appveyor.com/api/projects/status/5yqd882v4fbeggd5?svg=true)](https://ci.appveyor.com/project/sckott/ckanr)
 [![codecov.io](https://codecov.io/github/ropensci/ckanr/coverage.svg?branch=master)](https://codecov.io/github/ropensci/ckanr?branch=master)
+[![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/ckanr?color=FAB657)](https://github.com/metacran/cranlogs.app)
+[![cran version](http://www.r-pkg.org/badges/version/ckanr)](http://cran.rstudio.com/web/packages/ckanr)
 
-`ckanr` is an R client for the generic CKAN API - that is, plug in a base url for the CKAN instance of interest.
+`ckanr` is an R client for the CKAN API. 
+
+It is meant to be as general as possible, allowing you to work with any CKAN instance.
 
 ## Installation
+
+Stable CRAN version
+
+
+```r
+install.packages("ckanr")
+```
+
+Development version
 
 
 ```r
@@ -33,8 +46,8 @@ To set one or both, run:
 
 ```r
 ckanr_setup() # restores default CKAN url to http://data.techno-science.ca/
-ckanr_setup(url="http://data.techno-science.ca/")
-ckanr_setup(url="http://data.techno-science.ca/", key="my-ckan-api-key")
+ckanr_setup(url = "http://data.techno-science.ca/")
+ckanr_setup(url = "http://data.techno-science.ca/", key = "my-ckan-api-key")
 ```
 
 ## ckanr package API
@@ -48,6 +61,9 @@ There are a suite of CKAN things (package, resource, etc.) that each have a set 
 + Groups - `group_*()` - `ckan_group`
 + Tags - `tag_*()` - `ckan_tag`
 + Organizations  - `organization_*()` - `ckan_organization`
++ Groups - `group_*()` - `ckan_group`
++ Users - `user_*()` - `ckan_user`
++ Related items - `related_*()` - `ckan_related`
 
 The S3 class objects all look very similar; for example:
 
@@ -89,9 +105,8 @@ Show a package
 
 ```r
 package_show('34d60b13-1fd5-430e-b0ec-c8bc7f4841cf')
-#> <CKAN Package> 
+#> <CKAN Package> 34d60b13-1fd5-430e-b0ec-c8bc7f4841cf 
 #>   Title: Artifact Data - Vacuum Tubes
-#>   ID: 34d60b13-1fd5-430e-b0ec-c8bc7f4841cf
 #>   Creator/Modified: 2014-10-28T18:12:11.453636 / 2014-11-05T21:25:16.848989
 #>   Resources (up to 5): Artifact Data - Vacuum Tubes (XML), Data Dictionary, Tips (English), Tips (French)
 #>   Tags (up to 5): Vacuum Tubes
@@ -105,18 +120,16 @@ Search for packages
 x <- package_search(q = '*:*', rows = 2)
 x$results
 #> [[1]]
-#> <CKAN Package> 
+#> <CKAN Package> f4406699-3e11-4856-be48-b55da98b3c14 
 #>   Title: Artifact Data - Horology
-#>   ID: f4406699-3e11-4856-be48-b55da98b3c14
 #>   Creator/Modified: 2014-10-28T16:50:30.068996 / 2015-03-30T15:06:55.218176
 #>   Resources (up to 5): Artifact Data - Horology (XML), Data Dictionary, Tips (English), Tips (French)
 #>   Tags (up to 5): Horology
 #>   Groups (up to 5): scientific-instrumentation
 #> 
 #> [[2]]
-#> <CKAN Package> 
+#> <CKAN Package> 0a801729-aa94-4d76-a5e0-7b487303f4e5 
 #>   Title: Artifact Data - Astronomy
-#>   ID: 0a801729-aa94-4d76-a5e0-7b487303f4e5
 #>   Creator/Modified: 2014-10-24T19:16:59.160533 / 2015-01-09T23:33:13.972898
 #>   Resources (up to 5): Artifact Data - Astronomy (XML), Data Dictionary, Tips (English), Tips (French)
 #>   Tags (up to 5): Astronomy, Scientific Instrumentation
@@ -132,46 +145,20 @@ Search for resources
 x <- resource_search(q = 'name:data', limit = 2)
 x$results
 #> [[1]]
-#> <CKAN Resource> 
+#> <CKAN Resource> e179e910-27fb-44f4-a627-99822af49ffa 
 #>   Name: Artifact Data - Exploration and Survey (XML)
-#>   ID: e179e910-27fb-44f4-a627-99822af49ffa
 #>   Description: XML Dataset
 #>   Creator/Modified: 2014-10-28T15:50:35.374303 / 
 #>   Size: 
 #>   Format: XML
 #> 
 #> [[2]]
-#> <CKAN Resource> 
+#> <CKAN Resource> ba84e8b7-b388-4d2a-873a-7b107eb7f135 
 #>   Name: Data Dictionary
-#>   ID: ba84e8b7-b388-4d2a-873a-7b107eb7f135
 #>   Description: Data dictionary for CSTMC artifact datasets.
 #>   Creator/Modified: 2014-11-03T18:01:02.094210 / 
 #>   Size: 
 #>   Format: XLS
-```
-
-## Related
-
-
-```r
-related_list(url = "http://demo.ckan.org")[1:2]
-#> [[1]]
-#> <CKAN Related Item> 
-#>   Title: my resource
-#>   ID: 05483807-aa57-4f69-8df2-ffd7a6fbc883
-#>   Description: 
-#>   Type: visualization
-#>   Views: 0
-#>   Creator: 2015-10-11T16:29:17.696462
-#> 
-#> [[2]]
-#> <CKAN Related Item> 
-#>   Title: my resource
-#>   ID: feff48ca-56a4-4d54-9933-4f662e46fe7f
-#>   Description: 
-#>   Type: visualization
-#>   Views: 0
-#>   Creator: 2015-10-11T16:33:59.392169
 ```
 
 ## Users
@@ -182,21 +169,19 @@ List users
 ```r
 user_list()[1:2]
 #> [[1]]
-#> <CKAN User> 
+#> <CKAN User> ee100ca6-2363-4db8-b24b-066e865c33ec 
 #>   Name: CSTMC
 #>   Display Name: CSTMC
 #>   Full Name: 
-#>   ID: ee100ca6-2363-4db8-b24b-066e865c33ec
 #>   No. Packages: 
 #>   No. Edits: 0
 #>   Created: 2014-10-16T18:15:03.685929
 #> 
 #> [[2]]
-#> <CKAN User> 
+#> <CKAN User> de64d5d4-86ab-4510-820b-f0bd86ea7a79 
 #>   Name: default
 #>   Display Name: default
 #>   Full Name: 
-#>   ID: de64d5d4-86ab-4510-820b-f0bd86ea7a79
 #>   No. Packages: 
 #>   No. Edits: 0
 #>   Created: 2014-03-20T02:55:40.628968
@@ -296,7 +281,7 @@ organization_list()
 
 ## Examples of different CKAN APIs
 
-See `ckanr::servers()` for a list of CKAN servers. Ther are 115 as of 2015-10-11.
+See `ckanr::servers()` for a list of CKAN servers. Ther are 124 as of 2015-10-21.
 
 ### The Natural History Museum
 
@@ -304,17 +289,17 @@ Website: [http://data.nhm.ac.uk/](http://data.nhm.ac.uk/)
 
 
 ```r
-nhm_base <- "http://data.nhm.ac.uk"
-x <- package_search(q = '*:*', rows = 1, url = nhm_base)
+ckanr_setup(url = "http://data.nhm.ac.uk")
+x <- package_search(q = '*:*', rows = 1)
 x$results
 #> [[1]]
-#> <CKAN Package> 
+#> <CKAN Package> 56e711e6-c847-4f99-915a-6894bb5c5dea 
 #>   Title: Collection specimens
-#>   ID: 56e711e6-c847-4f99-915a-6894bb5c5dea
 #>   Creator/Modified: 2014-12-08T16:39:22.346941 / 2015-09-30T13:42:02.859838
 #>   Resources (up to 5): Specimens
 #>   Tags (up to 5): 
 #>   Groups (up to 5):
+NA
 ```
 
 ### The National Geothermal Data System
@@ -323,17 +308,17 @@ Website: [http://geothermaldata.org/](http://geothermaldata.org/)
 
 
 ```r
-ngds_base <- "http://search.geothermaldata.org"
-x <- package_search(q = '*:*', rows = 1, url = ngds_base)
+ckanr_setup("http://search.geothermaldata.org")
+x <- package_search(q = '*:*', rows = 1)
 x$results
 #> [[1]]
-#> <CKAN Package> 
+#> <CKAN Package> 428701c7-1b99-424a-a2ae-829cfe37794c 
 #>   Title: Pagosa Springs borehole lithology intervals
-#>   ID: 428701c7-1b99-424a-a2ae-829cfe37794c
 #>   Creator/Modified: 2015-10-08T20:37:41.620696 / 2015-10-08T20:38:56.525277
 #>   Resources (up to 5): Borehole Lithology of Pagosa Springs Temperature Gradient wells
 #>   Tags (up to 5): 
 #>   Groups (up to 5):
+NA
 ```
 
 ## Meta

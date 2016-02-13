@@ -1,40 +1,4 @@
-#' Send an httr::POST request and handle the response
-#'
-#' @details This method is a thin wrapper around httr::POST, which is a wrapper
-#' around RCurl::POST, which is a wrapper around curl.
-#'
-#' If the POST request requires authentication, a privileged CKAN API key has
-#' to be supplied. The method does not default to \code{ckanr_settings}.
-#' As the method is an internal method only, other functions of \code{ckanr}
-#' may default to \code{ckanr_settings} for convenience of use.
-#'
-#' @keywords internal
-#' @param url A CKAN base URL
-#' @param method The GET method as part of the CKAN API URL
-#' @param body The request body (a dictionary as named R list) (optional)
-#' @param key A CKAN API key (optional)
-#' @return The content of the response as text
-# ckan_POST <- function(url, method, body = NULL, key = NULL, ...){
-#   if (is.null(key)) {
-#     # no authentication
-#     if (is.null(body) || length(body) == 0) {
-#       res <- POST(file.path(url, ck(), method), ctj(), ...)
-#     } else {
-#       res <- POST(file.path(url, ck(), method), body = body, ...)
-#     }
-#   } else {
-#     # authentication
-#     api_key_header <- add_headers("X-CKAN-API-Key" = key)
-#     if (is.null(body) || length(body) == 0) {
-#       res <- POST(file.path(url, ck(), method), ctj(), api_key_header, ...)
-#     } else {
-#       res <- POST(file.path(url, ck(), method), body = body, api_key_header, ...)
-#     }
-#   }
-#   err_handler(res)
-#   content(res, "text")
-# }
-
+# httr helpers -----------------------
 ckan_POST <- function(url, method, body = NULL, key = NULL, ...){
   ckan_VERB("POST", url, method, body, key, ...)
 }
@@ -53,6 +17,7 @@ ckan_DELETE <- function(url, method, body = NULL, key = NULL, ...){
 
 ckan_VERB <- function(verb, url, method, body, key, ...) {
   VERB <- getExportedValue("httr", verb)
+  url <- notrail(url)
   if (is.null(key)) {
     # no authentication
     if (is.null(body) || length(body) == 0) {
@@ -70,7 +35,7 @@ ckan_VERB <- function(verb, url, method, body, key, ...) {
     }
   }
   err_handler(res)
-  content(res, "text")
+  content(res, "text", encoding = "UTF-8")
 }
 
 # GET fxn for fetch()
@@ -95,7 +60,7 @@ fetch_GET <- function(x, store, path, args = NULL, ...) {
       path <- NULL
       res <- GET(x, query = args, ...)
       err_handler(res)
-      dat <- content(res, "text")
+      dat <- content(res, "text", encoding = "UTF-8")
     }
     list(store = store, fmt = fmt, data = dat, path = path)
   } else {
@@ -128,7 +93,8 @@ as_ck <- function(x, class) {
 err_handler <- function(x) {
   if (x$status_code > 201) {
     obj <- try({
-      err <- content(x)$error
+      err <- jsonlite::fromJSON(content(x, "text", encoding = "UTF-8"))$error
+      #err <- content(x, encoding = "UTF-8")$error
       tmp <- err[names(err) != "__type"]
       errmsg <- paste(names(tmp), unlist(tmp[[1]]))
       list(err = err, errmsg = errmsg)
@@ -142,7 +108,7 @@ err_handler <- function(x) {
     } else {
       obj <- {
         err <- http_condition(x, "error")
-        errmsg <- content(x, "text")
+        errmsg <- content(x, "text", encoding = "UTF-8")
         list(err = err, errmsg = errmsg)
       }
       stop(sprintf("%s - %s\n  %s",
@@ -182,4 +148,8 @@ check4X <- function(x) {
   if (!requireNamespace(x, quietly = TRUE)) {
     stop("Please install ", x, call. = FALSE)
   }
+}
+
+notrail <- function(x) {
+  gsub("/+$", "", x)
 }

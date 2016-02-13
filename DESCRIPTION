@@ -3,7 +3,7 @@ Title: Client for the Comprehensive Knowledge Archive Network ('CKAN') 'API'
 Description: Client for 'CKAN' 'API' (http://ckan.org/). Includes interface
     to 'CKAN' 'APIs' for search, list, show for packages, organizations, and
     resources. In addition, provides an interface to the 'datastore' 'API'.
-Version: 0.0.9.9632
+Version: 0.1.0.9190
 Authors@R: c(
     person("Scott", "Chamberlain", email="myrmecocystus@gmail.com", role = c("aut", "cre")),
     person("Imanuel", "Costigan", email="i.costigan@me.com", role = "ctb"),
@@ -19,16 +19,16 @@ Imports:
     methods,
     stats,
     utils,
-    httr,
-    jsonlite,
+    httr (>= 1.0.0),
+    jsonlite (>= 0.9.17),
     magrittr
 Suggests:
-    roxygen2,
-    testthat,
     knitr,
-    xml2,
+    maptools,
     readxl,
     maptools,
-    dplyr
-Depends:
-    DBI
+    dplyr,
+    DBI,
+    testthat,
+    xml2
+RoxygenNote: 5.0.1

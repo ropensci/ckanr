@@ -1,4 +1,4 @@
-#' @title Update a package
+#' Update a package
 #'
 #' @export
 #' @param x (list) A list with key-value pairs
