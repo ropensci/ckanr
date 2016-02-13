@@ -8,14 +8,40 @@ src_ckan <- function(url) {
 }
 
 #'@export
-tbl.src_ckan <- function(src, from, ...) {
-  tbl_sql("ckan", src = src, from = from, ...)
+tbl.src_ckan <- function(src, from, ..., name = NULL) {
+  if (is.null(name)) {
+    tbl_sql("ckan", src = src, from = sql(from), ...)
+  } else {
+    tbl_sql("ckan", src = src, from = sql(sprintf('SELECT * FROM "%s"', name)))
+  }
 }
 
 #'@export
 src_desc.src_ckan <- function(x) {
   info <- x$info
-  paste0("ckan url: %s", src$con@url)
+  sprintf("ckan url: %s", src$con@url)
+}
+
+#'@export
+src_tbls.src_ckan <- function(x, ..., limit = 6) {
+  if (!is.null(limit)) {
+    c(dbListTables(x$con, limit = limit))
+  } else {
+    dbListTables(x$con)
+  }
+}
+
+#'@export
+format.src_ckan <- function(x, ...) {
+  .metadata <- ds_search("_table_metadata", url = x$con@url, limit = 6)
+  x1 <- sprintf("%s", src_desc(x))
+  x2 <- sprintf("total tbls: %d", .metadata$total)
+  if (.metadata$total > 6) {
+    x3 <- sprintf("tbls: %s, ...", paste0(sort(sapply(.metadata$records, "[[", "name")), collapse = ", "))
+  } else {
+    x3 <- sprintf("tbls: %s", paste0(sort(sapply(.metadata$records, "[[", "name")), collapse = ", "))
+  }
+  paste(x1, x2, x3, sep = "\n")
 }
 
 #' @export
