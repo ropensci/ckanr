@@ -27,8 +27,8 @@ Suggests:
     maptools,
     readxl,
     maptools,
-    dplyr,
-    DBI,
+    dplyr(>= 0.4.3),
     testthat,
     xml2
+Depends: DBI(>= 0.3.1)
 RoxygenNote: 5.0.1
