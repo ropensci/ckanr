@@ -97,8 +97,14 @@ setMethod("summary", "CKANConnection",
 
 ## convenience methods
 setMethod("dbListTables", "CKANConnection",
-          def = function(conn, ...){
-              stop("TODO: dbListTables")
+          def = function(conn, limit = NULL, ...){
+            if (is.null(limit)) {
+              out1 <- ds_search("_table_metadata", url = conn@url, as = "table", limit = 1)
+              out <- ds_search("_table_metadata", url = conn@url, as = "table", limit = out1$total)
+            } else {
+              out <- ds_search("_table_metadata", url = conn@url, as = "table", limit = limit)
+            }
+            out$records$name
           },
           valueClass = "character"
           )
