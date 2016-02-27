@@ -50,9 +50,10 @@ if (Sys.getenv("TEST_DPLYR_INTERFACE") != "") {
 
   test_that("basic_verbs: distinct", {
     r1 <- dplyr::select(tb, GABARITO) %>%
-      dplyr::distinct(GABARITO)
+      dplyr::distinct() %>%
+      collect()
     r2 <- dplyr::select(tb.raw, GABARITO) %>%
-      dplyr::distinct(GABARITO)
+      dplyr::distinct()
     expect_equal(r1, r2)
   })
 
