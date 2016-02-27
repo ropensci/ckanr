@@ -66,6 +66,28 @@ if (Sys.getenv("TEST_DPLYR_INTERFACE") != "") {
     expect_equal(r1, r2)
   })
 
+  test_that("basic_verbs: summarise", {
+    r1 <- dplyr::mutate(tb, t1 = as.integer(ID_SERIE_ITEM)) %>%
+      dplyr::summarise(t2 = mean(t1)) %>%
+      collect() %>%
+      mutate(t2 = as.numeric(t2)) # The default result is character
+    r2 <- dplyr::mutate(tb.raw, t1 = as.integer(ID_SERIE_ITEM)) %>%
+      dplyr::summarise(t2 = mean(t1))
+    expect_equal(r1, r2)
+  })
 
+  test_that("basic_verbs: sample_n", {
+    # sample_n is not implemented for PostgreSQL
+  })
+
+  test_that("basic_verbs: group_by", {
+    r1 <- group_by(tb, GABARITO) %>%
+      summarise(count = n()) %>%
+      collect() %>%
+      mutate(count = as.integer(count))
+    r2 <- group_by(tb.raw, GABARITO) %>%
+      summarise(count = n())
+    expect_equal(r1, r2)
+  })
 }
 
