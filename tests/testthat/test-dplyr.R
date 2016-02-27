@@ -89,5 +89,17 @@ if (Sys.getenv("TEST_DPLYR_INTERFACE") != "") {
       summarise(count = n())
     expect_equal(r1, r2)
   })
+
+  tb1 <- tbl(src, from = 'SELECT * FROM "be2ccdc2-9a76-47bf-862c-60c1525f5b1b" ORDER BY _id LIMIT 100')
+  tb2 <- tbl(src, name = name_list[1])
+  tb1.raw <- collect(tb1)
+  tb2.raw <- collect(tb2)
+
+  test_that("join: left_join", {
+    r1 <- left_join(tb1, tb2, by = "_id") %>%
+      collect()
+    r2 <- left_join(tb1.raw, tb2.raw, by = "_id")
+    expect_equal(r1, r2)
+  })
 }
 
