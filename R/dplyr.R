@@ -45,7 +45,23 @@ format.src_ckan <- function(x, ...) {
 }
 
 #' @export
-src_translate_env.src_ckan <- dplyr:::src_translate_env.src_postgres
+src_translate_env.src_ckan <- function(x) {
+  sql_variant(
+    base_scalar,
+    sql_translator(.parent = base_agg,
+      n = function() sql("count(*)"),
+      cor = sql_prefix("corr"),
+      cov = sql_prefix("covar_samp"),
+      sd =  sql_prefix("stddev_samp"),
+      var = sql_prefix("var_samp"),
+      all = sql_prefix("bool_and"),
+      any = sql_prefix("bool_or"),
+      paste = function(x, collapse) build_sql("string_agg(", x, ", ", collapse, ")")
+    ),
+    base_win
+  )
+}
+
 
 #' @export
 db_has_table.CKANConnection <- function(con, table, ...) {
