@@ -57,5 +57,15 @@ if (Sys.getenv("TEST_DPLYR_INTERFACE") != "") {
     expect_equal(r1, r2)
   })
 
+  test_that("basic_verbs: mutate", {
+    r1 <- dplyr::mutate(tb, t1 = as.integer(ID_ITEM)) %>%
+      dplyr::select(t1) %>%
+      collect()
+    r2 <- dplyr::mutate(tb.raw, t1 = as.integer(ID_ITEM)) %>%
+      dplyr::select(t1)
+    expect_equal(r1, r2)
+  })
+
+
 }
 
