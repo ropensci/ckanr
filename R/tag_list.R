@@ -25,8 +25,8 @@
 #' }
 tag_list <- function(query = NULL, vocabulary_id = NULL, all_fields = FALSE,
                      url = get_default_url(), as = 'list', ...) {
-  body <- cc(list(query = query, vocabulary_id = vocabulary_id,
+  args <- cc(list(query = query, vocabulary_id = vocabulary_id,
                   all_fields = as_log(all_fields)))
-  res <- ckan_POST(url, 'tag_list', body = body, ...)
+  res <- ckan_GET(url, 'tag_list', args, ...)
   switch(as, json = res, list = lapply(jsl(res), as.ckan_tag), table = jsd(res))
 }

@@ -26,10 +26,10 @@ organization_list <- function(order_by = c("name", "package"),
                               url = get_default_url(), as = 'list', ...) {
   stopifnot(length(order_by) > 0)
   stopifnot(order_by[1] %in% c("name", "package"))
-  body <- cc(list(sort = sprintf("%s %s", order_by[1],
+  args <- cc(list(sort = sprintf("%s %s", order_by[1],
                               ifelse(decreasing, "", "asc")),
                all_fields = ifelse(all_fields, "True", "False"),
                organizations = organizations))
-  res <- ckan_POST(url, method = 'organization_list', body = body, ...)
+  res <- ckan_GET(url, 'organization_list', args, ...)
   switch(as, json = res, list = lapply(jsl(res), as.ckan_organization), table = jsd(res))
 }

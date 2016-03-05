@@ -20,9 +20,9 @@
 group_list <- function(offset = 0, limit = 31, sort = NULL, groups = NULL,
                        all_fields = FALSE, url = get_default_url(), as = 'list', ...) {
 
-  body <- cc(list(offset = offset, limit = limit, sort = sort,
+  args <- cc(list(offset = offset, limit = limit, sort = sort,
                   groups = groups, all_fields = as_log(all_fields)))
-  res <- ckan_POST(url, 'group_list', body = body, ...)
+  res <- ckan_GET(url, 'group_list', args, ...)
   switch(as, json = res,
          list = lapply(jsl(res), as.ckan_group, url = url),
          table = jsd(res))

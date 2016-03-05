@@ -7,14 +7,14 @@
 #' ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
 #'
 #' (usrs <- user_list())
-#' usrs$results
-#' usrs$results[[3]]
+#' usrs[1:3]
+#' usrs[[3]]
 #'
 #' # create item class from only an item ID
-#' as.ckan_user(usrs$results[[3]]$id)
+#' as.ckan_user(usrs[[3]]$id)
 #'
 #' # gives back itself
-#' (x <- as.ckan_user(usrs$results[[3]]$id))
+#' (x <- as.ckan_user(usrs[[3]]$id))
 #' as.ckan_user(x)
 #' }
 as.ckan_user <- function(x, ...) UseMethod("as.ckan_user")
@@ -44,8 +44,6 @@ print.ckan_user <- function(x, ...) {
 }
 
 get_user <- function(id, url = get_default_url(), ...) {
-  res <- ckan_POST(url = url, method = 'user_show', key = NULL,
-                   body = tojun(list(id = id), TRUE),
-                   encode = "json", ctj(), ...)
+  res <- ckan_GET(url, 'user_show', list(id = id), NULL, ...)
   as_ck(jsl(res), "ckan_user")
 }

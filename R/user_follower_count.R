@@ -20,6 +20,6 @@
 #' }
 user_follower_count <- function(id, url = get_default_url(), as = "list", ...) {
   id <- as.ckan_user(id, url = url)
-  res <- ckan_POST(url, 'user_follower_count', body = list(id = id$id), ...)
+  res <- ckan_GET(url, 'user_follower_count', list(id = id$id), ...)
   switch(as, json = res, list = jsl(res), table = jsd(res))
 }

@@ -25,7 +25,7 @@
 group_show <- function(id, include_datasets = TRUE,
                        url = get_default_url(), as = 'list', ...) {
   id <- as.ckan_group(id, url = url)
-  body <- cc(list(id = id$id, include_datasets = as_log(include_datasets)))
-  res <- ckan_POST(url, 'group_show', body = body, ...)
+  args <- cc(list(id = id$id, include_datasets = as_log(include_datasets)))
+  res <- ckan_GET(url, 'group_show', args, ...)
   switch(as, json = res, list = as_ck(jsl(res), "ckan_group"), table = jsd(res))
 }
