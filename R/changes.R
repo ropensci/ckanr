@@ -10,8 +10,7 @@
 #' }
 changes <- function(offset = 0, limit = 31,
                     url = get_default_url(), as ='list', ...) {
-  body <- cc(list(offset = offset, limit = limit))
-  res <- ckan_POST(url, 'recently_changed_packages_activity_list', body = body,
-                   ...)
+  args <- cc(list(offset = offset, limit = limit))
+  res <- ckan_GET(url, 'recently_changed_packages_activity_list', args, ...)
   switch(as, json = res, list = jsl(res), table = jsd(res))
 }

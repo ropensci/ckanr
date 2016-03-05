@@ -8,6 +8,6 @@
 #' revision_list(as = "json")
 #' }
 revision_list <- function(url = get_default_url(), as = "list", ...) {
-  res <- ckan_POST(url, 'revision_list', ...)
+  res <- ckan_GET(url, 'revision_list', ...)
   switch(as, json = res, list = jsl(res), table = jsd(res))
 }

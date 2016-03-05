@@ -3,12 +3,13 @@
 #' @export
 #' @param id (character) User identifier.
 #' @template args
+#' @template key
 #' @examples \dontrun{
 #' # Setup
 #' ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
 #'
 #' # list package activity
-#' user_followee_list('sckottie')
+#' user_follower_list('sckottie')
 #'
 #' # input a ckan_user object
 #' (x <- user_show('sckottie'))
@@ -18,8 +19,10 @@
 #' user_follower_list(x, as = "table")
 #' user_follower_list(x, as = "json")
 #' }
-user_followee_list <- function(id, url = get_default_url(), as = "list", ...) {
+user_follower_list <- function(id, url = get_default_url(), as = "list",
+                               key = get_default_key(), ...) {
+
   id <- as.ckan_user(id, url = url)
-  res <- ckan_POST(url, 'user_followee_list', body = list(id = id$id), ...)
+  res <- ckan_GET(url, 'user_followee_list', list(id = id$id), key = key, ...)
   switch(as, json = res, list = jsl(res), table = jsd(res))
 }

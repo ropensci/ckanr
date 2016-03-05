@@ -26,7 +26,6 @@
 #' }
 related_show <- function(id, url = get_default_url(), as = 'list', ...) {
   id <- as.ckan_related(id, url = url)
-  res <- ckan_POST(url, 'related_show', body = tojun(list(id = id$id), TRUE), key = NULL,
-                   encode = "json", ctj(), ...)
+  res <- ckan_GET(url, 'related_show', list(id = id$id), key = NULL, ...)
   switch(as, json = res, list = as_ck(jsl(res), "ckan_related"), table = jsd(res))
 }

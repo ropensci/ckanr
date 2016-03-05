@@ -19,7 +19,7 @@
 #' }
 user_list <- function(q = NULL, order_by = NULL,
                       url = get_default_url(), as = "list", ...) {
-  body <- cc(list(q = q, order_by = order_by))
-  res <- ckan_POST(url, 'user_list', body = body, ...)
+  args <- cc(list(q = q, order_by = order_by))
+  res <- ckan_GET(url, 'user_list', args, ...)
   switch(as, json = res, list = lapply(jsl(res), as.ckan_user), table = jsd(res))
 }

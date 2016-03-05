@@ -42,8 +42,6 @@ print.ckan_tag <- function(x, ...) {
 }
 
 get_tag <- function(id, url = get_default_url(), ...) {
-  res <- ckan_POST(url = url, method = 'tag_show', key = NULL,
-                   body = tojun(list(id = id), TRUE),
-                   encode = "json", ctj(), ...)
+  res <- ckan_GET(url, 'tag_show', list(id = id), NULL, ...)
   as_ck(jsl(res), "ckan_tag")
 }
