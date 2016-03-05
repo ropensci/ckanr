@@ -3,6 +3,7 @@
 #' @export
 #' @param id (character) User identifier.
 #' @template args
+#' @template key
 #' @examples \dontrun{
 #' # Setup
 #' ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))

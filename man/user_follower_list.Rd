@@ -18,6 +18,8 @@ uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to
 data to data.frame's when possible, so the result can vary from a vector, list or
 data.frame. (required)}
 
+\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
+
 \item{...}{Curl args passed on to \code{\link[httr]{POST}} (optional)}
 }
 \description{
