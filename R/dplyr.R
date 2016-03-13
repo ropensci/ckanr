@@ -1,4 +1,26 @@
-#'@export
+#' Connect to CKAN with dplyr
+#'
+#' Use \code{src_ckan} to connect to an existing CKAN instance and \code{tbl} to
+#' connect to tables within that CKAN based on the DataStore Data API.
+#'
+#' @param url, the url of the CKAN instance
+#' @examples
+#' \dontrun{
+#' # To connect to a CKAN instance first create a src:
+#' my_ckan <- src_ckan("http://demo.ckan.org")
+#'
+#' # List all tables in the CKAN instance
+#' db_list_tables(src$con)
+#'
+#' # Then reference a tbl within that src
+#' my_tbl <- tbl(my_ckan, name = "be2ccdc2-9a76-47bf-862c-60c1525f5b1b")
+#'
+#' # You can use the dplyr verbs with my_tbl. For example:
+#' dplyr::filter(my_tbl, GABARITO == "C")
+#'
+#' }
+#' @aliases dplyr-interface
+#' @export
 src_ckan <- function(url) {
   library(dplyr)
   drv <- new("CKANDriver")
