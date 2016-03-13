@@ -43,8 +43,6 @@ print.ckan_resource <- function(x, ...) {
 }
 
 get_resource <- function(id, url = get_default_url(), ...) {
-  res <- ckan_POST(url = url, method = 'resource_show', key = NULL,
-                   body = tojun(list(id = id), TRUE),
-                   encode = "json", ctj(), ...)
+  res <- ckan_GET(url, 'resource_show', list(id = id), NULL, ...)
   as_ck(jsl(res), "ckan_resource")
 }

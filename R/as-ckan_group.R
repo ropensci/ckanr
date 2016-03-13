@@ -43,8 +43,6 @@ print.ckan_group <- function(x, ...) {
 }
 
 get_group <- function(id, url = get_default_url(), ...) {
-  res <- ckan_POST(url = url, method = 'group_show', key = NULL,
-                   body = tojun(list(id = id), TRUE),
-                   encode = "json", ctj(), ...)
+  res <- ckan_GET(url, 'group_show', list(id = id), NULL, ...)
   as_ck(jsl(res), "ckan_group")
 }

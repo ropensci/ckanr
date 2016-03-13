@@ -16,6 +16,6 @@
 #' dashboard_count()
 #' }
 dashboard_count <- function(key = get_default_key(), url = get_default_url(), as = 'list', ...) {
-  res <- ckan_POST(url, 'dashboard_new_activities_count', body = list(), key = key, ...)
+  res <- ckan_GET(url, 'dashboard_new_activities_count', list(), key = key, ...)
   switch(as, json = res, list = jsl(res), table = jsd(res))
 }

@@ -32,8 +32,7 @@
 package_show <- function(id, use_default_schema = FALSE,
                          url = get_default_url(), as = 'list', ...) {
   id <- as.ckan_package(id, url = url)
-  body <- cc(list(id = id$id, use_default_schema = use_default_schema))
-  res <- ckan_POST(url, 'package_show', body = tojun(body, TRUE), key = NULL,
-                   encode = "json", ctj(), ...)
+  args <- cc(list(id = id$id, use_default_schema = use_default_schema))
+  res <- ckan_GET(url, 'package_show', args, key = NULL, ...)
   switch(as, json = res, list = as_ck(jsl(res), "ckan_package"), table = jsd(res))
 }

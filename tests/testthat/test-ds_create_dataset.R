@@ -42,7 +42,7 @@ test_that("ds_create_dataset fails well", {
                "argument \"path\" is missing, with no default")
   # 403 forbidden error
   expect_error(ds_create_dataset(did, ds_title, file, "badkey", url),
-               "Error : 403 - Authorization Error")
+               "403 - Authorization Error")
   # bad file path
   expect_error(ds_create_dataset(did, ds_title, "asdfasdf", key, url))
 })

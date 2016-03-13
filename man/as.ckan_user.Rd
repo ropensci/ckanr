@@ -22,14 +22,14 @@ ckan_user class helpers
 ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
 
 (usrs <- user_list())
-usrs$results
-usrs$results[[3]]
+usrs[1:3]
+usrs[[3]]
 
 # create item class from only an item ID
-as.ckan_user(usrs$results[[3]]$id)
+as.ckan_user(usrs[[3]]$id)
 
 # gives back itself
-(x <- as.ckan_user(usrs$results[[3]]$id))
+(x <- as.ckan_user(usrs[[3]]$id))
 as.ckan_user(x)
 }
 }

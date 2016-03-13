@@ -36,6 +36,30 @@ test_that("resource_update gives back expected class types and output", {
   expect_true(grepl("actinidiaceae", a$url))
 })
 
+# html
+test_that("resource_update gives back expected class types and output with html", {
+  check_ckan(url)
+  check_resource(url, rid)
+
+  path <- system.file("examples", "mapbox.html", package = "ckanr")
+  xx <- resource_create(package_id = did, description = "a map, yay",
+                        name = "mapyay", upload = path,
+                        rcurl = "http://google.com", url = url, key = key)
+  dat <- readLines(path)
+  dat <- sub("-111.06", "-115.06", dat)
+  newpath <- tempfile(fileext = ".html")
+  cat(dat, file = newpath, sep = "\n")
+  a <- resource_update(xx, path = newpath, url = url, key = key)
+
+  # class types
+  expect_is(a, "ckan_resource")
+  expect_is(a$id, "character")
+
+  # expected output
+  expect_equal(a$id, xx$id)
+  expect_true(grepl(".html", a$url))
+})
+
 test_that("resource_update fails well", {
   check_ckan(url)
   check_resource(url, rid)

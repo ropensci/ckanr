@@ -25,6 +25,6 @@
 #' package_revision_list(res$id, as = "json")
 #' }
 package_revision_list <- function(id, url = get_default_url(), as = "list", ...) {
-  res <- ckan_POST(url, 'package_revision_list', body = list(id = id), ...)
+  res <- ckan_GET(url, 'package_revision_list', list(id = id), ...)
   switch(as, json = res, list = jsl(res), table = jsd(res))
 }

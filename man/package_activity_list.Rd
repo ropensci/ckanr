@@ -33,7 +33,7 @@ Return a list of the package's activity
 ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
 
 # create a package
-(res <- package_create("owls6"))
+(res <- package_create("owls64"))
 
 # list package activity
 package_activity_list(res$id)

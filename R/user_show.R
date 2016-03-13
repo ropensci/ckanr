@@ -27,10 +27,8 @@ user_show <- function(id, user_obj = NULL, include_datasets = FALSE,
   include_num_followers = FALSE, url = get_default_url(), as = 'list', ...) {
 
   id <- as.ckan_user(id, url = url)
-  body <- cc(list(id = id$id, user_obj = user_obj, include_datasets = include_datasets,
+  args <- cc(list(id = id$id, user_obj = user_obj, include_datasets = include_datasets,
                   include_num_followers = include_num_followers))
-  res <- ckan_POST(url, 'user_show',
-                   body = tojun(body, TRUE), key = NULL,
-                   encode = "json", ctj(), ...)
+  res <- ckan_GET(url, 'user_show', args, key = NULL, ...)
   switch(as, json = res, list = as_ck(jsl(res), "ckan_user"), table = jsd(res))
 }
