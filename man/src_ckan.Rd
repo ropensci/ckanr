@@ -20,7 +20,7 @@ connect to tables within that CKAN based on the DataStore Data API.
 my_ckan <- src_ckan("http://demo.ckan.org")
 
 # List all tables in the CKAN instance
-db_list_tables(src$con)
+db_list_tables(my_ckan$con)
 
 # Then reference a tbl within that src
 my_tbl <- tbl(my_ckan, name = "be2ccdc2-9a76-47bf-862c-60c1525f5b1b")

@@ -10,7 +10,7 @@
 #' my_ckan <- src_ckan("http://demo.ckan.org")
 #'
 #' # List all tables in the CKAN instance
-#' db_list_tables(src$con)
+#' db_list_tables(my_ckan$con)
 #'
 #' # Then reference a tbl within that src
 #' my_tbl <- tbl(my_ckan, name = "be2ccdc2-9a76-47bf-862c-60c1525f5b1b")
@@ -22,7 +22,9 @@
 #' @aliases dplyr-interface
 #' @export
 src_ckan <- function(url) {
-  library(dplyr)
+  if (!requireNamespace("dplyr", quietly = TRUE)) {
+    stop("Please install dplyr", call. = FALSE)
+  }
   drv <- new("CKANDriver")
   con <- dbConnect(drv, url = url)
   info <- dbGetInfo(con)
@@ -30,6 +32,7 @@ src_ckan <- function(url) {
 }
 
 #'@export
+#'@importFrom dplyr tbl
 tbl.src_ckan <- function(src, from, ..., name = NULL) {
   if (is.null(name)) {
     tbl_sql("ckan", src = src, from = sql(from), ...)
@@ -39,12 +42,14 @@ tbl.src_ckan <- function(src, from, ..., name = NULL) {
 }
 
 #'@export
+#'@importFrom dplyr src_desc
 src_desc.src_ckan <- function(x) {
   info <- x$info
-  sprintf("ckan url: %s", src$con@url)
+  sprintf("ckan url: %s", x$con@url)
 }
 
 #'@export
+#'@importFrom dplyr src_tbls
 src_tbls.src_ckan <- function(x, ..., limit = 6) {
   if (!is.null(limit)) {
     c(dbListTables(x$con, limit = limit))
@@ -66,7 +71,8 @@ format.src_ckan <- function(x, ...) {
   paste(x1, x2, x3, sep = "\n")
 }
 
-#' @export
+#'@export
+#'@importFrom dplyr src_translate_env
 src_translate_env.src_ckan <- function(x) {
   sql_variant(
     base_scalar,
@@ -85,18 +91,21 @@ src_translate_env.src_ckan <- function(x) {
 }
 
 
-#' @export
+#'@export
+#'@importFrom dplyr db_has_table
 db_has_table.CKANConnection <- function(con, table, ...) {
   table %in% db_list_tables(con)
 }
 
-#' @export
+#'@export
+#'@importFrom dplyr db_begin
 db_begin.CKANConnection <- function(con, ...) {
   dbGetQuery(con, "BEGIN TRANSACTION")
 }
 
 # http://www.postgresql.org/docs/9.3/static/sql-explain.html
-#' @export
+#'@export
+#'@importFrom dplyr db_explain
 db_explain.CKANConnection <- function(con, sql, format = "text", ...) {
   format <- match.arg(format, c("text", "json", "yaml", "xml"))
 
@@ -108,7 +117,8 @@ db_explain.CKANConnection <- function(con, sql, format = "text", ...) {
   paste(expl[[1]], collapse = "\n")
 }
 
-#' @export
+#'@export
+#'@importFrom dplyr db_insert_into
 db_insert_into.CKANConnection <- function(con, table, values, ...) {
   .read_only("db_insert_into.CKANConnection")
 }
