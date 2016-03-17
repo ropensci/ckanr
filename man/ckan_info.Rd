@@ -2,15 +2,23 @@
 % Please edit documentation in R/ckan_info.R
 \name{ckan_info}
 \alias{ckan_info}
+\alias{ckan_version}
 \title{Get information on a CKAN server}
 \usage{
 ckan_info(url = get_default_url(), ...)
+
+ckan_version(x)
 }
 \arguments{
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}. (required)}
 
 \item{...}{Curl args passed on to \code{\link[httr]{GET}} (optional)}
+}
+\value{
+for \code{ckan_info} a list with many slots with various info.
+for \code{ckan_version}, list of length two, with actual version as character,
+and another with version converted to numeric (any dots or letters removed)
 }
 \description{
 Get information on a CKAN server
@@ -19,6 +27,8 @@ Get information on a CKAN server
 \dontrun{
 ckan_info()
 ckan_info(servers()[5])
+
+ckan_version(servers()[5])
 }
 }
 
