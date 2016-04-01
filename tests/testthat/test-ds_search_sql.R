@@ -1,7 +1,11 @@
 context("ds_search_sql")
 u <- get_test_url()
-#r <- get_test_rid()
-r <- "83b5b18d-9ef6-4af6-83b2-99bdaffbf272"
+r <- get_test_rid()
+if (r == "") {
+  did <- package_list(limit = 1, url = u)[[1]]
+  pkg <- package_show(did, url = u)
+  r <- pkg$resources[[1]]$id
+}
 
 test_that("ds_search_sql gives back expected class types", {
   check_ckan(u)

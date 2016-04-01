@@ -1,6 +1,9 @@
 context("group_show")
 u <- get_test_url()
 g <- get_test_gid()
+if (g == "") {
+  g <- group_list(url = u, limit = 1)[[1]]$name
+}
 
 test_that("group_show gives back expected class types", {
   check_ckan(u)
