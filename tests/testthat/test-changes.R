@@ -28,5 +28,5 @@ test_that("changes fails correctly", {
   expect_error(changes("adf"), "offset Invalid integer")
   expect_error(changes(limit = "Adf"), "limit Invalid integer")
   expect_error(changes("adf", url = "http://www.google.com"),
-               regexp = "404 - Not Found")
+               regexp = "404")
 })
