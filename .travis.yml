@@ -16,3 +16,6 @@ notifications:
     on_failure: change
   slack:
     secure: c0GC9qvEjlKNjB694uBIsm+LvfL0kAfa7V41Ctk8i3sNo4pOQerwybOlCZ/foQMx7yke1UmfmWMfxTc35u8g8+8uH9hBGEHuq+PvR4pnqc6EcgJKrdFPn39ruzH7S4UHy/TaAJgkeXyhM+kjQXCJiX8OK74KJFuumH5LvA7PrHY=
+
+env:
+  - TEST_DPLYR_INTERFACE=TRUE
