@@ -122,3 +122,8 @@ db_explain.CKANConnection <- function(con, sql, format = "text", ...) {
 db_insert_into.CKANConnection <- function(con, table, values, ...) {
   .read_only("db_insert_into.CKANConnection")
 }
+
+#' @importFrom dplyr build_sql db_list_tables src_sql
+#' sql_variant base_scalar sql_translator base_agg sql
+#' sql_prefix build_sql base_win tbl_sql sql
+NULL
