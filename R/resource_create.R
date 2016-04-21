@@ -20,7 +20,7 @@
 #' @param last_modified (character) iso date string (optional)
 #' @param cache_last_updated (character) iso date string (optional)
 #' @param webstore_last_updated (character) iso date string (optional)
-#' @param upload (FieldStorage needs multipart/form-data) - (optional)
+#' @param upload (character) A path to a local file (optional)
 #' @template args
 #' @template key
 #'
@@ -33,7 +33,7 @@
 #'
 #' # then create a resource
 #' file <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
-#' (xx <- resource_create(package_id = "585d7ea2-ded0-4fed-9b08-61f7e83a3cb2",
+#' (xx <- resource_create(package_id = res$id,
 #'                        description = "my resource",
 #'                        name = "bears",
 #'                        upload = file,
@@ -42,7 +42,9 @@
 #'
 #' package_create("foobbbbbarrrr") %>%
 #'    resource_create(description = "my resource",
-#'    name = "bearsareus", upload = file, rcurl = "http://google.com")
+#'                    name = "bearsareus",
+#'                    upload = file,
+#'                    rcurl = "http://google.com")
 #' }
 resource_create <- function(package_id = NULL, rcurl = NULL, revision_id = NULL, description = NULL,
   format = NULL, hash = NULL, name = NULL, resource_type = NULL, mimetype = NULL,
@@ -60,7 +62,15 @@ resource_create <- function(package_id = NULL, rcurl = NULL, revision_id = NULL,
                   last_modified = last_modified,
                   cache_last_updated = cache_last_updated,
                   webstore_last_updated = webstore_last_updated,
-                  upload = upload_file(upload)))
+                  upload = upfile(upload)))
   res <- ckan_POST(url, 'resource_create', body = body, key = key, ...)
   switch(as, json = res, list = as_ck(jsl(res), "ckan_resource"), table = jsd(res))
+}
+
+upfile <- function(x) {
+  if (is.null(x)) {
+    NULL
+  } else {
+    upload_file(x)
+  }
 }

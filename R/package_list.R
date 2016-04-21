@@ -17,4 +17,3 @@ package_list <- function(offset = 0, limit = 31, url = get_default_url(),
   #res <- ckan_GET(url, 'package_list', key = NULL, ...)
   switch(as, json = res, list = jsl(res), table = jsd(res))
 }
-

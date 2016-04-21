@@ -48,7 +48,7 @@ This should be an alphanumeric string. Required.}
 
 \item{webstore_last_updated}{(character) iso date string (optional)}
 
-\item{upload}{(FieldStorage needs multipart/form-data) - (optional)}
+\item{upload}{(character) A path to a local file (optional)}
 
 \item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
 
@@ -75,7 +75,7 @@ ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
 
 # then create a resource
 file <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
-(xx <- resource_create(package_id = "585d7ea2-ded0-4fed-9b08-61f7e83a3cb2",
+(xx <- resource_create(package_id = res$id,
                        description = "my resource",
                        name = "bears",
                        upload = file,
@@ -84,7 +84,9 @@ file <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
 
 package_create("foobbbbbarrrr") \%>\%
    resource_create(description = "my resource",
-   name = "bearsareus", upload = file, rcurl = "http://google.com")
+                   name = "bearsareus",
+                   upload = file,
+                   rcurl = "http://google.com")
 }
 }
 
