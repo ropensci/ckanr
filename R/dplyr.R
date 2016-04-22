@@ -4,8 +4,9 @@
 #' connect to tables within that CKAN based on the DataStore Data API.
 #'
 #' @param url, the url of the CKAN instance
-#' @examples
-#' \dontrun{
+#' @examples \dontrun{
+#' library("dplyr")
+#'
 #' # To connect to a CKAN instance first create a src:
 #' my_ckan <- src_ckan("http://demo.ckan.org")
 #'
@@ -13,7 +14,7 @@
 #' db_list_tables(my_ckan$con)
 #'
 #' # Then reference a tbl within that src
-#' my_tbl <- tbl(my_ckan, name = "be2ccdc2-9a76-47bf-862c-60c1525f5b1b")
+#' my_tbl <- tbl(src = my_ckan, name = "44d7de5f-7029-4f3a-a812-d7a70895da7d")
 #'
 #' # You can use the dplyr verbs with my_tbl. For example:
 #' dplyr::filter(my_tbl, GABARITO == "C")
@@ -37,7 +38,7 @@ tbl.src_ckan <- function(src, from, ..., name = NULL) {
   if (is.null(name)) {
     tbl_sql("ckan", src = src, from = sql(from), ...)
   } else {
-    tbl_sql("ckan", src = src, from = sql(sprintf('SELECT * FROM "%s"', name)))
+    tbl_sql(subclass = "ckan", src = src, from = sql(sprintf('SELECT * FROM "%s"', name)))
   }
 }
 
@@ -72,8 +73,8 @@ format.src_ckan <- function(x, ...) {
 }
 
 #'@export
-#'@importFrom dplyr src_translate_env
-src_translate_env.src_ckan <- function(x) {
+#'@importFrom dplyr sql_translate_env
+sql_translate_env.src_ckan <- function(x) {
   sql_variant(
     base_scalar,
     sql_translator(.parent = base_agg,
@@ -123,7 +124,28 @@ db_insert_into.CKANConnection <- function(con, table, values, ...) {
   .read_only("db_insert_into.CKANConnection")
 }
 
+#' @export
+#'@importFrom dplyr db_query_fields
+db_query_fields.CKANConnection <- function(con, sql, ...) {
+  sql <- sql_select(con, sql("*"), sql_subquery(con, sql), where = sql("0 = 1"))
+  qry <- dbSendQuery(con, sql)
+  on.exit(dbClearResult(qry))
+
+  res <- fetch(qry, 0)
+  names(res)
+}
+
+#' @export
+#'@importFrom dplyr db_query_rows
+db_query_rows.CKANConnection <- function(con, sql, ...) {
+  from <- sql_subquery(con, sql, "master")
+  #rows <- build_sql("SELECT count(*) FROM ", from, con = con)
+  rows <- sprintf("SELECT count(*) FROM (%s)", unclass(sql))
+  as.integer(dbGetQuery(con$con, rows)[[1]])
+}
+
 #' @importFrom dplyr build_sql db_list_tables src_sql
 #' sql_variant base_scalar sql_translator base_agg sql
 #' sql_prefix build_sql base_win tbl_sql sql
+#' sql_select sql_subquery
 NULL
