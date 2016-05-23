@@ -230,9 +230,12 @@ setMethod("fetch", signature(res="CKANResult", n="numeric"),
               res@cache$fetch <- nrow(res@value$records)
               return(res@value$records)
             }
-            if (res@cache$fetch + 1 > nrow(res@value$records)) stop("Empty CKANResult")
             end <- min(nrow(res@value$records), res@cache$fetch + n)
-            .i <- seq(res@cache$fetch + 1, end, by = 1)
+            if (res@cache$fetch + 1 <= end) {
+              .i <- seq(res@cache$fetch + 1, end, by = 1)
+            } else {
+              .i <- integer(0)
+            }
             retval <- res@value$records[.i,]
             res@cache$fetch <- end
             retval

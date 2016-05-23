@@ -11,10 +11,14 @@
 #' sql2 <- 'SELECT "Species","Genus","Family" from "f4129802-22aa-4437-b9f9-8a8f3b7b2a53" LIMIT 2'
 #' ds_search_sql(sql2, url = url, as = "table")
 #' }
+#' @importFrom httr status_code
 
 ds_search_sql <- function(sql, url = get_default_url(), as = 'list', ...) {
   res <- httr::GET(file.path(notrail(url), 'api/action/datastore_search_sql'), ctj(),
               query = list(sql = sql), ...)
+  if (status_code(res) > 299) {
+    stop(httr::content(res, "text", encoding = "UTF-8"))
+  }
   res <- httr::content(res, "text", encoding = "UTF-8")
   switch(as, json = res, list = jsl(res), table = jsd(res))
 }

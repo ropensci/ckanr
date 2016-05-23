@@ -91,6 +91,10 @@ sql_translate_env.src_ckan <- function(x) {
   )
 }
 
+#'@export
+sql_translate_env.CKANConnection <- function(con) {
+  sql_translate_env.src_ckan(con)
+}
 
 #'@export
 #'@importFrom dplyr db_has_table
@@ -142,19 +146,6 @@ db_query_rows.CKANConnection <- function(con, sql, ...) {
   #rows <- build_sql("SELECT count(*) FROM ", from, con = con)
   rows <- sprintf("SELECT count(*) FROM (%s)", unclass(sql))
   as.integer(dbGetQuery(con$con, rows)[[1]])
-}
-
-sql_translate_env.CKANConnection <- function(con) {
-  sql_variant(base_scalar, sql_translator(.parent = base_agg,
-    n = function() sql("count(*)"),
-    cor = sql_prefix("corr"),
-    cov = sql_prefix("covar_samp"),
-    sd = sql_prefix("stddev_samp"),
-    var = sql_prefix("var_samp"),
-    all = sql_prefix("bool_and"),
-    any = sql_prefix("bool_or"),
-    paste = function(x, collapse) build_sql("string_agg(", x, ", ", collapse, ")")),
-    base_win)
 }
 
 #' @importFrom dplyr build_sql db_list_tables src_sql
