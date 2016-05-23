@@ -15,7 +15,7 @@ if (Sys.getenv("TEST_DPLYR_INTERFACE") != "") {
   src <- src_ckan(u)
   name_list <- Filter(f = function(name) {
     !is.null(ds_search(name, limit = 1, url = u))
-  }, dbListTables(src$con, limit = 6))
+  }, dbListTables(src$con, limit = 20))
 
   test_that("tb is created by name", {
     tb <- tbl(src, name = name_list[1])
@@ -25,13 +25,15 @@ if (Sys.getenv("TEST_DPLYR_INTERFACE") != "") {
     tb <- tbl(src, from = sprintf('SELECT * FROM "%s" LIMIT 100', name_list[1]))
   })
 
-  tb <- tbl(src, from = 'SELECT * FROM "be2ccdc2-9a76-47bf-862c-60c1525f5b1b" LIMIT 100')
+  tb <- tbl(src, from = sprintf('SELECT * FROM "%s" LIMIT 100', name_list[1]))
   tb.raw <- collect(tb)
 
   test_that("basic verbs: filter", {
-    r1 <- dplyr::filter(tb, GABARITO == "D") %>%
+    .value <- tb.raw[[1]][1]
+    .name <- colnames(tb.raw)[1]
+    r1 <- tb %>% dplyr::filter(`[`(., .name) == .value) %>%
       collect()
-    r2 <- dplyr::filter(tb.raw, GABARITO == "D")
+    r2 <- tb.raw %>% dplyr::filter(`[`(., .name) == .value)
     expect_equal(r1, r2)
   })
 

@@ -144,6 +144,19 @@ db_query_rows.CKANConnection <- function(con, sql, ...) {
   as.integer(dbGetQuery(con$con, rows)[[1]])
 }
 
+sql_translate_env.CKANConnection <- function(con) {
+  sql_variant(base_scalar, sql_translator(.parent = base_agg,
+    n = function() sql("count(*)"),
+    cor = sql_prefix("corr"),
+    cov = sql_prefix("covar_samp"),
+    sd = sql_prefix("stddev_samp"),
+    var = sql_prefix("var_samp"),
+    all = sql_prefix("bool_and"),
+    any = sql_prefix("bool_or"),
+    paste = function(x, collapse) build_sql("string_agg(", x, ", ", collapse, ")")),
+    base_win)
+}
+
 #' @importFrom dplyr build_sql db_list_tables src_sql
 #' sql_variant base_scalar sql_translator base_agg sql
 #' sql_prefix build_sql base_win tbl_sql sql
