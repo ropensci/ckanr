@@ -29,6 +29,7 @@ Suggests:
     maptools,
     readxl,
     testthat,
-    xml2
+    xml2,
+    lazyeval
 Remotes: hadley/dplyr
 RoxygenNote: 5.0.1
