@@ -91,6 +91,10 @@ sql_translate_env.src_ckan <- function(x) {
   )
 }
 
+#'@export
+sql_translate_env.CKANConnection <- function(con) {
+  sql_translate_env.src_ckan(con)
+}
 
 #'@export
 #'@importFrom dplyr db_has_table

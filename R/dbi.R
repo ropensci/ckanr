@@ -49,7 +49,55 @@ setMethod("dbDisconnect", "CKANConnection",
 
 setClass("CKANResult", representation("DBIResult", value = "list", cache = "environment"))
 
+fieldMapping <- Vectorize(function(type) {
+  switch(type,
+    "bigint" = "integer",
+    "bigserial" = "integer",
+    "bytea" = "raw",
+    "double precision" = "numeric",
+    "integer" = "integer",
+    "money" = "numeric",
+    "real" = "numeric",
+    "smallint" = "integer",
+    "smallserial" = "integer",
+    "serial" = "integer",
+    {
+      if (grepl("numeric", type)) "numeric" else "character"
+    }
+  )
+})
+
 setMethod("initialize", "CKANResult", function(.Object, value, ...) {
+  if (is.null(value)) {
+    stop("No result")
+  }
+  types <- fieldMapping(value$fields$type)
+  if (!is.data.frame(value$records)) {
+    args <- lapply(seq_len(nrow(value$fields)), function(i) {
+      switch(types[i],
+             "character" = character(0),
+             "integer" = integer(0),
+             "logical" = logical(0),
+             "numeric" = numeric(0),
+             stop("Unknown type"))
+    })
+    names(args) <- value$fields$id
+    args[["stringsAsFactors"]] <- FALSE
+    args[["check.names"]] <- FALSE
+    value$records <- do.call(data.frame, args)
+  } else {
+    df <- value$records
+    for(i in seq_len(nrow(value$fields))) {
+      f <- switch(types[i],
+             "character" = as.character,
+             "integer" = as.integer,
+             "logical" = as.logical,
+             "numeric" = as.numeric,
+             stop("Unknown type"))
+      df[[value$fields$id[i]]] <- f(df[[value$fields$id[i]]])
+    }
+    value$records <- df
+  }
   .Object@value <- value
   .Object@cache <- new.env()
   .Object@cache$fetch <- 0L
@@ -182,11 +230,15 @@ setMethod("fetch", signature(res="CKANResult", n="numeric"),
               res@cache$fetch <- nrow(res@value$records)
               return(res@value$records)
             }
-            if (res@cache$fetch + 1 > nrow(res@value$records)) stop("Empty CKANResult")
             end <- min(nrow(res@value$records), res@cache$fetch + n)
-            .i <- seq(res@cache$fetch + 1, end, by = 1)
+            if (res@cache$fetch + 1 <= end) {
+              .i <- seq(res@cache$fetch + 1, end, by = 1)
+            } else {
+              .i <- integer(0)
+            }
             retval <- res@value$records[.i,]
             res@cache$fetch <- end
+            retval
           },
           valueClass = "data.frame"
           )
