@@ -48,6 +48,17 @@ BEWARE: This function still doesn't quite work yet.
 }
 \examples{
 \dontrun{
+# create a package
+(res <- package_create("foobarrrr", author="Jane Doe"))
+
+# then create a resource
+file <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
+(xx <- resource_create(package_id = res$id,
+                       description = "my resource",
+                       name = "bears",
+                       upload = file,
+                       rcurl = "http://google.com"
+))
 ds_create(resource_id = "f4129802-22aa-4437-b9f9-8a8f3b7b2a53",
          records = iris, force = TRUE, key = "my-api-key")
 }
