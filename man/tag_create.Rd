@@ -29,4 +29,9 @@ data.frame. (required)}
 \description{
 Create a tag
 }
+\examples{
+\dontrun{
+tag_create(name = "TestTag1", vocabulary_id = "Testing1")
+}
+}
 
