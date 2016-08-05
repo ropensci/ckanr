@@ -12,6 +12,7 @@
 #' @param fullname (character) user full name
 #' @param about (character) a description of the new user (optional)
 #' @param openid (character) an openid (optional)
+#' @template key
 #' @template args
 #' @references
 #' \url{http://docs.ckan.org/en/latest/api/index.html#ckan.logic.action.create.user_create}

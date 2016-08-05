@@ -3,6 +3,7 @@
 #' @export
 #'
 #' @param id (character) the id of the new user (required)
+#' @template key
 #' @template args
 #' @references
 #' \url{http://docs.ckan.org/en/latest/api/index.html#ckan.logic.action.delete.user_delete}
