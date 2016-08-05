@@ -30,7 +30,7 @@ as.ckan_related.list <- function(x, ...) structure(x, class = "ckan_related")
 
 #' @export
 #' @rdname as.ckan_related
-is.ckan_related <- function(x) is(x, "ckan_related")
+is.ckan_related <- function(x) inherits(x, "ckan_related")
 
 #' @export
 print.ckan_related <- function(x, ...) {

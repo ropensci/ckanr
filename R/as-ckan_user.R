@@ -30,7 +30,7 @@ as.ckan_user.list <- function(x, ...) structure(x, class = "ckan_user")
 
 #' @export
 #' @rdname as.ckan_user
-is.ckan_user <- function(x) is(x, "ckan_user")
+is.ckan_user <- function(x) inherits(x, "ckan_user")
 
 #' @export
 print.ckan_user <- function(x, ...) {

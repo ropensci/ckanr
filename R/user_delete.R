@@ -19,6 +19,6 @@
 #' }
 user_delete <- function(id, key = get_default_key(), url = get_default_url(), as = 'list', ...) {
   warning("not tested yet, may not work", call. = FALSE)
-  res <- ckan_POST(url, 'user_delete', list(id = id), encode = "json", key = key, verbose())
+  res <- ckan_POST(url, 'user_delete', list(id = id), encode = "json", key = key, ...)
   switch(as, json = res, list = as_ck(jsl(res), "ckan_user"), table = jsd(res))
 }

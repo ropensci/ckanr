@@ -62,7 +62,7 @@
 #' using this package. That is, not necessarily landing pages of each instance,
 #' although, the URL may be the landing page and the base API URL.
 #'
-#' @importFrom methods is
+#' @importFrom methods new
 #' @importFrom stats na.omit
 #' @importFrom utils read.csv unzip
 #' @importFrom httr GET POST upload_file write_disk add_headers content

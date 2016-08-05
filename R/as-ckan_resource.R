@@ -30,7 +30,7 @@ as.ckan_resource.list <- function(x, ...) structure(x, class = "ckan_resource")
 
 #' @export
 #' @rdname as.ckan_resource
-is.ckan_resource <- function(x) is(x, "ckan_resource")
+is.ckan_resource <- function(x) inherits(x, "ckan_resource")
 
 #' @export
 print.ckan_resource <- function(x, ...) {

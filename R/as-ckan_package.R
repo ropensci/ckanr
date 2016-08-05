@@ -30,7 +30,7 @@ as.ckan_package.list <- function(x, ...) structure(x, class = "ckan_package")
 
 #' @export
 #' @rdname as.ckan_package
-is.ckan_package <- function(x) is(x, "ckan_package")
+is.ckan_package <- function(x) inherits(x, "ckan_package")
 
 #' @export
 print.ckan_package <- function(x, ...) {

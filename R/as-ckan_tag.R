@@ -29,7 +29,7 @@ as.ckan_tag.list <- function(x, ...) structure(x, class = "ckan_tag")
 
 #' @export
 #' @rdname as.ckan_tag
-is.ckan_tag <- function(x) is(x, "ckan_tag")
+is.ckan_tag <- function(x) inherits(x, "ckan_tag")
 
 #' @export
 print.ckan_tag <- function(x, ...) {

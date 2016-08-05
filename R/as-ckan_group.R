@@ -29,7 +29,7 @@ as.ckan_group.list <- function(x, ...) structure(x, class = "ckan_group")
 
 #' @export
 #' @rdname as.ckan_group
-is.ckan_group <- function(x) is(x, "ckan_group")
+is.ckan_group <- function(x) inherits(x, "ckan_group")
 
 #' @export
 print.ckan_group <- function(x, ...) {
