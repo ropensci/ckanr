@@ -29,6 +29,10 @@ data.frame. (required)}
 \description{
 Datastore - create a new resource on an existing dataset
 }
+\details{
+This function is deprecated - will be defunct in the next version
+of this package
+}
 \examples{
 \dontrun{
 path <- system.file("examples", "actinidiaceae.csv", package = "ckanr")

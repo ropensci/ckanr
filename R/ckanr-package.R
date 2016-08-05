@@ -78,3 +78,15 @@
 #' @author Imanuel Costigan \email{i.costigan@@me.com}
 #' @keywords package
 NULL
+
+#' Deprecated functions in \code{ckanr}
+#'
+#' These functions still work but will be removed (defunct) in the next version.
+#'
+#' \itemize{
+#'  \item \code{\link{ds_create_dataset}}: The functionality of this function is already in
+#'  another function in this package. See function \code{\link{resource_create}}
+#' }
+#'
+#' @name ckanr-deprecated
+NULL
