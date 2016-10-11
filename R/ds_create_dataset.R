@@ -30,7 +30,7 @@
 #' }
 ds_create_dataset <- function(package_id, name, path, key = get_default_key(),
                               url = get_default_url(), as = 'list', ...) {
-  .Deprecated("resource_create", "ckanr", msg = "deprecated, see ?recourse_create")
+  .Deprecated("resource_create", "ckanr", msg = "deprecated, see ?resource_create")
 
   path <- path.expand(path)
   ext <- strsplit(basename(path), "\\.")[[1]]
