@@ -42,11 +42,12 @@ ds_create <- function(resource_id = NULL, resource = NULL, force = FALSE,
                       url = get_default_url(), as = 'list', ...) {
 
   body <- cc(list(resource_id = resource_id, resource = resource, force = force,
-                  aliases = aliases, fields = fields, records = convert(records),
+                  aliases = aliases, fields = fields, records = records,
                   primary_key = primary_key, indexes = indexes))
   res <- POST(file.path(url, 'api/action/datastore_create'),
               add_headers(Authorization = key),
-              body = body, ...)
+              body = tojun(body, TRUE),
+              encode = "json", ctj(), ...)
   stop_for_status(res)
   res <- content(res, "text", encoding = "UTF-8")
   switch(as, json = res, list = jsl(res), table = jsd(res))
