@@ -43,7 +43,11 @@ knitr::opts_chunk$set(
 
 `ckanr` is an R client for the CKAN API.
 
-It is meant to be as general as possible, allowing you to work with any CKAN instance.
+## Description
+
+CKAN is an open source set of tools for hosting and providing data on the web. (CKAN users could include non-profits, museums, local city/county governments, etc.).
+
+`ckanr` allows users to interact with those CKAN websites to create, modify, and manage datasets, as well as search and download pre-existing data, and then to proceed using in R for data analysis (stats/plotting/etc.). It is meant to be as general as possible, allowing you to work with any CKAN instance.
 
 ## Installation
 
