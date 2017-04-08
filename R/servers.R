@@ -130,7 +130,7 @@ server_urls <- c(
   "https://catalogodatos.gub.uy",
   "https://data.barrowbc.gov.uk",
   "https://data.glasgow.gov.uk",
-  "https://data.hdx.rwlabs.org",
+  "https://data.humdata.org",
   "https://data.qld.gov.au",
   "https://data.sa.gov.au",
   "https://datahub.cmap.illinois.gov",
