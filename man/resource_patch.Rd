@@ -43,4 +43,3 @@ resource_patch(x, id = res)
 # resource_patch(x, id = res$id)
 }
 }
-

@@ -32,4 +32,3 @@ as.ckan_group(grps[[3]]$id)
 as.ckan_group(x)
 }
 }
-

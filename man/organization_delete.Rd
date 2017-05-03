@@ -33,4 +33,3 @@ ckanr_setup(url = "http://demo.ckan.org/")
 organization_delete(id = "someorgid")
 }
 }
-

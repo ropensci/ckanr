@@ -35,4 +35,3 @@ related_delete(res)
 ## related_delete(res$id)
 }
 }
-

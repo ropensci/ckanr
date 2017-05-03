@@ -36,4 +36,3 @@ group_delete(res)
 # group_delete(res$id)
 }
 }
-

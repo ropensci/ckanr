@@ -33,4 +33,3 @@ as.ckan_package("0699f475-6978-473a-8448-42585074b6f1")
 as.ckan_package(x)
 }
 }
-

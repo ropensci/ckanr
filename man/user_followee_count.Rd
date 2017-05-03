@@ -39,4 +39,3 @@ user_followee_count(x, as = "table")
 user_followee_count(x, as = "json")
 }
 }
-

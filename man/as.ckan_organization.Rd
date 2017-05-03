@@ -32,4 +32,3 @@ as.ckan_organization(orgs[[3]]$id)
 as.ckan_organization(x)
 }
 }
-

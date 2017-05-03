@@ -45,4 +45,3 @@ organization_list(as = 'json')
 organization_list(as = 'table')
 }
 }
-

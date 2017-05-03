@@ -43,4 +43,3 @@ group_list(as = 'json')
 group_list(as = 'table')
 }
 }
-

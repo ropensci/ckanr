@@ -44,4 +44,3 @@ user_activity_list(x, as = "table")
 user_activity_list(x, as = "json")
 }
 }
-

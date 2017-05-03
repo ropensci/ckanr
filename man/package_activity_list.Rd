@@ -50,4 +50,3 @@ package_activity_list(res$id, as = "table")
 package_activity_list(res$id, as = "json")
 }
 }
-

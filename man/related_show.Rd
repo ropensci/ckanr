@@ -46,4 +46,3 @@ related_show(res, as = 'json')
 related_show(res, as = 'table')
 }
 }
-

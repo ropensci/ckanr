@@ -32,4 +32,3 @@ changes(as = 'json')
 changes(as = 'table')
 }
 }
-

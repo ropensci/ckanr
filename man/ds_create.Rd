@@ -66,4 +66,3 @@ ds_create(resource_id = "f4129802-22aa-4437-b9f9-8a8f3b7b2a53",
 \references{
 \url{http://bit.ly/1G9cnBl}
 }
-
