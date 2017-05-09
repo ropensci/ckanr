@@ -19,6 +19,8 @@ organizations to return. NULL returns all organizations.}
 
 \item{all_fields}{(logical). Return the name or all fields of the object.}
 
+\item{limit}{(numeric) The maximum number of organizations to return (optional, default: 31)}
+
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
