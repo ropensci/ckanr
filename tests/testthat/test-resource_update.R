@@ -24,7 +24,7 @@ test_that("resource_update gives back expected class types and output", {
                         upload = path,
                         rcurl = "http://google.com",
                         url = url, key = key)
-  a <- resource_update(id = xx, path = path, url = url, key = key)
+  a <- resource_update(xx$id, path = path, url = url, key = key)
 
   # class types
   # expect_is(a, "ckan_resource")
