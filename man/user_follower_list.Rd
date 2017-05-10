@@ -42,4 +42,3 @@ user_follower_list(x, as = "table")
 user_follower_list(x, as = "json")
 }
 }
-

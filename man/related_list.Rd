@@ -32,4 +32,3 @@ related_list(as = 'json')
 related_list(as = 'table')
 }
 }
-

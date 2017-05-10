@@ -46,4 +46,3 @@ group_show(res[[1]]$name, as = 'json')
 group_show(res[[1]]$name, as = 'table')
 }
 }
-

@@ -27,4 +27,3 @@ out <- lapply(servers()[1:6], ckan_info)
 vapply(out, "[[", "", "ckan_version")
 }
 }
-

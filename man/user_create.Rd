@@ -53,4 +53,3 @@ user_create(name = 'stacy', email = "stacy@aaaaa.com", password = "helloworld")
 \references{
 \url{http://docs.ckan.org/en/latest/api/index.html#ckan.logic.action.create.user_create}
 }
-

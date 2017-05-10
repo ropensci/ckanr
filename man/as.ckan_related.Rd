@@ -33,4 +33,3 @@ as.ckan_related(x$id)
 as.ckan_related(x)
 }
 }
-

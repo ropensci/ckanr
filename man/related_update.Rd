@@ -55,4 +55,3 @@ res <- package_create("hello-saturn2") \%>\%
 related_update(res, title = "her resource", type = "idea")
 }
 }
-

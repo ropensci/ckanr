@@ -2,8 +2,8 @@
 % Please edit documentation in R/ckanr-package.R
 \docType{package}
 \name{ckanr-package}
-\alias{ckanr}
 \alias{ckanr-package}
+\alias{ckanr}
 \title{R client for the CKAN API}
 \description{
 ckanr is a full client for the CKAN API, wrapping all
@@ -77,6 +77,7 @@ CKAN instances we know about, with URLs to their base URLs that should work
 using this package. That is, not necessarily landing pages of each instance,
 although, the URL may be the landing page and the base API URL.
 }
+
 \author{
 Scott Chamberlain \email{myrmecocystus@gmail.com}
 
@@ -87,4 +88,3 @@ Wush Wu
 Imanuel Costigan \email{i.costigan@me.com}
 }
 \keyword{package}
-

@@ -34,4 +34,3 @@ Create a tag
 tag_create(name = "TestTag1", vocabulary_id = "Testing1")
 }
 }
-

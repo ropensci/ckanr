@@ -41,4 +41,3 @@ res <- organization_create("stuffthings2")
 organization_show(res$id)
 }
 }
-

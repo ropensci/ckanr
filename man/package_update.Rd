@@ -44,4 +44,3 @@ x <- list(maintainer_email = "heythere2@things.com")
 package_update(x, '585d7ea2-ded0-4fed-9b08-61f7e83a3cb2')
 }
 }
-

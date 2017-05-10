@@ -27,4 +27,3 @@ revision_list(as = "table")
 revision_list(as = "json")
 }
 }
-

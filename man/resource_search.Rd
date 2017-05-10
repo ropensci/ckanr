@@ -45,4 +45,3 @@ resource_search(q = 'name:data', as = 'table')
 resource_search(q = 'name:data', limit = 2, as = 'table')
 }
 }
-

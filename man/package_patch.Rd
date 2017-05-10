@@ -45,4 +45,3 @@ x <- list(title = "!hello there world! bye")
 package_patch(x, id = res$id)
 }
 }
-

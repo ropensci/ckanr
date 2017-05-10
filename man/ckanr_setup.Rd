@@ -73,4 +73,3 @@ ckanr_setup(url = "http://data.techno-science.ca/", key = "some-CKAN-API-key",
 # "http://data.techno-science.ca/":
 ckanr_setup()
 }
-

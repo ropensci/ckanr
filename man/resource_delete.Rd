@@ -40,4 +40,3 @@ file <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
 resource_delete(xx)
 }
 }
-

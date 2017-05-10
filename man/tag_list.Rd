@@ -46,4 +46,3 @@ tag_list('aviation', as = 'json')
 tag_list('aviation', as = 'table')
 }
 }
-

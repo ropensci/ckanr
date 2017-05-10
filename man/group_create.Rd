@@ -77,4 +77,3 @@ res$users
 res$num_followers
 }
 }
-

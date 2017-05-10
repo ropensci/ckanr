@@ -33,4 +33,3 @@ as.ckan_user(usrs[[3]]$id)
 as.ckan_user(x)
 }
 }
-

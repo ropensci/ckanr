@@ -37,4 +37,3 @@ ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
 dashboard_count()
 }
 }
-

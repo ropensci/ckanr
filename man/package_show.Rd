@@ -53,4 +53,3 @@ package_show(res$id, as = 'table')
 package_show(res$id, TRUE)
 }
 }
-

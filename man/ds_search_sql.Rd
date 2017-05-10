@@ -31,4 +31,3 @@ sql2 <- 'SELECT "Species","Genus","Family" from "f4129802-22aa-4437-b9f9-8a8f3b7
 ds_search_sql(sql2, url = url, as = "table")
 }
 }
-

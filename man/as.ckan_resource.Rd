@@ -33,4 +33,3 @@ as.ckan_resource(resrcs$results[[3]]$id)
 as.ckan_resource(x)
 }
 }
-

@@ -119,4 +119,3 @@ browseURL(xxx$url)
 \references{
 \url{http://docs.ckan.org/en/latest/api/index.html#ckan.logic.action.create.resource_create}
 }
-

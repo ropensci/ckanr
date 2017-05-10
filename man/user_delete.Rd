@@ -40,4 +40,3 @@ user_delete(id = "stacy")
 \references{
 \url{http://docs.ckan.org/en/latest/api/index.html#ckan.logic.action.delete.user_delete}
 }
-

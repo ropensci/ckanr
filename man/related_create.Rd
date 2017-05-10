@@ -58,4 +58,3 @@ package_create("foobbbbbarrrr") \%>\%
                   type = "visualization")
 }
 }
-

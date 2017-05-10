@@ -12,4 +12,3 @@ These functions still work but will be removed (defunct) in the next version.
  another function in this package. See function \code{\link{resource_create}}
 }
 }
-

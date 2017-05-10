@@ -63,4 +63,3 @@ package_search(q = '*:*', fq = 'num_tags:[2 TO *]')$count
 package_search(q = '*:*', fq = 'num_tags:[1 TO *]')$count
 }
 }
-

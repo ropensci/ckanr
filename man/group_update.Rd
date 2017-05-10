@@ -44,4 +44,3 @@ x <- list(description = "A group about water bears and people that love them")
 group_update(x, id = grp)
 }
 }
-

@@ -48,4 +48,3 @@ user_show('sckottie', include_datasets = TRUE)
 user_show('sckottie', include_num_followers = TRUE)
 }
 }
-

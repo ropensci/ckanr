@@ -45,4 +45,3 @@ x <- list(title = "!hello world!", maintainer_email = "hello@world.com")
 group_patch(x, id = grp)
 }
 }
-

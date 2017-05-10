@@ -40,4 +40,3 @@ tag_search(query = 'ta', as = 'json')
 tag_search(query = 'ta', as = 'table')
 }
 }
-

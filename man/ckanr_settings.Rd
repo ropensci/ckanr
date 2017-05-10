@@ -2,15 +2,15 @@
 % Please edit documentation in R/ckanr_settings.R
 \name{ckanr_settings}
 \alias{ckanr_settings}
-\alias{get_default_key}
 \alias{get_default_url}
-\alias{get_test_behaviour}
-\alias{get_test_did}
-\alias{get_test_gid}
-\alias{get_test_key}
-\alias{get_test_oid}
-\alias{get_test_rid}
+\alias{get_default_key}
 \alias{get_test_url}
+\alias{get_test_key}
+\alias{get_test_did}
+\alias{get_test_rid}
+\alias{get_test_gid}
+\alias{get_test_oid}
+\alias{get_test_behaviour}
 \title{Get or set ckanr CKAN settings}
 \usage{
 ckanr_settings()
@@ -56,4 +56,3 @@ ckanr_settings()
 \code{\link{get_test_gid}},  \code{get_test_oid},
 \code{get_test_behaviour}.
 }
-

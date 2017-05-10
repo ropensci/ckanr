@@ -45,4 +45,3 @@ package_revision_list(res$id, as = "table")
 package_revision_list(res$id, as = "json")
 }
 }
-
