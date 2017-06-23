@@ -186,6 +186,22 @@ List organizations
 organization_list()
 ```
 
+
+## ckanr's dplyr interface
+`ckanr` implements a `dplyr` SQL interface to CKAN's datastore. 
+You can access any resource in the datastore directly using only the CKAN
+resource ID.
+
+Note: this will only work for resources which were uploaded successfully to the 
+datastore - they will show the green "Data API" button in CKAN.
+
+```{r eval=FALSE}
+ckan <- ckanr::src_ckan("https://my.ckan.org/")
+res_id <- "my-ckan-resource-id"
+dplyr::tbl(src = ckan$con, from = res_id) %>% as_tibble(.)
+```
+
+
 ## Examples of different CKAN APIs
 
 See `ckanr::servers()` for a list of CKAN servers. Ther are `r length(ckanr::servers())` as of `r format(Sys.time(), "%Y-%m-%d")`.
