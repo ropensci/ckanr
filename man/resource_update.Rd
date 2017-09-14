@@ -46,7 +46,7 @@ ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
 path <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
 
 # Create package, then a resource within that package
-(res <- package_create("newpackage9"))
+(res <- package_create("newpackage10"))
 (xx <- resource_create(package_id = res$id,
                        description = "my resource",
                        name = "bears",
