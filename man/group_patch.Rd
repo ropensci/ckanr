@@ -30,7 +30,7 @@ Update a group's metadata
 \examples{
 \dontrun{
 # Setup
-ckanr_setup(url = "http://demo.ckan.org", key = getOption("ckan_demo_key"))
+ckanr_setup(url = "https://demo.ckan.org", key = getOption("ckan_demo_key"))
 
 # Create a package
 (res <- group_create("hello-my-world2"))

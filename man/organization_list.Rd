@@ -36,7 +36,7 @@ List organization
 }
 \examples{
 \dontrun{
-ckanr_setup(url = "http://demo.ckan.org/")
+ckanr_setup(url = "https://demo.ckan.org/")
 
 # list organizations
 res <- organization_list()

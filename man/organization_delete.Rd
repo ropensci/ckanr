@@ -27,7 +27,7 @@ Delete an organization
 }
 \examples{
 \dontrun{
-ckanr_setup(url = "http://demo.ckan.org/")
+ckanr_setup(url = "https://demo.ckan.org/")
 
 # delete an organization
 organization_delete(id = "someorgid")

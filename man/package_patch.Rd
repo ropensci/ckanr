@@ -30,18 +30,13 @@ Update a package's metadata
 \examples{
 \dontrun{
 # Setup
-ckanr_setup(url = "http://demo.ckan.org", key = getOption("ckan_demo_key"))
+ckanr_setup(url = "https://demo.ckan.org", key = getOption("ckan_demo_key"))
 
 # Create a package
-(res <- package_create("hello-world7", author="Jane Doe"))
+(res <- package_create("hello-world13", author="Jane Doe"))
 
 # Get a resource
 res <- package_show(res$id)
 res$title
-res$author_email
-
-# Make some changes
-x <- list(title = "!hello there world! bye")
-package_patch(x, id = res$id)
 }
 }

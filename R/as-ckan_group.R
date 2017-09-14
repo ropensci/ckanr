@@ -4,7 +4,7 @@
 #' @param x Variety of things, character, list, or ckan_group class object
 #' @param ... Further args passed on to \code{\link{group_show}} if character given
 #' @examples \dontrun{
-#' ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
+#' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
 #'
 #' (grps <- group_list())
 #' grps[[3]]

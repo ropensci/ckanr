@@ -21,7 +21,7 @@
 #' @references
 #' \url{http://docs.ckan.org/en/latest/api/index.html#ckan.logic.action.create.resource_create}
 #' @examples \dontrun{
-#' ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
+#' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
 #'
 #' # Get file
 #' path <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
