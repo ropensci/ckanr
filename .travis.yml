@@ -1,6 +1,7 @@
 language: r
 cache: packages
 sudo: required
+dist: trusty
 
 r_github_packages:
   - jimhester/robustr
