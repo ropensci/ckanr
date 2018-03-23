@@ -13,8 +13,10 @@
 #' }
 #' @importFrom httr status_code
 
-ds_search_sql <- function(sql, url = get_default_url(), as = 'list', ...) {
-  res <- httr::GET(file.path(notrail(url), 'api/action/datastore_search_sql'), ctj(),
+ds_search_sql <- function(sql, url = get_default_url(),  key = get_default_key(), as = 'list', ...) {
+  res <- httr::GET(file.path(notrail(url), 'api/action/datastore_search_sql'), 
+              add_headers(Authorization = key),
+              ctj(),
               query = list(sql = sql), ...)
   if (status_code(res) > 299) {
     stop(httr::content(res, "text", encoding = "UTF-8"))
