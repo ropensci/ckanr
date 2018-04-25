@@ -13,11 +13,11 @@
 #' }
 #' @importFrom httr status_code
 
-ds_search_sql <- function(sql, url = get_default_url(),  key = get_default_key(), as = 'list', ...) {
-  res <- httr::GET(file.path(notrail(url), 'api/action/datastore_search_sql'), 
-              add_headers(Authorization = key),
-              ctj(),
-              query = list(sql = sql), ...)
+ds_search_sql <- function(sql, url = get_default_url(),
+                          config = httr::add_headers(Authorization = get_default_key()),
+                          as = 'list', ...) {
+  res <- httr::GET(file.path(notrail(url), 'api/action/datastore_search_sql'), ctj(),
+                   query = list(sql = sql), config=config, ...)
   if (status_code(res) > 299) {
     stop(httr::content(res, "text", encoding = "UTF-8"))
   }
