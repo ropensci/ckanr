@@ -1,3 +1,80 @@
+#' Given a TEST_API_KEY, create test resources on demo.ckan.org
+#'
+#' @keywords internal
+#' @details
+#' \code{prepare_test_ckan} creates an example dataset, resource, organisation,
+#' and group on \code{demo.ckan.org} for the test suite to use, and runs \code{ckanr_setup}
+#' with the respective IDs.
+#'
+#' The only prerequisite for the tester is to register an account at
+#' \code{demo.ckan.org} and provide the API key as R environment variable
+#' \code{TEST_API_KEY}.
+#'
+#' This function aims to simplify using \code{demo.ckan.org} as test instance.
+#' \code{demo.ckan.org} periodically deletes all data, so test resources have to be
+#' re-created before running tests.
+#' @param test_url A test CKAN instance where we are allowed to create dummy resources
+#' @param test_key A working API key for an account on the test instance
+prepare_test_ckan <- function(test_url = "http://demo.ckan.org/",
+                              test_key = Sys.getenv("TEST_API_KEY")){
+  if (test_key == "") {
+    message("Please provide your demo.ckan.org API key as parameter 'test_key' or via Sys.setenv(TEST_API_KEY = \"my-api-key\")")
+    ckanr_setup(test_url=test_url)
+  } else {
+    message("Setting up test CKAN instance...")
+    # An example CSV file which should upload fine to the datastore
+    path <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
+
+    # Save ourselves from using test_url and test_key
+    ckanr_setup(url = test_url, key = test_key)
+
+    try(organization_create(name = "ckanr_test_org",
+                            title = "ckanr test org",
+                            url = test_url,
+                            key = test_key),
+        silent = TRUE)
+    o <- organization_show(id = "ckanr_test_org")
+
+    try(group_create(name = "ckanr_test_group",
+                     url = test_url,
+                     key = test_key),
+        silent = TRUE)
+    g <- group_show(id = "ckanr_test_group")
+
+    try(package_create(name = "ckanr_test_dataset",
+                       title = "ckanr test dataset",
+                       owner_org = o$id,
+                       url = test_url,
+                       key = test_key),
+        silent = TRUE)
+    p <- package_show(id = "ckanr_test_dataset")
+
+    r <- resource_create(package_id = p$id,
+                         description = "my resource",
+                         name = "ckanr test resource",
+                         upload = path,
+                         rcurl = "http://google.com")
+
+    # Tags should get an entry in ckanr_setup / ckanr_settings
+    # t <- tag_create(name = "web", vocabulary_id = "Testing1") ## 403
+    # t <- tag_list()[[1]]
+
+    # All together now
+    ckanr_setup(
+      url = test_url,
+      key = test_key,
+      test_url = test_url,
+      test_key = test_key,
+      test_did = p$id,
+      test_rid = r$id,
+      test_oid = o$id,
+      test_gid = g$id
+    )
+    message("CKAN test instance is set up.")
+  }
+
+}
+
 #' Test whether the configured test CKAN is offline
 #'
 #' @keywords internal

@@ -6,7 +6,8 @@ dataset_num <- local({
   check_ckan(u)
   check_organization(u, o)
 
-  res <- httr::GET(file.path(u, "organization", o))
+  org <- organization_show(o, url=u)
+  res <- httr::GET(file.path(u, "organization", org$name))
   httr::stop_for_status(res)
   html <- httr::content(res, as = "text")
   tmp <- regmatches(html, regexec("(\\d+) datasets? found", html))

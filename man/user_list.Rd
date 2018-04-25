@@ -40,4 +40,3 @@ user_list(q = "j", as = "table")
 user_list(q = "j", as = "json")
 }
 }
-

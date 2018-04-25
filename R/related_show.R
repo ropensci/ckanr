@@ -9,7 +9,7 @@
 #'   then parse yourself to get the help slot.
 #' @examples \dontrun{
 #' # Setup
-#' ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
+#' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
 #'
 #' # create a package and a related item
 #' res <- package_create("hello-pluto2") %>%

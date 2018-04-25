@@ -3,12 +3,22 @@ Title: Client for the Comprehensive Knowledge Archive Network ('CKAN') 'API'
 Description: Client for 'CKAN' 'API' (http://ckan.org/). Includes interface
     to 'CKAN' 'APIs' for search, list, show for packages, organizations, and
     resources. In addition, provides an interface to the 'datastore' 'API'.
-Version: 0.1.2.9840
+Version: 0.1.2.9846
 Authors@R: c(
-    person("Scott", "Chamberlain", email="myrmecocystus@gmail.com", role = c("aut", "cre")),
-    person("Imanuel", "Costigan", email="i.costigan@me.com", role = "ctb"),
-    person("Wush", "Wu", role = "ctb"),
-    person("Florian", "Mayer", email="Florian.Mayer@DPaW.wa.gov.au", role = "ctb")
+    person("Scott", "Chamberlain",
+    	role = c("aut", "cre"),
+    	email = "myrmecocystus@gmail.com",
+    	comment = "http://orcid.org/0000-0003-1444-9135"),
+    person("Imanuel", "Costigan",
+    	role = "ctb",
+    	email = "i.costigan@me.com"),
+    person("Wush", "Wu",
+    	role = "ctb",
+    	comment = "http://orcid.org/0000-0001-5180-0567"),
+    person("Florian", "Mayer",
+    	role = "ctb",
+     	email="Florian.Mayer@DPaW.wa.gov.au",
+     	comment = "http://orcid.org/0000-0003-4269-4242")
   )
 License: MIT + file LICENSE
 LazyData: true
@@ -22,7 +32,8 @@ Imports:
     utils,
     httr (>= 1.0.0),
     jsonlite (>= 0.9.17),
-    dplyr (>= 0.5.0),
+    dplyr (>= 0.7.0),
+    dbplyr,
     magrittr
 Suggests:
     knitr,
@@ -31,4 +42,7 @@ Suggests:
     testthat,
     xml2,
     lazyeval
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
+X-schema.org-keywords: database, open-data, ckan, api, data, dataset
+X-schema.org-applicationCategory: Data Access
+X-schema.org-isPartOf: "https://ropensci.org"

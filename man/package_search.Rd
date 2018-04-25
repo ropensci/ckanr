@@ -51,7 +51,7 @@ Search for packages.
 }
 \examples{
 \dontrun{
-ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
+ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
 
 package_search(q = '*:*')
 package_search(q = '*:*', rows = 2, as = 'json')
@@ -63,4 +63,3 @@ package_search(q = '*:*', fq = 'num_tags:[2 TO *]')$count
 package_search(q = '*:*', fq = 'num_tags:[1 TO *]')$count
 }
 }
-

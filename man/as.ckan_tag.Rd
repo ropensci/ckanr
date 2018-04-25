@@ -19,7 +19,7 @@ ckan_tag class helpers
 }
 \examples{
 \dontrun{
-ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
+ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
 
 (tags <- tag_search(query = 'ta'))
 tags[[3]]
@@ -32,4 +32,3 @@ as.ckan_tag(tags[[3]]$id)
 as.ckan_tag(x)
 }
 }
-

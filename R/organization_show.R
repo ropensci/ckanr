@@ -11,7 +11,7 @@
 #'   result slot is returned. You can request raw json with \code{as = 'json'}
 #'   then parse yourself to get the help slot.
 #' @examples \dontrun{
-#' ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
+#' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
 #'
 #' res <- organization_create("stuffthings2")
 #' organization_show(res$id)

@@ -7,7 +7,7 @@
 #' @template key
 #' @examples \dontrun{
 #' # Setup
-#' ckanr_setup(url = "http://demo.ckan.org", key = getOption("ckan_demo_key"))
+#' ckanr_setup(url = "https://demo.ckan.org", key = getOption("ckan_demo_key"))
 #'
 #' # Get a resource
 #' res <- resource_show("b85948b6-f9ea-4392-805e-00511d6cf6c6")

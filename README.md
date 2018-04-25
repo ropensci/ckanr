@@ -9,9 +9,11 @@ ckanr
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/ckanr?color=FAB657)](https://github.com/metacran/cranlogs.app)
 [![cran version](http://www.r-pkg.org/badges/version/ckanr)](https://cran.r-project.org/package=ckanr)
 
-`ckanr` is an R client for the CKAN API. 
+## Description
 
-It is meant to be as general as possible, allowing you to work with any CKAN instance.
+CKAN is an open source set of tools for hosting and providing data on the web. (CKAN users could include non-profits, museums, local city/county governments, etc.).
+
+`ckanr` allows users to interact with those CKAN websites to create, modify, and manage datasets, as well as search and download pre-existing data, and then to proceed using in R for data analysis (stats/plotting/etc.). It is meant to be as general as possible, allowing you to work with any CKAN instance.
 
 ## Installation
 
@@ -69,11 +71,11 @@ The S3 class objects all look very similar; for example:
 
 ```r
 <CKAN Resource> 8abc92ad-7379-4fb8-bba0-549f38a26ddb
-  Name: Data From Digital Portal 
-  Description: 
+  Name: Data From Digital Portal
+  Description:
   Creator/Modified: 2015-08-18T19:20:59.732601 / 2015-08-18T19:20:59.657943
-  Size: 
-  Format: CSV 
+  Size:
+  Format: CSV
 ```
 
 All classes state the type of object, have the ID to the right of the type, then have a varying set of key-value fields deemed important. This printed object is just a summary of an R list, so you can index to specific values (e.g., `result$description`). If you feel there are important fields left out of these printed summaries, let us know.
@@ -87,16 +89,16 @@ List packages
 
 ```r
 package_list(as = "table")
-#>  [1] "artifact-data-agriculture"                                  
-#>  [2] "artifact-data-aviation"                                     
-#>  [3] "artifact-data-bookbinding"                                  
-#>  [4] "artifact-data-chemistry"                                    
-#>  [5] "artifact-data-communications"                               
-#>  [6] "artifact-data-computing-technology"                         
-#>  [7] "artifact-data-domestic-technology"                          
-#>  [8] "artifact-data-energy-electric"                              
-#>  [9] "artifact-data-exploration-and-survey"                       
-#> [10] "artifact-data-fisheries"                                    
+#>  [1] "artifact-data-agriculture"
+#>  [2] "artifact-data-aviation"
+#>  [3] "artifact-data-bookbinding"
+#>  [4] "artifact-data-chemistry"
+#>  [5] "artifact-data-communications"
+#>  [6] "artifact-data-computing-technology"
+#>  [7] "artifact-data-domestic-technology"
+#>  [8] "artifact-data-energy-electric"
+#>  [9] "artifact-data-exploration-and-survey"
+#> [10] "artifact-data-fisheries"
 ...
 ```
 
@@ -105,7 +107,7 @@ Show a package
 
 ```r
 package_show('34d60b13-1fd5-430e-b0ec-c8bc7f4841cf')
-#> <CKAN Package> 34d60b13-1fd5-430e-b0ec-c8bc7f4841cf 
+#> <CKAN Package> 34d60b13-1fd5-430e-b0ec-c8bc7f4841cf
 #>   Title: Artifact Data - Vacuum Tubes
 #>   Creator/Modified: 2014-10-28T18:12:11.453636 / 2014-11-05T21:25:16.848989
 #>   Resources (up to 5): Artifact Data - Vacuum Tubes (XML), Data Dictionary, Tips (English), Tips (French)
@@ -120,15 +122,15 @@ Search for packages
 x <- package_search(q = '*:*', rows = 2)
 x$results
 #> [[1]]
-#> <CKAN Package> f4406699-3e11-4856-be48-b55da98b3c14 
+#> <CKAN Package> f4406699-3e11-4856-be48-b55da98b3c14
 #>   Title: Artifact Data - Horology
 #>   Creator/Modified: 2014-10-28T16:50:30.068996 / 2015-03-30T15:06:55.218176
 #>   Resources (up to 5): Artifact Data - Horology (XML), Data Dictionary, Tips (English), Tips (French)
 #>   Tags (up to 5): Horology
 #>   Groups (up to 5): scientific-instrumentation
-#> 
+#>
 #> [[2]]
-#> <CKAN Package> 0a801729-aa94-4d76-a5e0-7b487303f4e5 
+#> <CKAN Package> 0a801729-aa94-4d76-a5e0-7b487303f4e5
 #>   Title: Artifact Data - Astronomy
 #>   Creator/Modified: 2014-10-24T19:16:59.160533 / 2015-01-09T23:33:13.972898
 #>   Resources (up to 5): Artifact Data - Astronomy (XML), Data Dictionary, Tips (English), Tips (French)
@@ -145,19 +147,19 @@ Search for resources
 x <- resource_search(q = 'name:data', limit = 2)
 x$results
 #> [[1]]
-#> <CKAN Resource> e179e910-27fb-44f4-a627-99822af49ffa 
+#> <CKAN Resource> e179e910-27fb-44f4-a627-99822af49ffa
 #>   Name: Artifact Data - Exploration and Survey (XML)
 #>   Description: XML Dataset
-#>   Creator/Modified: 2014-10-28T15:50:35.374303 / 
-#>   Size: 
+#>   Creator/Modified: 2014-10-28T15:50:35.374303 /
+#>   Size:
 #>   Format: XML
-#> 
+#>
 #> [[2]]
-#> <CKAN Resource> ba84e8b7-b388-4d2a-873a-7b107eb7f135 
+#> <CKAN Resource> ba84e8b7-b388-4d2a-873a-7b107eb7f135
 #>   Name: Data Dictionary
 #>   Description: Data dictionary for CSTMC artifact datasets.
-#>   Creator/Modified: 2014-11-03T18:01:02.094210 / 
-#>   Size: 
+#>   Creator/Modified: 2014-11-03T18:01:02.094210 /
+#>   Size:
 #>   Format: XLS
 ```
 
@@ -169,20 +171,20 @@ List users
 ```r
 user_list()[1:2]
 #> [[1]]
-#> <CKAN User> ee100ca6-2363-4db8-b24b-066e865c33ec 
+#> <CKAN User> ee100ca6-2363-4db8-b24b-066e865c33ec
 #>   Name: CSTMC
 #>   Display Name: CSTMC
-#>   Full Name: 
-#>   No. Packages: 
+#>   Full Name:
+#>   No. Packages:
 #>   No. Edits: 0
 #>   Created: 2014-10-16T18:15:03.685929
-#> 
+#>
 #> [[2]]
-#> <CKAN User> de64d5d4-86ab-4510-820b-f0bd86ea7a79 
+#> <CKAN User> de64d5d4-86ab-4510-820b-f0bd86ea7a79
 #>   Name: default
 #>   Display Name: default
-#>   Full Name: 
-#>   No. Packages: 
+#>   Full Name:
+#>   No. Packages:
 #>   No. Edits: 0
 #>   Created: 2014-03-20T02:55:40.628968
 ```
@@ -195,13 +197,13 @@ List groups
 ```r
 group_list(as = 'table')[, 1:3]
 #>                         display_name description
-#> 1                     Communications            
-#> 2 Domestic and Industrial Technology            
-#> 3                         Everything            
-#> 4                           Location            
-#> 5                          Resources            
-#> 6         Scientific Instrumentation            
-#> 7                     Transportation            
+#> 1                     Communications
+#> 2 Domestic and Industrial Technology
+#> 3                         Everything
+#> 4                           Location
+#> 5                          Resources
+#> 6         Scientific Instrumentation
+#> 7                     Transportation
 #>                                title
 #> 1                     Communications
 #> 2 Domestic and Industrial Technology
@@ -228,7 +230,7 @@ group_show('communications', as = 'table')$users
 #> 2                                FALSE active              44
 #>   number_administered_packages display_name fullname
 #> 1                           39         marc     <NA>
-#> 2                            1     sepandar         
+#> 2                            1     sepandar
 #>                                     id
 #> 1 27778230-2e90-4818-9f00-bbf778c8fa09
 #> 2 b50449ea-1dcc-4d52-b620-fc95bf56034b
@@ -256,10 +258,10 @@ Show tags
 tag_show('Aviation')$packages[[1]][1:3]
 #> $owner_org
 #> [1] "fafa260d-e2bf-46cd-9c35-34c1dfa46c57"
-#> 
+#>
 #> $maintainer
 #> [1] ""
-#> 
+#>
 #> $relationships_as_object
 #> list()
 ```
@@ -272,10 +274,10 @@ List organizations
 ```r
 organization_list()
 #> [[1]]
-#> <CKAN Organization> fafa260d-e2bf-46cd-9c35-34c1dfa46c57 
+#> <CKAN Organization> fafa260d-e2bf-46cd-9c35-34c1dfa46c57
 #>   Name: cstmc
 #>   Display name: CSTMC
-#>   No. Packages: 
+#>   No. Packages:
 #>   No. Users: 0
 ```
 
@@ -293,11 +295,11 @@ ckanr_setup(url = "http://data.nhm.ac.uk")
 x <- package_search(q = '*:*', rows = 1)
 x$results
 #> [[1]]
-#> <CKAN Package> 56e711e6-c847-4f99-915a-6894bb5c5dea 
+#> <CKAN Package> 56e711e6-c847-4f99-915a-6894bb5c5dea
 #>   Title: Collection specimens
 #>   Creator/Modified: 2014-12-08T16:39:22.346941 / 2015-09-30T13:42:02.859838
 #>   Resources (up to 5): Specimens
-#>   Tags (up to 5): 
+#>   Tags (up to 5):
 #>   Groups (up to 5):
 NA
 ```
@@ -312,11 +314,11 @@ ckanr_setup("http://search.geothermaldata.org")
 x <- package_search(q = '*:*', rows = 1)
 x$results
 #> [[1]]
-#> <CKAN Package> 428701c7-1b99-424a-a2ae-829cfe37794c 
+#> <CKAN Package> 428701c7-1b99-424a-a2ae-829cfe37794c
 #>   Title: Pagosa Springs borehole lithology intervals
 #>   Creator/Modified: 2015-10-08T20:37:41.620696 / 2015-10-08T20:38:56.525277
 #>   Resources (up to 5): Borehole Lithology of Pagosa Springs Temperature Gradient wells
-#>   Tags (up to 5): 
+#>   Tags (up to 5):
 #>   Groups (up to 5):
 NA
 ```

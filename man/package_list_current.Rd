@@ -32,4 +32,3 @@ package_list_current(as = 'json')
 package_list_current(as = 'table')
 }
 }
-

@@ -30,7 +30,7 @@ By default the help and success slots are dropped, and only the
 \examples{
 \dontrun{
 # Setup
-ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
+ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
 
 # create a package and a related item
 res <- package_create("hello-pluto2") \%>\%
@@ -46,4 +46,3 @@ related_show(res, as = 'json')
 related_show(res, as = 'table')
 }
 }
-

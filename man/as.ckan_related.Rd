@@ -19,7 +19,7 @@ ckan_related class helpers
 }
 \examples{
 \dontrun{
-ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
+ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
 
 (x <- package_create("foobbbbbarrrr") \%>\%
    related_create(title = "my resource",
@@ -33,4 +33,3 @@ as.ckan_related(x$id)
 as.ckan_related(x)
 }
 }
-

@@ -233,6 +233,49 @@ resource_search(q = 'name:data', limit = 2, as = 'table')
 #> 2           NA        1 da1f8585-521d-47ef-8ead-7832474a3421            NA
 ```
 
+## ckanr's dplyr interface
+`ckanr` implements a `dplyr` SQL interface to CKAN's datastore. 
+You can access any resource in the datastore directly using only the CKAN
+resource ID.
+
+The path from a CSV (or XLS) file to a table in a CKAN datastore is:
+
+* A [tidy](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html) 
+  CSV file is uploaded as file resource to a CKAN dataset.
+* CKAN's datapusher (if enabled) attempts to parse the CSV and upload it into
+  its own table in the datastore. The datastore has a database separate to CKAN.
+* Depending on the CSV's size, the upload to the datastore can take seconds to
+  minutes.
+* Once the CSV is uploaded sucessfully to the datastore, CKAN will show a green
+  "Data API" button on the resource's page.
+* The table in the datastore is named after the resource ID (an MD5 hash).
+
+The following two lines will configure a given CKAN instance as source, 
+and read all records in one resource datastore table into a tibble.
+Note, `as_tibble` forces the lazy `tbl` query to run and actually retrieve all
+records.
+
+```{r eval=FALSE}
+ckan <- ckanr::src_ckan("https://my.ckan.org/")
+dplyr::tbl(src = ckan$con, from = "my-ckan-resource-id") %>% tibble::as_tibble(.)
+```
+
+As also explained in `??src_ckan`, you can list all available resources in the
+datastore:
+
+```{r eval=FALSE}
+dplyr::db_list_tables(ckan$con)
+```
+
+If your resource ID is not in this list, make sure it uploaded to the datastore 
+correctly.
+
+The above example retrieves all records at once. In contrast, dplyr's use of SQL
+allows server-side filtering and any data manipulation possible in SQL.
+
+There are many good tutorials about using dplyr's SQL interface, e.g.
+[datacarpentry.org](http://www.datacarpentry.org/R-ecology-lesson/05-r-and-databases.html).
+
 ## Example of using a different CKAN API
 
 ### The UK Natural History Museum

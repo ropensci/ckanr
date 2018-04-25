@@ -12,7 +12,7 @@ test_that("group_show gives back expected class types", {
 
   expect_is(a, "ckan_group")
   expect_is(a$name, "character")
-  expect_equal(a$name, g)
+  expect_equal(a$id, g)
 })
 
 test_that("group_show works giving back json output", {

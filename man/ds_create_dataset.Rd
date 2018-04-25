@@ -36,7 +36,7 @@ of this package
 \examples{
 \dontrun{
 path <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
-ckanr_setup(url = "http://demo.ckan.org/", key = "my-demo-ckan-org-api-key")
+ckanr_setup(url = "https://demo.ckan.org/", key = "my-demo-ckan-org-api-key")
 ds_create_dataset(package_id='testingagain', name="mydata", path = path)
 
 # Testing: see ?ckanr_setup to set test settings
@@ -55,4 +55,3 @@ ds_create_dataset(package_id=get_test_pid(), name="mydata",
 \references{
 \url{http://docs.ckan.org/en/latest/api/index.html#ckan.logic.action.create.resource_create}
 }
-

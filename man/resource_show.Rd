@@ -25,7 +25,7 @@ Show a resource.
 \examples{
 \dontrun{
 # Setup
-ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
+ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
 
 # create a package
 (res <- package_create("yellow7"))
@@ -48,4 +48,3 @@ resource_show(id = "05ff2255-c38a-40c9-b657-4ccb55ab2feb",
               url = "http://data.nhm.ac.uk")
 }
 }
-

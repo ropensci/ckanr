@@ -34,4 +34,3 @@ package_list(as = 'table')
 package_list(url = 'http://data.nhm.ac.uk')
 }
 }
-

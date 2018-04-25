@@ -94,7 +94,6 @@ err_handler <- function(x) {
   if (x$status_code > 201) {
     obj <- try({
       err <- jsonlite::fromJSON(content(x, "text", encoding = "UTF-8"))$error
-      #err <- content(x, encoding = "UTF-8")$error
       tmp <- err[names(err) != "__type"]
       errmsg <- paste(names(tmp), unlist(tmp[[1]]))
       list(err = err, errmsg = errmsg)
@@ -104,6 +103,7 @@ err_handler <- function(x) {
                    x$status_code,
                    obj$err$`__type`,
                    obj$errmsg),
+                   #obj$err$message),
            call. = FALSE)
     } else {
       obj <- {

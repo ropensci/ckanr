@@ -29,4 +29,3 @@ license_list(as = "table")
 license_list(as = "json")
 }
 }
-

@@ -40,13 +40,13 @@ which are set by \code{ckanr_setup}.
 }
 \examples{
 \dontrun{
-ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
+ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
 
 # Get file
 path <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
 
 # Create package, then a resource within that package
-(res <- package_create("newpackage9"))
+(res <- package_create("newpackage10"))
 (xx <- resource_create(package_id = res$id,
                        description = "my resource",
                        name = "bears",
@@ -119,4 +119,3 @@ browseURL(xxx$url)
 \references{
 \url{http://docs.ckan.org/en/latest/api/index.html#ckan.logic.action.create.resource_create}
 }
-

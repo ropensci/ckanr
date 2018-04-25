@@ -5,7 +5,7 @@
 \title{Show a package.}
 \usage{
 package_show(id, use_default_schema = FALSE, url = get_default_url(),
-  as = "list", ...)
+  key = get_default_key(), as = "list", ...)
 }
 \arguments{
 \item{id}{(character) Package identifier.}
@@ -15,6 +15,8 @@ custom schema defined with an IDatasetForm plugin. Default: FALSE}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
+
+\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse
@@ -34,7 +36,7 @@ By default the help and success slots are dropped, and only the
 \examples{
 \dontrun{
 # Setup
-ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
+ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
 
 # create a package
 (res <- package_create("purposeful55"))
@@ -53,4 +55,3 @@ package_show(res$id, as = 'table')
 package_show(res$id, TRUE)
 }
 }
-

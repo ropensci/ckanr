@@ -44,7 +44,7 @@ Update a related item
 \examples{
 \dontrun{
 # Setup
-ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
+ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
 
 # create a package and related item
 res <- package_create("hello-saturn2") \%>\%
@@ -55,4 +55,3 @@ res <- package_create("hello-saturn2") \%>\%
 related_update(res, title = "her resource", type = "idea")
 }
 }
-

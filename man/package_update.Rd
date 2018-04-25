@@ -30,18 +30,19 @@ Update a package
 \examples{
 \dontrun{
 # Setup
-ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
+ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
 
-# First, show a package to see the fields
-res <- package_show('585d7ea2-ded0-4fed-9b08-61f7e83a3cb2')
-res
+# Create a package
+(pkg <- package_create("hello-world11", author="Jane Doe"))
+
+# Next show the package to see the fields
+(res <- package_show(pkg$id))
 
 ## update just chosen things
 # Make some changes
 x <- list(maintainer_email = "heythere2@things.com")
 
 # Then update the packge
-package_update(x, '585d7ea2-ded0-4fed-9b08-61f7e83a3cb2')
+package_update(x, pkg$id)
 }
 }
-

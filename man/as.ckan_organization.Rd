@@ -19,7 +19,7 @@ ckan_organization class helpers
 }
 \examples{
 \dontrun{
-ckanr_setup(url = "http://demo.ckan.org/", key = getOption("ckan_demo_key"))
+ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
 
 (orgs <- organization_list())
 orgs[[3]]
@@ -32,4 +32,3 @@ as.ckan_organization(orgs[[3]]$id)
 as.ckan_organization(x)
 }
 }
-
