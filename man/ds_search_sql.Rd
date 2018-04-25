@@ -4,8 +4,8 @@
 \alias{ds_search_sql}
 \title{Datastore - search or get a dataset from CKRAN datastore}
 \usage{
-ds_search_sql(sql, url = get_default_url(), key = get_default_key(),
-  as = "list", ...)
+ds_search_sql(sql, url = get_default_url(), as = "list",
+  config = httr::add_headers(Authorization = get_default_key()), ...)
 }
 \arguments{
 \item{sql}{(character) A single SQL select statement. (required)}
