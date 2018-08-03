@@ -3,7 +3,7 @@ Title: Client for the Comprehensive Knowledge Archive Network ('CKAN') API
 Description: Client for 'CKAN' API (http://ckan.org/). Includes interface
     to 'CKAN' 'APIs' for search, list, show for packages, organizations, and
     resources. In addition, provides an interface to the 'datastore' API.
-Version: 0.1.2.9846
+Version: 0.1.2.9921
 Authors@R: c(
     person("Scott", "Chamberlain",
     	role = c("aut", "cre"),
@@ -42,7 +42,7 @@ Suggests:
     testthat,
     xml2,
     lazyeval
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
 X-schema.org-keywords: database, open-data, ckan, api, data, dataset
 X-schema.org-applicationCategory: Data Access
 X-schema.org-isPartOf: "https://ropensci.org"

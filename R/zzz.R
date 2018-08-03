@@ -18,20 +18,29 @@ ckan_DELETE <- function(url, method, body = NULL, key = NULL, ...){
 ckan_VERB <- function(verb, url, method, body, key, ...) {
   VERB <- getExportedValue("httr", verb)
   url <- notrail(url)
+  # check if proxy set
+  proxy <- get("ckanr_proxy", ckanr_settings_env)
+  if (!is.null(proxy)) {
+    if (!inherits(proxy, "request")) {
+      stop("proxy must be of class 'request', see ?ckanr_setup")
+    }
+  }
   if (is.null(key)) {
     # no authentication
     if (is.null(body) || length(body) == 0) {
-      res <- VERB(file.path(url, ck(), method), ctj(), ...)
+      res <- VERB(file.path(url, ck(), method), ctj(), proxy, ...)
     } else {
-      res <- VERB(file.path(url, ck(), method), body = body, ...)
+      res <- VERB(file.path(url, ck(), method), body = body, proxy, ...)
     }
   } else {
     # authentication
     api_key_header <- add_headers("X-CKAN-API-Key" = key)
     if (is.null(body) || length(body) == 0) {
-      res <- VERB(file.path(url, ck(), method), ctj(), api_key_header, ...)
+      res <- VERB(file.path(url, ck(), method), ctj(), 
+        api_key_header, proxy, ...)
     } else {
-      res <- VERB(file.path(url, ck(), method), body = body, api_key_header, ...)
+      res <- VERB(file.path(url, ck(), method), body = body, 
+        api_key_header, proxy, ...)
     }
   }
   err_handler(res)
@@ -40,32 +49,39 @@ ckan_VERB <- function(verb, url, method, body, key, ...) {
 
 # GET fxn for fetch()
 fetch_GET <- function(x, store, path, args = NULL, ...) {
+  # check if proxy set
+  proxy <- get("ckanr_proxy", ckanr_settings_env)
+  if (!is.null(proxy)) {
+    if (!inherits(proxy, "request")) {
+      stop("proxy must be of class 'request', see ?ckanr_setup")
+    }
+  }
   if (store == "session") {
     if (file_fmt(x) == "xls") {
       fmt <- file_fmt(x)
       dat <- NULL
       path <- paste0(path, ".xls")
-      res <- GET(x, query = args, write_disk(path, TRUE), ...)
+      res <- GET(x, query = args, write_disk(path, TRUE), proxy, ...)
       path <- res$request$output$path
     } else if (file_fmt(x) %in% c("shp", "zip")) {
       fmt <- "shp"
       dat <- NULL
       path <- paste0(path, ".zip")
-      res <- GET(x, query = args, write_disk(path, TRUE), ...)
+      res <- GET(x, query = args, write_disk(path, TRUE), proxy, ...)
       dir <- tempdir()
       unzip(path, exdir = dir)
       path <- list.files(dir, pattern = ".shp$", full.names = TRUE)
     } else {
       fmt <- file_fmt(x)
       path <- NULL
-      res <- GET(x, query = args, ...)
+      res <- GET(x, query = args, proxy, ...)
       err_handler(res)
       dat <- content(res, "text", encoding = "UTF-8")
     }
     list(store = store, fmt = fmt, data = dat, path = path)
   } else {
     # if (!file.exists(path)) stop("path does not exist", call. = FALSE)
-    res <- GET(x, query = args, write_disk(path, TRUE), ...)
+    res <- GET(x, query = args, write_disk(path, TRUE), proxy, ...)
     list(store = store, fmt = file_fmt(x), data = NULL, path = res$request$output$path)
   }
 }

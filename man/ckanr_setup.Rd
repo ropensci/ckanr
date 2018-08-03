@@ -5,8 +5,9 @@
 \title{Configure default CKAN settings}
 \usage{
 ckanr_setup(url = "http://data.techno-science.ca/", key = NULL,
-  test_url = NULL, test_key = NULL, test_did = NULL, test_rid = NULL,
-  test_gid = NULL, test_oid = NULL, test_behaviour = NULL)
+  test_url = NULL, test_key = NULL, test_did = NULL,
+  test_rid = NULL, test_gid = NULL, test_oid = NULL,
+  test_behaviour = NULL, proxy = NULL)
 }
 \arguments{
 \item{url}{A CKAN URL (optional), default: "http://data.techno-science.ca/"}
@@ -31,6 +32,9 @@ create datasets at \code{test_url}}
 
 \item{test_behaviour}{(optional, character) Whether to fail ("FAIL") or skip
 ("SKIP") writing tests in case of problems with the configured test CKAN.}
+
+\item{proxy}{an object of class \code{request} from a call to 
+\code{httr::use_proxy}}
 }
 \description{
 Configure default CKAN settings
@@ -72,4 +76,12 @@ ckanr_setup(url = "http://data.techno-science.ca/", key = "some-CKAN-API-key",
 # Not specifying the default CKAN URL will reset the CKAN URL to its default
 # "http://data.techno-science.ca/":
 ckanr_setup()
+
+# set a proxy
+library(httr)
+ckanr_setup(proxy = use_proxy("64.251.21.73", 8080))
+ckanr_settings()
+## run without setting proxy to reset to no proxy
+ckanr_setup()
+ckanr_settings()
 }

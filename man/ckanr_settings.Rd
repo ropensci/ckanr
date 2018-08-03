@@ -56,3 +56,4 @@ ckanr_settings()
 \code{\link{get_test_gid}},  \code{get_test_oid},
 \code{get_test_behaviour}.
 }
+\concept{ckanr settings}

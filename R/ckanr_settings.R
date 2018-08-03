@@ -1,3 +1,5 @@
+ckanr_settings_env <- new.env()
+
 #' Get or set ckanr CKAN settings
 #'
 #' @export
@@ -26,7 +28,8 @@ ckanr_settings <- function() {
               test_rid = Sys.getenv("CKANR_TEST_RID", ""),
               test_gid = Sys.getenv("CKANR_TEST_GID", ""),
               test_oid = Sys.getenv("CKANR_TEST_OID", ""),
-              test_behaviour = Sys.getenv("CKANR_TEST_BEHAVIOUR", "")
+              test_behaviour = Sys.getenv("CKANR_TEST_BEHAVIOUR", ""),
+              proxy = ckanr_settings_env$proxy
   )
   structure(ops, class = "ckanr_settings")
 }
@@ -42,7 +45,14 @@ print.ckanr_settings <- function(x, ...) {
   cat("  Test CKAN resource ID:", x$test_rid, "\n")
   cat("  Test CKAN group ID:", x$test_gid, "\n")
   cat("  Test CKAN organization ID:", x$test_oid, "\n")
-  cat("  Test behaviour if CKAN offline:", x$test_behaviour)
+  cat("  Test behaviour if CKAN offline:", x$test_behaviour, "\n")
+  px_val <- NULL
+  px <- get("ckanr_proxy", ckanr_settings_env)
+  if (!is.null(px)) {
+    px <- unclass(px)
+    px_val <- sprintf("%s:%s", px$options$proxy, px$options$proxyport)
+  }
+  cat("  Proxy:", px_val)
 }
 
 #------------------------------------------------------------------------------#
@@ -65,6 +75,8 @@ print.ckanr_settings <- function(x, ...) {
 #'   \code{test_url}
 #' @param test_behaviour (optional, character) Whether to fail ("FAIL") or skip
 #' ("SKIP") writing tests in case of problems with the configured test CKAN.
+#' @param proxy an object of class \code{request} from a call to 
+#' \code{httr::use_proxy}
 #' @details
 #' \code{ckanr_setup} sets CKAN connection details. \code{ckanr}'s functions
 #' default to use the default URL and API key unless specified explicitly.
@@ -102,6 +114,14 @@ print.ckanr_settings <- function(x, ...) {
 #' # Not specifying the default CKAN URL will reset the CKAN URL to its default
 #' # "http://data.techno-science.ca/":
 #' ckanr_setup()
+#' 
+#' # set a proxy
+#' library(httr)
+#' ckanr_setup(proxy = use_proxy("64.251.21.73", 8080))
+#' ckanr_settings()
+#' ## run without setting proxy to reset to no proxy
+#' ckanr_setup()
+#' ckanr_settings()
 ckanr_setup <- function(
   url = "http://data.techno-science.ca/",
   key = NULL,
@@ -111,7 +131,8 @@ ckanr_setup <- function(
   test_rid = NULL,
   test_gid = NULL,
   test_oid = NULL,
-  test_behaviour = NULL) {
+  test_behaviour = NULL,
+  proxy = NULL) {
 
   Sys.setenv("CKANR_DEFAULT_URL" = url)
   if (!is.null(key)) Sys.setenv("CKANR_DEFAULT_KEY" = key)
@@ -122,6 +143,7 @@ ckanr_setup <- function(
   if (!is.null(test_gid)) Sys.setenv("CKANR_TEST_GID" = test_gid)
   if (!is.null(test_oid)) Sys.setenv("CKANR_TEST_OID" = test_oid)
   if (!is.null(test_behaviour)) Sys.setenv("CKANR_TEST_BEHAVIOUR" = test_behaviour)
+  assign("ckanr_proxy", proxy, envir = ckanr_settings_env)
 }
 
 #------------------------------------------------------------------------------#
