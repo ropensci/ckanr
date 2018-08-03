@@ -1,8 +1,8 @@
 Package: ckanr
-Title: Client for the Comprehensive Knowledge Archive Network ('CKAN') 'API'
-Description: Client for 'CKAN' 'API' (http://ckan.org/). Includes interface
+Title: Client for the Comprehensive Knowledge Archive Network ('CKAN') API
+Description: Client for 'CKAN' API (http://ckan.org/). Includes interface
     to 'CKAN' 'APIs' for search, list, show for packages, organizations, and
-    resources. In addition, provides an interface to the 'datastore' 'API'.
+    resources. In addition, provides an interface to the 'datastore' API.
 Version: 0.1.2.9846
 Authors@R: c(
     person("Scott", "Chamberlain",
@@ -23,7 +23,7 @@ Authors@R: c(
 License: MIT + file LICENSE
 LazyData: true
 URL: https://github.com/ropensci/ckanr
-BugReports: http://www.github.com/ropensci/ckanr/issues
+BugReports: https://github.com/ropensci/ckanr/issues
 VignetteBuilder: knitr
 Depends: DBI (>= 0.3.1)
 Imports:
