@@ -1,6 +1,7 @@
 library("testthat")
 library("ckanr")
 
+source("testthat/helper-ckanr.R")
 prepare_test_ckan()
 
 # Test CKAN fallback
