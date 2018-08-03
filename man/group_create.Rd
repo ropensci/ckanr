@@ -4,11 +4,11 @@
 \alias{group_create}
 \title{Create a group}
 \usage{
-group_create(name = NULL, id = NULL, title = NULL, description = NULL,
-  image_url = NULL, type = NULL, state = "active",
-  approval_status = NULL, extras = NULL, packages = NULL, groups = NULL,
-  users = NULL, key = get_default_key(), url = get_default_url(),
-  as = "list", ...)
+group_create(name = NULL, id = NULL, title = NULL,
+  description = NULL, image_url = NULL, type = NULL,
+  state = "active", approval_status = NULL, extras = NULL,
+  packages = NULL, groups = NULL, users = NULL,
+  key = get_default_key(), url = get_default_url(), as = "list", ...)
 }
 \arguments{
 \item{name}{(character) the name of the new dataset, must be between 2 and 100 characters

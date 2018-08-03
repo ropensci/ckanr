@@ -5,9 +5,9 @@
 \title{Add a new table to a datastore}
 \usage{
 ds_create(resource_id = NULL, resource = NULL, force = FALSE,
-  aliases = NULL, fields = NULL, records = NULL, primary_key = NULL,
-  indexes = NULL, key = get_default_key(), url = get_default_url(),
-  as = "list", ...)
+  aliases = NULL, fields = NULL, records = NULL,
+  primary_key = NULL, indexes = NULL, key = get_default_key(),
+  url = get_default_url(), as = "list", ...)
 }
 \arguments{
 \item{resource_id}{(string) Resource id that the data is going to be stored

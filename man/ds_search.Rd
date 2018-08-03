@@ -4,9 +4,10 @@
 \alias{ds_search}
 \title{Datastore - search or get a dataset from CKRAN datastore}
 \usage{
-ds_search(resource_id = NULL, filters = NULL, q = NULL, plain = NULL,
-  language = NULL, fields = NULL, offset = NULL, limit = NULL,
-  sort = NULL, url = get_default_url(), as = "list", ...)
+ds_search(resource_id = NULL, filters = NULL, q = NULL,
+  plain = NULL, language = NULL, fields = NULL, offset = NULL,
+  limit = NULL, sort = NULL, url = get_default_url(), as = "list",
+  ...)
 }
 \arguments{
 \item{resource_id}{(character) id or alias of the resource to be searched against}

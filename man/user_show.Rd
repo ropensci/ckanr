@@ -5,8 +5,8 @@
 \title{Show a user.}
 \usage{
 user_show(id, user_obj = NULL, include_datasets = FALSE,
-  include_num_followers = FALSE, url = get_default_url(), as = "list",
-  ...)
+  include_num_followers = FALSE, url = get_default_url(),
+  as = "list", ...)
 }
 \arguments{
 \item{id}{(character) Package identifier.}

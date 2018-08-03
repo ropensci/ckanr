@@ -4,8 +4,8 @@
 \alias{resource_update}
 \title{Update a resource's file attachment}
 \usage{
-resource_update(id, path, key = get_default_key(), url = get_default_url(),
-  as = "list", ...)
+resource_update(id, path, key = get_default_key(),
+  url = get_default_url(), as = "list", ...)
 }
 \arguments{
 \item{id}{(character) Resource ID to update (required)}

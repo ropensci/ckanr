@@ -4,7 +4,8 @@
 \alias{package_delete}
 \title{Delete a package}
 \usage{
-package_delete(id, key = get_default_key(), url = get_default_url(), ...)
+package_delete(id, key = get_default_key(), url = get_default_url(),
+  ...)
 }
 \arguments{
 \item{id}{(character) The id of the package. Required.}

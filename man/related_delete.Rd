@@ -4,7 +4,8 @@
 \alias{related_delete}
 \title{Delete a related item.}
 \usage{
-related_delete(id, key = get_default_key(), url = get_default_url(), ...)
+related_delete(id, key = get_default_key(), url = get_default_url(),
+  ...)
 }
 \arguments{
 \item{id}{(character) Resource identifier.}

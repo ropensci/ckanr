@@ -4,8 +4,8 @@
 \alias{organization_show}
 \title{Show an organization}
 \usage{
-organization_show(id, include_datasets = FALSE, url = get_default_url(),
-  key = get_default_key(), as = "list", ...)
+organization_show(id, include_datasets = FALSE,
+  url = get_default_url(), key = get_default_key(), as = "list", ...)
 }
 \arguments{
 \item{id}{(character) Organization id or name.}

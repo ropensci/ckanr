@@ -5,8 +5,8 @@
 \title{Search for packages.}
 \usage{
 package_search(q = "*:*", fq = NULL, sort = NULL, rows = NULL,
-  start = NULL, facet = FALSE, facet.limit = NULL, facet.field = NULL,
-  url = get_default_url(), as = "list", ...)
+  start = NULL, facet = FALSE, facet.limit = NULL,
+  facet.field = NULL, url = get_default_url(), as = "list", ...)
 }
 \arguments{
 \item{q}{Query terms, defaults to '*:*', or everything.}

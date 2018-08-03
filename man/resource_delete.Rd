@@ -4,7 +4,8 @@
 \alias{resource_delete}
 \title{Delete a resource.}
 \usage{
-resource_delete(id, key = get_default_key(), url = get_default_url(), ...)
+resource_delete(id, key = get_default_key(), url = get_default_url(),
+  ...)
 }
 \arguments{
 \item{id}{(character) Resource identifier.}

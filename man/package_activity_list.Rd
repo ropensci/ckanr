@@ -4,8 +4,8 @@
 \alias{package_activity_list}
 \title{Return a list of the package's activity}
 \usage{
-package_activity_list(id, offset = 0, limit = 31, url = get_default_url(),
-  as = "list", ...)
+package_activity_list(id, offset = 0, limit = 31,
+  url = get_default_url(), as = "list", ...)
 }
 \arguments{
 \item{id}{(character) Package identifier.}

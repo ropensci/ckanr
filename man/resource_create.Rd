@@ -7,10 +7,10 @@
 resource_create(package_id = NULL, rcurl = NULL, revision_id = NULL,
   description = NULL, format = NULL, hash = NULL, name = NULL,
   resource_type = NULL, mimetype = NULL, mimetype_inner = NULL,
-  webstore_url = NULL, cache_url = NULL, size = NULL, created = NULL,
-  last_modified = NULL, cache_last_updated = NULL,
-  webstore_last_updated = NULL, upload = NULL, key = get_default_key(),
-  url = get_default_url(), as = "list", ...)
+  webstore_url = NULL, cache_url = NULL, size = NULL,
+  created = NULL, last_modified = NULL, cache_last_updated = NULL,
+  webstore_last_updated = NULL, upload = NULL,
+  key = get_default_key(), url = get_default_url(), as = "list", ...)
 }
 \arguments{
 \item{package_id}{(character) id of package that the resource should be added to.

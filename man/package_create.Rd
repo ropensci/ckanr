@@ -6,9 +6,9 @@
 \usage{
 package_create(name = NULL, title = NULL, author = NULL,
   author_email = NULL, maintainer = NULL, maintainer_email = NULL,
-  license_id = NULL, notes = NULL, package_url = NULL, version = NULL,
-  state = "active", type = NULL, resources = NULL, tags = NULL,
-  extras = NULL, relationships_as_object = NULL,
+  license_id = NULL, notes = NULL, package_url = NULL,
+  version = NULL, state = "active", type = NULL, resources = NULL,
+  tags = NULL, extras = NULL, relationships_as_object = NULL,
   relationships_as_subject = NULL, groups = NULL, owner_org = NULL,
   key = get_default_key(), url = get_default_url(), as = "list", ...)
 }
