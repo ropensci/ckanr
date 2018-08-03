@@ -25,6 +25,7 @@ LazyData: true
 URL: https://github.com/ropensci/ckanr
 BugReports: https://github.com/ropensci/ckanr/issues
 VignetteBuilder: knitr
+Encoding: UTF-8
 Depends: DBI (>= 0.3.1)
 Imports:
     methods,

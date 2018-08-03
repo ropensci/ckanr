@@ -24,23 +24,25 @@ ckan_VERB <- function(verb, url, method, body, key, ...) {
     if (!inherits(proxy, "request")) {
       stop("proxy must be of class 'request', see ?ckanr_setup")
     }
+  } else {
+    proxy <- httr::config()
   }
   if (is.null(key)) {
     # no authentication
     if (is.null(body) || length(body) == 0) {
-      res <- VERB(file.path(url, ck(), method), ctj(), proxy, ...)
+      res <- VERB(file.path(url, ck(), method), ctj(), config = proxy, ...)
     } else {
-      res <- VERB(file.path(url, ck(), method), body = body, proxy, ...)
+      res <- VERB(file.path(url, ck(), method), body = body, config = proxy, ...)
     }
   } else {
     # authentication
     api_key_header <- add_headers("X-CKAN-API-Key" = key)
     if (is.null(body) || length(body) == 0) {
       res <- VERB(file.path(url, ck(), method), ctj(), 
-        api_key_header, proxy, ...)
+        api_key_header, config = proxy, ...)
     } else {
       res <- VERB(file.path(url, ck(), method), body = body, 
-        api_key_header, proxy, ...)
+        api_key_header, config = proxy, ...)
     }
   }
   err_handler(res)
@@ -61,27 +63,27 @@ fetch_GET <- function(x, store, path, args = NULL, ...) {
       fmt <- file_fmt(x)
       dat <- NULL
       path <- paste0(path, ".xls")
-      res <- GET(x, query = args, write_disk(path, TRUE), proxy, ...)
+      res <- GET(x, query = args, write_disk(path, TRUE), config = proxy, ...)
       path <- res$request$output$path
     } else if (file_fmt(x) %in% c("shp", "zip")) {
       fmt <- "shp"
       dat <- NULL
       path <- paste0(path, ".zip")
-      res <- GET(x, query = args, write_disk(path, TRUE), proxy, ...)
+      res <- GET(x, query = args, write_disk(path, TRUE), config = proxy, ...)
       dir <- tempdir()
       unzip(path, exdir = dir)
       path <- list.files(dir, pattern = ".shp$", full.names = TRUE)
     } else {
       fmt <- file_fmt(x)
       path <- NULL
-      res <- GET(x, query = args, proxy, ...)
+      res <- GET(x, query = args, config = proxy, ...)
       err_handler(res)
       dat <- content(res, "text", encoding = "UTF-8")
     }
     list(store = store, fmt = fmt, data = dat, path = path)
   } else {
     # if (!file.exists(path)) stop("path does not exist", call. = FALSE)
-    res <- GET(x, query = args, write_disk(path, TRUE), proxy, ...)
+    res <- GET(x, query = args, write_disk(path, TRUE), config = proxy, ...)
     list(store = store, fmt = file_fmt(x), data = NULL, path = res$request$output$path)
   }
 }

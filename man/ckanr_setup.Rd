@@ -78,8 +78,7 @@ ckanr_setup(url = "http://data.techno-science.ca/", key = "some-CKAN-API-key",
 ckanr_setup()
 
 # set a proxy
-library(httr)
-ckanr_setup(proxy = use_proxy("64.251.21.73", 8080))
+ckanr_setup(proxy = httr::use_proxy("64.251.21.73", 8080))
 ckanr_settings()
 ## run without setting proxy to reset to no proxy
 ckanr_setup()

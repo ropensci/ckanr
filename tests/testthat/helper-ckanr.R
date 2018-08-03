@@ -15,7 +15,7 @@
 #' re-created before running tests.
 #' @param test_url A test CKAN instance where we are allowed to create dummy resources
 #' @param test_key A working API key for an account on the test instance
-prepare_test_ckan <- function(test_url = "http://demo.ckan.org/",
+prepare_test_ckan <- function(test_url = "https://demo.ckan.org/",
                               test_key = Sys.getenv("TEST_API_KEY")){
   if (test_key == "") {
     message("Please provide your demo.ckan.org API key as parameter 'test_key' or via Sys.setenv(TEST_API_KEY = \"my-api-key\")")
