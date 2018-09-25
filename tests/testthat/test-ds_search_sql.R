@@ -1,6 +1,8 @@
 context("ds_search_sql")
-u <- get_test_url()
-r <- get_test_rid()
+
+u <- "http://data.nhm.ac.uk/"
+r <- "8f0784a6-82dd-44e7-b105-6194e046eb8d"
+
 if (r == "") {
   did <- package_list(limit = 1, url = u)[[1]]
   pkg <- package_show(did, url = u)

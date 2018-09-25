@@ -1,6 +1,6 @@
 context("package_activity_list")
-u <- get_test_url()
 
+u <- get_test_url()
 id <- package_list(limit = 1, url=u)[[1]]
 
 package_activity_num <- local({

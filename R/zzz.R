@@ -31,8 +31,10 @@ ckan_VERB <- function(verb, url, method, body, key, ...) {
     # no authentication
     if (is.null(body) || length(body) == 0) {
       res <- VERB(file.path(url, ck(), method), ctj(), config = proxy, ...)
+      # res <- VERB(file.path(url, ck(), method), ctj(), config = httr::config(proxy, ...))
     } else {
       res <- VERB(file.path(url, ck(), method), body = body, config = proxy, ...)
+      # res <- VERB(file.path(url, ck(), method), body = body, config = httr::config(proxy, ...))
     }
   } else {
     # authentication
@@ -40,9 +42,11 @@ ckan_VERB <- function(verb, url, method, body, key, ...) {
     if (is.null(body) || length(body) == 0) {
       res <- VERB(file.path(url, ck(), method), ctj(), 
         api_key_header, config = proxy, ...)
+        # api_key_header, config = httr::config(proxy, ...))
     } else {
       res <- VERB(file.path(url, ck(), method), body = body, 
         api_key_header, config = proxy, ...)
+        # api_key_header, config = httr::config(proxy, ...))
     }
   }
   err_handler(res)

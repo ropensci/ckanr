@@ -141,7 +141,7 @@ check_group <- function(url, x){
 #' @importFrom testthat skip
 check_organization <- function(url, x){
   org <- organization_show(x, url = url)
-  if (get_test_behaviour()=="SKIP" && !is(org, "list") && grp$id != x) {
+  if (get_test_behaviour()=="SKIP" && !is(org, "list") && org$id != x) {
     skip(paste("The CKAN test group wasn't found.",
                "Did you set CKAN test settings with ?ckanr_setup ?",
                "Does an organization with slug", x, "exist on", url, "?"))

@@ -1,4 +1,5 @@
 context("organization_show")
+
 u <- get_test_url()
 o <- get_test_oid()
 

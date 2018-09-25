@@ -26,12 +26,12 @@
 #' \url{http://www.postgresql.org/docs/9.1/static/datatype-textsearch.html#DATATYPE-TSQUERY}.
 #' @examples \dontrun{
 #' url <- 'http://data.nhm.ac.uk/'
-#' ds_search(resource_id = 'f4129802-22aa-4437-b9f9-8a8f3b7b2a53', url = url)
-#' ds_search(resource_id = 'f4129802-22aa-4437-b9f9-8a8f3b7b2a53', url = url, as = "table")
-#' ds_search(resource_id = 'f4129802-22aa-4437-b9f9-8a8f3b7b2a53', url = url, as = "json")
+#' ds_search(resource_id = '8f0784a6-82dd-44e7-b105-6194e046eb8d', url = url)
+#' ds_search(resource_id = '8f0784a6-82dd-44e7-b105-6194e046eb8d', url = url, as = "table")
+#' ds_search(resource_id = '8f0784a6-82dd-44e7-b105-6194e046eb8d', url = url, as = "json")
 #'
-#' ds_search(resource_id = 'f4129802-22aa-4437-b9f9-8a8f3b7b2a53', url = url, limit = 1, as = "table")
-#' ds_search(resource_id = 'f4129802-22aa-4437-b9f9-8a8f3b7b2a53', url = url, q = "a*")
+#' ds_search(resource_id = '8f0784a6-82dd-44e7-b105-6194e046eb8d', url = url, limit = 1, as = "table")
+#' ds_search(resource_id = '8f0784a6-82dd-44e7-b105-6194e046eb8d', url = url, q = "a*")
 #' }
 
 ds_search <- function(resource_id = NULL, filters = NULL, q = NULL, plain = NULL,

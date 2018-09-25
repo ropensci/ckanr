@@ -6,7 +6,7 @@
 #' @template args
 #' @examples \dontrun{
 #' # Setup
-#' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+#' ckanr_setup(url = "https://demo.ckan.org/", key = Sys.getenv("CKAN_DEMO_KEY"))
 #'
 #' # create a package
 #' (res <- package_create("yellow7"))

@@ -7,7 +7,18 @@ path <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
 url <- get_test_url()
 key <- get_test_key()
 did <- get_test_did()
-rid <- get_test_rid()
+tt <- tryCatch(package_show(did, key = key, url = url), error = function(e) e)
+if (inherits(tt, "error")) {
+  did <- package_create(did, url = url, key = key)$id
+}
+# rid <- get_test_rid()
+rid <- resource_create(package_id = did,
+                        description = "my resource",
+                        name = "bears",
+                        upload = path,
+                        rcurl = "http://google.com",
+                        url = url, key = key)
+rid <- rid$id
 
 test_that("The CKAN URL must be set", { expect_is(url, "character") })
 test_that("The CKAN API key must be set", { expect_is(key, "character") })
@@ -18,13 +29,13 @@ test_that("resource_update gives back expected class types and output", {
   check_ckan(url)
   check_resource(url, rid)
 
-  xx <- resource_create(package_id = did,
-                        description = "my resource",
-                        name = "bears",
-                        upload = path,
-                        rcurl = "http://google.com",
-                        url = url, key = key)
-  a <- resource_update(xx$id, path = path, url = url, key = key)
+  # xx <- resource_create(package_id = did,
+  #                       description = "my resource",
+  #                       name = "bears",
+  #                       upload = path,
+  #                       rcurl = "http://google.com",
+  #                       url = url, key = key)
+  a <- resource_update(rid, path = path, url = url, key = key)
 
   # class types
   # expect_is(a, "ckan_resource")
@@ -32,7 +43,7 @@ test_that("resource_update gives back expected class types and output", {
   expect_is(a$id, "character")
 
   # expected output
-  expect_equal(a$id, xx$id)
+  expect_equal(a$id, rid)
   expect_true(grepl("actinidiaceae", a$url))
 })
 
