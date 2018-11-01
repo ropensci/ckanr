@@ -11,18 +11,20 @@ package_search(q = "*:*", fq = NULL, sort = NULL, rows = NULL,
 \arguments{
 \item{q}{Query terms, defaults to '*:*', or everything.}
 
-\item{fq}{Filter query, this does not affect the search, only what gets returned}
+\item{fq}{Filter query, this does not affect the search, only what gets 
+returned}
 
-\item{sort}{Field to sort on. You can specify ascending (e.g., score desc) or
-descending (e.g., score asc), sort by two fields (e.g., score desc, price asc),
-or sort by a function (e.g., sum(x_f, y_f) desc, which sorts by the sum of
-x_f and y_f in a descending order).}
+\item{sort}{Field to sort on. You can specify ascending (e.g., score desc) 
+or descending (e.g., score asc), sort by two fields (e.g., score desc, 
+price asc), or sort by a function (e.g., sum(x_f, y_f) desc, which sorts 
+by the sum of x_f and y_f in a descending order).}
 
 \item{rows}{Number of records to return. Defaults to 10.}
 
 \item{start}{Record to start at, default to beginning.}
 
-\item{facet}{(logical) Whether to return facet results or not. Default: FALSE}
+\item{facet}{(logical) Whether to return facet results or not. 
+Default: FALSE}
 
 \item{facet.limit}{(numeric) This param indicates the maximum number of
 constraint counts that should be returned for the facet fields.
@@ -30,11 +32,11 @@ A negative value means unlimited. Default: 100.
 Can be specified on a per field basis.}
 
 \item{facet.field}{(charcter) This param allows you to specify a field which
-should be treated as a facet. It will iterate over each Term in the field and
-generate a facet count using that Term as the constraint. This parameter can
-be specified multiple times to indicate multiple facet fields. None of the
-other params in this section will have any effect without specifying at least
-one field name using this param.}
+should be treated as a facet. It will iterate over each Term in the field 
+and generate a facet count using that Term as the constraint. This parameter 
+can be specified multiple times to indicate multiple facet fields. None of 
+the other params in this section will have any effect without specifying at 
+least one field name using this param.}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
@@ -51,7 +53,7 @@ Search for packages.
 }
 \examples{
 \dontrun{
-ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+ckanr_setup(url = "https://demo.ckan.org/", key=getOption("ckan_demo_key"))
 
 package_search(q = '*:*')
 package_search(q = '*:*', rows = 2, as = 'json')
