@@ -30,10 +30,10 @@ ckan_VERB <- function(verb, url, method, body, key, ...) {
   if (is.null(key)) {
     # no authentication
     if (is.null(body) || length(body) == 0) {
-      res <- VERB(file.path(url, ck(), method), ctj(), config = proxy, ...)
+      res <- VERB(file.path(url, ck(), method), ctj(), proxy, ...)
       # res <- VERB(file.path(url, ck(), method), ctj(), config = httr::config(proxy, ...))
     } else {
-      res <- VERB(file.path(url, ck(), method), body = body, config = proxy, ...)
+      res <- VERB(file.path(url, ck(), method), body = body, proxy, ...)
       # res <- VERB(file.path(url, ck(), method), body = body, config = httr::config(proxy, ...))
     }
   } else {
@@ -41,11 +41,11 @@ ckan_VERB <- function(verb, url, method, body, key, ...) {
     api_key_header <- add_headers("X-CKAN-API-Key" = key)
     if (is.null(body) || length(body) == 0) {
       res <- VERB(file.path(url, ck(), method), ctj(), 
-        api_key_header, config = proxy, ...)
+        api_key_header, proxy, ...)
         # api_key_header, config = httr::config(proxy, ...))
     } else {
       res <- VERB(file.path(url, ck(), method), body = body, 
-        api_key_header, config = proxy, ...)
+        api_key_header, proxy, ...)
         # api_key_header, config = httr::config(proxy, ...))
     }
   }

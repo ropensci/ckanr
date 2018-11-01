@@ -6,7 +6,9 @@
 \usage{
 package_search(q = "*:*", fq = NULL, sort = NULL, rows = NULL,
   start = NULL, facet = FALSE, facet.limit = NULL,
-  facet.field = NULL, url = get_default_url(), as = "list", ...)
+  facet.field = NULL, facet.mincount = NULL, include_drafts = FALSE,
+  include_private = FALSE, use_default_schema = FALSE,
+  url = get_default_url(), as = "list", ...)
 }
 \arguments{
 \item{q}{Query terms, defaults to '*:*', or everything.}
@@ -37,6 +39,21 @@ and generate a facet count using that Term as the constraint. This parameter
 can be specified multiple times to indicate multiple facet fields. None of 
 the other params in this section will have any effect without specifying at 
 least one field name using this param.}
+
+\item{facet.mincount}{(integer) the minimum counts for facet fields should 
+be included in the results}
+
+\item{include_drafts}{(logical) if \code{TRUE} draft datasets will be 
+included. A user will only be returned their own draft datasets, and a 
+sysadmin will be returned all draft datasets. default: \code{FALSE}}
+
+\item{include_private}{(logical) if \code{TRUE} private datasets will be 
+included. Only private datasets from the user’s organizations will be 
+returned and sysadmins will be returned all private datasets.
+default: \code{FALSE}}
+
+\item{use_default_schema}{(logical) use default package schema instead of a
+custom schema defined with an IDatasetForm plugin. default: \code{FALSE}}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}

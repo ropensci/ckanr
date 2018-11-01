@@ -23,6 +23,17 @@
 #' can be specified multiple times to indicate multiple facet fields. None of 
 #' the other params in this section will have any effect without specifying at 
 #' least one field name using this param.
+#' @param facet.mincount (integer) the minimum counts for facet fields should 
+#' be included in the results
+#' @param include_drafts (logical) if \code{TRUE} draft datasets will be 
+#' included. A user will only be returned their own draft datasets, and a 
+#' sysadmin will be returned all draft datasets. default: \code{FALSE}
+#' @param include_private (logical) if \code{TRUE} private datasets will be 
+#' included. Only private datasets from the user’s organizations will be 
+#' returned and sysadmins will be returned all private datasets.
+#' default: \code{FALSE}
+#' @param use_default_schema (logical) use default package schema instead of a
+#' custom schema defined with an IDatasetForm plugin. default: \code{FALSE}
 #' @template args
 #' @examples \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org/", key=getOption("ckan_demo_key"))
@@ -38,11 +49,17 @@
 #' }
 package_search <- function(q = '*:*', fq = NULL, sort = NULL, rows = NULL,
   start = NULL, facet = FALSE, facet.limit = NULL, facet.field = NULL,
-  url = get_default_url(), as = 'list', ...) {
+  facet.mincount = NULL, include_drafts = FALSE, include_private = FALSE, 
+  use_default_schema = FALSE, url = get_default_url(), as = 'list', ...) {
 
-  args <- cc(list(q = q, fq = fq, sort = sort, rows = rows, start = start,
-                  facet = as_log(facet), facet.limit = facet.limit,
-                  facet.field = facet.field))
+  args <- cc(list(
+    q = q, fq = fq, sort = sort, rows = rows, start = start,
+    facet = as_log(facet), facet.limit = facet.limit,
+    facet.field = facet.field, facet.mincount = facet.mincount,
+    include_drafts = as_log(include_drafts), 
+    include_private = as_log(include_private), 
+    use_default_schema = as_log(use_default_schema)
+  ))
   res <- ckan_GET(url, 'package_search', args, key = NULL, ...)
   switch(as, json = res,
          list = {
