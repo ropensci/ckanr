@@ -141,7 +141,7 @@ asl <- function(z) {
 }
 
 tojun <- function(x, unbox = TRUE) {
-  jsonlite::toJSON(x, auto_unbox = unbox)
+  jsonlite::toJSON(x, auto_unbox=F, na="null")
 }
 
 check4X <- function(x) {
