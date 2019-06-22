@@ -8,36 +8,37 @@
 #' @param path if store=disk, you must give a path to store file to
 #' @param ... Curl arguments passed on to \code{\link[httr]{GET}}
 #' @examples \dontrun{
+#' # CSV file
 #' ckanr_setup('http://datamx.io')
 #' res <- resource_show(id = "6145a539-cbde-4b0d-a3d3-d1a5eb013f5c", as = "table")
 #' head(ckan_fetch(res$url))
 #' ckan_fetch(res$url, "disk", "myfile.csv")
 #'
 #' # Excel file - requires readxl package
-#' ckanr_setup()
-#' res <- resource_show(id = "f4f871ae-139f-4acd-a700-8a08a1a04f95", as = "table")
+#' ckanr_setup('http://datamx.io')
+#' res <- resource_show(id = "e883510e-a082-435c-872a-c5b915857ae1", as = "table")
 #' head(ckan_fetch(res$url))
 #'
 #' # XML file
-#' ckanr_setup("http://publicdata.eu/")
-#' res <- resource_show(id = "ba447d6b-271e-42c2-965e-945f8e26b2ff", as = "table")
+#' ckanr_setup("http://data.ottawa.ca")
+#' res <- resource_show(id = "380061c1-6c46-4da6-a01b-7ab0f49a881e", as = "table")
 #' ckan_fetch(res$url)
 #'
 #' # HTML file
-#' ckanr_setup("http://publicdata.eu/")
-#' res <- resource_show(id = "9b5bebd8-ff40-476c-beeb-aae172031d5f", as = "table")
+#' ckanr_setup("http://open.canada.ca/data/en")
+#' res <- resource_show(id = "80321bac-4283-487c-93bd-c65acaa660f5", as = "table")
 #' ckan_fetch(res$url)
 #' library("xml2")
-#' xml_text(xml_find_one(xml_children(ckan_fetch(res$url))[[1]], "title"))
+#' xml_text(xml_find_first(xml_children(ckan_fetch(res$url))[[1]], "title"))
 #'
 #' # JSON file, by default reads in to a data.frame for ease of use
-#' ckanr_setup("http://publicdata.eu/")
-#' res <- resource_show(id = "fa268f29-5e19-4402-a014-3e0fb93936a8", as = "table")
+#' ckanr_setup("http://data.surrey.ca")
+#' res <- resource_show(id = "8d07c662-800d-4977-9e3e-5a3d2d1e99ab", as = "table")
 #' head(ckan_fetch(res$url))
 #'
 #' # SHP file (spatial data, ESRI format)
-#' ckanr_setup("http://publicdata.eu/")
-#' res <- resource_show(id = "7618b8e2-7308-4964-8024-f13df166e7fd", as = "table")
+#' ckanr_setup("https://ckan0.cf.opendata.inter.sandbox-toronto.ca")
+#' res <- resource_show(id = "6cbb0aa3-a8d1-421c-9c40-14c6f05e0c73", as = "table")
 #' x <- ckan_fetch(res$url)
 #' class(x)
 #' plot(x)
