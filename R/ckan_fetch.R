@@ -59,6 +59,10 @@ read_session <- function(fmt, dat, path) {
            check4X("readxl")
            readxl::read_excel(path)
          },
+         xlsx = {
+           check4X("readxl")
+           readxl::read_excel(path)
+         },
          xml = {
            check4X("xml2")
            xml2::read_xml(dat)

@@ -40,11 +40,11 @@ ckan_VERB <- function(verb, url, method, body, key, ...) {
     # authentication
     api_key_header <- add_headers("X-CKAN-API-Key" = key)
     if (is.null(body) || length(body) == 0) {
-      res <- VERB(file.path(url, ck(), method), ctj(), 
+      res <- VERB(file.path(url, ck(), method), ctj(),
         api_key_header, proxy, ...)
         # api_key_header, config = httr::config(proxy, ...))
     } else {
-      res <- VERB(file.path(url, ck(), method), body = body, 
+      res <- VERB(file.path(url, ck(), method), body = body,
         api_key_header, proxy, ...)
         # api_key_header, config = httr::config(proxy, ...))
     }
@@ -63,10 +63,10 @@ fetch_GET <- function(x, store, path, args = NULL, ...) {
     }
   }
   if (store == "session") {
-    if (file_fmt(x) == "xls") {
+    if (file_fmt(x) %in% c("xls", "xlsx")) {
       fmt <- file_fmt(x)
       dat <- NULL
-      path <- paste0(path, ".xls")
+      path <- paste0(path, ".", fmt)
       res <- GET(x, query = args, write_disk(path, TRUE), config = proxy, ...)
       path <- res$request$output$path
     } else if (file_fmt(x) %in% c("shp", "zip")) {
