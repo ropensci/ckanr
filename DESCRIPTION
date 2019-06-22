@@ -38,7 +38,7 @@ Imports:
     magrittr
 Suggests:
     knitr,
-    maptools,
+    sf,
     readxl,
     testthat,
     xml2,

@@ -69,8 +69,8 @@ read_session <- function(fmt, dat, path) {
          },
          json = jsonlite::fromJSON(dat),
          shp = {
-           check4X("maptools")
-           maptools::readShapePoints(path)
+           check4X("sf")
+           sf::st_read(path)
          }
   )
 }
