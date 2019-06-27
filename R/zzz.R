@@ -54,7 +54,7 @@ ckan_VERB <- function(verb, url, method, body, key, ...) {
 }
 
 # GET fxn for fetch()
-fetch_GET <- function(x, store, path, args = NULL, ...) {
+fetch_GET <- function(x, store, path, args = NULL, fmt = NULL, ...) {
   # check if proxy set
   proxy <- get("ckanr_proxy", ckanr_settings_env)
   if (!is.null(proxy)) {
@@ -62,14 +62,17 @@ fetch_GET <- function(x, store, path, args = NULL, ...) {
       stop("proxy must be of class 'request', see ?ckanr_setup")
     }
   }
+  # set file format
+  file_fmt <- file_fmt(x)
+  fmt <- ifelse(identical(file_fmt, character(0)), fmt, file_fmt)
+  fmt <- tolower(fmt)
   if (store == "session") {
-    if (file_fmt(x) %in% c("xls", "xlsx")) {
-      fmt <- file_fmt(x)
+    if (fmt %in% c("xls", "xlsx")) {
       dat <- NULL
       path <- paste0(path, ".", fmt)
       res <- GET(x, query = args, write_disk(path, TRUE), config = proxy, ...)
       path <- res$request$output$path
-    } else if (file_fmt(x) %in% c("shp", "zip")) {
+    } else if (fmt %in% c("shp", "zip")) {
       fmt <- "shp"
       dat <- NULL
       path <- paste0(path, ".zip")
@@ -78,7 +81,6 @@ fetch_GET <- function(x, store, path, args = NULL, ...) {
       unzip(path, exdir = dir)
       path <- list.files(dir, pattern = ".shp$", full.names = TRUE)
     } else {
-      fmt <- file_fmt(x)
       path <- NULL
       res <- GET(x, query = args, config = proxy, ...)
       err_handler(res)
@@ -88,7 +90,7 @@ fetch_GET <- function(x, store, path, args = NULL, ...) {
   } else {
     # if (!file.exists(path)) stop("path does not exist", call. = FALSE)
     res <- GET(x, query = args, write_disk(path, TRUE), config = proxy, ...)
-    list(store = store, fmt = file_fmt(x), data = NULL, path = res$request$output$path)
+    list(store = store, fmt = fmt, data = NULL, path = res$request$output$path)
   }
 }
 

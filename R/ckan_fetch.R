@@ -6,6 +6,7 @@
 #' @param store One of session (default) or disk. session stores in R session, and
 #' disk saves the file to disk.
 #' @param path if store=disk, you must give a path to store file to
+#' @param format (optional) format of the file. One of "XSV", "XLS", "XLSX", "XML", "HTML", "JSON", "SHP". Case insensitive.
 #' @param ... Curl arguments passed on to \code{\link[httr]{GET}}
 #' @examples \dontrun{
 #' # CSV file
@@ -43,9 +44,15 @@
 #' class(x)
 #' plot(x)
 #' }
-ckan_fetch <- function(x, store = "session", path = "file", ...) {
+ckan_fetch <- function(x, store = "session", path = "file", fmt = NULL, ...) {
   store <- match.arg(store, c("session", "disk"))
-  res <- fetch_GET(x, store, path, ...)
+  file_fmt <- file_fmt(x)
+  if (identical(file_fmt, character(0)) & is.null(fmt)){
+    stop("File format is not available from URL; please specify via `format` argument.")
+  }
+  fmt <- ifelse(identical(file_fmt, character(0)), fmt, file_fmt)
+  fmt <- tolower(fmt)
+  res <- fetch_GET(x, store, path, fmt = fmt, ...)
   if (store == "session") {
     read_session(res$fmt, res$data, res$path)
   } else {
