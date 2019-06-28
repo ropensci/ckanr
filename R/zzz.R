@@ -54,7 +54,7 @@ ckan_VERB <- function(verb, url, method, body, key, ...) {
 }
 
 # GET fxn for fetch()
-fetch_GET <- function(x, store, path, args = NULL, fmt = NULL, ...) {
+fetch_GET <- function(x, store, path, args = NULL, format = NULL, ...) {
   # check if proxy set
   proxy <- get("ckanr_proxy", ckanr_settings_env)
   if (!is.null(proxy)) {
@@ -64,7 +64,7 @@ fetch_GET <- function(x, store, path, args = NULL, fmt = NULL, ...) {
   }
   # set file format
   file_fmt <- file_fmt(x)
-  fmt <- ifelse(identical(file_fmt, character(0)), fmt, file_fmt)
+  fmt <- ifelse(identical(file_fmt, character(0)), format, file_fmt)
   fmt <- tolower(fmt)
   if (store == "session") {
     if (fmt %in% c("xls", "xlsx")) {

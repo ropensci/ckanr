@@ -4,7 +4,7 @@
 \alias{ckan_fetch}
 \title{Download a file}
 \usage{
-ckan_fetch(x, store = "session", path = "file", fmt = NULL, ...)
+ckan_fetch(x, store = "session", path = "file", format = NULL, ...)
 }
 \arguments{
 \item{x}{URL for the file}
@@ -14,7 +14,7 @@ disk saves the file to disk.}
 
 \item{path}{if store=disk, you must give a path to store file to}
 
-\item{fmt}{Format of the file. Required if format is not detectable through file URL.}
+\item{format}{Format of the file. Required if format is not detectable through file URL.}
 
 \item{...}{Curl arguments passed on to \code{\link[httr]{GET}}}
 }
@@ -33,7 +33,8 @@ ckan_fetch(res$url, "disk", "myfile.csv")
 ckanr_setup("https://ckan0.cf.opendata.inter.sandbox-toronto.ca")
 res <- resource_show(id = "75c69a49-8573-4dda-b41a-d312a33b2e05", as = "table")
 res$url
-head(ckan_fetch(res$url, fmt = "CSV"))
+res$format
+head(ckan_fetch(res$url, fmt = res$format))
 
 # Excel file - requires readxl package
 ckanr_setup("http://datamx.io")
