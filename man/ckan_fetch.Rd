@@ -4,7 +4,7 @@
 \alias{ckan_fetch}
 \title{Download a file}
 \usage{
-ckan_fetch(x, store = "session", path = "file", format = NULL, ...)
+ckan_fetch(x, store = "session", path = "file", fmt = NULL, ...)
 }
 \arguments{
 \item{x}{URL for the file}
@@ -14,7 +14,7 @@ disk saves the file to disk.}
 
 \item{path}{if store=disk, you must give a path to store file to}
 
-\item{format}{(optional) format of the file. One of "XSV", "XLS", "XLSX", "XML", "HTML", "JSON", "SHP". Case insensitive.}
+\item{fmt}{Format of the file. Required if format is not detectable through file URL.}
 
 \item{...}{Curl arguments passed on to \code{\link[httr]{GET}}}
 }
@@ -24,22 +24,28 @@ Download a file
 \examples{
 \dontrun{
 # CSV file
-ckanr_setup('http://datamx.io')
+ckanr_setup("http://datamx.io")
 res <- resource_show(id = "6145a539-cbde-4b0d-a3d3-d1a5eb013f5c", as = "table")
 head(ckan_fetch(res$url))
 ckan_fetch(res$url, "disk", "myfile.csv")
 
+# CSV file, format not available
+ckanr_setup("https://ckan0.cf.opendata.inter.sandbox-toronto.ca")
+res <- resource_show(id = "75c69a49-8573-4dda-b41a-d312a33b2e05", as = "table")
+res$url
+head(ckan_fetch(res$url, fmt = "CSV"))
+
 # Excel file - requires readxl package
-ckanr_setup('http://datamx.io')
+ckanr_setup("http://datamx.io")
 res <- resource_show(id = "e883510e-a082-435c-872a-c5b915857ae1", as = "table")
 head(ckan_fetch(res$url))
 
-# XML file
+# XML file - requires xml2 package
 ckanr_setup("http://data.ottawa.ca")
 res <- resource_show(id = "380061c1-6c46-4da6-a01b-7ab0f49a881e", as = "table")
 ckan_fetch(res$url)
 
-# HTML file
+# HTML file - requires xml2 package
 ckanr_setup("http://open.canada.ca/data/en")
 res <- resource_show(id = "80321bac-4283-487c-93bd-c65acaa660f5", as = "table")
 ckan_fetch(res$url)
@@ -51,7 +57,7 @@ ckanr_setup("http://data.surrey.ca")
 res <- resource_show(id = "8d07c662-800d-4977-9e3e-5a3d2d1e99ab", as = "table")
 head(ckan_fetch(res$url))
 
-# SHP file (spatial data, ESRI format)
+# SHP file (spatial data, ESRI format) - requires sf package
 ckanr_setup("https://ckan0.cf.opendata.inter.sandbox-toronto.ca")
 res <- resource_show(id = "6cbb0aa3-a8d1-421c-9c40-14c6f05e0c73", as = "table")
 x <- ckan_fetch(res$url)
