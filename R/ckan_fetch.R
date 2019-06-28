@@ -6,7 +6,7 @@
 #' @param store One of session (default) or disk. session stores in R session, and
 #' disk saves the file to disk.
 #' @param path if store=disk, you must give a path to store file to
-#' @param fmt Format of the file. Required if format is not detectable through file URL.
+#' @param format Format of the file. Required if format is not detectable through file URL.
 #' @param ... Curl arguments passed on to \code{\link[httr]{GET}}
 #' @examples \dontrun{
 #' # CSV file
@@ -19,7 +19,8 @@
 #' ckanr_setup("https://ckan0.cf.opendata.inter.sandbox-toronto.ca")
 #' res <- resource_show(id = "75c69a49-8573-4dda-b41a-d312a33b2e05", as = "table")
 #' res$url
-#' head(ckan_fetch(res$url, fmt = "CSV"))
+#' res$format
+#' head(ckan_fetch(res$url, format = res$format))
 #'
 #' # Excel file - requires readxl package
 #' ckanr_setup("http://datamx.io")
@@ -50,15 +51,15 @@
 #' class(x)
 #' plot(x)
 #' }
-ckan_fetch <- function(x, store = "session", path = "file", fmt = NULL, ...) {
+ckan_fetch <- function(x, store = "session", path = "file", format = NULL, ...) {
   store <- match.arg(store, c("session", "disk"))
   file_fmt <- file_fmt(x)
-  if (identical(file_fmt, character(0)) & is.null(fmt)){
+  if (identical(file_fmt, character(0)) & is.null(format)) {
     stop("File format is not available from URL; please specify via `format` argument.")
   }
-  fmt <- ifelse(identical(file_fmt, character(0)), fmt, file_fmt)
+  fmt <- ifelse(identical(file_fmt, character(0)), format, file_fmt)
   fmt <- tolower(fmt)
-  res <- fetch_GET(x, store, path, fmt = fmt, ...)
+  res <- fetch_GET(x, store, path, format = fmt, ...)
   if (store == "session") {
     read_session(res$fmt, res$data, res$path)
   } else {
