@@ -34,7 +34,7 @@ ckanr_setup("https://ckan0.cf.opendata.inter.sandbox-toronto.ca")
 res <- resource_show(id = "75c69a49-8573-4dda-b41a-d312a33b2e05", as = "table")
 res$url
 res$format
-head(ckan_fetch(res$url, fmt = res$format))
+head(ckan_fetch(res$url, format = res$format))
 
 # Excel file - requires readxl package
 ckanr_setup("http://datamx.io")
