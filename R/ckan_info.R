@@ -12,7 +12,7 @@
 #' ckan_version(servers()[5])
 #' }
 ckan_info <- function(url = get_default_url(), ...) {
-  res <- httr::GET(file.path(url, "api/util/status"), ...)
+  res <- httr::GET(file.path(sub("/$", "", url), "api/util/status"), ...)
   stop_for_status(res)
   jsonlite::fromJSON(httr::content(res, "text", encoding = "UTF-8"))
 }
