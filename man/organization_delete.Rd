@@ -22,14 +22,22 @@ data.frame. (required)}
 
 \item{...}{Curl args passed on to \code{\link[httr]{POST}} (optional)}
 }
+\value{
+an empty list on success
+}
 \description{
 Delete an organization
 }
 \examples{
 \dontrun{
-ckanr_setup(url = "https://demo.ckan.org/")
+ckanr_setup(url = "https://demo.ckan.org", key=getOption("ckan_demo_key"))
 
-# delete an organization
-organization_delete(id = "someorgid")
+# create an organization
+(res <- organization_create("foobar", title = "Foo bars",
+  description = "love foo bars"))
+
+# delete the organization just created
+res$id
+organization_delete(id = res$id)
 }
 }

@@ -4,7 +4,7 @@
 #'
 #' @param id (character) Organization id or name.
 #' @param include_datasets (logical). Whether to include a list of the
-#'   organization datasets
+#' organization datasets
 #' @template args
 #' @template key
 #' @details By default the help and success slots are dropped, and only the
@@ -16,10 +16,12 @@
 #' res <- organization_create("stuffthings2")
 #' organization_show(res$id)
 #' }
-organization_show <- function(id, include_datasets = FALSE, url = get_default_url(),
-                              key = get_default_key(), as = 'list', ...) {
+organization_show <- function(id, include_datasets = FALSE,
+  url = get_default_url(), key = get_default_key(), as = 'list', ...) {
+
   id <- as.ckan_organization(id, url = url)
   args <- cc(list(id = id$id, include_datasets = include_datasets))
   res <- ckan_GET(url, 'organization_show', args, key, ...)
-  switch(as, json = res, list = as_ck(jsl(res), "ckan_organization"), table = jsd(res))
+  switch(as, json = res, list = as_ck(jsl(res), "ckan_organization"),
+    table = jsd(res))
 }
