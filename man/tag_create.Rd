@@ -9,10 +9,11 @@ tag_create(name, vocabulary_id, key = get_default_key(),
 }
 \arguments{
 \item{name}{(character) The name for the new tag, a string between 2 and 100
-characters long containing only alphanumeric characters and -, _ and ., e.g. 'Jazz'}
+characters long containing only alphanumeric characters and -, _ and .,
+e.g. 'Jazz'}
 
-\item{vocabulary_id}{(character) The id of the vocabulary that the new tag should be
-added to, e.g. the id of vocabulary 'Genre'}
+\item{vocabulary_id}{(character) The id of the vocabulary that the new
+tag should be added to, e.g. the id of vocabulary 'Genre'}
 
 \item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
 
@@ -27,10 +28,12 @@ data.frame. (required)}
 \item{...}{Curl args passed on to \code{\link[httr]{POST}} (optional)}
 }
 \description{
-Create a tag
+IMPORTANT: You must be a sysadmin to create vocabulary tags.
 }
 \examples{
 \dontrun{
+ckanr_setup(url = "https://demo.ckan.org/",
+  key = Sys.getenv("CKAN_DEMO_KEY"))
 tag_create(name = "TestTag1", vocabulary_id = "Testing1")
 }
 }

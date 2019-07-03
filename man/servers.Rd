@@ -19,7 +19,6 @@ I can't figure out how to get access to the CKAN API on their instance.
 \examples{
 \dontrun{
 servers()
-ckan_info("http://data.gov.au/")
 ckan_info(servers()[5])
 
 # what version is each CKAN server running
