@@ -25,19 +25,23 @@
 #' full text search query language:
 #' \url{http://www.postgresql.org/docs/9.1/static/datatype-textsearch.html#DATATYPE-TSQUERY}.
 #' @examples \dontrun{
-#' url <- 'http://data.nhm.ac.uk/'
-#' ds_search(resource_id = '8f0784a6-82dd-44e7-b105-6194e046eb8d', url = url)
-#' ds_search(resource_id = '8f0784a6-82dd-44e7-b105-6194e046eb8d', url = url, as = "table")
-#' ds_search(resource_id = '8f0784a6-82dd-44e7-b105-6194e046eb8d', url = url, as = "json")
+#' ckanr_setup(url = 'https://data.nhm.ac.uk/')
+#' 
+#' ds_search(resource_id = '8f0784a6-82dd-44e7-b105-6194e046eb8d')
+#' ds_search(resource_id = '8f0784a6-82dd-44e7-b105-6194e046eb8d',
+#'   as = "table")
+#' ds_search(resource_id = '8f0784a6-82dd-44e7-b105-6194e046eb8d',
+#'   as = "json")
 #'
-#' ds_search(resource_id = '8f0784a6-82dd-44e7-b105-6194e046eb8d', url = url, limit = 1, as = "table")
-#' ds_search(resource_id = '8f0784a6-82dd-44e7-b105-6194e046eb8d', url = url, q = "a*")
+#' ds_search(resource_id = '8f0784a6-82dd-44e7-b105-6194e046eb8d', limit = 1,
+#'   as = "table")
+#' ds_search(resource_id = '8f0784a6-82dd-44e7-b105-6194e046eb8d', q = "a*")
 #' }
 
-ds_search <- function(resource_id = NULL, filters = NULL, q = NULL, plain = NULL,
-                      language = NULL, fields = NULL, offset = NULL,
-                      limit = NULL, sort = NULL,
-                      url = get_default_url(), as = 'list', ...) {
+ds_search <- function(resource_id = NULL, filters = NULL, q = NULL,
+  plain = NULL, language = NULL, fields = NULL, offset = NULL,
+  limit = NULL, sort = NULL, url = get_default_url(), as = 'list', ...) {
+
   args <- cc(list(resource_id = resource_id, filters = filters,q = q,
                   plain = plain, language = language, fields = fields,
                   offset = offset, limit = limit, sort = sort))
