@@ -1,9 +1,5 @@
 # CONTRIBUTING #
 
-### Please contribute!
-
-We love collaboration.
-
 ### Bugs?
 
 * Submit an issue on the [Issues page](https://github.com/ropensci/ckanr/issues)
@@ -20,5 +16,3 @@ We love collaboration.
 ### Also, check out our [discussion forum](https://discuss.ropensci.org)
 
 ### Prefer to Email? Email the person listed as maintainer in the `DESCRIPTION` file of this repo.
-
-### Thanks for contributing!
