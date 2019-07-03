@@ -45,15 +45,18 @@ be included in the results}
 
 \item{include_drafts}{(logical) if \code{TRUE} draft datasets will be 
 included. A user will only be returned their own draft datasets, and a 
-sysadmin will be returned all draft datasets. default: \code{FALSE}}
+sysadmin will be returned all draft datasets. default: \code{FALSE}.
+first CKAN version: 2.4.9; dropped from request if CKAN version is older}
 
 \item{include_private}{(logical) if \code{TRUE} private datasets will be 
 included. Only private datasets from the user’s organizations will be 
 returned and sysadmins will be returned all private datasets.
-default: \code{FALSE}}
+default: \code{FALSE}
+first CKAN version: 2.6; dropped from request if CKAN version is older}
 
 \item{use_default_schema}{(logical) use default package schema instead of a
-custom schema defined with an IDatasetForm plugin. default: \code{FALSE}}
+custom schema defined with an IDatasetForm plugin. default: \code{FALSE}
+first CKAN version: 2.3.5; dropped from request if CKAN version is older}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
@@ -70,7 +73,7 @@ Search for packages.
 }
 \examples{
 \dontrun{
-ckanr_setup(url = "https://demo.ckan.org/", key=getOption("ckan_demo_key"))
+ckanr_setup(url = "https://demo.ckan.org", key=getOption("ckan_demo_key"))
 
 package_search(q = '*:*')
 package_search(q = '*:*', rows = 2, as = 'json')

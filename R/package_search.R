@@ -27,16 +27,19 @@
 #' be included in the results
 #' @param include_drafts (logical) if \code{TRUE} draft datasets will be 
 #' included. A user will only be returned their own draft datasets, and a 
-#' sysadmin will be returned all draft datasets. default: \code{FALSE}
+#' sysadmin will be returned all draft datasets. default: \code{FALSE}.
+#' first CKAN version: 2.4.9; dropped from request if CKAN version is older
 #' @param include_private (logical) if \code{TRUE} private datasets will be 
 #' included. Only private datasets from the user’s organizations will be 
 #' returned and sysadmins will be returned all private datasets.
 #' default: \code{FALSE}
+#' first CKAN version: 2.6; dropped from request if CKAN version is older
 #' @param use_default_schema (logical) use default package schema instead of a
 #' custom schema defined with an IDatasetForm plugin. default: \code{FALSE}
+#' first CKAN version: 2.3.5; dropped from request if CKAN version is older
 #' @template args
 #' @examples \dontrun{
-#' ckanr_setup(url = "https://demo.ckan.org/", key=getOption("ckan_demo_key"))
+#' ckanr_setup(url = "https://demo.ckan.org", key=getOption("ckan_demo_key"))
 #'
 #' package_search(q = '*:*')
 #' package_search(q = '*:*', rows = 2, as = 'json')
@@ -52,6 +55,7 @@ package_search <- function(q = '*:*', fq = NULL, sort = NULL, rows = NULL,
   facet.mincount = NULL, include_drafts = FALSE, include_private = FALSE, 
   use_default_schema = FALSE, url = get_default_url(), as = 'list', ...) {
 
+  ver <- ckan_version(url)$version_num
   args <- cc(list(
     q = q, fq = fq, sort = sort, rows = rows, start = start,
     facet = as_log(facet), facet.limit = facet.limit,
@@ -60,6 +64,11 @@ package_search <- function(q = '*:*', fq = NULL, sort = NULL, rows = NULL,
     include_private = as_log(include_private), 
     use_default_schema = as_log(use_default_schema)
   ))
+  if (ver <= 23) {
+    args$use_default_schema <- args$include_drafts <- args$include_private <- NULL
+  }
+  if (ver < 24) args$include_drafts <- args$include_private <- NULL
+  if (ver < 26) args$include_private <- NULL
   res <- ckan_GET(url, 'package_search', args, key = NULL, ...)
   switch(as, json = res,
          list = {
