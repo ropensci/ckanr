@@ -23,6 +23,6 @@ user_follower_list <- function(id, url = get_default_url(), as = "list",
                                key = get_default_key(), ...) {
 
   id <- as.ckan_user(id, url = url)
-  res <- ckan_GET(url, 'user_followee_list', list(id = id$id), key = key, ...)
+  res <- ckan_GET(url, 'user_follower_list', list(id = id$id), key = key, ...)
   switch(as, json = res, list = jsl(res), table = jsd(res))
 }
