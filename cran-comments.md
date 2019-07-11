@@ -1,11 +1,20 @@
-I have read and agree to the the CRAN policies at
-http://cran.r-project.org/web/packages/policies.html
+## Test environments
 
-R CMD CHECK passed on my local OS X install with R 3.2.2 and
-R development version, Ubuntu running on Travis-CI, and Windows
-R 3.2.2 and devel on Win-Builder.
+* local OS X install, R 3.6.0 Patched
+* ubuntu 14.04 (on travis-ci), R 3.6.0
+* win-builder (devel and release)
 
-This is a new submission.
+## R CMD check results
 
-Thanks!
+0 errors | 0 warnings | 0 notes
+
+## Reverse dependencies
+
+There are no reverse dependencies.
+
+--------
+
+This version adds many new functions and fixes many bugs.
+
+Thanks very much,
 Scott Chamberlain
