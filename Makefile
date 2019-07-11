@@ -4,11 +4,11 @@ RSCRIPT = Rscript --no-init-file
 all: move rmd2md
 
 move:
-		cp inst/vign/ckanr_vignette.md vignettes/
+		cp inst/vign/ckanr.md vignettes/
 
 rmd2md:
 		cd vignettes;\
-		mv ckanr_vignette.md ckanr_vignette.Rmd
+		mv ckanr.md ckanr.Rmd
 
 install: doc build
 	R CMD INSTALL . && rm *.tar.gz
