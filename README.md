@@ -303,7 +303,7 @@ dplyr::tbl(src = ckan$con, from = res_id) %>% as_tibble(.)
 
 ## Examples of different CKAN APIs
 
-See `ckanr::servers()` for a list of CKAN servers. Ther are 124 as of 2019-07-03.
+See `ckanr::servers()` for a list of CKAN servers. Ther are 125 as of 2019-07-11.
 
 ### The Natural History Museum
 
@@ -317,7 +317,7 @@ x$results
 #> [[1]]
 #> <CKAN Package> d68e20f4-a56d-4a8a-a8d7-dc478ba64c76 
 #>   Title: Wallace and Banks drawers
-#>   Creator/Modified: 2018-08-15T13:31:33.694910 / 2019-04-10T14:54:37.206921
+#>   Creator/Modified: 2018-08-15T13:31:33.694910 / 2019-07-08T13:13:01.096684
 #>   Resources (up to 5): Drawer-level images
 #>   Tags (up to 5): 
 #>   Groups (up to 5):
