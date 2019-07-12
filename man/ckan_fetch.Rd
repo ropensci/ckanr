@@ -64,5 +64,11 @@ res <- resource_show(id = "6cbb0aa3-a8d1-421c-9c40-14c6f05e0c73", as = "table")
 x <- ckan_fetch(res$url)
 class(x)
 plot(x)
+
+GeoJSON file - requires geojsonio package
+ckanr_setup("http://open.canada.ca/data/en")
+res <- resource_show(id = "1502d5ec-0af2-4e2f-8fa7-1e90a43f356a", as = "table")
+ckan_fetch(res$url)
+
 }
 }

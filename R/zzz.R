@@ -67,7 +67,7 @@ fetch_GET <- function(x, store, path, args = NULL, format = NULL, ...) {
   fmt <- ifelse(identical(file_fmt, character(0)), format, file_fmt)
   fmt <- tolower(fmt)
   if (store == "session") {
-    if (fmt %in% c("xls", "xlsx")) {
+    if (fmt %in% c("xls", "xlsx", "geojson")) {
       dat <- NULL
       path <- paste0(path, ".", fmt)
       res <- GET(x, query = args, write_disk(path, TRUE), config = proxy, ...)
