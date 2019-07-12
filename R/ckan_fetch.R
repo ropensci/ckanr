@@ -50,6 +50,12 @@
 #' x <- ckan_fetch(res$url)
 #' class(x)
 #' plot(x)
+#'
+#' GeoJSON file - requires geojsonio package
+#' ckanr_setup("http://open.canada.ca/data/en")
+#' res <- resource_show(id = "1502d5ec-0af2-4e2f-8fa7-1e90a43f356a", as = "table")
+#' ckan_fetch(res$url)
+#'
 #' }
 ckan_fetch <- function(x, store = "session", path = "file", format = NULL, ...) {
   store <- match.arg(store, c("session", "disk"))
@@ -90,6 +96,12 @@ read_session <- function(fmt, dat, path) {
          shp = {
            check4X("sf")
            sf::st_read(path)
+         },
+         geojson = {
+           check4X("geojsonio")
+           geojsonio::geojson_read(path,
+                                   method = "local",
+                                   parse = TRUE)
          }
   )
 }
