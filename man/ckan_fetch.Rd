@@ -65,10 +65,12 @@ x <- ckan_fetch(res$url)
 class(x)
 plot(x)
 
-GeoJSON file - requires geojsonio package
-ckanr_setup("http://open.canada.ca/data/en")
-res <- resource_show(id = "1502d5ec-0af2-4e2f-8fa7-1e90a43f356a", as = "table")
-ckan_fetch(res$url)
+# GeoJSON file - requires sf package
+ckanr_setup("http://datamx.io")
+res <- resource_show(id = "b1cd35b7-479e-4fa0-86e9-e897d3c617e6", as = "table")
+x <- ckan_fetch(res$url)
+class(x)
+plot(x[, c("mun_name", "geometry")])
 
 }
 }

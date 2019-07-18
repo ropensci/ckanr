@@ -14,10 +14,10 @@
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "3.6.0",
+    "version": "3.5.2",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 3.6.0 Patched (2019-04-30 r76446)",
+  "runtimePlatform": "R version 3.5.2 (2018-12-20)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -252,7 +252,7 @@
   "contIntegration": "https://travis-ci.org/ropensci/ckanr",
   "releaseNotes": "https://github.com/ropensci/ckanr/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/ckanr/blob/master/README.md",
-  "fileSize": "77.083KB",
+  "fileSize": "76.198KB",
   "copyrightHolder": {},
   "funder": {}
 }
