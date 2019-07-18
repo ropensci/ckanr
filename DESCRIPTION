@@ -43,8 +43,7 @@ Suggests:
     readxl,
     testthat,
     xml2,
-    lazyeval,
-    geojsonio
+    lazyeval
 RoxygenNote: 6.1.1
 X-schema.org-keywords: database, open-data, ckan, api, data, dataset
 X-schema.org-applicationCategory: Data Access
