@@ -51,7 +51,7 @@ sift_res <- function(z) {
   }
 }
 
-get_package <- function(id, url = get_default_url(), ...) {
-  res <- ckan_GET(url, 'package_show', list(id = id), NULL, ...)
+get_package <- function(id, url = get_default_url(), key = get_default_key(), ...) {
+  res <- ckan_GET(url, 'package_show', list(id = id), key, ...)
   as_ck(jsl(res), "ckan_package")
 }
