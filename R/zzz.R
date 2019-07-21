@@ -69,24 +69,29 @@ fetch_GET <- function(x, store, path, args = NULL, format = NULL, ...) {
   if (store == "session") {
     if (fmt %in% c("xls", "xlsx", "geojson")) {
       dat <- NULL
-      path <- paste0(path, ".", fmt)
+      path <- tempfile(fileext = paste0(".", fmt))
       res <- GET(x, query = args, write_disk(path, TRUE), config = proxy, ...)
       path <- res$request$output$path
+      temp_files <- path
     } else if (fmt %in% c("shp", "zip")) {
       fmt <- "shp"
       dat <- NULL
-      path <- paste0(path, ".zip")
+      path <- tempfile(fileext = ".zip")
       res <- GET(x, query = args, write_disk(path, TRUE), config = proxy, ...)
       dir <- tempdir()
+      zip_files <- unzip(path, list = TRUE)
+      zip_files <- paste0(dir, "/", zip_files[["Name"]])
       unzip(path, exdir = dir)
+      temp_files <- c(path, zip_files)
       path <- list.files(dir, pattern = ".shp$", full.names = TRUE)
     } else {
       path <- NULL
+      temp_files <- NULL
       res <- GET(x, query = args, config = proxy, ...)
       err_handler(res)
       dat <- content(res, "text", encoding = "UTF-8")
     }
-    list(store = store, fmt = fmt, data = dat, path = path)
+    list(store = store, fmt = fmt, data = dat, path = path, temp_files = temp_files)
   } else {
     # if (!file.exists(path)) stop("path does not exist", call. = FALSE)
     res <- GET(x, query = args, write_disk(path, TRUE), config = proxy, ...)
