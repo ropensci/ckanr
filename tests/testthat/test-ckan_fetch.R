@@ -6,3 +6,24 @@ test_that("ckan_fetch returns error when file format can't be determined from UR
     "File format is not available from URL; please specify via `format` argument."
   )
 })
+
+test_that("ckan_fetch doesn't write any files to working directory when session = TRUE", {
+  skip_on_cran()
+  expect_identical(list.files(test_path()), {
+    ckanr_setup("http://datamx.io")
+    res <- resource_show(id = "e883510e-a082-435c-872a-c5b915857ae1", as = "table")
+    df <- ckan_fetch(res$url)
+    list.files(test_path())
+  })
+})
+
+test_that("ckan_fetch doesn't retain any files in temporary directory when session = TRUE", {
+  skip_on_cran()
+  dir <- tempdir()
+  expect_identical(list.files(dir), {
+    ckanr_setup("http://datamx.io")
+    res <- resource_show(id = "e883510e-a082-435c-872a-c5b915857ae1", as = "table")
+    df <- ckan_fetch(res$url)
+    list.files(dir)
+  })
+})
