@@ -5,7 +5,7 @@
   ],
   "@type": "SoftwareSourceCode",
   "identifier": "ckanr",
-  "description": "Client for 'CKAN' API (https://ckan.org/). Includes interface\n    to 'CKAN' 'APIs' for search, list, show for packages, organizations, and\n    resources. In addition, provides an interface to the 'datastore' API.",
+  "description": "Client for 'CKAN' API (<https://ckan.org/>). Includes interface\n    to 'CKAN' 'APIs' for search, list, show for packages, organizations, and\n    resources. In addition, provides an interface to the 'datastore' API.",
   "name": "ckanr: Client for the Comprehensive Knowledge Archive Network ('CKAN') API",
   "codeRepository": "https://github.com/ropensci/ckanr",
   "issueTracker": "https://github.com/ropensci/ckanr/issues",
@@ -240,7 +240,7 @@
   "contIntegration": "https://travis-ci.org/ropensci/ckanr",
   "releaseNotes": "https://github.com/ropensci/ckanr/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/ckanr/blob/master/README.md",
-  "fileSize": "77.363KB",
+  "fileSize": "77.271KB",
   "copyrightHolder": {},
   "funder": {}
 }
