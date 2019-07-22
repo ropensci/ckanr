@@ -1,4 +1,7 @@
 context("package_list")
+
+skip_on_cran()
+
 u <- get_test_url()
 
 package_num <- local({

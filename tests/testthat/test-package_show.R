@@ -1,4 +1,7 @@
 context("package_show")
+
+skip_on_cran()
+
 u <- get_test_url()
 
 test_that("package_show gives back expected class types", {

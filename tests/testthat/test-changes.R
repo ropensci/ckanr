@@ -1,5 +1,7 @@
 context("changes")
 
+skip_on_cran()
+
 u <- get_test_url()
 
 test_that("changes gives back expected class types", {

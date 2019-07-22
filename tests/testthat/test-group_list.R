@@ -1,4 +1,7 @@
 context("group_list")
+
+skip_on_cran()
+
 # u <- get_test_url()
 u <- "http://www.civicdata.io"
 

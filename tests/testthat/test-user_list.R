@@ -1,4 +1,7 @@
 context("user_list")
+
+skip_on_cran()
+
 u <- get_test_url()
 
 test_that("user_list gives back expected class types", {

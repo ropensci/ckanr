@@ -1,4 +1,7 @@
 context("organization_list")
+
+skip_on_cran()
+
 u <- get_test_url()
 
 # organization_num <- local({

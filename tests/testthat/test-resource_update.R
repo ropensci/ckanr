@@ -1,5 +1,7 @@
 context("resource_update")
 
+skip_on_cran()
+
 # Use a local example file from package ckanR
 path <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
 

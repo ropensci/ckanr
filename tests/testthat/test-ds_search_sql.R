@@ -1,5 +1,7 @@
 context("ds_search_sql")
 
+skip_on_cran()
+
 u <- "http://data.nhm.ac.uk/"
 r <- "8f0784a6-82dd-44e7-b105-6194e046eb8d"
 

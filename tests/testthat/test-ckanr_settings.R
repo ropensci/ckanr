@@ -1,5 +1,7 @@
 context("ckanr_settings")
 
+skip_on_cran()
+
 du <- 'http://default-ckan.org/'
 dk <- 'default-ckan-api-key'
 tu <- 'http://test-ckan.org/'

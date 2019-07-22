@@ -1,5 +1,7 @@
 context("dplyr Interface")
 
+skip_on_cran()
+
 if (Sys.getenv("TEST_DPLYR_INTERFACE") != "") {
 
   u <- get_test_url()

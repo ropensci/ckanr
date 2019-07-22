@@ -1,4 +1,7 @@
 context("group_show")
+
+skip_on_cran()
+
 u <- get_test_url()
 g <- get_test_gid()
 if (g == "") {

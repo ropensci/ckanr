@@ -1,4 +1,7 @@
 context("tag_list")
+
+skip_on_cran()
+
 u <- get_test_url()
 
 tag_num <- local({

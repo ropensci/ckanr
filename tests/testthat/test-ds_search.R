@@ -1,5 +1,7 @@
 context("ds_search")
 
+skip_on_cran()
+
 # u <- get_test_url()
 u <- "http://data.nhm.ac.uk/"
 # r <- get_test_rid()

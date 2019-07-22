@@ -1,4 +1,7 @@
 context("tag_search")
+
+skip_on_cran()
+
 u <- get_test_url()
 
 test_that("tag_search gives back expected class types", {

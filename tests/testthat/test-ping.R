@@ -1,5 +1,7 @@
 context("ping")
 
+skip_on_cran()
+
 test_that("ping return true", {
   expect_true(ping())
 })

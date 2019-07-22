@@ -1,4 +1,7 @@
 context("license_list")
+
+skip_on_cran()
+
 u = get_test_url()
 
 test_that("license_list gives back expected type", {

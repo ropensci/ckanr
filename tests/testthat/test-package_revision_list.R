@@ -1,4 +1,7 @@
 context("package_revision_list")
+
+skip_on_cran()
+
 u <- get_test_url()
 
 test_that("package_revision_list gives back expected class types", {

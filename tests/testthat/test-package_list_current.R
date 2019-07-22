@@ -1,4 +1,7 @@
 context("package_list_current")
+
+skip_on_cran()
+
 u <- get_test_url()
 
 test_that("package_list_current gives back expected class types and parameter offset works", {
