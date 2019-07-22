@@ -20,6 +20,7 @@ ds_search_sql <- function(sql, url = get_default_url(), key = get_default_key(),
   res <- httr::GET(file.path(notrail(url), 'api/action/datastore_search_sql'), ctj(),
               query = list(sql = sql), add_headers(Authorization = key), ...)
   if (status_code(res) > 299) {
+    if (grepl("html", res$headers$`content-type`)) httr::stop_for_status(res)
     stop(httr::content(res, "text", encoding = "UTF-8"))
   }
   res <- httr::content(res, "text", encoding = "UTF-8")
