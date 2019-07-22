@@ -1,6 +1,6 @@
 Package: ckanr
 Title: Client for the Comprehensive Knowledge Archive Network ('CKAN') API
-Description: Client for 'CKAN' API (https://ckan.org/). Includes interface
+Description: Client for 'CKAN' API (<https://ckan.org/>). Includes interface
     to 'CKAN' 'APIs' for search, list, show for packages, organizations, and
     resources. In addition, provides an interface to the 'datastore' API.
 Version: 0.3.0
