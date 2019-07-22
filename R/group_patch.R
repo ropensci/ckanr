@@ -21,8 +21,9 @@
 #' x <- list(title = "!hello world!", maintainer_email = "hello@@world.com")
 #' group_patch(x, id = grp)
 #' }
-group_patch <- function(x, id, key = get_default_key(),
-                           url = get_default_url(), as = 'list', ...) {
+group_patch <- function(x, id, url = get_default_url(), key = get_default_key(),
+  as = 'list', ...) {
+
   id <- as.ckan_group(id, url = url)
   if (!inherits(x, "list")) {
     stop("x must be of class list", call. = FALSE)

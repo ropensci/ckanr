@@ -32,7 +32,7 @@
 #' }
 related_create <- function(id, title, type, description = NULL,
   related_id = NULL, related_url = NULL, image_url = NULL,
-  key = get_default_key(), url = get_default_url(), as = 'list', ...) {
+  url = get_default_url(), key = get_default_key(), as = 'list', ...) {
 
   id <- as.ckan_package(id, url = url)
   body <- cc(list(dataset_id = id$id, title = title,

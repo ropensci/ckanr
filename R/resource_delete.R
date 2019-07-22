@@ -26,8 +26,11 @@
 #' # delete the resource
 #' resource_delete(xx)
 #' }
-resource_delete <- function(id, key = get_default_key(), url = get_default_url(), ...) {
+resource_delete <- function(id, url = get_default_url(), key = get_default_key(),
+  ...) {
+  
   id <- as.ckan_resource(id, url = url)
-  tmp <- ckan_POST(url, 'resource_delete', body = list(id = id$id), key = key, ...)
+  tmp <- ckan_POST(url, 'resource_delete', body = list(id = id$id), key = key,
+    ...)
   jsonlite::fromJSON(tmp)$success
 }

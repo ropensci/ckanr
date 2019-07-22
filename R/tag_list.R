@@ -9,6 +9,7 @@
 #' @param all_fields (logical) Return full tag dictionaries instead of
 #'    just names. Default: FALSE
 #' @template args
+#' @template key
 #' @examples \dontrun{
 #' # list all tags
 #' tag_list()
@@ -24,9 +25,11 @@
 #' tag_list('aviation', as = 'table')
 #' }
 tag_list <- function(query = NULL, vocabulary_id = NULL, all_fields = FALSE,
-                     url = get_default_url(), as = 'list', ...) {
+  url = get_default_url(), key = get_default_key(), as = 'list', ...) {
+
   args <- cc(list(query = query, vocabulary_id = vocabulary_id,
                   all_fields = as_log(all_fields)))
-  res <- ckan_GET(url, 'tag_list', args, ...)
-  switch(as, json = res, list = lapply(jsl(res), as.ckan_tag), table = jsd(res))
+  res <- ckan_GET(url, 'tag_list', args, key = key, ...)
+  switch(as, json = res, list = lapply(jsl(res), as.ckan_tag),
+    table = jsd(res))
 }

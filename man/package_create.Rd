@@ -10,7 +10,7 @@ package_create(name = NULL, title = NULL, author = NULL,
   version = NULL, state = "active", type = NULL, resources = NULL,
   tags = NULL, extras = NULL, relationships_as_object = NULL,
   relationships_as_subject = NULL, groups = NULL, owner_org = NULL,
-  key = get_default_key(), url = get_default_url(), as = "list", ...)
+  url = get_default_url(), key = get_default_key(), as = "list", ...)
 }
 \arguments{
 \item{name}{(character) the name of the new dataset, must be between 2 and 100 characters
@@ -68,10 +68,10 @@ string), to see which groups exist call group_list()}
 \item{owner_org}{(character) the id of the dataset's owning organization, see
 organization_list() or organization_list_for_user() for available values (optional)}
 
-\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
-
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
+
+\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse

@@ -5,7 +5,8 @@
 \title{List tags.}
 \usage{
 tag_search(query = NULL, vocabulary_id = NULL, offset = 0,
-  limit = 31, url = get_default_url(), as = "list", ...)
+  limit = 31, url = get_default_url(), key = get_default_key(),
+  as = "list", ...)
 }
 \arguments{
 \item{query}{(character) A tag name query to search for, if given only tags
@@ -20,6 +21,8 @@ if give only tags that belong to this vocabulary will be returned}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
+
+\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse

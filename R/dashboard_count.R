@@ -5,8 +5,8 @@
 #' @template args
 #' @template key
 #' @details Important: Activities from the user herself are not counted by this
-#' function even though they appear in the dashboard (users don't want to be notified
-#' about things they did themselves).
+#' function even though they appear in the dashboard (users don't want to be
+#' notified about things they did themselves).
 #'
 #' @examples \dontrun{
 #' # Setup
@@ -15,7 +15,10 @@
 #' # count
 #' dashboard_count()
 #' }
-dashboard_count <- function(key = get_default_key(), url = get_default_url(), as = 'list', ...) {
-  res <- ckan_GET(url, 'dashboard_new_activities_count', list(), key = key, ...)
+dashboard_count <- function(url = get_default_url(), key = get_default_key(),
+  as = 'list', ...) {
+
+  res <- ckan_GET(url, 'dashboard_new_activities_count', list(), key = key,
+    ...)
   switch(as, json = res, list = jsl(res), table = jsd(res))
 }

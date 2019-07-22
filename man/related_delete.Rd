@@ -4,16 +4,16 @@
 \alias{related_delete}
 \title{Delete a related item.}
 \usage{
-related_delete(id, key = get_default_key(), url = get_default_url(),
+related_delete(id, url = get_default_url(), key = get_default_key(),
   ...)
 }
 \arguments{
 \item{id}{(character) Resource identifier.}
 
-\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
-
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
+
+\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
 
 \item{...}{Curl args passed on to \code{\link[httr]{POST}} (optional)}
 }

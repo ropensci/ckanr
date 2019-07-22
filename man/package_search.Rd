@@ -8,7 +8,7 @@ package_search(q = "*:*", fq = NULL, sort = NULL, rows = NULL,
   start = NULL, facet = FALSE, facet.limit = NULL,
   facet.field = NULL, facet.mincount = NULL, include_drafts = FALSE,
   include_private = FALSE, use_default_schema = FALSE,
-  url = get_default_url(), as = "list", ...)
+  url = get_default_url(), key = get_default_key(), as = "list", ...)
 }
 \arguments{
 \item{q}{Query terms, defaults to '*:*', or everything.}
@@ -60,6 +60,8 @@ first CKAN version: 2.3.5; dropped from request if CKAN version is older}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
+
+\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse

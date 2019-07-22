@@ -8,7 +8,7 @@ group_create(name = NULL, id = NULL, title = NULL,
   description = NULL, image_url = NULL, type = NULL,
   state = "active", approval_status = NULL, extras = NULL,
   packages = NULL, groups = NULL, users = NULL,
-  key = get_default_key(), url = get_default_url(), as = "list", ...)
+  url = get_default_url(), key = get_default_key(), as = "list", ...)
 }
 \arguments{
 \item{name}{(character) the name of the new dataset, must be between 2 and 100 characters
@@ -51,10 +51,10 @@ string), to see which groups exist call group_list()}
 dictionaries each with key 'name' (string, the id or name of the user) and optionally
 'capacity' (string, the capacity in which the user is a member of the group)}
 
-\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
-
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
+
+\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse

@@ -7,7 +7,7 @@
 organization_create(name = NULL, id = NULL, title = NULL,
   description = NULL, image_url = NULL, state = "active",
   approval_status = NULL, extras = NULL, packages = NULL,
-  users = NULL, key = get_default_key(), url = get_default_url(),
+  users = NULL, url = get_default_url(), key = get_default_key(),
   as = "list", ...)
 }
 \arguments{
@@ -43,10 +43,10 @@ dataset) and optionally 'title' (string, the title of the dataset)}
 each with key 'name' (string, the id or name of the user) and optionally 'capacity'
 (string, the capacity in which the user is a member of the organization)}
 
-\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
-
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
+
+\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse

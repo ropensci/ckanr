@@ -41,7 +41,7 @@ print.ckan_tag <- function(x, ...) {
   cat("  Packages (up to 5): ", sift_res(x$packages), "\n", sep = "")
 }
 
-get_tag <- function(id, url = get_default_url(), ...) {
-  res <- ckan_GET(url, 'tag_show', list(id = id), NULL, ...)
+get_tag <- function(id, url = get_default_url(), key = get_default_key(), ...) {
+  res <- ckan_GET(url, 'tag_show', list(id = id), key = key, ...)
   as_ck(jsl(res), "ckan_tag")
 }

@@ -28,8 +28,9 @@
 #'                   key = get_test_key(),
 #'                   url = get_test_url())
 #' }
-ds_create_dataset <- function(package_id, name, path, key = get_default_key(),
-                              url = get_default_url(), as = 'list', ...) {
+ds_create_dataset <- function(package_id, name, path, url = get_default_url(),
+  key = get_default_key(), as = 'list', ...) {
+
   .Deprecated("resource_create", "ckanr", msg = "deprecated, see ?resource_create")
 
   path <- path.expand(path)

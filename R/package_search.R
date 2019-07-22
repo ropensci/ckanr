@@ -38,6 +38,7 @@
 #' custom schema defined with an IDatasetForm plugin. default: \code{FALSE}
 #' first CKAN version: 2.3.5; dropped from request if CKAN version is older
 #' @template args
+#' @template key
 #' @examples \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org", key=getOption("ckan_demo_key"))
 #'
@@ -53,7 +54,8 @@
 package_search <- function(q = '*:*', fq = NULL, sort = NULL, rows = NULL,
   start = NULL, facet = FALSE, facet.limit = NULL, facet.field = NULL,
   facet.mincount = NULL, include_drafts = FALSE, include_private = FALSE, 
-  use_default_schema = FALSE, url = get_default_url(), as = 'list', ...) {
+  use_default_schema = FALSE, url = get_default_url(), key = get_default_key(),
+  as = 'list', ...) {
 
   ver <- ckan_version(url)$version_num
   args <- cc(list(
@@ -69,7 +71,7 @@ package_search <- function(q = '*:*', fq = NULL, sort = NULL, rows = NULL,
   }
   if (ver < 24) args$include_drafts <- args$include_private <- NULL
   if (ver < 26) args$include_private <- NULL
-  res <- ckan_GET(url, 'package_search', args, key = NULL, ...)
+  res <- ckan_GET(url, 'package_search', args, key = key, ...)
   switch(as, json = res,
          list = {
            tmp <- jsl(res)

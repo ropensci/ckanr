@@ -5,7 +5,7 @@
 \title{Return a list of the site's user accounts.}
 \usage{
 user_list(q = NULL, order_by = NULL, url = get_default_url(),
-  as = "list", ...)
+  key = get_default_key(), as = "list", ...)
 }
 \arguments{
 \item{q}{(character) Restrict the users returned to those whose names
@@ -16,6 +16,8 @@ contain a string}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
+
+\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse

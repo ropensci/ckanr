@@ -16,6 +16,7 @@
 #' or sort by a function (e.g., sum(x_f, y_f) desc, which sorts by the sum of
 #' x_f and y_f in a descending order). (optional)
 #' @template args
+#' @template key
 #' @details From the help for this method "The datastore_search action allows you to search data
 #' in a resource. DataStore resources that belong to private CKAN resource can only be
 #' read by you if you have access to the CKAN resource and send the appropriate authorization."
@@ -40,13 +41,14 @@
 
 ds_search <- function(resource_id = NULL, filters = NULL, q = NULL,
   plain = NULL, language = NULL, fields = NULL, offset = NULL,
-  limit = NULL, sort = NULL, url = get_default_url(), as = 'list', ...) {
+  limit = NULL, sort = NULL, url = get_default_url(), key = get_default_key(),
+  as = 'list', ...) {
 
   args <- cc(list(resource_id = resource_id, filters = filters,q = q,
                   plain = plain, language = language, fields = fields,
                   offset = offset, limit = limit, sort = sort))
   res <- POST(file.path(notrail(url), 'api/action/datastore_search'), ctj(),
-              query = args, ...)
+              query = args, add_headers(Authorization = key), ...)
   res <- content(res, "text", encoding = "UTF-8")
   switch(as, json = res, list = jsl(res), table = jsd(res))
 }

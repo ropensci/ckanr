@@ -4,14 +4,14 @@
 \alias{dashboard_count}
 \title{Number of new activities of an authorized user}
 \usage{
-dashboard_count(key = get_default_key(), url = get_default_url(),
+dashboard_count(url = get_default_url(), key = get_default_key(),
   as = "list", ...)
 }
 \arguments{
-\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
-
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
+
+\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse
@@ -25,8 +25,8 @@ Number of new activities of an authorized user
 }
 \details{
 Important: Activities from the user herself are not counted by this
-function even though they appear in the dashboard (users don't want to be notified
-about things they did themselves).
+function even though they appear in the dashboard (users don't want to be
+notified about things they did themselves).
 }
 \examples{
 \dontrun{

@@ -5,8 +5,8 @@
 \title{Create a related item}
 \usage{
 related_create(id, title, type, description = NULL, related_id = NULL,
-  related_url = NULL, image_url = NULL, key = get_default_key(),
-  url = get_default_url(), as = "list", ...)
+  related_url = NULL, image_url = NULL, url = get_default_url(),
+  key = get_default_key(), as = "list", ...)
 }
 \arguments{
 \item{id}{(character) id of package that the related item should be added to.
@@ -26,10 +26,10 @@ ID will be assigned for you. Optional}
 
 \item{image_url}{(character) A url to associated image. Optional}
 
-\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
-
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
+
+\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse

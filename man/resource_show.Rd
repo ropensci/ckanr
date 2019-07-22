@@ -4,13 +4,16 @@
 \alias{resource_show}
 \title{Show a resource.}
 \usage{
-resource_show(id, url = get_default_url(), as = "list", ...)
+resource_show(id, url = get_default_url(), key = get_default_key(),
+  as = "list", ...)
 }
 \arguments{
 \item{id}{(character) Resource identifier.}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
+
+\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse

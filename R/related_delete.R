@@ -21,8 +21,11 @@
 #' ## or with id itself:
 #' ## related_delete(res$id)
 #' }
-related_delete <- function(id, key = get_default_key(), url = get_default_url(), ...) {
+related_delete <- function(id, url = get_default_url(),
+  key = get_default_key(), ...) {
+
   id <- as.ckan_related(id, url = url)
-  tmp <- ckan_POST(url, 'related_delete', body = list(id = id$id), key = key, ...)
+  tmp <- ckan_POST(url, 'related_delete', body = list(id = id$id),
+    key = key, ...)
   jsonlite::fromJSON(tmp)$success
 }

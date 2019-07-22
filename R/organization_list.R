@@ -11,6 +11,7 @@
 #' @param limit (numeric) The maximum number of organizations to return
 #' (optional, default: 31)
 #' @template args
+#' @template key
 #' @examples \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org/")
 #'
@@ -24,7 +25,8 @@
 #' }
 organization_list <- function(order_by = c("name", "package"),
   decreasing = FALSE, organizations = NULL, all_fields = TRUE,
-  limit = 31, url = get_default_url(), as = 'list', ...) {
+  limit = 31, url = get_default_url(), key = get_default_key(),
+  as = 'list', ...) {
 
   stopifnot(length(order_by) > 0)
   stopifnot(order_by[1] %in% c("name", "package"))
@@ -33,7 +35,7 @@ organization_list <- function(order_by = c("name", "package"),
                all_fields = ifelse(all_fields, "True", "False"),
                limit = limit,
                organizations = organizations))
-  res <- ckan_GET(url, 'organization_list', args, ...)
+  res <- ckan_GET(url, 'organization_list', args, key = key, ...)
   switch(as, json = res, list = lapply(jsl(res), as.ckan_organization),
     table = jsd(res))
 }

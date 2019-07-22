@@ -42,7 +42,7 @@ print.ckan_related <- function(x, ...) {
   cat("  Creator: ", x$created, "\n", sep = "")
 }
 
-get_related <- function(id, url = get_default_url(), ...) {
-  res <- ckan_GET(url, 'related_show', list(id = id), NULL, ...)
+get_related <- function(id, url = get_default_url(), key = get_default_key(), ...) {
+  res <- ckan_GET(url, 'related_show', list(id = id), key = key, ...)
   as_ck(jsl(res), "ckan_related")
 }

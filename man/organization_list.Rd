@@ -6,7 +6,7 @@
 \usage{
 organization_list(order_by = c("name", "package"), decreasing = FALSE,
   organizations = NULL, all_fields = TRUE, limit = 31,
-  url = get_default_url(), as = "list", ...)
+  url = get_default_url(), key = get_default_key(), as = "list", ...)
 }
 \arguments{
 \item{order_by}{(character, only the first element is used).
@@ -24,6 +24,8 @@ organizations to return. NULL returns all organizations.}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
+
+\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse

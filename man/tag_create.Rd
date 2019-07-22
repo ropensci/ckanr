@@ -4,8 +4,8 @@
 \alias{tag_create}
 \title{Create a tag}
 \usage{
-tag_create(name, vocabulary_id, key = get_default_key(),
-  url = get_default_url(), as = "list", ...)
+tag_create(name, vocabulary_id, url = get_default_url(),
+  key = get_default_key(), as = "list", ...)
 }
 \arguments{
 \item{name}{(character) The name for the new tag, a string between 2 and 100
@@ -15,10 +15,10 @@ e.g. 'Jazz'}
 \item{vocabulary_id}{(character) The id of the vocabulary that the new
 tag should be added to, e.g. the id of vocabulary 'Genre'}
 
-\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
-
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
+
+\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse

@@ -43,7 +43,7 @@ print.ckan_user <- function(x, ...) {
   cat("  Created: ", x$created, "\n", sep = "")
 }
 
-get_user <- function(id, url = get_default_url(), ...) {
-  res <- ckan_GET(url, 'user_show', list(id = id), NULL, ...)
+get_user <- function(id, url = get_default_url(), key = get_default_key(), ...) {
+  res <- ckan_GET(url, 'user_show', list(id = id), key = key, ...)
   as_ck(jsl(res), "ckan_user")
 }

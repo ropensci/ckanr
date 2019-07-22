@@ -46,12 +46,13 @@
 #'                    upload = file,
 #'                    rcurl = "http://google.com")
 #' }
-resource_create <- function(package_id = NULL, rcurl = NULL, revision_id = NULL, description = NULL,
-  format = NULL, hash = NULL, name = NULL, resource_type = NULL, mimetype = NULL,
+resource_create <- function(package_id = NULL, rcurl = NULL,
+  revision_id = NULL, description = NULL, format = NULL, hash = NULL,
+  name = NULL, resource_type = NULL, mimetype = NULL,
   mimetype_inner = NULL, webstore_url = NULL, cache_url = NULL, size = NULL,
   created = NULL, last_modified = NULL, cache_last_updated = NULL,
-  webstore_last_updated = NULL, upload = NULL, key = get_default_key(),
-  url = get_default_url(), as = 'list', ...) {
+  webstore_last_updated = NULL, upload = NULL, url = get_default_url(),
+  key = get_default_key(), as = 'list', ...) {
 
   id <- as.ckan_package(package_id, url = url)
   body <- cc(list(package_id = id$id, url = rcurl, revision_id = revision_id,

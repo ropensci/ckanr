@@ -24,8 +24,8 @@
 #' user_create(name = 'stacy', email = "stacy@aaaaa.com", password = "helloworld")
 #' }
 user_create <- function(name, email, password, id = NULL, fullname = NULL,
-  about = NULL, openid = NULL, key = get_default_key(),
-  url = get_default_url(), as = 'list', ...) {
+  about = NULL, openid = NULL, url = get_default_url(), key = get_default_key(),
+  as = 'list', ...) {
 
   args <- cc(list(name = name, email = email, password = password, id = id,
                   fullname = fullname, about = about, openid = openid))

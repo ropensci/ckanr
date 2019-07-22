@@ -17,7 +17,7 @@
 #' tag_create(name = "TestTag1", vocabulary_id = "Testing1")
 #' }
 tag_create <- function(name, vocabulary_id,
-  key = get_default_key(), url = get_default_url(), as = 'list', ...) {
+  url = get_default_url(), key = get_default_key(), as = 'list', ...) {
 
   warning("not tested yet, may not work", call. = FALSE)
   body <- cc(list(name = name, vocabulary_id = vocabulary_id))

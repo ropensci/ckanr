@@ -5,8 +5,8 @@
 \title{Create a user.}
 \usage{
 user_create(name, email, password, id = NULL, fullname = NULL,
-  about = NULL, openid = NULL, key = get_default_key(),
-  url = get_default_url(), as = "list", ...)
+  about = NULL, openid = NULL, url = get_default_url(),
+  key = get_default_key(), as = "list", ...)
 }
 \arguments{
 \item{name}{(character) the name of the new user, a string between 2 and 100
@@ -26,10 +26,10 @@ least 4 characters (required)}
 
 \item{openid}{(character) an openid (optional)}
 
-\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
-
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
+
+\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse

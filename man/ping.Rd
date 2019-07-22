@@ -4,11 +4,14 @@
 \alias{ping}
 \title{Ping a CKAN server to test that it's up or down.}
 \usage{
-ping(url = get_default_url(), as = "logical", ...)
+ping(url = get_default_url(), key = get_default_key(),
+  as = "logical", ...)
 }
 \arguments{
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
+
+\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse

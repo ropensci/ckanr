@@ -19,7 +19,7 @@
 #' }
 related_update <- function(id, title, type, description = NULL,
   related_id = NULL, related_url = NULL, image_url = NULL,
-  key = get_default_key(), url = get_default_url(), as = 'list', ...) {
+  url = get_default_url(), key = get_default_key(), as = 'list', ...) {
 
   id <- as.ckan_related(id, url = url)
   body <- cc(list(id = id$id, title = title,

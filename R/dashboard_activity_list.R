@@ -16,8 +16,8 @@
 #' # get activity
 #' (res <- dashboard_activity_list())
 #' }
-dashboard_activity_list <- function(limit = 31, offset = 0, key = get_default_key(),
-  url = get_default_url(), as = 'list', ...) {
+dashboard_activity_list <- function(limit = 31, offset = 0,
+  url = get_default_url(), key = get_default_key(), as = 'list', ...) {
 
   args <- list(limit = limit, offset = offset)
   res <- ckan_GET(url, 'dashboard_activity_list', args, key = key, ...)

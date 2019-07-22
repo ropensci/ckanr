@@ -5,8 +5,12 @@ o <- get_test_oid()
 
 dataset_num <- local({
   check_ckan(u)
-  check_organization(u, o)
-
+  chorg <- tryCatch(check_organization(u, o), error = function(e) e)
+  if (inherits(chorg, "error")) {
+    ckanr_setup(u, key = getOption("ckan_demo_key"))
+    organization_create(o)
+  }
+  Sys.sleep(2)
   org <- organization_show(o, url=u)
   res <- httr::GET(file.path(u, "organization", org$name))
   httr::stop_for_status(res)

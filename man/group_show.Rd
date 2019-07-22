@@ -5,7 +5,7 @@
 \title{Show a package}
 \usage{
 group_show(id, include_datasets = TRUE, url = get_default_url(),
-  as = "list", ...)
+  key = get_default_key(), as = "list", ...)
 }
 \arguments{
 \item{id}{(character) Package identifier.}
@@ -15,6 +15,8 @@ Default: TRUE}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
+
+\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse

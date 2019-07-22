@@ -40,7 +40,7 @@ print.ckan_organization <- function(x, ...) {
   cat("  No. Users: ", length(x$users), "\n", sep = "")
 }
 
-get_organization <- function(id, url = get_default_url(), ...) {
-  res <- ckan_GET(url, 'organization_show', list(id = id), NULL, ...)
+get_organization <- function(id, url = get_default_url(), key = get_default_key(), ...) {
+  res <- ckan_GET(url, 'organization_show', list(id = id), key = key, ...)
   as_ck(jsl(res), "ckan_organization")
 }

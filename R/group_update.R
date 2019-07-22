@@ -21,7 +21,8 @@
 #' group_update(x, id = grp)
 #' }
 group_update <- function(x, id, url = get_default_url(), key = get_default_key(),
-                           as = 'list', ...) {
+  as = 'list', ...) {
+  
   id <- as.ckan_group(id, url = url)
   if (class(x) != "list") {
     stop("x must be of class list", call. = FALSE)

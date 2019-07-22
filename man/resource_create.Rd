@@ -10,7 +10,7 @@ resource_create(package_id = NULL, rcurl = NULL, revision_id = NULL,
   webstore_url = NULL, cache_url = NULL, size = NULL,
   created = NULL, last_modified = NULL, cache_last_updated = NULL,
   webstore_last_updated = NULL, upload = NULL,
-  key = get_default_key(), url = get_default_url(), as = "list", ...)
+  url = get_default_url(), key = get_default_key(), as = "list", ...)
 }
 \arguments{
 \item{package_id}{(character) id of package that the resource should be added to.
@@ -50,10 +50,10 @@ This should be an alphanumeric string. Required.}
 
 \item{upload}{(character) A path to a local file (optional)}
 
-\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
-
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
+
+\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse

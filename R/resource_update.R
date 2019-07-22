@@ -96,9 +96,8 @@
 #' (xxx <- resource_update(xx, path=newpath))
 #' browseURL(xxx$url)
 #' }
-resource_update <- function(id, path, key = get_default_key(),
-                            url = get_default_url(),
-                            as = 'list', ...) {
+resource_update <- function(id, path, url = get_default_url(),
+  key = get_default_key(), as = 'list', ...) {
 
   id <- as.ckan_resource(id, url = url)
   path <- path.expand(path)

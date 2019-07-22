@@ -19,8 +19,8 @@
 #' user_follower_list(x, as = "table")
 #' user_follower_list(x, as = "json")
 #' }
-user_follower_list <- function(id, url = get_default_url(), as = "list",
-                               key = get_default_key(), ...) {
+user_follower_list <- function(id, url = get_default_url(),
+  key = get_default_key(), as = "list", ...) {
 
   id <- as.ckan_user(id, url = url)
   res <- ckan_GET(url, 'user_follower_list', list(id = id$id), key = key, ...)

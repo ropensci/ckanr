@@ -6,8 +6,8 @@
 \usage{
 ds_create(resource_id = NULL, resource = NULL, force = FALSE,
   aliases = NULL, fields = NULL, records = NULL,
-  primary_key = NULL, indexes = NULL, key = get_default_key(),
-  url = get_default_url(), as = "list", ...)
+  primary_key = NULL, indexes = NULL, url = get_default_url(),
+  key = get_default_key(), as = "list", ...)
 }
 \arguments{
 \item{resource_id}{(string) Resource id that the data is going to be stored
@@ -31,10 +31,10 @@ Default: FALSE}
 
 \item{indexes}{(character) Indexes on table (optional)}
 
-\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
-
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
+
+\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with table option
 uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse
