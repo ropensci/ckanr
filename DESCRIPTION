@@ -8,17 +8,17 @@ Authors@R: c(
     person("Scott", "Chamberlain",
     	role = c("aut", "cre"),
     	email = "myrmecocystus@gmail.com",
-    	comment = "http://orcid.org/0000-0003-1444-9135"),
+        comment = c(ORCID = "0000-0003-1444-9135")),
     person("Imanuel", "Costigan",
     	role = "aut",
     	email = "i.costigan@me.com"),
     person("Wush", "Wu",
     	role = "aut",
-    	comment = "http://orcid.org/0000-0001-5180-0567"),
+        comment = c(ORCID = "0000-0001-5180-0567")),
     person("Florian", "Mayer",
     	role = "aut",
-     	email="Florian.Mayer@DPaW.wa.gov.au",
-     	comment = "http://orcid.org/0000-0003-4269-4242"),
+     	email="Florian.Mayer@dbca.wa.gov.au",
+        comment = c(ORCID = "0000-0003-4269-4242")),
     person("Sharla", "Gelfand", role = "aut")
   )
 License: MIT + file LICENSE
