@@ -9,3 +9,4 @@ Makefile
 ^README\.Rmd$
 .github
 ^codemeta\.json$
+tests/test-all.R
