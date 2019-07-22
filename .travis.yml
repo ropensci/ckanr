@@ -4,6 +4,10 @@ sudo: required
 dist: trusty
 warnings_are_errors: false
 
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install -y libudunits2-dev
+
 r_github_packages:
   - jimhester/robustr
   - jimhester/covr
