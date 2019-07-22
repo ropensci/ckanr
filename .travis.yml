@@ -9,6 +9,11 @@ r_github_packages:
   - jimhester/covr
   - hadley/xml2
 
+
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install -y libudunits2-dev
+
 after_success:
   - Rscript -e 'covr::codecov()'
 
