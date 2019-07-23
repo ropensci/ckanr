@@ -58,6 +58,12 @@
 #' class(x)
 #' plot(x[, c("mun_name", "geometry")])
 #'
+#' # ZIP file - packages required depends on contents
+#' ckanr_setup("https://ckan0.cf.opendata.inter.sandbox-toronto.ca")
+#' res <- resource_show(id = "56738509-8612-404c-96e3-27c175321aa7", as = "table")
+#' x <- ckan_fetch(res$url)
+#' names(x)
+#' head(x[["ChickenpoxAgegroups2017.csv"]])
 #' }
 ckan_fetch <- function(x, store = "session", path = "file", format = NULL, ...) {
   store <- match.arg(store, c("session", "disk"))
