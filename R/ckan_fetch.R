@@ -69,7 +69,18 @@ ckan_fetch <- function(x, store = "session", path = "file", format = NULL, ...) 
   fmt <- tolower(fmt)
   res <- fetch_GET(x, store, path, format = fmt, ...)
   if (store == "session") {
-    temp_res <- read_session(res$fmt, res$data, res$path)
+    if(res$fmt == "zip"){
+      temp_res <- vector(mode = "list", length = length(res$path))
+      for(i in seq_along(res$path)){
+        temp_res[[i]] <- read_session(file_fmt(res$path[[i]]), res$data, res$path[[i]])
+      }
+      temp_names <- res$path
+      temp_names <- gsub(paste0(tempdir(), "/"), "", temp_names)
+      names(temp_res) <- temp_names
+    }
+    else{
+      temp_res <- read_session(res$fmt, res$data, res$path)
+    }
     unlink(res$temp_files)
     temp_res
   } else {
@@ -79,7 +90,14 @@ ckan_fetch <- function(x, store = "session", path = "file", format = NULL, ...) 
 
 read_session <- function(fmt, dat, path) {
   switch(fmt,
-         csv = read.csv(text = dat),
+         csv = {
+           if(!is.null(dat)) {
+             read.csv(text = dat, fileEncoding = "latin1")
+             }
+           else {
+             read.csv(path, fileEncoding = "latin1")
+           }
+         },
          xls = {
            check4X("readxl")
            readxl::read_excel(path)

@@ -74,7 +74,6 @@ fetch_GET <- function(x, store, path, args = NULL, format = NULL, ...) {
       path <- res$request$output$path
       temp_files <- path
     } else if (fmt %in% c("shp", "zip")) {
-      fmt <- "shp"
       dat <- NULL
       path <- tempfile(fileext = ".zip")
       res <- GET(x, query = args, write_disk(path, TRUE), config = proxy, ...)
@@ -84,6 +83,13 @@ fetch_GET <- function(x, store, path, args = NULL, format = NULL, ...) {
       unzip(path, exdir = dir)
       temp_files <- c(path, zip_files)
       path <- list.files(dir, pattern = ".shp$", full.names = TRUE)
+      if(identical(path, character(0))){
+        fmt <- "zip"
+        path <- zip_files
+      }
+      else{
+        fmt <- "shp"
+      }
     } else {
       path <- NULL
       temp_files <- NULL
