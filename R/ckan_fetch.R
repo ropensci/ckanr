@@ -75,9 +75,9 @@ ckan_fetch <- function(x, store = "session", path = "file", format = NULL, ...) 
   fmt <- tolower(fmt)
   res <- fetch_GET(x, store, path, format = fmt, ...)
   if (store == "session") {
-    if(res$fmt == "zip"){
+    if(res$fmt == "zip") {
       temp_res <- vector(mode = "list", length = length(res$path))
-      for(i in seq_along(res$path)){
+      for(i in seq_along(res$path)) {
         temp_res[[i]] <- read_session(file_fmt(res$path[[i]]), res$data, res$path[[i]])
       }
       temp_names <- res$path
