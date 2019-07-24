@@ -83,11 +83,10 @@ fetch_GET <- function(x, store, path, args = NULL, format = NULL, ...) {
       unzip(path, exdir = dir)
       temp_files <- c(path, zip_files)
       path <- list.files(dir, pattern = ".shp$", full.names = TRUE)
-      if(identical(path, character(0))) {
+      if (identical(path, character(0))) {
         fmt <- "zip"
         path <- zip_files
-      }
-      else {
+      } else {
         fmt <- "shp"
       }
     } else {
