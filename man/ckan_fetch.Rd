@@ -4,7 +4,8 @@
 \alias{ckan_fetch}
 \title{Download a file}
 \usage{
-ckan_fetch(x, store = "session", path = "file", format = NULL, ...)
+ckan_fetch(x, store = "session", path = "file", format = NULL,
+  key = get_default_key(), ...)
 }
 \arguments{
 \item{x}{URL for the file}
@@ -15,6 +16,8 @@ disk saves the file to disk.}
 \item{path}{if store=disk, you must give a path to store file to}
 
 \item{format}{Format of the file. Required if format is not detectable through file URL.}
+
+\item{key}{A CKAN API key (optional, character)}
 
 \item{...}{Curl arguments passed on to \code{\link[httr]{GET}}}
 }
