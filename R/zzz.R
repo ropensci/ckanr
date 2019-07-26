@@ -54,7 +54,7 @@ ckan_VERB <- function(verb, url, method, body, key, ...) {
 }
 
 # GET fxn for fetch()
-fetch_GET <- function(x, store, path, args = NULL, format = NULL, ...) {
+fetch_GET <- function(x, store, path, args = NULL, format = NULL, key = NULL, ...) {
   # check if proxy set
   proxy <- get("ckanr_proxy", ckanr_settings_env)
   if (!is.null(proxy)) {
@@ -66,18 +66,30 @@ fetch_GET <- function(x, store, path, args = NULL, format = NULL, ...) {
   file_fmt <- file_fmt(x)
   fmt <- ifelse(identical(file_fmt, character(0)), format, file_fmt)
   fmt <- tolower(fmt)
+  # set API key header
+  if (!is.null(key)) {
+    api_key_header <- add_headers("X-CKAN-API-Key" = key)
+  }
   if (store == "session") {
     if (fmt %in% c("xls", "xlsx", "geojson")) {
       dat <- NULL
       path <- tempfile(fileext = paste0(".", fmt))
-      res <- GET(x, query = args, write_disk(path, TRUE), config = proxy, ...)
+      if (is.null(key)) {
+        res <- GET(x, query = args, write_disk(path, TRUE), config = proxy, ...)
+      } else {
+        res <- GET(x, query = args, write_disk(path, TRUE), config = proxy, api_key_header, ...)
+      }
       path <- res$request$output$path
       temp_files <- path
     } else if (fmt %in% c("shp", "zip")) {
       fmt <- "shp"
       dat <- NULL
       path <- tempfile(fileext = ".zip")
-      res <- GET(x, query = args, write_disk(path, TRUE), config = proxy, ...)
+      if (is.null(key)) {
+        res <- GET(x, query = args, write_disk(path, TRUE), config = proxy, ...)
+      } else {
+        res <- GET(x, query = args, write_disk(path, TRUE), config = proxy, api_key_header, ...)
+      }
       dir <- tempdir()
       zip_files <- unzip(path, list = TRUE)
       zip_files <- paste0(dir, "/", zip_files[["Name"]])
@@ -87,14 +99,22 @@ fetch_GET <- function(x, store, path, args = NULL, format = NULL, ...) {
     } else {
       path <- NULL
       temp_files <- NULL
-      res <- GET(x, query = args, config = proxy, ...)
+      if (is.null(key)) {
+        res <- GET(x, query = args, config = proxy, ...)
+      } else {
+        res <- GET(x, query = args, config = proxy, api_key_header, ...)
+      }
       err_handler(res)
       dat <- content(res, "text", encoding = "UTF-8")
     }
     list(store = store, fmt = fmt, data = dat, path = path, temp_files = temp_files)
   } else {
     # if (!file.exists(path)) stop("path does not exist", call. = FALSE)
-    res <- GET(x, query = args, write_disk(path, TRUE), config = proxy, ...)
+    if (is.null(key)) {
+      res <- GET(x, query = args, write_disk(path, TRUE), config = proxy, ...)
+    } else {
+      res <- GET(x, query = args, write_disk(path, TRUE), config = proxy, api_key_header, ...)
+    }
     list(store = store, fmt = fmt, data = NULL, path = res$request$output$path)
   }
 }

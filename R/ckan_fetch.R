@@ -7,6 +7,7 @@
 #' disk saves the file to disk.
 #' @param path if store=disk, you must give a path to store file to
 #' @param format Format of the file. Required if format is not detectable through file URL.
+#' @param key A CKAN API key (optional, character)
 #' @param ... Curl arguments passed on to \code{\link[httr]{GET}}
 #' @examples \dontrun{
 #' # CSV file
@@ -59,7 +60,7 @@
 #' plot(x[, c("mun_name", "geometry")])
 #'
 #' }
-ckan_fetch <- function(x, store = "session", path = "file", format = NULL, ...) {
+ckan_fetch <- function(x, store = "session", path = "file", format = NULL, key = get_default_key(), ...) {
   store <- match.arg(store, c("session", "disk"))
   file_fmt <- file_fmt(x)
   if (identical(file_fmt, character(0)) & is.null(format)) {
@@ -67,7 +68,7 @@ ckan_fetch <- function(x, store = "session", path = "file", format = NULL, ...) 
   }
   fmt <- ifelse(identical(file_fmt, character(0)), format, file_fmt)
   fmt <- tolower(fmt)
-  res <- fetch_GET(x, store, path, format = fmt, ...)
+  res <- fetch_GET(x, store, path, format = fmt, key = get_default_key(), ...)
   if (store == "session") {
     temp_res <- read_session(res$fmt, res$data, res$path)
     unlink(res$temp_files)
