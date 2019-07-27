@@ -68,7 +68,7 @@ ckan_fetch <- function(x, store = "session", path = "file", format = NULL, key =
   }
   fmt <- ifelse(identical(file_fmt, character(0)), format, file_fmt)
   fmt <- tolower(fmt)
-  res <- fetch_GET(x, store, path, format = fmt, key = get_default_key(), ...)
+  res <- fetch_GET(x, store, path, format = fmt, key = key, ...)
   if (store == "session") {
     temp_res <- read_session(res$fmt, res$data, res$path)
     unlink(res$temp_files)
