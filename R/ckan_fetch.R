@@ -17,8 +17,8 @@
 #' ckan_fetch(res$url, "disk", "myfile.csv")
 #'
 #' # CSV file, format not available
-#' ckanr_setup("https://ckan0.cf.opendata.inter.sandbox-toronto.ca")
-#' res <- resource_show(id = "75c69a49-8573-4dda-b41a-d312a33b2e05", as = "table")
+#' ckanr_setup("https://ckan0.cf.opendata.inter.prod-toronto.ca")
+#' res <- resource_show(id = "c57c3e1c-20e2-470f-bc82-e39a0264be31", as = "table")
 #' res$url
 #' res$format
 #' head(ckan_fetch(res$url, format = res$format))
@@ -46,11 +46,11 @@
 #' head(ckan_fetch(res$url))
 #'
 #' # SHP file (spatial data, ESRI format) - requires sf package
-#' ckanr_setup("https://ckan0.cf.opendata.inter.sandbox-toronto.ca")
-#' res <- resource_show(id = "6cbb0aa3-a8d1-421c-9c40-14c6f05e0c73", as = "table")
+#' ckanr_setup("https://ckan0.cf.opendata.inter.prod-toronto.ca")
+#' res <- resource_show(id = "27362290-8bbf-434b-a9de-325a6c2ef923", as = "table")
 #' x <- ckan_fetch(res$url)
 #' class(x)
-#' plot(x)
+#' plot(x[, c("AREA_NAME", "geometry")])
 #'
 #' # GeoJSON file - requires sf package
 #' ckanr_setup("http://datamx.io")
@@ -60,8 +60,8 @@
 #' plot(x[, c("mun_name", "geometry")])
 #'
 #' # ZIP file - packages required depends on contents
-#' ckanr_setup("https://ckan0.cf.opendata.inter.sandbox-toronto.ca")
-#' res <- resource_show(id = "56738509-8612-404c-96e3-27c175321aa7", as = "table")
+#' ckanr_setup("https://ckan0.cf.opendata.inter.prod-toronto.ca")
+#' res <- resource_show(id = "bb21e1b8-a466-41c6-8bc3-3c362cb1ed55", as = "table")
 #' x <- ckan_fetch(res$url)
 #' names(x)
 #' head(x[["ChickenpoxAgegroups2017.csv"]])
