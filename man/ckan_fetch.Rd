@@ -33,8 +33,8 @@ head(ckan_fetch(res$url))
 ckan_fetch(res$url, "disk", "myfile.csv")
 
 # CSV file, format not available
-ckanr_setup("https://ckan0.cf.opendata.inter.sandbox-toronto.ca")
-res <- resource_show(id = "75c69a49-8573-4dda-b41a-d312a33b2e05", as = "table")
+ckanr_setup("https://ckan0.cf.opendata.inter.prod-toronto.ca")
+res <- resource_show(id = "c57c3e1c-20e2-470f-bc82-e39a0264be31", as = "table")
 res$url
 res$format
 head(ckan_fetch(res$url, format = res$format))
@@ -43,6 +43,13 @@ head(ckan_fetch(res$url, format = res$format))
 ckanr_setup("http://datamx.io")
 res <- resource_show(id = "e883510e-a082-435c-872a-c5b915857ae1", as = "table")
 head(ckan_fetch(res$url))
+
+# Excel file, multiple sheets - requires readxl package
+ckanr_setup()
+res <- resource_show(id = "ce02a1cf-35f1-41df-91d9-11ed1fdd4186", as = "table")
+x <- ckan_fetch(res$url)
+names(x)
+head(x[["Mayor - Maire"]])
 
 # XML file - requires xml2 package
 ckanr_setup("http://data.ottawa.ca")
@@ -62,11 +69,11 @@ res <- resource_show(id = "8d07c662-800d-4977-9e3e-5a3d2d1e99ab", as = "table")
 head(ckan_fetch(res$url))
 
 # SHP file (spatial data, ESRI format) - requires sf package
-ckanr_setup("https://ckan0.cf.opendata.inter.sandbox-toronto.ca")
-res <- resource_show(id = "6cbb0aa3-a8d1-421c-9c40-14c6f05e0c73", as = "table")
+ckanr_setup("https://ckan0.cf.opendata.inter.prod-toronto.ca")
+res <- resource_show(id = "27362290-8bbf-434b-a9de-325a6c2ef923", as = "table")
 x <- ckan_fetch(res$url)
 class(x)
-plot(x)
+plot(x[, c("AREA_NAME", "geometry")])
 
 # GeoJSON file - requires sf package
 ckanr_setup("http://datamx.io")
@@ -75,5 +82,11 @@ x <- ckan_fetch(res$url)
 class(x)
 plot(x[, c("mun_name", "geometry")])
 
+# ZIP file - packages required depends on contents
+ckanr_setup("https://ckan0.cf.opendata.inter.prod-toronto.ca")
+res <- resource_show(id = "bb21e1b8-a466-41c6-8bc3-3c362cb1ed55", as = "table")
+x <- ckan_fetch(res$url)
+names(x)
+head(x[["ChickenpoxAgegroups2017.csv"]])
 }
 }

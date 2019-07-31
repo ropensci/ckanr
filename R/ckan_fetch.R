@@ -28,6 +28,13 @@
 #' res <- resource_show(id = "e883510e-a082-435c-872a-c5b915857ae1", as = "table")
 #' head(ckan_fetch(res$url))
 #'
+#' # Excel file, multiple sheets - requires readxl package
+#' ckanr_setup()
+#' res <- resource_show(id = "ce02a1cf-35f1-41df-91d9-11ed1fdd4186", as = "table")
+#' x <- ckan_fetch(res$url)
+#' names(x)
+#' head(x[["Mayor - Maire"]])
+#'
 #' # XML file - requires xml2 package
 #' ckanr_setup("http://data.ottawa.ca")
 #' res <- resource_show(id = "380061c1-6c46-4da6-a01b-7ab0f49a881e", as = "table")
@@ -105,11 +112,11 @@ read_session <- function(fmt, dat, path) {
          },
          xls = {
            check4X("readxl")
-           readxl::read_excel(path)
+           read_all_excel_sheets(path)
          },
          xlsx = {
            check4X("readxl")
-           readxl::read_excel(path)
+           read_all_excel_sheets(path)
          },
          xml = {
            check4X("xml2")
@@ -129,4 +136,15 @@ read_session <- function(fmt, dat, path) {
            sf::st_read(path)
          }
   )
+}
+
+read_all_excel_sheets <- function(x) {
+  sheets <- readxl::excel_sheets(x)
+  if (length(sheets) > 1) {
+    res <- lapply(sheets, readxl::read_excel, path = x)
+    names(res) <- sheets
+    res
+  } else {
+    readxl::read_excel(x)
+  }
 }
