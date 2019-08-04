@@ -21,7 +21,7 @@ ckan_info <- function(url = get_default_url(), ...) {
 #' @param url Base url to use. Default: \url{http://data.techno-science.ca}. See
 #' also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}. (required)
 #' @rdname ckan_info
-ckan_version <- function(url, ...) {
+ckan_version <- function(url = get_default_url(), ...) {
   ver <- ckan_info(url, ...)$ckan_version
   nn <- parse_version_number(ver)
   list(version = ver, version_num = nn)
