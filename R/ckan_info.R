@@ -23,10 +23,17 @@ ckan_info <- function(url = get_default_url(), ...) {
 #' @rdname ckan_info
 ckan_version <- function(url, ...) {
   ver <- ckan_info(url, ...)$ckan_version
-  nn <- as.numeric(
-    paste0(
-      unlist(regmatches(ver, gregexpr("[[:digit:]]+", ver))),
-      collapse = "")
-  )
+  nn <- parse_version_number(ver)
   list(version = ver, version_num = nn)
+}
+
+parse_version_number <- function(x) {
+  version_components <- unlist(regmatches(x, gregexpr("[[:digit:]]+", x)))
+  major_minor <- paste0(version_components[1:2], collapse = "")
+  if (length(version_components) == 2) {
+    as.numeric(major_minor)
+  } else {
+    patch_etc <- paste0(version_components[-c(1:2)], collapse = "")
+    as.numeric(paste0(major_minor, ".", patch_etc))
+  }
 }
