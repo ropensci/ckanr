@@ -7,7 +7,7 @@
 \usage{
 ckan_info(url = get_default_url(), ...)
 
-ckan_version(url, ...)
+ckan_version(url = get_default_url(), ...)
 }
 \arguments{
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
