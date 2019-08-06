@@ -46,13 +46,13 @@ be included in the results}
 \item{include_drafts}{(logical) if \code{TRUE} draft datasets will be 
 included. A user will only be returned their own draft datasets, and a 
 sysadmin will be returned all draft datasets. default: \code{FALSE}.
-first CKAN version: 2.4.9; dropped from request if CKAN version is older}
+first CKAN version: 2.6.1; dropped from request if CKAN version is older}
 
 \item{include_private}{(logical) if \code{TRUE} private datasets will be 
 included. Only private datasets from the user’s organizations will be 
 returned and sysadmins will be returned all private datasets.
 default: \code{FALSE}
-first CKAN version: 2.6; dropped from request if CKAN version is older}
+first CKAN version: 2.6.1; dropped from request if CKAN version is older}
 
 \item{use_default_schema}{(logical) use default package schema instead of a
 custom schema defined with an IDatasetForm plugin. default: \code{FALSE}
