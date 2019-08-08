@@ -46,17 +46,20 @@ be included in the results}
 \item{include_drafts}{(logical) if \code{TRUE} draft datasets will be 
 included. A user will only be returned their own draft datasets, and a 
 sysadmin will be returned all draft datasets. default: \code{FALSE}.
-first CKAN version: 2.6.1; dropped from request if CKAN version is older}
+first CKAN version: 2.6.1; dropped from request if CKAN version is older
+or if CKAN version isn't available via \code{\link{ckan_version}}}
 
 \item{include_private}{(logical) if \code{TRUE} private datasets will be 
 included. Only private datasets from the user’s organizations will be 
 returned and sysadmins will be returned all private datasets.
 default: \code{FALSE}
-first CKAN version: 2.6.1; dropped from request if CKAN version is older}
+first CKAN version: 2.6.1; dropped from request if CKAN version is older
+or if CKAN version isn't available via \code{\link{ckan_version}}}
 
 \item{use_default_schema}{(logical) use default package schema instead of a
 custom schema defined with an IDatasetForm plugin. default: \code{FALSE}
-first CKAN version: 2.3.5; dropped from request if CKAN version is older}
+first CKAN version: 2.3.5; dropped from request if CKAN version is older
+or if CKAN version isn't available via \code{\link{ckan_version}}}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
