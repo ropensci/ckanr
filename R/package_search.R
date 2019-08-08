@@ -29,14 +29,17 @@
 #' included. A user will only be returned their own draft datasets, and a 
 #' sysadmin will be returned all draft datasets. default: \code{FALSE}.
 #' first CKAN version: 2.6.1; dropped from request if CKAN version is older
+#' or if CKAN version isn't available via \code{\link{ckan_version}}
 #' @param include_private (logical) if \code{TRUE} private datasets will be 
 #' included. Only private datasets from the user’s organizations will be 
 #' returned and sysadmins will be returned all private datasets.
 #' default: \code{FALSE}
 #' first CKAN version: 2.6.1; dropped from request if CKAN version is older
+#' or if CKAN version isn't available via \code{\link{ckan_version}}
 #' @param use_default_schema (logical) use default package schema instead of a
 #' custom schema defined with an IDatasetForm plugin. default: \code{FALSE}
 #' first CKAN version: 2.3.5; dropped from request if CKAN version is older
+#' or if CKAN version isn't available via \code{\link{ckan_version}}
 #' @template args
 #' @template key
 #' @examples \dontrun{
@@ -57,7 +60,10 @@ package_search <- function(q = '*:*', fq = NULL, sort = NULL, rows = NULL,
   use_default_schema = FALSE, url = get_default_url(), key = get_default_key(),
   as = 'list', ...) {
 
-  ver <- ckan_version(url)$version_num
+  ver <- try(ckan_version(url)$version_num, silent = TRUE)
+  if (class(ver) == "try-error") {
+    ver <- NA
+  }
   args <- cc(list(
     q = q, fq = fq, sort = sort, rows = rows, start = start,
     facet = as_log(facet), facet.limit = facet.limit,
@@ -66,7 +72,9 @@ package_search <- function(q = '*:*', fq = NULL, sort = NULL, rows = NULL,
     include_private = as_log(include_private), 
     use_default_schema = as_log(use_default_schema)
   ))
-  if (ver < 23.5) {
+  if (is.na(ver)) {
+    args$include_drafts <- args$use_default_schema <- args$include_private <- NULL
+  } else if (ver < 23.5) {
     args$include_drafts <- args$use_default_schema <- args$include_private <- NULL
   } else if (ver < 26.1) {
     args$use_default_schema <- args$include_private <- NULL
