@@ -229,6 +229,8 @@ x$results
 
 ## Contributors
 
+(alphebetical)
+
 * Scott Chamberlain
 * Imanuel Costigan
 * Sharla Gelfand

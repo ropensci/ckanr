@@ -303,7 +303,7 @@ dplyr::tbl(src = ckan$con, from = res_id) %>% as_tibble(.)
 
 ## Examples of different CKAN APIs
 
-See `ckanr::servers()` for a list of CKAN servers. Ther are 125 as of 2019-07-11.
+See `ckanr::servers()` for a list of CKAN servers. Ther are 125 as of 2019-08-09.
 
 ### The Natural History Museum
 
@@ -334,16 +334,18 @@ ckanr_setup("http://search.geothermaldata.org")
 x <- package_search(q = '*:*', rows = 1)
 x$results
 #> [[1]]
-#> <CKAN Package> 71ffb979-c3c8-467c-ab67-fe9477f0abda 
-#>   Title: Resource Analysis for Deep Direct-Use Feasibility Study in East Texas, Part 2 MEMO SMU DDU GeologicVariability-TravPeak29Jan2019.xlsx
-#>   Creator/Modified: 2019-07-02T22:55:08.989201 / 2019-07-02T22:55:09.055454
-#>   Resources (up to 5): MEMO SMU DDU GeologicVariability-TravPeak29Jan2019.xlsx
-#>   Tags (up to 5): DDU, Deep direct-use, East Texas, Eastman Chemical, Heat flow
+#> <CKAN Package> 2be536c9-6856-4363-89b6-9e4ef8a59875 
+#>   Title: Brady Hot Springs Seismic Modeling Data for Push-Pull Project vsp_Vy_tencluster_frac_0_1m_spacing_newgeometry.dat
+#>   Creator/Modified: 2019-08-08T20:22:00.003935 / 2019-08-08T20:22:00.094385
+#>   Resources (up to 5): vsp_Vy_tencluster_frac_0_1m_spacing_newgeometry.dat
+#>   Tags (up to 5): Brady Hot Springs, CO2, NV, Nevada, VSP
 #>   Groups (up to 5):
 NA
 ```
 
 ## Contributors
+
+(alphebetical)
 
 * Scott Chamberlain
 * Imanuel Costigan
