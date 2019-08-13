@@ -89,7 +89,7 @@ ckan_fetch <- function(x, store = "session", path = "file", format = NULL, key =
         temp_res[[i]] <- read_session(file_fmt(res$path[[i]]), res$data, res$path[[i]])
       }
       temp_names <- res$path
-      temp_names <- gsub(paste0(tempdir(), "/"), "", temp_names)
+      temp_names <- basename(temp_names)
       names(temp_res) <- temp_names
     } else {
       temp_res <- read_session(res$fmt, res$data, res$path)
