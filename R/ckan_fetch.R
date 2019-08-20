@@ -105,9 +105,9 @@ read_session <- function(fmt, dat, path) {
   switch(fmt,
          csv = {
            if (!is.null(dat)) {
-             read.csv(text = dat, fileEncoding = "latin1")
+             read.csv(text = dat, stringsAsFactors = FALSE, fileEncoding = "latin1")
            } else {
-             read.csv(path, fileEncoding = "latin1")
+             read.csv(path, stringsAsFactors = FALSE, fileEncoding = "latin1")
            }
          },
          xls = {
