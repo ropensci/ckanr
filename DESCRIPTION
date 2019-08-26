@@ -23,7 +23,8 @@ Authors@R: c(
   )
 License: MIT + file LICENSE
 LazyData: true
-URL: https://github.com/ropensci/ckanr
+URL: https://docs.ropensci.org/ckanr (website)
+    https://github.com/ropensci/ckanr (devel)
 BugReports: https://github.com/ropensci/ckanr/issues
 VignetteBuilder: knitr
 Encoding: UTF-8
