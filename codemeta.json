@@ -10,14 +10,14 @@
   "codeRepository": "https://github.com/ropensci/ckanr",
   "issueTracker": "https://github.com/ropensci/ckanr/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "version": "3.6.1",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 3.6.1 Patched (2019-07-17 r76848)",
+  "runtimePlatform": "R version 3.6.1 Patched (2019-09-05 r77154)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -79,6 +79,18 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=knitr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "rmarkdown",
+      "name": "rmarkdown",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=rmarkdown"
     },
     {
       "@type": "SoftwareApplication",
@@ -240,7 +252,9 @@
   "contIntegration": "https://travis-ci.org/ropensci/ckanr",
   "releaseNotes": "https://github.com/ropensci/ckanr/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/ckanr/blob/master/README.md",
-  "fileSize": "77.271KB",
+  "fileSize": "72.278KB",
   "copyrightHolder": {},
-  "funder": {}
+  "funder": {},
+  "relatedLink": "https://docs.ropensci.org/ckanr",
+  "developmentStatus": "http://www.repostatus.org/#active"
 }
