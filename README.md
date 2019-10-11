@@ -3,6 +3,7 @@ ckanr
 
 
 
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 [![cran checks](https://cranchecks.info/badges/worst/ckanr)](https://cranchecks.info/pkgs/ckanr)
 [![Build Status](https://api.travis-ci.org/ropensci/ckanr.png)](https://travis-ci.org/ropensci/ckanr)
 [![Build status](https://ci.appveyor.com/api/projects/status/5yqd882v4fbeggd5?svg=true)](https://ci.appveyor.com/project/sckott/ckanr)
@@ -303,7 +304,7 @@ dplyr::tbl(src = ckan$con, from = res_id) %>% as_tibble(.)
 
 ## Examples of different CKAN APIs
 
-See `ckanr::servers()` for a list of CKAN servers. Ther are 125 as of 2019-08-09.
+See `ckanr::servers()` for a list of CKAN servers. Ther are 125 as of 2019-10-11.
 
 ### The Natural History Museum
 
@@ -334,11 +335,11 @@ ckanr_setup("http://search.geothermaldata.org")
 x <- package_search(q = '*:*', rows = 1)
 x$results
 #> [[1]]
-#> <CKAN Package> 2be536c9-6856-4363-89b6-9e4ef8a59875 
-#>   Title: Brady Hot Springs Seismic Modeling Data for Push-Pull Project vsp_Vy_tencluster_frac_0_1m_spacing_newgeometry.dat
-#>   Creator/Modified: 2019-08-08T20:22:00.003935 / 2019-08-08T20:22:00.094385
-#>   Resources (up to 5): vsp_Vy_tencluster_frac_0_1m_spacing_newgeometry.dat
-#>   Tags (up to 5): Brady Hot Springs, CO2, NV, Nevada, VSP
+#> <CKAN Package> 2a6e3177-6c87-4027-9ca8-a8525f948c31 
+#>   Title: WISE-CASING: Time Domain Reflectometry Data from Lab Experiment on Steel Pipe TDR_20180319142827.eps
+#>   Creator/Modified: 2019-09-10T19:53:32.737122 / 2019-10-01T19:35:45.182936
+#>   Resources (up to 5): TDR_20180319142827.eps
+#>   Tags (up to 5): EGS, Lab experiment, TDR, Time domain Reflectormery, casing
 #>   Groups (up to 5):
 NA
 ```
