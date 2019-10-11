@@ -56,7 +56,7 @@ install.packages("ckanr")
 Development version from GitHub
 
 ```{r eval=FALSE}
-devtools::install_github("ropensci/ckanr")
+remotes::install_github("ropensci/ckanr")
 ```
 
 ```{r}
@@ -140,12 +140,12 @@ resource_search(q = 'name:data', limit = 2, as = 'table')
 
 ### The UK Natural History Museum
 
-Website: [http://data.nhm.ac.uk/](http://data.nhm.ac.uk/)
+Website: <https://data.nhm.ac.uk/>
 
 List datasets
 
 ```{r output.lines=1:10}
-ckanr_setup(url = "http://data.nhm.ac.uk")
+ckanr_setup(url = "https://data.nhm.ac.uk")
 package_list(as = "table")
 ```
 
