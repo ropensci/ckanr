@@ -24,3 +24,6 @@ eg:
 		
 test: 
 	${RSCRIPT} -e "devtools::test()"
+
+check:
+	${RSCRIPT} -e "devtools::check(document = FALSE, cran = TRUE)"
