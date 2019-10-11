@@ -22,3 +22,5 @@ doc:
 eg:
 	${RSCRIPT} -e "devtools::run_examples()"
 		
+test: 
+	${RSCRIPT} -e "devtools::test()"
