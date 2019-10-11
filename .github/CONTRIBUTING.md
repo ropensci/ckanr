@@ -14,5 +14,3 @@
 * Submit a pull request to home base (likely master branch, but check to make sure) at `ropensci/ckanr`
 
 ### Also, check out our [discussion forum](https://discuss.ropensci.org)
-
-### Prefer to Email? Email the person listed as maintainer in the `DESCRIPTION` file of this repo.
