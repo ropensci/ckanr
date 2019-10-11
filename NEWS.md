@@ -1,9 +1,27 @@
+ckanr 0.4.0
+===========
+
+### NEW FEATURES
+
+* `ckan_fetch()` gains parameter `key` for a CKAN API key; if given the API key is now included in the request headers (#133) see also (#122) by @sharlagelfand
+* `ckan_fetch()` gains ability to read xls/xlsx files with multiple sheets (#135) by @sharlagelfand
+
+### MINOR IMPROVEMENTS
+
+* `ckan_fetch()` now sets `stringsAsFactors = FALSE` when reading data (#141) (#142) thanks @LVG77 @sharlagelfand
+* in `ckan_fetch()`, use `basename(x)` instead of `gsub(paste0(tempdir(), "/"), "", x)`, to get file path (#140) by @sharlagelfand
+* in `package_search()` handle better cases where the CKAN version can not be determined (#139) && fix logic for when `default_schema` and `include_private` parameters are included based on the CKAN version (#137) by @sharlagelfand
+* improve `ckan_fetch()`: old behavior of the fxn with zip files was that it only worked if the zip file contained shp files; works more generally now, e.g., a zip file containing a csv file (#132) by @sharlagelfand
+* fix `ckan_fetch()` examples that weren't working (#134) by @sharlagelfand
+* fix to parsing CKAN version numbers, new internal fxn `parse_version_number()` - now properly parses CKAN version numbers that include patch and dev versions (#136) by @sharlagelfand
+
+
 ckanr 0.3.0
 ===========
 
 ### NEW FEATURES
 
-* new package maintainer Sharla Gelfand !!!
+* new package author Sharla Gelfand !!!
 * new functions for users: `user_create()` and `user_delete()` (#82)
 * `package_show()` gains `key` parameter to pass an API key (#97)
 * `package_search()` gains new parameters: `include_drafts`, `include_private`, `use_default_schema`, and `facet.mincount` (#107)

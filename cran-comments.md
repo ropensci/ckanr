@@ -14,7 +14,7 @@ There are no reverse dependencies.
 
 --------
 
-This version adds many new functions and fixes many bugs.
+This version includes many fixes for the function ckan_fetch().
 
 Thanks very much,
 Scott Chamberlain
