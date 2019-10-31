@@ -34,7 +34,7 @@ package_show <- function(id, use_default_schema = FALSE,
                          url = get_default_url(), key = get_default_key(),
                          as = 'list', ...) {
 
-  id <- as.ckan_package(id, url = url)
+  id <- as.ckan_package(id, url = url, key = key)
   args <- cc(list(id = id$id, use_default_schema = use_default_schema))
   res <- ckan_GET(url, 'package_show', args, key = key, ...)
   switch(as, json = res, list = as_ck(jsl(res), "ckan_package"),

@@ -54,7 +54,7 @@ resource_create <- function(package_id = NULL, rcurl = NULL,
   webstore_last_updated = NULL, upload = NULL, url = get_default_url(),
   key = get_default_key(), as = 'list', ...) {
 
-  id <- as.ckan_package(package_id, url = url)
+  id <- as.ckan_package(package_id, url = url, key = key)
   body <- cc(list(package_id = id$id, url = rcurl, revision_id = revision_id,
                   description = description, format = format, hash = hash,
                   name = name, resource_type = resource_type, mimetype = mimetype,
