@@ -5,6 +5,8 @@
 #' @param name (character) the name of the new dataset, must be between 2 and 100 characters
 #' long and contain only lowercase alphanumeric characters, - and _, e.g. 'warandpeace'
 #' @param title (character) the title of the dataset (optional, default: same as name)
+#' @param private (logical) whether or not the dataset should be private
+#' (optional, default: FALSE).
 #' @param author (character) the name of the dataset's author (optional)
 #' @param author_email (character) the email address of the dataset's author (optional)
 #' @param maintainer (character) the name of the dataset's maintainer (optional)
@@ -54,13 +56,13 @@
 #' (res <- package_create("helloworld", author="Jane DOe"))
 #'
 #' }
-package_create <- function(name = NULL, title = NULL, author = NULL, author_email = NULL,
+package_create <- function(name = NULL, title = NULL, private=FALSE, author = NULL, author_email = NULL,
   maintainer = NULL, maintainer_email = NULL, license_id = NULL, notes = NULL, package_url = NULL,
   version = NULL, state = "active", type = NULL, resources = NULL, tags = NULL, extras = NULL,
   relationships_as_object = NULL, relationships_as_subject = NULL, groups = NULL,
   owner_org = NULL, url = get_default_url(), key = get_default_key(), as = 'list', ...) {
 
-  body <- cc(list(name = name, title = title, author = author, author_email = author_email,
+  body <- cc(list(name = name, title = title, private = private, author = author, author_email = author_email,
     maintainer = maintainer, maintainer_email = maintainer_email, license_id = license_id,
     notes = notes, url = package_url, version = version, state = state, type = type,
     resources = resources, tags = tags, extras = extras,
