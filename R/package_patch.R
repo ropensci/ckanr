@@ -18,7 +18,7 @@
 #' }
 package_patch <- function(x, id, key = get_default_key(),
                            url = get_default_url(), as = 'list', ...) {
-  id <- as.ckan_package(id, url = url)
+  id <- as.ckan_package(id, url = url, key =key)
   if (!inherits(x, "list")) {
     stop("x must be of class list", call. = FALSE)
   }
