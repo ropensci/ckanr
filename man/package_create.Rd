@@ -19,8 +19,8 @@ long and contain only lowercase alphanumeric characters, - and _, e.g. 'warandpe
 
 \item{title}{(character) the title of the dataset (optional, default: same as name)}
 
-\item{private}{(logical) whether or not the dataset should be private
-(optional, default: FALSE).}
+\item{private}{(logical) whether the dataset should be private (optional,
+default: FALSE), requires a value for \code{owner_org} if TRUE}
 
 \item{author}{(character) the name of the dataset's author (optional)}
 
