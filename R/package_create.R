@@ -5,8 +5,8 @@
 #' @param name (character) the name of the new dataset, must be between 2 and 100 characters
 #' long and contain only lowercase alphanumeric characters, - and _, e.g. 'warandpeace'
 #' @param title (character) the title of the dataset (optional, default: same as name)
-#' @param private (logical) whether or not the dataset should be private
-#' (optional, default: FALSE).
+#' @param private (logical) whether the dataset should be private (optional,
+#' default: FALSE), requires a value for \code{owner_org} if TRUE
 #' @param author (character) the name of the dataset's author (optional)
 #' @param author_email (character) the email address of the dataset's author (optional)
 #' @param maintainer (character) the name of the dataset's maintainer (optional)
