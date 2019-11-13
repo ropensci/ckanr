@@ -4,14 +4,24 @@
 \alias{package_show}
 \title{Show a package.}
 \usage{
-package_show(id, use_default_schema = FALSE, url = get_default_url(),
-  key = get_default_key(), as = "list", ...)
+package_show(
+  id,
+  use_default_schema = FALSE,
+  http_method = "GET",
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{id}{(character) Package identifier.}
 
 \item{use_default_schema}{(logical) Use default package schema instead of a
 custom schema defined with an IDatasetForm plugin. Default: FALSE}
+
+\item{http_method}{(character) which HTTP method (verb) to use; one of 
+"GET" or "POST". Default: "GET"}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
@@ -36,7 +46,8 @@ By default the help and success slots are dropped, and only the
 \examples{
 \dontrun{
 # Setup
-ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+ckanr_setup(url = "https://demo.ckan.org/",
+  key = getOption("ckan_demo_key"))
 
 # create a package
 (res <- package_create("purposeful55"))

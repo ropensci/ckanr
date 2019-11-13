@@ -12,24 +12,27 @@ is.ckan_package(x)
 \arguments{
 \item{x}{Variety of things, character, list, or ckan_package class object}
 
-\item{...}{Further args passed on to \code{\link{package_show}} if character given}
+\item{...}{Further args passed on to \code{\link{package_show}} if
+character given. In particular, if GET is not supported you can 
+try the \code{http_method} parameter to set a different HTTP verb}
 }
 \description{
 ckan_package class helpers
 }
 \examples{
 \dontrun{
-ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+ckanr_setup(url = "https://demo.ckan.org/",
+  key = getOption("ckan_demo_key"))
 
 (pkgs <- package_search())
 pkgs$results
 pkgs$results[[3]]
 
 # create item class from only an item ID
-as.ckan_package("0699f475-6978-473a-8448-42585074b6f1")
+as.ckan_package(pkgs$results[[3]]$id)
 
 # gives back itself
-(x <- as.ckan_package("0699f475-6978-473a-8448-42585074b6f1"))
+(x <- as.ckan_package(pkgs$results[[3]]$id))
 as.ckan_package(x)
 }
 }

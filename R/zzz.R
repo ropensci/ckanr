@@ -207,3 +207,19 @@ check4X <- function(x) {
 notrail <- function(x) {
   gsub("/+$", "", x)
 }
+
+assert <- function(x, y) {
+  if (!is.null(x)) {
+    if (!inherits(x, y)) {
+      stop(deparse(substitute(x)), " must be of class ",
+          paste0(y, collapse = ", "), call. = FALSE)
+    }
+  }
+}
+
+check_http_method <- function(http_method, methods) {
+  if (!http_method %in% methods) {
+    stop("'http_method' must be one of: ", paste0(methods, collapse = ", "),
+      call. = FALSE)
+  }
+}
