@@ -4,8 +4,14 @@
 \alias{group_show}
 \title{Show a package}
 \usage{
-group_show(id, include_datasets = TRUE, url = get_default_url(),
-  key = get_default_key(), as = "list", ...)
+group_show(
+  id,
+  include_datasets = TRUE,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{id}{(character) Package identifier.}

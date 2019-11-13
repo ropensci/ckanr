@@ -4,11 +4,22 @@
 \alias{organization_create}
 \title{Create an organization}
 \usage{
-organization_create(name = NULL, id = NULL, title = NULL,
-  description = NULL, image_url = NULL, state = "active",
-  approval_status = NULL, extras = NULL, packages = NULL,
-  users = NULL, url = get_default_url(), key = get_default_key(),
-  as = "list", ...)
+organization_create(
+  name = NULL,
+  id = NULL,
+  title = NULL,
+  description = NULL,
+  image_url = NULL,
+  state = "active",
+  approval_status = NULL,
+  extras = NULL,
+  packages = NULL,
+  users = NULL,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{name}{(character) the name of the organization, a string between 2 and 100

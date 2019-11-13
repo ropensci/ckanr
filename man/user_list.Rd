@@ -4,8 +4,14 @@
 \alias{user_list}
 \title{Return a list of the site's user accounts.}
 \usage{
-user_list(q = NULL, order_by = NULL, url = get_default_url(),
-  key = get_default_key(), as = "list", ...)
+user_list(
+  q = NULL,
+  order_by = NULL,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{q}{(character) Restrict the users returned to those whose names

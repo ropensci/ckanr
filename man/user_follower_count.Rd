@@ -4,8 +4,13 @@
 \alias{user_follower_count}
 \title{Return a a user's follower count}
 \usage{
-user_follower_count(id, url = get_default_url(),
-  key = get_default_key(), as = "list", ...)
+user_follower_count(
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{id}{(character) User identifier.}

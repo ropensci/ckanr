@@ -4,8 +4,14 @@
 \alias{package_update}
 \title{Update a package}
 \usage{
-package_update(x, id, url = get_default_url(), key = get_default_key(),
-  as = "list", ...)
+package_update(
+  x,
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{x}{(list) A list with key-value pairs}

@@ -4,9 +4,16 @@
 \alias{user_show}
 \title{Show a user.}
 \usage{
-user_show(id, user_obj = NULL, include_datasets = FALSE,
-  include_num_followers = FALSE, url = get_default_url(),
-  key = get_default_key(), as = "list", ...)
+user_show(
+  id,
+  user_obj = NULL,
+  include_datasets = FALSE,
+  include_num_followers = FALSE,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{id}{(character) Package identifier.}

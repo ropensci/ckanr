@@ -4,8 +4,14 @@
 \alias{package_patch}
 \title{Update a package's metadata}
 \usage{
-package_patch(x, id, key = get_default_key(), url = get_default_url(),
-  as = "list", ...)
+package_patch(
+  x,
+  id,
+  key = get_default_key(),
+  url = get_default_url(),
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{x}{(list) A list with key-value pairs}

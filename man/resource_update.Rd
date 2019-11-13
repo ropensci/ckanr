@@ -4,8 +4,14 @@
 \alias{resource_update}
 \title{Update a resource's file attachment}
 \usage{
-resource_update(id, path, url = get_default_url(),
-  key = get_default_key(), as = "list", ...)
+resource_update(
+  id,
+  path,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{id}{(character) Resource ID to update (required)}
@@ -108,7 +114,7 @@ browseURL(xx$url)
 dat <- readLines(path)
 dat <- sub("-111.06", "-115.06", dat)
 newpath <- tempfile(fileext = ".html")
-cat(dat, file = newpath, sep = "\\n")
+cat(dat, file = newpath, sep = "\n")
 
 # Upload modified dataset
 ## Directly from output of resource_create

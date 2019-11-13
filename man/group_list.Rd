@@ -4,9 +4,17 @@
 \alias{group_list}
 \title{List groups.}
 \usage{
-group_list(offset = 0, limit = 31, sort = NULL, groups = NULL,
-  all_fields = FALSE, url = get_default_url(),
-  key = get_default_key(), as = "list", ...)
+group_list(
+  offset = 0,
+  limit = 31,
+  sort = NULL,
+  groups = NULL,
+  all_fields = FALSE,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{offset}{(numeric) Where to start getting activity items from (optional, default: 0)}

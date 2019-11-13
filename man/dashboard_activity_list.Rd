@@ -4,8 +4,14 @@
 \alias{dashboard_activity_list}
 \title{Authorized user's dashboard activity stream}
 \usage{
-dashboard_activity_list(limit = 31, offset = 0,
-  url = get_default_url(), key = get_default_key(), as = "list", ...)
+dashboard_activity_list(
+  limit = 31,
+  offset = 0,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{limit}{(integer) The maximum number of activities to return (optional).

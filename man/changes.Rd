@@ -4,8 +4,14 @@
 \alias{changes}
 \title{Get an activity stream of recently changed datasets on a site.}
 \usage{
-changes(offset = 0, limit = 31, url = get_default_url(),
-  key = get_default_key(), as = "list", ...)
+changes(
+  offset = 0,
+  limit = 31,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{offset}{(numeric) Where to start getting activity items from (optional, default: 0)}

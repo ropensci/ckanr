@@ -4,8 +4,14 @@
 \alias{tag_create}
 \title{Create a tag}
 \usage{
-tag_create(name, vocabulary_id, url = get_default_url(),
-  key = get_default_key(), as = "list", ...)
+tag_create(
+  name,
+  vocabulary_id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{name}{(character) The name for the new tag, a string between 2 and 100

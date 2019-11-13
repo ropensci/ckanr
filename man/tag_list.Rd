@@ -4,8 +4,15 @@
 \alias{tag_list}
 \title{List tags.}
 \usage{
-tag_list(query = NULL, vocabulary_id = NULL, all_fields = FALSE,
-  url = get_default_url(), key = get_default_key(), as = "list", ...)
+tag_list(
+  query = NULL,
+  vocabulary_id = NULL,
+  all_fields = FALSE,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{query}{(character) A tag name query to search for, if given only tags

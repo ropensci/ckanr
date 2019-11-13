@@ -4,9 +4,19 @@
 \alias{related_create}
 \title{Create a related item}
 \usage{
-related_create(id, title, type, description = NULL, related_id = NULL,
-  related_url = NULL, image_url = NULL, url = get_default_url(),
-  key = get_default_key(), as = "list", ...)
+related_create(
+  id,
+  title,
+  type,
+  description = NULL,
+  related_id = NULL,
+  related_url = NULL,
+  image_url = NULL,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{id}{(character) id of package that the related item should be added to.
@@ -53,7 +63,7 @@ ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
 related_create(res, title = "asdfdaf", type = "idea")
 
 # pipe operations together
-package_create("foobbbbbarrrr") \%>\%
+package_create("foobbbbbarrrr") %>%
    related_create(title = "my resource",
                   type = "visualization")
 }

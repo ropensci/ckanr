@@ -4,8 +4,14 @@
 \alias{ckan_fetch}
 \title{Download a file}
 \usage{
-ckan_fetch(x, store = "session", path = "file", format = NULL,
-  key = get_default_key(), ...)
+ckan_fetch(
+  x,
+  store = "session",
+  path = "file",
+  format = NULL,
+  key = get_default_key(),
+  ...
+)
 }
 \arguments{
 \item{x}{URL for the file}

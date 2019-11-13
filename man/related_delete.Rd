@@ -4,8 +4,7 @@
 \alias{related_delete}
 \title{Delete a related item.}
 \usage{
-related_delete(id, url = get_default_url(), key = get_default_key(),
-  ...)
+related_delete(id, url = get_default_url(), key = get_default_key(), ...)
 }
 \arguments{
 \item{id}{(character) Resource identifier.}
@@ -26,7 +25,7 @@ Delete a related item.
 ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
 
 # create a package and a related item
-res <- package_create("hello-venus2") \%>\%
+res <- package_create("hello-venus2") %>%
    related_create(title = "my resource",
                   type = "visualization")
 

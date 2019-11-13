@@ -4,8 +4,13 @@
 \alias{resource_show}
 \title{Show a resource.}
 \usage{
-resource_show(id, url = get_default_url(), key = get_default_key(),
-  as = "list", ...)
+resource_show(
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{id}{(character) Resource identifier.}

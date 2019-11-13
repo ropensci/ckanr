@@ -4,8 +4,13 @@
 \alias{user_delete}
 \title{Delete a user.}
 \usage{
-user_delete(id, url = get_default_url(), key = get_default_key(),
-  as = "list", ...)
+user_delete(
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{id}{(character) the id of the new user (required)}

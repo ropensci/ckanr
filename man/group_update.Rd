@@ -4,8 +4,14 @@
 \alias{group_update}
 \title{Update a group}
 \usage{
-group_update(x, id, url = get_default_url(), key = get_default_key(),
-  as = "list", ...)
+group_update(
+  x,
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{x}{(list) A list with key-value pairs}

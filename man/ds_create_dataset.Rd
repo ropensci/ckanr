@@ -4,8 +4,15 @@
 \alias{ds_create_dataset}
 \title{Datastore - create a new resource on an existing dataset}
 \usage{
-ds_create_dataset(package_id, name, path, url = get_default_url(),
-  key = get_default_key(), as = "list", ...)
+ds_create_dataset(
+  package_id,
+  name,
+  path,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{package_id}{(character) Existing package ID (required)}

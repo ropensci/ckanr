@@ -4,8 +4,15 @@
 \alias{user_activity_list}
 \title{Return a list of a user's activities}
 \usage{
-user_activity_list(id, offset = 0, limit = 31,
-  url = get_default_url(), key = get_default_key(), as = "list", ...)
+user_activity_list(
+  id,
+  offset = 0,
+  limit = 31,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{id}{(character) User identifier.}

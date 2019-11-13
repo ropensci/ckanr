@@ -4,8 +4,13 @@
 \alias{organization_delete}
 \title{Delete an organization}
 \usage{
-organization_delete(id, url = get_default_url(),
-  key = get_default_key(), as = "list", ...)
+organization_delete(
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{id}{(character) name or id of the organization}

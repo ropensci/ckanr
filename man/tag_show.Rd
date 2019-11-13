@@ -4,8 +4,14 @@
 \alias{tag_show}
 \title{Show a tag.}
 \usage{
-tag_show(id, include_datasets = FALSE, url = get_default_url(),
-  key = get_default_key(), as = "list", ...)
+tag_show(
+  id,
+  include_datasets = FALSE,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{id}{(character) The name or id of the tag}

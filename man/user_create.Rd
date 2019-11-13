@@ -4,9 +4,19 @@
 \alias{user_create}
 \title{Create a user.}
 \usage{
-user_create(name, email, password, id = NULL, fullname = NULL,
-  about = NULL, openid = NULL, url = get_default_url(),
-  key = get_default_key(), as = "list", ...)
+user_create(
+  name,
+  email,
+  password,
+  id = NULL,
+  fullname = NULL,
+  about = NULL,
+  openid = NULL,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{name}{(character) the name of the new user, a string between 2 and 100

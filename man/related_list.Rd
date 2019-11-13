@@ -4,8 +4,14 @@
 \alias{related_list}
 \title{List related items}
 \usage{
-related_list(offset = 0, limit = 31, url = get_default_url(),
-  key = get_default_key(), as = "list", ...)
+related_list(
+  offset = 0,
+  limit = 31,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{offset}{(numeric) Where to start getting activity items from (optional, default: 0)}

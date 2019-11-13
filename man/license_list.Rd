@@ -4,8 +4,13 @@
 \alias{license_list}
 \title{Return the list of licenses available for datasets on the site.}
 \usage{
-license_list(id, url = get_default_url(), key = get_default_key(),
-  as = "list", ...)
+license_list(
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{id}{(character) Package identifier.}

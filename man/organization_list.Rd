@@ -4,9 +4,17 @@
 \alias{organization_list}
 \title{List organization}
 \usage{
-organization_list(order_by = c("name", "package"), decreasing = FALSE,
-  organizations = NULL, all_fields = TRUE, limit = 31,
-  url = get_default_url(), key = get_default_key(), as = "list", ...)
+organization_list(
+  order_by = c("name", "package"),
+  decreasing = FALSE,
+  organizations = NULL,
+  all_fields = TRUE,
+  limit = 31,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{order_by}{(character, only the first element is used).

@@ -4,8 +4,14 @@
 \alias{resource_patch}
 \title{Update a resource's metadata}
 \usage{
-resource_patch(x, id, url = get_default_url(), key = get_default_key(),
-  as = "list", ...)
+resource_patch(
+  x,
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{x}{(list) A list with key-value pairs}

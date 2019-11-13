@@ -4,10 +4,20 @@
 \alias{ds_create}
 \title{Add a new table to a datastore}
 \usage{
-ds_create(resource_id = NULL, resource = NULL, force = FALSE,
-  aliases = NULL, fields = NULL, records = NULL,
-  primary_key = NULL, indexes = NULL, url = get_default_url(),
-  key = get_default_key(), as = "list", ...)
+ds_create(
+  resource_id = NULL,
+  resource = NULL,
+  force = FALSE,
+  aliases = NULL,
+  fields = NULL,
+  records = NULL,
+  primary_key = NULL,
+  indexes = NULL,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{resource_id}{(string) Resource id that the data is going to be stored

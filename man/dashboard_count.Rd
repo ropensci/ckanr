@@ -4,8 +4,12 @@
 \alias{dashboard_count}
 \title{Number of new activities of an authorized user}
 \usage{
-dashboard_count(url = get_default_url(), key = get_default_key(),
-  as = "list", ...)
+dashboard_count(
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See

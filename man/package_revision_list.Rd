@@ -4,8 +4,13 @@
 \alias{package_revision_list}
 \title{Return a dataset (package's) revisions as a list of dictionaries.}
 \usage{
-package_revision_list(id, url = get_default_url(),
-  key = get_default_key(), as = "list", ...)
+package_revision_list(
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{id}{(character) Package identifier.}

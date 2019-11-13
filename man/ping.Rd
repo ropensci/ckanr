@@ -4,8 +4,7 @@
 \alias{ping}
 \title{Ping a CKAN server to test that it's up or down.}
 \usage{
-ping(url = get_default_url(), key = get_default_key(),
-  as = "logical", ...)
+ping(url = get_default_url(), key = get_default_key(), as = "logical", ...)
 }
 \arguments{
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See

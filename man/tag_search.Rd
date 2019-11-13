@@ -4,9 +4,16 @@
 \alias{tag_search}
 \title{List tags.}
 \usage{
-tag_search(query = NULL, vocabulary_id = NULL, offset = 0,
-  limit = 31, url = get_default_url(), key = get_default_key(),
-  as = "list", ...)
+tag_search(
+  query = NULL,
+  vocabulary_id = NULL,
+  offset = 0,
+  limit = 31,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{query}{(character) A tag name query to search for, if given only tags

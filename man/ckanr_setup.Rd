@@ -4,10 +4,18 @@
 \alias{ckanr_setup}
 \title{Configure default CKAN settings}
 \usage{
-ckanr_setup(url = "http://data.techno-science.ca/", key = NULL,
-  test_url = NULL, test_key = NULL, test_did = NULL,
-  test_rid = NULL, test_gid = NULL, test_oid = NULL,
-  test_behaviour = NULL, proxy = NULL)
+ckanr_setup(
+  url = "http://data.techno-science.ca/",
+  key = NULL,
+  test_url = NULL,
+  test_key = NULL,
+  test_did = NULL,
+  test_rid = NULL,
+  test_gid = NULL,
+  test_oid = NULL,
+  test_behaviour = NULL,
+  proxy = NULL
+)
 }
 \arguments{
 \item{url}{A CKAN URL (optional), default: "http://data.techno-science.ca/"}

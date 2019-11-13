@@ -4,8 +4,14 @@
 \alias{group_patch}
 \title{Update a group's metadata}
 \usage{
-group_patch(x, id, url = get_default_url(), key = get_default_key(),
-  as = "list", ...)
+group_patch(
+  x,
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{x}{(list) A list with key-value pairs}

@@ -4,13 +4,30 @@
 \alias{resource_create}
 \title{Create a resource}
 \usage{
-resource_create(package_id = NULL, rcurl = NULL, revision_id = NULL,
-  description = NULL, format = NULL, hash = NULL, name = NULL,
-  resource_type = NULL, mimetype = NULL, mimetype_inner = NULL,
-  webstore_url = NULL, cache_url = NULL, size = NULL,
-  created = NULL, last_modified = NULL, cache_last_updated = NULL,
-  webstore_last_updated = NULL, upload = NULL,
-  url = get_default_url(), key = get_default_key(), as = "list", ...)
+resource_create(
+  package_id = NULL,
+  rcurl = NULL,
+  revision_id = NULL,
+  description = NULL,
+  format = NULL,
+  hash = NULL,
+  name = NULL,
+  resource_type = NULL,
+  mimetype = NULL,
+  mimetype_inner = NULL,
+  webstore_url = NULL,
+  cache_url = NULL,
+  size = NULL,
+  created = NULL,
+  last_modified = NULL,
+  cache_last_updated = NULL,
+  webstore_last_updated = NULL,
+  upload = NULL,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{package_id}{(character) id of package that the resource should be added to.
@@ -82,7 +99,7 @@ file <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
                        rcurl = "http://google.com"
 ))
 
-package_create("foobbbbbarrrr") \%>\%
+package_create("foobbbbbarrrr") %>%
    resource_create(description = "my resource",
                    name = "bearsareus",
                    upload = file,

@@ -4,8 +4,13 @@
 \alias{related_show}
 \title{Show a related item}
 \usage{
-related_show(id, url = get_default_url(), key = get_default_key(),
-  as = "list", ...)
+related_show(
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{id}{(character) Related item identifier.}
@@ -36,7 +41,7 @@ By default the help and success slots are dropped, and only the
 ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
 
 # create a package and a related item
-res <- package_create("hello-pluto2") \%>\%
+res <- package_create("hello-pluto2") %>%
    related_create(title = "my resource",
                   type = "visualization")
 
