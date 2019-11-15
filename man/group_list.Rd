@@ -30,7 +30,7 @@ x_f and y_f in a descending order).}
 only groups whose names are in this list will be returned}
 
 \item{all_fields}{(logical) Return full group dictionaries instead of just
-names. Default: FALSE}
+names. Default: \code{FALSE}}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}

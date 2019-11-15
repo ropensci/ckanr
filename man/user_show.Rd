@@ -21,11 +21,11 @@ user_show(
 \item{user_obj}{(user dictionary) The user dictionary of the user (optional)}
 
 \item{include_datasets}{(logical) Include a list of datasets the user has
-created. If it is the same user or a sysadmin requesting, it includes datasets that
-are draft or private. (optional, default:False, limit:50)}
+created. If it is the same user or a sysadmin requesting, it includes
+datasets that are draft or private. (optional, default:False, limit:50)}
 
-\item{include_num_followers}{(logical) Include the number of followers the user
-has (optional, default:False)}
+\item{include_num_followers}{(logical) Include the number of followers
+the user has (optional, default:False)}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}

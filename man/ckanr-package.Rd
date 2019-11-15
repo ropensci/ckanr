@@ -23,24 +23,23 @@ We'll always be following the lastest version of the API.
 
 The functions can be grouped into those for setup, packages,
 resources, tags, organizations, groups, and users.
-
 \itemize{
- \item Setup - The main one is \code{\link{ckanr_setup}} - and many related
- functions, e.g., \code{\link{get_default_key}}
- \item Packages - Create a package with \code{\link{package_create}}, and see
- other functions starting with \code{package_*}
- \item Resources - Create a package with \code{\link{resource_create}}, and see
- other functions starting with \code{resource_*}
- \item Tags - List tags with \code{\link{tag_list}}, and see
- other functions starting with \code{tag_*}
- \item Organizations - List organizations with \code{\link{organization_list}},
- show a specific organization with \code{\link{organization_show}}, and
- create with \code{\link{organization_create}}
- \item Groups - List groups with \code{\link{group_list}}, and see
- other functions starting with \code{group_*}
- \item Users - List users with \code{\link{user_list}}, and see
- other functions starting with \code{user_*}
- \item Related items - See functions starting with \code{related_*}
+\item Setup - The main one is \code{\link[=ckanr_setup]{ckanr_setup()}} - and many related
+functions, e.g., \code{\link[=get_default_key]{get_default_key()}}
+\item Packages - Create a package with \code{\link[=package_create]{package_create()}}, and see
+other functions starting with \verb{package_*}
+\item Resources - Create a package with \code{\link[=resource_create]{resource_create()}}, and see
+other functions starting with \verb{resource_*}
+\item Tags - List tags with \code{\link[=tag_list]{tag_list()}}, and see
+other functions starting with \verb{tag_*}
+\item Organizations - List organizations with \code{\link[=organization_list]{organization_list()}},
+show a specific organization with \code{\link[=organization_show]{organization_show()}}, and
+create with \code{\link[=organization_create]{organization_create()}}
+\item Groups - List groups with \code{\link[=group_list]{group_list()}}, and see
+other functions starting with \verb{group_*}
+\item Users - List users with \code{\link[=user_list]{user_list()}}, and see
+other functions starting with \verb{user_*}
+\item Related items - See functions starting with \verb{related_*}
 }
 }
 
@@ -50,12 +49,11 @@ resources, tags, organizations, groups, and users.
 We are also working on supporting the Datastore extension
 (\url{http://docs.ckan.org/en/latest/maintaining/datastore.html}).
 We currently have these functions:
-
 \itemize{
- \item \code{\link{ds_create}}
- \item \code{\link{ds_create_dataset}}
- \item \code{\link{ds_search}}
- \item \code{\link{ds_search_sql}}
+\item \code{\link[=ds_create]{ds_create()}}
+\item \code{\link[=ds_create_dataset]{ds_create_dataset()}}
+\item \code{\link[=ds_search]{ds_search()}}
+\item \code{\link[=ds_search_sql]{ds_search_sql()}}
 }
 }
 
@@ -66,13 +64,13 @@ Data can come back in a huge variety of formats. We've attempted a function to
 help you fetch not just metadata but the actual data for a link to a file on
 a CKAN instance. Though if you know what you're doing, you can easily use
 whatever is your preferred tool for the job (e.g., maybe you like
-\code{\link{read.csv}} for reading csv files).
+\code{\link[=read.csv]{read.csv()}} for reading csv files).
 }
 
 \section{CKAN Instances}{
 
 
-We have a helper function (\code{\link{servers}}) that spits out the current
+We have a helper function (\code{\link[=servers]{servers()}}) that spits out the current
 CKAN instances we know about, with URLs to their base URLs that should work
 using this package. That is, not necessarily landing pages of each instance,
 although, the URL may be the landing page and the base API URL.

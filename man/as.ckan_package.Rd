@@ -12,8 +12,8 @@ is.ckan_package(x)
 \arguments{
 \item{x}{Variety of things, character, list, or ckan_package class object}
 
-\item{...}{Further args passed on to \code{\link{package_show}} if
-character given. In particular, if GET is not supported you can 
+\item{...}{Further args passed on to \code{\link[=package_show]{package_show()}} if
+character given. In particular, if GET is not supported you can
 try the \code{http_method} parameter to set a different HTTP verb}
 }
 \description{

@@ -15,13 +15,13 @@ package_show(
 )
 }
 \arguments{
-\item{id}{(character/ckan_package) Package identifier, or a ckan_package
+\item{id}{(character/ckan_package) Package identifier, or a \code{ckan_package}
 object}
 
 \item{use_default_schema}{(logical) Use default package schema instead of a
-custom schema defined with an IDatasetForm plugin. Default: FALSE}
+custom schema defined with an IDatasetForm plugin. Default: \code{FALSE}}
 
-\item{http_method}{(character) which HTTP method (verb) to use; one of 
+\item{http_method}{(character) which HTTP method (verb) to use; one of
 "GET" or "POST". Default: "GET"}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
@@ -41,8 +41,8 @@ Show a package.
 }
 \details{
 By default the help and success slots are dropped, and only the
-  result slot is returned. You can request raw json with \code{as = 'json'}
-  then parse yourself to get the help slot.
+result slot is returned. You can request raw json with \code{as = 'json'}
+then parse yourself to get the help slot.
 }
 \examples{
 \dontrun{

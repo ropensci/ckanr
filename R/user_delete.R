@@ -6,13 +6,15 @@
 #' @template key
 #' @template args
 #' @references
-#' \url{http://docs.ckan.org/en/latest/api/index.html#ckan.logic.action.delete.user_delete}
+#' http://docs.ckan.org/en/latest/api/index.html#ckan.logic.action.delete.user_delete
 #' @examples \dontrun{
 #' # Setup
-#' ckanr_setup(url = "https://data-demo.dpaw.wa.gov.au", key = "824e7c50-9577-4bfa-bf32-246ebed1a8a2")
+#' ckanr_setup(url = "https://data-demo.dpaw.wa.gov.au",
+#' key = "824e7c50-9577-4bfa-bf32-246ebed1a8a2")
 #'
 #' # create a user
-#' res <- user_delete(name = 'stacy', email = "stacy@aaaaa.com", password = "helloworld")
+#' res <- user_delete(name = 'stacy', email = "stacy@aaaaa.com",
+#' password = "helloworld")
 #'
 #' # then, delete a user
 #' user_delete(id = "stacy")

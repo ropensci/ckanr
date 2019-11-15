@@ -19,7 +19,7 @@ resource_search(
 \item{q}{Query terms. It is a string of the form \code{field:term} or a list
 of strings, each of the same form.  Within each string, \code{field}
 is a field or extra field on the Resource domain object. If \code{field} is
-hash, then an attempt is made to match the \code{term} as a *prefix* of the
+hash, then an attempt is made to match the \code{term} as a \emph{prefix} of the
 Resource.hash field. If \code{field} is an extra field, then an attempt is
 made to match against the extra fields stored against the Resource.}
 

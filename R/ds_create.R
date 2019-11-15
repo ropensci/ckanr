@@ -4,16 +4,16 @@
 #'
 #' @export
 #' @param resource_id (string) Resource id that the data is going to be stored
-#'   against.
-#' @param force (logical) Set to \code{TRUE} to edit a read-only resource.
-#'   Default: FALSE
+#' against.
+#' @param force (logical) Set to `TRUE` to edit a read-only resource.
+#' Default: `FALSE`
 #' @param resource (dictionary) Resource dictionary that is passed to
-#'   resource_create(). Use instead of \code{resource_id} (optional)
+#' [resource_create()]. Use instead of `resource_id` (optional)
 #' @param aliases (character) Names for read only aliases of the resource.
-#'   (optional)
+#' (optional)
 #' @param fields (list) Fields/columns and their extra metadata. (optional)
-#' @param records (list) The data, eg: \code{[{"dob": "2005", "some_stuff":
-#'   ["a", "b"]}]} (optional)
+#' @param records (list) The data, eg: `[{"dob": "2005", "some_stuff":
+#' ["a", "b"]}]` (optional)
 #' @param primary_key (character) Fields that represent a unique key (optional)
 #' @param indexes (character) Indexes on table (optional)
 #' @template key

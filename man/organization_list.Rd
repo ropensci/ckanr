@@ -22,8 +22,8 @@ The field to sort the list by, must be \code{name} or \code{packages}.}
 
 \item{decreasing}{(logical). Is the sort-order is decreasing or not.}
 
-\item{organizations}{(character or NULL). A list of names of the
-organizations to return. NULL returns all organizations.}
+\item{organizations}{(character or \code{NULL}). A list of names of the
+organizations to return. \code{NULL} returns all organizations.}
 
 \item{all_fields}{(logical). Return the name or all fields of the object.}
 

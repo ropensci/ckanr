@@ -24,15 +24,16 @@ alphanumeric string. Required.}
 
 \item{title}{(character) Title of the related item. Required.}
 
-\item{type}{(character) The type of the related item. One of API, application,
-idea, news article, paper, post or visualization. Required.}
+\item{type}{(character) The type of the related item. One of API,
+application, idea, news article, paper, post or visualization. Required.}
 
 \item{description}{(character) description (optional). Optional}
 
-\item{related_id}{(character) An id to assign to the related item. If blank, an
-ID will be assigned for you. Optional}
+\item{related_id}{(character) An id to assign to the related item. If blank,
+an ID will be assigned for you. Optional}
 
-\item{related_url}{(character) A url to associated with the related item. Optional}
+\item{related_url}{(character) A url to associated with the related item.
+Optional}
 
 \item{image_url}{(character) A url to associated image. Optional}
 

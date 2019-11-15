@@ -24,18 +24,17 @@ ds_create(
 against.}
 
 \item{resource}{(dictionary) Resource dictionary that is passed to
-resource_create(). Use instead of \code{resource_id} (optional)}
+\code{\link[=resource_create]{resource_create()}}. Use instead of \code{resource_id} (optional)}
 
 \item{force}{(logical) Set to \code{TRUE} to edit a read-only resource.
-Default: FALSE}
+Default: \code{FALSE}}
 
 \item{aliases}{(character) Names for read only aliases of the resource.
 (optional)}
 
 \item{fields}{(list) Fields/columns and their extra metadata. (optional)}
 
-\item{records}{(list) The data, eg: \code{[{"dob": "2005", "some_stuff":
-["a", "b"]}]} (optional)}
+\item{records}{(list) The data, eg: \verb{[\{"dob": "2005", "some_stuff": ["a", "b"]\}]} (optional)}
 
 \item{primary_key}{(character) Fields that represent a unique key (optional)}
 

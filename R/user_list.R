@@ -2,9 +2,9 @@
 #'
 #' @export
 #' @param q (character) Restrict the users returned to those whose names
-#'    contain a string
+#' contain a string
 #' @param order_by (character) Which field to sort the list by
-#'    (optional, default: 'name')
+#' (optional, default: 'name')
 #' @template args
 #' @template key
 #' @examples \dontrun{

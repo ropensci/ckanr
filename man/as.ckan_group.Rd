@@ -12,7 +12,7 @@ is.ckan_group(x)
 \arguments{
 \item{x}{Variety of things, character, list, or ckan_group class object}
 
-\item{...}{Further args passed on to \code{\link{group_show}} if character given}
+\item{...}{Further args passed on to \code{\link[=group_show]{group_show()}} if character given}
 }
 \description{
 ckan_group class helpers

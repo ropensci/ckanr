@@ -40,7 +40,7 @@ and _, e.g. 'warandpeace'}
 as name)}
 
 \item{private}{(logical) whether the dataset should be private (optional,
-default: FALSE), requires a value for \code{owner_org} if TRUE}
+default: \code{FALSE}), requires a value for \code{owner_org} if \code{TRUE}}
 
 \item{author}{(character) the name of the dataset's author (optional)}
 
@@ -72,10 +72,10 @@ plugins associate themselves with different dataset types and provide custom
 dataset handling behaviour for these types}
 
 \item{resources}{(list of resource dictionaries) - the dataset's resources,
-see resource_create() for the format of resource dictionaries (optional)}
+see \code{\link[=resource_create]{resource_create()}} for the format of resource dictionaries (optional)}
 
 \item{tags}{(list of tag dictionaries) - the dataset's tags, see
-tag_create() for the format of tag dictionaries (optional)}
+\code{\link[=tag_create]{tag_create()}} for the format of tag dictionaries (optional)}
 
 \item{extras}{(list of dataset extra dictionaries) - the dataset's extras
 (optional), extras are arbitrary (key: value) metadata items that can be
@@ -83,21 +83,21 @@ added to datasets, each extra dictionary should have keys 'key' (a string),
 'value' (a string)}
 
 \item{relationships_as_object}{(list of relationship dictionaries) - see
-package_relationship_create() for the format of relationship dictionaries
+\code{package_relationship_create} for the format of relationship dictionaries
 (optional)}
 
 \item{relationships_as_subject}{(list of relationship dictionaries) - see
-package_relationship_create() for the format of relationship dictionaries
+\code{package_relationship_create} for the format of relationship dictionaries
 (optional)}
 
 \item{groups}{(list of dictionaries) - the groups to which the dataset
 belongs (optional), each group dictionary should have one or more of the
 following keys which identify an existing group: 'id' (the id of the group,
 string), or 'name' (the name of the group, string), to see which groups
-exist call group_list()}
+exist call \code{\link[=group_list]{group_list()}}}
 
 \item{owner_org}{(character) the id of the dataset's owning organization,
-see organization_list() or organization_list_for_user() for available
+see \code{\link[=organization_list]{organization_list()}} or \code{organization_list_for_user} for available
 values (optional)}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See

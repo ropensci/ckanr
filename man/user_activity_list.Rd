@@ -39,7 +39,8 @@ Return a list of a user's activities
 \examples{
 \dontrun{
 # Setup
-ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+ckanr_setup(url = "https://demo.ckan.org/",
+key = getOption("ckan_demo_key"))
 
 # list package activity
 user_activity_list('sckottie')

@@ -12,14 +12,15 @@ is.ckan_resource(x)
 \arguments{
 \item{x}{Variety of things, character, list, or ckan_package class object}
 
-\item{...}{Further args passed on to \code{\link{resource_show}} if character given}
+\item{...}{Further args passed on to \code{\link[=resource_show]{resource_show()}} if character given}
 }
 \description{
 ckan_resource class helpers
 }
 \examples{
 \dontrun{
-ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+ckanr_setup(url = "https://demo.ckan.org/",
+key = getOption("ckan_demo_key"))
 
 (resrcs <- resource_search(q = 'name:data'))
 resrcs$results

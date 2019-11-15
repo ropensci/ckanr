@@ -2,9 +2,9 @@
 #'
 #' @export
 #' @param x Variety of things, character, list, or ckan_package class object
-#' @param ... Further args passed on to \code{\link{package_show}} if
+#' @param ... Further args passed on to [package_show()] if
 #' character given. In particular, if GET is not supported you can 
-#' try the \code{http_method} parameter to set a different HTTP verb
+#' try the `http_method` parameter to set a different HTTP verb
 #' @examples \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org/",
 #'   key = getOption("ckan_demo_key"))

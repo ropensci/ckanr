@@ -6,10 +6,10 @@
 #' are not updated.
 #'
 #' The new file must exist on a local path. R objects have to be written to a
-#' file, e.g. using \code{tempfile()} - see example.
+#' file, e.g. using `tempfile()` - see example.
 #'
 #' For convenience, CKAN base url and API key default to the global options,
-#' which are set by \code{ckanr_setup}.
+#' which are set by `ckanr_setup`.
 #'
 #' @export
 #'
@@ -17,9 +17,10 @@
 #' @param path (character) Local path of the file to upload (required)
 #' @template key
 #' @template args
-#' @return The HTTP response from CKAN, formatted as list (default), table, or JSON.
+#' @return The HTTP response from CKAN, formatted as list (default), table,
+#' or JSON.
 #' @references
-#' \url{http://docs.ckan.org/en/latest/api/index.html#ckan.logic.action.create.resource_create}
+#' http://docs.ckan.org/en/latest/api/index.html#ckan.logic.action.create.resource_create
 #' @examples \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
 #'

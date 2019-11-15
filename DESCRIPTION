@@ -28,6 +28,8 @@ URL: https://docs.ropensci.org/ckanr (website)
 BugReports: https://github.com/ropensci/ckanr/issues
 VignetteBuilder: knitr
 Encoding: UTF-8
+Language: en-US
+Roxygen: list(markdown = TRUE)
 Depends: DBI (>= 0.3.1)
 Imports:
     methods,

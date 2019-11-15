@@ -17,8 +17,8 @@ tag_show(
 \item{id}{(character) The name or id of the tag}
 
 \item{include_datasets}{include a list of up to 1000 of the tag's datasets.
-Limit 1000 datasets, use \code{\link{package_search}} for more.
-(optional, default: False)}
+Limit 1000 datasets, use \code{\link[=package_search]{package_search()}} for more.
+(optional, default: \code{FALSE})}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}

@@ -17,7 +17,7 @@ group_show(
 \item{id}{(character) Package identifier.}
 
 \item{include_datasets}{(logical) Include a list of the group's datasets.
-Default: TRUE}
+Default: \code{TRUE}}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
@@ -36,8 +36,8 @@ Show a package
 }
 \details{
 By default the help and success slots are dropped, and only the
-   result slot is returned. You can request raw json with \code{as = 'json'}
-   then parse yourself to get the help slot.
+result slot is returned. You can request raw json with \code{as = 'json'}
+then parse yourself to get the help slot.
 }
 \examples{
 \dontrun{

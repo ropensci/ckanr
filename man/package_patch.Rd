@@ -17,7 +17,7 @@ package_patch(
 \arguments{
 \item{x}{(list) A list with key-value pairs}
 
-\item{id}{(character) Resource ID to update (optional, required if 
+\item{id}{(character) Resource ID to update (optional, required if
 x does not have an "id" field)}
 
 \item{extras}{(character vector) - the dataset's extras

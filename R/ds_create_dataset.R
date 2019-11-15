@@ -8,7 +8,7 @@
 #' @template key
 #' @template args
 #' @references
-#' \url{http://docs.ckan.org/en/latest/api/index.html#ckan.logic.action.create.resource_create}
+#' http://docs.ckan.org/en/latest/api/index.html#ckan.logic.action.create.resource_create
 #' @details This function is deprecated - will be defunct in the next version
 #' of this package
 #' @examples \dontrun{

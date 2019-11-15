@@ -12,14 +12,15 @@ is.ckan_related(x)
 \arguments{
 \item{x}{Variety of things, character, list, or ckan_related class object}
 
-\item{...}{Further args passed on to \code{\link{related_show}} if character given}
+\item{...}{Further args passed on to \code{\link[=related_show]{related_show()}} if character given}
 }
 \description{
 ckan_related class helpers
 }
 \examples{
 \dontrun{
-ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+ckanr_setup(url = "https://demo.ckan.org/",
+key = getOption("ckan_demo_key"))
 
 (x <- package_create("foobbbbbarrrr") %>%
    related_create(title = "my resource",

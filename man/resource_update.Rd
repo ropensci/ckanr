@@ -31,7 +31,8 @@ data.frame. (required)}
 \item{...}{Curl args passed on to \code{\link[httr]{POST}} (optional)}
 }
 \value{
-The HTTP response from CKAN, formatted as list (default), table, or JSON.
+The HTTP response from CKAN, formatted as list (default), table,
+or JSON.
 }
 \description{
 This function will only update a resource's file attachment and
@@ -123,5 +124,5 @@ browseURL(xxx$url)
 }
 }
 \references{
-\url{http://docs.ckan.org/en/latest/api/index.html#ckan.logic.action.create.resource_create}
+http://docs.ckan.org/en/latest/api/index.html#ckan.logic.action.create.resource_create
 }

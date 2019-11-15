@@ -9,12 +9,12 @@ package_delete(id, url = get_default_url(), key = get_default_key(), ...)
 \arguments{
 \item{id}{(character) The id of the package. Required.}
 
-\item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
-also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
+\item{url}{Base url to use. Default: http://data.techno-science.ca
+See also \code{\link[=ckanr_setup]{ckanr_setup()}} and \code{\link[=get_default_url]{get_default_url()}}}
 
 \item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
 
-\item{...}{Curl args passed on to \code{\link[httr]{POST}} (optional)}
+\item{...}{Curl args passed on to \code{\link[httr:POST]{httr::POST()}} (optional)}
 }
 \description{
 Delete a package

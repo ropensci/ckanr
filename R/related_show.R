@@ -6,8 +6,8 @@
 #' @template args
 #' @template key
 #' @details By default the help and success slots are dropped, and only the
-#'   result slot is returned. You can request raw json with \code{as = 'json'}
-#'   then parse yourself to get the help slot.
+#' result slot is returned. You can request raw json with `as = 'json'`
+#' then parse yourself to get the help slot.
 #' @examples \dontrun{
 #' # Setup
 #' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))

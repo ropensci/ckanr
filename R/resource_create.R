@@ -2,8 +2,8 @@
 #'
 #' @export
 #'
-#' @param package_id (character) id of package that the resource should be added to.
-#' This should be an alphanumeric string. Required.
+#' @param package_id (character) id of package that the resource should be
+#' added to. This should be an alphanumeric string. Required.
 #' @param rcurl (character) url of resource. Required.
 #' @param description (character) description (optional). Required.
 #' @param name (character) name (optional). Required.
@@ -26,7 +26,8 @@
 #'
 #' @examples \dontrun{
 #' # Setup
-#' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+#' ckanr_setup(url = "https://demo.ckan.org/",
+#'  key = getOption("ckan_demo_key"))
 #'
 #' # create a package
 #' (res <- package_create("foobarrrr", author="Jane Doe"))
@@ -56,16 +57,17 @@ resource_create <- function(package_id = NULL, rcurl = NULL,
 
   id <- as.ckan_package(package_id, url = url, key = key)
   body <- cc(list(package_id = id$id, url = rcurl, revision_id = revision_id,
-                  description = description, format = format, hash = hash,
-                  name = name, resource_type = resource_type, mimetype = mimetype,
-                  mimetype_inner = mimetype_inner, webstore_url = webstore_url,
-                  cache_url = cache_url, size = size, created = created,
-                  last_modified = last_modified,
-                  cache_last_updated = cache_last_updated,
-                  webstore_last_updated = webstore_last_updated,
-                  upload = upfile(upload)))
+    description = description, format = format, hash = hash,
+    name = name, resource_type = resource_type, mimetype = mimetype,
+    mimetype_inner = mimetype_inner, webstore_url = webstore_url,
+    cache_url = cache_url, size = size, created = created,
+    last_modified = last_modified,
+    cache_last_updated = cache_last_updated,
+    webstore_last_updated = webstore_last_updated,
+    upload = upfile(upload)))
   res <- ckan_POST(url, 'resource_create', body = body, key = key, ...)
-  switch(as, json = res, list = as_ck(jsl(res), "ckan_resource"), table = jsd(res))
+  switch(as, json = res, list = as_ck(jsl(res), "ckan_resource"),
+    table = jsd(res))
 }
 
 upfile <- function(x) {

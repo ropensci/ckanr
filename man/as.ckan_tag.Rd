@@ -12,14 +12,15 @@ is.ckan_tag(x)
 \arguments{
 \item{x}{Variety of things, character, list, or ckan_tag class object}
 
-\item{...}{Further args passed on to \code{\link{tag_show}} if character given}
+\item{...}{Further args passed on to \code{\link[=tag_show]{tag_show()}} if character given}
 }
 \description{
 ckan_tag class helpers
 }
 \examples{
 \dontrun{
-ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+ckanr_setup(url = "https://demo.ckan.org/",
+key = getOption("ckan_demo_key"))
 
 (tags <- tag_search(query = 'ta'))
 tags[[3]]

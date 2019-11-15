@@ -60,5 +60,5 @@ ds_create_dataset(package_id=get_test_pid(), name="mydata",
 }
 }
 \references{
-\url{http://docs.ckan.org/en/latest/api/index.html#ckan.logic.action.create.resource_create}
+http://docs.ckan.org/en/latest/api/index.html#ckan.logic.action.create.resource_create
 }

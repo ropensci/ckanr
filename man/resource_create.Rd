@@ -30,8 +30,8 @@ resource_create(
 )
 }
 \arguments{
-\item{package_id}{(character) id of package that the resource should be added to.
-This should be an alphanumeric string. Required.}
+\item{package_id}{(character) id of package that the resource should be
+added to. This should be an alphanumeric string. Required.}
 
 \item{rcurl}{(character) url of resource. Required.}
 
@@ -85,7 +85,8 @@ Create a resource
 \examples{
 \dontrun{
 # Setup
-ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+ckanr_setup(url = "https://demo.ckan.org/",
+ key = getOption("ckan_demo_key"))
 
 # create a package
 (res <- package_create("foobarrrr", author="Jane Doe"))

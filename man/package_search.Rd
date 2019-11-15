@@ -24,22 +24,22 @@ package_search(
 )
 }
 \arguments{
-\item{q}{Query terms, defaults to '*:*', or everything.}
+\item{q}{Query terms, defaults to '\emph{:}', or everything.}
 
-\item{fq}{Filter query, this does not affect the search, only what gets 
+\item{fq}{Filter query, this does not affect the search, only what gets
 returned}
 
-\item{sort}{Field to sort on. You can specify ascending (e.g., score desc) 
-or descending (e.g., score asc), sort by two fields (e.g., score desc, 
-price asc), or sort by a function (e.g., sum(x_f, y_f) desc, which sorts 
+\item{sort}{Field to sort on. You can specify ascending (e.g., score desc)
+or descending (e.g., score asc), sort by two fields (e.g., score desc,
+price asc), or sort by a function (e.g., sum(x_f, y_f) desc, which sorts
 by the sum of x_f and y_f in a descending order).}
 
 \item{rows}{Number of records to return. Defaults to 10.}
 
 \item{start}{Record to start at, default to beginning.}
 
-\item{facet}{(logical) Whether to return facet results or not. 
-Default: FALSE}
+\item{facet}{(logical) Whether to return facet results or not.
+Default: \code{FALSE}}
 
 \item{facet.limit}{(numeric) This param indicates the maximum number of
 constraint counts that should be returned for the facet fields.
@@ -47,32 +47,32 @@ A negative value means unlimited. Default: 100.
 Can be specified on a per field basis.}
 
 \item{facet.field}{(charcter) This param allows you to specify a field which
-should be treated as a facet. It will iterate over each Term in the field 
-and generate a facet count using that Term as the constraint. This parameter 
-can be specified multiple times to indicate multiple facet fields. None of 
-the other params in this section will have any effect without specifying at 
+should be treated as a facet. It will iterate over each Term in the field
+and generate a facet count using that Term as the constraint. This parameter
+can be specified multiple times to indicate multiple facet fields. None of
+the other params in this section will have any effect without specifying at
 least one field name using this param.}
 
-\item{facet.mincount}{(integer) the minimum counts for facet fields should 
+\item{facet.mincount}{(integer) the minimum counts for facet fields should
 be included in the results}
 
-\item{include_drafts}{(logical) if \code{TRUE} draft datasets will be 
-included. A user will only be returned their own draft datasets, and a 
+\item{include_drafts}{(logical) if \code{TRUE} draft datasets will be
+included. A user will only be returned their own draft datasets, and a
 sysadmin will be returned all draft datasets. default: \code{FALSE}.
 first CKAN version: 2.6.1; dropped from request if CKAN version is older
-or if CKAN version isn't available via \code{\link{ckan_version}}}
+or if CKAN version isn't available via \code{\link[=ckan_version]{ckan_version()}}}
 
-\item{include_private}{(logical) if \code{TRUE} private datasets will be 
-included. Only private datasets from the user’s organizations will be 
+\item{include_private}{(logical) if \code{TRUE} private datasets will be
+included. Only private datasets from the user’s organizations will be
 returned and sysadmins will be returned all private datasets.
 default: \code{FALSE}
 first CKAN version: 2.6.1; dropped from request if CKAN version is older
-or if CKAN version isn't available via \code{\link{ckan_version}}}
+or if CKAN version isn't available via \code{\link[=ckan_version]{ckan_version()}}}
 
 \item{use_default_schema}{(logical) use default package schema instead of a
 custom schema defined with an IDatasetForm plugin. default: \code{FALSE}
 first CKAN version: 2.3.5; dropped from request if CKAN version is older
-or if CKAN version isn't available via \code{\link{ckan_version}}}
+or if CKAN version isn't available via \code{\link[=ckan_version]{ckan_version()}}}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}

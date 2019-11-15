@@ -1,9 +1,9 @@
-#' List tags.
+#' Searcn tags.
 #'
 #' @export
 #'
 #' @param query (character) A tag name query to search for, if given only tags
-#'    whose names contain this string will be returned
+#' whose names contain this string will be returned
 #' @param vocabulary_id (character) The id or name of a vocabulary,
 #' if give only tags that belong to this vocabulary will be returned
 #' @template paging

@@ -6,19 +6,17 @@ assign("ckanr_proxy", NULL, envir = ckanr_settings_env)
 #' Get or set ckanr CKAN settings
 #'
 #' @export
-#' @return \code{ckanr_settings} prints your base url, API key (if used), and
+#' @return `ckanr_settings` prints your base url, API key (if used), and
 #' optional test server settings (URL, API key, a dataset ID and a resource ID).
-#' \code{ckanr_setup} sets your production and test settings, while
-#' \code{get_test_*} get each of those respective settings.
-#' \code{test_behaviour} indicates whether the CKANR test suite will skip
+#' `ckanr_setup` sets your production and test settings, while
+#' `get_test_*` get each of those respective settings.
+#' `test_behaviour` indicates whether the CKANR test suite will skip
 #' ("SKIP") or fail ("FAIL") writing tests in case the configured test
 #' CKAN settings don't work.
-#' @seealso  \code{\link{ckanr_setup}},
-#' \code{\link{get_default_url}}, \code{\link{get_default_key}},
-#' \code{\link{get_test_url}}, \code{\link{get_test_key}},
-#' \code{\link{get_test_did}}, \code{\link{get_test_rid}},
-#' \code{\link{get_test_gid}},  \code{get_test_oid},
-#' \code{get_test_behaviour}.
+#' @seealso  [ckanr_setup()],
+#' [get_default_url()], [get_default_key()], [get_test_url()],
+#' [get_test_key()], [get_test_did()], [get_test_rid()],
+#' [get_test_gid()], `get_test_oid`, `get_test_behaviour`
 #' @family ckanr settings
 #' @examples
 #' ckanr_settings()
@@ -68,36 +66,36 @@ print.ckanr_settings <- function(x, ...) {
 #' @param key A CKAN API key (optional, character)
 #' @param test_url (optional, character) A valid CKAN URL for testing purposes
 #' @param test_key (optional, character) A valid CKAN API key privileged to
-#'    create datasets at \code{test_url}
+#' create datasets at `test_url`
 #' @param test_did (optional, character) A valid CKAN dataset ID, existing at
-#'   \code{test_url}
+#' `test_url`
 #' @param test_rid (optional, character) A valid CKAN resource ID, attached to
-#'   \code{did}
-#' @param test_gid (optional, character) A valid CKAN group name at \code{test_url}
+#' `did`
+#' @param test_gid (optional, character) A valid CKAN group name at `test_url`
 #' @param test_oid (optional, character) A valid CKAN organization name at
-#'   \code{test_url}
+#' `test_url`
 #' @param test_behaviour (optional, character) Whether to fail ("FAIL") or skip
 #' ("SKIP") writing tests in case of problems with the configured test CKAN.
-#' @param proxy an object of class \code{request} from a call to 
-#' \code{httr::use_proxy}
+#' @param proxy an object of class `request` from a call to 
+#' `httr::use_proxy()`
 #' @details
-#' \code{ckanr_setup} sets CKAN connection details. \code{ckanr}'s functions
+#' [ckanr_setup()] sets CKAN connection details. ckanr's functions
 #' default to use the default URL and API key unless specified explicitly.
 #'
-#' \code{ckanr}'s automated tests require a valid CKAN URL, a privileged API key
+#' ckanr's automated tests require a valid CKAN URL, a privileged API key
 #' for that URL, plus the IDs of an existing dataset and an existing resource,
 #' repectively.
 #'
 #' The writing tests (create, update, delete) can fail for two reasons:
-#' failures in \code{ckanr}'s code which the tests aim to detect,
+#' failures in ckanr's code which the tests aim to detect,
 #' or failures in the configured CKAN, which are not necessarily a problem
-#' with \code{ckanr}'s code but prevent the tests to prove otherwise.
+#' with ckanr's code but prevent the tests to prove otherwise.
 #'
-#' Setting \code{test_behaviour} to \code{"SKIP"} will allow writing tests to skip
+#' Setting `test_behaviour` to `"SKIP"` will allow writing tests to skip
 #' if the configured test CKAN fails. This is desirable to e.g. test the other
 #' functions even if the tester has no write access to a CKAN instance.
 #'
-#' Setting \code{test_behaviour} to \code{"FAIL"} will let the tester find any
+#' Setting `test_behaviour` to `"FAIL"` will let the tester find any
 #' problems with both the configured test CKAN and the writing functions.
 #'
 #' @examples

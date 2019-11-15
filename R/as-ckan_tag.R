@@ -2,9 +2,10 @@
 #'
 #' @export
 #' @param x Variety of things, character, list, or ckan_tag class object
-#' @param ... Further args passed on to \code{\link{tag_show}} if character given
+#' @param ... Further args passed on to [tag_show()] if character given
 #' @examples \dontrun{
-#' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+#' ckanr_setup(url = "https://demo.ckan.org/",
+#' key = getOption("ckan_demo_key"))
 #'
 #' (tags <- tag_search(query = 'ta'))
 #' tags[[3]]

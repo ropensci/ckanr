@@ -1,6 +1,6 @@
 #' Connect to CKAN with dplyr
 #'
-#' Use \code{src_ckan} to connect to an existing CKAN instance and \code{tbl} to
+#' Use `src_ckan` to connect to an existing CKAN instance and `tbl` to
 #' connect to tables within that CKAN based on the DataStore Data API.
 #'
 #' @param url, the url of the CKAN instance

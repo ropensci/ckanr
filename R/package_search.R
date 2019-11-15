@@ -12,7 +12,7 @@
 #' @param rows Number of records to return. Defaults to 10.
 #' @param start Record to start at, default to beginning.
 #' @param facet (logical) Whether to return facet results or not. 
-#' Default: FALSE
+#' Default: `FALSE`
 #' @param facet.limit (numeric) This param indicates the maximum number of
 #' constraint counts that should be returned for the facet fields.
 #' A negative value means unlimited. Default: 100.
@@ -25,21 +25,21 @@
 #' least one field name using this param.
 #' @param facet.mincount (integer) the minimum counts for facet fields should 
 #' be included in the results
-#' @param include_drafts (logical) if \code{TRUE} draft datasets will be 
+#' @param include_drafts (logical) if `TRUE` draft datasets will be 
 #' included. A user will only be returned their own draft datasets, and a 
-#' sysadmin will be returned all draft datasets. default: \code{FALSE}.
+#' sysadmin will be returned all draft datasets. default: `FALSE`.
 #' first CKAN version: 2.6.1; dropped from request if CKAN version is older
-#' or if CKAN version isn't available via \code{\link{ckan_version}}
-#' @param include_private (logical) if \code{TRUE} private datasets will be 
+#' or if CKAN version isn't available via [ckan_version()]
+#' @param include_private (logical) if `TRUE` private datasets will be 
 #' included. Only private datasets from the user’s organizations will be 
 #' returned and sysadmins will be returned all private datasets.
-#' default: \code{FALSE}
+#' default: `FALSE`
 #' first CKAN version: 2.6.1; dropped from request if CKAN version is older
-#' or if CKAN version isn't available via \code{\link{ckan_version}}
+#' or if CKAN version isn't available via [ckan_version()]
 #' @param use_default_schema (logical) use default package schema instead of a
-#' custom schema defined with an IDatasetForm plugin. default: \code{FALSE}
+#' custom schema defined with an IDatasetForm plugin. default: `FALSE`
 #' first CKAN version: 2.3.5; dropped from request if CKAN version is older
-#' or if CKAN version isn't available via \code{\link{ckan_version}}
+#' or if CKAN version isn't available via [ckan_version()]
 #' @template args
 #' @template key
 #' @examples \dontrun{

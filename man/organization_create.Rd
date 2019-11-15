@@ -22,8 +22,11 @@ organization_create(
 )
 }
 \arguments{
-\item{name}{(character) the name of the organization, a string between 2 and 100
-characters long, containing only lowercase alphanumeric characters, - and _}
+\item{name}{(character) the name of the organization, a string between 2 and
+100 characters long, containing only lowercase alphanumeric characters,
+\itemize{
+\item and _
+}}
 
 \item{id}{the id of the organization (optional)}
 
@@ -34,25 +37,29 @@ characters long, containing only lowercase alphanumeric characters, - and _}
 \item{image_url}{(character) the URL to an image to be displayed on the
 organization's page (optional)}
 
-\item{state}{(character) the current state of the organization, e.g. 'active' or 'deleted',
-only active organization show up in search results and other lists of organization,
-this parameter will be ignored if you are not authorized to change the state of the
-organization (optional). Default: 'active'}
+\item{state}{(character) the current state of the organization, e.g.
+'active' or 'deleted', only active organization show up in search results
+and other lists of organization, this parameter will be ignored if you are
+not authorized to change the state of the organization (optional).
+Default: 'active'}
 
 \item{approval_status}{(character) Approval status}
 
-\item{extras}{The organization's extras (optional), extras are arbitrary (key: value)
-metadata items that can be added to organizations, each extra dictionary should have
-keys 'key' (a string), 'value' (a string) package_relationship_create() for the format
-of relationship dictionaries (optional)}
+\item{extras}{The organization's extras (optional), extras are arbitrary
+(key: value) metadata items that can be added to organizations, each extra
+dictionary should have keys 'key' (a string), 'value' (a string)
+\code{package_relationship_create} for the format of relationship dictionaries
+(optional)}
 
-\item{packages}{(list of dictionaries) the datasets (packages) that belong to the
-organization, a list of dictionaries each with keys 'name' (string, the id or name of the
-dataset) and optionally 'title' (string, the title of the dataset)}
+\item{packages}{(list of dictionaries) the datasets (packages) that belong
+to the organization, a list of dictionaries each with keys 'name' (string,
+the id or name of the dataset) and optionally 'title' (string, the title
+of the dataset)}
 
-\item{users}{(character) the users that belong to the organization, a list of dictionaries
-each with key 'name' (string, the id or name of the user) and optionally 'capacity'
-(string, the capacity in which the user is a member of the organization)}
+\item{users}{(character) the users that belong to the organization, a list
+of dictionaries each with key 'name' (string, the id or name of the user)
+and optionally 'capacity' (string, the capacity in which the user is a
+member of the organization)}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
@@ -75,7 +82,8 @@ Create an organization
 ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
 
 # create an organization
-(res <- organization_create("foobar", title = "Foo bars", description = "love foo bars"))
+(res <- organization_create("foobar", title = "Foo bars",
+  description = "love foo bars"))
 res$name
 }
 }

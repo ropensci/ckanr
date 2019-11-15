@@ -22,7 +22,7 @@ whose names contain this string will be returned}
 only tags that belong to this vocabulary will be returned}
 
 \item{all_fields}{(logical) Return full tag dictionaries instead of
-just names. Default: FALSE}
+just names. Default: \code{FALSE}}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}

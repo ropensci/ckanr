@@ -1,7 +1,7 @@
 #' CKAN server URLS and other info
 #'
 #' @export
-#' @details Comes from the links at http://ckan.org/instances
+#' @details Comes from the links at https://ckan.org/about/instances/
 #'
 #' There were a number of other URLs for CKAN instances in the CKAN URL
 #' above, but some sites are now gone completely, or if they do exist,

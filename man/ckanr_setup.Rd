@@ -41,24 +41,24 @@ create datasets at \code{test_url}}
 \item{test_behaviour}{(optional, character) Whether to fail ("FAIL") or skip
 ("SKIP") writing tests in case of problems with the configured test CKAN.}
 
-\item{proxy}{an object of class \code{request} from a call to 
-\code{httr::use_proxy}}
+\item{proxy}{an object of class \code{request} from a call to
+\code{httr::use_proxy()}}
 }
 \description{
 Configure default CKAN settings
 }
 \details{
-\code{ckanr_setup} sets CKAN connection details. \code{ckanr}'s functions
+\code{\link[=ckanr_setup]{ckanr_setup()}} sets CKAN connection details. ckanr's functions
 default to use the default URL and API key unless specified explicitly.
 
-\code{ckanr}'s automated tests require a valid CKAN URL, a privileged API key
+ckanr's automated tests require a valid CKAN URL, a privileged API key
 for that URL, plus the IDs of an existing dataset and an existing resource,
 repectively.
 
 The writing tests (create, update, delete) can fail for two reasons:
-failures in \code{ckanr}'s code which the tests aim to detect,
+failures in ckanr's code which the tests aim to detect,
 or failures in the configured CKAN, which are not necessarily a problem
-with \code{ckanr}'s code but prevent the tests to prove otherwise.
+with ckanr's code but prevent the tests to prove otherwise.
 
 Setting \code{test_behaviour} to \code{"SKIP"} will allow writing tests to skip
 if the configured test CKAN fails. This is desirable to e.g. test the other

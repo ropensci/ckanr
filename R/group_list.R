@@ -7,9 +7,9 @@
 #' or sort by a function (e.g., sum(x_f, y_f) desc, which sorts by the sum of
 #' x_f and y_f in a descending order).
 #' @param groups (character) A list of names of the groups to return, if given
-#'    only groups whose names are in this list will be returned
+#' only groups whose names are in this list will be returned
 #' @param all_fields (logical) Return full group dictionaries instead of just
-#'    names. Default: FALSE
+#' names. Default: `FALSE`
 #' @template paging
 #' @template args
 #' @template key

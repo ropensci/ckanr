@@ -2,13 +2,13 @@
 % Please edit documentation in R/ckanr-package.R
 \name{ckanr-deprecated}
 \alias{ckanr-deprecated}
-\title{Deprecated functions in \code{ckanr}}
+\title{Deprecated functions in \pkg{ckanr}}
 \description{
 These functions still work but will be removed (defunct) in the next version.
 }
 \details{
 \itemize{
- \item \code{\link{ds_create_dataset}}: The functionality of this function is already in
- another function in this package. See function \code{\link{resource_create}}
+\item \code{\link[=ds_create_dataset]{ds_create_dataset()}}: The functionality of this function is already in
+another function in this package. See function \code{\link[=resource_create]{resource_create()}}
 }
 }

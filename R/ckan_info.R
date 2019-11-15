@@ -1,9 +1,9 @@
 #' Get information on a CKAN server
 #'
 #' @export
-#' @param ... Curl args passed on to \code{\link[httr]{GET}} (optional)
-#' @return for \code{ckan_info} a list with many slots with various info.
-#' for \code{ckan_version}, list of length two, with actual version as character,
+#' @param ... Curl args passed on to [httr::GET()] (optional)
+#' @return for `ckan_info` a list with many slots with various info.
+#' for `ckan_version`, list of length two, with actual version as character,
 #' and another with version converted to numeric (any dots or letters removed)
 #' @examples \dontrun{
 #' ckan_info()
@@ -18,8 +18,8 @@ ckan_info <- function(url = get_default_url(), ...) {
 }
 
 #' @export
-#' @param url Base url to use. Default: \url{http://data.techno-science.ca}. See
-#' also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}. (required)
+#' @param url Base url to use. Default: <http://data.techno-science.ca>. See
+#' also [ckanr_setup()] and [get_default_url()]. (required)
 #' @rdname ckan_info
 ckan_version <- function(url = get_default_url(), ...) {
   ver <- ckan_info(url, ...)$ckan_version
