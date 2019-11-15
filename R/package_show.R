@@ -2,7 +2,8 @@
 #'
 #' @export
 #'
-#' @param id (character) Package identifier.
+#' @param id (character/ckan_package) Package identifier, or a ckan_package
+#' object
 #' @param use_default_schema (logical) Use default package schema instead of a
 #' custom schema defined with an IDatasetForm plugin. Default: FALSE
 #' @param http_method (character) which HTTP method (verb) to use; one of 
@@ -36,8 +37,9 @@
 package_show <- function(id, use_default_schema = FALSE, http_method = "GET",
   url = get_default_url(), key = get_default_key(), as = 'list', ...) {
 
-  assert(id, "character")
+  assert(id, c("character", "ckan_package"))
   check_http_method(http_method, c("GET", "POST"))
+  if (inherits(id, "ckan_package")) id <- id$id
   args <- cc(list(id = id, use_default_schema = use_default_schema))
   fun <- switch(http_method, GET = ckan_GET, POST = ckan_POST)
   res <- fun(url, 'package_show', args, key = key, ...)

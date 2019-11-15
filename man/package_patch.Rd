@@ -6,7 +6,8 @@
 \usage{
 package_patch(
   x,
-  id,
+  id = NULL,
+  extras = NULL,
   key = get_default_key(),
   url = get_default_url(),
   as = "list",
@@ -16,7 +17,13 @@ package_patch(
 \arguments{
 \item{x}{(list) A list with key-value pairs}
 
-\item{id}{(character) Resource ID to update (required)}
+\item{id}{(character) Resource ID to update (optional, required if 
+x does not have an "id" field)}
+
+\item{extras}{(character vector) - the dataset's extras
+(optional), extras are arbitrary (key: value) metadata items that can be
+added to datasets, each extra dictionary should have keys 'key' (a string),
+'value' (a string)}
 
 \item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
 
@@ -44,5 +51,9 @@ ckanr_setup(url = "https://demo.ckan.org", key = getOption("ckan_demo_key"))
 # Get a resource
 res <- package_show(res$id)
 res$title
+
+# patch
+package_patch(res, extras = list(list(key = "foo", value = "bar")))
+unclass(package_show(res))
 }
 }

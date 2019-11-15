@@ -2,7 +2,12 @@
 #'
 #' @export
 #' @param x (list) A list with key-value pairs
-#' @param id (character) Resource ID to update (required)
+#' @param id (character) Resource ID to update (optional, required if 
+#' x does not have an "id" field)
+#' @param extras (character vector) - the dataset's extras
+#' (optional), extras are arbitrary (key: value) metadata items that can be
+#' added to datasets, each extra dictionary should have keys 'key' (a string),
+#' 'value' (a string)
 #' @template args
 #' @template key
 #' @examples \dontrun{
@@ -15,15 +20,28 @@
 #' # Get a resource
 #' res <- package_show(res$id)
 #' res$title
+#'
+#' # patch
+#' package_patch(res, extras = list(list(key = "foo", value = "bar")))
+#' unclass(package_show(res))
 #' }
-package_patch <- function(x, id, key = get_default_key(),
-                           url = get_default_url(), as = 'list', ...) {
-  id <- as.ckan_package(id, url = url, key =key)
+package_patch <- function(x, id = NULL, extras = NULL, key = get_default_key(),
+  url = get_default_url(), as = 'list', ...) {
+
+  x <- as.ckan_package(x, url = url, key = key)
+  x <- unclass(x)
   if (!inherits(x, "list")) {
     stop("x must be of class list", call. = FALSE)
   }
-  x$id <- id$id
-  res <- ckan_POST(url, method = 'package_patch', body = x, key = key, ...)
+  if (!"id" %in% names(x)) {
+    if (is.null(id))
+      stop("`id` field not found in `x`; provide a value to `id` param",
+        call. = FALSE)
+    x$id <- id$id
+  }
+  if (!is.null(extras)) x$extras <- extras
+  res <- ckan_POST(url, method = 'package_patch', body = x, key = key,
+    encode = "json", ...)
   switch(as, json = res, list = as_ck(jsl(res), "ckan_package"),
          table = jsd(res))
 }

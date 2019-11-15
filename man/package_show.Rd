@@ -15,7 +15,8 @@ package_show(
 )
 }
 \arguments{
-\item{id}{(character) Package identifier.}
+\item{id}{(character/ckan_package) Package identifier, or a ckan_package
+object}
 
 \item{use_default_schema}{(logical) Use default package schema instead of a
 custom schema defined with an IDatasetForm plugin. Default: FALSE}
