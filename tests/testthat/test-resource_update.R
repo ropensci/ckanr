@@ -94,3 +94,18 @@ test_that("resource_update fails well", {
   expect_error(resource_update(rid, path=path, url=url, key="invalid-key"),
                "Authorization Error")
 })
+
+# key:value pairs
+test_that("resource_create gives back expected key:value pairs", {
+  check_ckan(url)
+  check_resource(url, rid)
+
+  path <- system.file("examples", "mapbox.html", package = "ckanr")
+  xx <- resource_create(package_id = did, description = "a map, yay",
+                        name = "mapyay", upload = path,
+                        extras = list(map_type = "mapbox"),
+                        rcurl = "http://google.com", url = url, key = key)
+
+  # expected output
+  expect_equal(a$map_type, "mapbox")
+})
