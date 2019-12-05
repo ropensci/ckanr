@@ -21,6 +21,10 @@
 #' @param cache_last_updated (character) iso date string (optional)
 #' @param webstore_last_updated (character) iso date string (optional)
 #' @param upload (character) A path to a local file (optional)
+#' @param extras (list of resource extra dictionaries) - the resources's
+#' extras (optional), extras are arbitrary (key: value) metadata items
+#' that can be added to resources, each extra dictionary is a named
+#' list.
 #' @template args
 #' @template key
 #'
@@ -52,8 +56,8 @@ resource_create <- function(package_id = NULL, rcurl = NULL,
   name = NULL, resource_type = NULL, mimetype = NULL,
   mimetype_inner = NULL, webstore_url = NULL, cache_url = NULL, size = NULL,
   created = NULL, last_modified = NULL, cache_last_updated = NULL,
-  webstore_last_updated = NULL, upload = NULL, url = get_default_url(),
-  key = get_default_key(), as = 'list', ...) {
+  webstore_last_updated = NULL, upload = NULL, extras = NULL,
+  url = get_default_url(), key = get_default_key(), as = 'list', ...) {
 
   id <- as.ckan_package(package_id, url = url, key = key)
   body <- cc(list(package_id = id$id, url = rcurl, revision_id = revision_id,
@@ -65,6 +69,7 @@ resource_create <- function(package_id = NULL, rcurl = NULL,
     cache_last_updated = cache_last_updated,
     webstore_last_updated = webstore_last_updated,
     upload = upfile(upload)))
+  body <- c(body, extras)
   res <- ckan_POST(url, 'resource_create', body = body, key = key, ...)
   switch(as, json = res, list = as_ck(jsl(res), "ckan_resource"),
     table = jsd(res))
