@@ -15,6 +15,7 @@
 #'
 #' @param id (character) Resource ID to update (required)
 #' @param path (character) Local path of the file to upload (required)
+#' @param extras (list) - the resources' extra metadata fields (optional)
 #' @template key
 #' @template args
 #' @return The HTTP response from CKAN, formatted as list (default), table,
@@ -48,6 +49,10 @@
 #'
 #' ## or from the resource id
 #' resource_update(xx$id, path=newpath)
+#'
+#' ## optionally include extra tags
+#' resource_update(xx$id, path=newpath,
+#'                 extras = list(some="metadata"))
 #'
 #' #######
 #' # Using default settings
@@ -97,8 +102,9 @@
 #' (xxx <- resource_update(xx, path=newpath))
 #' browseURL(xxx$url)
 #' }
-resource_update <- function(id, path, url = get_default_url(),
-  key = get_default_key(), as = 'list', ...) {
+resource_update <- function(id, path, extras,
+  url = get_default_url(), key = get_default_key(),
+  as = 'list', ...) {
 
   id <- as.ckan_resource(id, url = url)
   path <- path.expand(path)
@@ -108,6 +114,7 @@ resource_update <- function(id, path, url = get_default_url(),
     last_modified =
       format(Sys.time(), tz = "UTC", format = "%Y-%m-%d %H:%M:%OS6"),
     url = "update")
+  body <- c(body, extras)
   res <- ckan_POST(url, 'resource_update', body = body, key = key, ...)
   switch(as, json = res, list = as_ck(jsl(res), "ckan_resource"),
          table = jsd(res))
