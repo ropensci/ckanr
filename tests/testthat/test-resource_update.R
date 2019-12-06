@@ -107,5 +107,5 @@ test_that("resource_create gives back expected key:value pairs", {
                         rcurl = "http://google.com", url = url, key = key)
 
   # expected output
-  expect_equal(a$map_type, "mapbox")
+  expect_equal(xx$map_type, "mapbox")
 })
