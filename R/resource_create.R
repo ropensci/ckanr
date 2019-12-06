@@ -21,10 +21,7 @@
 #' @param cache_last_updated (character) iso date string (optional)
 #' @param webstore_last_updated (character) iso date string (optional)
 #' @param upload (character) A path to a local file (optional)
-#' @param extras (list of resource extra dictionaries) - the resources's
-#' extras (optional), extras are arbitrary (key: value) metadata items
-#' that can be added to resources, each extra dictionary is a named
-#' list.
+#' @param extras (list) - the resources' extra metadata fields (optional)
 #' @template args
 #' @template key
 #'
