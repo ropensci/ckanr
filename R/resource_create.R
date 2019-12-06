@@ -42,6 +42,7 @@
 #'                        description = "my resource",
 #'                        name = "bears",
 #'                        upload = file,
+#'                        extras = list(species = "grizzly"),
 #'                        rcurl = "http://google.com"
 #' ))
 #'
@@ -49,6 +50,7 @@
 #'    resource_create(description = "my resource",
 #'                    name = "bearsareus",
 #'                    upload = file,
+#'                    extras = list(my_extra = "some value")
 #'                    rcurl = "http://google.com")
 #' }
 resource_create <- function(package_id = NULL, rcurl = NULL,
