@@ -14,14 +14,14 @@
 #' res$description
 #'
 #' # Make some changes
-#' x <- list(description = "My newer description")
+#' x <- list(description = "My newer description", "extra_key" = "my special value")
 #' resource_patch(x, id = res)
 #' # or pass id in directly
 #' # resource_patch(x, id = res$id)
 #' }
 resource_patch <- function(x, id, url = get_default_url(),
   key = get_default_key(), as = 'list', ...) {
-  
+
   id <- as.ckan_resource(id, url = url)
   if (!inherits(x, "list")) {
     stop("x must be of class list", call. = FALSE)
