@@ -102,7 +102,7 @@
 #' (xxx <- resource_update(xx, path=newpath))
 #' browseURL(xxx$url)
 #' }
-resource_update <- function(id, path, extras,
+resource_update <- function(id, path, extras = list(),
   url = get_default_url(), key = get_default_key(),
   as = 'list', ...) {
 
