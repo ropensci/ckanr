@@ -106,6 +106,7 @@ resource_update <- function(id, path, extras = list(),
   url = get_default_url(), key = get_default_key(),
   as = 'list', ...) {
 
+  assert(extras, "list")
   id <- as.ckan_resource(id, url = url)
   path <- path.expand(path)
   up <- upload_file(path)
