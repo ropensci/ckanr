@@ -23,6 +23,7 @@ resource_create(
   cache_last_updated = NULL,
   webstore_last_updated = NULL,
   upload = NULL,
+  extras = NULL,
   url = get_default_url(),
   key = get_default_key(),
   as = "list",
@@ -67,6 +68,8 @@ added to. This should be an alphanumeric string. Required.}
 
 \item{upload}{(character) A path to a local file (optional)}
 
+\item{extras}{(list) - the resources' extra metadata fields (optional)}
+
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
@@ -97,13 +100,15 @@ file <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
                        description = "my resource",
                        name = "bears",
                        upload = file,
+                       extras = list(species = "grizzly"),
                        rcurl = "http://google.com"
 ))
 
-package_create("foobbbbbarrrr") %>%
+package_create("foobbbbbarrrr") \%>\%
    resource_create(description = "my resource",
                    name = "bearsareus",
                    upload = file,
+                   extras = list(my_extra = "some value"),
                    rcurl = "http://google.com")
 }
 }

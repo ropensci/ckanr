@@ -29,6 +29,7 @@
 #' extra <- list("extra_key" = "my special value")
 #' zz <- resource_patch(extra, id = res)
 #' zz$extra_key
+#' }
 resource_patch <- function(x, id, url = get_default_url(),
   key = get_default_key(), as = 'list', ...) {
 
