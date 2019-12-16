@@ -29,7 +29,8 @@ related_show <- function(id, url = get_default_url(), key = get_default_key(),
   as = 'list', ...) {
 
   id <- as.ckan_related(id, url = url)
-  res <- ckan_GET(url, 'related_show', list(id = id$id), key = key, ...)
+  res <- ckan_GET(url, 'related_show', list(id = id$id), key = key,
+    opts = list(...))
   switch(as, json = res, list = as_ck(jsl(res), "ckan_related"),
     table = jsd(res))
 }

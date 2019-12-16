@@ -4,7 +4,7 @@
 #' @param id (character) The id of the package. Required.
 #' @param url Base url to use. Default: http://data.techno-science.ca
 #' See also [ckanr_setup()] and [get_default_url()]
-#' @param ... Curl args passed on to [httr::POST()] (optional)
+#' @param ... Curl args passed on to [crul::verb-POST] (optional)
 #' @template key
 #'
 #' @examples \dontrun{
@@ -24,6 +24,7 @@ package_delete <- function(id, url = get_default_url(),
   key = get_default_key(), ...) {
 
   id <- as.ckan_package(id, url = url)
-  tmp <- ckan_POST(url, 'package_delete', body = list(id = id$id), key = key, ...)
+  tmp <- ckan_POST(url, 'package_delete', body = list(id = id$id), key = key,
+    opts = list(...))
   jsonlite::fromJSON(tmp)$success
 }

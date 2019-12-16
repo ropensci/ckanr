@@ -9,7 +9,7 @@
 #' ckanr_setup(url = "https://demo.ckan.org/",
 #' key = getOption("ckan_demo_key"))
 #'
-#' (orgs <- organization_list())
+#' (orgs <- organization_list(limit = 3))
 #' orgs[[3]]
 #'
 #' # create item class from only an item ID
@@ -48,6 +48,7 @@ print.ckan_organization <- function(x, ...) {
 get_organization <- function(id, url = get_default_url(),
   key = get_default_key(), ...) {
   
-  res <- ckan_GET(url, 'organization_show', list(id = id), key = key, ...)
+  res <- ckan_GET(url, 'organization_show', list(id = id), key = key,
+    opts = list(...))
   as_ck(jsl(res), "ckan_organization")
 }

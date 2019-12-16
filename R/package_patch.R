@@ -41,7 +41,7 @@ package_patch <- function(x, id = NULL, extras = NULL, key = get_default_key(),
   }
   if (!is.null(extras)) x$extras <- extras
   res <- ckan_POST(url, method = 'package_patch', body = x, key = key,
-    encode = "json", ...)
+    encode = "json", opts = list(...))
   switch(as, json = res, list = as_ck(jsl(res), "ckan_package"),
          table = jsd(res))
 }

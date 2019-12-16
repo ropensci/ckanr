@@ -31,6 +31,7 @@ package_activity_list <- function(id, offset = 0, limit = 31,
 
   id <- as.ckan_package(id, url = url)
   args <- cc(list(id = id$id, offset = offset, limit = limit))
-  res <- ckan_GET(url, 'package_activity_list', args, key = key, ...)
+  res <- ckan_GET(url, 'package_activity_list', args, key = key,
+    opts = list(...))
   switch(as, json = res, list = jsl(res), table = jsd(res))
 }

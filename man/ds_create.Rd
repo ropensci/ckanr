@@ -50,15 +50,18 @@ uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to
 data to data.frame's when possible, so the result can vary from a vector, list or
 data.frame. (required)}
 
-\item{...}{Curl args passed on to \code{\link[httr]{POST}} (optional)}
+\item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
 }
 \description{
 BEWARE: This function still doesn't quite work yet.
 }
 \examples{
 \dontrun{
+ckanr_setup(url = "https://demo.ckan.org/",
+  key = getOption("ckan_demo_key"))
+
 # create a package
-(res <- package_create("foobarrrr", author="Jane Doe"))
+(res <- package_create("foobarrrrr", author="Jane Doe"))
 
 # then create a resource
 file <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
@@ -68,8 +71,8 @@ file <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
                        upload = file,
                        rcurl = "http://google.com"
 ))
-ds_create(resource_id = "f4129802-22aa-4437-b9f9-8a8f3b7b2a53",
-         records = iris, force = TRUE, key = "my-api-key")
+ds_create(resource_id = xx$id, records = iris, force = TRUE)
+resource_show(xx$id)
 }
 }
 \references{

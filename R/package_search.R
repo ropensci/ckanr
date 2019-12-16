@@ -79,7 +79,7 @@ package_search <- function(q = '*:*', fq = NULL, sort = NULL, rows = NULL,
   } else if (ver < 26.1) {
     args$use_default_schema <- args$include_private <- NULL
   }
-  res <- ckan_GET(url, 'package_search', args, key = key, ...)
+  res <- ckan_GET(url, 'package_search', args, key = key, opts = list(...))
   switch(as, json = res,
          list = {
            tmp <- jsl(res)

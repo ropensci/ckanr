@@ -59,6 +59,6 @@ group_create <- function(name = NULL, id = NULL, title = NULL,
     state = state, approval_status = approval_status, extras = extras,
     packages = packages, groups = groups, users = users))
   res <- ckan_POST(url, 'group_create', body = tojun(body, TRUE), key = key,
-    encode = "json", ctj(), ...)
+    encode = "json", ctj(), opts = list(...))
   switch(as, json = res, list = as_ck(jsl(res), "ckan_group"), table = jsd(res))
 }

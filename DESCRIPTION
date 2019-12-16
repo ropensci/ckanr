@@ -3,7 +3,7 @@ Title: Client for the Comprehensive Knowledge Archive Network ('CKAN') API
 Description: Client for 'CKAN' API (<https://ckan.org/>). Includes interface
     to 'CKAN' 'APIs' for search, list, show for packages, organizations, and
     resources. In addition, provides an interface to the 'datastore' API.
-Version: 0.4.1.9213
+Version: 0.4.2.91
 Authors@R: c(
     person("Scott", "Chamberlain",
     	role = c("aut", "cre"),
@@ -35,7 +35,7 @@ Imports:
     methods,
     stats,
     utils,
-    httr (>= 1.0.0),
+    crul,
     jsonlite (>= 0.9.17),
     dplyr (>= 0.7.0),
     dbplyr,

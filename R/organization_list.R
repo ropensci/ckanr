@@ -35,7 +35,7 @@ organization_list <- function(order_by = c("name", "package"),
                all_fields = ifelse(all_fields, "True", "False"),
                limit = limit,
                organizations = organizations))
-  res <- ckan_GET(url, 'organization_list', args, key = key, ...)
+  res <- ckan_GET(url, 'organization_list', args, key = key, opts = list(...))
   switch(as, json = res, list = lapply(jsl(res), as.ckan_organization),
     table = jsd(res))
 }

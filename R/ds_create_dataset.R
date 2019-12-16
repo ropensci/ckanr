@@ -37,7 +37,8 @@ ds_create_dataset <- function(package_id, name, path, url = get_default_url(),
   ext <- strsplit(basename(path), "\\.")[[1]]
   ext <- ext[length(ext)]
   body <- list(package_id = package_id, name = name, format = ext,
-               url = 'upload', upload = upload_file(path))
-  res <- ckan_POST(url, method = 'resource_create', body = body, key = key, ...)
+               url = 'upload', upload = crul::upload(path))
+  res <- ckan_POST(url, method = 'resource_create', body = body, key = key,
+    opts = list(...))
   switch(as, json = res, list = jsl(res), table = jsd(res))
 }

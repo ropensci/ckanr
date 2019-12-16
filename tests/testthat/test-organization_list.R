@@ -4,15 +4,6 @@ skip_on_cran()
 
 u <- get_test_url()
 
-# organization_num <- local({
-#   check_ckan(u)
-#   res <- httr::GET(file.path(u, "organization"))
-#   httr::stop_for_status(res)
-#   html <- httr::content(res, as = "text")
-#   tmp <- regmatches(html, regexec("(\\d+) organi[sz]ations found", html))
-#   as.integer(tmp[[1]][2])
-# })
-
 test_that("organization_list gives back expected class types", {
   check_ckan(u)
   a <- organization_list(url=u, limit=10)

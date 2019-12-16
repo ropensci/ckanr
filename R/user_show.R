@@ -32,6 +32,6 @@ user_show <- function(id, user_obj = NULL, include_datasets = FALSE,
   args <- cc(list(id = id$id, user_obj = user_obj,
     include_datasets = include_datasets,
     include_num_followers = include_num_followers))
-  res <- ckan_GET(url, 'user_show', args, key = key, ...)
+  res <- ckan_GET(url, 'user_show', query = args, key = key, opts = list(...))
   switch(as, json = res, list = as_ck(jsl(res), "ckan_user"), table = jsd(res))
 }

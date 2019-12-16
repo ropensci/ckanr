@@ -12,7 +12,7 @@ ping <- function(url = get_default_url(), key = get_default_key(),
   as = "logical", ...) {
   
   tryCatch({
-    res <- ckan_GET(url, 'site_read', key = key, ...)
+    res <- ckan_GET(url, 'site_read', key = key, opts = list(...))
     switch(as, json = res, logical = jsd(res))
   }, error = function(e) FALSE)
 }
