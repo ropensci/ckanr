@@ -26,7 +26,7 @@ through file URL.}
 
 \item{key}{A CKAN API key (optional, character)}
 
-\item{...}{Curl arguments passed on to \code{\link[httr:GET]{httr::GET()}}}
+\item{...}{Curl arguments passed on to \link[crul:verb-GET]{crul::verb-GET}}
 }
 \description{
 Download a file
@@ -63,10 +63,10 @@ names(x)
 head(x[["Mayor - Maire"]])
 
 # XML file - requires xml2 package
-ckanr_setup("http://data.ottawa.ca")
-res <- resource_show(id = "380061c1-6c46-4da6-a01b-7ab0f49a881e",
-as = "table")
-ckan_fetch(res$url)
+# ckanr_setup("http://data.ottawa.ca")
+# res <- resource_show(id = "380061c1-6c46-4da6-a01b-7ab0f49a881e",
+# as = "table")
+# ckan_fetch(res$url)
 
 # HTML file - requires xml2 package
 ckanr_setup("http://open.canada.ca/data/en")

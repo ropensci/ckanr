@@ -31,6 +31,6 @@ user_create <- function(name, email, password, id = NULL, fullname = NULL,
 
   args <- cc(list(name = name, email = email, password = password, id = id,
                   fullname = fullname, about = about, openid = openid))
-  res <- ckan_POST(url, 'user_create', args, key = key, ...)
+  res <- ckan_POST(url, 'user_create', args, key = key, opts = list(...))
   switch(as, json = res, list = as_ck(jsl(res), "ckan_user"), table = jsd(res))
 }

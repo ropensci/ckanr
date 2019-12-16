@@ -14,6 +14,6 @@ changes <- function(offset = 0, limit = 31,url = get_default_url(),
 
   args <- cc(list(offset = offset, limit = limit))
   res <- ckan_GET(url, 'recently_changed_packages_activity_list', args,
-    key = key, ...)
+    key = key, opts = list(...))
   switch(as, json = res, list = jsl(res), table = jsd(res))
 }

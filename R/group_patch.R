@@ -31,6 +31,6 @@ group_patch <- function(x, id, url = get_default_url(), key = get_default_key(),
   x$id <- id$id
   res <- ckan_POST(url, method = 'group_patch',
                    body = tojun(x, TRUE), key = key,
-                   encode = "json", ctj(), ...)
+                   encode = "json", headers = ctj(), opts = list(...))
   switch(as, json = res, list = as_ck(jsl(res), "ckan_group"), table = jsd(res))
 }

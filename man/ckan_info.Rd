@@ -13,7 +13,7 @@ ckan_version(url = get_default_url(), ...)
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link[=ckanr_setup]{ckanr_setup()}} and \code{\link[=get_default_url]{get_default_url()}}. (required)}
 
-\item{...}{Curl args passed on to \code{\link[httr:GET]{httr::GET()}} (optional)}
+\item{...}{Curl args passed on to \link[crul:verb-GET]{crul::verb-GET} (optional)}
 }
 \value{
 for \code{ckan_info} a list with many slots with various info.

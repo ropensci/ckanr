@@ -119,5 +119,5 @@ test_that("resource_update gives back expected key:value pairs", {
                        url = url, key = key)
 
   # expected output
-  expect_equal(xx$map_type, "mapbox")
+  expect_equal(a$map_type, "mapbox")
 })

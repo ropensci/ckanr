@@ -1,7 +1,6 @@
 #' Datastore - search or get a dataset from CKRAN datastore
 #'
 #' @export
-#'
 #' @param resource_id (character) id or alias of the resource to be searched
 #' against
 #' @param filters (character) matching conditions to select, e.g
@@ -54,8 +53,13 @@ ds_search <- function(resource_id = NULL, filters = NULL, q = NULL,
   args <- cc(list(resource_id = resource_id, filters = filters,q = q,
                   plain = plain, language = language, fields = fields,
                   offset = offset, limit = limit, sort = sort))
-  res <- POST(file.path(notrail(url), 'api/action/datastore_search'), ctj(),
-              query = args, add_headers(Authorization = key), ...)
-  res <- content(res, "text", encoding = "UTF-8")
-  switch(as, json = res, list = jsl(res), table = jsd(res))
+  con <- crul::HttpClient$new(
+    url = file.path(notrail(url), 'api/action/datastore_search'),
+    headers = c(list(Authorization = key), ctj()),
+    opts = list(...)
+  )
+  res <- con$post(query = args)
+  res$raise_for_status()
+  txt <- res$parse("UTF-8")
+  switch(as, json = txt, list = jsl(txt), table = jsd(txt))
 }

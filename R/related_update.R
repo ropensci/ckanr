@@ -28,7 +28,7 @@ related_update <- function(id, title, type, description = NULL,
                   image_url = image_url))
   res <- ckan_POST(url, 'related_update',
                    body = tojun(body, TRUE), key = key,
-                   encode = "json", ctj(), ...)
+                   encode = "json", headers = ctj(), opts = list(...))
   switch(as, json = res, list = as_ck(jsl(res), "ckan_related"),
     table = jsd(res))
 }

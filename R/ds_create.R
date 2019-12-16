@@ -20,8 +20,11 @@
 #' @template args
 #' @references \url{http://bit.ly/1G9cnBl}
 #' @examples \dontrun{
+#' ckanr_setup(url = "https://demo.ckan.org/",
+#'   key = getOption("ckan_demo_key"))
+#' 
 #' # create a package
-#' (res <- package_create("foobarrrr", author="Jane Doe"))
+#' (res <- package_create("foobarrrrr", author="Jane Doe"))
 #'
 #' # then create a resource
 #' file <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
@@ -31,8 +34,8 @@
 #'                        upload = file,
 #'                        rcurl = "http://google.com"
 #' ))
-#' ds_create(resource_id = "f4129802-22aa-4437-b9f9-8a8f3b7b2a53",
-#'          records = iris, force = TRUE, key = "my-api-key")
+#' ds_create(resource_id = xx$id, records = iris, force = TRUE)
+#' resource_show(xx$id)
 #' }
 
 ds_create <- function(resource_id = NULL, resource = NULL, force = FALSE,
@@ -43,13 +46,12 @@ ds_create <- function(resource_id = NULL, resource = NULL, force = FALSE,
   body <- cc(list(resource_id = resource_id, resource = resource, force = force,
                   aliases = aliases, fields = fields, records = records,
                   primary_key = primary_key, indexes = indexes))
-  res <- POST(file.path(url, 'api/action/datastore_create'),
-              add_headers(Authorization = key),
-              body = tojun(body, TRUE),
-              encode = "json", ctj(), ...)
-  stop_for_status(res)
-  res <- content(res, "text", encoding = "UTF-8")
-  switch(as, json = res, list = jsl(res), table = jsd(res))
+  con <- crul::HttpClient$new(file.path(url, 'api/action/datastore_create'),
+    headers = c(list(Authorization = key), ctj()),
+    opts = list(...)
+  )
+  res <- con$post(body = tojun(body, TRUE), encode = "json")
+  res$raise_for_status()
+  txt <- res$parse("UTF-8")
+  switch(as, json = txt, list = jsl(txt), table = jsd(txt))
 }
-
-convert <- function(x){ if (!is.null(x)) { jsonlite::toJSON(x) } else { NULL } }

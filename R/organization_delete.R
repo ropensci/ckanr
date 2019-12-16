@@ -17,10 +17,11 @@
 #' res$id
 #' organization_delete(id = res$id)
 #' }
-organization_delete <- function(id, url = get_default_url(), key = get_default_key(),
-  as = 'list', ...) {
+organization_delete <- function(id, url = get_default_url(),
+    key = get_default_key(), as = 'list', ...) {
 
-  res <- ckan_POST(url, 'organization_delete', list(id = id), key = key, ...)
+  res <- ckan_POST(url, 'organization_delete', list(id = id), key = key,
+    opts = list(...))
   switch(as, json = res, list = lapply(jsl(res), as.ckan_organization),
     table = jsd(res))
 }

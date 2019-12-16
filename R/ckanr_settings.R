@@ -77,7 +77,7 @@ print.ckanr_settings <- function(x, ...) {
 #' @param test_behaviour (optional, character) Whether to fail ("FAIL") or skip
 #' ("SKIP") writing tests in case of problems with the configured test CKAN.
 #' @param proxy an object of class `request` from a call to 
-#' `httr::use_proxy()`
+#' [crul::proxy()]
 #' @details
 #' [ckanr_setup()] sets CKAN connection details. ckanr's functions
 #' default to use the default URL and API key unless specified explicitly.
@@ -117,7 +117,7 @@ print.ckanr_settings <- function(x, ...) {
 #' ckanr_setup()
 #' 
 #' # set a proxy
-#' ckanr_setup(proxy = httr::use_proxy("64.251.21.73", 8080))
+#' ckanr_setup(proxy = crul::proxy("64.251.21.73:8080"))
 #' ckanr_settings()
 #' ## run without setting proxy to reset to no proxy
 #' ckanr_setup()

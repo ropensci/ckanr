@@ -45,6 +45,6 @@ print.ckan_group <- function(x, ...) {
 get_group <- function(id, url = get_default_url(), key = get_default_key(),
   ...) {
 
-  res <- ckan_GET(url, 'group_show', list(id = id), key = key, ...)
+  res <- ckan_GET(url, 'group_show', list(id = id), key = key, opts = list(...))
   as_ck(jsl(res), "ckan_group")
 }

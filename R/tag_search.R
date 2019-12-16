@@ -22,7 +22,7 @@ tag_search <- function(query = NULL, vocabulary_id = NULL,
 
   args <- cc(list(query = query, vocabulary_id = vocabulary_id,
                   offset = offset, limit = limit))
-  res <- ckan_GET(url, 'tag_search', args, key = key, ...)
+  res <- ckan_GET(url, 'tag_search', args, key = key, opts = list(...))
   switch(as, json = res, list = lapply(jsl(res)$results, as.ckan_tag),
     table = jsd(res))
 }

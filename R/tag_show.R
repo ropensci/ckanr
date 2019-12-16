@@ -25,7 +25,8 @@ tag_show <- function(id, include_datasets = FALSE, url = get_default_url(),
 
   id <- as.ckan_tag(id, url = url)
   res <- ckan_GET(url, 'tag_show',
-    list(id = id$id, include_datasets = include_datasets), key = key, ...)
+    query = list(id = id$id, include_datasets = include_datasets), key = key,
+    opts = list(...))
   switch(as, json = res, list = as_ck(jsl(res), "ckan_tag"),
     table = jsd(res))
 }

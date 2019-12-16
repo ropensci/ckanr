@@ -7,10 +7,11 @@ id <- package_list(limit = 1, url=u)[[1]]
 
 package_activity_num <- local({
   check_ckan(u)
-  res <- httr::GET(file.path(u, "dataset/activity", id))
-  httr::stop_for_status(res)
-  length(xml2::xml_find_all(xml2::read_html(httr::content(res, "text")),
-                            '//ul[@data-module="activity-stream"]/li'))
+  res <- crul::HttpClient$new(file.path(u, "dataset/activity", id))$get()
+  res$raise_for_status()
+  txt <- res$parse("UTF-8")
+  length(xml2::xml_find_all(xml2::read_html(txt),
+    '//ul[@data-module="activity-stream"]/li'))
 })
 
 test_that("package_activity_list gives back expected class types", {

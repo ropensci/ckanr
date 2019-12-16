@@ -42,7 +42,7 @@ package_show <- function(id, use_default_schema = FALSE, http_method = "GET",
   if (inherits(id, "ckan_package")) id <- id$id
   args <- cc(list(id = id, use_default_schema = use_default_schema))
   fun <- switch(http_method, GET = ckan_GET, POST = ckan_POST)
-  res <- fun(url, 'package_show', args, key = key, ...)
+  res <- fun(url, 'package_show', args, key = key, opts = list(...))
   switch(as, json = res, list = as_ck(jsl(res), "ckan_package"),
          table = jsd(res))
 }

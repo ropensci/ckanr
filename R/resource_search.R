@@ -26,7 +26,7 @@ resource_search <- function(q, sort = NULL, offset = NULL, limit = NULL,
   url = get_default_url(), key = get_default_key(), as = 'list', ...) {
 
   args <- cc(list(query = q, order_by = sort, offset = offset, limit = limit))
-  res <- ckan_GET(url, 'resource_search', args, key = key, ...)
+  res <- ckan_GET(url, 'resource_search', args, key = key, opts = list(...))
   switch(as, json = res,
          list = {
            tmp <- jsl(res)

@@ -42,7 +42,7 @@ create datasets at \code{test_url}}
 ("SKIP") writing tests in case of problems with the configured test CKAN.}
 
 \item{proxy}{an object of class \code{request} from a call to
-\code{httr::use_proxy()}}
+\code{\link[crul:proxy]{crul::proxy()}}}
 }
 \description{
 Configure default CKAN settings
@@ -86,7 +86,7 @@ ckanr_setup(url = "http://data.techno-science.ca/", key = "some-CKAN-API-key",
 ckanr_setup()
 
 # set a proxy
-ckanr_setup(proxy = httr::use_proxy("64.251.21.73", 8080))
+ckanr_setup(proxy = crul::proxy("64.251.21.73:8080"))
 ckanr_settings()
 ## run without setting proxy to reset to no proxy
 ckanr_setup()

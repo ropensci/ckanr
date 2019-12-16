@@ -6,9 +6,9 @@ u <- get_test_url()
 
 tag_num <- local({
   check_ckan(u)
-  res <- httr::GET(file.path(u, "api/3/action/tag_list"))
-  httr::stop_for_status(res)
-  json <- httr::content(res, as = "parsed")
+  res <- crul::HttpClient$new(file.path(u, "api/3/action/tag_list"))$get()
+  res$raise_for_status()
+  json <- jsonlite::fromJSON(res$parse("UTF-8"), FALSE)
   length(json$result)
 })
 

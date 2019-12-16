@@ -69,7 +69,8 @@ resource_create <- function(package_id = NULL, rcurl = NULL,
     webstore_last_updated = webstore_last_updated,
     upload = upfile(upload)))
   body <- c(body, extras)
-  res <- ckan_POST(url, 'resource_create', body = body, key = key, ...)
+  res <- ckan_POST(url, 'resource_create', body = body, key = key,
+    opts = list(...))
   switch(as, json = res, list = as_ck(jsl(res), "ckan_resource"),
     table = jsd(res))
 }
@@ -78,6 +79,6 @@ upfile <- function(x) {
   if (is.null(x)) {
     NULL
   } else {
-    upload_file(x)
+    crul::upload(x)
   }
 }

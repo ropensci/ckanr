@@ -43,7 +43,9 @@ print.ckan_resource <- function(x, ...) {
   cat("  Format: ", x$format, "\n", sep = "")
 }
 
-get_resource <- function(id, url = get_default_url(), key = get_default_key(), ...) {
-  res <- ckan_GET(url, 'resource_show', list(id = id), key = key, ...)
+get_resource <- function(id, url = get_default_url(), key = get_default_key(),
+    ...) {
+  res <- ckan_GET(url, 'resource_show', list(id = id), key = key,
+    opts = list(...))
   as_ck(jsl(res), "ckan_resource")
 }

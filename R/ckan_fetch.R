@@ -9,7 +9,7 @@
 #' @param format Format of the file. Required if format is not detectable
 #' through file URL.
 #' @param key A CKAN API key (optional, character)
-#' @param ... Curl arguments passed on to [httr::GET()]
+#' @param ... Curl arguments passed on to [crul::verb-GET]
 #' @examples \dontrun{
 #' # CSV file
 #' ckanr_setup("http://datamx.io")
@@ -41,10 +41,10 @@
 #' head(x[["Mayor - Maire"]])
 #'
 #' # XML file - requires xml2 package
-#' ckanr_setup("http://data.ottawa.ca")
-#' res <- resource_show(id = "380061c1-6c46-4da6-a01b-7ab0f49a881e",
-#' as = "table")
-#' ckan_fetch(res$url)
+#' # ckanr_setup("http://data.ottawa.ca")
+#' # res <- resource_show(id = "380061c1-6c46-4da6-a01b-7ab0f49a881e",
+#' # as = "table")
+#' # ckan_fetch(res$url)
 #'
 #' # HTML file - requires xml2 package
 #' ckanr_setup("http://open.canada.ca/data/en")

@@ -1,56 +1,67 @@
-# httr helpers -----------------------
-ckan_POST <- function(url, method, body = NULL, key = NULL, ...){
-  ckan_VERB("POST", url, method, body, key, ...)
+# crul helpers -----------------------
+ckan_POST <- function(url, method, body = NULL, key = NULL,
+  headers = list(), opts = list(), ...) {
+  ckan_VERB("post", url, method, body, key, list(), headers, opts, ...)
 }
 
-ckan_PATCH <- function(url, method, body = NULL, key = NULL, ...){
-  ckan_VERB("PATCH", url, method, body, key, ...)
+ckan_PATCH <- function(url, method, body = NULL, key = NULL,
+  headers = list(), opts = list(), ...) {
+  ckan_VERB("patch", url, method, body, key, list(), headers, opts, ...)
 }
 
-ckan_GET <- function(url, method, query = NULL, key = NULL, ...){
-  ckan_VERB("GET", url, method, body = NULL, key, query = query, ...)
+ckan_GET <- function(url, method, query = NULL, key = NULL,
+  headers = list(), opts = list(), ...) {
+  ckan_VERB("get", url, method, body = NULL, key, query,
+    headers, opts, ...)
 }
 
-ckan_DELETE <- function(url, method, body = NULL, key = NULL, ...){
-  ckan_VERB("DELETE", url, method, body, key, ...)
+ckan_DELETE <- function(url, method, body = NULL, key = NULL,
+  headers = list(), opts = list(), ...) {
+  ckan_VERB("delete", url, method, body, key, list(), headers, opts, ...)
 }
 
-ckan_VERB <- function(verb, url, method, body, key, ...) {
-  VERB <- getExportedValue("httr", verb)
+ckan_VERB <- function(verb, url, method, body, key, query = list(),
+  headers = list(), opts = list(), ...) {
+
   url <- notrail(url)
+  
   # check if proxy set
   proxy <- get("ckanr_proxy", ckanr_settings_env)
   if (!is.null(proxy)) {
-    if (!inherits(proxy, "request")) {
-      stop("proxy must be of class 'request', see ?ckanr_setup")
+    if (!inherits(proxy, "proxy")) {
+      stop("proxy must be of class 'proxy', see ?ckanr_setup")
     }
   } else {
-    proxy <- httr::config()
+    proxy <- NULL
   }
+
+  con <- crul::HttpClient$new(url = file.path(url, ck(), method),
+    opts = opts, headers = headers)
+
   if (is.null(key)) {
     # no authentication
     if (is.null(body) || length(body) == 0) {
-      res <- VERB(file.path(url, ck(), method), ctj(), proxy, ...)
-      # res <- VERB(file.path(url, ck(), method), ctj(), config = httr::config(proxy, ...))
+      con$headers <- c(con$headers, ctj())
+      if (!is.null(proxy)) con$proxies <- proxy
+      res <- con$verb(verb, query = query)
     } else {
-      res <- VERB(file.path(url, ck(), method), body = body, proxy, ...)
-      # res <- VERB(file.path(url, ck(), method), body = body, config = httr::config(proxy, ...))
+      if (!is.null(proxy)) con$proxies <- proxy
+      res <- con$verb(verb, body = body, query = query)
     }
   } else {
     # authentication
-    api_key_header <- add_headers("X-CKAN-API-Key" = key)
+    con$headers <- c(con$headers, list("X-CKAN-API-Key" = key))
     if (is.null(body) || length(body) == 0) {
-      res <- VERB(file.path(url, ck(), method), ctj(),
-        api_key_header, proxy, ...)
-        # api_key_header, config = httr::config(proxy, ...))
+      con$headers <- c(con$headers, ctj())
+      if (!is.null(proxy)) con$proxies <- proxy
+      res <- con$verb(verb, query = query)
     } else {
-      res <- VERB(file.path(url, ck(), method), body = body,
-        api_key_header, proxy, ...)
-        # api_key_header, config = httr::config(proxy, ...))
+      if (!is.null(proxy)) con$proxies <- proxy
+      res <- con$verb(verb, body = body, query = query)
     }
   }
   err_handler(res)
-  content(res, "text", encoding = "UTF-8")
+  res$parse("UTF-8")
 }
 
 # GET fxn for fetch()
@@ -58,37 +69,36 @@ fetch_GET <- function(x, store, path, args = NULL, format = NULL, key = NULL, ..
   # check if proxy set
   proxy <- get("ckanr_proxy", ckanr_settings_env)
   if (!is.null(proxy)) {
-    if (!inherits(proxy, "request")) {
-      stop("proxy must be of class 'request', see ?ckanr_setup")
+    if (!inherits(proxy, "proxy")) {
+      stop("proxy must be of class 'proxy', see ?ckanr_setup")
     }
   }
   # set file format
   file_fmt <- file_fmt(x)
   fmt <- ifelse(identical(file_fmt, character(0)), format, file_fmt)
   fmt <- tolower(fmt)
+  
   # set API key header
   if (!is.null(key)) {
-    api_key_header <- add_headers("X-CKAN-API-Key" = key)
+    api_key_header <- list("X-CKAN-API-Key" = key)
   }
+  
+  # initialize client, and set headers and proxy
+  con <- crul::HttpClient$new(url = x, opts = list(...))
+  if (!is.null(key)) con$headers <- list("X-CKAN-API-Key" = key)
+  if (!is.null(proxy)) con$proxies <- proxy
+
   if (store == "session") {
     if (fmt %in% c("xls", "xlsx", "geojson")) {
       dat <- NULL
       path <- tempfile(fileext = paste0(".", fmt))
-      if (is.null(key)) {
-        res <- GET(x, query = args, write_disk(path, TRUE), config = proxy, ...)
-      } else {
-        res <- GET(x, query = args, write_disk(path, TRUE), config = proxy, api_key_header, ...)
-      }
-      path <- res$request$output$path
+      res <- con$get(query = args, disk = path)
+      path <- res$content
       temp_files <- path
     } else if (fmt %in% c("shp", "zip")) {
       dat <- NULL
       path <- tempfile(fileext = ".zip")
-      if (is.null(key)) {
-        res <- GET(x, query = args, write_disk(path, TRUE), config = proxy, ...)
-      } else {
-        res <- GET(x, query = args, write_disk(path, TRUE), config = proxy, api_key_header, ...)
-      }
+      res <- con$get(query = args, disk = path)
       dir <- tempdir()
       zip_files <- unzip(path, list = TRUE)
       zip_files <- paste0(dir, "/", zip_files[["Name"]])
@@ -104,23 +114,15 @@ fetch_GET <- function(x, store, path, args = NULL, format = NULL, key = NULL, ..
     } else {
       path <- NULL
       temp_files <- NULL
-      if (is.null(key)) {
-        res <- GET(x, query = args, config = proxy, ...)
-      } else {
-        res <- GET(x, query = args, config = proxy, api_key_header, ...)
-      }
+      res <- con$get(query = args)
       err_handler(res)
-      dat <- content(res, "text", encoding = "UTF-8")
+      dat <- res$parse("UTF-8")
     }
-    list(store = store, fmt = fmt, data = dat, path = path, temp_files = temp_files)
+    list(store = store, fmt = fmt, data = dat, path = path,
+      temp_files = temp_files)
   } else {
-    # if (!file.exists(path)) stop("path does not exist", call. = FALSE)
-    if (is.null(key)) {
-      res <- GET(x, query = args, write_disk(path, TRUE), config = proxy, ...)
-    } else {
-      res <- GET(x, query = args, write_disk(path, TRUE), config = proxy, api_key_header, ...)
-    }
-    list(store = store, fmt = fmt, data = NULL, path = res$request$output$path)
+    res <- con$get(query = args, disk = path, ...)
+    list(store = store, fmt = fmt, data = NULL, path = res$content)
   }
 }
 
@@ -137,7 +139,7 @@ ck <- function() 'api/3/action'
 as_log <- function(x){ stopifnot(is.logical(x)); if (x) 'true' else 'false' }
 jsl <- function(x) jsonlite::fromJSON(x, FALSE)$result
 jsd <- function(x) jsonlite::fromJSON(x)$result
-ctj <- function() httr::content_type_json()
+ctj <- function() list(`Content-Type` = "application/json")
 
 # fxn to attach classes
 as_ck <- function(x, class) {
@@ -147,12 +149,12 @@ as_ck <- function(x, class) {
 err_handler <- function(x) {
   if (x$status_code > 201) {
     obj <- try({
-      err <- jsonlite::fromJSON(content(x, "text", encoding = "UTF-8"))$error
+      err <- jsonlite::fromJSON(x$parse("UTF-8"))$error
       tmp <- err[names(err) != "__type"]
       errmsg <- paste(names(tmp), unlist(tmp[[1]]))
       list(err = err, errmsg = errmsg)
     }, silent = TRUE)
-    if (class(obj) != "try-error") {
+    if (!inherits(obj, "try-error")) {
       stop(sprintf("%s - %s\n  %s",
                    x$status_code,
                    obj$err$`__type`,
@@ -161,13 +163,13 @@ err_handler <- function(x) {
            call. = FALSE)
     } else {
       obj <- {
-        err <- http_condition(x, "error")
-        errmsg <- content(x, "text", encoding = "UTF-8")
+        err <- x$status_http()$message
+        errmsg <- x$parse("UTF-8")
         list(err = err, errmsg = errmsg)
       }
       stop(sprintf("%s - %s\n  %s",
                    x$status_code,
-                   obj$err[["message"]],
+                   obj$err,
                    obj$errmsg),
            call. = FALSE)
     }

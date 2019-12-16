@@ -14,9 +14,9 @@ dataset_num <- local({
   }
   Sys.sleep(2)
   org <- organization_show(o, url=u)
-  res <- httr::GET(file.path(u, "organization", org$name))
-  httr::stop_for_status(res)
-  html <- httr::content(res, as = "text")
+  res <- crul::HttpClient$new(file.path(u, "organization", org$name))$get()
+  res$raise_for_status()
+  html <- res$parse("UTF-8")
   tmp <- regmatches(html, regexec("(\\d+) datasets? found", html))
   as.integer(tmp[[1]][2])
 })

@@ -29,7 +29,7 @@ tag_list <- function(query = NULL, vocabulary_id = NULL, all_fields = FALSE,
 
   args <- cc(list(query = query, vocabulary_id = vocabulary_id,
                   all_fields = as_log(all_fields)))
-  res <- ckan_GET(url, 'tag_list', args, key = key, ...)
+  res <- ckan_GET(url, 'tag_list', args, key = key, opts = list(...))
   switch(as, json = res, list = lapply(jsl(res), as.ckan_tag),
     table = jsd(res))
 }

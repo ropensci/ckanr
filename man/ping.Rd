@@ -17,7 +17,7 @@ uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to
 data to data.frame's when possible, so the result can vary from a vector, list or
 data.frame. (required)}
 
-\item{...}{Curl args passed on to \code{\link[httr]{POST}} (optional)}
+\item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
 }
 \description{
 Ping a CKAN server to test that it's up or down.

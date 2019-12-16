@@ -23,6 +23,6 @@ tag_create <- function(name, vocabulary_id,
   body <- cc(list(name = name, vocabulary_id = vocabulary_id))
   res <- ckan_POST(url, 'tag_create',
                    body = tojun(body, TRUE), key = key,
-                   encode = "json", ctj(), ...)
+                   encode = "json", headers = ctj(), opts = list(...))
   switch(as, json = res, list = jsl(res), table = jsd(res))
 }

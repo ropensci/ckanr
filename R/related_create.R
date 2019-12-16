@@ -42,7 +42,7 @@ related_create <- function(id, title, type, description = NULL,
                   image_url = image_url))
   res <- ckan_POST(url, 'related_create',
                    body = tojun(body, TRUE), key = key,
-                   encode = "json", ctj(), ...)
+                   headers = ctj(), opts = list(...), encode = "json")
   switch(as, json = res, list = as_ck(jsl(res), "ckan_related"),
     table = jsd(res))
 }

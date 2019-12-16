@@ -39,6 +39,7 @@ resource_patch <- function(x, id, url = get_default_url(),
   }
   x$id <- id$id
   res <- ckan_POST(url, method = 'resource_patch', body = x, key = key,
-                   encode = "json", content_type_json(), ...)
-  switch(as, json = res, list = as_ck(jsl(res), "ckan_resource"), table = jsd(res))
+    encode = "json", headers = ctj(), opts = list(...))
+  switch(as, json = res, list = as_ck(jsl(res), "ckan_resource"),
+    table = jsd(res))
 }

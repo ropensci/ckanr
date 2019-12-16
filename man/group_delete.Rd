@@ -14,7 +14,7 @@ See also \code{\link[=ckanr_setup]{ckanr_setup()}} and \code{\link[=get_default_
 
 \item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
 
-\item{...}{Curl args passed on to \code{\link[httr:POST]{httr::POST()}} (optional)}
+\item{...}{Curl args passed on to \link[crul:verb-POST]{crul::verb-POST} (optional)}
 }
 \description{
 Delete a group

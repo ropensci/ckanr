@@ -1,7 +1,7 @@
 #' Get information on a CKAN server
 #'
 #' @export
-#' @param ... Curl args passed on to [httr::GET()] (optional)
+#' @param ... Curl args passed on to [crul::verb-GET] (optional)
 #' @return for `ckan_info` a list with many slots with various info.
 #' for `ckan_version`, list of length two, with actual version as character,
 #' and another with version converted to numeric (any dots or letters removed)
@@ -12,9 +12,9 @@
 #' ckan_version(servers()[5])
 #' }
 ckan_info <- function(url = get_default_url(), ...) {
-  res <- httr::GET(file.path(sub("/$", "", url), "api/util/status"), ...)
-  stop_for_status(res)
-  jsonlite::fromJSON(httr::content(res, "text", encoding = "UTF-8"))
+  ## FIX for newer CKAN instances
+  ## FIXME: may need to try this and the above api route for older versions
+  jsonlite::fromJSON(ckan_GET(url, 'status_show', opts = list(...)))$result
 }
 
 #' @export
