@@ -10,14 +10,14 @@
   "codeRepository": "https://github.com/ropensci/ckanr",
   "issueTracker": "https://github.com/ropensci/ckanr/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.4.0",
+  "version": "0.4.2.91",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "3.6.1",
+    "version": "3.6.2",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 3.6.1 Patched (2019-09-05 r77154)",
+  "runtimePlatform": "R version 3.6.2 Patched (2019-12-12 r77564)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -184,16 +184,15 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "httr",
-      "name": "httr",
-      "version": ">= 1.0.0",
+      "identifier": "crul",
+      "name": "crul",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://CRAN.R-project.org/package=httr"
+      "sameAs": "https://CRAN.R-project.org/package=crul"
     },
     {
       "@type": "SoftwareApplication",
@@ -249,10 +248,10 @@
   "applicationCategory": "DataAccess",
   "isPartOf": "\"https://ropensci.org\"",
   "keywords": ["database", "open-data", "ckan", "api", "data", "dataset", "ckan-api", "api-wrapper", "r", "rstats", "r-package"],
-  "contIntegration": "https://travis-ci.org/ropensci/ckanr",
+  "contIntegration": ["https://travis-ci.org/ropensci/ckanr", "https://ci.appveyor.com/project/sckott/ckanr", "https://codecov.io/github/ropensci/ckanr?branch=master"],
   "releaseNotes": "https://github.com/ropensci/ckanr/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/ckanr/blob/master/README.md",
-  "fileSize": "72.278KB",
+  "fileSize": "74.093KB",
   "copyrightHolder": {},
   "funder": {},
   "relatedLink": "https://docs.ropensci.org/ckanr",
