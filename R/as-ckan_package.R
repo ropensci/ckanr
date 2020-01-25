@@ -44,7 +44,7 @@ is.ckan_package <- function(x) inherits(x, "ckan_package")
 #' @export
 print.ckan_package <- function(x, ...) {
   cat(paste0("<CKAN Package> ", x$id), "\n")
-  cat("  Title: ", x$title, "\n", sep = "")
+  cat("  Title: ", title_x(x$title), "\n", sep = "")
   cat("  Creator/Modified: ", x$metadata_created, " / ",
     x$metadata_modified, "\n", sep = "")
   cat("  Resources (up to 5): ", sift_res(x$resources), "\n", sep = "")
@@ -52,9 +52,27 @@ print.ckan_package <- function(x, ...) {
   cat("  Groups (up to 5): ", sift_res(x$groups), "\n", sep = "")
 }
 
+title_x <- function(w) {
+  if (is.list(w)) {
+    w <- paste(names(w), unlist(unname(w)), sep = ": ")
+    return(paste0("\n   ", paste0(w, collapse = "\n   ")))
+  }
+  return(w)
+}
+
 sift_res <- function(z) {
   if (!is.null(z) && length(z) > 0) {
     tmp <- pluck(z, "name")
+    if (is.list(tmp)) {
+      tmp <- unlist(lapply(tmp, function(b) {
+        if (!is.list(b)) return(b)
+        if (!haz_names(b)) return(b)
+        b <- unlist(b)
+        b <- b[nchar(b) > 0]
+        if (length(b) > 1) b <- b[1]
+        paste(names(b), unlist(unname(b)), sep = ": ")
+      }))
+    }
     paste0(cc(na.omit(tmp[1:5])), collapse = ", ")
   } else {
     NULL

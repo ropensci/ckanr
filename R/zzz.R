@@ -225,3 +225,9 @@ check_http_method <- function(http_method, methods) {
       call. = FALSE)
   }
 }
+
+haz_names <- function(x) {
+  stopifnot(is.list(x))
+  if (length(x) == 0) return(TRUE)
+  length(Filter(nzchar, names(x))) == length(x)
+}
