@@ -231,3 +231,10 @@ haz_names <- function(x) {
   if (length(x) == 0) return(TRUE)
   length(Filter(nzchar, names(x))) == length(x)
 }
+
+handle_many <- function(x) {
+  x <- unlist(x)
+  if (!is.character(x))
+    stop("query/q must be vector or list of strings", call.=FALSE)
+  unlist(lapply(x, function(z) list(query = z)), FALSE)
+}

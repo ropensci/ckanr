@@ -17,7 +17,8 @@ tag_search(
 }
 \arguments{
 \item{query}{(character) A tag name query to search for, if given only tags
-whose names contain this string will be returned}
+whose names contain this string will be returned; one or more search
+strings}
 
 \item{vocabulary_id}{(character) The id or name of a vocabulary,
 if give only tags that belong to this vocabulary will be returned}
@@ -44,6 +45,7 @@ Searcn tags.
 \examples{
 \dontrun{
 tag_search(query = 'ta')
+tag_search(query = c('ta', 'al'))
 
 # different formats back
 tag_search(query = 'ta', as = 'json')
