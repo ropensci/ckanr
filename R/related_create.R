@@ -35,7 +35,7 @@ related_create <- function(id, title, type, description = NULL,
   related_id = NULL, related_url = NULL, image_url = NULL,
   url = get_default_url(), key = get_default_key(), as = 'list', ...) {
 
-  id <- as.ckan_package(id, url = url)
+  id <- as.ckan_package(id, url = url, key = key)
   body <- cc(list(dataset_id = id$id, title = title,
                   type = type, url = related_url,
                   description = description, id = related_id,
