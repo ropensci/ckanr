@@ -3,13 +3,13 @@ ckanr
 
 
 
-[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![cran checks](https://cranchecks.info/badges/worst/ckanr)](https://cranchecks.info/pkgs/ckanr)
 [![Build Status](https://api.travis-ci.org/ropensci/ckanr.png)](https://travis-ci.org/ropensci/ckanr)
 [![Build status](https://ci.appveyor.com/api/projects/status/5yqd882v4fbeggd5?svg=true)](https://ci.appveyor.com/project/sckott/ckanr)
 [![codecov.io](https://codecov.io/github/ropensci/ckanr/coverage.svg?branch=master)](https://codecov.io/github/ropensci/ckanr?branch=master)
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/ckanr?color=FAB657)](https://github.com/metacran/cranlogs.app)
-[![cran version](http://www.r-pkg.org/badges/version/ckanr)](https://cran.r-project.org/package=ckanr)
+[![cran version](https://www.r-pkg.org/badges/version/ckanr)](https://cran.r-project.org/package=ckanr)
 
 `ckanr` is an R client for the CKAN API.
 
@@ -18,6 +18,8 @@ ckanr
 CKAN is an open source set of tools for hosting and providing data on the web. (CKAN users could include non-profits, museums, local city/county governments, etc.).
 
 `ckanr` allows users to interact with those CKAN websites to create, modify, and manage datasets, as well as search and download pre-existing data, and then to proceed using in R for data analysis (stats/plotting/etc.). It is meant to be as general as possible, allowing you to work with any CKAN instance.
+
+Get started: https://docs.ropensci.org/ckanr/
 
 ## Installation
 
@@ -32,8 +34,8 @@ Development version
 
 
 ```r
-install.packages("devtools")
-devtools::install_github("ropensci/ckanr")
+install.packages("remotes")
+remotes::install_github("ropensci/ckanr")
 ```
 
 
@@ -41,8 +43,7 @@ devtools::install_github("ropensci/ckanr")
 library('ckanr')
 ```
 
-Note: the default base CKAN URL is set to
-[http://data.techno-science.ca/](http://data.techno-science.ca/).
+Note: the default base CKAN URL is set to http://data.techno-science.ca/
 Functions requiring write permissions in CKAN additionally require a privileged
 CKAN API key.
 You can change this using `ckanr_setup()`, or change the URL using the `url`
@@ -304,7 +305,7 @@ dplyr::tbl(src = ckan$con, from = res_id) %>% as_tibble(.)
 
 ## Examples of different CKAN APIs
 
-See `ckanr::servers()` for a list of CKAN servers. Ther are 125 as of 2019-10-11.
+See `ckanr::servers()` for a list of CKAN servers. Ther are 127 as of 2020-07-28.
 
 ### The Natural History Museum
 
@@ -335,11 +336,11 @@ ckanr_setup("http://search.geothermaldata.org")
 x <- package_search(q = '*:*', rows = 1)
 x$results
 #> [[1]]
-#> <CKAN Package> 2a6e3177-6c87-4027-9ca8-a8525f948c31 
-#>   Title: WISE-CASING: Time Domain Reflectometry Data from Lab Experiment on Steel Pipe TDR_20180319142827.eps
-#>   Creator/Modified: 2019-09-10T19:53:32.737122 / 2019-10-01T19:35:45.182936
-#>   Resources (up to 5): TDR_20180319142827.eps
-#>   Tags (up to 5): EGS, Lab experiment, TDR, Time domain Reflectormery, casing
+#> <CKAN Package> 787986f3-fd65-4e99-b28e-077c69933c76 
+#>   Title: Hawthorne Nevada Deep Direct-Use Feasibility Study - Data Used for Geothermal Resource Conceptual Modeling and Power Capacity Estimates Hawthorne_fracture_data_HWAAD-2A_HWAAD-3.xlsx
+#>   Creator/Modified: 2020-05-07T23:35:47.237011 / 2020-05-07T23:35:47.328456
+#>   Resources (up to 5): Hawthorne_fracture_data_HWAAD-2A_HWAAD-3.xlsx
+#>   Tags (up to 5): 2-meter temperatures, DDU, HWAAD-2, HWAAD-2A, HWAAD-3
 #>   Groups (up to 5):
 NA
 ```
@@ -359,9 +360,6 @@ NA
 * Please [report any issues or bugs](https://github.com/ropensci/ckanr/issues).
 * License: MIT
 * Get citation information for `ckanr` in R doing `citation(package = 'ckanr')`
-* Please note that this project is released with a [Contributor Code of Conduct][coc].
-By participating in this project you agree to abide by its terms.
+* Please note that this package is released with a [Contributor Code of Conduct](https://ropensci.org/code-of-conduct/). By contributing to this project, you agree to abide by its terms.
 
-[![ropensci](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
-
-[coc]: https://github.com/ropensci/ckanr/blob/master/CODE_OF_CONDUCT.md
+[![ropensci](https://ropensci.org/public_images/github_footer.png)](https://ropensci.org)
