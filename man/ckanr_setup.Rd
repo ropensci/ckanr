@@ -42,7 +42,7 @@ create datasets at \code{test_url}}
 ("SKIP") writing tests in case of problems with the configured test CKAN.}
 
 \item{proxy}{an object of class \code{request} from a call to
-\code{\link[crul:proxy]{crul::proxy()}}}
+\code{\link[crul:proxies]{crul::proxy()}}}
 }
 \description{
 Configure default CKAN settings
