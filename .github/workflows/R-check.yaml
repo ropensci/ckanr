@@ -21,6 +21,16 @@ jobs:
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       CRAN: ${{ matrix.config.rspm }}
+      CKANR_DEFAULT_KEY: ${{secrets.CKANR_DEFAULT_KEY}}
+      CKANR_DEFAULT_URL: ${{secrets.CKANR_DEFAULT_URL}}
+      CKANR_TEST_BEHAVIOUR: ${{secrets.CKANR_TEST_BEHAVIOUR}}
+      CKANR_TEST_DID: ${{secrets.CKANR_TEST_DID}}
+      CKANR_TEST_GID: ${{secrets.CKANR_TEST_GID}}
+      CKANR_TEST_KEY: ${{secrets.CKANR_TEST_KEY}}
+      CKANR_TEST_OID: ${{secrets.CKANR_TEST_OID}}
+      CKANR_TEST_RID: ${{secrets.CKANR_TEST_RID}}
+      CKANR_TEST_URL: ${{secrets.CKANR_TEST_URL}}
+      TEST_API_KEY: ${{secrets.TEST_API_KEY}}
 
     steps:
       - uses: actions/checkout@v2
