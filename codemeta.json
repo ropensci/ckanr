@@ -247,7 +247,6 @@
   "applicationCategory": "DataAccess",
   "isPartOf": "\"https://ropensci.org\"",
   "keywords": ["database", "open-data", "ckan", "api", "data", "dataset", "ckan-api", "api-wrapper", "r", "rstats", "r-package"],
-  "contIntegration": ["https://travis-ci.org/ropensci/ckanr", "https://ci.appveyor.com/project/sckott/ckanr", "https://codecov.io/github/ropensci/ckanr?branch=master"],
   "releaseNotes": "https://github.com/ropensci/ckanr/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/ckanr/blob/master/README.md",
   "fileSize": "0KB",
