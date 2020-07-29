@@ -10,14 +10,13 @@
   "codeRepository": "https://github.com/ropensci/ckanr",
   "issueTracker": "https://github.com/ropensci/ckanr/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.4.2.91",
+  "version": "0.5.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "3.6.2",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 3.6.2 Patched (2019-12-12 r77564)",
+  "runtimePlatform": "R version 4.0.2 Patched (2020-06-30 r78761)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -251,9 +250,9 @@
   "contIntegration": ["https://travis-ci.org/ropensci/ckanr", "https://ci.appveyor.com/project/sckott/ckanr", "https://codecov.io/github/ropensci/ckanr?branch=master"],
   "releaseNotes": "https://github.com/ropensci/ckanr/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/ckanr/blob/master/README.md",
-  "fileSize": "74.093KB",
+  "fileSize": "0KB",
   "copyrightHolder": {},
   "funder": {},
   "relatedLink": "https://docs.ropensci.org/ckanr",
-  "developmentStatus": "http://www.repostatus.org/#active"
+  "developmentStatus": "https://www.repostatus.org/#active"
 }

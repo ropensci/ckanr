@@ -1,3 +1,26 @@
+ckanr 0.5.0
+===========
+
+### NEW FEATURES
+
+* `package_create()` gains parameter `private` (boolean) (#145)
+* add support for resource extras. `resource_create()` and `resource_update()` gain new parameter `extras`, while `resource_patch()` function doesn't change but gains an example of adding an extra (#149) (#150) thanks @nicholsn
+* `package_patch()` gains `extras` parameter (#94) see also (#147)
+
+### MINOR IMPROVEMENTS
+
+* replace httr with crul throughout package (#86) (#151)
+* use markdown for docs (#148)
+* `package_patch()`, `package_show()`, `package_activity_list()`, `package_delete()`, `package_update()`, and `related_create()` now pass on `key` parameter value to `as.ckan_package` internally; same for `resource_create()` and `resource_show()`, but passed to `as.ckan_resource()`  (#145) (#146)
+* `servers()` gains two additional CKAN urls (#155)
+* `package_show()` called `as.ckan_package()` within it, which itself calls `package_show()` - fixed now  (#127)
+
+### BUG FIXES
+
+* fix for `resource_search()` and `tag_search`: both were not allowing a query to be more than length 1 (#153)
+* fix for `print.ckan_package`: wasn't handling well results from `package_search()` that had a named list of locale specific results (#152)
+
+
 ckanr 0.4.0
 ===========
 
