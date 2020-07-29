@@ -9,6 +9,5 @@ Makefile
 ^README\.Rmd$
 .github
 ^codemeta\.json$
-tests/test-all.R
 notes.md
 ^revdep$
