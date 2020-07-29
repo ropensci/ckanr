@@ -1,5 +1,7 @@
 context("ckanr utils")
 
+skip_on_cran()
+
 test_that("handle_many", {
   x <- c("stuff", "things")
   y <- list("stuff:foo", "things:bar")
