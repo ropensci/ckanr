@@ -17,7 +17,6 @@ addons:
     - netcdf-bin
 
 r_packages:
-  - robustr
   - covr
   - xml2
 
