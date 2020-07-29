@@ -9,7 +9,7 @@ dataset_num <- local({
   check_ckan(u)
   chorg <- tryCatch(check_organization(u, o), error = function(e) e)
   if (inherits(chorg, "error")) {
-    ckanr_setup(u, key = getOption("ckan_demo_key"))
+    ckanr_setup(u, key = Sys.getenv("TEST_API_KEY", ""))
     organization_create(o)
   }
   Sys.sleep(2)
