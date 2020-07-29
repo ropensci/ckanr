@@ -46,7 +46,7 @@ test_that("resource_update gives back expected class types and output", {
 
   # expected output
   expect_equal(a$id, rid)
-  expect_true(grepl("actinidiaceae", a$url))
+  expect_equal(a$format, "CSV")
 })
 
 # html
@@ -70,7 +70,7 @@ test_that("resource_update gives back expected class types and output with html"
 
   # expected output
   expect_equal(a$id, xx$id)
-  expect_true(grepl(".html", a$url))
+  expect_equal(a$format, "HTML")
 })
 
 test_that("resource_update fails well", {

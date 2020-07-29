@@ -22,7 +22,7 @@ test_that("tag_search works with many queries", {
 
 test_that("tag_search works giving back json output", {
   check_ckan(u)
-  b <- tag_search(url=u, as="json")
+  b <- tag_search(query = c('ta', 'al'), url=u, as="json")
   expect_is(b, "character")
   b_df <- jsonlite::fromJSON(b)
   expect_is(b_df, "list")

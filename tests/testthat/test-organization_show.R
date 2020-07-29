@@ -1,6 +1,7 @@
 context("organization_show")
 
 skip_on_cran()
+skip_on_ci()
 
 u <- get_test_url()
 o <- get_test_oid()

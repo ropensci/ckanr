@@ -1,6 +1,7 @@
 context("package_activity_list")
 
 skip_on_cran()
+skip_on_ci()
 
 u <- get_test_url()
 id <- package_list(limit = 1, url=u)[[1]]
