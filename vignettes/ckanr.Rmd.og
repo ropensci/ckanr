@@ -1,0 +1,202 @@
+---
+title: "ckanr vignette"
+author: "Scott Chamberlain"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{ckanr vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+knitr::opts_chunk$set(
+  collapse  =  TRUE,
+  comment  =  "#>",
+  warning = FALSE, 
+  message = FALSE
+)
+library("knitr")
+hook_output <- knitr::knit_hooks$get("output")
+knitr::knit_hooks$set(output = function(x, options) {
+   lines <- options$output.lines
+   if (is.null(lines)) {
+     return(hook_output(x, options))  # pass to default hook
+   }
+   x <- unlist(strsplit(x, "\n"))
+   more <- "..."
+   if (length(lines)==1) {        # first n lines
+     if (length(x) > lines) {
+       # truncate the output, but add ....
+       x <- c(head(x, lines), more)
+     }
+   } else {
+     x <- c(if (abs(lines[1])>1) more else NULL, 
+            x[lines], 
+            if (length(x)>lines[abs(length(lines))]) more else NULL
+           )
+   }
+   # paste these lines together
+   x <- paste(c(x, ""), collapse = "\n")
+   hook_output(x, options)
+ })
+```
+
+## Install
+
+Stable version from CRAN
+
+```{r eval=FALSE}
+install.packages("ckanr")
+```
+
+Development version from GitHub
+
+```{r eval=FALSE}
+remotes::install_github("ropensci/ckanr")
+```
+
+```{r}
+library("ckanr")
+```
+
+Note: the default base CKAN URL is set to [http://data.techno-science.ca/](http://data.techno-science.ca/). You can change this using `ckanr_setup()`, or change the URL using the `url` 
+parameter in each function call.
+
+To set one or both, run:
+
+```{r eval=FALSE}
+# restores default CKAN url to http://data.techno-science.ca/
+ckanr_setup() 
+# Just set url
+ckanr_setup(url = "http://data.techno-science.ca/")
+# set url and key
+ckanr_setup(url = "http://data.techno-science.ca/", key = "my-ckan-api-key")
+```
+
+## Changes
+
+```{r}
+changes(limit = 2, as = "table")[, 1:4]
+```
+
+## List datasets
+
+```{r output.lines=1:10}
+package_list(as = "table")
+```
+
+## List tags
+
+```{r}
+tag_list('aviation', as = 'table')
+```
+
+## Show tags
+
+Subset for readme brevity
+
+```{r}
+tag_show('Aviation')
+```
+
+## List groups
+
+```{r}
+group_list(as = 'table')[, 1:3]
+```
+
+## Show groups
+
+Subset for readme brevity
+
+```{r}
+group_show('communications', as = 'table')$users
+```
+
+## Show a package
+
+```{r}
+package_show('34d60b13-1fd5-430e-b0ec-c8bc7f4841cf', as = 'table')$resources[, 1:10]
+```
+
+## Search for packages
+
+```{r}
+out <- package_search(q = '*:*', rows = 2, as = "table")$results
+out[, !names(out) %in% 'resources'][, 1:10]
+```
+
+## Search for resources
+
+```{r}
+resource_search(q = 'name:data', limit = 2, as = 'table')
+```
+
+## ckanr's dplyr interface
+`ckanr` implements a `dplyr` SQL interface to CKAN's datastore. 
+You can access any resource in the datastore directly using only the CKAN
+resource ID.
+
+Note: this will only work for resources which were uploaded successfully to the 
+datastore - they will show the green "Data API" button in CKAN.
+
+```{r eval=FALSE}
+ckan <- ckanr::src_ckan("https://my.ckan.org/")
+res_id <- "my-ckan-resource-id"
+dplyr::tbl(src = ckan$con, from = res_id) %>% as_tibble(.)
+```
+
+## Example of using a different CKAN API
+
+See `ckanr::servers()` for a list of CKAN servers. Ther are `r length(ckanr::servers())` as of `r format(Sys.time(), "%Y-%m-%d")`.
+
+### The UK Natural History Museum
+
+Website: <https://data.nhm.ac.uk/>
+
+List datasets
+
+```{r output.lines=1:10}
+ckanr_setup(url = "https://data.nhm.ac.uk")
+package_list(as = "table")
+```
+
+Tags
+
+_list_
+
+```{r}
+head(tag_list(as = "table"))
+```
+
+_show_
+
+```{r}
+tag_show('arthropods', as = 'table')
+```
+
+Packages
+
+_search_
+
+```{r}
+out <- package_search(q = '*:*', rows = 2, as = 'table')
+out$results[, 1:10]
+```
+
+_show_
+
+```{r output.lines=1:10}
+package_show(id = "56e711e6-c847-4f99-915a-6894bb5c5dea", as = "table")
+```
+
+### The National Geothermal Data System
+
+Website: <http://geothermaldata.org/>
+
+```{r output.lines=1:8}
+ckanr_setup("http://search.geothermaldata.org")
+x <- package_search(q = '*:*', rows = 1)
+x$results
+```

@@ -1,14 +1,10 @@
 PACKAGE := $(shell grep '^Package:' DESCRIPTION | sed -E 's/^Package:[[:space:]]+//')
 RSCRIPT = Rscript --no-init-file
 
-all: move rmd2md
-
-move:
-		cp inst/vign/ckanr.md vignettes/
-
-rmd2md:
-		cd vignettes;\
-		mv ckanr.md ckanr.Rmd
+vign:
+	cd vignettes;\
+	${RSCRIPT} -e "Sys.setenv(NOT_CRAN='true'); knitr::knit('ckanr.Rmd.og', output = 'ckanr.Rmd')";\
+	cd ..
 
 install: doc build
 	R CMD INSTALL . && rm *.tar.gz
