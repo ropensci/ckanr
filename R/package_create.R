@@ -78,10 +78,11 @@ package_create <- function(name = NULL, title = NULL, private=FALSE,
     author = author, author_email = author_email, maintainer = maintainer,
     maintainer_email = maintainer_email, license_id = license_id,
     notes = notes, url = package_url, version = version, state = state,
-    type = type, resources = resources, tags = tags, extras = extras,
+    type = type, resources = resources, tags = tags,
     relationships_as_object = relationships_as_object,
     relationships_as_subject = relationships_as_subject, groups = groups,
     owner_org = owner_org))
+  body <- c(body, extras)
   res <- ckan_POST(url, 'package_create',
                    body = tojun(body, TRUE), key = key,
                    encode = "json", headers = ctj(), opts = list(...))
