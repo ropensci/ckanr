@@ -22,6 +22,8 @@
 #' @param webstore_last_updated (character) iso date string (optional)
 #' @param upload (character) A path to a local file (optional)
 #' @param extras (list) - the resources' extra metadata fields (optional)
+#' @param http_method (character) which HTTP method (verb) to use; one of 
+#' "GET" or "POST". Default: "GET"
 #' @template args
 #' @template key
 #'
@@ -55,10 +57,10 @@ resource_create <- function(package_id = NULL, rcurl = NULL,
   name = NULL, resource_type = NULL, mimetype = NULL,
   mimetype_inner = NULL, webstore_url = NULL, cache_url = NULL, size = NULL,
   created = NULL, last_modified = NULL, cache_last_updated = NULL,
-  webstore_last_updated = NULL, upload = NULL, extras = NULL,
+  webstore_last_updated = NULL, upload = NULL, extras = NULL, http_method = "GET",
   url = get_default_url(), key = get_default_key(), as = 'list', ...) {
 
-  id <- as.ckan_package(package_id, url = url, key = key)
+  id <- as.ckan_package(package_id, url = url, key = key, http_method = http_method)
   body <- cc(list(package_id = id$id, url = rcurl, revision_id = revision_id,
     description = description, format = format, hash = hash,
     name = name, resource_type = resource_type, mimetype = mimetype,
