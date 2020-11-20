@@ -8,6 +8,8 @@
 #' (optional), extras are arbitrary (key: value) metadata items that can be
 #' added to datasets, each extra dictionary should have keys 'key' (a string),
 #' 'value' (a string)
+#' @param http_method (character) which HTTP method (verb) to use; one of 
+#' "GET" or "POST". Default: "GET"
 #' @template args
 #' @template key
 #' @examples \dontrun{
@@ -25,10 +27,10 @@
 #' package_patch(res, extras = list(list(key = "foo", value = "bar")))
 #' unclass(package_show(res))
 #' }
-package_patch <- function(x, id = NULL, extras = NULL, key = get_default_key(),
-  url = get_default_url(), as = 'list', ...) {
+package_patch <- function(x, id = NULL, extras = NULL, http_method = "GET", 
+  key = get_default_key(),url = get_default_url(), as = 'list', ...) {
 
-  x <- as.ckan_package(x, url = url, key = key)
+  x <- as.ckan_package(x, url = url, key = key, http_method = http_method)
   x <- unclass(x)
   if (!inherits(x, "list")) {
     stop("x must be of class list", call. = FALSE)
