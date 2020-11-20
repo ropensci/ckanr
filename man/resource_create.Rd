@@ -24,6 +24,7 @@ resource_create(
   webstore_last_updated = NULL,
   upload = NULL,
   extras = NULL,
+  http_method = "GET",
   url = get_default_url(),
   key = get_default_key(),
   as = "list",
@@ -69,6 +70,9 @@ added to. This should be an alphanumeric string. Required.}
 \item{upload}{(character) A path to a local file (optional)}
 
 \item{extras}{(list) - the resources' extra metadata fields (optional)}
+
+\item{http_method}{(character) which HTTP method (verb) to use; one of
+"GET" or "POST". Default: "GET"}
 
 \item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
