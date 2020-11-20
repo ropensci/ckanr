@@ -89,10 +89,10 @@ ckan_fetch <- function(x, store = "session", path = "file", format = NULL,
 
   store <- match.arg(store, c("session", "disk"))
   file_fmt <- file_fmt(x)
-  if (identical(file_fmt, character(0)) & is.null(format)) {
+  if (is.na(file_fmt) & is.null(format)) {
     stop("File format is not available from URL; please specify via `format` argument.")
   }
-  fmt <- ifelse(identical(file_fmt, character(0)), format, file_fmt)
+  fmt <- ifelse(is.na(file_fmt), format, file_fmt)
   fmt <- tolower(fmt)
   res <- fetch_GET(x, store, path, format = fmt, key = key, ...)
   if (store == "session") {
