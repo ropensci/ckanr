@@ -8,6 +8,7 @@ package_patch(
   x,
   id = NULL,
   extras = NULL,
+  http_method = "GET",
   key = get_default_key(),
   url = get_default_url(),
   as = "list",
@@ -24,6 +25,9 @@ x does not have an "id" field)}
 (optional), extras are arbitrary (key: value) metadata items that can be
 added to datasets, each extra dictionary should have keys 'key' (a string),
 'value' (a string)}
+
+\item{http_method}{(character) which HTTP method (verb) to use; one of
+"GET" or "POST". Default: "GET"}
 
 \item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
 
