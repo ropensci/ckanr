@@ -24,7 +24,7 @@ ckan_VERB <- function(verb, url, method, body, key, query = list(),
   headers = list(), opts = list(), ...) {
 
   url <- notrail(url)
-  
+
   # check if proxy set
   proxy <- get("ckanr_proxy", ckanr_settings_env)
   if (!is.null(proxy)) {
@@ -75,14 +75,14 @@ fetch_GET <- function(x, store, path, args = NULL, format = NULL, key = NULL, ..
   }
   # set file format
   file_fmt <- file_fmt(x)
-  fmt <- ifelse(identical(file_fmt, character(0)), format, file_fmt)
+  fmt <- ifelse(is.na(file_fmt), format, file_fmt)
   fmt <- tolower(fmt)
-  
+
   # set API key header
   if (!is.null(key)) {
     api_key_header <- list("X-CKAN-API-Key" = key)
   }
-  
+
   # initialize client, and set headers and proxy
   con <- crul::HttpClient$new(url = x, opts = list(...))
   if (!is.null(key)) con$headers <- list("X-CKAN-API-Key" = key)
@@ -127,7 +127,12 @@ fetch_GET <- function(x, store, path, args = NULL, format = NULL, key = NULL, ..
 }
 
 file_fmt <- function(x) {
-  gsub("\\.", "", strextract(x, "\\.[A-Za-z0-9]+$"))
+  fmt <- gsub("\\.", "", strextract(x, "\\.[A-Za-z0-9]+$"))
+  if (length(fmt) == 0) {
+    NA
+  } else {
+    fmt
+  }
 }
 
 strextract <- function(str, pattern) regmatches(str, regexpr(pattern, str))
