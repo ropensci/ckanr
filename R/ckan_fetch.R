@@ -83,6 +83,13 @@
 #' x <- ckan_fetch(res$url)
 #' names(x)
 #' head(x[["ChickenpoxAgegroups2017.csv"]])
+#' 
+#' # TXT file
+#' ckanr_setup("https://ckan0.cf.opendata.inter.prod-toronto.ca")
+#' res <- resource_show(id = "e4211f49-611f-438c-a444-aaa7f3f84117",
+#' as = "table")
+#' x <- ckan_fetch(res$url)
+#' head(x)
 #' }
 ckan_fetch <- function(x, store = "session", path = "file", format = NULL,
   key = get_default_key(), ...) {
