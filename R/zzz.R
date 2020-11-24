@@ -74,8 +74,8 @@ fetch_GET <- function(x, store, path, args = NULL, format = NULL, key = NULL, ..
     }
   }
   # set file format
-  file_fmt <- file_fmt(x)
-  fmt <- ifelse(is.na(file_fmt), format, file_fmt)
+  derived_file_fmt <- file_fmt(x)
+  fmt <- ifelse(is.na(derived_file_fmt), format, derived_file_fmt)
   fmt <- tolower(fmt)
 
   # set API key header
