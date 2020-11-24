@@ -89,7 +89,7 @@ fetch_GET <- function(x, store, path, args = NULL, format = NULL, key = NULL, ..
   if (!is.null(proxy)) con$proxies <- proxy
 
   if (store == "session") {
-    if (fmt %in% c("xls", "xlsx", "geojson")) {
+    if (fmt %in% c("xls", "xlsx", "geojson", "txt")) {
       dat <- NULL
       path <- tempfile(fileext = paste0(".", fmt))
       res <- con$get(query = args, disk = path)
