@@ -86,6 +86,10 @@
 #' }
 ckan_fetch <- function(x, store = "session", path = "file", format = NULL,
   key = get_default_key(), ...) {
+  
+  if (length(x) != 1) {
+    stop("`x` must be length 1.", call. = FALSE)
+  }
 
   store <- match.arg(store, c("session", "disk"))
   derived_file_fmt <- file_fmt(x)
