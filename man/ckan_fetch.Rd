@@ -26,7 +26,7 @@ through file URL.}
 
 \item{key}{A CKAN API key (optional, character)}
 
-\item{...}{Curl arguments passed on to \link[crul:verb-GET]{crul::verb-GET}}
+\item{...}{Arguments passed on to the function used to read the file, if \code{store="disk"}. See details.}
 }
 \description{
 Download a file
