@@ -90,6 +90,13 @@
 #' as = "table")
 #' x <- ckan_fetch(res$url)
 #' head(x)
+#' 
+#' # TXT file, semicolon used as separator
+#' ckanr_setup("https://data.coat.no")
+#' res <- resource_show(id = "384fe537-e0bd-4e57-8a0d-420b7a745196",
+#' as = "table")
+#' x <- ckan_fetch(res$url, sep = ";")
+#' head(x)
 #' }
 ckan_fetch <- function(x, store = "session", path = "file", format = NULL,
   key = get_default_key(), ...) {
