@@ -26,10 +26,27 @@ through file URL.}
 
 \item{key}{A CKAN API key (optional, character)}
 
-\item{...}{Arguments passed on to the function used to read the file, if \code{store="disk"}. See details.}
+\item{...}{Arguments passed on to the function used to read the file, if \code{store="session"}. See details.}
 }
 \description{
 Download a file
+}
+\details{
+The \code{...} argument can be used to pass additional arguments to the
+function that actually reads the file. It is only used when \code{store="session"}
+and if the file is \emph{not} a ZIP file.
+
+This list shows what function is used to read what file format, so that you can
+see what additional arguments are available:
+\itemize{
+\item csv: \link[utils]{read.csv}
+\item xls, xlsx: \link[readxl]{read_excel}
+\item xml: \link[xml2]{read_xml}
+\item html: \link[xml2]{read_html}
+\item json: \link[jsonlite]{fromJSON}
+\item shp, geojson: \link[sf]{st_read}
+\item txt: \link[utils]{read.table}
+}
 }
 \examples{
 \dontrun{
