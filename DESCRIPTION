@@ -48,11 +48,7 @@ Suggests:
     testthat,
     xml2,
     lazyeval
-<<<<<<< HEAD
-RoxygenNote: 7.1.1
-=======
 RoxygenNote: 7.1.1.9000
->>>>>>> add: action for organization_purge
 X-schema.org-keywords: database, open-data, ckan, api, data, dataset
 X-schema.org-applicationCategory: Data Access
 X-schema.org-isPartOf: "https://ropensci.org"
