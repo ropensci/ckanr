@@ -25,11 +25,29 @@ uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to
 data to data.frame's when possible, so the result can vary from a vector, list or
 data.frame. (required)}
 
-\item{...}{Curl args passed on to \code{\link[httr]{POST}} (optional)}
+\item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
 }
 \value{
 an empty list on success
 }
 \description{
-Purge an organization
+IMPORTANT: You must be a sysadmin to purge an organization. Once an
+organization is purged, it is permanently removed from the system.
+}
+\examples{
+\dontrun{
+ckanr_setup(url = "https://demo.ckan.org", key=getOption("ckan_demo_key"))
+
+# create an organization
+(res <- organization_create("foobar", title = "Foo bars",
+  description = "love foo bars"))
+
+# delete the organization just created
+res$id
+organization_delete(id = res$id)
+
+# purge the organization just deleted
+res$id
+organization_purge(id = res$id)
+}
 }
