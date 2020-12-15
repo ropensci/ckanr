@@ -1,5 +1,8 @@
 #' Purge an organization
 #'
+#' IMPORTANT: You must be a sysadmin to purge an organization. Once an
+#' organization is purged, it is permanently removed from the system.
+#'
 #' @export
 #'
 #' @param id (character) name or id of the organization
