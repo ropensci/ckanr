@@ -16,7 +16,6 @@
 #' # delete the organization just created
 #' res$id
 #' organization_delete(id = res$id)
-#' }
 #'
 #' # purge the organization just deleted
 #' res$id
