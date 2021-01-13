@@ -143,5 +143,7 @@ server_urls <- c(
   "https://www.data.gv.at/katalog",
   "https://data.nal.usda.gov",
   "https://data.ontario.ca/",
-  "https://ckan0.cf.opendata.inter.prod-toronto.ca/"
+  "https://ckan0.cf.opendata.inter.prod-toronto.ca/",
+  "https://open.canada.ca/data",
+  "https://open.canada.ca/ckan"
 )
