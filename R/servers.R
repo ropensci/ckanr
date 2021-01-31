@@ -141,5 +141,10 @@ server_urls <- c(
   "https://data.ontario.ca/",
   "https://ckan0.cf.opendata.inter.prod-toronto.ca/",
   "https://open.canada.ca/data",
-  "https://open.canada.ca/ckan"
+  "https://open.canada.ca/ckan",
+  "https://data.cnra.ca.gov/",
+  "https://data.ca.gov/",
+  "https://data.chhs.ca.gov/",
+  "http://data.whiterockcity.ca/"
+  "https://www.yorkopendata.org/"
 )
