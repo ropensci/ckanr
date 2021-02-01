@@ -55,7 +55,6 @@ server_urls <- c(
   "http://data.gv.at/katalog",
   "http://data.norge.no/api/dcat/data.json",
   "http://data.nsw.gov.au/data",
-  "https://data.overheid.nl/data",
   "http://catalog.data.ug",
   "http://data.vic.gov.au",
   "http://data.wu.ac.at",
@@ -88,7 +87,7 @@ server_urls <- c(
   "http://hubofdata.ru",
   "http://iatiregistry.org",
   "http://offenedaten.de",
-  "http://open.canada.ca/data/en",
+  "http://open.canada.ca/data",
   "http://opendata.aachen.de",
   "http://opendata.admin.ch",
   "http://opendata.aragon.es",
@@ -140,11 +139,9 @@ server_urls <- c(
   "https://data.nal.usda.gov",
   "https://data.ontario.ca/",
   "https://ckan0.cf.opendata.inter.prod-toronto.ca/",
-  "https://open.canada.ca/data",
-  "https://open.canada.ca/ckan",
   "https://data.cnra.ca.gov/",
   "https://data.ca.gov/",
   "https://data.chhs.ca.gov/",
-  "http://data.whiterockcity.ca/"
+  "http://data.whiterockcity.ca/",
   "https://www.yorkopendata.org/"
 )
