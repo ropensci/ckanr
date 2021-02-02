@@ -56,16 +56,16 @@ change the state of the dataset (optional, default: 'active')}
 added to datasets, each extra dictionary should have keys 'key' (a string),
 'value' (a string)}
 
-\item{packages}{(list of dictionaries) The datasets (packages) that belong
-to the group, a list of dictionaries each with keys 'name' (string, the id
+\item{packages}{(data.frame) The datasets (packages) that belong
+to the group, a data.frame, where each row has column 'name' (string, the id
 or name of the dataset) and optionally 'title' (string, the title of
 the dataset)}
 
-\item{groups}{(list of dictionaries) The groups to which the dataset
-belongs (optional), each group dictionary should have one or more of the
-following keys which identify an existing group: 'id' (the id of the group,
+\item{groups}{(data.frame) The groups to which the dataset
+belongs (optional), each data.frame row should have one or more of the
+following columns which identify an existing group: 'id' (the id of the group,
 string), or 'name' (the name of the group, string), to see which groups
-exist call group_list()}
+exist call \code{\link[=group_list]{group_list()}}}
 
 \item{users}{(list of dictionaries) The users that belong to the group,
 a list of dictionaries each with key 'name' (string, the id or name of the

@@ -90,11 +90,11 @@ added to datasets, each extra dictionary should have keys 'key' (a string),
 \code{package_relationship_create} for the format of relationship dictionaries
 (optional)}
 
-\item{groups}{(list of dictionaries) - the groups to which the dataset
-belongs (optional), each group dictionary should have one or more of the
-following keys which identify an existing group: 'id' (the id of the group,
+\item{groups}{(data.frame) the groups to which the dataset
+belongs, each row should have one or more of the
+following columns which identify an existing group: 'id' (the id of the group,
 string), or 'name' (the name of the group, string), to see which groups
-exist call \code{\link[=group_list]{group_list()}}}
+exist call \code{\link[=group_list]{group_list()}}. see example (optional)}
 
 \item{owner_org}{(character) the id of the dataset's owning organization,
 see \code{\link[=organization_list]{organization_list()}} or \code{organization_list_for_user} for available
@@ -127,6 +127,9 @@ res$author
 
 ## Example 2 - create package, add a resource
 (res <- package_create("helloworld", author="Jane DOe"))
+
+# include a group
+# package_create("brownbear", groups = data.frame(id = "some-id"))
 
 }
 }
