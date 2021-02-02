@@ -3,7 +3,7 @@ Title: Client for the Comprehensive Knowledge Archive Network ('CKAN') API
 Description: Client for 'CKAN' API (<https://ckan.org/>). Includes interface
     to 'CKAN' 'APIs' for search, list, show for packages, organizations, and
     resources. In addition, provides an interface to the 'datastore' API.
-Version: 0.5.2.94
+Version: 0.5.2.95
 Authors@R: c(
     person("Scott", "Chamberlain",
     	role = c("aut", "cre"),
@@ -26,7 +26,6 @@ LazyData: true
 URL: https://docs.ropensci.org/ckanr/ (website)
     https://github.com/ropensci/ckanr (devel)
 BugReports: https://github.com/ropensci/ckanr/issues
-VignetteBuilder: knitr
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
@@ -41,8 +40,6 @@ Imports:
     dbplyr,
     magrittr
 Suggests:
-    knitr,
-    rmarkdown,
     sf,
     readxl,
     testthat,

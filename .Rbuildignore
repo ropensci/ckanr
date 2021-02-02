@@ -7,7 +7,9 @@ Makefile
 ^\.travis\.yml$
 ^cran-comments\.md$
 ^README\.Rmd$
+^README\.md$
 .github
 ^codemeta\.json$
 notes.md
 ^revdep$
+vignettes/
