@@ -185,7 +185,7 @@ read_session <- function(fmt, dat, path, ...) {
            sf::st_read(path, ...)
          },
          txt = {
-           txt_res <- try(read.table(path, ...), silent = TRUE)
+           txt_res <- try(utils::read.table(path, ...), silent = TRUE)
            
            if (inherits(txt_res, "try-error")) {
              stop("File cannot be read via `read.table()`. Please download and import into R manually.", call. = FALSE)
