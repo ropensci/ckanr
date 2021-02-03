@@ -10,13 +10,13 @@
   "codeRepository": "https://github.com/ropensci/ckanr",
   "issueTracker": "https://github.com/ropensci/ckanr/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.0.2 Patched (2020-06-30 r78761)",
+  "runtimePlatform": "R version 4.0.3 Patched (2021-02-02 r79929)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -67,30 +67,6 @@
     }
   ],
   "softwareSuggestions": [
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "knitr",
-      "name": "knitr",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=knitr"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "rmarkdown",
-      "name": "rmarkdown",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=rmarkdown"
-    },
     {
       "@type": "SoftwareApplication",
       "identifier": "sf",
@@ -249,9 +225,9 @@
   "keywords": ["database", "open-data", "ckan", "api", "data", "dataset", "ckan-api", "api-wrapper", "r", "rstats", "r-package"],
   "releaseNotes": "https://github.com/ropensci/ckanr/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/ckanr/blob/master/README.md",
-  "fileSize": "0KB",
+  "fileSize": "328.438KB",
   "copyrightHolder": {},
   "funder": {},
-  "relatedLink": "https://docs.ropensci.org/ckanr",
+  "relatedLink": ["https://docs.ropensci.org/ckanr", "https://docs.ropensci.org/ckanr/"],
   "developmentStatus": "https://www.repostatus.org/#active"
 }

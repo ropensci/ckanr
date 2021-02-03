@@ -1,3 +1,21 @@
+ckanr 0.6.0
+===========
+
+### NEW FEATURES
+
+* parameter `http_method` gained in `resource_create()`, `package_update()`, and `package_patch()`; it's passed to `as.ckan_package()` internally, but does not affect the HTTP request for the main point of the function (#163) thanks @hannaboe
+* gains new function `organization_purge()` to purge an organization (which requires sysadmin) (#166) thanks @nicholsn
+
+### MINOR IMPROVEMENTS
+
+* update URLs for known CKAN instances behind the `servers()` function (#162) (#167) (#170)
+* .Rbuildignore README.md and vignettes (#171)
+* `extras` now passed in HTTP request in `package_create()` as a top level part of the request body rather than as a named `extras` element (#158) thanks @galaH
+* change in `ckan_fetch()`: now when a zip file has a subdirectory an `NA` is returned rather than `character(0)` (#164)
+* change in the `...` parameter in `ckan_fetch()`: was used to pass through curl options to the http request but now is used to pass through additional parameters to either `read.csv`, `xml2::read_xml`, `jsonlite::fromJSON`, `sf::st_read()`, `read.table()`, or `readxl::read_excel` (#165)
+* updated docs for `package_create()` and `group_create()` - change `groups` parameter description to explain what kind of input is expected (#168)
+
+
 ckanr 0.5.0
 ===========
 

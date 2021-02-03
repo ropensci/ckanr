@@ -1,7 +1,7 @@
 ## Test environments
 
-* local OS X install, R 4.0.2 Patched
-* ubuntu 14.04 (on travis-ci), R 4.0.2
+* local macOS install, R 4.0.3 Patched
+* ubuntu 14.04 (on github actions), R 4.0.3
 * win-builder (devel and release)
 
 ## R CMD check results
@@ -14,7 +14,7 @@
 
 --------
 
-This version adds new parameters to a number of functions, and fixes a number of bugs.
+This version adds a new function, a few functions gain a new parameter, and many minor fixes.
 
 Thanks very much,
 Scott Chamberlain
