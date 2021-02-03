@@ -8,7 +8,7 @@ tu <- 'http://test-ckan.org/'
 tk <- 'test-ckan-key'
 td <- 'test-ckan-package-id'
 tr <- 'test-ckan-resource-id'
-default_ckan <- "http://data.techno-science.ca/"
+default_ckan <- "https://data.ontario.ca/"
 
 
 test_that("ckanr_settings can set and get default url", {

@@ -9,10 +9,11 @@ group_delete(id, url = get_default_url(), key = get_default_key(), ...)
 \arguments{
 \item{id}{(character) The id of the group. Required.}
 
-\item{url}{Base url to use. Default: http://data.techno-science.ca
+\item{url}{Base url to use. Default: https://data.ontario.ca
 See also \code{\link[=ckanr_setup]{ckanr_setup()}} and \code{\link[=get_default_url]{get_default_url()}}}
 
-\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
+\item{key}{A privileged CKAN API key, Default: your key set with
+\code{\link{ckanr_setup}}}
 
 \item{...}{Curl args passed on to \link[crul:verb-POST]{crul::verb-POST} (optional)}
 }

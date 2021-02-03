@@ -62,7 +62,7 @@ print.ckanr_settings <- function(x, ...) {
 #' Configure default CKAN settings
 #'
 #' @export
-#' @param url A CKAN URL (optional), default: "http://data.techno-science.ca/"
+#' @param url A CKAN URL (optional), default: https://data.ontario.ca
 #' @param key A CKAN API key (optional, character)
 #' @param test_url (optional, character) A valid CKAN URL for testing purposes
 #' @param test_key (optional, character) A valid CKAN API key privileged to
@@ -100,20 +100,20 @@ print.ckanr_settings <- function(x, ...) {
 #'
 #' @examples
 #' # CKAN users without admin/editor privileges could run:
-#' ckanr_setup(url = "http://data.techno-science.ca/")
+#' ckanr_setup(url = "https://data.ontario.ca/")
 #'
 #' # Privileged CKAN editor/admin users can run:
-#' ckanr_setup(url = "http://data.techno-science.ca/", key = "some-CKAN-API-key")
+#' ckanr_setup(url = "https://data.ontario.ca/", key = "some-CKAN-API-key")
 #'
 #' # ckanR developers/testers can run:
-#' ckanr_setup(url = "http://data.techno-science.ca/", key = "some-CKAN-API-key",
+#' ckanr_setup(url = "https://data.ontario.ca/", key = "some-CKAN-API-key",
 #'            test_url = "http://test-ckan.gov/",test_key = "test-ckan-API-key",
 #'            test_did = "test-ckan-dataset-id",test_rid = "test-ckan-resource-id",
 #'            test_gid = "test-group-name", test_oid = "test-organzation-name",
 #'            test_behaviour = "FAIL")
 #'
 #' # Not specifying the default CKAN URL will reset the CKAN URL to its default
-#' # "http://data.techno-science.ca/":
+#' # "https://data.ontario.ca/":
 #' ckanr_setup()
 #' 
 #' # set a proxy
@@ -123,7 +123,7 @@ print.ckanr_settings <- function(x, ...) {
 #' ckanr_setup()
 #' ckanr_settings()
 ckanr_setup <- function(
-  url = "http://data.techno-science.ca/",
+  url = "https://data.ontario.ca/",
   key = NULL,
   test_url = NULL,
   test_key = NULL,

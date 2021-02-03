@@ -7,7 +7,7 @@
 #'
 #' @section CKAN API:
 #'
-#' Document for the CKAN API is at <http://docs.ckan.org/en/latest/api/index.html>.
+#' Document for the CKAN API is at <https://docs.ckan.org/en/latest/api/index.html>.
 #' We'll always be following the lastest version of the API.
 #'
 #' @section ckanr package API:
@@ -35,7 +35,7 @@
 #' @section Datastore:
 #'
 #' We are also working on supporting the Datastore extension
-#' (<http://docs.ckan.org/en/latest/maintaining/datastore.html>).
+#' (<https://docs.ckan.org/en/latest/maintaining/datastore.html>).
 #' We currently have these functions:
 #'
 #' - [ds_create()]

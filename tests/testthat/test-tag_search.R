@@ -14,7 +14,7 @@ test_that("tag_search gives back expected class types", {
 
 test_that("tag_search works with many queries", {
   check_ckan(u)
-  a <- tag_search(query = c('ta', 'al'), url = u)
+  a <- tag_search(query = c('a', 'al'), url = u)
   expect_is(a, "list")
   expect_is(a[[1]], "ckan_tag")
   expect_named(a[[1]], c('vocabulary_id', 'id', 'name'))

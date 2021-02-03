@@ -45,7 +45,7 @@ remotes::install_github("ropensci/ckanr")
 library('ckanr')
 ```
 
-Note: the default base CKAN URL is set to <http://data.techno-science.ca/>
+Note: the default base CKAN URL is set to <https://data.ontario.ca/>
 Functions requiring write permissions in CKAN additionally require a privileged
 CKAN API key.
 You can change this using `ckanr_setup()`, or change the URL using the `url`
@@ -53,9 +53,9 @@ parameter in each function call.
 To set one or both, run:
 
 ```{r}
-ckanr_setup() # restores default CKAN url to http://data.techno-science.ca/
-ckanr_setup(url = "http://data.techno-science.ca/")
-ckanr_setup(url = "http://data.techno-science.ca/", key = "my-ckan-api-key")
+ckanr_setup() # restores default CKAN url to https://data.ontario.ca/
+ckanr_setup(url = "https://data.ontario.ca/")
+ckanr_setup(url = "https://data.ontario.ca/", key = "my-ckan-api-key")
 ```
 
 ## ckanr package API

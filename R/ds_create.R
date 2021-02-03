@@ -18,7 +18,7 @@
 #' @param indexes (character) Indexes on table (optional)
 #' @template key
 #' @template args
-#' @references \url{http://bit.ly/1G9cnBl}
+#' @references http://bit.ly/ds_create
 #' @examples \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org/",
 #'   key = getOption("ckan_demo_key"))

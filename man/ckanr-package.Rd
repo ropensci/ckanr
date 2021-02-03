@@ -14,7 +14,7 @@ if you have problems, or have use cases that we don't cover yet.
 \section{CKAN API}{
 
 
-Document for the CKAN API is at \url{http://docs.ckan.org/en/latest/api/index.html}.
+Document for the CKAN API is at \url{https://docs.ckan.org/en/latest/api/index.html}.
 We'll always be following the lastest version of the API.
 }
 
@@ -47,7 +47,7 @@ other functions starting with \verb{user_*}
 
 
 We are also working on supporting the Datastore extension
-(\url{http://docs.ckan.org/en/latest/maintaining/datastore.html}).
+(\url{https://docs.ckan.org/en/latest/maintaining/datastore.html}).
 We currently have these functions:
 \itemize{
 \item \code{\link[=ds_create]{ds_create()}}
