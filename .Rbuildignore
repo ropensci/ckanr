@@ -13,3 +13,4 @@ Makefile
 notes.md
 ^revdep$
 vignettes/
+inst/ignore/
