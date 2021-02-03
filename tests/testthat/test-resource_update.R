@@ -54,6 +54,7 @@ test_that("resource_update gives back expected class types and output with html"
   # to avoid failures, probably due to this same event
   # being attempted at the same-ish time on different CI operating systems
   skip_on_os("windows")
+  skip_on_os("mac")
   check_ckan(url)
   check_resource(url, rid)
 
