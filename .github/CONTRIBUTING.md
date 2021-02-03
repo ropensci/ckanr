@@ -14,3 +14,7 @@
 * Submit a pull request to home base (likely master branch, but check to make sure) at `ropensci/ckanr`
 
 ### Also, check out our [discussion forum](https://discuss.ropensci.org)
+
+### Email
+
+Don't send email. Open an issue instead.
