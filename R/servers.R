@@ -94,5 +94,6 @@ server_urls <- c(
   "https://data.cnra.ca.gov/",
   "https://data.ca.gov/",
   "https://data.chhs.ca.gov/",
-  "http://data.whiterockcity.ca/"
+  "http://data.whiterockcity.ca/",
+  "https://catalogue.data.gov.bc.ca"
 )
