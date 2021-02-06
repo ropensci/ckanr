@@ -2,6 +2,12 @@ context("resource_update")
 
 skip_on_cran()
 
+# to avoid failures, probably due to this same event
+# being attempted at the same-ish time on different CI operating systems
+# just run on linux
+skip_on_os("windows")
+skip_on_os("mac")
+
 # Use a local example file from package ckanR
 path <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
 

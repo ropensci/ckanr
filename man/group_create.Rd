@@ -56,31 +56,32 @@ change the state of the dataset (optional, default: 'active')}
 added to datasets, each extra dictionary should have keys 'key' (a string),
 'value' (a string)}
 
-\item{packages}{(list of dictionaries) The datasets (packages) that belong
-to the group, a list of dictionaries each with keys 'name' (string, the id
+\item{packages}{(data.frame) The datasets (packages) that belong
+to the group, a data.frame, where each row has column 'name' (string, the id
 or name of the dataset) and optionally 'title' (string, the title of
 the dataset)}
 
-\item{groups}{(list of dictionaries) The groups to which the dataset
-belongs (optional), each group dictionary should have one or more of the
-following keys which identify an existing group: 'id' (the id of the group,
+\item{groups}{(data.frame) The groups to which the dataset
+belongs (optional), each data.frame row should have one or more of the
+following columns which identify an existing group: 'id' (the id of the group,
 string), or 'name' (the name of the group, string), to see which groups
-exist call group_list()}
+exist call \code{\link[=group_list]{group_list()}}}
 
 \item{users}{(list of dictionaries) The users that belong to the group,
 a list of dictionaries each with key 'name' (string, the id or name of the
 user) and optionally 'capacity' (string, the capacity in which the user is
 a member of the group)}
 
-\item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
+\item{url}{Base url to use. Default: https://data.ontario.ca/ See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
-\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
+\item{key}{A privileged CKAN API key, Default: your key set with
+\code{\link{ckanr_setup}}}
 
-\item{as}{(character) One of list (default), table, or json. Parsing with table option
-uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse
-data to data.frame's when possible, so the result can vary from a vector, list or
-data.frame. (required)}
+\item{as}{(character) One of list (default), table, or json. Parsing with
+table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
+which attempts to parse data to data.frame's when possible, so the result
+can vary from a vector, list or data.frame. (required)}
 
 \item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
 }

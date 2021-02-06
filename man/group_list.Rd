@@ -17,9 +17,11 @@ group_list(
 )
 }
 \arguments{
-\item{offset}{(numeric) Where to start getting activity items from (optional, default: 0)}
+\item{offset}{(numeric) Where to start getting activity items from
+(optional, default: 0)}
 
-\item{limit}{(numeric) The maximum number of activities to return (optional, default: 31)}
+\item{limit}{(numeric) The maximum number of activities to return
+(optional, default: 31)}
 
 \item{sort}{Field to sort on. You can specify ascending (e.g., score desc) or
 descending (e.g., score asc), sort by two fields (e.g., score desc, price asc),
@@ -32,15 +34,16 @@ only groups whose names are in this list will be returned}
 \item{all_fields}{(logical) Return full group dictionaries instead of just
 names. Default: \code{FALSE}}
 
-\item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
+\item{url}{Base url to use. Default: https://data.ontario.ca/ See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
-\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
+\item{key}{A privileged CKAN API key, Default: your key set with
+\code{\link{ckanr_setup}}}
 
-\item{as}{(character) One of list (default), table, or json. Parsing with table option
-uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse
-data to data.frame's when possible, so the result can vary from a vector, list or
-data.frame. (required)}
+\item{as}{(character) One of list (default), table, or json. Parsing with
+table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
+which attempts to parse data to data.frame's when possible, so the result
+can vary from a vector, list or data.frame. (required)}
 
 \item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
 }

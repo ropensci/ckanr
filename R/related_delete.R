@@ -3,7 +3,7 @@
 #' @export
 #'
 #' @param id (character) Resource identifier.
-#' @param url Base url to use. Default: http://data.techno-science.ca See
+#' @param url Base url to use. Default: https://data.ontario.ca See
 #' also [ckanr_setup()] and [get_default_url()].
 #' @param ... Curl args passed on to [crul::verb-POST] (optional)
 #' @template key

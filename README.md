@@ -17,7 +17,7 @@ CKAN is an open source set of tools for hosting and providing data on the web. (
 
 `ckanr` allows users to interact with those CKAN websites to create, modify, and manage datasets, as well as search and download pre-existing data, and then to proceed using in R for data analysis (stats/plotting/etc.). It is meant to be as general as possible, allowing you to work with any CKAN instance.
 
-Get started: https://docs.ropensci.org/ckanr/
+Get started: <https://docs.ropensci.org/ckanr/>
 
 ## Installation
 
@@ -41,7 +41,7 @@ remotes::install_github("ropensci/ckanr")
 library('ckanr')
 ```
 
-Note: the default base CKAN URL is set to http://data.techno-science.ca/
+Note: the default base CKAN URL is set to <https://data.ontario.ca/>
 Functions requiring write permissions in CKAN additionally require a privileged
 CKAN API key.
 You can change this using `ckanr_setup()`, or change the URL using the `url`
@@ -50,9 +50,9 @@ To set one or both, run:
 
 
 ```r
-ckanr_setup() # restores default CKAN url to http://data.techno-science.ca/
-ckanr_setup(url = "http://data.techno-science.ca/")
-ckanr_setup(url = "http://data.techno-science.ca/", key = "my-ckan-api-key")
+ckanr_setup() # restores default CKAN url to https://data.ontario.ca/
+ckanr_setup(url = "https://data.ontario.ca/")
+ckanr_setup(url = "https://data.ontario.ca/", key = "my-ckan-api-key")
 ```
 
 ## ckanr package API
@@ -102,5 +102,3 @@ All classes state the type of object, have the ID to the right of the type, then
 * License: MIT
 * Get citation information for `ckanr` in R doing `citation(package = 'ckanr')`
 * Please note that this package is released with a [Contributor Code of Conduct](https://ropensci.org/code-of-conduct/). By contributing to this project, you agree to abide by its terms.
-
-[![ropensci](https://ropensci.org/public_images/github_footer.png)](https://ropensci.org)

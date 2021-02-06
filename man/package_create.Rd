@@ -90,25 +90,26 @@ added to datasets, each extra dictionary should have keys 'key' (a string),
 \code{package_relationship_create} for the format of relationship dictionaries
 (optional)}
 
-\item{groups}{(list of dictionaries) - the groups to which the dataset
-belongs (optional), each group dictionary should have one or more of the
-following keys which identify an existing group: 'id' (the id of the group,
+\item{groups}{(data.frame) the groups to which the dataset
+belongs, each row should have one or more of the
+following columns which identify an existing group: 'id' (the id of the group,
 string), or 'name' (the name of the group, string), to see which groups
-exist call \code{\link[=group_list]{group_list()}}}
+exist call \code{\link[=group_list]{group_list()}}. see example (optional)}
 
 \item{owner_org}{(character) the id of the dataset's owning organization,
 see \code{\link[=organization_list]{organization_list()}} or \code{organization_list_for_user} for available
 values (optional)}
 
-\item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
+\item{url}{Base url to use. Default: https://data.ontario.ca/ See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
-\item{key}{A privileged CKAN API key, Default: your key set with \code{\link{ckanr_setup}}}
+\item{key}{A privileged CKAN API key, Default: your key set with
+\code{\link{ckanr_setup}}}
 
-\item{as}{(character) One of list (default), table, or json. Parsing with table option
-uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)}, which attempts to parse
-data to data.frame's when possible, so the result can vary from a vector, list or
-data.frame. (required)}
+\item{as}{(character) One of list (default), table, or json. Parsing with
+table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
+which attempts to parse data to data.frame's when possible, so the result
+can vary from a vector, list or data.frame. (required)}
 
 \item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
 }
@@ -127,6 +128,9 @@ res$author
 
 ## Example 2 - create package, add a resource
 (res <- package_create("helloworld", author="Jane DOe"))
+
+# include a group
+# package_create("brownbear", groups = data.frame(id = "some-id"))
 
 }
 }

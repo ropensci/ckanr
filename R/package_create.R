@@ -42,11 +42,11 @@
 #' @param relationships_as_subject (list of relationship dictionaries) - see
 #' `package_relationship_create` for the format of relationship dictionaries
 #' (optional)
-#' @param groups (list of dictionaries) - the groups to which the dataset
-#' belongs (optional), each group dictionary should have one or more of the
-#' following keys which identify an existing group: 'id' (the id of the group,
+#' @param groups (data.frame) the groups to which the dataset
+#' belongs, each row should have one or more of the
+#' following columns which identify an existing group: 'id' (the id of the group,
 #' string), or 'name' (the name of the group, string), to see which groups
-#' exist call [group_list()]
+#' exist call [group_list()]. see example (optional)
 #' @param owner_org (character) the id of the dataset's owning organization,
 #' see [organization_list()] or `organization_list_for_user` for available
 #' values (optional)
@@ -64,6 +64,9 @@
 #'
 #' ## Example 2 - create package, add a resource
 #' (res <- package_create("helloworld", author="Jane DOe"))
+#' 
+#' # include a group
+#' # package_create("brownbear", groups = data.frame(id = "some-id"))
 #'
 #' }
 package_create <- function(name = NULL, title = NULL, private=FALSE,

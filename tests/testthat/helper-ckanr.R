@@ -135,6 +135,11 @@ check_group <- function(url, x){
   }
 }
 
+ok_group <- function(url, x){
+  grp <- tryCatch(group_show(x, url = url), error = function(e) e)
+  !inherits(grp, "error")
+}
+
 #' Test whether the configured test CKAN group exists
 #'
 #' @keywords internal

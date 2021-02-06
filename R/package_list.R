@@ -9,7 +9,7 @@
 #' package_list(as = 'json')
 #' package_list(as = 'table')
 #'
-#' package_list(url = 'http://data.nhm.ac.uk')
+#' package_list(url = 'https://data.nhm.ac.uk')
 #' }
 package_list <- function(offset = 0, limit = 31, url = get_default_url(),
   key = get_default_key(), as = 'list', ...) {

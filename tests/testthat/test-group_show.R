@@ -10,17 +10,20 @@ if (g == "") {
 
 test_that("group_show gives back expected class types", {
   check_ckan(u)
-  check_group(u,g)
+  # check_group(u,g)
+  if (!ok_group(u, g))
+    group_create("ckanr_test_group", url = u, key = get_test_key())
   a <- group_show(g, url=u)
 
   expect_is(a, "ckan_group")
   expect_is(a$name, "character")
-  expect_equal(a$id, g)
 })
 
 test_that("group_show works giving back json output", {
   check_ckan(u)
-  check_group(u,g)
+  # check_group(u,g)
+  if (!ok_group(u, g))
+    group_create("ckanr_test_group", url = u, key = get_test_key())
   b <- group_show(g, url=u, as='json')
   b_df <- jsonlite::fromJSON(b)
 

@@ -5,7 +5,7 @@
 \title{Configure default CKAN settings}
 \usage{
 ckanr_setup(
-  url = "http://data.techno-science.ca/",
+  url = "https://data.ontario.ca/",
   key = NULL,
   test_url = NULL,
   test_key = NULL,
@@ -18,7 +18,7 @@ ckanr_setup(
 )
 }
 \arguments{
-\item{url}{A CKAN URL (optional), default: "http://data.techno-science.ca/"}
+\item{url}{A CKAN URL (optional), default: https://data.ontario.ca}
 
 \item{key}{A CKAN API key (optional, character)}
 
@@ -69,20 +69,20 @@ problems with both the configured test CKAN and the writing functions.
 }
 \examples{
 # CKAN users without admin/editor privileges could run:
-ckanr_setup(url = "http://data.techno-science.ca/")
+ckanr_setup(url = "https://data.ontario.ca/")
 
 # Privileged CKAN editor/admin users can run:
-ckanr_setup(url = "http://data.techno-science.ca/", key = "some-CKAN-API-key")
+ckanr_setup(url = "https://data.ontario.ca/", key = "some-CKAN-API-key")
 
 # ckanR developers/testers can run:
-ckanr_setup(url = "http://data.techno-science.ca/", key = "some-CKAN-API-key",
+ckanr_setup(url = "https://data.ontario.ca/", key = "some-CKAN-API-key",
            test_url = "http://test-ckan.gov/",test_key = "test-ckan-API-key",
            test_did = "test-ckan-dataset-id",test_rid = "test-ckan-resource-id",
            test_gid = "test-group-name", test_oid = "test-organzation-name",
            test_behaviour = "FAIL")
 
 # Not specifying the default CKAN URL will reset the CKAN URL to its default
-# "http://data.techno-science.ca/":
+# "https://data.ontario.ca/":
 ckanr_setup()
 
 # set a proxy

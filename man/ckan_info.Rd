@@ -10,7 +10,7 @@ ckan_info(url = get_default_url(), ...)
 ckan_version(url = get_default_url(), ...)
 }
 \arguments{
-\item{url}{Base url to use. Default: \url{http://data.techno-science.ca}. See
+\item{url}{Base url to use. Default: \url{https://data.ontario.ca}. See
 also \code{\link[=ckanr_setup]{ckanr_setup()}} and \code{\link[=get_default_url]{get_default_url()}}. (required)}
 
 \item{...}{Curl args passed on to \link[crul:verb-GET]{crul::verb-GET} (optional)}

@@ -22,7 +22,10 @@ servers()
 ckan_info(servers()[5])
 
 # what version is each CKAN server running
-out <- lapply(servers()[1:6], ckan_info)
+out <- lapply(servers()[1:6], function(w) {
+  cat(w, sep='\n') 
+  ckan_info(w)
+})
 vapply(out, "[[", "", "ckan_version")
 }
 }
