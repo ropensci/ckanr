@@ -14,7 +14,7 @@
 #' @export
 #'
 #' @param id (character) Resource ID to update (required)
-#' @param path (character) Local path of the file to upload (required)
+#' @param path (character) Local path of the file to upload (optional)
 #' @param extras (list) - the resources' extra metadata fields (optional)
 #' @template key
 #' @template args
@@ -102,19 +102,27 @@
 #' (xxx <- resource_update(xx, path=newpath))
 #' browseURL(xxx$url)
 #' }
-resource_update <- function(id, path, extras = list(),
+resource_update <- function(id, path = NULL, extras = list(),
   url = get_default_url(), key = get_default_key(),
   as = 'list', ...) {
 
   assert(extras, "list")
   id <- as.ckan_resource(id, url = url)
-  path <- path.expand(path)
-  up <- upfile(path)
-  format <- pick_type(up$type)
-  body <- list(id = id$id, format = format, upload = up,
-    last_modified =
-      format(Sys.time(), tz = "UTC", format = "%Y-%m-%d %H:%M:%OS6"),
-    url = "update")
+  if (is.character(path)) {
+    path <- path.expand(path)
+    up <- upfile(path)
+    format <- pick_type(up$type)
+    body <- list(id = id$id, format = format, upload = up,
+      last_modified =
+        format(Sys.time(), tz = "UTC", format = "%Y-%m-%d %H:%M:%OS6"),
+      url = "update")
+  } else {
+    body <- list(id = id$id,
+      last_modified =
+        format(Sys.time(), tz = "UTC", format = "%Y-%m-%d %H:%M:%OS6"),
+      format = id$format,
+      url = "update")
+  }
   body <- c(body, extras)
   res <- ckan_POST(url, 'resource_update', body = body, key = key,
     opts = list(...))
