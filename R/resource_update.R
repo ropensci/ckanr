@@ -120,18 +120,16 @@ resource_update <- function(id, path = NULL, extras = list(),
     path <- path.expand(path)
     up <- upfile(path)
     format <- pick_type(up$type)
-    body <- list(id = id$id, format = format, upload = up,
-      last_modified =
-        format(Sys.time(), tz = "UTC", format = "%Y-%m-%d %H:%M:%OS6"),
-      url = "update")
+    body <- list(format = format, upload = up)
   } else {
-    body <- list(id = id$id,
-      last_modified =
-        format(Sys.time(), tz = "UTC", format = "%Y-%m-%d %H:%M:%OS6"),
-      format = id$format,
-      url = "update")
+    body <- list()
   }
-  body <- c(body, extras)
+  default_body = list(id = id$id,
+    last_modified =
+      format(Sys.time(), tz = "UTC", format = "%Y-%m-%d %H:%M:%OS6"),
+    url = "update"
+  )
+  body <- c(default_body, body, extras)
   res <- ckan_POST(url, 'resource_update', body = body, key = key,
     opts = list(...))
   switch(as, json = res, list = as_ck(jsl(res), "ckan_resource"),
