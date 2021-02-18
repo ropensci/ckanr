@@ -2,11 +2,11 @@
 % Please edit documentation in R/resource_update.R
 \name{resource_update}
 \alias{resource_update}
-\title{Update a resource's file attachment}
+\title{Update a resource}
 \usage{
 resource_update(
   id,
-  path,
+  path = NULL,
   extras = list(),
   url = get_default_url(),
   key = get_default_key(),
@@ -17,7 +17,7 @@ resource_update(
 \arguments{
 \item{id}{(character) Resource ID to update (required)}
 
-\item{path}{(character) Local path of the file to upload (required)}
+\item{path}{(character) Local path of the file to upload (optional)}
 
 \item{extras}{(list) - the resources' extra metadata fields (optional)}
 
@@ -39,9 +39,9 @@ The HTTP response from CKAN, formatted as list (default), table,
 or JSON.
 }
 \description{
-This function will only update a resource's file attachment and
-the metadata key "last_updated". Other metadata, such as name or description,
-are not updated.
+This function can be used to update a resource's file attachment
+and "extra" metadata fields. Any update will also set the metadata key
+"last_updated". Other metadata, such as name or description, are not updated.
 
 The new file must exist on a local path. R objects have to be written to a
 file, e.g. using \code{tempfile()} - see example.
@@ -81,6 +81,14 @@ resource_update(xx$id, path=newpath)
 ## optionally include extra tags
 resource_update(xx$id, path=newpath,
                 extras = list(some="metadata"))
+                
+# Update a resource's extra tags
+## add extra tags without uploading a new file
+resource_update(id,
+                extras = list(some="metadata"))
+
+## or remove all extra tags
+resource_update(id, extras = list())                 
 
 #######
 # Using default settings

@@ -1,9 +1,9 @@
-#' @title Update a resource's file attachment
+#' @title Update a resource
 #'
 #'
-#' @description This function will only update a resource's file attachment and
-#' the metadata key "last_updated". Other metadata, such as name or description,
-#' are not updated.
+#' @description This function can be used to update a resource's file attachment
+#' and "extra" metadata fields. Any update will also set the metadata key 
+#' "last_updated". Other metadata, such as name or description, are not updated.
 #'
 #' The new file must exist on a local path. R objects have to be written to a
 #' file, e.g. using `tempfile()` - see example.
@@ -53,6 +53,14 @@
 #' ## optionally include extra tags
 #' resource_update(xx$id, path=newpath,
 #'                 extras = list(some="metadata"))
+#'                 
+#' # Update a resource's extra tags
+#' ## add extra tags without uploading a new file
+#' resource_update(id,
+#'                 extras = list(some="metadata"))
+#'
+#' ## or remove all extra tags
+#' resource_update(id, extras = list())                 
 #'
 #' #######
 #' # Using default settings
