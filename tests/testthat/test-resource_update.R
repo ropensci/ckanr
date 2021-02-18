@@ -127,3 +127,30 @@ test_that("resource_update gives back expected key:value pairs", {
   # expected output
   expect_equal(a$map_type, "mapbox")
 })
+
+# extras on resource_update without path
+test_that("resource_update gives back expected key:value pairs even without path", {
+  check_ckan(url)
+  check_resource(url, rid)
+  
+  a <- resource_update(rid, extras = list(map_type = "mapbox"),
+                       url = url, key = key)
+  
+  # expected output
+  expect_equal(a$map_type, "mapbox")
+})
+
+# extras removed on resource_update with empty extras
+test_that("resource_update removes key:value pairs with empty extras", {
+  check_ckan(url)
+  check_resource(url, rid)
+  
+  a <- resource_update(rid, extras = list(map_type = "mapbox"),
+                       url = url, key = key)
+  
+  b <- resource_update(rid, extras = list(),
+                       url = url, key = key)
+  
+  # expected output
+  testthat::expect_null(b$map_type)
+})
