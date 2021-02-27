@@ -94,5 +94,8 @@ server_urls <- c(
   "http://data.whiterockcity.ca/",
   "https://catalogue.data.gov.bc.ca",
   "https://data.montreal.ca",
-  "https://www.donneesquebec.ca"
+  "https://www.donneesquebec.ca",
+  "http://dados.tce.rs.gov.br/",
+  "https://dados.al.gov.br/catalogo/",
+  "https://dati.comune.roma.it/catalog/"
 )
