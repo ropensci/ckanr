@@ -93,5 +93,11 @@ server_urls <- c(
   "https://www.donneesquebec.ca",
   "http://dados.tce.rs.gov.br/",
   "https://dados.al.gov.br/catalogo/",
-  "https://dati.comune.roma.it/catalog/"
+  "https://dati.comune.roma.it/catalog/",
+  "https://www.dati.gov.it/",
+  "https://data.amerigeoss.org/",
+  "https://opendata-ajuntament.barcelona.cat/",
+  "https://data.nhm.ac.uk/",
+  "https://dataworks.calderdale.gov.uk/"
+  
 )
