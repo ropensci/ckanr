@@ -64,7 +64,6 @@ server_urls <- c(
   "https://opendata.riik.ee",
   "http://opendatagortynia.gr",
   "http://opingogn.is",
-  "http://oppnadata.se",
   "http://rotterdamopendata.nl",
   "http://taijiang.tw",
   "http://www.civicdata.io",
