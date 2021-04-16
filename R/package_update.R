@@ -3,7 +3,7 @@
 #' @export
 #' @param x (list) A list with key-value pairs
 #' @param id (character) Package identifier
-#' @param http_method (character) which HTTP method (verb) to use; one of 
+#' @param http_method (character) which HTTP method (verb) to use; one of
 #' "GET" or "POST". Default: "GET"
 #' @template args
 #' @template key
@@ -17,12 +17,14 @@
 #' # Next show the package to see the fields
 #' (res <- package_show(pkg$id))
 #'
-#' ## update just chosen things
 #' # Make some changes
-#' x <- list(maintainer_email = "heythere2@@things.com")
+#' res$maintainer_email <- "heythere2@@things.com"
+#'
+#' Note: package_upate will reset all attributes not mentioned in (x), including extras and resources.
+#' If you wish to retain resources, use package_patch() instead.
 #'
 #' # Then update the packge
-#' package_update(x, pkg$id)
+#' package_update(res, pkg$id)
 #' }
 package_update <- function(x, id, http_method = "GET", url = get_default_url(),
                            key = get_default_key(), as = 'list', ...) {

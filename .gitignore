@@ -3,3 +3,7 @@
 .RData
 .DS_Store
 notes.md
+*.Rproj
+.Rbuildignore
+.Rhistory
+.Rproj.user/

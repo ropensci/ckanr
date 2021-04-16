@@ -243,3 +243,33 @@ handle_many <- function(x) {
     stop("query/q must be vector or list of strings", call.=FALSE)
   unlist(lapply(x, function(z) list(query = z)), FALSE)
 }
+
+err_handler <- function(x) {
+  if (x$status_code > 201) {
+    obj <- try({
+      err <- jsonlite::fromJSON(x$parse("UTF-8"))$error
+      tmp <- err[names(err) != "__type"]
+      errmsg <- paste(names(tmp), unlist(tmp[[1]]))
+      list(err = err, errmsg = errmsg)
+    }, silent = TRUE)
+    if (!inherits(obj, "try-error")) {
+      stop(sprintf("%s - %s\n  %s",
+                   x$status_code,
+                   obj$err$`__type`,
+                   obj$errmsg),
+                   #obj$err$message),
+           call. = FALSE)
+    } else {
+      obj <- {
+        err <- x$status_http()$message
+        errmsg <- x$parse("UTF-8")
+        list(err = err, errmsg = errmsg)
+      }
+      stop(sprintf("%s - %s\n  %s",
+                   x$status_code,
+                   obj$err,
+                   obj$errmsg),
+           call. = FALSE)
+    }
+  }
+}

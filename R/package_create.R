@@ -64,7 +64,7 @@
 #'
 #' ## Example 2 - create package, add a resource
 #' (res <- package_create("helloworld", author="Jane DOe"))
-#' 
+#'
 #' # include a group
 #' # package_create("brownbear", groups = data.frame(id = "some-id"))
 #'
@@ -84,8 +84,11 @@ package_create <- function(name = NULL, title = NULL, private=FALSE,
     type = type, resources = resources, tags = tags,
     relationships_as_object = relationships_as_object,
     relationships_as_subject = relationships_as_subject, groups = groups,
-    owner_org = owner_org))
-  body <- c(body, extras)
+    owner_org = owner_org,extras = extras))
+
+#  if (length(extras) >0) {
+#    body <- list(body, extras = extras)
+#  }
   res <- ckan_POST(url, 'package_create',
                    body = tojun(body, TRUE), key = key,
                    encode = "json", headers = ctj(), opts = list(...))
