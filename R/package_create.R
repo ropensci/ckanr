@@ -86,9 +86,6 @@ package_create <- function(name = NULL, title = NULL, private=FALSE,
     relationships_as_subject = relationships_as_subject, groups = groups,
     owner_org = owner_org,extras = extras))
 
-#  if (length(extras) >0) {
-#    body <- list(body, extras = extras)
-#  }
   res <- ckan_POST(url, 'package_create',
                    body = tojun(body, TRUE), key = key,
                    encode = "json", headers = ctj(), opts = list(...))
