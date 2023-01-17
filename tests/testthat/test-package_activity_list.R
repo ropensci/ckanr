@@ -4,10 +4,11 @@ skip_on_cran()
 skip_on_ci()
 
 u <- get_test_url()
+check_ckan(u)
+
 id <- package_list(limit = 1, url=u)[[1]]
 
 package_activity_num <- local({
-  check_ckan(u)
   res <- crul::HttpClient$new(file.path(u, "dataset/activity", id))$get()
   res$raise_for_status()
   txt <- res$parse("UTF-8")
