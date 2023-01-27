@@ -1,7 +1,8 @@
 version: "3.9"
 services:
   ckan:
-    image: "openknowledge/ckan-base:2.8"
+    image: "openknowledge/ckan-base:${CKAN_VERSION}"
+    container_name: ckan
     environment:
       - CKAN_SITE_URL=http://ckan:5000
       - CKAN_SQLALCHEMY_URL=postgresql://ckan_default:pass@postgres/ckan_test
@@ -18,13 +19,15 @@ services:
     ports:
       - "5000:5000"
   postgres:
-    image: "ckan/ckan-postgres-dev:2.8"
+    image: "ckan/ckan-postgres-dev:${CKAN_VERSION}"
+    container_name: postgres
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
   datapusher:
     image: ghcr.io/keitaroinc/datapusher:0.0.17
+    container_name: datapusher
     environment:
       - DATAPUSHER_MAX_CONTENT_LENGTH=10485760
       - DATAPUSHER_CHUNK_SIZE=16384
@@ -32,6 +35,8 @@ services:
       - DATAPUSHER_DOWNLOAD_TIMEOUT=30
       - DATAPUSHER_SSL_VERIFY=False
   solr: 
-    image: "ckan/ckan-solr:2.8"
+    image: "ckan/ckan-solr:${CKAN_VERSION}"
+    container_name: solr
   redis:
     image: "redis:5.0.14"
+    container_name: redis

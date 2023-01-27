@@ -11,6 +11,9 @@ test_that("ckan_fetch returns error when file format can't be determined from UR
   )
 })
 
+u <- get_test_url()
+check_ckan(u)
+
 test_that("ckan_fetch doesn't write any files to working directory when session = TRUE", {
   expect_identical(list.files(test_path()), {
     res <- resource_show(id = rid, as = "table")

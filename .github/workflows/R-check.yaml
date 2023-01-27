@@ -6,36 +6,35 @@ jobs:
   R-check:
     runs-on: ${{ matrix.config.os }}
 
-    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }}) - CKAN ${{ matrix.config.ckan-version }}
 
     strategy:
       fail-fast: false
       matrix:
         config:
         - { os: windows-latest, r: 'release'}
-        - { os: windows-latest, r: 'devel'}
         - { os: macOS-latest, r: 'release'}
-        - { os: ubuntu-latest,  r: 'release'}
+        - { os: ubuntu-latest,  r: 'release', ckan-version: 2.7}
+        - { os: ubuntu-latest,  r: 'release', ckan-version: 2.8}
+        - { os: ubuntu-latest,  r: 'release', ckan-version: 2.9}
+        - { os: ubuntu-latest, r: 'devel', ckan-version: 2.9}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-      CRAN: ${{ matrix.config.rspm }}
-      CKANR_DEFAULT_KEY: ${{secrets.CKANR_DEFAULT_KEY}}
-      CKANR_DEFAULT_URL: ${{secrets.CKANR_DEFAULT_URL}}
-      CKANR_TEST_BEHAVIOUR: ${{secrets.CKANR_TEST_BEHAVIOUR}}
-      CKANR_TEST_DID: ${{secrets.CKANR_TEST_DID}}
-      CKANR_TEST_GID: ${{secrets.CKANR_TEST_GID}}
-      CKANR_TEST_KEY: ${{secrets.CKANR_TEST_KEY}}
-      CKANR_TEST_OID: ${{secrets.CKANR_TEST_OID}}
-      CKANR_TEST_RID: ${{secrets.CKANR_TEST_RID}}
       CKANR_TEST_URL: ${{secrets.CKANR_TEST_URL}}
-      TEST_API_KEY: ${{secrets.TEST_API_KEY}}
+      CKANR_TEST_BEHAVIOUR: ${{secrets.CKANR_TEST_BEHAVIOUR}}
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       R_KEEP_PKG_SOURCE: yes
+      CKAN_VERSION: ${{ matrix.config.ckan-version }} # for docker compose up
 
     steps:
       - uses: actions/checkout@v3
-
+      - name: Configure /etc/hosts
+        run: sudo echo "127.0.0.1 ckan" | sudo tee -a /etc/hosts
+        if: matrix.config.os == 'ubuntu-latest'
+      - name: Start CKAN
+        run: docker compose up -d
+        if: matrix.config.os == 'ubuntu-latest'
       - uses: r-lib/actions/setup-r@v2
         with:
           r-version: ${{ matrix.config.r }}
@@ -51,7 +50,14 @@ jobs:
           needs: |
             check
             coverage
-
+      - name: Generate CKAN API token
+        run: |
+          echo "TEST_API_KEY=$(docker exec ckan ckan user token add ckan_admin dev_token | sed 's/API Token created://' | tr -d '\n\t')" >> $GITHUB_ENV
+        if: matrix.config.ckan-version == '2.9' && matrix.config.os == 'ubuntu-latest'
+      - name: Generate CKAN API key
+        run: |
+          echo "TEST_API_KEY"=$(docker exec ckan paster --plugin=ckan user ckan_admin | grep -o -P '(?<=apikey=).*(?= created)') >> $GITHUB_ENV
+        if: matrix.config.ckan-version != '2.9' && matrix.config.os == 'ubuntu-latest'
       - name: Check
         env:
           _R_CHECK_CRAN_INCOMING_: false
@@ -59,7 +65,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Test coverage
-        if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'release'
+        if: matrix.config.os == 'ubuntu-latest' && matrix.config.r == 'release' &&  matrix.config.ckan-version == '2.8'
         run: |
           covr::codecov(
             quiet = FALSE,
@@ -76,7 +82,7 @@ jobs:
         shell: bash
 
       - name: Upload test results
-        if: failure()
+        if: failure() && matrix.config.os == 'ubuntu-latest'
         uses: actions/upload-artifact@v3
         with:
           name: coverage-test-failures
