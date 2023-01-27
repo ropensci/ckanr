@@ -12,7 +12,12 @@ jobs:
       fail-fast: false
       matrix:
         config:
+        - { os: windows-latest, r: 'release'}
+        - { os: macOS-latest, r: 'release'}
+        - { os: ubuntu-latest,  r: 'release', ckan-version: 2.7}
         - { os: ubuntu-latest,  r: 'release', ckan-version: 2.8}
+        - { os: ubuntu-latest,  r: 'release', ckan-version: 2.9}
+        - { os: ubuntu-latest, r: 'devel', ckan-version: 2.9}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -74,11 +79,6 @@ jobs:
           find ${{ runner.temp }}/package -name 'testthat.Rout*' -exec cat '{}' \; || true
         shell: bash
 
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-        with:
-          limit-access-to-actor: true
-      
       - name: Upload test results
         if: failure() && matrix.config.os == 'ubuntu-latest'
         uses: actions/upload-artifact@v3
