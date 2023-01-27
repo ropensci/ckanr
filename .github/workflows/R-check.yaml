@@ -51,12 +51,6 @@ jobs:
         run: |
           echo "TEST_API_KEY"=$(docker exec ckan paster --plugin=ckan user ckan_admin | grep -o -P '(?<=apikey=).*(?= created)') >> $GITHUB_ENV
         if: matrix.config.ckan-version != '2.9' && matrix.config.os == 'ubuntu-latest'
-      
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-        with:
-          limit-access-to-actor: true
-
       - name: Check
         env:
           _R_CHECK_CRAN_INCOMING_: false
@@ -79,6 +73,11 @@ jobs:
           ## --------------------------------------------------------------------
           find ${{ runner.temp }}/package -name 'testthat.Rout*' -exec cat '{}' \; || true
         shell: bash
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        with:
+          limit-access-to-actor: true
       
       - name: Upload test results
         if: failure() && matrix.config.os == 'ubuntu-latest'
