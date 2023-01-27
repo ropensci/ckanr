@@ -88,12 +88,13 @@ All classes state the type of object, have the ID to the right of the type, then
 
 ## Contributors
 
-(alphebetical)
+(alphabetical)
 
-* Scott Chamberlain
-* Imanuel Costigan
-* Sharla Gelfand
 * Florian Mayer
+* Francisco Alves
+* Imanuel Costigan
+* Scott Chamberlain
+* Sharla Gelfand
 * Wush Wu
 
 ## Meta

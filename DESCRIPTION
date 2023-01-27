@@ -6,7 +6,7 @@ Description: Client for 'CKAN' API (<https://ckan.org/>). Includes interface
 Version: 0.6.0.92
 Authors@R: c(
     person("Scott", "Chamberlain",
-    	role = c("aut", "cre"),
+    	role = c("aut"),
     	email = "myrmecocystus@gmail.com",
         comment = c(ORCID = "0000-0003-1444-9135")),
     person("Imanuel", "Costigan",
@@ -19,7 +19,12 @@ Authors@R: c(
     	role = "aut",
      	email="Florian.Mayer@dbca.wa.gov.au",
         comment = c(ORCID = "0000-0003-4269-4242")),
-    person("Sharla", "Gelfand", role = "aut")
+    person("Sharla", "Gelfand", 
+        role = "aut"),
+    person("Francisco", "Alves",
+    	role = c("aut", "cre"),
+    	email = "fjunior.alves.oliveira@gmail.com",
+        comment = c(ORCID = "0000-0003-3390-0534")),
   )
 License: MIT + file LICENSE
 LazyData: true
