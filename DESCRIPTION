@@ -24,7 +24,7 @@ Authors@R: c(
     person("Francisco", "Alves",
     	role = c("aut", "cre"),
     	email = "fjunior.alves.oliveira@gmail.com",
-        comment = c(ORCID = "0000-0003-3390-0534")),
+        comment = c(ORCID = "0000-0003-3390-0534"))
   )
 License: MIT + file LICENSE
 LazyData: true
