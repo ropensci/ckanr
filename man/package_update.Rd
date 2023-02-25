@@ -36,24 +36,31 @@ can vary from a vector, list or data.frame. (required)}
 \item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
 }
 \description{
-Update a package
+This function updates all package metadata fields.
+Any update will also set the metadata key "last_updated".
+Any omitted metadata fields will be overwritten.
 }
 \examples{
 \dontrun{
 # Setup
 ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
 
-# Create a package
-(pkg <- package_create("hello-world11", author="Jane Doe"))
+# Step 1: get the dataset details as R list
+ds_id <- "my-dataset-id-md5-hash"
+ds <- ckanr::package_show(ds_id, as="table")
 
-# Next show the package to see the fields
-(res <- package_show(pkg$id))
+# Step 2: update selected fields
+ds$title <- "An updated title"
+ds$description <- "Only title and description have been updated."
+ds contains all other package data, including tags and resources
 
-## update just chosen things
-# Make some changes
-x <- list(maintainer_email = "heythere2@things.com")
+# Step 3a: Update the dataset on CKAN with locally modified metadata `ds`
+result <- ckanr::package_update(ds, ds_id)
+# Replace existing package metadata
 
-# Then update the packge
-package_update(x, pkg$id)
+# Step 3b: Possible or intended data loss
+# Any metadata fields missing from `ds` will be deleted in the package
+del(ds$description)
+result_with_deleted_description <- ckanr::package_update(ds, ds_id)
 }
 }
