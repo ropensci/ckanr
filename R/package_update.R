@@ -28,7 +28,7 @@ package_update <- function(x, id, http_method = "GET", url = get_default_url(),
                            key = get_default_key(), as = 'list', ...) {
 
   id <- as.ckan_package(id, url = url, key = key, http_method = http_method)
-  if (class(x) != "list") {
+  if (!inherits(x, "list")) {
     stop("x must be of class list", call. = FALSE)
   }
   x$id <- id$id
