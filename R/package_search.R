@@ -61,7 +61,7 @@ package_search <- function(q = '*:*', fq = NULL, sort = NULL, rows = NULL,
   as = 'list', ...) {
 
   ver <- try(ckan_version(url)$version_num, silent = TRUE)
-  if (class(ver) == "try-error") {
+  if (inherits(ver, "try-error")) {
     ver <- NA
   }
   args <- cc(list(
