@@ -80,7 +80,7 @@ format.src_ckan <- function(x, ...) {
 #' @export
 #' @importFrom dplyr sql_translate_env
 #' @importFrom dbplyr base_agg build_sql
-sql_translate_env.src_ckan <- function(x) {
+sql_translate_env.src_ckan <- function(con) {
   sql_variant(
     base_scalar,
     sql_translator(.parent = base_agg,
