@@ -9,7 +9,7 @@ test_that("tag_search gives back expected class types", {
   a <- tag_search(query = "a", url = u)
   expect_is(a, "list")
   expect_is(a[[1]], "ckan_tag")
-  expect_named(a[[1]], c('vocabulary_id', 'id', 'name'))
+  expect_named(a[[1]], c('vocabulary_id', 'id', 'name'), ignore.order = TRUE)
 })
 
 test_that("tag_search works with many queries", {
@@ -17,7 +17,7 @@ test_that("tag_search works with many queries", {
   a <- tag_search(query = c('c', 'ck'), url = u)
   expect_is(a, "list")
   expect_is(a[[1]], "ckan_tag")
-  expect_named(a[[1]], c('vocabulary_id', 'id', 'name'))
+  expect_named(a[[1]], c('vocabulary_id', 'id', 'name'), ignore.order = TRUE)
 })
 
 test_that("tag_search works giving back json output", {
