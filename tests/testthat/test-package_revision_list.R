@@ -3,6 +3,7 @@ context("package_revision_list")
 skip_on_cran()
 
 u <- get_test_url()
+ver <- try(ckan_version(u)$version_num, silent = TRUE)
 
 if (ver >= 29.0) {
   test_that("removal of package_revision_list endpoint", {
