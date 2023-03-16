@@ -16,6 +16,7 @@ services:
       - CKAN_SYSADMIN_NAME=ckan_admin
       - CKAN_SYSADMIN_PASSWORD=test1234
       - CKAN_SYSADMIN_EMAIL=mail@example.com
+      - CKAN___BEAKER__SESSION__SECRET=secret
     ports:
       - "5000:5000"
   postgres:
