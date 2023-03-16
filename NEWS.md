@@ -1,3 +1,15 @@
+ckanr 0.7.0
+===========
+
+### NEW FEATURES
+
+* `resource_update()` allows update of resource extra fields by making the `path` parameter optional (#175) thanks @nicholsn
+
+### MINOR IMPROVEMENTS
+
+* `revision_list` and `package_revision_list` return `NULL` instead of error for CKAN 2.9+ (#200)
+* fix notes and warnings from CRAN package check results (#195)
+
 ckanr 0.6.0
 ===========
 
