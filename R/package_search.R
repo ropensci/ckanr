@@ -17,7 +17,7 @@
 #' constraint counts that should be returned for the facet fields.
 #' A negative value means unlimited. Default: 100.
 #' Can be specified on a per field basis.
-#' @param facet.field (charcter) This param allows you to specify a field which
+#' @param facet.field (character) This param allows you to specify a field which
 #' should be treated as a facet. It will iterate over each Term in the field 
 #' and generate a facet count using that Term as the constraint. This parameter 
 #' can be specified multiple times to indicate multiple facet fields. None of 

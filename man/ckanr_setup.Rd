@@ -53,7 +53,7 @@ default to use the default URL and API key unless specified explicitly.
 
 ckanr's automated tests require a valid CKAN URL, a privileged API key
 for that URL, plus the IDs of an existing dataset and an existing resource,
-repectively.
+respectively.
 
 The writing tests (create, update, delete) can fail for two reasons:
 failures in ckanr's code which the tests aim to detect,
