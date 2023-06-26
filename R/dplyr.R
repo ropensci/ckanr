@@ -136,15 +136,6 @@ db_insert_into.CKANConnection <- function(con, table, values, ...) {
   .read_only("db_insert_into.CKANConnection")
 }
 
-#' @export
-#' @importFrom dplyr db_query_rows
-db_query_rows.CKANConnection <- function(con, sql, ...) {
-  from <- sql_subquery(con, sql, "master")
-  # rows <- build_sql("SELECT count(*) FROM ", from, con = con)
-  rows <- sprintf("SELECT count(*) FROM (%s)", unclass(sql))
-  as.integer(dbGetQuery(con$con, rows)[[1]])
-}
-
 #' @importFrom dplyr db_list_tables sql sql_select sql_subquery
 #' @importFrom dbplyr base_agg base_scalar base_win build_sql sql_prefix
 #' sql_translator sql_variant src_sql tbl_sql
