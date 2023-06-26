@@ -104,12 +104,6 @@ sql_translate_env.CKANConnection <- function(con) {
   sql_translate_env.src_ckan(con)
 }
 
-#' @export
-#' @importFrom dplyr db_has_table
-db_has_table.CKANConnection <- function(con, table, ...) {
-  table %in% db_list_tables(con)
-}
-
 # http://www.postgresql.org/docs/9.3/static/sql-explain.html
 #' @export
 #' @importFrom dplyr db_explain
