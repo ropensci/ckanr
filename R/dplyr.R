@@ -110,12 +110,6 @@ db_has_table.CKANConnection <- function(con, table, ...) {
   table %in% db_list_tables(con)
 }
 
-#' @export
-#' @importFrom dplyr db_begin
-db_begin.CKANConnection <- function(con, ...) {
-  dbGetQuery(con, "BEGIN TRANSACTION")
-}
-
 # http://www.postgresql.org/docs/9.3/static/sql-explain.html
 #' @export
 #' @importFrom dplyr db_explain
