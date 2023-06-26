@@ -118,7 +118,7 @@ db_explain.CKANConnection <- function(con, sql, format = "text", ...) {
   paste(expl[[1]], collapse = "\n")
 }
 
-#' @importFrom dplyr db_list_tables sql sql_select sql_subquery
+#' @importFrom dplyr db_list_tables sql
 #' @importFrom dbplyr base_agg base_scalar base_win build_sql sql_prefix
 #' sql_translator sql_variant src_sql tbl_sql
 NULL
