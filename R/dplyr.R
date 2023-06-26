@@ -137,17 +137,6 @@ db_insert_into.CKANConnection <- function(con, table, values, ...) {
 }
 
 #' @export
-#' @importFrom dplyr db_query_fields
-db_query_fields.CKANConnection <- function(con, sql, ...) {
-  sql <- sql_select(con, sql("*"), sql_subquery(con, sql), where = sql("0 = 1"))
-  qry <- dbSendQuery(con, sql)
-  on.exit(dbClearResult(qry))
-
-  res <- fetch(qry, 0)
-  names(res)
-}
-
-#' @export
 #' @importFrom dplyr db_query_rows
 db_query_rows.CKANConnection <- function(con, sql, ...) {
   from <- sql_subquery(con, sql, "master")
