@@ -38,8 +38,9 @@ resource_patch <- function(x, id, url = get_default_url(),
     stop("x must be of class list", call. = FALSE)
   }
   x$id <- id$id
+  if (!is.null(x$upload)) x$upload <- upfile(x$upload)
   res <- ckan_POST(url, method = 'resource_patch', body = x, key = key,
-    encode = "json", headers = ctj(), opts = list(...))
+    opts = list(...))
   switch(as, json = res, list = as_ck(jsl(res), "ckan_resource"),
     table = jsd(res))
 }
