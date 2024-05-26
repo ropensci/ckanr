@@ -87,7 +87,7 @@ Useful links:
 \author{
 Scott Chamberlain \email{myrmecocystus@gmail.com}
 
-Florian Mayer \email{florian.wendelin.mayer@gmail.com}
+Florian Mayer \email{florian.wendelin.mayer+ckanr@gmail.com}
 
 Wush Wu
 

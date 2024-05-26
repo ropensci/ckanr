@@ -156,14 +156,20 @@ db_query_rows.CKANConnection <- function(con, sql, ...) {
 
 #' Use dbplyr 2.0.0 generics
 #' See https://dbplyr.tidyverse.org/articles/backend-2.html#nd-edition
-#' New in 0.7.0.9001
+#' Introduced in 0.8.0
 #' @importFrom dbplyr dbplyr_edition
 #' @export
-dbplyr_edition.myConnectionClass <- function(con) 2L
+dbplyr_edition.CKANConnection <- function(con) 2L
+
+#' Use dbplyr 2.0.0 generics
+#' See https://dbplyr.tidyverse.org/articles/backend-2.html#nd-edition
+#' Introduced in 0.8.0
+#' @importFrom dbplyr dbplyr_edition
+#' @export
+dbplyr_edition.src_ckan <- function(con) 2L
 
 #' @importFrom dplyr db_list_tables sql
 #' @importFrom dbplyr base_agg base_scalar base_win build_sql sql_prefix 
 #' sql_translator sql_variant src_sql tbl_sql
-#' sql_query_fields 
-#' sql_query_select sql_query_wrap sql_query_explain sql_translation
+#' sql_query_fields sql_query_select sql_query_wrap sql_query_explain sql_translation
 NULL

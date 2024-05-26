@@ -34,12 +34,14 @@ BugReports: https://github.com/ropensci/ckanr/issues
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
-Depends: DBI (>= 0.3.1)
+Depends: 
+  DBI (>= 1.2.2),
+  R (>= 4.4.0)
 Imports:
     methods,
     stats,
     utils,
-    crul,
+    crul (>= 1.4.2),
     jsonlite (>= 1.8.8),
     dplyr (>= 1.1.4),
     dbplyr (>= 2.5.0),

@@ -68,7 +68,7 @@
 #' @aliases ckanr
 #' @docType package
 #' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}
-#' @author Florian Mayer \email{florian.wendelin.mayer@@gmail.com}
+#' @author Florian Mayer \email{florian.wendelin.mayer+ckanr@@gmail.com}
 #' @author Wush Wu
 #' @author Imanuel Costigan \email{i.costigan@@me.com}
 #' @author Sharla Gelfand
