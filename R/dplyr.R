@@ -78,9 +78,8 @@ format.src_ckan <- function(x, ...) {
 }
 
 #' @export
-#' @importFrom dplyr sql_translate_env
 #' @importFrom dbplyr base_agg build_sql
-sql_translate_env.src_ckan <- function(con) {
+sql_translation.src_ckan <- function(con) {
   sql_variant(
     base_scalar,
     sql_translator(.parent = base_agg,
@@ -100,8 +99,8 @@ sql_translate_env.src_ckan <- function(con) {
 }
 
 #' @export
-sql_translate_env.CKANConnection <- function(con) {
-  sql_translate_env.src_ckan(con)
+sql_translation.CKANConnection <- function(con) {
+  sql_translation.src_ckan(con)
 }
 
 #' @export
@@ -118,8 +117,8 @@ db_begin.CKANConnection <- function(con, ...) {
 
 # http://www.postgresql.org/docs/9.3/static/sql-explain.html
 #' @export
-#' @importFrom dplyr db_explain
-db_explain.CKANConnection <- function(con, sql, format = "text", ...) {
+#' @importFrom dbplyr sql_query_explain
+sql_query_explain.CKANConnection <- function(con, sql, format = "text", ...) {
   format <- match.arg(format, c("text", "json", "yaml", "xml"))
 
   exsql <- build_sql("EXPLAIN ",
@@ -137,9 +136,8 @@ db_insert_into.CKANConnection <- function(con, table, values, ...) {
 }
 
 #' @export
-#' @importFrom dplyr db_query_fields
-db_query_fields.CKANConnection <- function(con, sql, ...) {
-  sql <- sql_select(con, sql("*"), sql_subquery(con, sql), where = sql("0 = 1"))
+sql_query_fields.CKANConnection <- function(con, sql, ...) {
+  sql <- sql_query_select(con, sql("*"), sql_query_wrap(con, sql), where = sql("0 = 1"))
   qry <- dbSendQuery(con, sql)
   on.exit(dbClearResult(qry))
 
@@ -150,13 +148,22 @@ db_query_fields.CKANConnection <- function(con, sql, ...) {
 #' @export
 #' @importFrom dplyr db_query_rows
 db_query_rows.CKANConnection <- function(con, sql, ...) {
-  from <- sql_subquery(con, sql, "master")
+  from <- sql_query_wrap(con, sql, "master")
   # rows <- build_sql("SELECT count(*) FROM ", from, con = con)
   rows <- sprintf("SELECT count(*) FROM (%s)", unclass(sql))
   as.integer(dbGetQuery(con$con, rows)[[1]])
 }
 
-#' @importFrom dplyr db_list_tables sql sql_select sql_subquery
-#' @importFrom dbplyr base_agg base_scalar base_win build_sql sql_prefix
+#' Use dbplyr 2.0.0 generics
+#' See https://dbplyr.tidyverse.org/articles/backend-2.html#nd-edition
+#' New in 0.7.0.9001
+#' @importFrom dbplyr dbplyr_edition
+#' @export
+dbplyr_edition.myConnectionClass <- function(con) 2L
+
+#' @importFrom dplyr db_list_tables sql
+#' @importFrom dbplyr base_agg base_scalar base_win build_sql sql_prefix 
 #' sql_translator sql_variant src_sql tbl_sql
+#' sql_query_fields 
+#' sql_query_select sql_query_wrap sql_query_explain sql_translation
 NULL
