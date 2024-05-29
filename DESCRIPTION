@@ -3,7 +3,7 @@ Title: Client for the Comprehensive Knowledge Archive Network ('CKAN') API
 Description: Client for 'CKAN' API (<https://ckan.org/>). Includes interface
     to 'CKAN' 'APIs' for search, list, show for packages, organizations, and
     resources. In addition, provides an interface to the 'datastore' API.
-Version: 0.7.0.9000
+Version: 0.7.0.9001
 Authors@R: c(
     person("Scott", "Chamberlain",
     	role = c("aut"),
@@ -17,7 +17,7 @@ Authors@R: c(
         comment = c(ORCID = "0000-0001-5180-0567")),
     person("Florian", "Mayer",
     	role = "aut",
-     	email="Florian.Mayer@dbca.wa.gov.au",
+     	email="Florian.Mayer@dpc.wa.gov.au",
         comment = c(ORCID = "0000-0003-4269-4242")),
     person("Sharla", "Gelfand", 
         role = "aut"),
@@ -34,15 +34,17 @@ BugReports: https://github.com/ropensci/ckanr/issues
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
-Depends: DBI (>= 0.3.1)
+Depends: 
+  DBI (>= 1.2.2),
+  R (>= 4.4.0)
 Imports:
     methods,
     stats,
     utils,
-    crul,
-    jsonlite (>= 0.9.17),
-    dplyr (>= 0.7.0),
-    dbplyr,
+    crul (>= 1.4.2),
+    jsonlite (>= 1.8.8),
+    dplyr (>= 1.1.4),
+    dbplyr (>= 2.5.0),
     magrittr
 Suggests:
     sf,
@@ -50,7 +52,7 @@ Suggests:
     testthat,
     xml2,
     lazyeval
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 X-schema.org-keywords: database, open-data, ckan, api, data, dataset
 X-schema.org-applicationCategory: Data Access
 X-schema.org-isPartOf: "https://ropensci.org"

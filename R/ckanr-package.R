@@ -68,11 +68,13 @@
 #' @aliases ckanr
 #' @docType package
 #' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}
-#' @author Florian Mayer \email{florian.wendelin.mayer@@gmail.com}
+#' @author Florian Mayer \email{florian.wendelin.mayer+ckanr@@gmail.com}
 #' @author Wush Wu
 #' @author Imanuel Costigan \email{i.costigan@@me.com}
+#' @author Sharla Gelfand
+#' @author Francisco Alves \email{fjunior.alves.oliveira@@gmail.com}
 #' @keywords package
-NULL
+"_PACKAGE"
 
 #' Deprecated functions in \pkg{ckanr}
 #'

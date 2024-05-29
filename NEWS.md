@@ -1,5 +1,28 @@
 # ckanr (development version)
 
+ckanr 0.8.0
+===========
+
+### NEW FEATURES
+
+* upgrades deprecated `dbplyr` generics (#187, @florianm)
+
+  Following [dbplyr's 2.0.0 backend API](https://dbplyr.tidyverse.org/articles/backend-2.html),
+  scripts using `ckanr`'s SQL `CKANConnection` must implement the following 
+  changes:
+  
+  * change `dplyr::sql_translate_env` to `dbplyr::sql_translation`
+  * change `dplyr::db_explain` to `dbplyr::sql_query_explain`
+  * change `dplyr::db_query_fields` to `dbplyr::sql_query_fields`
+  * change `dplyr::sql_subquery` to `dbplyr::sql_query_wrap`
+  * change `dplyr::sql_select` to `dbplyr::sql_query_select`
+  * all other generics are unchanged.
+* updates dependencies (R, DBI, jsonlite, dplyr, dbplyr, RoxygenNote)
+  
+### MINOR IMPROVEMENTS
+
+* update manpage author list (add SG, FA), author email (FM)
+
 ckanr 0.7.0
 ===========
 
@@ -81,7 +104,7 @@ ckanr 0.3.0
 * `package_show()` gains `key` parameter to pass an API key (#97)
 * `package_search()` gains new parameters: `include_drafts`, `include_private`, `use_default_schema`, and `facet.mincount` (#107)
 * function `fetch()` changed to `ckan_fetch()`
-* gains function `organization_delet()` to delete an organization (#83)
+* gains function `organization_delete()` to delete an organization (#83)
 * gains function `ckan_version()` to get version info for a CKAN instance
 * gains methods for creating a CKAN remote instance as a dplyr backend: gains `src_ckan()` and it's s3 methods `tbl` and `src_tbls`, `sql_translate_env`. in addition gains the S3 methods `db_begin`, `db_explain`, `db_has_table`, `db_insert_into`, `db_query_fields`, `db_query_rows`
 

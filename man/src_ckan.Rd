@@ -14,21 +14,36 @@ src_ckan(url)
 Use \code{src_ckan} to connect to an existing CKAN instance and \code{tbl} to
 connect to tables within that CKAN based on the DataStore Data API.
 }
+\details{
+The function returns a
+\href{https://dbi.r-dbi.org/reference/DBIConnection-class.html}{\code{DBI::dbConnect()}}
+object, which can be then used by
+\href{https://dbplyr.tidyverse.org/articles/dbplyr.html}{dbplyr} and
+}
 \examples{
 \dontrun{
-library("dplyr")
+library(dplyr)
+library(DBI)
 
 # To connect to a CKAN instance first create a src:
-my_ckan <- src_ckan("http://demo.ckan.org")
+my_ckan <- src_ckan("https://www.data.qld.gov.au/")
 
-# List all tables in the CKAN instance
-db_list_tables(my_ckan$con)
+summary(my_ckan)
+dplyr::db_desc(my_ckan)
 
-# Then reference a tbl within that src
-my_tbl <- tbl(src = my_ckan, name = "44d7de5f-7029-4f3a-a812-d7a70895da7d")
+# dplyr has changed its dbplyr backend API to version 2
+dbplyr::dbplyr_edition(my_ckan)
 
-# You can use the dplyr verbs with my_tbl. For example:
-dplyr::filter(my_tbl, GABARITO == "C")
+# List all tables in the CKAN database
+tbl_list <- DBI::dbListTables(my_ckan, limit=5)
+tbl_list
 
+# Create an in-memory table from a CKAN database table
+tbl1 <- dplyr::tbl(my_ckan, tbl_list[1])
+tbl2 <- dplyr::tbl(my_ckan, "587f65ae-6675-4b8e-bac5-606ce7f4446a")
+
+# You can use the dplyr verbs with tbl. For example:
+dplyr::filter(tbl1, variable_name == "value")
+dplyr::select(tbl2, `Density class`, Full)
 }
 }
