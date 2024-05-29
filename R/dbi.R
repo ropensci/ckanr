@@ -131,7 +131,7 @@ setMethod("dbGetException", "CKANConnection",
 
 setMethod("dbGetInfo", "CKANConnection",
           def = function(dbObj, ...) {
-            cat(sprintf("url: %s\n", dbObj@url))
+            cat(sprintf("CKAN URL: %s\n", dbObj@url))
           }
           )
 

@@ -8,6 +8,9 @@ Introduced in 0.8.0}
 \usage{
 \method{dbplyr_edition}{CKANConnection}(con)
 }
+\arguments{
+\item{con}{A database connection.}
+}
 \description{
 Use dbplyr 2.0.0 generics
 See https://dbplyr.tidyverse.org/articles/backend-2.html#nd-edition
