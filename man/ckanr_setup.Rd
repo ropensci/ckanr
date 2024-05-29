@@ -22,7 +22,12 @@ ckanr_setup(
 
 \item{key}{A CKAN API key (optional, character)}
 
-\item{test_url}{(optional, character) A valid CKAN URL for testing purposes}
+\item{test_url}{(optional, character) A valid CKAN URL for testing purposes.
+Default: "http://localhost:5000".
+The default works with a local installation of CKAN via docker compose
+running on port 5000, as well as for CI on GitHub.
+This enables contributors to run the CI test suite on GitHub when submitting
+a pull request.}
 
 \item{test_key}{(optional, character) A valid CKAN API key privileged to
 create datasets at \code{test_url}}
@@ -39,7 +44,8 @@ create datasets at \code{test_url}}
 \code{test_url}}
 
 \item{test_behaviour}{(optional, character) Whether to fail ("FAIL") or skip
-("SKIP") writing tests in case of problems with the configured test CKAN.}
+("SKIP") writing tests in case of problems with the configured test CKAN.
+Default: "FAIL".}
 
 \item{proxy}{an object of class \code{request} from a call to
 \code{\link[crul:proxies]{crul::proxy()}}}
@@ -75,11 +81,13 @@ ckanr_setup(url = "https://data.ontario.ca/")
 ckanr_setup(url = "https://data.ontario.ca/", key = "some-CKAN-API-key")
 
 # ckanR developers/testers can run:
-ckanr_setup(url = "https://data.ontario.ca/", key = "some-CKAN-API-key",
-           test_url = "http://test-ckan.gov/",test_key = "test-ckan-API-key",
-           test_did = "test-ckan-dataset-id",test_rid = "test-ckan-resource-id",
-           test_gid = "test-group-name", test_oid = "test-organzation-name",
-           test_behaviour = "FAIL")
+ckanr_setup(
+  url = "https://data.ontario.ca/", key = "some-CKAN-API-key",
+  test_url = "http://test-ckan.gov/", test_key = "test-ckan-API-key",
+  test_did = "test-ckan-dataset-id", test_rid = "test-ckan-resource-id",
+  test_gid = "test-group-name", test_oid = "test-organization-name",
+  test_behaviour = "FAIL"
+)
 
 # Not specifying the default CKAN URL will reset the CKAN URL to its default
 # "https://data.ontario.ca/":

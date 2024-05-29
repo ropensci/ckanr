@@ -21,8 +21,8 @@ test_that("tag_show gives back expected class types", {
   a <- tag_show(t$name, include_datasets = TRUE, url=u)
 
   expect_is(a, "ckan_tag")
-  expect_is(a[[2]], "list")
-  #expect_equal(length(a[[2]]), tag_test_num)
+  expect_is(a$packages, "list")
+  #expect_equal(length(a$packages), tag_test_num)
 })
 
 test_that("tag_show works giving back json output", {

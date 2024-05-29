@@ -2,6 +2,7 @@ context("ckan_fetch")
 
 skip_on_cran()
 
+url <- get_test_url()
 rid <- get_test_rid()
 
 test_that("ckan_fetch returns error when file format can't be determined from URL", {
@@ -17,7 +18,11 @@ check_ckan(u)
 test_that("ckan_fetch doesn't write any files to working directory when session = TRUE", {
   expect_identical(list.files(test_path()), {
     res <- resource_show(id = rid, as = "table")
-    df <- ckan_fetch(res$url)
+    # When running CKAN via docker compose, it returns its hostname as 
+    # http://ckan:5000, but we can only reach it via localhost unless we patch
+    # /etc/hosts
+    url <- gsub("ckan", "localhost", res$url)
+    df <- ckan_fetch(url)
     list.files(test_path())
   })
 })
@@ -26,7 +31,8 @@ test_that("ckan_fetch doesn't retain any files in temporary directory when sessi
   dir <- tempdir()
   expect_identical(list.files(dir), {
     res <- resource_show(id = rid, as = "table")
-    df <- ckan_fetch(res$url)
+    url <- gsub("ckan", "localhost", res$url)
+    df <- ckan_fetch(url)
     list.files(dir)
   })
 })
