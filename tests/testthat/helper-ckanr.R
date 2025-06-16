@@ -153,9 +153,7 @@ check_organization <- function(url, x){
   }
 }
 
-u <- get_test_url()
-
-if (ping(u)) {
+if (ping("http://localhost:5000")) {
   prepare_test_ckan()
 } else {
   message("CKAN is offline. Running tests that don't depend on CKAN.")

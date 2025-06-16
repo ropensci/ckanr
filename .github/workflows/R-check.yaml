@@ -1,4 +1,8 @@
-on: [push, pull_request]
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
 
 name: R-check
 
@@ -21,8 +25,8 @@ jobs:
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      CKANR_TEST_URL: ${{secrets.CKANR_TEST_URL}}
-      CKANR_TEST_BEHAVIOUR: ${{secrets.CKANR_TEST_BEHAVIOUR}}
+      CKANR_TEST_URL: http://ckan:5000
+      CKANR_TEST_BEHAVIOUR: SKIP
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       R_KEEP_PKG_SOURCE: yes
       CKAN_VERSION: ${{ matrix.config.ckan-version }} # for docker compose up
@@ -63,7 +67,6 @@ jobs:
           _R_CHECK_CRAN_INCOMING_: false
         run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "error", check_dir = "check")
         shell: Rscript {0}
-
       - name: Test coverage
         if: matrix.config.os == 'ubuntu-latest' && matrix.config.r == 'release' &&  matrix.config.ckan-version == '2.8'
         run: |
