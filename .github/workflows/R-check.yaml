@@ -1,4 +1,8 @@
-on: [push, pull_request]
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
 
 name: R-check
 
@@ -58,6 +62,9 @@ jobs:
         run: |
           echo "TEST_API_KEY"=$(docker exec ckan paster --plugin=ckan user ckan_admin | grep -o -P '(?<=apikey=).*(?= created)') >> $GITHUB_ENV
         if: matrix.config.ckan-version != '2.9' && matrix.config.os == 'ubuntu-latest'
+      - name: Configure Test CKAN
+        run: ckanr::ckanr_setup(test_url="$CKANR_TEST_URL")
+        shell: Rscript {0}
       - name: Check
         env:
           _R_CHECK_CRAN_INCOMING_: false
