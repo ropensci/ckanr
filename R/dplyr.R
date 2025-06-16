@@ -104,18 +104,6 @@ sql_translate_env.CKANConnection <- function(con) {
   sql_translate_env.src_ckan(con)
 }
 
-#' @export
-#' @importFrom dplyr db_has_table
-db_has_table.CKANConnection <- function(con, table, ...) {
-  table %in% db_list_tables(con)
-}
-
-#' @export
-#' @importFrom dplyr db_begin
-db_begin.CKANConnection <- function(con, ...) {
-  dbGetQuery(con, "BEGIN TRANSACTION")
-}
-
 # http://www.postgresql.org/docs/9.3/static/sql-explain.html
 #' @export
 #' @importFrom dplyr db_explain
@@ -130,33 +118,7 @@ db_explain.CKANConnection <- function(con, sql, format = "text", ...) {
   paste(expl[[1]], collapse = "\n")
 }
 
-#' @export
-#' @importFrom dplyr db_insert_into
-db_insert_into.CKANConnection <- function(con, table, values, ...) {
-  .read_only("db_insert_into.CKANConnection")
-}
-
-#' @export
-#' @importFrom dplyr db_query_fields
-db_query_fields.CKANConnection <- function(con, sql, ...) {
-  sql <- sql_select(con, sql("*"), sql_subquery(con, sql), where = sql("0 = 1"))
-  qry <- dbSendQuery(con, sql)
-  on.exit(dbClearResult(qry))
-
-  res <- fetch(qry, 0)
-  names(res)
-}
-
-#' @export
-#' @importFrom dplyr db_query_rows
-db_query_rows.CKANConnection <- function(con, sql, ...) {
-  from <- sql_subquery(con, sql, "master")
-  # rows <- build_sql("SELECT count(*) FROM ", from, con = con)
-  rows <- sprintf("SELECT count(*) FROM (%s)", unclass(sql))
-  as.integer(dbGetQuery(con$con, rows)[[1]])
-}
-
-#' @importFrom dplyr db_list_tables sql sql_select sql_subquery
+#' @importFrom dplyr db_list_tables sql
 #' @importFrom dbplyr base_agg base_scalar base_win build_sql sql_prefix
 #' sql_translator sql_variant src_sql tbl_sql
 NULL
