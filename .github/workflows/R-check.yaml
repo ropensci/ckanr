@@ -67,8 +67,6 @@ jobs:
           _R_CHECK_CRAN_INCOMING_: false
         run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "error", check_dir = "check")
         shell: Rscript {0}
-        env:
-          CKANR_TEST_URL: http://ckan:5000
       - name: Test coverage
         if: matrix.config.os == 'ubuntu-latest' && matrix.config.r == 'release' &&  matrix.config.ckan-version == '2.8'
         run: |
@@ -78,8 +76,6 @@ jobs:
             install_path = file.path(Sys.getenv("RUNNER_TEMP"), "package")
           )
         shell: Rscript {0}
-        env:
-          CKANR_TEST_URL: http://ckan:5000
 
       - name: Show testthat output
         if: always()
