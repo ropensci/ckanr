@@ -15,7 +15,7 @@ if you have problems, or have use cases that we don't cover yet.
 
 
 Document for the CKAN API is at \url{https://docs.ckan.org/en/latest/api/index.html}.
-We'll always be following the lastest version of the API.
+We'll always be following the latest version of the API.
 }
 
 \section{ckanr package API}{

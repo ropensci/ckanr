@@ -2,7 +2,7 @@
 % Please edit documentation in R/tag_search.R
 \name{tag_search}
 \alias{tag_search}
-\title{Searcn tags.}
+\title{Search tags.}
 \usage{
 tag_search(
   query = NULL,
@@ -43,7 +43,7 @@ can vary from a vector, list or data.frame. (required)}
 \item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
 }
 \description{
-Searcn tags.
+Search tags.
 }
 \examples{
 \dontrun{
