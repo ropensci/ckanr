@@ -24,7 +24,7 @@
     docker exec ckan paster --plugin=ckan user ckan_admin
     ```
 * Push up to your account
-* Submit a pull request to home base (likely master branch, but check to make sure) at `ropensci/ckanr`
+* Submit a pull request to home base (likely `main` branch, but check to make sure) at `ropensci/ckanr`
 
 ### Also, check out our [discussion forum](https://discuss.ropensci.org)
 
