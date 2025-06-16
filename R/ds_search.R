@@ -1,4 +1,4 @@
-#' Datastore - search or get a dataset from CKRAN datastore
+#' Datastore - search or get a dataset from CKAN datastore
 #'
 #' @export
 #' @param resource_id (character) id or alias of the resource to be searched

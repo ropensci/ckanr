@@ -1,24 +1,22 @@
-#' Given a TEST_API_KEY, create test resources on demo.ckan.org
+#' Given a TEST_API_KEY, create test resources on a CKAN site
 #'
 #' @keywords internal
 #' @details
 #' \code{prepare_test_ckan} creates an example dataset, resource, organisation,
-#' and group on \code{demo.ckan.org} for the test suite to use, and runs \code{ckanr_setup}
+#' and group on \code{localhost:5000} for the test suite to use, and runs \code{ckanr_setup}
 #' with the respective IDs.
 #'
-#' The only prerequisite for the tester is to register an account at
-#' \code{demo.ckan.org} and provide the API key as R environment variable
+#' The prerequisites for the tester is to run a CKAN site at
+#' \code{localhost:5000} and provide the API key as R environment variable
 #' \code{TEST_API_KEY}.
 #'
-#' This function aims to simplify using \code{demo.ckan.org} as test instance.
-#' \code{demo.ckan.org} periodically deletes all data, so test resources have to be
-#' re-created before running tests.
+#' This function aims to simplify using \code{localhost:5000} as test instance.
 #' @param test_url A test CKAN instance where we are allowed to create dummy resources
 #' @param test_key A working API key for an account on the test instance
-prepare_test_ckan <- function(test_url = "https://demo.ckan.org/",
+prepare_test_ckan <- function(test_url = "http://localhost:5000",
                               test_key = Sys.getenv("TEST_API_KEY")){
   if (test_key == "") {
-    message("Please provide your demo.ckan.org API key as parameter 'test_key' or via Sys.setenv(TEST_API_KEY = \"my-api-key\")")
+    message("Please provide your API key as parameter 'test_key' or via Sys.setenv(TEST_API_KEY = \"my-api-key\")")
     ckanr_setup(test_url=test_url)
   } else {
     message("Setting up test CKAN instance...")
@@ -44,6 +42,8 @@ prepare_test_ckan <- function(test_url = "https://demo.ckan.org/",
     try(package_create(name = "ckanr_test_dataset",
                        title = "ckanr test dataset",
                        owner_org = o$id,
+                       tags = list(list("name" = "ckanr"),
+                                   list("name" = "test")),
                        url = test_url,
                        key = test_key),
         silent = TRUE)
@@ -151,4 +151,12 @@ check_organization <- function(url, x){
                "Did you set CKAN test settings with ?ckanr_setup ?",
                "Does an organization with slug", x, "exist on", url, "?"))
   }
+}
+
+u <- get_test_url()
+
+if (ping(u)) {
+  prepare_test_ckan()
+} else {
+  message("CKAN is offline. Running tests that don't depend on CKAN.")
 }

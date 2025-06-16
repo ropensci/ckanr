@@ -3,9 +3,9 @@ context("organization_list")
 skip_on_cran()
 
 u <- get_test_url()
+check_ckan(u)
 
 test_that("organization_list gives back expected class types", {
-  check_ckan(u)
   a <- organization_list(url=u, limit=10)
 
   expect_is(a, "list")

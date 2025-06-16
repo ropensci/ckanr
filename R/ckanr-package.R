@@ -8,7 +8,7 @@
 #' @section CKAN API:
 #'
 #' Document for the CKAN API is at <https://docs.ckan.org/en/latest/api/index.html>.
-#' We'll always be following the lastest version of the API.
+#' We'll always be following the latest version of the API.
 #'
 #' @section ckanr package API:
 #'

@@ -4,10 +4,11 @@ ckanr
 
 
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![cran checks](https://cranchecks.info/badges/worst/ckanr)](https://cranchecks.info/pkgs/ckanr)
 [![R-check](https://github.com/ropensci/ckanr/workflows/R-check/badge.svg)](https://github.com/ropensci/ckanr/actions/)
 [![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/ckanr?color=FAB657)](https://github.com/r-hub/cranlogs.app)
 [![cran version](https://www.r-pkg.org/badges/version/ckanr)](https://cran.r-project.org/package=ckanr)
+[![Coverage](https://img.shields.io/codecov/c/github/ropensci/ckanr/main)](https://app.codecov.io/gh/ropensci/ckanr)
+
 
 `ckanr` is an R client for the CKAN API.
 
@@ -88,12 +89,13 @@ All classes state the type of object, have the ID to the right of the type, then
 
 ## Contributors
 
-(alphebetical)
+(alphabetical)
 
-* Scott Chamberlain
-* Imanuel Costigan
-* Sharla Gelfand
 * Florian Mayer
+* Francisco Alves
+* Imanuel Costigan
+* Scott Chamberlain
+* Sharla Gelfand
 * Wush Wu
 
 ## Meta

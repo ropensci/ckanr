@@ -1,6 +1,5 @@
 #' @title Update a resource
 #'
-#'
 #' @description This function can be used to update a resource's file attachment
 #' and "extra" metadata fields. Any update will also set the metadata key
 #' "last_updated". Any omitted metadata fields will be overwritten.

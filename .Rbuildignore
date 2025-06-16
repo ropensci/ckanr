@@ -14,3 +14,5 @@ notes.md
 ^revdep$
 vignettes/
 inst/ignore/
+docker-compose.yml
+^CRAN-SUBMISSION$

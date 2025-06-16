@@ -1,4 +1,4 @@
-#' Searcn tags.
+#' Search tags.
 #'
 #' @export
 #'

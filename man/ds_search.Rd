@@ -2,7 +2,7 @@
 % Please edit documentation in R/ds_search.R
 \name{ds_search}
 \alias{ds_search}
-\title{Datastore - search or get a dataset from CKRAN datastore}
+\title{Datastore - search or get a dataset from CKAN datastore}
 \usage{
 ds_search(
   resource_id = NULL,
@@ -63,7 +63,7 @@ can vary from a vector, list or data.frame. (required)}
 \item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
 }
 \description{
-Datastore - search or get a dataset from CKRAN datastore
+Datastore - search or get a dataset from CKAN datastore
 }
 \details{
 From the help for this method "The datastore_search action allows

@@ -4,6 +4,7 @@ skip_on_cran()
 skip_on_ci()
 
 u <- get_test_url()
+check_ckan(u)
 
 tag_test_num <- local({
   t <- "api"
@@ -16,7 +17,6 @@ tag_test_num <- local({
 })
 
 test_that("tag_show gives back expected class types", {
-  check_ckan(u)
   t <- tag_list(url=u)[[1]]
   a <- tag_show(t$name, include_datasets = TRUE, url=u)
 
@@ -26,7 +26,6 @@ test_that("tag_show gives back expected class types", {
 })
 
 test_that("tag_show works giving back json output", {
-  check_ckan(u)
   t <- tag_list(url=u)[[1]]
   b <- tag_show(t$name, include_datasets = TRUE, url=u, as = 'json')
   b_df <- jsonlite::fromJSON(b)
