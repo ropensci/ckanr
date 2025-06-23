@@ -46,6 +46,7 @@ see what additional arguments are available:
 \item json: \link[jsonlite]{fromJSON}
 \item shp, geojson: \link[sf]{st_read}
 \item txt: \link[utils]{read.table}
+\item parquet: \link[arrow]{read_parquet}
 }
 }
 \examples{
