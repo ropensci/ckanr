@@ -15,6 +15,7 @@
 #' * json: \link[jsonlite]{fromJSON}
 #' * shp, geojson: \link[sf]{st_read}
 #' * txt: \link[utils]{read.table}
+#' * parquet: \link[arrow]{read_parquet}
 #' 
 #'
 #' @param x URL for the file
@@ -192,6 +193,10 @@ read_session <- function(fmt, dat, path, ...) {
            } else {
              txt_res
            }
+         } ,
+         parquet = {
+           check4X("arrow")
+           arrow::read_parquet(path, ...)
          }
   )
 }
