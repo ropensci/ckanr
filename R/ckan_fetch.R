@@ -113,7 +113,15 @@
 #' as = "table")
 #' x <- ckan_fetch(res$url, sep = ";")
 #' head(x)
+#' 
+#' # Parquet file
+#' ckanr_setup("https://data.coat.no")
+#' res <- resource_show(id = "b7d1c192-0f44-4bab-bd51-eea0d408a09f",
+#' as = "table")
+#' x <- ckan_fetch(res$url)
+#' head(x)
 #' }
+
 ckan_fetch <- function(x, store = "session", path = "file", format = NULL,
   key = get_default_key(), ...) {
   
