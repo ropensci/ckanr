@@ -1,7 +1,6 @@
-version: "3.9"
 services:
   ckan:
-    image: "openknowledge/ckan-base:${CKAN_VERSION}"
+    image: "ckan/ckan-base:${CKAN_VERSION}"
     container_name: ckan
     environment:
       - CKAN_SITE_URL=http://ckan:5000
@@ -35,7 +34,7 @@ services:
       - DATAPUSHER_CHUNK_INSERT_ROWS=250
       - DATAPUSHER_DOWNLOAD_TIMEOUT=30
       - DATAPUSHER_SSL_VERIFY=False
-  solr: 
+  solr:
     image: "ckan/ckan-solr:${CKAN_VERSION}"
     container_name: solr
   redis:

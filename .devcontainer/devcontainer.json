@@ -3,10 +3,9 @@
 {
 	"name": "R (r2u and bspm configured)",
 	"image": "mcr.microsoft.com/devcontainers/base:noble",
-
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	"features": {
-		// A Feature to configure R on Ubuntu. 
+		// A Feature to configure R on Ubuntu.
 		// More info: https://github.com/rocker-org/devcontainer-features/tree/main/src/r-apt.
 		"ghcr.io/rocker-org/devcontainer-features/r-apt:0": {
 			"vscodeRSupport": "full",
@@ -17,16 +16,28 @@
 			"installBspm": true,
 		},
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
-    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
-    "ghcr.io/devcontainers-extra/features/pre-commit:2": {}
+		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
+		"ghcr.io/devcontainers-extra/features/pre-commit:2": {}
 	},
-
+	"remoteEnv": {
+		// For use in GitHub Codespaces: use repository codespaces secret
+		"CKAN_VERSION": "2.11",
+		"COMPOSE_BAKE": "true"
+	},
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
-
+	"forwardPorts": [
+		5000
+	],
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "R -q -e 'install.packages(\"tidyverse\")'",
 
+	"postCreateCommand": "R -q -e 'install.packages(c(\"generics\", \"tidyverse\", \"triebeard\",\"blob\",\"httpcode\",\"urltools\",\"DBI\", \"crul\", \"jsonlite\", \"sf\", \"readxl\", \"testthat\", \"xml2\", \"lazyeval\"))'",
+	// postStartCommand
+	// Run each time the container is successfully started.
+	// Startup CKAN from /docker-compose.yml and generate a TEST_API_KEY
+	"postStartCommand": "docker compose up -d && export TEST_API_KEY=$(docker exec ckan ckan user token add ckan_admin dev_token | sed 's/API Token created://' | tr -d '\n\t')",
+	// postAttachCommand
+	// A command to run each time a tool has successfully attached to the container.
+	// "postAttachCommand": {"TEST_API_KEY": "export TEST_API_KEY=..."},
 	// Configure tool-specific properties.
 	"customizations": {
 		// Settings for VS Code.
@@ -41,7 +52,6 @@
 			}
 		}
 	},
-
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
 	// "remoteUser": "root"
 }

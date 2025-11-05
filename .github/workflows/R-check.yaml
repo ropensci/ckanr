@@ -14,10 +14,13 @@ jobs:
         config:
         - { os: windows-latest, r: 'release'}
         - { os: macOS-latest, r: 'release'}
-        - { os: ubuntu-latest,  r: 'release', ckan-version: 2.7}
-        - { os: ubuntu-latest,  r: 'release', ckan-version: 2.8}
-        - { os: ubuntu-latest,  r: 'release', ckan-version: 2.9}
-        - { os: ubuntu-latest, r: 'devel', ckan-version: 2.9}
+        # Skip testing against no longer supported CKAN versions
+        # - { os: ubuntu-latest,  r: 'release', ckan-version: 2.7}
+        # - { os: ubuntu-latest,  r: 'release', ckan-version: 2.8}
+        # - { os: ubuntu-latest,  r: 'release', ckan-version: 2.9}
+        - { os: ubuntu-latest,  r: 'release', ckan-version: 2.10}
+        - { os: ubuntu-latest,  r: 'release', ckan-version: 2.11}
+        - { os: ubuntu-latest, r: 'devel', ckan-version: 2.11}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -53,11 +56,11 @@ jobs:
       - name: Generate CKAN API token
         run: |
           echo "TEST_API_KEY=$(docker exec ckan ckan user token add ckan_admin dev_token | sed 's/API Token created://' | tr -d '\n\t')" >> $GITHUB_ENV
-        if: matrix.config.ckan-version == '2.9' && matrix.config.os == 'ubuntu-latest'
-      - name: Generate CKAN API key
-        run: |
-          echo "TEST_API_KEY"=$(docker exec ckan paster --plugin=ckan user ckan_admin | grep -o -P '(?<=apikey=).*(?= created)') >> $GITHUB_ENV
-        if: matrix.config.ckan-version != '2.9' && matrix.config.os == 'ubuntu-latest'
+        # if: matrix.config.ckan-version == '2.9' && matrix.config.os == 'ubuntu-latest'
+      # - name: Generate CKAN API key
+      #   run: |
+      #     echo "TEST_API_KEY"=$(docker exec ckan paster --plugin=ckan user ckan_admin | grep -o -P '(?<=apikey=).*(?= created)') >> $GITHUB_ENV
+      #   if: matrix.config.ckan-version != '2.9' && matrix.config.os == 'ubuntu-latest'
       - name: Check
         env:
           _R_CHECK_CRAN_INCOMING_: false
@@ -65,7 +68,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Test coverage
-        if: matrix.config.os == 'ubuntu-latest' && matrix.config.r == 'release' &&  matrix.config.ckan-version == '2.8'
+        if: matrix.config.os == 'ubuntu-latest' && matrix.config.r == 'release' &&  matrix.config.ckan-version == '2.11'
         run: |
           covr::codecov(
             quiet = FALSE,
