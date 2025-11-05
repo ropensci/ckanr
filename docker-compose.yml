@@ -35,7 +35,7 @@ services:
       - DATAPUSHER_DOWNLOAD_TIMEOUT=30
       - DATAPUSHER_SSL_VERIFY=False
   solr:
-    image: "ckan/ckan-solr:${CKAN_VERSION}"
+    image: "ckan/ckan-solr:2.10-solr9-spatial"
     container_name: solr
   redis:
     image: "redis:5.0.14"

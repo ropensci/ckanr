@@ -10,6 +10,7 @@ Makefile
 ^README\.md$
 .github
 .devcontainer
+.vscode
 ^codemeta\.json$
 notes.md
 ^revdep$

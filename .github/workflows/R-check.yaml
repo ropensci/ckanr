@@ -17,7 +17,7 @@ jobs:
         # Skip testing against no longer supported CKAN versions
         # - { os: ubuntu-latest,  r: 'release', ckan-version: 2.7}
         # - { os: ubuntu-latest,  r: 'release', ckan-version: 2.8}
-        # - { os: ubuntu-latest,  r: 'release', ckan-version: 2.9}
+        - { os: ubuntu-latest,  r: 'release', ckan-version: 2.9}
         - { os: ubuntu-latest,  r: 'release', ckan-version: 2.10}
         - { os: ubuntu-latest,  r: 'release', ckan-version: 2.11}
         - { os: ubuntu-latest, r: 'devel', ckan-version: 2.11}
