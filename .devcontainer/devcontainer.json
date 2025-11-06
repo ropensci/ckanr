@@ -36,14 +36,14 @@
 		// For use in GitHub Codespaces: use repository codespaces secret
 		"CKAN_VERSION": "2.11",
 		"COMPOSE_BAKE": "true",
-		"CKANR_DEFAULT_URL": "http://localhost:5000",
-		"CKANR_TEST_URL": "http://localhost:5000"
+		"CKANR_DEFAULT_URL": "https://${CODESPACE_NAME}-5000.app.github.dev",
+		"CKANR_TEST_URL": "https://${CODESPACE_NAME}-5000.app.github.dev"
 	},
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [
 		5000
 	],
-	"onCreateCommand": "sudo chown $(whoami) /var/run/docker.sock",
+	// "onCreateCommand": "sudo chown $(whoami) /var/run/docker.sock",
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// Using install.packages() leverages bspm which is more reliable than pak for these packages
 	"postCreateCommand": "R -q -e 'install.packages(c(\"backports\", \"tidyverse\", \"stringr\", \"purrr\", \"triebeard\", \"blob\", \"httpcode\", \"urltools\", \"DBI\", \"crul\", \"jsonlite\", \"sf\", \"readxl\", \"testthat\", \"xml2\", \"lazyeval\"))'",
@@ -58,7 +58,10 @@
 		// Settings for VS Code.
 		"vscode": {
 			"extensions": [
-				"RDebugger.r-debugger"
+				"reditorsupport.r",
+				"REditorSupport.r-lsp",
+				"RDebugger.r-debugger",
+				"github.codespaces"
 			],
 			"settings": {
 				"r.rterm.linux": "/usr/local/bin/radian",
