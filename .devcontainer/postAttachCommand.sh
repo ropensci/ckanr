@@ -18,4 +18,13 @@ echo "CKANR_DEFAULT_KEY set to $CKANR_DEFAULT_KEY"
 # Persist environment variables to shell profile for all future terminal sessions
 echo "export CKANR_TEST_KEY='$CKANR_TEST_KEY'" >> ~/.bashrc
 echo "export CKANR_DEFAULT_KEY='$CKANR_DEFAULT_KEY'" >> ~/.bashrc
+echo "export CKANR_TEST_URL='https://${CODESPACE_NAME}-5000.app.github.dev'" >> ~/.bashrc
+echo "export CKANR_DEFAULT_URL='https://${CODESPACE_NAME}-5000.app.github.dev'" >> ~/.bashrc
 echo "Environment variables persisted to ~/.bashrc"
+
+# Persist environment variables to R environment for R sessions
+echo "CKANR_TEST_KEY=$CKANR_TEST_KEY" >> ~/.Renviron
+echo "CKANR_DEFAULT_KEY=$CKANR_DEFAULT_KEY" >> ~/.Renviron
+echo "CKANR_TEST_URL=https://${CODESPACE_NAME}-5000.app.github.dev" >> ~/.Renviron
+echo "CKANR_DEFAULT_URL=https://${CODESPACE_NAME}-5000.app.github.dev" >> ~/.Renviron
+echo "Environment variables persisted to ~/.Renviron for R sessions"

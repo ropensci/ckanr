@@ -6,5 +6,5 @@ ckanr::ckanr_setup(
   test_key = Sys.getenv("CKANR_TEST_KEY"),
   test_behaviour = "SKIP"
 )
-
+ckanr::ckanr_settings()
 test_check("ckanr")

@@ -41,7 +41,7 @@
 	},
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [
-		5000
+		5000, 8983, 6379, 8000
 	],
 	// "onCreateCommand": "sudo chown $(whoami) /var/run/docker.sock",
 	// Use 'postCreateCommand' to run commands after the container is created.
