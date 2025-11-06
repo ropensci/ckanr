@@ -26,7 +26,8 @@
 		"CKAN_VERSION": "2.11",
 		"COMPOSE_BAKE": "true",
 		"CKANR_DEFAULT_URL": "http://localhost:5000",
-		"CKANR_TEST_URL": "http://localhost:5000"
+		"CKANR_TEST_URL": "http://localhost:5000",
+		"CKANR_TEST_KEY": "$(sudo DOCKER_HOST=unix:///var/run/docker-host.sock docker exec ckan ckan user token add ckan_admin dev_token 2>/dev/null | grep -A1 'API Token created:' | tail -1 | tr -d '\\n\\t ')"
 	},
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [
@@ -37,14 +38,10 @@
 	"postCreateCommand": "R -q -e 'install.packages(c(\"generics\", \"tidyverse\",\"stringr\",\"purrr\", \"triebeard\",\"blob\",\"httpcode\",\"urltools\",\"DBI\", \"crul\", \"jsonlite\", \"sf\", \"readxl\", \"testthat\", \"xml2\", \"lazyeval\"))'",
 	// postStartCommand
 	// Run each time the container is successfully started.
-	// Startup CKAN from /docker-compose.yml and generate a CKANR_TEST_KEY
 	//"postStartCommand": "docker compose up -d",
 	// postAttachCommand
 	// A command to run each time a tool has successfully attached to the container.
-	"postAttachCommand": {
-		"CKANR_TEST_KEY": "export CKANR_TEST_KEY=$(sudo DOCKER_HOST=unix:///var/run/docker-host.sock docker exec ckan ckan user token add ckan_admin dev_token 2>/dev/null | grep -A1 'API Token created:' | tail -1 | tr -d '\\n\\t ')",
-		"CKANR_DEFAULT_KEY": "export CKANR_DEFAULT_KEY=$CKANR_TEST_KEY"
-	},
+	"postAttachCommand": ".devcontainer/postAttachCommand.sh",
 	// Configure tool-specific properties.
 	"customizations": {
 		// Settings for VS Code.
