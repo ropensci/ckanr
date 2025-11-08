@@ -13,10 +13,10 @@
 #' This function aims to simplify using \code{localhost:5000} as test instance.
 #' @param test_url A test CKAN instance where we are allowed to create dummy resources
 #' @param test_key A working API key for an account on the test instance
-prepare_test_ckan <- function(test_url = "http://localhost:5000",
-                              test_key = Sys.getenv("TEST_API_KEY")){
+prepare_test_ckan <- function(test_url = Sys.getenv("CKANR_TEST_URL"),
+                              test_key = Sys.getenv("CKANR_TEST_KEY")){
   if (test_key == "") {
-    message("Please provide your API key as parameter 'test_key' or via Sys.setenv(TEST_API_KEY = \"my-api-key\")")
+    message("Please provide your API key as parameter 'test_key' or via Sys.setenv(CKANR_TEST_KEY = \"my-api-key\")")
     ckanr_setup(test_url=test_url)
   } else {
     message("Setting up test CKAN instance...")
@@ -54,6 +54,9 @@ prepare_test_ckan <- function(test_url = "http://localhost:5000",
                          name = "ckanr test resource",
                          upload = path,
                          rcurl = "http://google.com")
+
+    # Note: The DataPusher will automatically push CSV resources to the datastore
+    # ds_search tests will skip if the datastore is not ready yet
 
     # Tags should get an entry in ckanr_setup / ckanr_settings
     # t <- tag_create(name = "web", vocabulary_id = "Testing1") ## 403
@@ -156,7 +159,7 @@ check_organization <- function(url, x){
 u <- get_test_url()
 
 if (ping(u)) {
-  prepare_test_ckan()
+  prepare_test_ckan(test_url=u)
 } else {
   message("CKAN is offline. Running tests that don't depend on CKAN.")
 }

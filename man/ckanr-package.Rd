@@ -76,6 +76,14 @@ using this package. That is, not necessarily landing pages of each instance,
 although, the URL may be the landing page and the base API URL.
 }
 
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://docs.ropensci.org/ckanr/ (website) https://github.com/ropensci/ckanr (devel)}
+  \item Report bugs at \url{https://github.com/ropensci/ckanr/issues}
+}
+
+}
 \author{
 Scott Chamberlain \email{myrmecocystus@gmail.com}
 

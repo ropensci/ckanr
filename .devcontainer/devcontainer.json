@@ -36,8 +36,12 @@
 		// For use in GitHub Codespaces: use repository codespaces secret
 		"CKAN_VERSION": "2.11",
 		"COMPOSE_BAKE": "true",
-		"CKANR_DEFAULT_URL": "https://${CODESPACE_NAME}-5000.app.github.dev",
-		"CKANR_TEST_URL": "https://${CODESPACE_NAME}-5000.app.github.dev"
+		// "CKANR_DEFAULT_URL": "https://${CODESPACE_NAME}-5000.app.github.dev",
+		// "CKANR_TEST_URL": "https://${CODESPACE_NAME}-5000.app.github.dev",
+		// "SOLR_URL": "https://${CODESPACE_NAME}-8983.app.github.dev/solr/ckan",
+		// "REDIS_URL": "https://${CODESPACE_NAME}-6379.app.github.dev/1",
+		// "DATAPUSHER_URL": "https://${CODESPACE_NAME}-8000.app.github.dev"
+
 	},
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [

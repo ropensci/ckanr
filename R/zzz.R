@@ -49,8 +49,8 @@ ckan_VERB <- function(verb, url, method, body, key, query = list(),
       res <- con$verb(verb, body = body, query = query)
     }
   } else {
-    # authentication
-    con$headers <- c(con$headers, list("X-CKAN-API-Key" = key))
+    # authentication - use both headers for compatibility with CKAN 2.10 and 2.11+
+    con$headers <- c(con$headers, auth_headers(key))
     if (is.null(body) || length(body) == 0) {
       con$headers <- c(con$headers, ctj())
       if (!is.null(proxy)) con$proxies <- proxy
@@ -78,14 +78,14 @@ fetch_GET <- function(x, store, path, args = NULL, format = NULL, key = NULL, ..
   fmt <- ifelse(is.na(derived_file_fmt), format, derived_file_fmt)
   fmt <- tolower(fmt)
 
-  # set API key header
+  # set API key header - compatible with both CKAN 2.10 and 2.11+
   if (!is.null(key)) {
-    api_key_header <- list("X-CKAN-API-Key" = key)
+    api_key_header <- auth_headers(key)
   }
 
   # initialize client, and set headers and proxy
   con <- crul::HttpClient$new(url = x, opts = list(...))
-  if (!is.null(key)) con$headers <- list("X-CKAN-API-Key" = key)
+  if (!is.null(key)) con$headers <- auth_headers(key)
   if (!is.null(proxy)) con$proxies <- proxy
 
   if (store == "session") {
@@ -145,6 +145,15 @@ as_log <- function(x){ stopifnot(is.logical(x)); if (x) 'true' else 'false' }
 jsl <- function(x) jsonlite::fromJSON(x, FALSE)$result
 jsd <- function(x) jsonlite::fromJSON(x)$result
 ctj <- function() list(`Content-Type` = "application/json")
+ 
+# Create auth headers compatible with both CKAN 2.10 and earlier (X-CKAN-API-Key)
+# and CKAN 2.11+ (Authorization)
+auth_headers <- function(key) {
+  list(
+    "Authorization" = key,        # CKAN 2.11+
+    "X-CKAN-API-Key" = key         # CKAN 2.10 and earlier
+  )
+}
 
 # fxn to attach classes
 as_ck <- function(x, class) {
