@@ -33,11 +33,11 @@
 	},
 	// "overrideFeatureInstallOrder": ["ghcr.io/rocker-org/devcontainer-features/r-apt"],
 	"remoteEnv": {
-		// For use in GitHub Codespaces: use repository codespaces secret
-		"CKAN_VERSION": "2.11",
-		"DATAPUSHER_VERSION": "2.11",
-		"SOLR_VERSION": "2.11",
-		"COMPOSE_BAKE": "true",
+		// For use in GitHub Codespaces: use repository codespaces secrets with ${{ secrets.SECRET_NAME }}
+		"CKAN_VERSION": "2.10",
+		"DATAPUSHER_VERSION": "0.0.17",
+		"SOLR_VERSION": "2.10-solr9-spatial",
+		"COMPOSE_BAKE": "true"
 		// "CKANR_DEFAULT_URL": "https://${CODESPACE_NAME}-5000.app.github.dev",
 		// "CKANR_TEST_URL": "https://${CODESPACE_NAME}-5000.app.github.dev",
 		// "SOLR_URL": "https://${CODESPACE_NAME}-8983.app.github.dev/solr/ckan",
