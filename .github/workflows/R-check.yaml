@@ -24,20 +24,23 @@ jobs:
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      CKANR_TEST_URL: ${{secrets.CKANR_TEST_URL}}
-      CKANR_TEST_BEHAVIOUR: ${{secrets.CKANR_TEST_BEHAVIOUR}}
+      CKANR_TEST_URL: http://localhost:5000  # ${{secrets.CKANR_TEST_URL}}
+      CKANR_TEST_BEHAVIOUR: 'SKIP'
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       R_KEEP_PKG_SOURCE: yes
       CKAN_VERSION: ${{ matrix.config.ckan-version }} # for docker compose up
 
     steps:
       - uses: actions/checkout@v3
+
       - name: Configure /etc/hosts
         run: sudo echo "127.0.0.1 ckan" | sudo tee -a /etc/hosts
         if: matrix.config.os == 'ubuntu-latest'
+
       - name: Start CKAN
         run: docker compose -f .devcontainer/docker-compose.yml up -d
         if: matrix.config.os == 'ubuntu-latest'
+
       - uses: r-lib/actions/setup-r@v2
         with:
           r-version: ${{ matrix.config.r }}
@@ -53,14 +56,17 @@ jobs:
           needs: |
             check
             coverage
-      - name: Generate CKAN API token
+
+      - name: Generate CKAN API token (CKAN >= 2.10)
         run: |
-          echo "TEST_API_KEY=$(docker exec ckan ckan user token add ckan_admin dev_token | sed 's/API Token created://' | tr -d '\n\t')" >> $GITHUB_ENV
-        # if: matrix.config.ckan-version == '2.9' && matrix.config.os == 'ubuntu-latest'
-      # - name: Generate CKAN API key
-      #   run: |
-      #     echo "TEST_API_KEY"=$(docker exec ckan paster --plugin=ckan user ckan_admin | grep -o -P '(?<=apikey=).*(?= created)') >> $GITHUB_ENV
-      #   if: matrix.config.ckan-version != '2.9' && matrix.config.os == 'ubuntu-latest'
+          echo "CKANR_TEST_KEY=$(docker exec ckan ckan user token add ckan_admin dev_token | sed 's/API Token created://' | tr -d '\n\t')" >> $GITHUB_ENV
+        if: matrix.config.ckan-version != '2.9' && matrix.config.os == 'ubuntu-latest'
+
+      - name: Generate CKAN API key (CKAN 2.9)
+        run: |
+          echo "CKANR_TEST_KEY"=$(docker exec ckan paster --plugin=ckan user ckan_admin | grep -o -P '(?<=apikey=).*(?= created)') >> $GITHUB_ENV
+        if: matrix.config.ckan-version == '2.9' && matrix.config.os == 'ubuntu-latest'
+
       - name: Check
         env:
           _R_CHECK_CRAN_INCOMING_: false

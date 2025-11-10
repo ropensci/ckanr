@@ -35,6 +35,8 @@
 	"remoteEnv": {
 		// For use in GitHub Codespaces: use repository codespaces secret
 		"CKAN_VERSION": "2.11",
+		"DATAPUSHER_VERSION": "2.11",
+		"SOLR_VERSION": "2.11",
 		"COMPOSE_BAKE": "true",
 		// "CKANR_DEFAULT_URL": "https://${CODESPACE_NAME}-5000.app.github.dev",
 		// "CKANR_TEST_URL": "https://${CODESPACE_NAME}-5000.app.github.dev",

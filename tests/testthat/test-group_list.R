@@ -2,8 +2,7 @@ context("group_list")
 
 skip_on_cran()
 
-# u <- get_test_url()
-u <- "http://www.civicdata.io"
+u <- get_test_url()
 
 test_that("group_list gives back expected class types", {
   check_ckan(u)

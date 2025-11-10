@@ -6,6 +6,9 @@ skip_on_ci()
 u <- get_test_url()
 check_ckan(u)
 
+ver <- floor(ckan_version(u)$version_num)
+skip_if(ver > 29, message="ckanr::package_activity_list() not supported on CKAN>=2.10")
+
 id <- package_list(limit = 1, url=u)[[1]]
 
 package_activity_num <- local({
