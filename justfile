@@ -16,6 +16,11 @@ alias cr := ckan_rebuild
 ckan_version:
   /usr/bin/curl -s http://localhost:5000/api/3/action/status_show
 
+docker options='':
+  #!/usr/bin/env bash
+  sudo DOCKER_HOST=unix:///var/run/docker-host.sock docker {{options}}
+
+
 # Stop Devcontainer CKAN
 ckan_down:
   #!/usr/bin/env bash
