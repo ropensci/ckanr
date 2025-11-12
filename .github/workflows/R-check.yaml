@@ -59,15 +59,15 @@ jobs:
             check
             coverage
 
-      - name: Generate CKAN API token (CKAN >= 2.10)
+      - name: Generate CKAN API token (CKAN >= 2.9)
         run: |
           echo "CKANR_TEST_KEY=$(docker exec ckan ckan user token add ckan_admin dev_token | sed 's/API Token created://' | tr -d '\n\t')" >> $GITHUB_ENV
-        if: matrix.config.ckan-version != '2.9' && matrix.config.os == 'ubuntu-latest'
+        if: matrix.config.ckan-version != '2.8' && matrix.config.os == 'ubuntu-latest'
 
-      - name: Generate CKAN API key (CKAN 2.9)
-        run: |
-          echo "CKANR_TEST_KEY"=$(docker exec ckan paster --plugin=ckan user ckan_admin | grep -o -P '(?<=apikey=).*(?= created)') >> $GITHUB_ENV
-        if: matrix.config.ckan-version == '2.9' && matrix.config.os == 'ubuntu-latest'
+      # - name: Generate CKAN API key (CKAN 2.8)
+      #   run: |
+      #     echo "CKANR_TEST_KEY"=$(docker exec ckan paster --plugin=ckan user ckan_admin | grep -o -P '(?<=apikey=).*(?= created)') >> $GITHUB_ENV
+      #   if: matrix.config.ckan-version == '2.8' && matrix.config.os == 'ubuntu-latest'
 
       - name: Check
         env:

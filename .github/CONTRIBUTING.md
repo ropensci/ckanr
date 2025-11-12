@@ -27,7 +27,7 @@ List running Docker containers with `just docker ps`.
 In general, you can run any docker command against the devcontainer with `just docker ...`.
 
 Change Test CKAN versions: Update `.devcontainer/.env`, enabling the variables for the desired CKAN version,
-then rebuild the Codespace with `just ckan_rebuild` (alias: `just cr`).
+then rebuild the Codespace or run `just ckan_rebuild` (alias: `just cr`).
 
 Verify the version and status of the running CKAN with `just ckan_version` (alias: `just cv`).
 List running Docker containers with `just docker ps`.
