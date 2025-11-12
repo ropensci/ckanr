@@ -69,7 +69,7 @@
 #' @import DBI
 #' @name ckanr-package
 #' @aliases ckanr
-#' @docType package
+#' @docType _PACKAGE
 #' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}
 #' @author Florian Mayer \email{florian.wendelin.mayer@@gmail.com}
 #' @author Wush Wu
