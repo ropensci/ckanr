@@ -46,7 +46,7 @@
 	"forwardPorts": [
 		5000, 5432, 8983, 6379, 8000
 	],
-	"onCreateCommand": "sudo chown $(whoami) /var/run/docker.sock && sudo chown $(whoami) /var/run/docker-host.sock",
+	"onCreateCommand": "sudo chown $(whoami) /var/run/docker*",
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// Using install.packages() leverages bspm which is more reliable than pak for these packages
 	"postCreateCommand": ".devcontainer/postCreateCommand.sh",
