@@ -15,20 +15,21 @@ jobs:
         - { os: windows-latest, r: 'release'}
         - { os: macOS-latest, r: 'release'}
         # Skip testing against no longer supported CKAN versions
-        # - { os: ubuntu-latest,  r: 'release', ckan-version: 2.7}
-        # - { os: ubuntu-latest,  r: 'release', ckan-version: 2.8}
-        - { os: ubuntu-latest,  r: 'release', ckan-version: '2.9'}
-        - { os: ubuntu-latest,  r: 'release', ckan-version: '2.10'}
-        - { os: ubuntu-latest,  r: 'release', ckan-version: '2.11'}
-        - { os: ubuntu-latest, r: 'devel', ckan-version: '2.11'}
+        # - { os: ubuntu-latest, r: 'release', ckan-version: 2.7}
+        # - { os: ubuntu-latest, r: 'release', ckan-version: '2.8', 'solr_version':'2.8'}
+        - { os: ubuntu-latest, r: 'release', ckan-version: '2.9', 'solr_version':'2.9-solr9-spatial'}
+        - { os: ubuntu-latest, r: 'release', ckan-version: '2.10', 'solr_version':'2.10-solr9-spatial'}
+        - { os: ubuntu-latest, r: 'release', ckan-version: '2.11', 'solr_version':'2.10-solr9-spatial'}
+        - { os: ubuntu-latest, r: 'devel', ckan-version: '2.11', 'solr_version':'2.10-solr9-spatial'}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      CKANR_TEST_URL: http://localhost:5000  # ${{secrets.CKANR_TEST_URL}}
+      CKANR_TEST_URL: 'http://ckan:5000'  # ${{ secrets.CKANR_TEST_URL }}
       CKANR_TEST_BEHAVIOUR: 'SKIP'
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       R_KEEP_PKG_SOURCE: yes
       CKAN_VERSION: ${{ matrix.config.ckan-version }} # for docker compose up
+      SOLR_VERSION: ${{ matrix.config.solr-version }}
 
     steps:
       - uses: actions/checkout@v3

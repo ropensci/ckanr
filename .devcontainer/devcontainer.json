@@ -40,20 +40,13 @@
 		// Since this is read after docker compose is run,
 		// any variables for docker compose live in .env
 		// To make Docker commands default to the devcontainer's Docker host
-		"DOCKER_HOST": "unix:///var/run/docker-host.sock"
-		// Let Codespaces use the defaults so that the R package tests can access CKAN via http://localhost:5000
-		// "CKANR_DEFAULT_URL": "https://${CODESPACE_NAME}-5000.app.github.dev",
-		// "CKANR_TEST_URL": "https://${CODESPACE_NAME}-5000.app.github.dev",
-		// "SOLR_URL": "https://${CODESPACE_NAME}-8983.app.github.dev/solr/ckan",
-		// "REDIS_URL": "https://${CODESPACE_NAME}-6379.app.github.dev/1",
-		// "DATAPUSHER_URL": "https://${CODESPACE_NAME}-8000.app.github.dev"
-
+		// "DOCKER_HOST": "unix:///var/run/docker-host.sock"
 	},
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [
 		5000, 5432, 8983, 6379, 8000
 	],
-	// "onCreateCommand": "sudo chown $(whoami) /var/run/docker.sock",
+	"onCreateCommand": "sudo chown $(whoami) /var/run/docker.sock && sudo chown $(whoami) /var/run/docker-host.sock",
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// Using install.packages() leverages bspm which is more reliable than pak for these packages
 	"postCreateCommand": ".devcontainer/postCreateCommand.sh",

@@ -7,7 +7,7 @@ echo "Running post attach commands..."
 # Running "docker " would use the Devcontainer's own Docker daemon, which doesn't have access to the CKAN container
 # The devcontainer's own Docker daemon is provided by the docker-in-docker feature and allows to run
 # CKAN from the top level dpcker-compose file.
-CKANR_TEST_KEY=$(sudo DOCKER_HOST=unix:///var/run/docker-host.sock docker exec ckan ckan user token add ckan_admin dev_token 2>/dev/null | grep -A1 'API Token created:' | tail -1 | tr -d '\n\t ')
+CKANR_TEST_KEY=$(DOCKER_HOST=unix:///var/run/docker-host.sock docker exec ckan ckan user token add ckan_admin dev_token 2>/dev/null | grep -A1 'API Token created:' | tail -1 | tr -d '\n\t ')
 
 # This is the public facing URL which only works for users of the codespace.
 # Access is protected by GitHub authentication.
