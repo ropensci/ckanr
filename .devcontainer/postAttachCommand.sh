@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euo pipefail
+# set -euo pipefail
 
 echo "Running post attach commands..."
 # Generate CKANR_TEST_KEY
