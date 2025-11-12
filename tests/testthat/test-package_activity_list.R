@@ -15,8 +15,15 @@ package_activity_num <- local({
   res <- crul::HttpClient$new(file.path(u, "dataset/activity", id))$get()
   res$raise_for_status()
   txt <- res$parse("UTF-8")
-  length(xml2::xml_find_all(xml2::read_html(txt),
-    '//ul[@data-module="activity-stream"]/li'))
+  if (ver > 29){
+    # CKAN 2.10+ nests activity items in <ul data-module="activity-stream">
+    length(xml2::xml_find_all(xml2::read_html(txt),
+      '//ul[@data-module="activity-stream"]/li'))
+  } else {
+    # CKAN up to 2.9 nests activity items in <ul class="activity">
+    length(xml2::xml_find_all(xml2::read_html(txt),
+      '//ul[@class="activity"]/li'))
+  }
 })
 
 test_that("package_activity_list gives back expected class types", {
@@ -44,4 +51,3 @@ test_that("package_activity_list works giving back json output", {
   expect_is(b_df$result, "data.frame")
   expect_equal(nrow(b_df$result), package_activity_num)
 })
-
