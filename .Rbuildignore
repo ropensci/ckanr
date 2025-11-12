@@ -11,6 +11,7 @@ Makefile
 .github
 .devcontainer
 .vscode
+justfile
 ^codemeta\.json$
 notes.md
 ^revdep$
