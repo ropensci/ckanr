@@ -43,7 +43,7 @@ remotes::install_github("ropensci/ckanr")
 ```
 
 ```{r}
-library('ckanr')
+library("ckanr")
 ```
 
 Note: the default base CKAN URL is set to <https://data.ontario.ca/>
@@ -69,10 +69,7 @@ There are a suite of CKAN things (package, resource, etc.) that each have a set 
 + Users - `user_*()` - `ckan_user`
 + Groups - `group_*()` - `ckan_group`
 + Tags - `tag_*()` - `ckan_tag`
-+ Organizations  - `organization_*()` - `ckan_organization`
-+ Groups - `group_*()` - `ckan_group`
-+ Users - `user_*()` - `ckan_user`
-+ Related items - `related_*()` - `ckan_related`
++Organizations - `organization_*()` - `ckan_organization`
 
 The S3 class objects all look very similar; for example:
 
@@ -88,7 +85,6 @@ The S3 class objects all look very similar; for example:
 All classes state the type of object, have the ID to the right of the type, then have a varying set of key-value fields deemed important. This printed object is just a summary of an R list, so you can index to specific values (e.g., `result$description`). If you feel there are important fields left out of these printed summaries, let us know.
 
 > note: Many examples are given in brief for readme brevity
-
 
 ## Contributors
 

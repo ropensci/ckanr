@@ -13,6 +13,15 @@
 		{
 			"type": "R",
 			"code": [
+				"devtools::check()"
+			],
+			"group": "build",
+			"problemMatcher": [],
+			"label": "R: Check"
+		},
+		{
+			"type": "R",
+			"code": [
 				"devtools::test()"
 			],
 			"group": "build",
