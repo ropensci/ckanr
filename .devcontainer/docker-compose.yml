@@ -19,14 +19,14 @@ services:
     ports:
       - "5000:5000"
   postgres:
-    image: ckan/ckan-postgres-dev:${CKAN_VERSION:-2.11}
+    image: ckan/ckan-postgres-dev:${CKAN_PG_VERSION:-2.11}
     container_name: postgres
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
   datapusher:
-    image: ghcr.io/keitaroinc/datapusher:${DATAPUSHER_VERSION:-0.0.17}
+    image: ghcr.io/keitaroinc/datapusher:${DATAPUSHER_VERSION:-0.0.21}
     container_name: datapusher
     environment:
       - DATAPUSHER_MAX_CONTENT_LENGTH=10485760

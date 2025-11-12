@@ -18,7 +18,7 @@ ckan_version:
 
 docker options='':
   #!/usr/bin/env bash
-  sudo DOCKER_HOST=unix:///var/run/docker-host.sock docker {{options}}
+  DOCKER_HOST=unix:///var/run/docker-host.sock docker {{options}}
 
 
 # Stop Devcontainer CKAN
@@ -40,3 +40,14 @@ ckan_rebuild:
   just ckan_down
   just ckan_rm
   just ckan_up
+
+
+# Build package
+build:
+  /usr/bin/R --no-echo --no-restore -e devtools::build()
+
+load_all:
+  /usr/bin/R --no-echo --no-restore -e devtools::load_all()
+
+test:
+  /usr/bin/R --no-echo --no-restore -e devtools::test()

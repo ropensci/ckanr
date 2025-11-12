@@ -1,1 +1,0 @@
-R -q -e 'install.packages(c(\"backports\", \"tidyverse\", \"stringr\", \"purrr\", \"triebeard\", \"blob\", \"httpcode\", \"urltools\", \"DBI\", \"crul\", \"jsonlite\", \"sf\", \"readxl\", \"testthat\", \"xml2\", \"lazyeval\"))'
