@@ -25,21 +25,21 @@ Get started: <https://docs.ropensci.org/ckanr/>
 Stable CRAN version
 
 
-```r
+``` r
 install.packages("ckanr")
 ```
 
 Development version
 
 
-```r
+``` r
 install.packages("remotes")
 remotes::install_github("ropensci/ckanr")
 ```
 
 
-```r
-library('ckanr')
+``` r
+library("ckanr")
 ```
 
 Note: the default base CKAN URL is set to <https://data.ontario.ca/>
@@ -50,7 +50,7 @@ parameter in each function call.
 To set one or both, run:
 
 
-```r
+``` r
 ckanr_setup() # restores default CKAN url to https://data.ontario.ca/
 ckanr_setup(url = "https://data.ontario.ca/")
 ckanr_setup(url = "https://data.ontario.ca/", key = "my-ckan-api-key")
@@ -66,10 +66,7 @@ There are a suite of CKAN things (package, resource, etc.) that each have a set 
 + Users - `user_*()` - `ckan_user`
 + Groups - `group_*()` - `ckan_group`
 + Tags - `tag_*()` - `ckan_tag`
-+ Organizations  - `organization_*()` - `ckan_organization`
-+ Groups - `group_*()` - `ckan_group`
-+ Users - `user_*()` - `ckan_user`
-+ Related items - `related_*()` - `ckan_related`
++Organizations - `organization_*()` - `ckan_organization`
 
 The S3 class objects all look very similar; for example:
 
@@ -85,7 +82,6 @@ The S3 class objects all look very similar; for example:
 All classes state the type of object, have the ID to the right of the type, then have a varying set of key-value fields deemed important. This printed object is just a summary of an R list, so you can index to specific values (e.g., `result$description`). If you feel there are important fields left out of these printed summaries, let us know.
 
 > note: Many examples are given in brief for readme brevity
-
 
 ## Contributors
 

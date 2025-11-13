@@ -8,13 +8,15 @@
 \description{
 ckanr is a full client for the CKAN API, wrapping all
 APIs, including for reading and writing data. Please get in touch
-(\url{https://github.com/ropensci/ckanr/issues} or \url{https://discuss.ropensci.org/})
+(\url{https://github.com/ropensci/ckanr/issues} or
+\url{https://discuss.ropensci.org/})
 if you have problems, or have use cases that we don't cover yet.
 }
 \section{CKAN API}{
 
 
-Document for the CKAN API is at \url{https://docs.ckan.org/en/latest/api/index.html}.
+Documentation for the CKAN API is at
+\url{https://docs.ckan.org/en/latest/api/index.html}.
 We'll always be following the latest version of the API.
 }
 
@@ -60,9 +62,10 @@ We currently have these functions:
 \section{Fetch}{
 
 
-Data can come back in a huge variety of formats. We've attempted a function to
-help you fetch not just metadata but the actual data for a link to a file on
-a CKAN instance. Though if you know what you're doing, you can easily use
+Data can come back in a huge variety of formats.
+We've attempted a function to help you fetch not just metadata
+but the actual data for a link to a file on a CKAN instance.
+Though if you know what you're doing, you can easily use
 whatever is your preferred tool for the job (e.g., maybe you like
 \code{\link[=read.csv]{read.csv()}} for reading csv files).
 }
@@ -76,6 +79,14 @@ using this package. That is, not necessarily landing pages of each instance,
 although, the URL may be the landing page and the base API URL.
 }
 
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://docs.ropensci.org/ckanr/ (website) https://github.com/ropensci/ckanr (devel)}
+  \item Report bugs at \url{https://github.com/ropensci/ckanr/issues}
+}
+
+}
 \author{
 Scott Chamberlain \email{myrmecocystus@gmail.com}
 
@@ -84,5 +95,9 @@ Florian Mayer \email{florian.wendelin.mayer@gmail.com}
 Wush Wu
 
 Imanuel Costigan \email{i.costigan@me.com}
+
+Sharla Gelfand
+
+Francisco Alves \email{fjunior.alves.oliveira@gmail.com}
 }
 \keyword{package}

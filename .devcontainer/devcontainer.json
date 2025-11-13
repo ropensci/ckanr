@@ -1,0 +1,82 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/rocker-org/devcontainer-templates/tree/main/src/r2u
+{
+  "name": "R (r2u and bspm configured)",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  //"image": "mcr.microsoft.com/devcontainers/base:noble",
+  "dockerComposeFile": "docker-compose-dev.yml",
+  "service": "app",
+  // Features to add to the dev container. More info: https://containers.dev/features.
+  "features": {
+    // A Feature to configure R on Ubuntu.
+    "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
+      "packages": "cmake,gdal-bin,libfontconfig1-dev,libfreetype6-dev,libfribidi-dev,libgdal-dev,libgeos-dev,libharfbuzz-dev,libproj-dev,libsqlite3-dev,libtiff-dev,libudunits2-dev,libwebp-dev,libx11-dev,libxml2-dev,r-cran-backports,r-cran-tidyverse,r-cran-stringr,r-cran-purrr,r-cran-blob,r-cran-httpcode,r-cran-urltools,r-cran-dbi,r-cran-crul,r-cran-jsonlite,r-cran-sf,r-cran-readxl,r-cran-testthat,r-cran-xml2,r-cran-lazyeval,libpq-dev,libcurl4-openssl-dev,libssl-dev,libxml2-dev"
+    },
+    // More info: https://github.com/rocker-org/devcontainer-features/tree/main/src/r-apt.
+    "ghcr.io/rocker-org/devcontainer-features/r-apt:0": {
+      "vscodeRSupport": "full",
+      "installDevTools": true,
+      "installRMarkdown": true,
+      "installRadian": true,
+      "installVscDebugger": true,
+      "installBspm": true
+    },
+    // Packages moved to postCreateCommand due to backports download issues
+    // backports CRAN currently broken
+    // "ghcr.io/rocker-org/devcontainer-features/r-packages:1": {
+    // 	"packages": "tidyverse,stringr,purrr,triebeard,blob,httpcode,urltools,DBI,crul,jsonlite,sf,readxl,testthat,xml2,lazyeval"
+    // },
+    "ghcr.io/rocker-org/devcontainer-features/r-history:0": {},
+    "ghcr.io/guiyomh/features/just:0": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
+    "ghcr.io/devcontainers-extra/features/pre-commit:2": {}
+  },
+  "overrideFeatureInstallOrder": [
+    "ghcr.io/rocker-org/devcontainer-features/r-apt"
+  ],
+  "remoteEnv": {
+    // For use in GitHub Codespaces: use repository codespaces secrets with ${{ secrets.SECRET_NAME }}
+    // Since this is read after docker compose is run,
+    // any variables for docker compose live in .env
+    // To make Docker commands default to the devcontainer's Docker host
+    // "DOCKER_HOST": "unix:///var/run/docker-host.sock"
+  },
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  "forwardPorts": [
+    5000,
+    5432,
+    8983,
+    6379,
+    8000
+  ],
+  "onCreateCommand": "sudo chown $(whoami) /var/run/docker*",
+  // Use 'postCreateCommand' to run commands after the container is created.
+  // Using install.packages() leverages bspm which is more reliable than pak for these packages
+  // "postCreateCommand": ".devcontainer/postCreateCommand.sh",
+  // postStartCommand
+  // Run each time the container is successfully started.
+  //"postStartCommand": "docker compose up -d",
+  // postAttachCommand
+  // A command to run each time a tool has successfully attached to the container.
+  "postAttachCommand": ".devcontainer/postAttachCommand.sh",
+  // Configure tool-specific properties.
+  "customizations": {
+    // Settings for VS Code.
+    "vscode": {
+      "extensions": [
+        "reditorsupport.r",
+        "REditorSupport.r-lsp",
+        "RDebugger.r-debugger",
+        "github.codespaces"
+      ],
+      "settings": {
+        "r.rterm.linux": "/usr/local/bin/radian",
+        "r.bracketedPaste": true,
+        "r.plot.useHttpgd": true
+      }
+    }
+  }
+  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+  // "remoteUser": "root"
+}
