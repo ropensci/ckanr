@@ -9,6 +9,7 @@
   // Features to add to the dev container. More info: https://containers.dev/features.
   "features": {
     // A Feature to configure R on Ubuntu.
+    // pak is also able to install system dependencies
     "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
       "packages": "cmake,gdal-bin,libfontconfig1-dev,libfreetype6-dev,libfribidi-dev,libabsl-dev,libgdal-dev,libgeos-dev,libharfbuzz-dev,libproj-dev,libsqlite3-dev,libtiff-dev,libudunits2-dev,libwebp-dev,libx11-dev,libxml2-dev,r-cran-backports,r-cran-tidyverse,r-cran-stringr,r-cran-purrr,r-cran-blob,r-cran-httpcode,r-cran-urltools,r-cran-dbi,r-cran-crul,r-cran-jsonlite,r-cran-sf,r-cran-readxl,r-cran-testthat,r-cran-xml2,r-cran-lazyeval,libpq-dev,libcurl4-openssl-dev,libssl-dev,libxml2-dev"
     },
@@ -22,9 +23,9 @@
       "installBspm": true
     },
     // Install R packages from CRAN using bspm
-    "ghcr.io/rocker-org/devcontainer-features/r-packages:1": {
-      "packages": "backports,tidyverse,stringr,purrr,triebeard,blob,httpcode,urltools,DBI,crul,jsonlite,sf,readxl,testthat,xml2,lazyeval"
-    },
+    // "ghcr.io/rocker-org/devcontainer-features/r-packages:1": {
+    //   "packages": "backports,tidyverse,stringr,purrr,triebeard,blob,httpcode,urltools,DBI,crul,jsonlite,sf,readxl,testthat,xml2,lazyeval"
+    // },
     "ghcr.io/rocker-org/devcontainer-features/r-history:0": {},
     "ghcr.io/guiyomh/features/just:0": {},
     "ghcr.io/devcontainers/features/docker-in-docker:2": {},
@@ -51,7 +52,8 @@
   ],
   // onCreateCommand
   // Make docker executable and R library writable for devcontainer user (vscode)
-  "onCreateCommand": "sudo chown -R $(whoami) /var/run/docker* /usr/local/lib/R/site-library",
+  // Install R dependencies
+  "onCreateCommand": ".devcontainer/onCreateCommand.sh",
   // Use 'postCreateCommand' to run commands after the container is created.
   // Using install.packages() leverages bspm which is more reliable than pak for these packages
   // "postCreateCommand": ".devcontainer/postCreateCommand.sh",
