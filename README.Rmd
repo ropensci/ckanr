@@ -69,7 +69,7 @@ There are a suite of CKAN things (package, resource, etc.) that each have a set 
 + Users - `user_*()` - `ckan_user`
 + Groups - `group_*()` - `ckan_group`
 + Tags - `tag_*()` - `ckan_tag`
-+Organizations - `organization_*()` - `ckan_organization`
++ Organizations - `organization_*()` - `ckan_organization`
 
 The S3 class objects all look very similar; for example:
 
