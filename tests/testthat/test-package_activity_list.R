@@ -7,13 +7,13 @@ u <- get_test_url()
 check_ckan(u)
 
 ver <- floor(ckan_version(u)$version_num)
-skip_if(ver > 29, message="ckanr::package_activity_list() not supported on CKAN>=2.10")
+skip_if(ver > 29, message = "ckanr::package_activity_list() not supported on CKAN>=2.10")
 
 id <- package_list(limit = 1, url=u)[[1]]
 
 package_activity_num <- local({
   res <- crul::HttpClient$new(file.path(u, "dataset/activity", id))$get()
-  res$raise_for_status()
+  res$raise_for_status() # TODO: this returns 404 on CKAN >= 2.10
   txt <- res$parse("UTF-8")
   if (ver > 29){
     # CKAN 2.10+ nests activity items in <ul data-module="activity-stream">
@@ -27,7 +27,6 @@ package_activity_num <- local({
 })
 
 test_that("package_activity_list gives back expected class types", {
-
   a <- package_activity_list(id, url=u, limit=30)
   expect_is(a, "list")
   expect_lt(length(a), 30 + 1)
