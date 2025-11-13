@@ -1,6 +1,7 @@
 #' Given a TEST_API_KEY, create test resources on a CKAN site
 #'
 #' @keywords internal
+#' @export
 #' @details
 #' \code{prepare_test_ckan} creates an example dataset, resource, organisation,
 #' and group on \code{localhost:5000} for the test suite to use, and runs \code{ckanr_setup}
@@ -14,46 +15,72 @@
 #' @param test_url A test CKAN instance where we are allowed to create dummy resources
 #' @param test_key A working API key for an account on the test instance
 prepare_test_ckan <- function(test_url = Sys.getenv("CKANR_TEST_URL"),
-                              test_key = Sys.getenv("CKANR_TEST_KEY")){
+                              test_key = Sys.getenv("CKANR_TEST_KEY")) {
   if (test_key == "") {
     message("Please provide your API key as parameter 'test_key' or via Sys.setenv(CKANR_TEST_KEY = \"my-api-key\")")
-    ckanr_setup(test_url=test_url)
+    ckanr_setup(test_url = test_url)
   } else {
     message("Setting up test CKAN instance...")
     # An example CSV file which should upload fine to the datastore
-    path <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
+    path_csv <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
+    path_parquet <- system.file("examples", "iris.parquet", package = "ckanr")
+
 
     # Save ourselves from using test_url and test_key
     ckanr_setup(url = test_url, key = test_key)
 
-    try(organization_create(name = "ckanr_test_org",
-                            title = "ckanr test org",
-                            url = test_url,
-                            key = test_key),
-        silent = TRUE)
+    try(
+      organization_create(
+        name = "ckanr_test_org",
+        title = "ckanr test org",
+        url = test_url,
+        key = test_key
+      ),
+      silent = TRUE
+    )
     o <- organization_show(id = "ckanr_test_org")
 
-    try(group_create(name = "ckanr_test_group",
-                     url = test_url,
-                     key = test_key),
-        silent = TRUE)
+    try(
+      group_create(
+        name = "ckanr_test_group",
+        url = test_url,
+        key = test_key
+      ),
+      silent = TRUE
+    )
     g <- group_show(id = "ckanr_test_group")
 
-    try(package_create(name = "ckanr_test_dataset",
-                       title = "ckanr test dataset",
-                       owner_org = o$id,
-                       tags = list(list("name" = "ckanr"),
-                                   list("name" = "test")),
-                       url = test_url,
-                       key = test_key),
-        silent = TRUE)
+    try(
+      package_create(
+        name = "ckanr_test_dataset",
+        title = "ckanr test dataset",
+        owner_org = o$id,
+        tags = list(
+          list("name" = "ckanr"),
+          list("name" = "test")
+        ),
+        url = test_url,
+        key = test_key
+      ),
+      silent = TRUE
+    )
     p <- package_show(id = "ckanr_test_dataset")
 
-    r <- resource_create(package_id = p$id,
-                         description = "my resource",
-                         name = "ckanr test resource",
-                         upload = path,
-                         rcurl = "http://google.com")
+    r <- resource_create(
+      package_id = p$id,
+      description = "CSV resource",
+      name = "ckanr test resource",
+      upload = path_csv,
+      rcurl = "http://google.com"
+    )
+
+    r_parquet <- resource_create(
+      package_id = p$id,
+      description = "Parquet resource",
+      name = "ckanr test parquet resource",
+      upload = path_parquet,
+      rcurl = "http://google.com"
+    )
 
     # Note: The DataPusher will automatically push CSV resources to the datastore
     # ds_search tests will skip if the datastore is not ready yet
@@ -75,7 +102,6 @@ prepare_test_ckan <- function(test_url = Sys.getenv("CKANR_TEST_URL"),
     )
     message("CKAN test instance is set up.")
   }
-
 }
 
 #' Test whether the configured test CKAN is offline
@@ -89,13 +115,15 @@ prepare_test_ckan <- function(test_url = Sys.getenv("CKANR_TEST_URL"),
 #' if \code{ckanr_setup(test_strict)} was set to anything but the string "TRUE".
 #' @param url A URL that shall be tested whether it is online
 #'
-check_ckan <- function(url){
+check_ckan <- function(url) {
   # Strict tests shall not skip if there's problems with CKAN
 
-  if (get_test_behaviour()=="SKIP" && !ping(url)) {
-    skip(paste("CKAN is offline.",
-               "Did you set CKAN test settings with ?ckanr_setup ?",
-               "Does the test CKAN server run at", url, "?"))
+  if (get_test_behaviour() == "SKIP" && !ping(url)) {
+    skip(paste(
+      "CKAN is offline.",
+      "Did you set CKAN test settings with ?ckanr_setup ?",
+      "Does the test CKAN server run at", url, "?"
+    ))
   }
 }
 
@@ -103,12 +131,14 @@ check_ckan <- function(url){
 #'
 #' @keywords internal
 #' @importFrom testthat skip
-check_resource <- function(url, x){
+check_resource <- function(url, x) {
   res <- resource_show(x, url = url)
-  if (get_test_behaviour()=="SKIP" && !is(res, "list") && res$id != x) {
-    skip(paste("The CKAN test resource wasn't found.",
-               "Did you set CKAN test settings with ?ckanr_setup ?",
-               "Does a resource with ID", x, "exist on", url, "?"))
+  if (get_test_behaviour() == "SKIP" && !is(res, "list") && res$id != x) {
+    skip(paste(
+      "The CKAN test resource wasn't found.",
+      "Did you set CKAN test settings with ?ckanr_setup ?",
+      "Does a resource with ID", x, "exist on", url, "?"
+    ))
   }
 }
 
@@ -116,12 +146,14 @@ check_resource <- function(url, x){
 #'
 #' @keywords internal
 #' @importFrom testthat skip
-check_dataset <- function(url, x){
+check_dataset <- function(url, x) {
   d <- package_show(x, url = url)
-  if (get_test_behaviour()=="SKIP" && !is(d, "list") && d$id != x) {
-    skip(paste("The CKAN test dataset wasn't found.",
-               "Did you set CKAN test settings with ?ckanr_setup ?",
-               "Does a dataset with ID", x, "exist on", url, "?"))
+  if (get_test_behaviour() == "SKIP" && !is(d, "list") && d$id != x) {
+    skip(paste(
+      "The CKAN test dataset wasn't found.",
+      "Did you set CKAN test settings with ?ckanr_setup ?",
+      "Does a dataset with ID", x, "exist on", url, "?"
+    ))
   }
 }
 
@@ -129,16 +161,18 @@ check_dataset <- function(url, x){
 #'
 #' @keywords internal
 #' @importFrom testthat skip
-check_group <- function(url, x){
+check_group <- function(url, x) {
   grp <- group_show(x, url = url)
-  if (get_test_behaviour()=="SKIP" && !is(grp, "list") && grp$id != x) {
-    skip(paste("The CKAN test group wasn't found.",
-               "Did you set CKAN test settings with ?ckanr_setup ?",
-               "Does a dataset with slug", x, "exist on", url, "?"))
+  if (get_test_behaviour() == "SKIP" && !is(grp, "list") && grp$id != x) {
+    skip(paste(
+      "The CKAN test group wasn't found.",
+      "Did you set CKAN test settings with ?ckanr_setup ?",
+      "Does a dataset with slug", x, "exist on", url, "?"
+    ))
   }
 }
 
-ok_group <- function(url, x){
+ok_group <- function(url, x) {
   grp <- tryCatch(group_show(x, url = url), error = function(e) e)
   !inherits(grp, "error")
 }
@@ -147,19 +181,21 @@ ok_group <- function(url, x){
 #'
 #' @keywords internal
 #' @importFrom testthat skip
-check_organization <- function(url, x){
+check_organization <- function(url, x) {
   org <- organization_show(x, url = url)
-  if (get_test_behaviour()=="SKIP" && !is(org, "list") && org$id != x) {
-    skip(paste("The CKAN test group wasn't found.",
-               "Did you set CKAN test settings with ?ckanr_setup ?",
-               "Does an organization with slug", x, "exist on", url, "?"))
+  if (get_test_behaviour() == "SKIP" && !is(org, "list") && org$id != x) {
+    skip(paste(
+      "The CKAN test group wasn't found.",
+      "Did you set CKAN test settings with ?ckanr_setup ?",
+      "Does an organization with slug", x, "exist on", url, "?"
+    ))
   }
 }
 
 u <- get_test_url()
 
 if (ping(u)) {
-  prepare_test_ckan(test_url=u)
+  prepare_test_ckan(test_url = u)
 } else {
   message("CKAN is offline. Running tests that don't depend on CKAN.")
 }

@@ -114,4 +114,7 @@ If you feel there are important fields left out of these printed summaries, let 
 * Please [report any issues or bugs](https://github.com/ropensci/ckanr/issues).
 * License: MIT
 * Get citation information for `ckanr` in R doing `citation(package = 'ckanr')`
-* Please note that this package is released with a [Contributor Code of Conduct](https://ropensci.org/code-of-conduct/). By contributing to this project, you agree to abide by its terms.
+* Please note that this package is released with a [Contributor Code of Conduct](https://ropensci.org/code-of-conduct/).
+  By contributing to this project, you agree to abide by its terms.
+* If you want to contribute to the package development, please see the
+  [contributing guide](https://docs.ropensci.org/ckanr/CONTRIBUTING.html).
