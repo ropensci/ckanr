@@ -98,7 +98,8 @@ prepare_test_ckan <- function(test_url = Sys.getenv("CKANR_TEST_URL"),
       test_did = p$id,
       test_rid = r$id,
       test_oid = o$id,
-      test_gid = g$id
+      test_gid = g$id,
+      test_behaviour = Sys.getenv("CKANR_TEST_BEHAVIOUR", "SKIP")
     )
     message("CKAN test instance is set up.")
   }
