@@ -150,6 +150,8 @@ ctj <- function() list(`Content-Type` = "application/json")
 # and CKAN 2.11+ (Authorization)
 auth_headers <- function(key) {
   list(
+    # CKAN 2.11+: The Authorization header should contain the API key as a raw token,
+    # with NO "Bearer" or other prefix. See: https://docs.ckan.org/en/2.11/api/index.html#authorization
     "Authorization" = key,        # CKAN 2.11+
     "X-CKAN-API-Key" = key         # CKAN 2.10 and earlier
   )
