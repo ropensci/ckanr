@@ -49,7 +49,7 @@ ckan_VERB <- function(verb, url, method, body, key, query = list(),
       res <- con$verb(verb, body = body, query = query)
     }
   } else {
-    # authentication - use both headers for compatibility with CKAN 2.10 and 2.11+
+    # Authentication - use both headers for compatibility with CKAN 2.10 and 2.11+
     con$headers <- c(con$headers, auth_headers(key))
     if (is.null(body) || length(body) == 0) {
       con$headers <- c(con$headers, ctj())
