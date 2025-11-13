@@ -28,7 +28,7 @@
 			"problemMatcher": [],
 			"label": "R: Test"
 		},
-				{
+		{
 			"type": "R",
 			"code": [
 				"devtools::document()"
