@@ -78,7 +78,7 @@ fetch_GET <- function(x, store, path, args = NULL, format = NULL, key = NULL, ..
   fmt <- ifelse(is.na(derived_file_fmt), format, derived_file_fmt)
   fmt <- tolower(fmt)
 
-  # set API key header - compatible with both CKAN 2.10 and 2.11+
+  # Set API key header - compatible with both CKAN 2.10 and 2.11+
   if (!is.null(key)) {
     api_key_header <- auth_headers(key)
   }
