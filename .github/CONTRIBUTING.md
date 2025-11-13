@@ -1,33 +1,38 @@
 # CONTRIBUTING #
 
 ### Bugs?
-
 * Submit an issue on the [Issues page](https://github.com/ropensci/ckanr/issues)
 
 ### Code contributions
+The recommended development environment for ckanr is VS Code or any IDE compatible with
+the devcontainer setup.
 
-* Fork this repo to your Github account
-* Clone your version on your account down to your machine from your account, e.g,. `git clone https://github.com/<yourgithubusername>/ckanr.git`
-* Make sure to track progress upstream (i.e., on our version of `ckanr` at `ropensci/ckanr`) by doing `git remote add upstream https://github.com/ropensci/ckanr.git`. Before making changes make sure to pull changes in from upstream by doing either `git fetch upstream` then merge later or `git pull upstream` to fetch and merge in one step
-* Make your changes (bonus points for making changes on a new feature branch)
-* Test your changes locally. You need Docker Compose for this (installation instructions are available at <https://docs.docker.com/compose/install/>). You can spin up a local CKAN site with
+* Fork this repo to your Github account.
+* Open the code in Codespaces either in browser or in VS Code.
+  Note, Codespaces usage will be billed against your account, which includes a free usage quota.
+  The first build will take a while, subsequent builds are faster.
+* The devcontainer setup provides a running CKAN instance,
+  available to package tests via `http://localhost:5000` and accessible to Codespaces
+  via the published port 5000 under a URL like `https://${CODESPACE_NAME}-5000.app.github.dev`.
+* Install ckanr via <kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>B</kbd> > "Install" or `devtools::install()`.
+* Build your changes locally via <kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>B</kbd> > "Build" or `devtools::build()`.
+* Test your changes locally via <kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>B</kbd> > "Test" or `devtools::test()`.
+* Make your changes on a new feature branch, named after the ckanr GitHub issue it addresses:
+  `git checkout -b <ISSUE_ID>-<SHORT_BRANCH_NAME>`.
+* Submit a pull request to `ropensci/ckanr`.
+  We encourage early / draft pull requests to facilitate questions, review, and collaboration.
 
-    ```bash
-    CKAN_VERSION=2.8 docker compose up
-    ```
+### Test CKAN
+List running Docker containers with `just docker ps`.
+In general, you can run any docker command against the devcontainer with `just docker ...`.
 
-    Enter http://localhost:5000/ in a browser to see CKAN running.
+Change Test CKAN versions: Update `.devcontainer/.env`, enabling the variables for the
+desired CKAN version, then rebuild the Codespace. This will take longer on the first run,
+but already downloaded Docker images are cached, so subsequent rebuilds run quickly.
 
-    There is a sysadmin user created by default with `username=ckan_admin` and `password=test1234`. You can retrieve the user details including the API KEY (for the R environment variable `TEST_API_KEY`) with
-
-    ```bash
-    docker exec ckan paster --plugin=ckan user ckan_admin
-    ```
-* Push up to your account
-* Submit a pull request to home base (likely master branch, but check to make sure) at `ropensci/ckanr`
+Verify the version and status of the running CKAN with `just ckan_version` (alias: `just cv`).
 
 ### Also, check out our [discussion forum](https://discuss.ropensci.org)
 
 ### Email
-
 Don't send email. Open an issue instead.

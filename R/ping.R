@@ -10,9 +10,11 @@
 #' }
 ping <- function(url = get_default_url(), key = get_default_key(),
   as = "logical", ...) {
-  
+
   tryCatch({
-    res <- ckan_GET(url, 'site_read', key = key, opts = list(...))
-    switch(as, json = res, logical = jsd(res))
+    res <- ckan_GET(url, 'status_show', key = key, opts = list(...))
+    switch(as,
+           json = res,
+           logical = isTRUE(jsonlite::fromJSON(res)$success))
   }, error = function(e) FALSE)
 }

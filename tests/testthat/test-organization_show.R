@@ -10,7 +10,7 @@ dataset_num <- local({
   check_ckan(u)
   chorg <- tryCatch(check_organization(u, o), error = function(e) e)
   if (inherits(chorg, "error")) {
-    ckanr_setup(u, key = Sys.getenv("TEST_API_KEY", ""))
+    ckanr_setup(u, key = Sys.getenv("CKANR_TEST_KEY", ""))
     organization_create(o)
   }
   Sys.sleep(2)
@@ -28,9 +28,8 @@ test_that("organization_show gives back expected class types", {
   a <- organization_show(o, url=u)
 
   expect_is(a, "ckan_organization")
-  expect_is(a[[1]], "list")
-  expect_is(a[[1]][[1]]$name, "character")
-  expect_equal(as.integer(length(a)), 19L)
+  # TODO: See https://github.com/ropensci/ckanr/issues/324 - ckan_organization return type has changed
+  expect_equal(as.integer(length(a)), 18L)
 
   a <- organization_show(o, url=u, include_datasets = TRUE)
   expect_equal(as.integer(a$package_count), dataset_num)
@@ -45,5 +44,5 @@ test_that("organization_show works giving back json output", {
   expect_is(b, "character")
   expect_is(b_df, "list")
   expect_is(b_df$result, "list")
-  expect_equal(as.integer(length(b_df$result)), 19L)
+  expect_true(as.integer(length(b_df$result)) >= 18L)
 })

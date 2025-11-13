@@ -229,8 +229,8 @@
   "isPartOf": "\"https://ropensci.org\"",
   "keywords": ["database", "open-data", "ckan", "api", "data", "dataset", "ckan-api", "api-wrapper", "r", "rstats", "r-package"],
   "fileSize": "331.599KB",
-  "releaseNotes": "https://github.com/ropensci/ckanr/blob/master/NEWS.md",
-  "readme": "https://github.com/ropensci/ckanr/blob/master/README.md",
+  "releaseNotes": "https://github.com/ropensci/ckanr/blob/main/NEWS.md",
+  "readme": "https://github.com/ropensci/ckanr/blob/main/README.md",
   "contIntegration": ["https://github.com/ropensci/ckanr/actions/", "https://app.codecov.io/gh/ropensci/ckanr"],
   "developmentStatus": "https://www.repostatus.org/#active"
 }
