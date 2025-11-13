@@ -49,6 +49,7 @@ Imports:
     dbplyr,
     magrittr
 Suggests:
+    arrow,
     sf,
     readxl,
     testthat,

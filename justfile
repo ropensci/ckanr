@@ -29,26 +29,37 @@ docker options='':
 # R tooling (alternative to VS Code tasks via Ctrl-Shift-B)
 #--------------------------------------------------------------------------------------#
 
+# R: Document package
+doc:
+  #!/usr/bin/env Rscript
+  devtools::document()
+
 # R: Build package
 build:
-  /usr/bin/R --no-echo --no-restore -e devtools::build()
+  #!/usr/bin/env Rscript
+  devtools::build()
 
 # R: load all package files without installing
 load_all:
-  /usr/bin/R --no-echo --no-restore -e devtools::load_all()
+  #!/usr/bin/env Rscript
+  devtools::load_all()
 
 # R: install package
 install:
-  /usr/bin/R --no-echo --no-restore -e devtools::install()
+  #!/usr/bin/env Rscript
+  devtools::install()
 
 # R: check package
 check:
-  /usr/bin/R --no-echo --no-restore -e devtools::check()
+  #!/usr/bin/env Rscript
+  devtools::check()
 
 # R: run tests
 test:
-  /usr/bin/R --no-echo --no-restore -e devtools::test()
+  #!/usr/bin/env Rscript
+  devtools::test()
 
 # R: install development dependencies (System and R packages)
 deps:
-  /usr/bin/R --no-echo --no-restore -e pak::local_install_dev_deps()
+  #!/usr/bin/env Rscript
+  pak::local_install_dev_deps()
