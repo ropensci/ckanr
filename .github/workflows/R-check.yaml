@@ -1,6 +1,17 @@
-on: [push, pull_request]
-
 name: R-check
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+concurrency:
+  group: ${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
 
 jobs:
   R-check:
@@ -14,27 +25,34 @@ jobs:
         config:
         - { os: windows-latest, r: 'release'}
         - { os: macOS-latest, r: 'release'}
-        - { os: ubuntu-latest,  r: 'release', ckan-version: 2.7}
-        - { os: ubuntu-latest,  r: 'release', ckan-version: 2.8}
-        - { os: ubuntu-latest,  r: 'release', ckan-version: 2.9}
-        - { os: ubuntu-latest, r: 'devel', ckan-version: 2.9}
+        # - { os: ubuntu-latest, r: 'release', ckan-version: '2.7', ckan-pg-version: '2.7', solr-version: 2.7}
+        # - { os: ubuntu-latest, r: 'release', ckan-version: '2.8', ckan-pg-version: '2.8', solr-version:'2.8'}
+        - { os: ubuntu-latest, r: 'release', ckan-version: '2.9', ckan-pg-version: '2.9', solr-version: '2.9-solr9-spatial'}
+        - { os: ubuntu-latest, r: 'release', ckan-version: '2.10-py3.10', ckan-pg-version: '2.10', solr-version: '2.10-solr9-spatial'}
+        - { os: ubuntu-latest, r: 'release', ckan-version: '2.11', ckan-pg-version: '2.11', solr-version: '2.10-solr9-spatial'}
+        - { os: ubuntu-latest, r: 'devel', ckan-version: '2.11', ckan-pg-version: '2.11', solr-version: '2.10-solr9-spatial'}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      CKANR_TEST_URL: ${{secrets.CKANR_TEST_URL}}
-      CKANR_TEST_BEHAVIOUR: ${{secrets.CKANR_TEST_BEHAVIOUR}}
+      CKANR_TEST_URL: 'http://localhost:5000'
+      CKANR_TEST_BEHAVIOUR: 'SKIP'
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       R_KEEP_PKG_SOURCE: yes
-      CKAN_VERSION: ${{ matrix.config.ckan-version }} # for docker compose up
+      CKAN_VERSION: ${{ matrix.config.ckan-version }}
+      CKAN_PG_VERSION: ${{ matrix.config.ckan-pg-version }}
+      SOLR_VERSION: ${{ matrix.config.solr-version }}
 
     steps:
       - uses: actions/checkout@v3
+
       - name: Configure /etc/hosts
         run: sudo echo "127.0.0.1 ckan" | sudo tee -a /etc/hosts
         if: matrix.config.os == 'ubuntu-latest'
+
       - name: Start CKAN
-        run: docker compose up -d
+        run: docker compose -f .devcontainer/docker-compose.yml up -d
         if: matrix.config.os == 'ubuntu-latest'
+
       - uses: r-lib/actions/setup-r@v2
         with:
           r-version: ${{ matrix.config.r }}
@@ -50,14 +68,17 @@ jobs:
           needs: |
             check
             coverage
-      - name: Generate CKAN API token
+
+      - name: Generate CKAN API token (CKAN >= 2.9)
         run: |
-          echo "TEST_API_KEY=$(docker exec ckan ckan user token add ckan_admin dev_token | sed 's/API Token created://' | tr -d '\n\t')" >> $GITHUB_ENV
-        if: matrix.config.ckan-version == '2.9' && matrix.config.os == 'ubuntu-latest'
-      - name: Generate CKAN API key
-        run: |
-          echo "TEST_API_KEY"=$(docker exec ckan paster --plugin=ckan user ckan_admin | grep -o -P '(?<=apikey=).*(?= created)') >> $GITHUB_ENV
-        if: matrix.config.ckan-version != '2.9' && matrix.config.os == 'ubuntu-latest'
+          echo "CKANR_TEST_KEY=$(docker exec ckan ckan user token add ckan_admin dev_token | sed 's/API Token created://' | tr -d '\n\t')" >> $GITHUB_ENV
+        if: matrix.config.ckan-version != '2.8' && matrix.config.os == 'ubuntu-latest'
+
+      # - name: Generate CKAN API key (CKAN 2.8)
+      #   run: |
+      #     echo "CKANR_TEST_KEY"=$(docker exec ckan paster --plugin=ckan user ckan_admin | grep -o -P '(?<=apikey=).*(?= created)') >> $GITHUB_ENV
+      #   if: matrix.config.ckan-version == '2.8' && matrix.config.os == 'ubuntu-latest'
+
       - name: Check
         env:
           _R_CHECK_CRAN_INCOMING_: false
@@ -65,7 +86,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Test coverage
-        if: matrix.config.os == 'ubuntu-latest' && matrix.config.r == 'release' &&  matrix.config.ckan-version == '2.8'
+        if: matrix.config.os == 'ubuntu-latest' && matrix.config.r == 'release' &&  matrix.config.ckan-version == '2.11'
         run: |
           covr::codecov(
             quiet = FALSE,
