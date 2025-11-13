@@ -201,7 +201,7 @@ read_session <- function(fmt, dat, path, ...) {
            } else {
              txt_res
            }
-         } ,
+         },
          parquet = {
            check4X("arrow")
            arrow::read_parquet(path, ...)
