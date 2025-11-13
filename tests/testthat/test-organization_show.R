@@ -28,9 +28,7 @@ test_that("organization_show gives back expected class types", {
   a <- organization_show(o, url=u)
 
   expect_is(a, "ckan_organization")
-  # TODO FIXME ckan_organization return type has changed
-  # expect_is(a[[1]], "list")
-  # expect_is(a[[1]][[1]]$name, "character")
+  # TODO: See https://github.com/ropensci/ckanr/issues/324 - ckan_organization return type has changed
   expect_equal(as.integer(length(a)), 18L)
 
   a <- organization_show(o, url=u, include_datasets = TRUE)
