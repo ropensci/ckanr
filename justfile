@@ -15,6 +15,7 @@ alias cr := ckan_rebuild
 # Show running CKAN status and version
 ckan_version:
   /usr/bin/curl -s http://localhost:5000/api/3/action/status_show
+  echo "\n"
 
 docker options='':
   #!/usr/bin/env bash
