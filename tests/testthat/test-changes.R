@@ -3,12 +3,17 @@ context("changes")
 skip_on_cran()
 
 u <- get_test_url()
+k <- get_test_key()
+check_ckan(u)
+
+# Skip for CKAN >= 2.10
+# See https://github.com/ropensci/ckanr/issues/220
+ver <- floor(ckan_version(u)$version_num)
 
 test_that("changes gives back expected class types", {
-  check_ckan(u)
+  skip_if(ver > 29)
   cat(u, sep = "\n")
-  a <- changes(url = u)
-
+  a <- changes(url = u, key = k)
   expect_is(a, "list")
   expect_is(a[[1]], "list")
   expect_is(a[[1]]$user_id, "character")
@@ -16,8 +21,8 @@ test_that("changes gives back expected class types", {
 })
 
 test_that("changes works giving back json output", {
-  check_ckan(u)
-  b <- changes(url = u, as = 'json')
+  skip_if(ver > 29)
+  b <- changes(url = u, key = k, as = 'json')
   b_df <- jsonlite::fromJSON(b)
 
   expect_is(b, "character")
@@ -26,10 +31,13 @@ test_that("changes works giving back json output", {
 })
 
 test_that("changes fails correctly", {
-  check_ckan(u)
-
+  skip_if(ver > 29)
   expect_error(changes("adf"), "offset Invalid integer")
   expect_error(changes(limit = "Adf"), "limit Invalid integer")
-  expect_error(changes("adf", url = "http://www.google.com"),
-               regexp = "404")
+  expect_error(changes("adf", url = "http://www.google.com"), regexp = "404")
+})
+
+test_that("changes returns error for CKAN >= 2.10", {
+  skip_if(ver <= 29, message="CKAN version < 2.10")
+  expect_error(changes(url = u, key = k), regexp = "ckanr::changes\\(\\) is not supported on CKAN 2.10 - 2.11")
 })

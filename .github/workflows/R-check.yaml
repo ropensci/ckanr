@@ -1,97 +1,83 @@
-on: [push, pull_request]
-
 name: R-check
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+concurrency:
+  group: ${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
 
 jobs:
   R-check:
     runs-on: ${{ matrix.config.os }}
 
-    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }}) - CKAN ${{ matrix.config.ckan-version }}
 
     strategy:
       fail-fast: false
       matrix:
         config:
         - { os: windows-latest, r: 'release'}
-        - { os: windows-latest, r: 'devel'}
         - { os: macOS-latest, r: 'release'}
-        # - { os: macOS-latest, r: 'devel'}
-        - { os: ubuntu-16.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
+        # - { os: ubuntu-latest, r: 'release', ckan-version: '2.7', ckan-pg-version: '2.7', solr-version: 2.7}
+        # - { os: ubuntu-latest, r: 'release', ckan-version: '2.8', ckan-pg-version: '2.8', solr-version:'2.8'}
+        - { os: ubuntu-latest, r: 'release', ckan-version: '2.9', ckan-pg-version: '2.9', solr-version: '2.9-solr9-spatial'}
+        - { os: ubuntu-latest, r: 'release', ckan-version: '2.10-py3.10', ckan-pg-version: '2.10', solr-version: '2.10-solr9-spatial'}
+        - { os: ubuntu-latest, r: 'release', ckan-version: '2.11', ckan-pg-version: '2.11', solr-version: '2.10-solr9-spatial'}
+        - { os: ubuntu-latest, r: 'devel', ckan-version: '2.11', ckan-pg-version: '2.11', solr-version: '2.10-solr9-spatial'}
 
     env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      CKANR_TEST_URL: 'http://localhost:5000'
+      CKANR_TEST_BEHAVIOUR: 'SKIP'
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-      CRAN: ${{ matrix.config.rspm }}
-      CKANR_DEFAULT_KEY: ${{secrets.CKANR_DEFAULT_KEY}}
-      CKANR_DEFAULT_URL: ${{secrets.CKANR_DEFAULT_URL}}
-      CKANR_TEST_BEHAVIOUR: ${{secrets.CKANR_TEST_BEHAVIOUR}}
-      CKANR_TEST_DID: ${{secrets.CKANR_TEST_DID}}
-      CKANR_TEST_GID: ${{secrets.CKANR_TEST_GID}}
-      CKANR_TEST_KEY: ${{secrets.CKANR_TEST_KEY}}
-      CKANR_TEST_OID: ${{secrets.CKANR_TEST_OID}}
-      CKANR_TEST_RID: ${{secrets.CKANR_TEST_RID}}
-      CKANR_TEST_URL: ${{secrets.CKANR_TEST_URL}}
-      TEST_API_KEY: ${{secrets.TEST_API_KEY}}
+      R_KEEP_PKG_SOURCE: yes
+      CKAN_VERSION: ${{ matrix.config.ckan-version }}
+      CKAN_PG_VERSION: ${{ matrix.config.ckan-pg-version }}
+      SOLR_VERSION: ${{ matrix.config.solr-version }}
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - uses: r-lib/actions/setup-r@master
+      - name: Configure /etc/hosts
+        run: sudo echo "127.0.0.1 ckan" | sudo tee -a /etc/hosts
+        if: matrix.config.os == 'ubuntu-latest'
+
+      - name: Start CKAN
+        run: docker compose -f .devcontainer/docker-compose.yml up -d
+        if: matrix.config.os == 'ubuntu-latest'
+
+      - uses: r-lib/actions/setup-r@v2
         with:
           r-version: ${{ matrix.config.r }}
+          use-public-rspm: true
 
-      - uses: r-lib/actions/setup-pandoc@master
+      - uses: r-lib/actions/setup-pandoc@v2
 
-      - name: Query dependencies
-        run: |
-          install.packages('remotes')
-          saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
-          writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
-        shell: Rscript {0}
-
-      - name: Cache R packages
-        if: runner.os != 'Windows'
-        uses: actions/cache@v1
+      - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
-          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
+          extra-packages: |
+            any::rcmdcheck
+            any::covr
+          needs: |
+            check
+            coverage
 
-      - name: install macOS system dependencies
-        if: runner.os == 'macOS'
-        continue-on-error: true
+      - name: Generate CKAN API token (CKAN >= 2.9)
         run: |
-          brew install pkg-config gdal geos openssl udunits proj
-      
-      - name: Install system dependencies
-        if: runner.os == 'Linux'
-        env:
-          RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
-        run: |
-          Rscript -e "remotes::install_github('r-hub/sysreqs')"
-          sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
-          sudo add-apt-repository -y ppa:ubuntugis/ppa
-          sudo -s eval "$sysreqs"
-          sudo apt update
-          sudo apt install \
-            libudunits2-dev \
-            libproj-dev \
-            libgeos-dev \
-            libgdal-dev \
-            netcdf-bin \
-            libprotoc-dev
+          echo "CKANR_TEST_KEY=$(docker exec ckan ckan user token add ckan_admin dev_token | sed 's/API Token created://' | tr -d '\n\t')" >> $GITHUB_ENV
+        if: matrix.config.ckan-version != '2.8' && matrix.config.os == 'ubuntu-latest'
 
-      - name: Install dependencies
-        run: |
-          remotes::install_deps(dependencies = TRUE)
-          remotes::install_cran(c("rcmdcheck"))
-        shell: Rscript {0}
-
-      - name: Session info
-        run: |
-          options(width = 100)
-          pkgs <- installed.packages()[, "Package"]
-          sessioninfo::session_info(pkgs, include_base = TRUE)
-        shell: Rscript {0}
+      # - name: Generate CKAN API key (CKAN 2.8)
+      #   run: |
+      #     echo "CKANR_TEST_KEY"=$(docker exec ckan paster --plugin=ckan user ckan_admin | grep -o -P '(?<=apikey=).*(?= created)') >> $GITHUB_ENV
+      #   if: matrix.config.ckan-version == '2.8' && matrix.config.os == 'ubuntu-latest'
 
       - name: Check
         env:
@@ -99,19 +85,26 @@ jobs:
         run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "error", check_dir = "check")
         shell: Rscript {0}
 
+      - name: Test coverage
+        if: matrix.config.os == 'ubuntu-latest' && matrix.config.r == 'release' &&  matrix.config.ckan-version == '2.11'
+        run: |
+          covr::codecov(
+            quiet = FALSE,
+            clean = FALSE,
+            install_path = file.path(Sys.getenv("RUNNER_TEMP"), "package")
+          )
+        shell: Rscript {0}
+
       - name: Show testthat output
         if: always()
-        run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
+        run: |
+          ## --------------------------------------------------------------------
+          find ${{ runner.temp }}/package -name 'testthat.Rout*' -exec cat '{}' \; || true
         shell: bash
 
-      - name: Upload check results
-        if: failure()
-        uses: actions/upload-artifact@main
+      - name: Upload test results
+        if: failure() && matrix.config.os == 'ubuntu-latest'
+        uses: actions/upload-artifact@v4
         with:
-          name: ${{ runner.os }}-r${{ matrix.config.r }}-results
-          path: check
-
-      - name: Test coverage
-        if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'release'
-        run: |
-          Rscript -e 'install.packages("covr")' -e 'covr::codecov(token = "${{secrets.CODECOV_TOKEN}}")'
+          name: coverage-test-failures
+          path: ${{ runner.temp }}/package

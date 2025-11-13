@@ -1,12 +1,17 @@
 #' @title Update a resource
 #'
-#'
 #' @description This function can be used to update a resource's file attachment
-#' and "extra" metadata fields. Any update will also set the metadata key 
-#' "last_updated". Other metadata, such as name or description, are not updated.
+#' and "extra" metadata fields. Any update will also set the metadata key
+#' "last_updated". Any omitted metadata fields will be overwritten.
 #'
-#' The new file must exist on a local path. R objects have to be written to a
-#' file, e.g. using `tempfile()` - see example.
+#' To update selected metadata fields and retain all others unchanged,
+#' it is highly recommended to first retrieve the full resource metadata using
+#' `resource_show`, then update these metadata as required, then update the
+#' given resource with `resource_update` using the locally updated metadata.
+#'
+#' If a resource file is updated, then the new file must exist on a local path.
+#' R objects cannot directly be used to update a resource file; instead, they
+#' have to be written to a file, e.g. using `tempfile()` - see example.
 #'
 #' For convenience, CKAN base url and API key default to the global options,
 #' which are set by `ckanr_setup`.
@@ -53,14 +58,14 @@
 #' ## optionally include extra tags
 #' resource_update(xx$id, path=newpath,
 #'                 extras = list(some="metadata"))
-#'                 
+#'
 #' # Update a resource's extra tags
 #' ## add extra tags without uploading a new file
 #' resource_update(id,
 #'                 extras = list(some="metadata"))
 #'
 #' ## or remove all extra tags
-#' resource_update(id, extras = list())                 
+#' resource_update(id, extras = list())
 #'
 #' #######
 #' # Using default settings

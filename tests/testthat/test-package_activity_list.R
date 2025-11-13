@@ -4,19 +4,29 @@ skip_on_cran()
 skip_on_ci()
 
 u <- get_test_url()
+check_ckan(u)
+
+ver <- floor(ckan_version(u)$version_num)
+skip_if(ver > 29, message = "ckanr::package_activity_list() not supported on CKAN>=2.10")
+
 id <- package_list(limit = 1, url=u)[[1]]
 
 package_activity_num <- local({
-  check_ckan(u)
   res <- crul::HttpClient$new(file.path(u, "dataset/activity", id))$get()
-  res$raise_for_status()
+  res$raise_for_status() # TODO: this returns 404 on CKAN >= 2.10
   txt <- res$parse("UTF-8")
-  length(xml2::xml_find_all(xml2::read_html(txt),
-    '//ul[@data-module="activity-stream"]/li'))
+  if (ver > 29){
+    # CKAN 2.10+ nests activity items in <ul data-module="activity-stream">
+    length(xml2::xml_find_all(xml2::read_html(txt),
+      '//ul[@data-module="activity-stream"]/li'))
+  } else {
+    # CKAN up to 2.9 nests activity items in <ul class="activity">
+    length(xml2::xml_find_all(xml2::read_html(txt),
+      '//ul[@class="activity"]/li'))
+  }
 })
 
 test_that("package_activity_list gives back expected class types", {
-
   a <- package_activity_list(id, url=u, limit=30)
   expect_is(a, "list")
   expect_lt(length(a), 30 + 1)
@@ -40,4 +50,3 @@ test_that("package_activity_list works giving back json output", {
   expect_is(b_df$result, "data.frame")
   expect_equal(nrow(b_df$result), package_activity_num)
 })
-

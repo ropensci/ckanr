@@ -2,7 +2,7 @@
 % Please edit documentation in R/ds_search_sql.R
 \name{ds_search_sql}
 \alias{ds_search_sql}
-\title{Datastore - search or get a dataset from CKRAN datastore}
+\title{Datastore - search or get a dataset from CKAN datastore}
 \usage{
 ds_search_sql(
   sql,
@@ -29,7 +29,7 @@ can vary from a vector, list or data.frame. (required)}
 \item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
 }
 \description{
-Datastore - search or get a dataset from CKRAN datastore
+Datastore - search or get a dataset from CKAN datastore
 }
 \examples{
 \dontrun{

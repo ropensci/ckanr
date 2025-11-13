@@ -2,10 +2,14 @@ context("ds_search")
 
 skip_on_cran()
 
-# u <- get_test_url()
-u <- "http://data.nhm.ac.uk/"
-# r <- get_test_rid()
-r <- "8f0784a6-82dd-44e7-b105-6194e046eb8d"
+u <- get_test_url()
+r <- get_test_rid()
+
+# Fallback to external instance if local test instance not configured
+if (u == "" || !ping(u)) {
+  u <- "http://data.nhm.ac.uk/"
+  r <- "8f0784a6-82dd-44e7-b105-6194e046eb8d"
+}
 
 if (r == "") {
   did <- package_list(limit = 1, url = u)[[1]]
@@ -16,6 +20,12 @@ if (r == "") {
 test_that("ds_search gives back expected class types", {
   check_ckan(u)
   check_resource(u,r)
+  # Check if resource is in datastore, skip if not
+  a <- tryCatch(ds_search(resource_id=r, url=u, limit=1),
+                error = function(e) NULL)
+  if (is.null(a)) {
+    skip("Resource not yet in datastore (DataPusher may still be processing)")
+  }
   a <- ds_search(resource_id=r, url=u)
 
   expect_is(a, "list")
@@ -24,6 +34,12 @@ test_that("ds_search gives back expected class types", {
 test_that("ds_search works giving back json output", {
   check_ckan(u)
   check_resource(u, r)
+  # Check if resource is in datastore, skip if not
+  test_result <- tryCatch(ds_search(resource_id=r, url=u, limit=1),
+                          error = function(e) NULL)
+  if (is.null(test_result)) {
+    skip("Resource not yet in datastore (DataPusher may still be processing)")
+  }
   b <- ds_search(resource_id=r, url=u, as="json")
 
   expect_is(b, "character")

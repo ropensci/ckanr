@@ -1,4 +1,4 @@
-#' Datastore - search or get a dataset from CKRAN datastore
+#' Datastore - search or get a dataset from CKAN datastore
 #'
 #' @export
 #' @param sql (character) A single SQL select statement. (required)

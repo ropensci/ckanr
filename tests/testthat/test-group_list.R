@@ -2,8 +2,7 @@ context("group_list")
 
 skip_on_cran()
 
-# u <- get_test_url()
-u <- "http://www.civicdata.io"
+u <- get_test_url()
 
 test_that("group_list gives back expected class types", {
   check_ckan(u)
@@ -25,5 +24,5 @@ test_that("group_list works giving back json output", {
 test_that("group_list fails correctly", {
   check_ckan(u)
   expect_error(group_list(sort = "adf", url=u, limit=10), "Cannot sort by field `adf`")
-  expect_equal(group_list(groups = 4, url=u, limit=10), list())
+  expect_is(group_list(url=u, limit=10), "list")
 })

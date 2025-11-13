@@ -46,6 +46,7 @@ see what additional arguments are available:
 \item json: \link[jsonlite]{fromJSON}
 \item shp, geojson: \link[sf]{st_read}
 \item txt: \link[utils]{read.table}
+\item parquet: \link[arrow]{read_parquet}
 }
 }
 \examples{
@@ -135,6 +136,13 @@ ckanr_setup("https://data.coat.no")
 res <- resource_show(id = "384fe537-e0bd-4e57-8a0d-420b7a745196",
 as = "table")
 x <- ckan_fetch(res$url, sep = ";")
+head(x)
+
+# Parquet file - requires arrow package
+ckanr_setup("https://data.coat.no")
+res <- resource_show(id = "b7d1c192-0f44-4bab-bd51-eea0d408a09f",
+as = "table")
+x <- ckan_fetch(res$url)
 head(x)
 }
 }
