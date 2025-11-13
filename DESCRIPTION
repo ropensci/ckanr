@@ -26,10 +26,10 @@ Authors@R: c(
     	email = "fjunior.alves.oliveira@gmail.com",
         comment = c(ORCID = "0000-0003-3390-0534")),
     person("Hanna", "Böhner",
+        role = "aut",
         email="hanna.bohner@uit.no",
-        comment = c(ORCID = "0000-0001-7356-5457")),
-        role = "aut"),
-)
+        comment = c(ORCID = "0000-0001-7356-5457"))
+    )
 License: MIT + file LICENSE
 LazyData: true
 URL: https://docs.ropensci.org/ckanr/ (website)
