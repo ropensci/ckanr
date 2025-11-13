@@ -21,6 +21,8 @@ test_that("tag_show gives back expected class types", {
   a <- tag_show(t$name, include_datasets = TRUE, url=u)
 
   expect_is(a, "ckan_tag")
+  # TODO: This assertion is disabled due to possible CKAN API changes affecting the structure of 'a[[2]]'.
+  #       Re-enable after verifying compatibility with current CKAN versions.
   # expect_is(a[[2]], "list")
   #expect_equal(length(a[[2]]), tag_test_num)
 })
