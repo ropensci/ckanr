@@ -15,6 +15,7 @@
 #' * json: \link[jsonlite]{fromJSON}
 #' * shp, geojson: \link[sf]{st_read}
 #' * txt: \link[utils]{read.table}
+#' * parquet: \link[arrow]{read_parquet}
 #' 
 #'
 #' @param x URL for the file
@@ -112,7 +113,15 @@
 #' as = "table")
 #' x <- ckan_fetch(res$url, sep = ";")
 #' head(x)
+#' 
+#' # Parquet file - requires arrow package
+#' ckanr_setup("https://data.coat.no")
+#' res <- resource_show(id = "b7d1c192-0f44-4bab-bd51-eea0d408a09f",
+#' as = "table")
+#' x <- ckan_fetch(res$url)
+#' head(x)
 #' }
+
 ckan_fetch <- function(x, store = "session", path = "file", format = NULL,
   key = get_default_key(), ...) {
   
@@ -192,6 +201,10 @@ read_session <- function(fmt, dat, path, ...) {
            } else {
              txt_res
            }
+         },
+         parquet = {
+           check4X("arrow")
+           arrow::read_parquet(path, ...)
          }
   )
 }
