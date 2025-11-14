@@ -16,7 +16,7 @@ ckan_action(
 )
 }
 \arguments{
-\item{action}{a ckan action}
+\item{action}{A valid CKAN API action name (e.g., \code{"package_list"}, \code{"package_show"}). See the CKAN API documentation for a full list of actions: \url{https://docs.ckan.org/en/latest/api/index.html}}
 
 \item{query}{a named list of URL query parameters}
 
