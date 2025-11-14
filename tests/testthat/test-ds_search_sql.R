@@ -1,23 +1,23 @@
 context("ds_search_sql")
 
 skip_on_cran()
-testthat::skip_on_os("windows", "Skipping on Windows (no test CKAN)")
-testthat::skip_on_os("mac", "Skipping on Mac OS (no test CKAN)")
 
 u <- get_test_url()
 r <- get_test_rid()
+check_ckan(u)
 
 # Fallback to external instance if local test instance not configured
-if (u == "" || !ping(u)) {
-  u <- "http://data.nhm.ac.uk/"
-  r <- "8f0784a6-82dd-44e7-b105-6194e046eb8d"
-}
+# if (u == "" || !ping(u)) {
+#   u <- "http://data.nhm.ac.uk/"
+#   r <- "8f0784a6-82dd-44e7-b105-6194e046eb8d"
+# }
 
 if (r == "") {
   did <- package_list(limit = 1, url = u)[[1]]
   pkg <- package_show(did, url = u)
   r <- pkg$resources[[1]]$id
 }
+skip_if(r == "")
 
 test_that("ds_search_sql gives back expected class types", {
   check_ckan(u)
