@@ -1,5 +1,21 @@
 # ckanr (development version)
 
+
+ckanr 0.7.1
+===========
+
+### NEW FEATURES
+
+* Support for parquet files: `ckan_fetch()`, `read_session()` and `fetch_GET()` now
+  support parquet files, thanks @hannaboe (#217)
+
+### MAINTENANCE
+
+* New developer experience: A devcontainer provides a disposable CKAN instance for testing,
+  replacing the need for an external CKAN instance and GitHub secrets for testing, and
+  offering the choice of CKAN v2.9-2.11 (#216 #212)
+* New maintainer @florianm
+
 ckanr 0.7.0
 ===========
 

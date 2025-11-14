@@ -12,7 +12,7 @@
 #'
 #' # what version is each CKAN server running
 #' out <- lapply(servers()[1:6], function(w) {
-#'   cat(w, sep='\n') 
+#'   cat(w, sep='\n')
 #'   ckan_info(w)
 #' })
 #' vapply(out, "[[", "", "ckan_version")
@@ -32,6 +32,7 @@ server_urls <- c(
   "http://data.glasgow.gov.uk",
   "http://data.go.id",
   "http://data.gov.au",
+  "https://catalogue.data.wa.gov.au",
   "http://data.gov.hr",
   "http://data.gov.ie",
   "http://data.gov.ro",

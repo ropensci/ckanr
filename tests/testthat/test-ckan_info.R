@@ -1,6 +1,9 @@
 context("test-ckan_info")
 
 test_that("parse_version_number parses correctly.", {
+  expect_equal(parse_version_number("2.11"), 211)
+  expect_equal(parse_version_number("2.10"), 210)
+  expect_equal(parse_version_number("2.9"), 29)
   expect_equal(parse_version_number("2.1"), 21)
   expect_equal(parse_version_number("2.1b"), 21)
   expect_equal(parse_version_number("2.1.0"), 21)
