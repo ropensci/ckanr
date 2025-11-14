@@ -33,7 +33,7 @@ also \code{\link[=ckanr_setup]{ckanr_setup()}} and \code{\link[=get_default_url]
 \item{key}{A privileged CKAN API key, Default: your key set with
 \code{\link{ckanr_setup}}}
 
-\item{...}{Curl args passed on to \link[crul:verb-GET]{crul::verb-GET} (optional)}
+\item{...}{Curl args passed on to the appropriate crul HTTP verb function (e.g., \link[crul:verb-GET]{crul::verb-GET}, \link[crul:verb-POST]{crul::verb-POST}) depending on the value of \code{verb} (optional)}
 }
 \value{
 a text string. because we can't know ahead of time for sure
