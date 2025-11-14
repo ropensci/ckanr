@@ -14,7 +14,7 @@
 #' @param url Base url to use. Default: https://data.ontario.ca/ See
 #' also [ckanr_setup()] and [get_default_url()]
 #' @template key
-#' @param ... Curl args passed on to [crul::verb-GET] (optional)
+#' @param ... Curl args passed on to the relevant [crul::HttpClient] method depending on the `verb` parameter (optional)
 #' @return a text string. because we can't know ahead of time for sure
 #' what kind of data will be returned, we return text and the user
 #' can parse as needed.
