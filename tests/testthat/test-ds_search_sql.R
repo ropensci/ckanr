@@ -1,6 +1,8 @@
 context("ds_search_sql")
 
 skip_on_cran()
+testthat::skip_on_os("windows", "Skipping on Windows (no test CKAN)")
+testthat::skip_on_os("mac", "Skipping on Mac OS (no test CKAN)")
 
 u <- get_test_url()
 r <- get_test_rid()
@@ -19,29 +21,31 @@ if (r == "") {
 
 test_that("ds_search_sql gives back expected class types", {
   check_ckan(u)
-  check_resource(u,r)
+  check_resource(u, r)
   # Check if resource is in datastore, skip if not
-  test_result <- tryCatch(ds_search(resource_id=r, url=u, limit=1),
-                          error = function(e) NULL)
+  test_result <- tryCatch(ds_search(resource_id = r, url = u, limit = 1),
+    error = function(e) NULL
+  )
   if (is.null(test_result)) {
     skip("Resource not yet in datastore (DataPusher may still be processing)")
   }
-  sql = paste0('SELECT * from "', r, '" LIMIT 2')
-  a <- ds_search_sql(sql, url=u)
+  sql <- paste0('SELECT * from "', r, '" LIMIT 2')
+  a <- ds_search_sql(sql, url = u)
   expect_is(a, "list")
 })
 
 test_that("ds_search_sql works giving back json output", {
   check_ckan(u)
-  check_resource(u,r)
+  check_resource(u, r)
   # Check if resource is in datastore, skip if not
-  test_result <- tryCatch(ds_search(resource_id=r, url=u, limit=1),
-                          error = function(e) NULL)
+  test_result <- tryCatch(ds_search(resource_id = r, url = u, limit = 1),
+    error = function(e) NULL
+  )
   if (is.null(test_result)) {
     skip("Resource not yet in datastore (DataPusher may still be processing)")
   }
-  sql = paste0('SELECT * from "', r, '" LIMIT 2')
-  b <- ds_search_sql(sql, url=u, as="json")
+  sql <- paste0('SELECT * from "', r, '" LIMIT 2')
+  b <- ds_search_sql(sql, url = u, as = "json")
   expect_is(b, "character")
   b_df <- jsonlite::fromJSON(b)
   expect_is(b_df, "list")

@@ -2,9 +2,11 @@
 
 ### Bugs?
 * Submit an issue on the [Issues page](https://github.com/ropensci/ckanr/issues)
+* We are also grateful for ideas and experiences around the developer experience.
+  Feel free to reach out in the rOpenSci forum or submit a GitHub issue.
 
 ### Code contributions
-The recommended development environment for ckanr is VS Code or any IDE compatible with
+The recommended development environment for `ckanr` is VS Code or any IDE compatible with
 the devcontainer setup.
 
 * Fork this repo to your Github account.
@@ -14,10 +16,12 @@ the devcontainer setup.
 * The devcontainer setup provides a running CKAN instance,
   available to package tests via `http://localhost:5000` and accessible to Codespaces
   via the published port 5000 under a URL like `https://${CODESPACE_NAME}-5000.app.github.dev`.
-* Install ckanr via <kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>B</kbd> > "Install" or `devtools::install()`.
-* Build your changes locally via <kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>B</kbd> > "Build" or `devtools::build()`.
-* Test your changes locally via <kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>B</kbd> > "Test" or `devtools::test()`.
-* Make your changes on a new feature branch, named after the ckanr GitHub issue it addresses:
+* Install `ckanr` via VS Code build task (<kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>B</kbd>) "Install"
+  or via running `just install` in the terminal.
+* Install development dependencies via build task "Install Dev Deps" or `just deps`.
+* Build your changes locally via build task "Build" or `just build`.
+* Test your changes locally via build task "Test" or `just test`.
+* Make your changes on a new feature branch, named after the `ckanr` GitHub issue it addresses:
   `git checkout -b <ISSUE_ID>-<SHORT_BRANCH_NAME>`.
 * Submit a pull request to `ropensci/ckanr`.
   We encourage early / draft pull requests to facilitate questions, review, and collaboration.
