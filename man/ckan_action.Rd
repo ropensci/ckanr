@@ -16,7 +16,7 @@ ckan_action(
 )
 }
 \arguments{
-\item{action}{A valid CKAN API action name (e.g., \code{"package_list"}, \code{"package_show"}). See the CKAN API documentation for a full list of actions: \url{https://docs.ckan.org/en/latest/api/index.html}}
+\item{action}{A valid CKAN API action name (e.g., "package_list", "package_show"). See the CKAN API documentation for a full list of actions: https://docs.ckan.org/en/latest/api/index.html}
 
 \item{query}{a named list of URL query parameters}
 
@@ -33,7 +33,7 @@ also \code{\link[=ckanr_setup]{ckanr_setup()}} and \code{\link[=get_default_url]
 \item{key}{A privileged CKAN API key, Default: your key set with
 \code{\link{ckanr_setup}}}
 
-\item{...}{Curl args passed on to the appropriate crul HTTP verb function (e.g., \link[crul:verb-GET]{crul::verb-GET}, \link[crul:verb-POST]{crul::verb-POST}) depending on the value of \code{verb} (optional)}
+\item{...}{Curl args passed on to the relevant \link[crul:HttpClient]{crul::HttpClient} method depending on the \code{verb} parameter (optional)}
 }
 \value{
 a text string. because we can't know ahead of time for sure

@@ -3,9 +3,10 @@
 #' @name ckan_classes
 #'
 #' @section The classes:
-#' 
+#'
 #' - ckan_package - CKAN package
 #' - ckan_resource - CKAN resource
+#' - ckan_resource_view - CKAN resource view
 #' - ckan_related - CKAN related item
 #'
 #' @section Coercion:

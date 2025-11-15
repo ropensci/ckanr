@@ -22,7 +22,7 @@
 #' @examples \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org/",
 #'   key = getOption("ckan_demo_key"))
-#' 
+#'
 #' # create a package
 #' (res <- package_create("foobarrrrr", author="Jane Doe"))
 #'
@@ -46,12 +46,13 @@ ds_create <- function(resource_id = NULL, resource = NULL, force = FALSE,
   body <- cc(list(resource_id = resource_id, resource = resource, force = force,
                   aliases = aliases, fields = fields, records = records,
                   primary_key = primary_key, indexes = indexes))
+  headers <- c(auth_headers(key), ctj())
   con <- crul::HttpClient$new(file.path(url, 'api/action/datastore_create'),
-    headers = c(list(Authorization = key), ctj()),
+    headers = headers,
     opts = list(...)
   )
   res <- con$post(body = tojun(body, TRUE), encode = "json")
-  res$raise_for_status()
+  err_handler(res)
   txt <- res$parse("UTF-8")
   switch(as, json = txt, list = jsl(txt), table = jsd(txt))
 }
