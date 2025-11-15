@@ -16,9 +16,9 @@ This checklist translates the CKAN 2.11 API review into discrete implementation 
 - [x] Expose destructive maintenance endpoints such as `dataset_purge()` (skip tests unless running in disposable CKAN).
 
 ## 3. Resource View Management (Medium)
-- [ ] Create a `ckan_resource_view` S3 class plus wrappers for `resource_view_list`, `resource_view_show`, `resource_view_create`, `resource_view_update`, `resource_view_reorder`, `resource_view_delete`, and `resource_view_clear`.
-- [ ] Add helpers for `resource_create_default_resource_views()` and `package_create_default_resource_views()` with sensible defaults when the dataset payload is missing.
-- [ ] Extend tests to create a simple view (when the default text view plugin is available) and skip gracefully otherwise.
+- [x] Create a `ckan_resource_view` S3 class plus wrappers for `resource_view_list`, `resource_view_show`, `resource_view_create`, `resource_view_update`, `resource_view_reorder`, `resource_view_delete`, and `resource_view_clear`.
+- [x] Add helpers for `resource_create_default_resource_views()` and `package_create_default_resource_views()` with sensible defaults when the dataset payload is missing.
+- [x] Extend tests to create a simple view (when the default text view plugin is available) and skip gracefully otherwise.
 
 ## 4. Followers & Social Features (Medium)
 - [ ] Implement follower counts/lists for every object type (`dataset`, `group`, `organization`, `user`).

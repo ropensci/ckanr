@@ -6,11 +6,13 @@
 * Expose membership utilities `member_list()`, `member_create()`, `member_delete()`, `member_roles_list()`, `group_member_create()`, `group_member_delete()`, `organization_member_create()`, `organization_member_delete()`, `user_invite()`, `group_list_authz()`, and `organization_list_for_user()` to manage user access consistently across groups and organizations.
 * Add relationship management wrappers `package_relationships_list()`, `package_relationship_create()`, `package_relationship_update()`, and `package_relationship_delete()` with S3-friendly inputs.
 * Provide dataset maintenance helpers `package_revise()`, `package_resource_reorder()`, `package_owner_org_update()`, and `dataset_purge()` for advanced automation workflows.
+* Introduce the `ckan_resource_view` S3 class along with wrappers for `resource_view_list()`, `resource_view_show()`, `resource_view_create()`, `resource_view_update()`, `resource_view_reorder()`, `resource_view_delete()`, `resource_view_clear()`, `resource_create_default_resource_views()`, and `package_create_default_resource_views()` to manage CKAN previews from R.
 
 ### TESTS
 
 * Add integration coverage for collaborator and membership endpoints with dynamic skips when the target CKAN instance lacks the relevant feature flags.
 * Cover the new relationship and dataset maintenance helpers, including opt-in purge coverage behind the `CKANR_ALLOW_PURGE_TESTS` gate.
+* Exercise the resource view lifecycle (create/list/show/update/reorder/delete) plus default view helpers when the `text_view` plugin is available, while skipping gracefully otherwise.
 
 ckanr 0.7.1
 ===========

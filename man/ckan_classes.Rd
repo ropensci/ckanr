@@ -11,6 +11,7 @@ ckanr S3 classes
 \itemize{
 \item ckan_package - CKAN package
 \item ckan_resource - CKAN resource
+\item ckan_resource_view - CKAN resource view
 \item ckan_related - CKAN related item
 }
 }
