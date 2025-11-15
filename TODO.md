@@ -1,0 +1,53 @@
+# TODO: CKAN 2.11 Coverage Roadmap
+
+This checklist translates the CKAN 2.11 API review into discrete implementation work for `ckanr`. Each section groups closely related endpoints so they can share helpers, docs, and tests. Use `devtools::test(filter = "<area>")` as you deliver each bucket.
+
+## 1. Collaborators & Membership (High)
+- [x] Implement `package_collaborator_list()` and `package_collaborator_list_for_user()` wrappers with pagination, plus docs/tests that skip when `ckan.auth.allow_dataset_collaborators` is disabled.
+- [x] Add `package_collaborator_create()`/`package_collaborator_delete()` using shared ID coercion and ensure authorization failures surface cleanly.
+- [x] Cover `member_list()`, `member_create()`, `member_delete()`, and expose `member_roles_list()` to report valid capacities.
+- [x] Add group/org membership helpers (`group_member_create/delete`, `organization_member_create/delete`) and the invitation endpoint `user_invite()`.
+- [x] Provide `group_list_authz()` and `organization_list_for_user()` to help clients decide which containers a user can edit.
+
+## 2. Dataset Management Extras (High)
+- [x] Wrap the relationship API (`package_relationships_list`, `package_relationship_create`, `package_relationship_update`, `package_relationship_delete`) with helpers that accept either IDs or `ckan_package` objects.
+- [x] Implement `package_revise()` (flattened-key payloads) with detailed parameter validation guidance.
+- [x] Add `package_resource_reorder()` and `package_owner_org_update()` utilities; include tests that ensure resource ordering sticks.
+- [x] Expose destructive maintenance endpoints such as `dataset_purge()` (skip tests unless running in disposable CKAN).
+
+## 3. Resource View Management (Medium)
+- [ ] Create a `ckan_resource_view` S3 class plus wrappers for `resource_view_list`, `resource_view_show`, `resource_view_create`, `resource_view_update`, `resource_view_reorder`, `resource_view_delete`, and `resource_view_clear`.
+- [ ] Add helpers for `resource_create_default_resource_views()` and `package_create_default_resource_views()` with sensible defaults when the dataset payload is missing.
+- [ ] Extend tests to create a simple view (when the default text view plugin is available) and skip gracefully otherwise.
+
+## 4. Followers & Social Features (Medium)
+- [ ] Implement follower counts/lists for every object type (`dataset`, `group`, `organization`, `user`).
+- [ ] Add follow/unfollow helpers plus the "am I following" probes for all objects.
+- [ ] Surface `followee_count`, `followee_list`, `user_followee_count`, `user_followee_list`, `dataset_followee_*`, `group_followee_*`, `organization_followee_*` so clients can build dashboards.
+- [ ] Tests should create a temporary follow relationship via the authorized test user, then clean up.
+
+## 5. Vocabulary & Tag Extensions (Medium)
+- [ ] Add wrappers for `vocabulary_list`, `vocabulary_show`, `vocabulary_create`, `vocabulary_update`, and `vocabulary_delete` (sysadmin only).
+- [ ] Implement `tag_autocomplete()` alongside existing tag helpers.
+- [ ] Update docs to clarify when sysadmin credentials are required and reuse existing templates for parameters.
+
+## 6. Activity & Dashboard APIs (Low-Medium)
+- [ ] Extend activity coverage: `group_activity_list`, `organization_activity_list`, `recently_changed_packages_activity_list`.
+- [ ] Wrap dashboard utilities (`dashboard_activity_list`, `dashboard_new_activities_count`, `dashboard_mark_activities_old`).
+- [ ] Support advanced introspection (`activity_show`, `activity_data_show`, `activity_diff`, `activity_create`, `send_email_notifications`).
+- [ ] Tests must check `status_show()` to confirm the `activity` plugin is enabled; skip otherwise.
+
+## 7. Admin & Ops Utilities (Low)
+- [ ] Implement task-status maintenance (`task_status_show`, `task_status_update`, `task_status_update_many`, `task_status_delete`).
+- [ ] Add term-translation helpers (`term_translation_show`, `term_translation_update`, `term_translation_update_many`).
+- [ ] Provide runtime config editing (`config_option_list`, `config_option_show`, `config_option_update`).
+- [ ] Surface background job monitors (`job_list`, `job_show`, `job_clear`, `job_cancel`).
+- [ ] Cover API token lifecycle (`api_token_list`, `api_token_create`, `api_token_revoke`).
+- [ ] Expose `status_show()` and `help_show()` as general-purpose diagnostics.
+- [ ] Because these actions require sysadmin keys, mark tests with explicit skips when `get_test_key()` lacks that role.
+
+## Cross-Cutting Actions
+- [ ] For each new function, add roxygen docs (templates in `man-roxygen/`), export entries in `NAMESPACE`, and examples wrapped in `\dontrun{}`.
+- [ ] Ensure new HTTP calls reuse `ckan_GET/POST/PATCH/DELETE` and dual Authorization headers.
+- [ ] Expand the Copilot instructions (`.github/copilot-instructions.md`) once the first batch lands so future contributors follow the same patterns.
+- [ ] Track progress by checking off each bullet as the corresponding PR merges.

@@ -1,5 +1,16 @@
 # ckanr (development version)
 
+### NEW FEATURES
+
+* Add dataset collaborator helpers `package_collaborator_list()`, `package_collaborator_list_for_user()`, `package_collaborator_create()`, and `package_collaborator_delete()` for CKAN 2.11 deployments.
+* Expose membership utilities `member_list()`, `member_create()`, `member_delete()`, `member_roles_list()`, `group_member_create()`, `group_member_delete()`, `organization_member_create()`, `organization_member_delete()`, `user_invite()`, `group_list_authz()`, and `organization_list_for_user()` to manage user access consistently across groups and organizations.
+* Add relationship management wrappers `package_relationships_list()`, `package_relationship_create()`, `package_relationship_update()`, and `package_relationship_delete()` with S3-friendly inputs.
+* Provide dataset maintenance helpers `package_revise()`, `package_resource_reorder()`, `package_owner_org_update()`, and `dataset_purge()` for advanced automation workflows.
+
+### TESTS
+
+* Add integration coverage for collaborator and membership endpoints with dynamic skips when the target CKAN instance lacks the relevant feature flags.
+* Cover the new relationship and dataset maintenance helpers, including opt-in purge coverage behind the `CKANR_ALLOW_PURGE_TESTS` gate.
 
 ckanr 0.7.1
 ===========

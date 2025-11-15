@@ -193,6 +193,38 @@ check_organization <- function(url, x) {
   }
 }
 
+collaborators_feature_enabled <- function(url, key) {
+  override <- Sys.getenv("CKANR_ASSUME_COLLABORATORS")
+  if (nzchar(override)) {
+    return(tolower(override) %in% c("true", "1", "yes"))
+  }
+  res <- tryCatch(
+    {
+      txt <- ckan_action(
+        "config_option_show",
+        body = list(key = "ckan.auth.allow_dataset_collaborators"),
+        verb = "GET",
+        url = url,
+        key = key
+      )
+      jsonlite::fromJSON(txt)
+    },
+    error = function(e) e
+  )
+  if (inherits(res, "error")) {
+    return(FALSE)
+  }
+  val <- res$result$value
+  isTRUE(val) || identical(val, "True") || identical(val, "true") ||
+    identical(val, 1L) || identical(val, "1")
+}
+
+skip_if_collaborators_disabled <- function(url, key) {
+  if (!collaborators_feature_enabled(url, key)) {
+    skip("Dataset collaborators feature disabled or unavailable")
+  }
+}
+
 u <- get_test_url()
 
 if (ping(u)) {
