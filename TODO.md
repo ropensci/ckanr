@@ -46,8 +46,15 @@ This checklist translates the CKAN 2.11 API review into discrete implementation 
 - [ ] Expose `status_show()` and `help_show()` as general-purpose diagnostics.
 - [ ] Because these actions require sysadmin keys, mark tests with explicit skips when `get_test_key()` lacks that role.
 
-## Cross-Cutting Actions
-- [ ] For each new function, add roxygen docs (templates in `man-roxygen/`), export entries in `NAMESPACE`, and examples wrapped in `\dontrun{}`.
+## 8. Cross-Cutting Actions
+- [ ] For each new function, add roxygen docs (templates in `man-roxygen/`), and examples wrapped in `\dontrun{}`.
 - [ ] Ensure new HTTP calls reuse `ckan_GET/POST/PATCH/DELETE` and dual Authorization headers.
 - [ ] Expand the Copilot instructions (`.github/copilot-instructions.md`) once the first batch lands so future contributors follow the same patterns.
-- [ ] Track progress by checking off each bullet as the corresponding PR merges.
+- [ ] Track progress by checking off each bullet when implemented.
+
+## 9. Maintainability & Refactors
+- [ ] Consolidate membership CRUD patterns (`member_create/delete`, `group_member_*`, `organization_member_*`) behind a single helper that handles ID coercion, POST bodies, and `as` parsing, so adding new endpoints only requires wiring endpoint names.
+- [ ] Introduce a collaborator request helper that encapsulates the repeated `as.ckan_package()` + `resolve_user_identifier()` + `ckan_{GET,POST}` logic in `R/package_collaborators.R`, reducing copy/paste when future collaborator features arrive.
+- [ ] Create a shared response parser (e.g., `parse_ckan_response(out, as, coerce = NULL)`) to replace the duplicated `switch(as, ...)` blocks across modules like `resource_views`, `membership`, and dataset extras.
+- [ ] Extract the `resolve_*` identifier helpers into a single internal file, export them as needed, and update dependent modules (`package_dataset_extras`, `group_list.R`, etc.) to reuse instead of reimplementing ID coercion.
+- [ ] Convert repeated roxygen example boilerplate (setup + teardown) into reusable templates under `man-roxygen/` to keep documentation consistent and easy to update.
