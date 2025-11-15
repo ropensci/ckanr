@@ -1,0 +1,50 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "R",
+			"code": [
+				"devtools::build()"
+			],
+			"group": "build",
+			"problemMatcher": [],
+			"label": "R: Build"
+		},
+		{
+			"type": "R",
+			"code": [
+				"devtools::check()"
+			],
+			"group": "build",
+			"problemMatcher": [],
+			"label": "R: Check"
+		},
+		{
+			"type": "R",
+			"code": [
+				"devtools::test()"
+			],
+			"group": "build",
+			"problemMatcher": [],
+			"label": "R: Test"
+		},
+		{
+			"type": "R",
+			"code": [
+				"pak::local_install_dev_deps()"
+			],
+			"group": "build",
+			"problemMatcher": [],
+			"label": "R: Install Dev Deps"
+		},
+		{
+			"type": "R",
+			"code": [
+				"devtools::document()"
+			],
+			"group": "build",
+			"problemMatcher": [],
+			"label": "R: Document"
+		}
+	]
+}

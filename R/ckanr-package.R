@@ -2,12 +2,14 @@
 #'
 #' @description ckanr is a full client for the CKAN API, wrapping all
 #' APIs, including for reading and writing data. Please get in touch
-#' (<https://github.com/ropensci/ckanr/issues> or <https://discuss.ropensci.org/>)
+#' (<https://github.com/ropensci/ckanr/issues> or
+#' <https://discuss.ropensci.org/>)
 #' if you have problems, or have use cases that we don't cover yet.
 #'
 #' @section CKAN API:
 #'
-#' Document for the CKAN API is at <https://docs.ckan.org/en/latest/api/index.html>.
+#' Documentation for the CKAN API is at
+#' <https://docs.ckan.org/en/latest/api/index.html>.
 #' We'll always be following the latest version of the API.
 #'
 #' @section ckanr package API:
@@ -45,9 +47,10 @@
 #'
 #' @section Fetch:
 #'
-#' Data can come back in a huge variety of formats. We've attempted a function to
-#' help you fetch not just metadata but the actual data for a link to a file on
-#' a CKAN instance. Though if you know what you're doing, you can easily use
+#' Data can come back in a huge variety of formats.
+#' We've attempted a function to help you fetch not just metadata
+#' but the actual data for a link to a file on a CKAN instance.
+#' Though if you know what you're doing, you can easily use
 #' whatever is your preferred tool for the job (e.g., maybe you like
 #' [read.csv()] for reading csv files).
 #'
@@ -66,13 +69,14 @@
 #' @import DBI
 #' @name ckanr-package
 #' @aliases ckanr
-#' @docType package
 #' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}
 #' @author Florian Mayer \email{florian.wendelin.mayer@@gmail.com}
 #' @author Wush Wu
 #' @author Imanuel Costigan \email{i.costigan@@me.com}
+#' @author Sharla Gelfand
+#' @author Francisco Alves \email{fjunior.alves.oliveira@gmail.com}
 #' @keywords package
-NULL
+"_PACKAGE"
 
 #' Deprecated functions in \pkg{ckanr}
 #'

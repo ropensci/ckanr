@@ -39,7 +39,7 @@ Get an activity stream of recently changed datasets on a site.
 \examples{
 \dontrun{
 changes()
-changes(as = 'json')
-changes(as = 'table')
+changes(as = "json")
+changes(as = "table")
 }
 }

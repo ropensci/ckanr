@@ -1,5 +1,21 @@
 # ckanr (development version)
 
+
+ckanr 0.7.1
+===========
+
+### NEW FEATURES
+
+* Support for parquet files: `ckan_fetch()`, `read_session()` and `fetch_GET()` now
+  support parquet files, thanks @hannaboe (#217)
+
+### MAINTENANCE
+
+* New developer experience: A devcontainer provides a disposable CKAN instance for testing,
+  replacing the need for an external CKAN instance and GitHub secrets for testing, and
+  offering the choice of CKAN v2.9-2.11 (#216 #212)
+* New maintainer @florianm
+
 ckanr 0.7.0
 ===========
 
@@ -28,6 +44,7 @@ ckanr 0.6.0
 * change in `ckan_fetch()`: now when a zip file has a subdirectory an `NA` is returned rather than `character(0)` (#164)
 * change in the `...` parameter in `ckan_fetch()`: was used to pass through curl options to the http request but now is used to pass through additional parameters to either `read.csv`, `xml2::read_xml`, `jsonlite::fromJSON`, `sf::st_read()`, `read.table()`, or `readxl::read_excel` (#165)
 * updated docs for `package_create()` and `group_create()` - change `groups` parameter description to explain what kind of input is expected (#168)
+* updated docs for `package_update()` and `resource_update()` - illustrate possible data loss when updating with incomplete package metadata (#108)
 
 
 ckanr 0.5.0
