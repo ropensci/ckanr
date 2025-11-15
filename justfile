@@ -10,45 +10,56 @@ default:
   @just --list
 
 alias cv := ckan_version
-alias cr := ckan_rebuild
+
+#--------------------------------------------------------------------------------------#
+# Manage CKAN Devcontainer Docker containers and images
+#--------------------------------------------------------------------------------------#
 
 # Show running CKAN status and version
 ckan_version:
   /usr/bin/curl -s http://localhost:5000/api/3/action/status_show
   echo "\n"
 
+# Run a Docker command against the CKAN Devcontainer Docker host
 docker options='':
   #!/usr/bin/env bash
   DOCKER_HOST=unix:///var/run/docker-host.sock docker {{options}}
 
+#--------------------------------------------------------------------------------------#
+# R tooling (alternative to VS Code tasks via Ctrl-Shift-B)
+#--------------------------------------------------------------------------------------#
 
-# Stop Devcontainer CKAN
-ckan_down:
-  #!/usr/bin/env bash
-  DOCKER_HOST=unix:///var/run/docker-host.sock docker-compose -f .devcontainer/docker-compose-dev.yml down
+# R: Document package
+doc:
+  #!/usr/bin/env Rscript
+  devtools::document()
 
-# Delete cached CKAN Docker images
-ckan_rm:
-  #!/usr/bin/env bash
-  DOCKER_HOST=unix:///var/run/docker-host.sock docker rmi -f ckan postgres solr redis datapusher
-
-# Startup Devcontainer CKAN with .env
-ckan_up:
-  #!/usr/bin/env bash
-  DOCKER_HOST=unix:///var/run/docker-host.sock docker-compose -f .devcontainer/docker-compose-dev.yml up -d
-
-ckan_rebuild:
-  just ckan_down
-  just ckan_rm
-  just ckan_up
-
-
-# Build package
+# R: Build package
 build:
-  /usr/bin/R --no-echo --no-restore -e devtools::build()
+  #!/usr/bin/env Rscript
+  devtools::build()
 
+# R: load all package files without installing
 load_all:
-  /usr/bin/R --no-echo --no-restore -e devtools::load_all()
+  #!/usr/bin/env Rscript
+  devtools::load_all()
 
+# R: install package
+install:
+  #!/usr/bin/env Rscript
+  devtools::install()
+
+# R: check package
+check:
+  #!/usr/bin/env Rscript
+  devtools::check()
+
+# R: run tests
 test:
-  /usr/bin/R --no-echo --no-restore -e devtools::test()
+  #!/usr/bin/env Rscript
+  devtools::test()
+
+# R: install development dependencies (System and R packages)
+deps:
+  #!/usr/bin/env Rscript
+  pak::local_install_dev_deps()

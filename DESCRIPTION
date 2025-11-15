@@ -3,7 +3,7 @@ Title: Client for the Comprehensive Knowledge Archive Network ('CKAN') API
 Description: Client for 'CKAN' API (<https://ckan.org/>). Includes interface
     to 'CKAN' 'APIs' for search, list, show for packages, organizations, and
     resources. In addition, provides an interface to the 'datastore' API.
-Version: 0.7.1
+Version: 0.7.1.9000
 Authors@R: c(
     person("Scott", "Chamberlain",
     	role = c("aut"),
@@ -24,8 +24,12 @@ Authors@R: c(
     person("Francisco", "Alves",
     	role = "aut",
     	email = "fjunior.alves.oliveira@gmail.com",
-        comment = c(ORCID = "0000-0003-3390-0534"))
-  )
+        comment = c(ORCID = "0000-0003-3390-0534")),
+    person("Hanna", "Böhner",
+        role = "aut",
+        email="hanna.bohner@uit.no",
+        comment = c(ORCID = "0000-0001-7356-5457"))
+    )
 License: MIT + file LICENSE
 LazyData: true
 URL: https://docs.ropensci.org/ckanr/ (website)
@@ -45,6 +49,7 @@ Imports:
     dbplyr,
     magrittr
 Suggests:
+    arrow,
     sf,
     readxl,
     testthat,

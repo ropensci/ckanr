@@ -29,7 +29,7 @@ ckanr_settings <- function() {
               test_rid = Sys.getenv("CKANR_TEST_RID", ""),
               test_gid = Sys.getenv("CKANR_TEST_GID", ""),
               test_oid = Sys.getenv("CKANR_TEST_OID", ""),
-              test_behaviour = Sys.getenv("CKANR_TEST_BEHAVIOUR", ""),
+              test_behaviour = Sys.getenv("CKANR_TEST_BEHAVIOUR", "SKIP"),
               proxy = get("ckanr_proxy", ckanr_settings_env)
   )
   structure(ops, class = "ckanr_settings")
@@ -76,7 +76,7 @@ print.ckanr_settings <- function(x, ...) {
 #' `test_url`
 #' @param test_behaviour (optional, character) Whether to fail ("FAIL") or skip
 #' ("SKIP") writing tests in case of problems with the configured test CKAN.
-#' @param proxy an object of class `request` from a call to 
+#' @param proxy an object of class `request` from a call to
 #' [crul::proxy()]
 #' @details
 #' [ckanr_setup()] sets CKAN connection details. ckanr's functions
@@ -115,7 +115,7 @@ print.ckanr_settings <- function(x, ...) {
 #' # Not specifying the default CKAN URL will reset the CKAN URL to its default
 #' # "https://data.ontario.ca/":
 #' ckanr_setup()
-#' 
+#'
 #' # set a proxy
 #' ckanr_setup(proxy = crul::proxy("64.251.21.73:8080"))
 #' ckanr_settings()
