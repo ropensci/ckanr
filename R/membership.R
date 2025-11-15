@@ -14,9 +14,8 @@ NULL
 #' @template key
 #' @export
 #' @examples
-#' ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
-#' member_list("my-group", object_type = "user")
-#' }
+#' # ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
+#' # member_list("my-group", object_type = "user")
 member_list <- function(id, object_type = NULL, capacity = NULL,
   url = get_default_url(), key = get_default_key(), as = "list", ...) {
 
@@ -180,7 +179,8 @@ user_invite <- function(email, group_id, role = "member",
 #' @param type (character) Group type, defaults to `"group"`.
 #' @param groups (character vector) Optional list of group names to filter.
 #' @param all_fields (logical) Return full group dictionaries.
-#' @param include_dataset_count,include_extras,include_tags,include_groups,include_users (logical) Include additional metadata when `all_fields = TRUE`.
+#' @param include_dataset_count,include_extras,include_tags,include_groups,include_users
+#'   (logical) Include additional metadata when `all_fields = TRUE`.
 #' @param available_only (logical) Remove groups already associated to the context dataset.
 #' @param am_member (logical) Only return memberships for the current user.
 #' @template paging
@@ -216,7 +216,8 @@ group_list_authz <- function(type = "group", groups = NULL, all_fields = FALSE,
 
 #' List organizations a user can act on
 #'
-#' @param id (character or `ckan_user`) Optional user identifier; defaults to the authenticated user.
+#' @param id (character or `ckan_user`) Optional user identifier; defaults to the
+#'   authenticated user.
 #' @param permission (character) Permission to check (defaults to `"manage_group"`).
 #' @param include_dataset_count (logical) Include dataset counts in the response.
 #' @template args

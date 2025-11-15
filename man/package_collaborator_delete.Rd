@@ -28,3 +28,7 @@ also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 \description{
 Delete a dataset collaborator
 }
+\examples{
+# ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
+# package_collaborator_delete("my-dataset", "new-user")
+}

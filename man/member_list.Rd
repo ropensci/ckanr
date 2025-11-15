@@ -37,3 +37,7 @@ can vary from a vector, list or data.frame. (required)}
 \description{
 List members for a group or organization
 }
+\examples{
+# ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
+# member_list("my-group", object_type = "user")
+}

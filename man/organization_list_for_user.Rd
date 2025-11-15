@@ -15,7 +15,8 @@ organization_list_for_user(
 )
 }
 \arguments{
-\item{id}{(character or \code{ckan_user}) Optional user identifier; defaults to the authenticated user.}
+\item{id}{(character or \code{ckan_user}) Optional user identifier; defaults to the
+authenticated user.}
 
 \item{permission}{(character) Permission to check (defaults to \code{"manage_group"}).}
 
