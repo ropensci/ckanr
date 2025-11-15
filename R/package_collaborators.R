@@ -115,12 +115,4 @@ package_collaborator_delete <- function(
     jsonlite::fromJSON(res)$success
 }
 
-resolve_user_identifier <- function(x) {
-    if (is.ckan_user(x)) {
-        return(if (!is.null(x$id)) x$id else x$name)
-    }
-    if (is.list(x) && !is.null(x$id)) {
-        return(x$id)
-    }
-    x
-}
+# resolve_user_identifier is now defined in R/membership.R (shared utility).
