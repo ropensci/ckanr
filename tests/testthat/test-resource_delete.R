@@ -72,7 +72,18 @@ test_that("resource_delete fails well", {
   expect_error(resource_delete("nonexistent-resource-id", url = url, key = key),
                "Not Found Error")
 
-  # bad key
-  expect_error(resource_delete("some-id", url = url, key = "invalid-key"),
+  # bad key (use a real resource id)
+  path <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
+  res <- resource_create(
+    package_id = did,
+    description = "Resource to delete bad key",
+    name = paste0("delete_me_badkey_", as.integer(Sys.time())),
+    upload = path,
+    rcurl = "http://example.com",
+    url = url,
+    key = key
+  )
+  expect_error(resource_delete(res$id, url = url, key = "invalid-key"),
                "Authorization Error")
+  resource_delete(res$id, url = url, key = key)
 })

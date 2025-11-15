@@ -24,8 +24,9 @@ test_that("group_delete deletes a group", {
 
   expect_true(result)
 
-  # Verify it's deleted (should error)
-  expect_error(group_show(grp$id, url = url), "Not Found Error")
+  # Verify it's marked as deleted
+  deleted_grp <- group_show(grp$id, url = url, key = key)
+  expect_equal(deleted_grp$state, "deleted")
 })
 
 test_that("group_delete accepts ckan_group object", {
@@ -52,7 +53,10 @@ test_that("group_delete fails well", {
   expect_error(group_delete("nonexistent-group-id", url = url, key = key),
                "Not Found Error")
 
-  # bad key
-  expect_error(group_delete("some-id", url = url, key = "invalid-key"),
+  # bad key (use a real group id)
+  grp_name <- paste0("test_group_delete_badkey_", as.integer(Sys.time()))
+  grp <- group_create(name = grp_name, url = url, key = key)
+  expect_error(group_delete(grp$id, url = url, key = "invalid-key"),
                "Authorization Error")
+  group_delete(grp$id, url = url, key = key)
 })

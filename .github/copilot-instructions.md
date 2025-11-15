@@ -96,7 +96,31 @@ test_that("function_name works", {
 })
 ```
 
+### Test Quality Standards
+
+All new tests follow established patterns:
+- ✅ Skip on CRAN with `skip_on_cran()`
+- ✅ Skip on Windows/Mac for write operations
+- ✅ Check CKAN availability before running
+- ✅ Clean up created resources after testing
+- ✅ Test both success and failure scenarios
+- ✅ Test multiple output formats (JSON, list, table)
+- ✅ Test S3 object acceptance (ckan_package, ckan_resource, etc.)
+- ✅ Include proper error handling tests
+
 **CI runs against multiple CKAN versions** (2.9, 2.10, 2.11) using docker-compose in GitHub Actions.
+
+### Recent Coverage Expansion
+
+Coverage now includes 14 additional CRUD-focused files (`tests/testthat/test-*.R`), adding 50+ cases that exercise package/resource/org/group creation+deletion, user activity flows, datastore table creation, and dashboard activity listings. Each suite mixes ID strings and S3 objects, validates JSON output, and checks error paths.
+
+### Remaining Gaps
+
+Untested areas worth prioritizing: `group_update()`, `group_patch()`, `resource_patch()`, `organization_purge()`, `user_create()`, `user_delete()`, follower/followee counters (`user_followee_count()`, `user_follower_count()`, `user_follower_list()`), `dashboard_count()`, `tag_create()`, and legacy related-item helpers (`related_*`). Lower-level helpers (S3 coercion, DBI/dplyr bridge, HTTP glue in `R/zzz.R`) are only exercised indirectly.
+
+### Running Targeted Suites
+
+Use `devtools::test(filter = "package")` (or `resource`, `organization`, `group`, `user`) to focus on a resource family, `devtools::test()` for the entire suite, and `covr::package_coverage()` to gauge progress. DataStore+dashboard tests may skip if the DataPusher lags or the CKAN version lacks those endpoints.
 
 ## Special Features
 

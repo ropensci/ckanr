@@ -24,8 +24,9 @@ test_that("organization_delete deletes an organization", {
 
   expect_true(result)
 
-  # Verify it's deleted (should error)
-  expect_error(organization_show(org$id, url = url), "Not Found Error")
+  # Verify it's marked as deleted
+  deleted_org <- organization_show(org$id, url = url, key = key)
+  expect_equal(deleted_org$state, "deleted")
 })
 
 test_that("organization_delete accepts ckan_organization object", {
@@ -52,7 +53,10 @@ test_that("organization_delete fails well", {
   expect_error(organization_delete("nonexistent-org-id", url = url, key = key),
                "Not Found Error")
 
-  # bad key
-  expect_error(organization_delete("some-id", url = url, key = "invalid-key"),
+  # bad key (use a real organization id)
+  org_name <- paste0("test_org_delete_badkey_", as.integer(Sys.time()))
+  org <- organization_create(name = org_name, url = url, key = key)
+  expect_error(organization_delete(org$id, url = url, key = "invalid-key"),
                "Authorization Error")
+  organization_delete(org$id, url = url, key = key)
 })

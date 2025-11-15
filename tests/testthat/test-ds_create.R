@@ -109,6 +109,6 @@ test_that("ds_create fails well", {
   # invalid resource_id
   expect_error(
     ds_create(resource_id = "nonexistent-resource", url = url, key = key),
-    "Not Found Error|error"
+    "Not Found Error|Conflict|Validation"
   )
 })

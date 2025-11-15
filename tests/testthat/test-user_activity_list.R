@@ -3,9 +3,19 @@ context("user_activity_list")
 skip_on_cran()
 
 url <- get_test_url()
+has_user_activity <- local({
+  actions <- tryCatch(
+    jsonlite::fromJSON(
+      ckan_action("action_list", verb = "GET", url = url)
+    )$result,
+    error = function(e) NULL
+  )
+  isTRUE("user_activity_list" %in% actions)
+})
 
 test_that("user_activity_list returns activities", {
   check_ckan(url)
+  skip_if_not(has_user_activity, "user_activity_list action unavailable on this CKAN instance")
 
   # Get a user from user_list
   users <- user_list(url = url)
@@ -22,6 +32,7 @@ test_that("user_activity_list returns activities", {
 
 test_that("user_activity_list respects limit parameter", {
   check_ckan(url)
+  skip_if_not(has_user_activity, "user_activity_list action unavailable on this CKAN instance")
 
   users <- user_list(url = url)
   if (length(users) > 0) {
@@ -38,6 +49,7 @@ test_that("user_activity_list respects limit parameter", {
 
 test_that("user_activity_list accepts ckan_user object", {
   check_ckan(url)
+  skip_if_not(has_user_activity, "user_activity_list action unavailable on this CKAN instance")
 
   users <- user_list(url = url)
   if (length(users) > 0) {
@@ -54,6 +66,7 @@ test_that("user_activity_list accepts ckan_user object", {
 
 test_that("user_activity_list works with different output formats", {
   check_ckan(url)
+  skip_if_not(has_user_activity, "user_activity_list action unavailable on this CKAN instance")
 
   users <- user_list(url = url)
   if (length(users) > 0) {
@@ -73,6 +86,7 @@ test_that("user_activity_list works with different output formats", {
 
 test_that("user_activity_list fails well", {
   check_ckan(url)
+  skip_if_not(has_user_activity, "user_activity_list action unavailable on this CKAN instance")
 
   # non-existent user
   expect_error(
