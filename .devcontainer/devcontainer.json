@@ -40,7 +40,9 @@
     // Since this is read after docker compose is run,
     // any variables for docker compose live in .env
     // To make Docker commands default to the devcontainer's Docker host
-    "DOCKER_HOST": "unix:///var/run/docker-host.sock"
+    "DOCKER_HOST": "unix:///var/run/docker-host.sock",
+    // Allow destructive tests
+    "CKANR_ALLOW_PURGE_TESTS": true
   },
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   "forwardPorts": [

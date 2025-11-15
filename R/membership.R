@@ -270,3 +270,18 @@ resolve_username <- function(x) {
   }
   x
 }
+
+resolve_user_identifier <- function(x) {
+  if (is.ckan_user(x)) {
+    return(if (!is.null(x$id)) x$id else x$name)
+  }
+  if (is.list(x)) {
+    if (!is.null(x$id)) {
+      return(x$id)
+    }
+    if (!is.null(x$name)) {
+      return(x$name)
+    }
+  }
+  x
+}
