@@ -10,23 +10,24 @@ NULL
 #' @template key
 #' @template args
 #' @export
-#' @examples
-#' # ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
-#' # package_collaborator_list("my-dataset")
+#' @examples \dontrun{
+#' ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
+#' package_collaborator_list("my-dataset")
+#' }
 package_collaborator_list <- function(
   id, capacity = NULL,
   url = get_default_url(), key = get_default_key(), as = "list", ...
 ) {
     pkg <- as.ckan_package(id, url = url, key = key)
     args <- cc(list(id = pkg$id, capacity = capacity))
-    res <- ckan_GET(url, "package_collaborator_list",
+    collaborator_request(
+        endpoint = "package_collaborator_list",
+        url = url,
+        key = key,
+        as = as,
+        method = "GET",
         query = args,
-        key = key, opts = list(...)
-    )
-    switch(as,
-        json = res,
-        list = jsl(res),
-        table = jsd(res)
+        opts <- list(...)
     )
 }
 
@@ -37,23 +38,24 @@ package_collaborator_list <- function(
 #' @template key
 #' @template args
 #' @export
-#' @examples
-#' # ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
-#' # package_collaborator_list_for_user("sckottie")
+#' @examples \dontrun{
+#' ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
+#' package_collaborator_list_for_user("sckottie")
+#' }
 package_collaborator_list_for_user <- function(
   id, capacity = NULL,
   url = get_default_url(), key = get_default_key(), as = "list", ...
 ) {
     user_id <- resolve_user_identifier(id)
     args <- cc(list(id = user_id, capacity = capacity))
-    res <- ckan_GET(url, "package_collaborator_list_for_user",
+    collaborator_request(
+        endpoint = "package_collaborator_list_for_user",
+        url = url,
+        key = key,
+        as = as,
+        method = "GET",
         query = args,
-        key = key, opts = list(...)
-    )
-    switch(as,
-        json = res,
-        list = jsl(res),
-        table = jsd(res)
+        opts <- list(...)
     )
 }
 
@@ -65,9 +67,10 @@ package_collaborator_list_for_user <- function(
 #' @template key
 #' @template args
 #' @export
-#' @examples
-#' # ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
-#' # package_collaborator_create("my-dataset", "new-user", capacity = "editor")
+#' @examples \dontrun{
+#' ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
+#' package_collaborator_create("my-dataset", "new-user", capacity = "editor")
+#' }
 package_collaborator_create <- function(
   id, user_id, capacity,
   url = get_default_url(), key = get_default_key(), as = "list", ...
@@ -78,14 +81,14 @@ package_collaborator_create <- function(
         user_id = resolve_user_identifier(user_id),
         capacity = capacity
     )
-    res <- ckan_POST(url, "package_collaborator_create",
+    collaborator_request(
+        endpoint = "package_collaborator_create",
+        url = url,
+        key = key,
+        as = as,
+        method = "POST",
         body = body,
-        key = key, opts = list(...)
-    )
-    switch(as,
-        json = res,
-        list = jsl(res),
-        table = jsd(res)
+        opts <- list(...)
     )
 }
 
@@ -96,9 +99,10 @@ package_collaborator_create <- function(
 #' @template key
 #' @template args_noas
 #' @export
-#' @examples
-#' # ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
-#' # package_collaborator_delete("my-dataset", "new-user")
+#' @examples \dontrun{
+#' ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
+#' package_collaborator_delete("my-dataset", "new-user")
+#' }
 package_collaborator_delete <- function(
   id, user_id,
   url = get_default_url(), key = get_default_key(), ...
@@ -108,11 +112,31 @@ package_collaborator_delete <- function(
         id = pkg$id,
         user_id = resolve_user_identifier(user_id)
     )
-    res <- ckan_POST(url, "package_collaborator_delete",
+    collaborator_request(
+        endpoint = "package_collaborator_delete",
+        url = url,
+        key = key,
+        method = "POST",
         body = body,
-        key = key, opts = list(...)
+        success = TRUE,
+        opts = list(...)
     )
-    jsonlite::fromJSON(res)$success
 }
 
 # resolve_user_identifier is now defined in R/membership.R (shared utility).
+
+collaborator_request <- function(endpoint, url, key, as = "list",
+                                 method = c("GET", "POST"), query = NULL,
+                                 body = NULL, success = FALSE,
+                                 opts = list()) {
+    method <- match.arg(method)
+    resp <- if (method == "GET") {
+        ckan_GET(url, endpoint, query = query, key = key, opts = opts)
+    } else {
+        ckan_POST(url, endpoint, body = body, key = key, opts = opts)
+    }
+    if (success) {
+        return(jsonlite::fromJSON(resp)$success)
+    }
+    parse_ckan_response(resp, as)
+}

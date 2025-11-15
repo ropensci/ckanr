@@ -144,8 +144,24 @@ ck <- function() 'api/3/action'
 as_log <- function(x){ stopifnot(is.logical(x)); if (x) 'true' else 'false' }
 jsl <- function(x) jsonlite::fromJSON(x, FALSE)$result
 jsd <- function(x) jsonlite::fromJSON(x)$result
+parse_ckan_response <- function(resp, as = "list", list_coercer = NULL) {
+  if (!as %in% c("json", "list", "table")) {
+    stop(sprintf("Unsupported `as` value: %s", as), call. = FALSE)
+  }
+  switch(as,
+    json = resp,
+    list = {
+      out <- jsl(resp)
+      if (!is.null(list_coercer)) {
+        out <- list_coercer(out)
+      }
+      out
+    },
+    table = jsd(resp)
+  )
+}
 ctj <- function() list(`Content-Type` = "application/json")
- 
+
 # Create auth headers compatible with both CKAN 2.10 and earlier (X-CKAN-API-Key)
 # and CKAN 2.11+ (Authorization)
 auth_headers <- function(key) {

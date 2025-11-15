@@ -35,6 +35,8 @@ can vary from a vector, list or data.frame. (required)}
 List packages a user collaborates on
 }
 \examples{
-# ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
-# package_collaborator_list_for_user("sckottie")
+\dontrun{
+ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
+package_collaborator_list_for_user("sckottie")
+}
 }

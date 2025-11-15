@@ -38,6 +38,8 @@ can vary from a vector, list or data.frame. (required)}
 Create or update a dataset collaborator
 }
 \examples{
-# ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
-# package_collaborator_create("my-dataset", "new-user", capacity = "editor")
+\dontrun{
+ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
+package_collaborator_create("my-dataset", "new-user", capacity = "editor")
+}
 }

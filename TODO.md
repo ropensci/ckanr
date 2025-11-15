@@ -53,8 +53,8 @@ This checklist translates the CKAN 2.11 API review into discrete implementation 
 - [ ] Track progress by checking off each bullet when implemented.
 
 ## 9. Maintainability & Refactors
-- [ ] Consolidate membership CRUD patterns (`member_create/delete`, `group_member_*`, `organization_member_*`) behind a single helper that handles ID coercion, POST bodies, and `as` parsing, so adding new endpoints only requires wiring endpoint names.
-- [ ] Introduce a collaborator request helper that encapsulates the repeated `as.ckan_package()` + `resolve_user_identifier()` + `ckan_{GET,POST}` logic in `R/package_collaborators.R`, reducing copy/paste when future collaborator features arrive.
-- [ ] Create a shared response parser (e.g., `parse_ckan_response(out, as, coerce = NULL)`) to replace the duplicated `switch(as, ...)` blocks across modules like `resource_views`, `membership`, and dataset extras.
-- [ ] Extract the `resolve_*` identifier helpers into a single internal file, export them as needed, and update dependent modules (`package_dataset_extras`, `group_list.R`, etc.) to reuse instead of reimplementing ID coercion.
-- [ ] Convert repeated roxygen example boilerplate (setup + teardown) into reusable templates under `man-roxygen/` to keep documentation consistent and easy to update.
+- [x] Consolidate membership CRUD patterns (`member_create/delete`, `group_member_*`, `organization_member_*`) behind a single helper that handles ID coercion, POST bodies, and `as` parsing, so adding new endpoints only requires wiring endpoint names.
+- [x] Introduce a collaborator request helper that encapsulates the repeated `as.ckan_package()` + `resolve_user_identifier()` + `ckan_{GET,POST}` logic in `R/package_collaborators.R`, reducing copy/paste when future collaborator features arrive.
+- [x] Create a shared response parser (e.g., `parse_ckan_response(out, as, coerce = NULL)`) to replace the duplicated `switch(as, ...)` blocks across modules like `resource_views`, `membership`, and dataset extras.
+- [x] Extract the `resolve_*` identifier helpers into a single internal file, export them as needed, and update dependent modules (`package_dataset_extras`, `group_list.R`, etc.) to reuse instead of reimplementing ID coercion.
+- [x] Convert repeated roxygen example boilerplate (setup + teardown) into reusable templates under `man-roxygen/` to keep documentation consistent and easy to update.

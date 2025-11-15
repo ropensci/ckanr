@@ -5,6 +5,9 @@
 #' @name resource_views
 NULL
 
+coerce_view_list <- function(res) lapply(res, as_ck, "ckan_resource_view")
+coerce_view <- function(res) as_ck(res, "ckan_resource_view")
+
 #' List resource views for a resource
 #'
 #' @param id (character or `ckan_resource`) Resource identifier.
@@ -21,11 +24,7 @@ resource_view_list <- function(id, url = get_default_url(),
   res <- as.ckan_resource(id, url = url, key = key)
   out <- ckan_GET(url, "resource_view_list", list(id = res$id), key = key,
     opts = list(...))
-  switch(as,
-    json = out,
-    list = lapply(jsl(out), as_ck, "ckan_resource_view"),
-    table = jsd(out)
-  )
+  parse_ckan_response(out, as, list_coercer = coerce_view_list)
 }
 
 #' Show a resource view
@@ -40,11 +39,7 @@ resource_view_show <- function(id, url = get_default_url(),
   if (inherits(id, "ckan_resource_view")) id <- id$id
   out <- ckan_GET(url, "resource_view_show", list(id = id), key = key,
     opts = list(...))
-  switch(as,
-    json = out,
-    list = as_ck(jsl(out), "ckan_resource_view"),
-    table = jsd(out)
-  )
+  parse_ckan_response(out, as, list_coercer = coerce_view)
 }
 
 #' Create a resource view
@@ -75,11 +70,7 @@ resource_view_create <- function(resource, view_type, title,
   ))
   out <- ckan_POST(url, "resource_view_create", body = tojun(body, TRUE),
     key = key, headers = ctj(), encode = "json", opts = list(...))
-  switch(as,
-    json = out,
-    list = as_ck(jsl(out), "ckan_resource_view"),
-    table = jsd(out)
-  )
+  parse_ckan_response(out, as, list_coercer = coerce_view)
 }
 
 #' Update an existing resource view
@@ -107,11 +98,7 @@ resource_view_update <- function(id, resource = NULL, title = NULL,
   ))
   out <- ckan_POST(url, "resource_view_update", body = tojun(body, TRUE),
     key = key, headers = ctj(), encode = "json", opts = list(...))
-  switch(as,
-    json = out,
-    list = as_ck(jsl(out), "ckan_resource_view"),
-    table = jsd(out)
-  )
+  parse_ckan_response(out, as, list_coercer = coerce_view)
 }
 
 #' Reorder resource views
@@ -128,11 +115,7 @@ resource_view_reorder <- function(id, order, url = get_default_url(),
   body <- list(id = res$id, order = as.list(order))
   out <- ckan_POST(url, "resource_view_reorder", body = tojun(body, TRUE),
     key = key, headers = ctj(), encode = "json", opts = list(...))
-  switch(as,
-    json = out,
-    list = jsl(out),
-    table = jsd(out)
-  )
+  parse_ckan_response(out, as)
 }
 
 #' Delete a resource view
@@ -191,11 +174,7 @@ resource_create_default_resource_views <- function(resource, package = NULL,
   out <- ckan_POST(url, "resource_create_default_resource_views",
     body = tojun(body, TRUE), key = key, headers = ctj(), encode = "json",
     opts = list(...))
-  switch(as,
-    json = out,
-    list = jsl(out),
-    table = jsd(out)
-  )
+  parse_ckan_response(out, as)
 }
 
 #' Create default views for all resources in a dataset
@@ -217,9 +196,5 @@ package_create_default_resource_views <- function(package,
   out <- ckan_POST(url, "package_create_default_resource_views",
     body = tojun(body, TRUE), key = key, headers = ctj(), encode = "json",
     opts = list(...))
-  switch(as,
-    json = out,
-    list = jsl(out),
-    table = jsd(out)
-  )
+  parse_ckan_response(out, as)
 }

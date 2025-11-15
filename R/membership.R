@@ -21,8 +21,10 @@ member_list <- function(id, object_type = NULL, capacity = NULL,
 
   group_id <- resolve_group_or_org_id(id)
   args <- cc(list(id = group_id, object_type = object_type, capacity = capacity))
-  res <- ckan_GET(url, "member_list", query = args, key = key, opts = list(...))
-  switch(as, json = res, list = jsl(res), table = jsd(res))
+  membership_request("member_list",
+    url = url, key = key, as = as,
+    method = "GET", query = args, opts = list(...)
+  )
 }
 
 #' Create or update a membership via member_* endpoints
@@ -44,9 +46,10 @@ member_create <- function(id, object, object_type, capacity,
     object_type = object_type,
     capacity = capacity
   )
-  res <- ckan_POST(url, "member_create", body = body, key = key,
-    opts = list(...))
-  switch(as, json = res, list = jsl(res), table = jsd(res))
+  membership_request("member_create",
+    url = url, key = key, as = as,
+    method = "POST", body = body, opts = list(...)
+  )
 }
 
 #' Remove a membership via member_* endpoints
@@ -62,9 +65,10 @@ member_delete <- function(id, object, object_type,
     object = resolve_object_identifier(object),
     object_type = object_type
   )
-  res <- ckan_POST(url, "member_delete", body = body, key = key,
-    opts = list(...))
-  jsonlite::fromJSON(res)$success
+  membership_request("member_delete",
+    url = url, key = key,
+    method = "POST", body = body, success = TRUE, opts = list(...)
+  )
 }
 
 #' Report available member roles
@@ -77,9 +81,10 @@ member_roles_list <- function(group_type = "organization",
   url = get_default_url(), key = get_default_key(), as = "list", ...) {
 
   args <- cc(list(group_type = group_type))
-  res <- ckan_GET(url, "member_roles_list", query = args, key = key,
-    opts = list(...))
-  switch(as, json = res, list = jsl(res), table = jsd(res))
+  membership_request("member_roles_list",
+    url = url, key = key, as = as,
+    method = "GET", query = args, opts = list(...)
+  )
 }
 
 #' Make a user a member of a group
@@ -99,9 +104,10 @@ group_member_create <- function(id, username, role,
     username = resolve_username(username),
     role = role
   )
-  res <- ckan_POST(url, "group_member_create", body = body, key = key,
-    opts = list(...))
-  switch(as, json = res, list = jsl(res), table = jsd(res))
+  membership_request("group_member_create",
+    url = url, key = key, as = as,
+    method = "POST", body = body, opts = list(...)
+  )
 }
 
 #' Remove a user from a group
@@ -116,9 +122,10 @@ group_member_delete <- function(id, username,
     id = group_id,
     username = resolve_username(username)
   )
-  res <- ckan_POST(url, "group_member_delete", body = body, key = key,
-    opts = list(...))
-  jsonlite::fromJSON(res)$success
+  membership_request("group_member_delete",
+    url = url, key = key,
+    method = "POST", body = body, success = TRUE, opts = list(...)
+  )
 }
 
 #' Make a user a member of an organization
@@ -134,9 +141,10 @@ organization_member_create <- function(id, username, role,
     username = resolve_username(username),
     role = role
   )
-  res <- ckan_POST(url, "organization_member_create", body = body,
-    key = key, opts = list(...))
-  switch(as, json = res, list = jsl(res), table = jsd(res))
+  membership_request("organization_member_create",
+    url = url, key = key,
+    as = as, method = "POST", body = body, opts = list(...)
+  )
 }
 
 #' Remove a user from an organization
@@ -151,9 +159,10 @@ organization_member_delete <- function(id, username,
     id = org_id,
     username = resolve_username(username)
   )
-  res <- ckan_POST(url, "organization_member_delete", body = body,
-    key = key, opts = list(...))
-  jsonlite::fromJSON(res)$success
+  membership_request("organization_member_delete",
+    url = url, key = key,
+    method = "POST", body = body, success = TRUE, opts = list(...)
+  )
 }
 
 #' Invite a user to a group
@@ -169,9 +178,8 @@ user_invite <- function(email, group_id, role = "member",
 
   grp <- resolve_group_or_org_id(group_id)
   body <- list(email = email, group_id = grp, role = role)
-  res <- ckan_POST(url, "user_invite", body = body, key = key,
-    opts = list(...))
-  switch(as, json = res, list = jsl(res), table = jsd(res))
+  membership_request("user_invite", url = url, key = key, as = as,
+    method = "POST", body = body, opts = list(...))
 }
 
 #' List groups the current user can edit
@@ -238,50 +246,20 @@ organization_list_for_user <- function(id = NULL, permission = "manage_group",
     table = jsd(res))
 }
 
-resolve_group_or_org_id <- function(x) {
-  if (is.ckan_group(x) || is.ckan_organization(x)) {
-    return(x$id)
-  }
-  if (is.list(x) && !is.null(x$id)) {
-    return(x$id)
-  }
-  x
-}
+membership_request <- function(endpoint, url, key, as = "list",
+  method = c("GET", "POST"), query = NULL, body = NULL,
+  success = FALSE, list_coercer = NULL, opts = list()) {
 
-resolve_object_identifier <- function(x) {
-  if (is.ckan_package(x) || is.ckan_group(x) || is.ckan_organization(x) ||
-      is.ckan_user(x)) {
-    return(if (!is.null(x$id)) x$id else x$name)
+  method <- match.arg(method)
+  resp <- if (method == "GET") {
+    ckan_GET(url, endpoint, query = query, key = key, opts = opts)
+  } else {
+    ckan_POST(url, endpoint, body = body, key = key, opts = opts)
   }
-  if (is.list(x)) {
-    if (!is.null(x$id)) return(x$id)
-    if (!is.null(x$name)) return(x$name)
-  }
-  x
-}
 
-resolve_username <- function(x) {
-  if (is.ckan_user(x)) {
-    return(if (!is.null(x$name)) x$name else x$id)
+  if (success) {
+    return(jsonlite::fromJSON(resp)$success)
   }
-  if (is.list(x)) {
-    if (!is.null(x$name)) return(x$name)
-    if (!is.null(x$id)) return(x$id)
-  }
-  x
-}
 
-resolve_user_identifier <- function(x) {
-  if (is.ckan_user(x)) {
-    return(if (!is.null(x$id)) x$id else x$name)
-  }
-  if (is.list(x)) {
-    if (!is.null(x$id)) {
-      return(x$id)
-    }
-    if (!is.null(x$name)) {
-      return(x$name)
-    }
-  }
-  x
+  parse_ckan_response(resp, as, list_coercer)
 }
