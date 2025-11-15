@@ -46,10 +46,7 @@ ds_create <- function(resource_id = NULL, resource = NULL, force = FALSE,
   body <- cc(list(resource_id = resource_id, resource = resource, force = force,
                   aliases = aliases, fields = fields, records = records,
                   primary_key = primary_key, indexes = indexes))
-  headers <- ctj()
-  if (!is.null(key)) {
-    headers <- c(auth_headers(key), headers)
-  }
+  headers <- c(auth_headers(key), ctj())
   con <- crul::HttpClient$new(file.path(url, 'api/action/datastore_create'),
     headers = headers,
     opts = list(...)
