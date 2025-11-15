@@ -24,18 +24,7 @@ also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 \code{\link{ckanr_setup}}}
 
 \item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
-
-\item{as}{(character) One of list (default), table, or json. Parsing with
-table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
-which attempts to parse data to data.frame's when possible, so the result
-can vary from a vector, list or data.frame. (required)}
 }
 \description{
 Delete a dataset collaborator
-}
-\examples{
-\\dontrun{
-ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
-package_collaborator_delete("my-dataset", "new-user")
-}
 }

@@ -40,7 +40,9 @@ package_revise <- function(match = NULL, filter = NULL, update = NULL,
 #' @export
 #' @examples \dontrun{
 #' pkg <- package_show("my-dataset")
-#' package_resource_reorder(pkg, order = rev(vapply(pkg$resources, `[[`, "id", FUN.VALUE = character(1))))
+#' package_resource_reorder(pkg,
+#'   order = rev(vapply(pkg$resources, `[[`, "id", FUN.VALUE = character(1)))
+#' )
 #' }
 package_resource_reorder <- function(id, order,
   url = get_default_url(), key = get_default_key(), as = "list", ...) {
@@ -57,7 +59,7 @@ package_resource_reorder <- function(id, order,
 #'
 #' @param id (character or `ckan_package`) Dataset identifier.
 #' @param organization_id (character or `ckan_organization`) Owning organization identifier.
-#' @template args
+#' @template args_noas
 #' @template key
 #' @export
 #' @examples \dontrun{
@@ -78,7 +80,7 @@ package_owner_org_update <- function(id, organization_id,
 #' Permanently purge a dataset
 #'
 #' @param id (character or `ckan_package`) Dataset identifier.
-#' @template args
+#' @template args_noas
 #' @template key
 #' @export
 #' @examples \dontrun{

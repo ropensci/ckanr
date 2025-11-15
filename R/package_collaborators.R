@@ -10,7 +10,7 @@ NULL
 #' @template key
 #' @template args
 #' @export
-#' @examples \\dontrun{
+#' @examples
 #' ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
 #' package_collaborator_list("my-dataset")
 #' }
@@ -31,7 +31,7 @@ package_collaborator_list <- function(id, capacity = NULL,
 #' @template key
 #' @template args
 #' @export
-#' @examples \\dontrun{
+#' @examples
 #' ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
 #' package_collaborator_list_for_user("sckottie")
 #' }
@@ -53,7 +53,10 @@ package_collaborator_list_for_user <- function(id, capacity = NULL,
 #' @template key
 #' @template args
 #' @export
-#' @examples \\dontrun{
+#' @examples
+#' \dontrun{
+#'
+#' }
 #' ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
 #' package_collaborator_create("my-dataset", "new-user", capacity = "editor")
 #' }
@@ -76,9 +79,12 @@ package_collaborator_create <- function(id, user_id, capacity,
 #' @param id (character or `ckan_package`) Dataset identifier or object.
 #' @param user_id (character or `ckan_user`) User identifier or object.
 #' @template key
-#' @template args
+#' @template args_noas
 #' @export
-#' @examples \\dontrun{
+#' @examples
+#' \dontrun{
+#'
+#' }
 #' ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
 #' package_collaborator_delete("my-dataset", "new-user")
 #' }

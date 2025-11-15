@@ -19,3 +19,6 @@ vignettes/
 inst/ignore/
 docker-compose.yml
 ^CRAN-SUBMISSION$
+TEST_COVERAGE_SUMMARY.md
+NEW_TESTS_REPORT.md
+TODO.md

@@ -37,6 +37,8 @@ Reorder resources for a dataset
 \examples{
 \dontrun{
 pkg <- package_show("my-dataset")
-package_resource_reorder(pkg, order = rev(vapply(pkg$resources, `[[`, "id", FUN.VALUE = character(1))))
+package_resource_reorder(pkg,
+  order = rev(vapply(pkg$resources, `[[`, "id", FUN.VALUE = character(1)))
+)
 }
 }

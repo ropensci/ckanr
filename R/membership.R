@@ -13,7 +13,7 @@ NULL
 #' @template args
 #' @template key
 #' @export
-#' @examples \\dontrun{
+#' @examples
 #' ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
 #' member_list("my-group", object_type = "user")
 #' }
