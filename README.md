@@ -10,13 +10,27 @@ ckanr
 [![Coverage](https://img.shields.io/codecov/c/github/ropensci/ckanr/main)](https://app.codecov.io/gh/ropensci/ckanr)
 
 
-`ckanr` is an R client for the CKAN API.
+`ckanr` is an R client package for the [CKAN API](https://ckan.org/),
+enabling R users to interact with CKAN data portals for reading, writing, and managing datasets.
+The package wraps the entire CKAN REST API with R functions organized by resource type
+(packages, resources, organizations, groups, users, tags).
 
 ## Description
 
-CKAN is an open source set of tools for hosting and providing data on the web. (CKAN users could include non-profits, museums, local city/county governments, etc.).
+CKAN is an open source set of tools for hosting and providing data on the web.
+(CKAN users could include non-profits, museums, local city/county governments, etc.).
 
-`ckanr` allows users to interact with those CKAN websites to create, modify, and manage datasets, as well as search and download pre-existing data, and then to proceed using in R for data analysis (stats/plotting/etc.). It is meant to be as general as possible, allowing you to work with any CKAN instance.
+`ckanr` allows users to interact with those CKAN websites to create, modify, and manage
+datasets, as well as search and download pre-existing data, and then to proceed using in
+R for data analysis (stats/plotting/etc.). It is meant to be as general as possible,
+allowing you to work with any CKAN instance.
+
+`ckanr` works for and is tested against
+- the [CKAN v2.11 API](https://docs.ckan.org/en/2.11/api/),
+- the [CKAN v2.10 API](https://docs.ckan.org/en/2.10/api/), and
+- the [CKAN v2.9 API](https://docs.ckan.org/en/2.9/api/).
+
+`ckanr` may work with older and newer CKAN versions.
 
 Get started: <https://docs.ropensci.org/ckanr/>
 
@@ -33,8 +47,17 @@ Development version
 
 
 ``` r
+# From source
 install.packages("remotes")
 remotes::install_github("ropensci/ckanr")
+# Binary via the rOpenSci universe
+options(
+  repos = c(
+    ropensci = "https://ropensci.r-universe.dev",
+    CRAN = "https://cloud.r-project.org"
+  )
+)
+install.packages("ruODK")
 ```
 
 
@@ -58,7 +81,11 @@ ckanr_setup(url = "https://data.ontario.ca/", key = "my-ckan-api-key")
 
 ## ckanr package API
 
-There are a suite of CKAN things (package, resource, etc.) that each have a set of functions in this package. The functions for each CKAN thing have an S3 class that is returned from most functions, and can be passed to most other functions (this also facilitates piping). The following is a list of the function groups for certain CKAN things, with the prefix for the functions that work with that thing, and the name of the S3 class:
+There are a suite of CKAN things (package, resource, etc.) that each have a set of
+functions in this package. The functions for each CKAN thing have an S3 class that is
+returned from most functions, and can be passed to most other functions (this also
+facilitates piping). The following is a list of the function groups for certain CKAN
+things, with the prefix for the functions that work with that thing, and the name of the S3 class:
 
 + Packages (aka packages) - `package_*()` - `ckan_package`
 + Resources - `resource_*()` - `ckan_resource`
@@ -66,7 +93,7 @@ There are a suite of CKAN things (package, resource, etc.) that each have a set 
 + Users - `user_*()` - `ckan_user`
 + Groups - `group_*()` - `ckan_group`
 + Tags - `tag_*()` - `ckan_tag`
-+Organizations - `organization_*()` - `ckan_organization`
++ Organizations - `organization_*()` - `ckan_organization`
 
 The S3 class objects all look very similar; for example:
 
@@ -79,7 +106,10 @@ The S3 class objects all look very similar; for example:
   Format: CSV
 ```
 
-All classes state the type of object, have the ID to the right of the type, then have a varying set of key-value fields deemed important. This printed object is just a summary of an R list, so you can index to specific values (e.g., `result$description`). If you feel there are important fields left out of these printed summaries, let us know.
+All classes state the type of object, have the ID to the right of the type, then have a
+varying set of key-value fields deemed important. This printed object is just a summary
+of an R list, so you can index to specific values (e.g., `result$description`).
+If you feel there are important fields left out of these printed summaries, let us know.
 
 > note: Many examples are given in brief for readme brevity
 
@@ -89,8 +119,9 @@ All classes state the type of object, have the ID to the right of the type, then
 
 * Florian Mayer
 * Francisco Alves
+* Hanna Böhner
 * Imanuel Costigan
-* Scott Chamberlain
+* Scott Chamberlain (original creator)
 * Sharla Gelfand
 * Wush Wu
 
@@ -98,5 +129,9 @@ All classes state the type of object, have the ID to the right of the type, then
 
 * Please [report any issues or bugs](https://github.com/ropensci/ckanr/issues).
 * License: MIT
-* Get citation information for `ckanr` in R doing `citation(package = 'ckanr')`
-* Please note that this package is released with a [Contributor Code of Conduct](https://ropensci.org/code-of-conduct/). By contributing to this project, you agree to abide by its terms.
+* Get citation information for `ckanr` in R via `citation(package = 'ckanr')`
+* Please note that this package is released with a
+  [Contributor Code of Conduct](https://ropensci.org/code-of-conduct/).
+  By contributing to this project, you agree to abide by its terms.
+* If you want to contribute to the package development, please see the
+  [contributing guide](https://docs.ropensci.org/ckanr/CONTRIBUTING.html).
