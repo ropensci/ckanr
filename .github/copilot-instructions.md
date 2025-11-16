@@ -4,6 +4,16 @@
 
 `ckanr` is an R client package for the [CKAN API](https://ckan.org/), enabling R users to interact with CKAN data portals for reading, writing, and managing datasets. The package wraps the entire CKAN REST API with R functions organized by resource type (packages, resources, organizations, groups, users, tags).
 
+`ckanr` works for and is tested against
+- the [CKAN v2.11 API](https://docs.ckan.org/en/2.11/api/),
+- the [CKAN v2.10 API](https://docs.ckan.org/en/2.10/api/), and
+- the [CKAN v2.9 API](https://docs.ckan.org/en/2.9/api/).
+
+`ckanr` uses the CKAN version to toggle API endpoint behaviour if different between supported
+versions, or emits warnings if an endpoint is not available for that given version.
+
+`ckanr` may work with older and newer CKAN versions.
+
 **Key Architecture**: Functions follow a consistent pattern using HTTP verb wrappers (`ckan_GET`, `ckan_POST`, `ckan_PATCH`, `ckan_DELETE`) defined in `R/zzz.R` that use `crul::HttpClient` for all API requests. Each CKAN resource type has dedicated S3 classes (e.g., `ckan_package`, `ckan_resource`) with coercion functions (`as.ckan_*`).
 
 ## Development Environment
