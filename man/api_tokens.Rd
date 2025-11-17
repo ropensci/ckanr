@@ -65,7 +65,7 @@ by CKAN or extensions.}
 Inspect, create, and revoke API tokens for a user.
 }
 \examples{
-\\dontrun{
+\dontrun{
 ckanr_setup(url = "https://demo.ckan.org/", key = "my-ckan-key")
 api_token_list(user_id = "my-user-id")
 }

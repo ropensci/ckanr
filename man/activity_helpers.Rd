@@ -104,6 +104,49 @@ send_email_notifications(
   ...
 )
 }
+\arguments{
+\item{id}{(character) Identifier of the target object (group, organization,
+activity, etc.).}
+
+\item{offset}{(numeric) Where to start getting activity items from
+(optional, default: 0)}
+
+\item{limit}{(numeric) The maximum number of activities to return
+(optional, default: 31)}
+
+\item{include_hidden_activity}{(logical) If \code{TRUE}, include private activity
+entries (requires sysadmin).}
+
+\item{url}{Base url to use. Default: https://data.ontario.ca/ See
+also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
+
+\item{key}{A privileged CKAN API key, Default: your key set with
+\code{\link{ckanr_setup}}}
+
+\item{as}{(character) One of list (default), table, or json. Parsing with
+table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
+which attempts to parse data to data.frame's when possible, so the result
+can vary from a vector, list or data.frame. (required)}
+
+\item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
+
+\item{object_type}{(character) Domain object affected by the activity, e.g.,
+"package", "resource", or a plugin-defined type.}
+
+\item{diff_type}{(character) Diff format returned by \code{activity_diff()},
+typically "unified".}
+
+\item{user_id}{(character) User identifier associated with a custom
+\code{activity_create()} entry.}
+
+\item{object_id}{(character) Target object identifier for
+\code{activity_create()}.}
+
+\item{activity_type}{(character) Activity type string to emit via
+\code{activity_create()}.}
+
+\item{data}{(list) Optional structured payload describing the activity body.}
+}
 \description{
 These helpers wrap CKAN's \code{ckanext.activity} endpoints. They require the
 \code{activity} core plugin to be enabled on the target CKAN instance.

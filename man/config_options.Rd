@@ -52,7 +52,7 @@ can vary from a vector, list or data.frame. (required)}
 Inspect and update CKAN's runtime-editable configuration keys.
 }
 \examples{
-\\dontrun{
+\dontrun{
 ckanr_setup(url = "https://demo.ckan.org/", key = "my-ckan-key")
 config_option_list()
 config_option_update(list("ckan.site_title" = "My Portal"))

@@ -4,8 +4,20 @@
 #' track background operations (eg DataPusher runs).
 #'
 #' @name task_status
+#' @template args
+#' @template key
+#' @param id (character) Task status identifier to inspect or mutate.
+#' @param entity_id (character) ID of the dataset/resource related to the task.
+#' @param entity_type (character) CKAN domain object type (e.g., "dataset").
+#' @param task_type (character) Task namespace such as "datapusher".
+#' @param task_key (character) Additional task key (e.g., queue name).
+#' @param value (character) Free-form value, often notes or payload references.
+#' @param state (character) Task state such as "queued", "running", or
+#'   "finished".
+#' @param last_updated (character) Timestamp string for the last state change.
+#' @param error (character) Optional serialized error blob attached to the task.
 #' @examples
-#' \\dontrun{
+#' \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org/", key = "my-ckan-key")
 #' task_status_show(entity_type = "dataset", entity_id = "my-dataset")
 #' task_status_update(
@@ -107,7 +119,7 @@ task_status_delete <- function(id = NULL, entity_id = NULL,
 #'
 #' @name term_translation
 #' @examples
-#' \\dontrun{
+#' \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org/", key = "my-ckan-key")
 #' term_translation_show(c("License", "Dataset"), lang_codes = "fr")
 #' term_translation_update(term = "License", term_translation = "Licence", lang_code = "fr")
@@ -149,6 +161,8 @@ term_translation_update <- function(term, term_translation, lang_code,
 #' @rdname term_translation
 #' @template args
 #' @template key
+#' @param data (list) List of translation dictionaries with `term`,
+#'   `term_translation`, and `lang_code` entries.
 #' @export
 term_translation_update_many <- function(data, url = get_default_url(),
   key = get_default_key(), as = 'list', ...) {
@@ -168,7 +182,7 @@ term_translation_update_many <- function(data, url = get_default_url(),
 #'
 #' @name config_options
 #' @examples
-#' \\dontrun{
+#' \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org/", key = "my-ckan-key")
 #' config_option_list()
 #' config_option_update(list("ckan.site_title" = "My Portal"))
@@ -222,7 +236,7 @@ config_option_update <- function(options, url = get_default_url(),
 #'
 #' @name job_queue
 #' @examples
-#' \\dontrun{
+#' \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org/", key = "my-ckan-key")
 #' job_list()
 #' }
@@ -288,7 +302,7 @@ job_cancel <- function(id, url = get_default_url(), key = get_default_key(),
 #'
 #' @name api_tokens
 #' @examples
-#' \\dontrun{
+#' \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org/", key = "my-ckan-key")
 #' api_token_list(user_id = "my-user-id")
 #' }
@@ -352,7 +366,7 @@ api_token_revoke <- function(token = NULL, jti = NULL,
 #'
 #' @name diagnostics
 #' @examples
-#' \\dontrun{
+#' \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org/")
 #' status_show()
 #' help_show("package_search")

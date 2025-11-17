@@ -57,6 +57,16 @@ task_status_delete(
 )
 }
 \arguments{
+\item{id}{(character) Task status identifier to inspect or mutate.}
+
+\item{entity_id}{(character) ID of the dataset/resource related to the task.}
+
+\item{entity_type}{(character) CKAN domain object type (e.g., "dataset").}
+
+\item{task_type}{(character) Task namespace such as "datapusher".}
+
+\item{task_key}{(character) Additional task key (e.g., queue name).}
+
 \item{url}{Base url to use. Default: https://data.ontario.ca/ See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
@@ -70,6 +80,15 @@ can vary from a vector, list or data.frame. (required)}
 
 \item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
 
+\item{value}{(character) Free-form value, often notes or payload references.}
+
+\item{state}{(character) Task state such as "queued", "running", or
+"finished".}
+
+\item{last_updated}{(character) Timestamp string for the last state change.}
+
+\item{error}{(character) Optional serialized error blob attached to the task.}
+
 \item{data}{(list) For \code{task_status_update_many()}, a list of task status
 dictionaries to update.}
 }
@@ -78,7 +97,7 @@ These helpers wrap the sysadmin-only task status endpoints that CKAN uses to
 track background operations (eg DataPusher runs).
 }
 \examples{
-\\dontrun{
+\dontrun{
 ckanr_setup(url = "https://demo.ckan.org/", key = "my-ckan-key")
 task_status_show(entity_type = "dataset", entity_id = "my-dataset")
 task_status_update(

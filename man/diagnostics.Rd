@@ -36,7 +36,7 @@ can vary from a vector, list or data.frame. (required)}
 Lightweight wrappers for CKAN's \code{status_show} and \code{help_show} actions.
 }
 \examples{
-\\dontrun{
+\dontrun{
 ckanr_setup(url = "https://demo.ckan.org/")
 status_show()
 help_show("package_search")

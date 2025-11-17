@@ -57,12 +57,15 @@ can vary from a vector, list or data.frame. (required)}
 \item{term_translation}{(character) Translation value.}
 
 \item{lang_code}{(character) Target language code.}
+
+\item{data}{(list) List of translation dictionaries with \code{term},
+\code{term_translation}, and \code{lang_code} entries.}
 }
 \description{
 Manage localized UI strings stored in CKAN's term translation table.
 }
 \examples{
-\\dontrun{
+\dontrun{
 ckanr_setup(url = "https://demo.ckan.org/", key = "my-ckan-key")
 term_translation_show(c("License", "Dataset"), lang_codes = "fr")
 term_translation_update(term = "License", term_translation = "Licence", lang_code = "fr")

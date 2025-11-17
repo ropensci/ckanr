@@ -4,6 +4,24 @@
 #' `activity` core plugin to be enabled on the target CKAN instance.
 #'
 #' @name activity_helpers
+#' @template paging
+#' @template args
+#' @template key
+#' @param id (character) Identifier of the target object (group, organization,
+#'   activity, etc.).
+#' @param include_hidden_activity (logical) If `TRUE`, include private activity
+#'   entries (requires sysadmin).
+#' @param object_type (character) Domain object affected by the activity, e.g.,
+#'   "package", "resource", or a plugin-defined type.
+#' @param diff_type (character) Diff format returned by `activity_diff()`,
+#'   typically "unified".
+#' @param user_id (character) User identifier associated with a custom
+#'   `activity_create()` entry.
+#' @param object_id (character) Target object identifier for
+#'   `activity_create()`.
+#' @param activity_type (character) Activity type string to emit via
+#'   `activity_create()`.
+#' @param data (list) Optional structured payload describing the activity body.
 NULL
 
 #' @rdname activity_helpers

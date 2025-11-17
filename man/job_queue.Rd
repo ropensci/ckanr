@@ -62,7 +62,7 @@ can vary from a vector, list or data.frame. (required)}
 Manage CKAN's RQ/Redis job queue (requires sysadmin access).
 }
 \examples{
-\\dontrun{
+\dontrun{
 ckanr_setup(url = "https://demo.ckan.org/", key = "my-ckan-key")
 job_list()
 }
