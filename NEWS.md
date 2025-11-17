@@ -11,6 +11,7 @@ Additional endoints of the CKAN 2.11 API have been implemented.
 * Refresh the follower/followee helpers: `dataset_*`, `group_*`, and `user_*` functions now expose counts, lists, follow/unfollow flows, and "am I following" probes, plus followee dashboards (`followee_count()`, `followee_list()`, `dataset_followee_*()`, `group_followee_*()`, `user_followee_*()`). Organization-specific helpers remain unavailable because CKAN 2.11+ no longer exposes those endpoints.
 * Add activity-stream helpers covering `group_activity_list()`, `organization_activity_list()`, `recently_changed_packages_activity_list()`, `dashboard_new_activities_count()`, `dashboard_mark_activities_old()`, `activity_show()`, `activity_data_show()`, `activity_diff()`, `activity_create()`, and `send_email_notifications()` (all automatically skip when the `activity` plugin is disabled).
 * Add sysadmin-only vocabulary helpers (`vocabulary_list()`, `vocabulary_show()`, `vocabulary_create()`, `vocabulary_update()`, `vocabulary_delete()`) plus `tag_autocomplete()` to round out the tag discovery toolkit.
+* Implement the admin & operations toolkit: task-status maintenance (`task_status_*()`), term translations, runtime config editing, Redis/RQ job controls, API token lifecycle helpers, and diagnostic wrappers for `status_show()`/`help_show()`.
 
 ### TESTS
 
@@ -25,6 +26,7 @@ Additional endoints of the CKAN 2.11 API have been implemented.
   followee dashboards while automatically cleaning up temporary relationships.
 * Add skips keyed off `status_show()` for all activity and dashboard tests, exercising new helpers whenever the `activity` plugin is available.
 * Cover the new vocabulary lifecycle and `tag_autocomplete()` helpers, skipping gracefully when the configured CKAN user lacks sysadmin rights.
+* Exercise the admin/ops helpers with sysadmin-gated tests that verify task-status roundtrips, term translations, config changes, job management, API tokens, and diagnostics while skipping when the test key lacks sufficient privileges.
 
 ### MAINTENANCE
 

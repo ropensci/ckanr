@@ -38,13 +38,13 @@ This checklist translates the CKAN 2.11 API review into discrete implementation 
 - [x] Tests must check `status_show()` to confirm the `activity` plugin is enabled; skip otherwise.
 
 ## 7. Admin & Ops Utilities (Low)
-- [ ] Implement task-status maintenance (`task_status_show`, `task_status_update`, `task_status_update_many`, `task_status_delete`).
-- [ ] Add term-translation helpers (`term_translation_show`, `term_translation_update`, `term_translation_update_many`).
-- [ ] Provide runtime config editing (`config_option_list`, `config_option_show`, `config_option_update`).
-- [ ] Surface background job monitors (`job_list`, `job_show`, `job_clear`, `job_cancel`).
-- [ ] Cover API token lifecycle (`api_token_list`, `api_token_create`, `api_token_revoke`).
-- [ ] Expose `status_show()` and `help_show()` as general-purpose diagnostics.
-- [ ] Because these actions require sysadmin keys, mark tests with explicit skips when `get_test_key()` lacks that role.
+- [x] Implement task-status maintenance (`task_status_show`, `task_status_update`, `task_status_update_many`, `task_status_delete`).
+- [x] Add term-translation helpers (`term_translation_show`, `term_translation_update`, `term_translation_update_many`).
+- [x] Provide runtime config editing (`config_option_list`, `config_option_show`, `config_option_update`).
+- [x] Surface background job monitors (`job_list`, `job_show`, `job_clear`, `job_cancel`).
+- [x] Cover API token lifecycle (`api_token_list`, `api_token_create`, `api_token_revoke`).
+- [x] Expose `status_show()` and `help_show()` as general-purpose diagnostics.
+- [x] Because these actions require sysadmin keys, mark tests with explicit skips when `get_test_key()` lacks that role.
 
 ## 8. Cross-Cutting Actions
 - [ ] For each new function, add roxygen docs (templates in `man-roxygen/`), and examples wrapped in `\dontrun{}`.
