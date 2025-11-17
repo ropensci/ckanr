@@ -47,10 +47,10 @@ This checklist translates the CKAN 2.11 API review into discrete implementation 
 - [x] Because these actions require sysadmin keys, mark tests with explicit skips when `get_test_key()` lacks that role.
 
 ## 8. Cross-Cutting Actions
-- [ ] For each new function, add roxygen docs (templates in `man-roxygen/`), and examples wrapped in `\dontrun{}`.
-- [ ] Ensure new HTTP calls reuse `ckan_GET/POST/PATCH/DELETE` and dual Authorization headers.
-- [ ] Expand the Copilot instructions (`.github/copilot-instructions.md`) once the first batch lands so future contributors follow the same patterns.
-- [ ] Track progress by checking off each bullet when implemented.
+- [x] For each new function, add roxygen docs (templates in `man-roxygen/`), and examples wrapped in `\dontrun{}`.
+- [x] Ensure new HTTP calls reuse `ckan_GET/POST/PATCH/DELETE` and dual Authorization headers.
+- [x] Expand the Copilot instructions (`.github/copilot-instructions.md`) once the first batch lands so future contributors follow the same patterns.
+- [x] Track progress by checking off each bullet when implemented.
 
 ## 9. Maintainability & Refactors
 - [x] Consolidate membership CRUD patterns (`member_create/delete`, `group_member_*`, `organization_member_*`) behind a single helper that handles ID coercion, POST bodies, and `as` parsing, so adding new endpoints only requires wiring endpoint names.
@@ -58,3 +58,9 @@ This checklist translates the CKAN 2.11 API review into discrete implementation 
 - [x] Create a shared response parser (e.g., `parse_ckan_response(out, as, coerce = NULL)`) to replace the duplicated `switch(as, ...)` blocks across modules like `resource_views`, `membership`, and dataset extras.
 - [x] Extract the `resolve_*` identifier helpers into a single internal file, export them as needed, and update dependent modules (`package_dataset_extras`, `group_list.R`, etc.) to reuse instead of reimplementing ID coercion.
 - [x] Convert repeated roxygen example boilerplate (setup + teardown) into reusable templates under `man-roxygen/` to keep documentation consistent and easy to update.
+
+## 10. Maintainability Follow-ups (Ongoing)
+- [ ] Reuse `parse_ckan_response()` inside `R/admin_ops.R` so all new helpers share the centralized response handling instead of duplicating `switch(as, ...)` blocks.
+- [ ] Add capability guards around the admin/ops helpers (e.g., detect job queue or task-status availability via `status_show()`) and expose matching skip helpers in `tests/testthat/helper-ckanr.R` to avoid confusing 404s on older CKANs.
+- [ ] Introduce a `with_sysadmin_ckan()` (or similar) helper in `tests/testthat/helper-ckanr.R` to encapsulate the repetitive `skip_on_cran()`, `check_ckan()`, and `skip_if_not_sysadmin()` scaffolding in `test-admin_ops.R`.
+- [ ] Create a roxygen template (e.g., `man-roxygen/example-admin.R`) for the repeated `\dontrun{ ckanr_setup(...) }` admin examples so future docs only need `@template example_admin` and stay consistent.

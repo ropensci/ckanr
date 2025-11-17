@@ -270,3 +270,41 @@ handle_many <- function(x) {
     stop("query/q must be vector or list of strings", call.=FALSE)
   unlist(lapply(x, function(z) list(query = z)), FALSE)
 }
+
+ckan_action_available <- local({
+  cache <- new.env(parent = emptyenv())
+  function(action, url = get_default_url(), key = get_default_key()) {
+    cache_key <- paste(url, action, sep = "|")
+    cached <- get0(cache_key, envir = cache, inherits = FALSE)
+    if (!is.null(cached)) {
+      return(cached)
+    }
+    res <- tryCatch(
+      {
+        ckan_action(
+          "help_show",
+          query = list(name = action),
+          verb = "GET",
+          url = url,
+          key = key
+        )
+      },
+      error = function(e) e
+    )
+    ok <- !inherits(res, "error")
+    assign(cache_key, ok, envir = cache)
+    ok
+  }
+})
+
+ensure_action_available <- function(
+  action, url = get_default_url(),
+  key = get_default_key()
+) {
+  if (!ckan_action_available(action, url = url, key = key)) {
+    stop(sprintf(
+      "The '%s' action is unavailable on this CKAN instance",
+      action
+    ), call. = FALSE)
+  }
+}

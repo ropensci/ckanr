@@ -1,7 +1,11 @@
 # ckanr (development version)
+==============================
+
+ckanr 0.8.0
+===========
 
 ### NEW FEATURES
-Additional endoints of the CKAN 2.11 API have been implemented.
+Remaining endpoints of the CKAN 2.11 API have been implemented.
 
 * Add dataset collaborator helpers `package_collaborator_list()`, `package_collaborator_list_for_user()`, `package_collaborator_create()`, and `package_collaborator_delete()`.
 * Expose membership utilities `member_list()`, `member_create()`, `member_delete()`, `member_roles_list()`, `group_member_create()`, `group_member_delete()`, `organization_member_create()`, `organization_member_delete()`, `user_invite()`, `group_list_authz()`, and `organization_list_for_user()` to manage user access consistently across groups and organizations.
@@ -31,7 +35,7 @@ Additional endoints of the CKAN 2.11 API have been implemented.
 ### MAINTENANCE
 
 * Add file `.github/copilot-instructions.md` to allow GenAI to reason over the codebase.
-  The file is also a great read for contributors.
+  The file is also a great read for human contributors.
 
 ckanr 0.7.1
 ===========
