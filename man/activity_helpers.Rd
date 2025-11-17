@@ -145,7 +145,8 @@ typically "unified".}
 \item{activity_type}{(character) Activity type string to emit via
 \code{activity_create()}.}
 
-\item{data}{(list) Optional structured payload describing the activity body.}
+\item{data}{(list|character) Optional structured payload describing the
+activity body. Lists are JSON-encoded automatically.}
 }
 \description{
 These helpers wrap CKAN's \code{ckanext.activity} endpoints. They require the

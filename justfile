@@ -43,6 +43,13 @@ ckan_stop:
 doc:
   #!/usr/bin/env Rscript
   devtools::document()
+  knitr::knit('README.Rmd')
+
+# TODO
+# vign:
+# 	cd vignettes;\
+# 	${RSCRIPT} -e "Sys.setenv(NOT_CRAN='true'); knitr::knit('ckanr.Rmd.og', output = 'ckanr.Rmd')";\
+# 	cd ..
 
 # R: Build package
 build:
@@ -57,12 +64,20 @@ load_all:
 # R: install package
 install:
   #!/usr/bin/env Rscript
+  just doc
+  just build
   devtools::install()
 
 # R: check package
 check:
   #!/usr/bin/env Rscript
   devtools::check()
+  devtools::run_examples()
+
+check_win:
+  #!/usr/bin/env Rscript
+	devtools::check_win_devel()
+  devtools::check_win_release()
 
 # R: run tests
 test:

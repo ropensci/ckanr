@@ -300,6 +300,19 @@ skip_if_activity_plugin_disabled <- function(url) {
   }
 }
 
+skip_if_activity_email_notifications_disabled <- function(url, key) {
+  status <- tryCatch(
+    ckanr:::activity_email_notifications_enabled(url = url, key = key),
+    error = function(e) NA
+  )
+  if (identical(status, FALSE)) {
+    skip("Activity email notifications are disabled on this CKAN instance")
+  }
+  if (is.na(status)) {
+    skip("Unable to determine activity email notification setting")
+  }
+}
+
 u <- get_test_url()
 
 if (ping(u)) {
