@@ -5,7 +5,7 @@
 
 * Replace the deprecated `lazyeval` dependency with `rlang`, updating our dplyr
   tests and development tooling accordingly so contributors only need the modern
-  tidy-eval stack.
+  tidy-eval stack (#93)
 
 ckanr 0.8.1
 ===========
