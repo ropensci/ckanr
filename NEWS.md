@@ -1,6 +1,13 @@
 # ckanr (development version)
 ==============================
 
+ckanr 0.8.1
+===========
+
+### MAINTENANCE
+
+* Update servers(), thanks @nn-at (#176)
+
 ckanr 0.8.0
 ===========
 
