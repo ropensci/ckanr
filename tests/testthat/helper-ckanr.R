@@ -85,9 +85,40 @@ prepare_test_ckan <- function(test_url = Sys.getenv("CKANR_TEST_URL"),
     # Note: The DataPusher will automatically push CSV resources to the datastore
     # ds_search tests will skip if the datastore is not ready yet
 
-    # Tags should get an entry in ckanr_setup / ckanr_settings
-    # t <- tag_create(name = "web", vocabulary_id = "Testing1") ## 403
-    # t <- tag_list()[[1]]
+    vocab_name <- "ckanr_test_vocabulary"
+    vocab_tags <- c("ckanr_vocab_alpha", "ckanr_vocab_beta")
+    user_info <- tryCatch(current_test_user(test_url, test_key),
+      error = function(e) e
+    )
+    if (!inherits(user_info, "error") && isTRUE(user_info$sysadmin)) {
+      try(vocabulary_delete(vocab_name, url = test_url, key = test_key),
+        silent = TRUE
+      )
+      vocab <- tryCatch(
+        vocabulary_create(
+          name = vocab_name,
+          tags = lapply(vocab_tags, function(x) list(name = x)),
+          url = test_url,
+          key = test_key
+        ),
+        error = function(e) e
+      )
+      if (!inherits(vocab, "error")) {
+        invisible(lapply(vocab_tags, function(tag_name) {
+          try(
+            tag_create(
+              name = tag_name,
+              vocabulary_id = vocab$id,
+              url = test_url,
+              key = test_key
+            ),
+            silent = TRUE
+          )
+        }))
+      }
+    } else {
+      message("Skipping vocabulary/tag test fixtures; sysadmin rights required")
+    }
 
     # All together now
     ckanr_setup(
@@ -222,6 +253,24 @@ collaborators_feature_enabled <- function(url, key) {
 skip_if_collaborators_disabled <- function(url, key) {
   if (!collaborators_feature_enabled(url, key)) {
     skip("Dataset collaborators feature disabled or unavailable")
+  }
+}
+
+current_test_user <- function(url, key) {
+  if (!nzchar(key)) {
+    stop("An API key is required to query the current user", call. = FALSE)
+  }
+  txt <- ckan_action("user_show", verb = "GET", url = url, key = key)
+  jsonlite::fromJSON(txt, simplifyVector = FALSE)$result
+}
+
+skip_if_not_sysadmin <- function(url, key) {
+  user <- tryCatch(current_test_user(url, key), error = function(e) e)
+  if (inherits(user, "error")) {
+    skip("Unable to determine current user; requires authenticated CKAN")
+  }
+  if (!isTRUE(user$sysadmin)) {
+    skip("Vocabulary endpoints require a sysadmin user")
   }
 }
 

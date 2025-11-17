@@ -1,6 +1,6 @@
 # TODO: CKAN 2.11 Coverage Roadmap
 
-This checklist translates the CKAN 2.11 API review into discrete implementation work for `ckanr`. Each section groups closely related endpoints so they can share helpers, docs, and tests. Use `devtools::test(filter = "<area>")` as you deliver each bucket.
+This checklist translates the CKAN 2.11 API review into discrete implementation work for `ckanr`. Each section groups closely related endpoints so they can share helpers, docs, and tests. Use `devtools::test(filter = "<area>")` as you deliver each bucket. Follow `.github/copilot-instructions.md`.
 
 ## 1. Collaborators & Membership (High)
 - [x] Implement `package_collaborator_list()` and `package_collaborator_list_for_user()` wrappers with pagination, plus docs/tests that skip when `ckan.auth.allow_dataset_collaborators` is disabled.
@@ -21,15 +21,15 @@ This checklist translates the CKAN 2.11 API review into discrete implementation 
 - [x] Extend tests to create a simple view (when the default text view plugin is available) and skip gracefully otherwise.
 
 ## 4. Followers & Social Features (Medium)
-- [ ] Implement follower counts/lists for every object type (`dataset`, `group`, `organization`, `user`).
-- [ ] Add follow/unfollow helpers plus the "am I following" probes for all objects.
-- [ ] Surface `followee_count`, `followee_list`, `user_followee_count`, `user_followee_list`, `dataset_followee_*`, `group_followee_*`, `organization_followee_*` so clients can build dashboards.
-- [ ] Tests should create a temporary follow relationship via the authorized test user, then clean up.
+- [x] Implement follower counts/lists for datasets, groups, and users (CKAN does not expose organization follower endpoints, so those remain out of scope).
+- [x] Add follow/unfollow helpers plus the "am I following" probes for datasets, groups, and users (organization follow APIs are unavailable upstream).
+- [x] Surface `followee_count`, `followee_list`, `user_followee_count`, `user_followee_list`, `dataset_followee_*`, and `group_followee_*` so clients can build dashboards (organization variants depend on missing CKAN endpoints).
+- [x] Tests should create a temporary follow relationship via the authorized test user, then clean up.
 
 ## 5. Vocabulary & Tag Extensions (Medium)
-- [ ] Add wrappers for `vocabulary_list`, `vocabulary_show`, `vocabulary_create`, `vocabulary_update`, and `vocabulary_delete` (sysadmin only).
-- [ ] Implement `tag_autocomplete()` alongside existing tag helpers.
-- [ ] Update docs to clarify when sysadmin credentials are required and reuse existing templates for parameters.
+- [x] Add wrappers for `vocabulary_list`, `vocabulary_show`, `vocabulary_create`, `vocabulary_update`, and `vocabulary_delete` (sysadmin only).
+- [x] Implement `tag_autocomplete()` alongside existing tag helpers.
+- [x] Update docs to clarify when sysadmin credentials are required and reuse existing templates for parameters.
 
 ## 6. Activity & Dashboard APIs (Low-Medium)
 - [ ] Extend activity coverage: `group_activity_list`, `organization_activity_list`, `recently_changed_packages_activity_list`.

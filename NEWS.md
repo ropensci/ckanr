@@ -8,6 +8,8 @@ Additional endoints of the CKAN 2.11 API have been implemented.
 * Add relationship management wrappers `package_relationships_list()`, `package_relationship_create()`, `package_relationship_update()`, and `package_relationship_delete()` with S3-friendly inputs.
 * Provide dataset maintenance helpers `package_revise()`, `package_resource_reorder()`, `package_owner_org_update()`, and `dataset_purge()` for advanced automation workflows.
 * Introduce the `ckan_resource_view` S3 class along with wrappers for `resource_view_list()`, `resource_view_show()`, `resource_view_create()`, `resource_view_update()`, `resource_view_reorder()`, `resource_view_delete()`, `resource_view_clear()`, `resource_create_default_resource_views()`, and `package_create_default_resource_views()` to manage CKAN previews from R.
+* Refresh the follower/followee helpers: `dataset_*`, `group_*`, and `user_*` functions now expose counts, lists, follow/unfollow flows, and "am I following" probes, plus followee dashboards (`followee_count()`, `followee_list()`, `dataset_followee_*()`, `group_followee_*()`, `user_followee_*()`). Organization-specific helpers remain unavailable because CKAN 2.11+ no longer exposes those endpoints.
+* Add sysadmin-only vocabulary helpers (`vocabulary_list()`, `vocabulary_show()`, `vocabulary_create()`, `vocabulary_update()`, `vocabulary_delete()`) plus `tag_autocomplete()` to round out the tag discovery toolkit.
 
 ### TESTS
 
@@ -18,6 +20,9 @@ Additional endoints of the CKAN 2.11 API have been implemented.
 * Exercise the resource view lifecycle (create/list/show/update/reorder/delete) plus
   default view helpers when the `text_view` plugin is available, while skipping gracefully
   otherwise.
+* Expand the follower tests to follow/unfollow datasets, groups, and users, verifying the
+  followee dashboards while automatically cleaning up temporary relationships.
+* Cover the new vocabulary lifecycle and `tag_autocomplete()` helpers, skipping gracefully when the configured CKAN user lacks sysadmin rights.
 
 ### MAINTENANCE
 
