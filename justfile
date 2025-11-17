@@ -64,8 +64,9 @@ load_all:
 # R: install package
 install:
   #!/usr/bin/env Rscript
-  just doc
-  just build
+  devtools::document()
+  knitr::knit('README.Rmd')
+  devtools::build()
   devtools::install()
 
 # R: check package

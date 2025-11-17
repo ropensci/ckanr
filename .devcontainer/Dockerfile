@@ -11,7 +11,7 @@ RUN apt-get update && \
     apt-get -y install --no-install-recommends \
     cmake gdal-bin libfontconfig1-dev libfreetype6-dev libfribidi-dev libabsl-dev \
     libgdal-dev libgeos-dev libharfbuzz-dev libproj-dev libsqlite3-dev libtiff-dev \
-    libudunits2-dev libwebp-dev libx11-dev libxml2-dev r-cran-backports \
+    libudunits2-dev libwebp-dev libx11-dev libxml2-dev r-cran-backports r-cran-rlang \
     r-cran-stringr r-cran-purrr r-cran-blob r-cran-httpcode r-cran-urltools r-cran-dbi \
     r-cran-crul r-cran-jsonlite r-cran-readxl r-cran-testthat r-cran-xml2 \
     libpq-dev libcurl4-openssl-dev libssl-dev libxml2-dev && \
