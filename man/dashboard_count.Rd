@@ -29,9 +29,9 @@ can vary from a vector, list or data.frame. (required)}
 Number of new activities of an authorized user
 }
 \details{
-Important: Activities from the user herself are not counted by this
-function even though they appear in the dashboard (users don't want to be
-notified about things they did themselves).
+Activities from the user herself are not counted by CKAN even
+though they appear in the dashboard (users don't want to be notified about
+things they did themselves).
 }
 \examples{
 \dontrun{
@@ -39,6 +39,6 @@ notified about things they did themselves).
 ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
 
 # count
-dashboard_count()
+dashboard_new_activities_count()
 }
 }

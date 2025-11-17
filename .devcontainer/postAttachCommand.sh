@@ -34,4 +34,5 @@ echo "CKANR_DEFAULT_KEY=$CKANR_TEST_KEY" >> ~/.Renviron
 echo "CKANR_TEST_URL=$CKANR_TEST_URL" >> ~/.Renviron
 echo "CKANR_TEST_KEY=$CKANR_TEST_KEY" >> ~/.Renviron
 echo "CODESPACE_NAME=$CODESPACE_NAME" >> ~/.Renviron
+echo "CKANR_ALLOW_PURGE_TESTS=TRUE" >> ~/.Renviron
 echo "Environment variables persisted to ~/.Renviron for R sessions"
