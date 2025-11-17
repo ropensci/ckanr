@@ -10,7 +10,7 @@ The recommended development environment for `ckanr` is VS Code or any IDE compat
 the devcontainer setup.
 
 * Fork this repo to your Github account.
-* Open the code in Codespaces either in browser or in VS Code.
+* Open the code in Codespaces either in browser or in VS Code. The latter will work best.
   Note, Codespaces usage will be billed against your account, which includes a free usage quota.
   The first build will take a while, subsequent builds are faster.
 * The devcontainer setup provides a running CKAN instance,

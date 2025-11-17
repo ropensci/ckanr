@@ -1,5 +1,41 @@
 # ckanr (development version)
+==============================
 
+ckanr 0.8.0
+===========
+
+### NEW FEATURES
+Remaining endpoints of the CKAN 2.11 API have been implemented.
+
+* Add dataset collaborator helpers `package_collaborator_list()`, `package_collaborator_list_for_user()`, `package_collaborator_create()`, and `package_collaborator_delete()`.
+* Expose membership utilities `member_list()`, `member_create()`, `member_delete()`, `member_roles_list()`, `group_member_create()`, `group_member_delete()`, `organization_member_create()`, `organization_member_delete()`, `user_invite()`, `group_list_authz()`, and `organization_list_for_user()` to manage user access consistently across groups and organizations.
+* Add relationship management wrappers `package_relationships_list()`, `package_relationship_create()`, `package_relationship_update()`, and `package_relationship_delete()` with S3-friendly inputs.
+* Provide dataset maintenance helpers `package_revise()`, `package_resource_reorder()`, `package_owner_org_update()`, and `dataset_purge()` for advanced automation workflows.
+* Introduce the `ckan_resource_view` S3 class along with wrappers for `resource_view_list()`, `resource_view_show()`, `resource_view_create()`, `resource_view_update()`, `resource_view_reorder()`, `resource_view_delete()`, `resource_view_clear()`, `resource_create_default_resource_views()`, and `package_create_default_resource_views()` to manage CKAN previews from R.
+* Refresh the follower/followee helpers: `dataset_*`, `group_*`, and `user_*` functions now expose counts, lists, follow/unfollow flows, and "am I following" probes, plus followee dashboards (`followee_count()`, `followee_list()`, `dataset_followee_*()`, `group_followee_*()`, `user_followee_*()`). Organization-specific helpers remain unavailable because CKAN 2.11+ no longer exposes those endpoints.
+* Add activity-stream helpers covering `group_activity_list()`, `organization_activity_list()`, `recently_changed_packages_activity_list()`, `dashboard_new_activities_count()`, `dashboard_mark_activities_old()`, `activity_show()`, `activity_data_show()`, `activity_diff()`, `activity_create()`, and `send_email_notifications()` (all automatically skip when the `activity` plugin is disabled).
+* Add sysadmin-only vocabulary helpers (`vocabulary_list()`, `vocabulary_show()`, `vocabulary_create()`, `vocabulary_update()`, `vocabulary_delete()`) plus `tag_autocomplete()` to round out the tag discovery toolkit.
+* Implement the admin & operations toolkit: task-status maintenance (`task_status_*()`), term translations, runtime config editing, Redis/RQ job controls, API token lifecycle helpers, and diagnostic wrappers for `status_show()`/`help_show()`.
+
+### TESTS
+
+* Add integration coverage for collaborator and membership endpoints with dynamic skips
+  when the target CKAN instance lacks the relevant feature flags.
+* Cover the new relationship and dataset maintenance helpers, including opt-in purge
+  coverage behind the `CKANR_ALLOW_PURGE_TESTS` gate.
+* Exercise the resource view lifecycle (create/list/show/update/reorder/delete) plus
+  default view helpers when the `text_view` plugin is available, while skipping gracefully
+  otherwise.
+* Expand the follower tests to follow/unfollow datasets, groups, and users, verifying the
+  followee dashboards while automatically cleaning up temporary relationships.
+* Add skips keyed off `status_show()` for all activity and dashboard tests, exercising new helpers whenever the `activity` plugin is available.
+* Cover the new vocabulary lifecycle and `tag_autocomplete()` helpers, skipping gracefully when the configured CKAN user lacks sysadmin rights.
+* Exercise the admin/ops helpers with sysadmin-gated tests that verify task-status roundtrips, term translations, config changes, job management, API tokens, and diagnostics while skipping when the test key lacks sufficient privileges.
+
+### MAINTENANCE
+
+* Add file `.github/copilot-instructions.md` to allow GenAI to reason over the codebase.
+  The file is also a great read for human contributors.
 
 ckanr 0.7.1
 ===========

@@ -144,8 +144,24 @@ ck <- function() 'api/3/action'
 as_log <- function(x){ stopifnot(is.logical(x)); if (x) 'true' else 'false' }
 jsl <- function(x) jsonlite::fromJSON(x, FALSE)$result
 jsd <- function(x) jsonlite::fromJSON(x)$result
+parse_ckan_response <- function(resp, as = "list", list_coercer = NULL) {
+  if (!as %in% c("json", "list", "table")) {
+    stop(sprintf("Unsupported `as` value: %s", as), call. = FALSE)
+  }
+  switch(as,
+    json = resp,
+    list = {
+      out <- jsl(resp)
+      if (!is.null(list_coercer)) {
+        out <- list_coercer(out)
+      }
+      out
+    },
+    table = jsd(resp)
+  )
+}
 ctj <- function() list(`Content-Type` = "application/json")
- 
+
 # Create auth headers compatible with both CKAN 2.10 and earlier (X-CKAN-API-Key)
 # and CKAN 2.11+ (Authorization)
 auth_headers <- function(key) {
@@ -253,4 +269,42 @@ handle_many <- function(x) {
   if (!is.character(x))
     stop("query/q must be vector or list of strings", call.=FALSE)
   unlist(lapply(x, function(z) list(query = z)), FALSE)
+}
+
+ckan_action_available <- local({
+  cache <- new.env(parent = emptyenv())
+  function(action, url = get_default_url(), key = get_default_key()) {
+    cache_key <- paste(url, action, sep = "|")
+    cached <- get0(cache_key, envir = cache, inherits = FALSE)
+    if (!is.null(cached)) {
+      return(cached)
+    }
+    res <- tryCatch(
+      {
+        ckan_action(
+          "help_show",
+          query = list(name = action),
+          verb = "GET",
+          url = url,
+          key = key
+        )
+      },
+      error = function(e) e
+    )
+    ok <- !inherits(res, "error")
+    assign(cache_key, ok, envir = cache)
+    ok
+  }
+})
+
+ensure_action_available <- function(
+  action, url = get_default_url(),
+  key = get_default_key()
+) {
+  if (!ckan_action_available(action, url = url, key = key)) {
+    stop(sprintf(
+      "The '%s' action is unavailable on this CKAN instance",
+      action
+    ), call. = FALSE)
+  }
 }
