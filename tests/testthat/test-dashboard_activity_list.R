@@ -10,12 +10,13 @@ test_that("The CKAN API key must be set", { expect_is(key, "character") })
 
 test_that("dashboard_activity_list returns activities", {
   check_ckan(url)
-  
+  skip_if_activity_plugin_disabled(url)
+
   # This requires a valid API key
   res <- tryCatch({
     dashboard_activity_list(url = url, key = key)
   }, error = function(e) e)
-  
+
   # Only test if key is valid and action is supported
   if (!inherits(res, "error")) {
     expect_is(res, "list")
@@ -26,11 +27,12 @@ test_that("dashboard_activity_list returns activities", {
 
 test_that("dashboard_activity_list respects limit parameter", {
   check_ckan(url)
-  
+  skip_if_activity_plugin_disabled(url)
+
   res <- tryCatch({
     dashboard_activity_list(limit = 5, url = url, key = key)
   }, error = function(e) e)
-  
+
   if (!inherits(res, "error")) {
     expect_is(res, "list")
     expect_lte(length(res), 5)
@@ -41,11 +43,12 @@ test_that("dashboard_activity_list respects limit parameter", {
 
 test_that("dashboard_activity_list works with json output", {
   check_ckan(url)
-  
+  skip_if_activity_plugin_disabled(url)
+
   res <- tryCatch({
     dashboard_activity_list(url = url, key = key, as = "json")
   }, error = function(e) e)
-  
+
   if (!inherits(res, "error")) {
     expect_is(res, "character")
     parsed <- jsonlite::fromJSON(res)
@@ -57,12 +60,13 @@ test_that("dashboard_activity_list works with json output", {
 
 test_that("dashboard_activity_list fails well", {
   check_ckan(url)
-  
+  skip_if_activity_plugin_disabled(url)
+
   # bad key - may fail differently depending on CKAN version
   result <- tryCatch({
     dashboard_activity_list(url = url, key = "invalid-key")
   }, error = function(e) e)
-  
+
   # Just verify it errors (the error message varies by CKAN version)
   expect_true(inherits(result, "error"))
 })

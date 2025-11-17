@@ -270,7 +270,33 @@ skip_if_not_sysadmin <- function(url, key) {
     skip("Unable to determine current user; requires authenticated CKAN")
   }
   if (!isTRUE(user$sysadmin)) {
-    skip("Vocabulary endpoints require a sysadmin user")
+    skip("Sysadmin privileges required for this test")
+  }
+}
+
+activity_plugin_enabled <- local({
+  cache <- new.env(parent = emptyenv())
+  function(url) {
+    cached <- get0(url, envir = cache, inherits = FALSE)
+    if (!is.null(cached)) {
+      return(cached)
+    }
+    status <- tryCatch(
+      jsonlite::fromJSON(ckan_action("status_show", verb = "GET", url = url)),
+      error = function(e) NULL
+    )
+    enabled <- FALSE
+    if (!is.null(status) && !is.null(status$result$extensions)) {
+      enabled <- "activity" %in% status$result$extensions
+    }
+    assign(url, enabled, envir = cache)
+    enabled
+  }
+})
+
+skip_if_activity_plugin_disabled <- function(url) {
+  if (!activity_plugin_enabled(url)) {
+    skip("Activity plugin not enabled on test CKAN instance")
   }
 }
 

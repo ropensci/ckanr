@@ -32,10 +32,10 @@ This checklist translates the CKAN 2.11 API review into discrete implementation 
 - [x] Update docs to clarify when sysadmin credentials are required and reuse existing templates for parameters.
 
 ## 6. Activity & Dashboard APIs (Low-Medium)
-- [ ] Extend activity coverage: `group_activity_list`, `organization_activity_list`, `recently_changed_packages_activity_list`.
-- [ ] Wrap dashboard utilities (`dashboard_activity_list`, `dashboard_new_activities_count`, `dashboard_mark_activities_old`).
-- [ ] Support advanced introspection (`activity_show`, `activity_data_show`, `activity_diff`, `activity_create`, `send_email_notifications`).
-- [ ] Tests must check `status_show()` to confirm the `activity` plugin is enabled; skip otherwise.
+- [x] Extend activity coverage: `group_activity_list`, `organization_activity_list`, `recently_changed_packages_activity_list`.
+- [x] Wrap dashboard utilities (`dashboard_activity_list`, `dashboard_new_activities_count`, `dashboard_mark_activities_old`).
+- [x] Support advanced introspection (`activity_show`, `activity_data_show`, `activity_diff`, `activity_create`, `send_email_notifications`).
+- [x] Tests must check `status_show()` to confirm the `activity` plugin is enabled; skip otherwise.
 
 ## 7. Admin & Ops Utilities (Low)
 - [ ] Implement task-status maintenance (`task_status_show`, `task_status_update`, `task_status_update_many`, `task_status_delete`).

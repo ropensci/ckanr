@@ -9,6 +9,7 @@ Additional endoints of the CKAN 2.11 API have been implemented.
 * Provide dataset maintenance helpers `package_revise()`, `package_resource_reorder()`, `package_owner_org_update()`, and `dataset_purge()` for advanced automation workflows.
 * Introduce the `ckan_resource_view` S3 class along with wrappers for `resource_view_list()`, `resource_view_show()`, `resource_view_create()`, `resource_view_update()`, `resource_view_reorder()`, `resource_view_delete()`, `resource_view_clear()`, `resource_create_default_resource_views()`, and `package_create_default_resource_views()` to manage CKAN previews from R.
 * Refresh the follower/followee helpers: `dataset_*`, `group_*`, and `user_*` functions now expose counts, lists, follow/unfollow flows, and "am I following" probes, plus followee dashboards (`followee_count()`, `followee_list()`, `dataset_followee_*()`, `group_followee_*()`, `user_followee_*()`). Organization-specific helpers remain unavailable because CKAN 2.11+ no longer exposes those endpoints.
+* Add activity-stream helpers covering `group_activity_list()`, `organization_activity_list()`, `recently_changed_packages_activity_list()`, `dashboard_new_activities_count()`, `dashboard_mark_activities_old()`, `activity_show()`, `activity_data_show()`, `activity_diff()`, `activity_create()`, and `send_email_notifications()` (all automatically skip when the `activity` plugin is disabled).
 * Add sysadmin-only vocabulary helpers (`vocabulary_list()`, `vocabulary_show()`, `vocabulary_create()`, `vocabulary_update()`, `vocabulary_delete()`) plus `tag_autocomplete()` to round out the tag discovery toolkit.
 
 ### TESTS
@@ -22,6 +23,7 @@ Additional endoints of the CKAN 2.11 API have been implemented.
   otherwise.
 * Expand the follower tests to follow/unfollow datasets, groups, and users, verifying the
   followee dashboards while automatically cleaning up temporary relationships.
+* Add skips keyed off `status_show()` for all activity and dashboard tests, exercising new helpers whenever the `activity` plugin is available.
 * Cover the new vocabulary lifecycle and `tag_autocomplete()` helpers, skipping gracefully when the configured CKAN user lacks sysadmin rights.
 
 ### MAINTENANCE
