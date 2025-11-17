@@ -50,10 +50,10 @@ if (Sys.getenv("TEST_DPLYR_INTERFACE") != "") {
     col_name <- sample(orderable, 1)
 
     r1 <- tb %>%
-      dplyr::arrange(dplyr::desc(rlang::.data[[col_name]])) %>%
+      dplyr::arrange(dplyr::desc(.data[[col_name]])) %>%
       collect()
     r2 <- tb.raw %>%
-      dplyr::arrange(dplyr::desc(rlang::.data[[col_name]]))
+      dplyr::arrange(dplyr::desc(.data[[col_name]]))
 
     expect_equal(r1, r2)
   })
@@ -77,11 +77,11 @@ if (Sys.getenv("TEST_DPLYR_INTERFACE") != "") {
     skip_if(length(numeric_cols) == 0, "No numeric columns to mutate")
     col_name <- sample(numeric_cols, 1)
     r1 <- tb %>%
-      dplyr::mutate(.temp = rlang::.data[[col_name]] + 1) %>%
+      dplyr::mutate(.temp = .data[[col_name]] + 1) %>%
       dplyr::select(.temp) %>%
       collect()
     r2 <- tb.raw %>%
-      dplyr::mutate(.temp = rlang::.data[[col_name]] + 1) %>%
+      dplyr::mutate(.temp = .data[[col_name]] + 1) %>%
       dplyr::select(.temp)
     expect_equal(r1, r2)
   })
@@ -92,10 +92,10 @@ if (Sys.getenv("TEST_DPLYR_INTERFACE") != "") {
     col_name <- sample(numeric_cols, 1)
 
     r1 <- tb %>%
-      dplyr::summarise(.mean = mean(rlang::.data[[col_name]], na.rm = TRUE)) %>%
+      dplyr::summarise(.mean = mean(.data[[col_name]], na.rm = TRUE)) %>%
       collect()
     r2 <- tb.raw %>%
-      dplyr::summarise(.mean = mean(rlang::.data[[col_name]], na.rm = TRUE))
+      dplyr::summarise(.mean = mean(.data[[col_name]], na.rm = TRUE))
     expect_equal(r1$.mean, as.numeric(r2$.mean))
   })
 
@@ -105,11 +105,11 @@ if (Sys.getenv("TEST_DPLYR_INTERFACE") != "") {
     col_name <- sample(groupable, 1)
 
     r1 <- tb %>%
-      dplyr::group_by(rlang::.data[[col_name]]) %>%
+      dplyr::group_by(.data[[col_name]]) %>%
       dplyr::summarise(count = dplyr::n(), .groups = "drop") %>%
       collect()
     r2 <- tb.raw %>%
-      dplyr::group_by(rlang::.data[[col_name]]) %>%
+      dplyr::group_by(.data[[col_name]]) %>%
       dplyr::summarise(count = dplyr::n(), .groups = "drop")
     r1$count <- as.integer(r1$count)
     expect_equal(r1, r2)
