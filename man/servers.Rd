@@ -10,11 +10,7 @@ servers()
 CKAN server URLS and other info
 }
 \details{
-Comes from the links at https://ckan.org/about/instances/
-
-There were a number of other URLs for CKAN instances in the CKAN URL
-above, but some sites are now gone completely, or if they do exist,
-I can't figure out how to get access to the CKAN API on their instance.
+CKAN instances from https://github.com/ckan/ckan-instances/
 }
 \examples{
 \dontrun{
@@ -22,10 +18,6 @@ servers()
 ckan_info(servers()[5])
 
 # what version is each CKAN server running
-out <- lapply(servers()[1:6], function(w) {
-  cat(w, sep='\n')
-  ckan_info(w)
-})
-vapply(out, "[[", "", "ckan_version")
+out <- lapply(servers()[1:6], function(w) {ckan_version(w)$version_num})
 }
 }

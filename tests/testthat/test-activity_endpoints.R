@@ -105,6 +105,7 @@ test_that("send_email_notifications requires sysadmin", {
   check_ckan(url)
   skip_if_activity_plugin_disabled(url)
   skip_if_not_sysadmin(url, key)
+  skip_if_activity_email_notifications_disabled(url, key)
 
   res <- send_email_notifications(url = url, key = key)
   expect_true(isTRUE(res) || is.list(res) || is.null(res))

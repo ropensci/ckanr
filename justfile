@@ -25,6 +25,16 @@ docker options='':
   #!/usr/bin/env bash
   DOCKER_HOST=unix:///var/run/docker-host.sock docker {{options}}
 
+# Stop CKAN
+ckan_logs:
+  #!/usr/bin/env bash
+  DOCKER_HOST=unix:///var/run/docker-host.sock docker logs ckan
+
+# Stop CKAN
+ckan_stop:
+  #!/usr/bin/env bash
+  DOCKER_HOST=unix:///var/run/docker-host.sock docker compose -f .devcontainer/docker-compose-dev.yml stop ckan postgres solr
+
 #--------------------------------------------------------------------------------------#
 # R tooling (alternative to VS Code tasks via Ctrl-Shift-B)
 #--------------------------------------------------------------------------------------#
@@ -33,6 +43,13 @@ docker options='':
 doc:
   #!/usr/bin/env Rscript
   devtools::document()
+  knitr::knit('README.Rmd')
+
+# TODO
+# vign:
+# 	cd vignettes;\
+# 	${RSCRIPT} -e "Sys.setenv(NOT_CRAN='true'); knitr::knit('ckanr.Rmd.og', output = 'ckanr.Rmd')";\
+# 	cd ..
 
 # R: Build package
 build:
@@ -47,12 +64,21 @@ load_all:
 # R: install package
 install:
   #!/usr/bin/env Rscript
+  devtools::document()
+  knitr::knit('README.Rmd')
+  devtools::build()
   devtools::install()
 
 # R: check package
 check:
   #!/usr/bin/env Rscript
   devtools::check()
+  devtools::run_examples()
+
+check_win:
+  #!/usr/bin/env Rscript
+	devtools::check_win_devel()
+  devtools::check_win_release()
 
 # R: run tests
 test:

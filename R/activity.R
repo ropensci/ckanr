@@ -21,7 +21,8 @@
 #'   `activity_create()`.
 #' @param activity_type (character) Activity type string to emit via
 #'   `activity_create()`.
-#' @param data (list) Optional structured payload describing the activity body.
+#' @param data (list|character) Optional structured payload describing the
+#'   activity body. Lists are JSON-encoded automatically.
 NULL
 
 #' @rdname activity_helpers
@@ -131,6 +132,14 @@ activity_diff <- function(id, object_type, diff_type = "unified",
 activity_create <- function(user_id, object_id, activity_type, data = NULL,
   url = get_default_url(), key = get_default_key(), as = "list", ...) {
 
+  if (!is.null(data)) {
+    if (is.list(data)) {
+      data <- tojun(data, TRUE)
+    } else if (!is.character(data) || length(data) != 1) {
+      stop("`data` must be a named list or JSON string", call. = FALSE)
+    }
+  }
+
   body <- cc(list(
     user_id = user_id,
     object_id = object_id,
@@ -147,7 +156,58 @@ activity_create <- function(user_id, object_id, activity_type, data = NULL,
 send_email_notifications <- function(url = get_default_url(),
   key = get_default_key(), as = "list", ...) {
 
+  notif_enabled <- activity_email_notifications_enabled(url, key)
+  if (identical(notif_enabled, FALSE)) {
+    stop(
+      "Activity email notifications are disabled on this CKAN instance",
+      call. = FALSE
+    )
+  }
   res <- ckan_POST(url, "send_email_notifications", body = list(),
     key = key, opts = list(...))
   switch(as, json = res, list = jsl(res), table = jsd(res))
 }
+
+activity_email_notifications_enabled <- local({
+  cache <- new.env(parent = emptyenv())
+  truthy <- c("true", "1", "yes", "on")
+  falsy <- c("false", "0", "no", "off", "")
+  function(url = get_default_url(), key = get_default_key()) {
+    cache_key <- notrail(url)
+    cached <- get0(cache_key, envir = cache, inherits = FALSE)
+    if (!is.null(cached)) {
+      return(cached)
+    }
+    option_value <- tryCatch(
+      config_option_show(
+        "ckan.activity_streams_email_notifications",
+        url = url,
+        key = key
+      ),
+      error = function(e) e
+    )
+    status <- NA
+    if (!inherits(option_value, "error") && !is.null(option_value)) {
+      value <- option_value
+      if (is.list(value)) {
+        if (!is.null(value$value)) {
+          value <- value$value
+        } else if (!is.null(value$result) && !is.null(value$result$value)) {
+          value <- value$result$value
+        }
+      }
+      if (is.logical(value) && length(value) == 1) {
+        status <- value
+      } else if (is.character(value) && length(value) == 1) {
+        val <- tolower(trimws(value))
+        if (val %in% truthy) {
+          status <- TRUE
+        } else if (val %in% falsy) {
+          status <- FALSE
+        }
+      }
+    }
+    assign(cache_key, status, envir = cache)
+    status
+  }
+})

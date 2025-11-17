@@ -1,19 +1,20 @@
 ## Test environments
 
-* local macOS install, R 4.2.2
+* GitHub Codespaces using Devcontainer setup providing a disposable CKAN 2.9, 2.10, or 2.11 instance.
 * ubuntu 22.04 (on github actions), R devel
 * win-builder
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 notes
+0 errors | 0 warnings | 0 notes
 
-Maintainer: 'Francisco Alves <fjunior.alves.oliveira@gmail.com>'
+Maintainer: 'Florian Mayer <florian.wendelin.mayer@gmail.com>'
 
 New maintainer:
-  Francisco Alves <fjunior.alves.oliveira@gmail.com>
+  Florian Mayer <florian.wendelin.mayer@gmail.com>
 Old maintainer(s):
-  Scott Chamberlain <myrmecocystus@gmail.com>
+  Francisco Alves <fjunior.alves.oliveira@gmail.com>
+
 
 ## Reverse dependencies
 
@@ -24,7 +25,11 @@ We checked 1 reverse dependencies, comparing R CMD check results across CRAN and
 
 --------
 
-This version addresses notes and warnings from CRAN package check results (which should be corrected before 2023-03-22 per request). There is also a change in package maintainer and minor improvements and bug fixes.
+This release adds a Devcontainer setup providing a range of CKAN versions to develop against,
+a GitHub Actions matrix checking on windows-latest, macos-latest, and ubuntu-latest,
+plus it runs tests (on ubuntu-latest) against CKAN versions 2.9-2.11.
+It implements the remaining endpoints of the CKAN 2.11 API and adds comprehensive test coverage.
+This release transfers the package maintainership.
 
 Thanks very much,
-Francisco Alves
+Florian Mayer
