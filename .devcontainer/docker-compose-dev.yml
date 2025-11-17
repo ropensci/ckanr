@@ -1,6 +1,9 @@
 services:
   app:
-    image: mcr.microsoft.com/devcontainers/base:noble
+    # image: mcr.microsoft.com/devcontainers/base:noble
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
     volumes:
       - ../..:/workspaces:cached
 

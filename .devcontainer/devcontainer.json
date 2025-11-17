@@ -9,10 +9,10 @@
   // Features to add to the dev container. More info: https://containers.dev/features.
   "features": {
     // A Feature to configure R on Ubuntu.
-    // pak is also able to install system dependencies
-    "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
-      "packages": "cmake,gdal-bin,libfontconfig1-dev,libfreetype6-dev,libfribidi-dev,libabsl-dev,libgdal-dev,libgeos-dev,libharfbuzz-dev,libproj-dev,libsqlite3-dev,libtiff-dev,libudunits2-dev,libwebp-dev,libx11-dev,libxml2-dev,r-cran-backports,r-cran-tidyverse,r-cran-stringr,r-cran-purrr,r-cran-blob,r-cran-httpcode,r-cran-urltools,r-cran-dbi,r-cran-crul,r-cran-jsonlite,r-cran-sf,r-cran-readxl,r-cran-testthat,r-cran-xml2,r-cran-rlang,libpq-dev,libcurl4-openssl-dev,libssl-dev,libxml2-dev"
-    },
+    // Moved to Dockerfile to speed up Codespace rebuilds for switching CKAN versions.
+    // "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
+    //   "packages": "cmake,gdal-bin,libfontconfig1-dev,libfreetype6-dev,libfribidi-dev,libabsl-dev,libgdal-dev,libgeos-dev,libharfbuzz-dev,libproj-dev,libsqlite3-dev,libtiff-dev,libudunits2-dev,libwebp-dev,libx11-dev,libxml2-dev,r-cran-backports,r-cran-tidyverse,r-cran-stringr,r-cran-purrr,r-cran-blob,r-cran-httpcode,r-cran-urltools,r-cran-dbi,r-cran-crul,r-cran-jsonlite,r-cran-sf,r-cran-readxl,r-cran-testthat,r-cran-xml2,r-cran-rlang,libpq-dev,libcurl4-openssl-dev,libssl-dev,libxml2-dev"
+    // },
     // More info: https://github.com/rocker-org/devcontainer-features/tree/main/src/r-apt.
     "ghcr.io/rocker-org/devcontainer-features/r-apt:0": {
       "vscodeRSupport": "full",

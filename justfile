@@ -25,6 +25,16 @@ docker options='':
   #!/usr/bin/env bash
   DOCKER_HOST=unix:///var/run/docker-host.sock docker {{options}}
 
+# Stop CKAN
+ckan_logs:
+  #!/usr/bin/env bash
+  DOCKER_HOST=unix:///var/run/docker-host.sock docker logs ckan
+
+# Stop CKAN
+ckan_stop:
+  #!/usr/bin/env bash
+  DOCKER_HOST=unix:///var/run/docker-host.sock docker compose -f .devcontainer/docker-compose-dev.yml stop ckan postgres solr
+
 #--------------------------------------------------------------------------------------#
 # R tooling (alternative to VS Code tasks via Ctrl-Shift-B)
 #--------------------------------------------------------------------------------------#
