@@ -1,6 +1,12 @@
 # ckanr (development version)
 ==============================
 
+### MAINTENANCE
+
+* Replace the deprecated `lazyeval` dependency with `rlang`, updating our dplyr
+  tests and development tooling accordingly so contributors only need the modern
+  tidy-eval stack.
+
 ckanr 0.8.1
 ===========
 

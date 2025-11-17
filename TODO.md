@@ -64,3 +64,10 @@ This checklist translates the CKAN 2.11 API review into discrete implementation 
 - [ ] Add capability guards around the admin/ops helpers (e.g., detect job queue or task-status availability via `status_show()`) and expose matching skip helpers in `tests/testthat/helper-ckanr.R` to avoid confusing 404s on older CKANs.
 - [ ] Introduce a `with_sysadmin_ckan()` (or similar) helper in `tests/testthat/helper-ckanr.R` to encapsulate the repetitive `skip_on_cran()`, `check_ckan()`, and `skip_if_not_sysadmin()` scaffolding in `test-admin_ops.R`.
 - [ ] Create a roxygen template (e.g., `man-roxygen/example-admin.R`) for the repeated `\dontrun{ ckanr_setup(...) }` admin examples so future docs only need `@template example_admin` and stay consistent.
+
+## 11. Replace lazyeval with rlang
+- [x] Inventory all remaining lazyeval touch points (DESCRIPTION Suggests, `.devcontainer` packages, `codemeta.json`, `tests/testthat/test-dplyr.R`, etc.) to confirm scope and plan the migration.
+- [x] Add `rlang` (Imports + Suggests if needed) and drop `lazyeval` from every dependency manifest (`DESCRIPTION`, `.devcontainer/devcontainer.json`, docs) so the package pulls in the modern tidy-eval helper.
+- [x] Refactor any lazyeval::interp usage (currently in `test-dplyr.R`, plus any others found during inventory) to the equivalent `rlang::expr()`/`rlang::inject()` patterns, keeping tests readable and backwards compatible with supported R versions.
+- [x] Update documentation and metadata: mention the migration in `NEWS.md`, ensure `README`/pkgdown snippets no longer reference lazyeval, and explain the new tidy-eval dependency where appropriate.
+- [x] Run `devtools::document()`, the targeted test file(s), and `devtools::check()` to ensure the refactor passes CI scaffolding before merging.

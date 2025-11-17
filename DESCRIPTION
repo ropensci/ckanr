@@ -55,7 +55,7 @@ Suggests:
     readxl,
     testthat,
     xml2,
-    lazyeval
+    rlang
 RoxygenNote: 7.3.3
 X-schema.org-keywords: database, open-data, ckan, api, data, dataset
 X-schema.org-applicationCategory: Data Access

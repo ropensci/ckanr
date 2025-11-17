@@ -31,84 +31,120 @@ if (Sys.getenv("TEST_DPLYR_INTERFACE") != "") {
   tb.raw <- collect(tb)
 
   test_that("basic verbs: filter", {
-    .name <- dplyr::ident(sample(colnames(tb.raw), 1))
-    .value <- tb.raw[[.name]][1]
-    .criteria <- lazyeval::interp(~ name == value, name = .name, value = .value)
-    r1 <- tb %>% dplyr::filter_(.criteria) %>%
+    col_name <- sample(colnames(tb.raw), 1)
+    col_sym <- rlang::sym(col_name)
+    col_value <- tb.raw[[col_name]][1]
+
+    r1 <- tb %>%
+      dplyr::filter(!!col_sym == !!col_value) %>%
       collect()
-    r2 <- tb.raw %>% dplyr::filter(`[`(., .name) == .value)
+    r2 <- tb.raw %>%
+      dplyr::filter(!!col_sym == !!col_value)
+
     expect_equal(r1, r2)
   })
 
-#   test_that("basic verbs: arrage", {
-#     .name <- sample(colnames(tb.raw), 1)
-#     .criteria <- lazyeval::interp(~ desc(name), name = .name)
-#     r1 <- tb %>% dplyr::arrange_(.criteria) %>%
-#       collect()
-#     r2 <- tb.raw %>% dplyr::arrange_(.criteria)
-#     expect_equal(r1, r2)
-#   })
-#
-#   test_that("basic verbs: select", {
-#     .name <- sample(colnames(tb.raw), 1)
-#     .criteria <- lazyeval::interp(~ name, name = dplyr::ident(.name))
-#     r1 <- dplyr::select_(tb, .criteria) %>% collect()
-#     r2 <- dplyr::select(tb.raw, ID_ITEM, ID_SERIE_ITEM)
-#     expect_equal(r1, r2)
-#   })
-#
-#   test_that("basic_verbs: distinct", {
-#     r1 <- dplyr::select(tb, GABARITO) %>%
-#       dplyr::distinct() %>%
-#       collect()
-#     r2 <- dplyr::select(tb.raw, GABARITO) %>%
-#       dplyr::distinct()
-#     expect_equal(r1, r2)
-#   })
-#
-#   test_that("basic_verbs: mutate", {
-#     r1 <- dplyr::mutate(tb, t1 = as.integer(ID_ITEM)) %>%
-#       dplyr::select(t1) %>%
-#       collect()
-#     r2 <- dplyr::mutate(tb.raw, t1 = as.integer(ID_ITEM)) %>%
-#       dplyr::select(t1)
-#     expect_equal(r1, r2)
-#   })
-#
-#   test_that("basic_verbs: summarise", {
-#     r1 <- dplyr::mutate(tb, t1 = as.integer(ID_SERIE_ITEM)) %>%
-#       dplyr::summarise(t2 = mean(t1)) %>%
-#       collect() %>%
-#       mutate(t2 = as.numeric(t2)) # The default result is character
-#     r2 <- dplyr::mutate(tb.raw, t1 = as.integer(ID_SERIE_ITEM)) %>%
-#       dplyr::summarise(t2 = mean(t1))
-#     expect_equal(r1, r2)
-#   })
-#
-#   test_that("basic_verbs: sample_n", {
-#     # sample_n is not implemented for PostgreSQL
-#   })
-#
-#   test_that("basic_verbs: group_by", {
-#     r1 <- group_by(tb, GABARITO) %>%
-#       summarise(count = n()) %>%
-#       collect() %>%
-#       mutate(count = as.integer(count))
-#     r2 <- group_by(tb.raw, GABARITO) %>%
-#       summarise(count = n())
-#     expect_equal(r1, r2)
-#   })
-#
-#   tb1 <- tbl(src, from = 'SELECT * FROM "be2ccdc2-9a76-47bf-862c-60c1525f5b1b" ORDER BY _id LIMIT 100')
-#   tb2 <- tbl(src, name = name_list[1])
-#   tb1.raw <- collect(tb1)
-#   tb2.raw <- collect(tb2)
-#
-#   test_that("join: left_join", {
-#     r1 <- left_join(tb1, tb2, by = "_id") %>%
-#       collect()
-#     r2 <- left_join(tb1.raw, tb2.raw, by = "_id")
-#     expect_equal(r1, r2)
-#   })
-}
+  test_that("basic verbs: arrange", {
+    orderable <- names(tb.raw)[vapply(tb.raw, function(x) is.atomic(x) && !is.list(x), logical(1))]
+    skip_if(length(orderable) == 0, "No sortable columns available")
+    col_name <- sample(orderable, 1)
 
+    r1 <- tb %>%
+      dplyr::arrange(dplyr::desc(rlang::.data[[col_name]])) %>%
+      collect()
+    r2 <- tb.raw %>%
+      dplyr::arrange(dplyr::desc(rlang::.data[[col_name]]))
+
+    expect_equal(r1, r2)
+  })
+
+  test_that("basic verbs: select", {
+    cols <- sample(colnames(tb.raw), min(2, ncol(tb.raw)))
+    r1 <- tb %>% dplyr::select(dplyr::all_of(cols)) %>% collect()
+    r2 <- tb.raw %>% dplyr::select(dplyr::all_of(cols))
+    expect_equal(r1, r2)
+  })
+
+  test_that("basic verbs: distinct", {
+    cols <- sample(colnames(tb.raw), 1)
+    r1 <- tb %>% dplyr::select(dplyr::all_of(cols)) %>% dplyr::distinct() %>% collect()
+    r2 <- tb.raw %>% dplyr::select(dplyr::all_of(cols)) %>% dplyr::distinct()
+    expect_equal(r1, r2)
+  })
+
+  test_that("basic verbs: mutate", {
+    numeric_cols <- names(tb.raw)[vapply(tb.raw, is.numeric, logical(1))]
+    skip_if(length(numeric_cols) == 0, "No numeric columns to mutate")
+    col_name <- sample(numeric_cols, 1)
+    r1 <- tb %>%
+      dplyr::mutate(.temp = rlang::.data[[col_name]] + 1) %>%
+      dplyr::select(.temp) %>%
+      collect()
+    r2 <- tb.raw %>%
+      dplyr::mutate(.temp = rlang::.data[[col_name]] + 1) %>%
+      dplyr::select(.temp)
+    expect_equal(r1, r2)
+  })
+
+  test_that("basic verbs: summarise", {
+    numeric_cols <- names(tb.raw)[vapply(tb.raw, is.numeric, logical(1))]
+    skip_if(length(numeric_cols) == 0, "No numeric columns to summarise")
+    col_name <- sample(numeric_cols, 1)
+
+    r1 <- tb %>%
+      dplyr::summarise(.mean = mean(rlang::.data[[col_name]], na.rm = TRUE)) %>%
+      collect()
+    r2 <- tb.raw %>%
+      dplyr::summarise(.mean = mean(rlang::.data[[col_name]], na.rm = TRUE))
+    expect_equal(r1$.mean, as.numeric(r2$.mean))
+  })
+
+  test_that("basic verbs: group_by", {
+    groupable <- names(tb.raw)[vapply(tb.raw, function(x) is.character(x) || is.factor(x), logical(1))]
+    skip_if(length(groupable) == 0, "No categorical columns to group by")
+    col_name <- sample(groupable, 1)
+
+    r1 <- tb %>%
+      dplyr::group_by(rlang::.data[[col_name]]) %>%
+      dplyr::summarise(count = dplyr::n(), .groups = "drop") %>%
+      collect()
+    r2 <- tb.raw %>%
+      dplyr::group_by(rlang::.data[[col_name]]) %>%
+      dplyr::summarise(count = dplyr::n(), .groups = "drop")
+    r1$count <- as.integer(r1$count)
+    expect_equal(r1, r2)
+  })
+
+  test_that("basic verbs: slice_sample", {
+    sample_size <- min(5, nrow(tb.raw))
+    skip_if(sample_size == 0, "No rows available to sample")
+    skip_if(!"_id" %in% colnames(tb.raw), "No _id column available to check sampled rows")
+
+    r1 <- tb %>%
+      dplyr::slice_sample(n = sample_size) %>%
+      collect()
+
+    expect_equal(nrow(r1), sample_size)
+    expect_true(all(r1$`_id` %in% tb.raw$`_id`))
+    expect_equal(length(unique(r1$`_id`)), nrow(r1))
+  })
+
+  tb1 <- tbl(src, from = 'SELECT * FROM "be2ccdc2-9a76-47bf-862c-60c1525f5b1b" ORDER BY _id LIMIT 100')
+  tb2 <- tbl(src, name = name_list[1])
+  tb1.raw <- collect(tb1)
+  tb2.raw <- collect(tb2)
+
+  test_that("join: left_join", {
+    skip_if(!"_id" %in% intersect(colnames(tb1.raw), colnames(tb2.raw)), "_id column missing")
+    r1 <- dplyr::left_join(tb1, tb2, by = "_id") %>% collect()
+    r2 <- dplyr::left_join(tb1.raw, tb2.raw, by = "_id")
+    expect_equal(r1, r2)
+  })
+
+  test_that("join: inner_join", {
+    skip_if(!"_id" %in% intersect(colnames(tb1.raw), colnames(tb2.raw)), "_id column missing")
+    r1 <- dplyr::inner_join(tb1, tb2, by = "_id") %>% collect()
+    r2 <- dplyr::inner_join(tb1.raw, tb2.raw, by = "_id")
+    expect_equal(r1, r2)
+  })
+}
