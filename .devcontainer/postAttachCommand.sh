@@ -18,7 +18,8 @@ CKANR_TEST_KEY=$(DOCKER_HOST=unix:///var/run/docker-host.sock docker exec ckan c
 # Access is protected by GitHub authentication.
 # R scripts can only access CKAN via localhost port forwarding.
 #CKANR_TEST_URL=https://$CODESPACE_NAME-5000.app.github.dev
-CKANR_TEST_URL=http://localhost:5000
+CKANR_TEST_URL=${CKAN_INTERNAL_URL:-http://ckan:5000}
+CODESPACE_PUBLIC_URL=${CKAN_PUBLIC_URL:-http://localhost:5000}
 CODESPACE_NAME=${CODESPACE_NAME}
 
 # Persist environment variables to shell profile for all future terminal sessions
@@ -26,6 +27,7 @@ echo "export CKANR_TEST_KEY='$CKANR_TEST_KEY'" >> ~/.bashrc
 echo "export CKANR_DEFAULT_KEY='$CKANR_TEST_KEY'" >> ~/.bashrc
 echo "export CKANR_TEST_URL='$CKANR_TEST_URL'" >> ~/.bashrc
 echo "export CKANR_DEFAULT_URL='$CKANR_TEST_URL'" >> ~/.bashrc
+echo "export CKANR_BROWSER_URL='$CODESPACE_PUBLIC_URL'" >> ~/.bashrc
 echo "Environment variables persisted to ~/.bashrc"
 
 # Persist environment variables to R environment for R sessions
@@ -35,4 +37,5 @@ echo "CKANR_TEST_URL=$CKANR_TEST_URL" >> ~/.Renviron
 echo "CKANR_TEST_KEY=$CKANR_TEST_KEY" >> ~/.Renviron
 echo "CODESPACE_NAME=$CODESPACE_NAME" >> ~/.Renviron
 echo "CKANR_ALLOW_PURGE_TESTS=TRUE" >> ~/.Renviron
+echo "CKANR_BROWSER_URL=$CODESPACE_PUBLIC_URL" >> ~/.Renviron
 echo "Environment variables persisted to ~/.Renviron for R sessions"
