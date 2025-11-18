@@ -68,10 +68,22 @@ services:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+      - CKAN_POSTGRES_DB=ckan_test
+      - CKAN_POSTGRES_USER=ckan_default
+      - CKAN_POSTGRES_USER_PWD=pass
+      - CKAN_DATASTORE_POSTGRES_DB=datastore_test
+      - CKAN_DATASTORE_POSTGRES_READ_USER=datastore_read
+      - CKAN_DATASTORE_POSTGRES_READ_PWD=pass
+      - CKAN_DATASTORE_POSTGRES_WRITE_USER=datastore_write
+      - CKAN_DATASTORE_POSTGRES_WRITE_PWD=pass
+      - CKAN_VERSION=${CKAN_VERSION:-2.11}
     networks:
       - dbnet
     healthcheck:
-      test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER}", "-d", "${POSTGRES_DB}"]
+      test: ["CMD","pg_isready","-U","${POSTGRES_USER:-postgres}","-d","${POSTGRES_DB:-postgres}"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   datapusher:
     image: ckan/ckan-base-datapusher:${DATAPUSHER_VERSION:-0.0.21}
