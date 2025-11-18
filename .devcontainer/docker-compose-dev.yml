@@ -14,6 +14,8 @@ services:
       - webnet
       - ckannet
       - solrnet
+      - redisnet
+      - dbnet
 
     # Use "forwardPorts" in **devcontainer.json** to forward an app port locally.
     # (Adding the "ports" property to this file will not forward from a Codespace.)
@@ -21,7 +23,7 @@ services:
     security_opt:
       - apparmor=docker-default
 
-  # TODO: define networks as per https://github.com/ckan/ckan-docker/blob/master/docker-compose.yml
+  # See https://github.com/ckan/ckan-docker/blob/master/docker-compose.yml
   ckan:
     image: ckan/ckan-base:${CKAN_VERSION:-2.11}
     container_name: ckan
@@ -31,7 +33,7 @@ services:
       - CKAN_SQLALCHEMY_URL=postgresql://ckan_default:pass@postgres/ckan_test
       - CKAN_DATASTORE_WRITE_URL=postgresql://datastore_write:pass@postgres/datastore_test
       - CKAN_DATASTORE_READ_URL=postgresql://datastore_read:pass@postgres/datastore_test
-      - CKAN_SOLR_URL=${SOLR_URL:-http://localhost:8983/solr/ckan}
+      - CKAN_SOLR_URL=${SOLR_URL:-http://solr:8983/solr/ckan}
       - CKAN_REDIS_URL=${REDIS_URL:-redis://redis:6379/1}
       - CKAN_DATAPUSHER_URL=${DATAPUSHER_URL:-http://datapusher:8800}
       - CKAN__DATAPUSHER__CALLBACK_URL_BASE=${CKANR_DEFAULT_URL:-http://ckan:5000}
@@ -43,11 +45,12 @@ services:
       - CKAN__ACTIVITY_STREAMS__EMAIL_NOTIFICATIONS=true
     ports:
       - "5000:5000"
+    restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "-qO", "/dev/null", "${CKANR_DEFAULT_URL:-http://localhost:5000}/api/action/status_show"]
       interval: 60s
-      timeout: 10s
-      retries: 3
+      timeout: 30s
+      retries: 5
     depends_on:
       postgres:
         condition: service_healthy
@@ -65,22 +68,12 @@ services:
     image: ckan/ckan-postgres-dev:${CKAN_PG_VERSION:-2.11}
     container_name: postgres
     environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - CKAN_POSTGRES_DB=ckan_test
-      - CKAN_POSTGRES_USER=ckan_default
-      - CKAN_POSTGRES_USER_PWD=pass
-      - CKAN_DATASTORE_POSTGRES_DB=datastore_test
-      - CKAN_DATASTORE_POSTGRES_READ_USER=datastore_read
-      - CKAN_DATASTORE_POSTGRES_READ_PWD=pass
-      - CKAN_DATASTORE_POSTGRES_WRITE_USER=datastore_write
-      - CKAN_DATASTORE_POSTGRES_WRITE_PWD=pass
       - CKAN_VERSION=${CKAN_VERSION:-2.11}
     networks:
       - dbnet
+    restart: unless-stopped
     healthcheck:
-      test: ["CMD","pg_isready","-U","${POSTGRES_USER:-postgres}","-d","${POSTGRES_DB:-postgres}"]
+      test: ["CMD","pg_isready","-U","ckan_default","-d","ckan_test"]
       interval: 30s
       timeout: 10s
       retries: 5
@@ -97,6 +90,7 @@ services:
     networks:
       - ckannet
       - dbnet
+    restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "-qO", "/dev/null", "${DATAPUSHER_URL:-http://datapusher:8800}"]
       interval: 60s
@@ -108,6 +102,7 @@ services:
     container_name: solr
     networks:
       - solrnet
+    restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "-qO", "/dev/null", "${SOLR_URL:-http://localhost:8983/solr/ckan/admin/ping?wt=json&distrib=false}"]
       interval: 60s
@@ -119,6 +114,7 @@ services:
     container_name: redis
     networks:
       - redisnet
+    restart: unless-stopped
     healthcheck:
       test: ["CMD", "redis-cli", "-e", "QUIT"]
 
@@ -127,6 +123,4 @@ networks:
   ckannet:
   solrnet:
   dbnet:
-    internal: true
   redisnet:
-    internal: true
