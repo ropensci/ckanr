@@ -1,7 +1,7 @@
+# https://rocker-project.org/images/devcontainer/images.html
 FROM ghcr.io/rocker-org/devcontainer/geospatial:4.5
 
-
-# non interactive frontend for locales
+# Non interactive frontend
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN echo 'options(repos = c(P3M = "https://packagemanager.posit.co/cran/__linux__/jammy/latest", CRAN = "https://cloud.r-project.org"))' >>"${R_HOME}/etc/Rprofile.site"
@@ -18,7 +18,8 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 RUN R -q -e 'install.packages(c("arrow", "class", "crul", "httpcode", "KernSmooth", "MASS", "purrr", "sf", "stringr", "testthat", "triebeard", "urltools", "xml2"))'
-# Install any new and updated packages into the base image
+# Install any new and updated packages into the base image to shift work from
+# the uncached pak command to this cached Docker image
 # pak::local_install_dev_deps()
 # → Will update 5 packages.
 # → Will download 12 CRAN packages (12.60 MB).

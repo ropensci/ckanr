@@ -75,9 +75,10 @@ check:
   devtools::check()
   devtools::run_examples()
 
+# Check on Windows
 check_win:
   #!/usr/bin/env Rscript
-	devtools::check_win_devel()
+  devtools::check_win_devel()
   devtools::check_win_release()
 
 # R: run tests
