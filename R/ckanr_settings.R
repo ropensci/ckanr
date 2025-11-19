@@ -105,7 +105,8 @@ print.ckanr_settings <- function(x, ...) {
 #' # Privileged CKAN editor/admin users can run:
 #' ckanr_setup(url = "https://data.ontario.ca/", key = "some-CKAN-API-key")
 #'
-#' # ckanR developers/testers can run:
+#' # ckanR developers/testers can either use the Codespaces/devcontainer test suite
+#' # which automatically sets up all test credentials, or run:
 #' ckanr_setup(url = "https://data.ontario.ca/", key = "some-CKAN-API-key",
 #'            test_url = "http://test-ckan.gov/",test_key = "test-ckan-API-key",
 #'            test_did = "test-ckan-dataset-id",test_rid = "test-ckan-resource-id",

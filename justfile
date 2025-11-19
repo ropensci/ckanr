@@ -1,7 +1,7 @@
 #!/usr/bin/env just --justfile
 # https://github.com/casey/just
 # https://cheatography.com/linux-china/cheat-sheets/justfile/
-# Add a .env file with secrets like VIEWFLOW_KEY at top level
+# Add a .env file with secrets at top level
 
 set dotenv-load
 

@@ -3,14 +3,14 @@ services:
     image: ckan/ckan-base:${CKAN_VERSION:-2.11}
     container_name: ckan
     environment:
-      - CKAN_SITE_URL=${CKAN_PUBLIC_URL:-http://localhost:5000}
+      - CKAN_SITE_URL=${CKANR_DEFAULT_URL:-http://localhost:5000}
       - CKAN_SQLALCHEMY_URL=postgresql://ckan_default:pass@postgres/ckan_test
       - CKAN_DATASTORE_WRITE_URL=postgresql://datastore_write:pass@postgres/datastore_test
       - CKAN_DATASTORE_READ_URL=postgresql://datastore_read:pass@postgres/datastore_test
       - CKAN_SOLR_URL=${SOLR_URL:-http://solr:8983/solr/ckan}
       - CKAN_REDIS_URL=${REDIS_URL:-redis://redis:6379/1}
       - CKAN_DATAPUSHER_URL=${DATAPUSHER_URL:-http://datapusher:8000}
-      - CKAN__DATAPUSHER__CALLBACK_URL_BASE=${CKAN_INTERNAL_URL:-http://ckan:5000}
+      - CKAN__DATAPUSHER__CALLBACK_URL_BASE=${CKANR_DEFAULT_URL:-http://localhost:5000}
       - TZ=UTC
       - CKAN_SYSADMIN_NAME=ckan_admin
       - CKAN_SYSADMIN_PASSWORD=test1234
