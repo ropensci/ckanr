@@ -18,7 +18,7 @@ CKANR_TEST_KEY=$(DOCKER_HOST=unix:///var/run/docker-host.sock docker exec ckan c
 # Access is protected by GitHub authentication.
 # R scripts can only access CKAN via localhost port forwarding.
 #CKANR_TEST_URL=https://$CODESPACE_NAME-5000.app.github.dev
-CKANR_TEST_URL=${CKAN_INTERNAL_URL:-http://ckan:5000}
+CKANR_TEST_URL=${CKAN_INTERNAL_URL:-http://localhost:5000}
 CODESPACE_PUBLIC_URL=${CKAN_PUBLIC_URL:-http://localhost:5000}
 CODESPACE_NAME=${CODESPACE_NAME}
 

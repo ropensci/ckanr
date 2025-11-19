@@ -73,6 +73,12 @@ prepare_test_ckan <- function(test_url = Sys.getenv("CKANR_TEST_URL"),
       upload = path_csv,
       rcurl = "http://google.com"
     )
+    push_resource_to_datastore(
+      resource_id = r$id,
+      csv_path = path_csv,
+      url = test_url,
+      key = test_key
+    )
 
     r_parquet <- resource_create(
       package_id = p$id,
@@ -134,6 +140,37 @@ prepare_test_ckan <- function(test_url = Sys.getenv("CKANR_TEST_URL"),
     )
     message("CKAN test instance is set up.")
   }
+}
+
+push_resource_to_datastore <- function(resource_id, csv_path, url, key) {
+  if (!nzchar(resource_id) || !file.exists(csv_path)) {
+    message("Unable to push resource to datastore; missing resource id or file")
+    return(invisible(FALSE))
+  }
+  data <- utils::read.csv(csv_path, stringsAsFactors = FALSE, check.names = FALSE)
+  records <- lapply(seq_len(nrow(data)), function(i) as.list(data[i, , drop = FALSE]))
+  payload <- list(
+    resource_id = resource_id,
+    force = TRUE,
+    records = records
+  )
+  try(
+    ckan_action(
+      "datastore_delete",
+      body = jsonlite::toJSON(list(resource_id = resource_id, force = TRUE), auto_unbox = TRUE),
+      headers = list(`Content-Type` = "application/json"),
+      url = url,
+      key = key
+    ),
+    silent = TRUE
+  )
+  invisible(ckan_action(
+    "datastore_create",
+    body = jsonlite::toJSON(payload, auto_unbox = TRUE, dataframe = "rows"),
+    headers = list(`Content-Type` = "application/json"),
+    url = url,
+    key = key
+  ))
 }
 
 #' Test whether the configured test CKAN is offline

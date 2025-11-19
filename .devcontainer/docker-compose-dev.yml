@@ -28,15 +28,16 @@ services:
     image: ckan/ckan-base:${CKAN_VERSION:-2.11}
     container_name: ckan
     environment:
-      - CKAN_SITE_URL=${CKAN_PUBLIC_URL:-http://localhost:5000}
+      - CKAN_SITE_URL=${CKANR_DEFAULT_URL:-http://localhost:5000}
       - CKAN__PLUGINS=${CKAN__PLUGINS}
       - CKAN_SQLALCHEMY_URL=postgresql://ckan_default:pass@postgres/ckan_test
       - CKAN_DATASTORE_WRITE_URL=postgresql://datastore_write:pass@postgres/datastore_test
       - CKAN_DATASTORE_READ_URL=postgresql://datastore_read:pass@postgres/datastore_test
       - CKAN_SOLR_URL=${SOLR_URL:-http://solr:8983/solr/ckan}
       - CKAN_REDIS_URL=${REDIS_URL:-redis://redis:6379/1}
-      - CKAN_DATAPUSHER_URL=${DATAPUSHER_URL:-http://datapusher:8800}
-      - CKAN__DATAPUSHER__CALLBACK_URL_BASE=${CKAN_INTERNAL_URL:-http://ckan:5000}
+      # - CKAN_DATAPUSHER_URL=${DATAPUSHER_URL:-http://datapusher:8800}
+      # - CKAN__DATAPUSHER__CALLBACK_URL_BASE=${CKANR_DEFAULT_URL:-http://localhost:5000}
+      # - CKAN__DATAPUSHER__API_TOKEN=${CKAN__DATAPUSHER__API_TOKEN}
       - TZ=UTC
       - CKAN_SYSADMIN_NAME=ckan_admin
       - CKAN_SYSADMIN_PASSWORD=test1234
@@ -47,7 +48,7 @@ services:
       - "5000:5000"
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "wget", "-qO", "/dev/null", "${CKAN_INTERNAL_URL:-http://ckan:5000}/api/action/status_show"]
+      test: ["CMD", "wget", "-qO", "/dev/null", "${CKANR_DEFAULT_URL:-http://localhost:5000}/api/action/status_show"]
       interval: 60s
       timeout: 30s
       retries: 5
@@ -78,24 +79,24 @@ services:
       timeout: 10s
       retries: 5
 
-  datapusher:
-    image: ckan/ckan-base-datapusher:${DATAPUSHER_VERSION:-0.0.21}
-    container_name: datapusher
-    environment:
-      - DATAPUSHER_MAX_CONTENT_LENGTH=10485760
-      - DATAPUSHER_CHUNK_SIZE=16384
-      - DATAPUSHER_CHUNK_INSERT_ROWS=250
-      - DATAPUSHER_DOWNLOAD_TIMEOUT=30
-      - DATAPUSHER_SSL_VERIFY=False
-    networks:
-      - ckannet
-      - dbnet
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "wget", "-qO", "/dev/null", "${DATAPUSHER_URL:-http://datapusher:8800}"]
-      interval: 60s
-      timeout: 10s
-      retries: 3
+  # datapusher:
+  #   image: ckan/ckan-base-datapusher:${DATAPUSHER_VERSION:-0.0.21}
+  #   container_name: datapusher
+  #   environment:
+  #     - DATAPUSHER_MAX_CONTENT_LENGTH=10485760
+  #     - DATAPUSHER_CHUNK_SIZE=16384
+  #     - DATAPUSHER_CHUNK_INSERT_ROWS=250
+  #     - DATAPUSHER_DOWNLOAD_TIMEOUT=30
+  #     - DATAPUSHER_SSL_VERIFY=False
+  #   networks:
+  #     - ckannet
+  #     - dbnet
+  #   restart: unless-stopped
+  #   healthcheck:
+  #     test: ["CMD", "wget", "-qO", "/dev/null", "${DATAPUSHER_URL:-http://datapusher:8800}"]
+  #     interval: 60s
+  #     timeout: 10s
+  #     retries: 3
 
   solr:
     image: ckan/ckan-solr:${SOLR_VERSION:-2.10-solr9-spatial}
