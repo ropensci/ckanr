@@ -45,12 +45,6 @@ doc:
   devtools::document()
   knitr::knit('README.Rmd')
 
-# TODO
-# vign:
-# 	cd vignettes;\
-# 	${RSCRIPT} -e "Sys.setenv(NOT_CRAN='true'); knitr::knit('ckanr.Rmd.og', output = 'ckanr.Rmd')";\
-# 	cd ..
-
 # R: Build package
 build:
   #!/usr/bin/env Rscript
@@ -75,7 +69,7 @@ check:
   devtools::check()
   devtools::run_examples()
 
-# Check on Windows
+# R: check Windows
 check_win:
   #!/usr/bin/env Rscript
   devtools::check_win_devel()

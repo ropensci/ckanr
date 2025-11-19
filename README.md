@@ -7,8 +7,7 @@ ckanr
 [![R-check](https://github.com/ropensci/ckanr/workflows/R-check/badge.svg)](https://github.com/ropensci/ckanr/actions/)
 [![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/ckanr?color=FAB657)](https://github.com/r-hub/cranlogs.app)
 [![cran version](https://www.r-pkg.org/badges/version/ckanr)](https://cran.r-project.org/package=ckanr)
-[![Coverage](https://img.shields.io/codecov/c/github/ropensci/ckanr/main)](https://app.codecov.io/gh/ropensci/ckanr)
-
+[![Codecov test coverage](https://codecov.io/gh/ropensci/ckanr/graph/badge.svg)](https://app.codecov.io/gh/ropensci/ckanr)
 
 `ckanr` is an R client package for the [CKAN API](https://ckan.org/),
 enabling R users to interact with CKAN data portals for reading, writing, and managing datasets.
