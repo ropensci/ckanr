@@ -22,6 +22,9 @@ skip_if(r == "")
 test_that("ds_search_sql gives back expected class types", {
   check_ckan(u)
   check_resource(u, r)
+  if (!ckanr:::ckan_action_available("datastore_search_sql", url = u)) {
+    skip("datastore_search_sql action unavailable on this CKAN instance")
+  }
   # Check if resource is in datastore, skip if not
   test_result <- tryCatch(ds_search(resource_id = r, url = u, limit = 1),
     error = function(e) NULL
@@ -37,6 +40,9 @@ test_that("ds_search_sql gives back expected class types", {
 test_that("ds_search_sql works giving back json output", {
   check_ckan(u)
   check_resource(u, r)
+  if (!ckanr:::ckan_action_available("datastore_search_sql", url = u)) {
+    skip("datastore_search_sql action unavailable on this CKAN instance")
+  }
   # Check if resource is in datastore, skip if not
   test_result <- tryCatch(ds_search(resource_id = r, url = u, limit = 1),
     error = function(e) NULL

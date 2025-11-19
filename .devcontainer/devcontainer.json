@@ -46,9 +46,9 @@
   "forwardPorts": [
     5000,
     5432,
-    8983,
     6379,
-    8000
+    8800,
+    8983
   ],
   // onCreateCommand
   // Make docker executable and R library writable for devcontainer user (vscode)

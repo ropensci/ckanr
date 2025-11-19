@@ -1,7 +1,7 @@
 #!/usr/bin/env just --justfile
 # https://github.com/casey/just
 # https://cheatography.com/linux-china/cheat-sheets/justfile/
-# Add a .env file with secrets like VIEWFLOW_KEY at top level
+# Add a .env file with secrets at top level
 
 set dotenv-load
 
@@ -20,12 +20,12 @@ ckan_version:
   /usr/bin/curl -s http://localhost:5000/api/3/action/status_show
   echo "\n"
 
-# Run a Docker command against the CKAN Devcontainer Docker host
+# Run a Docker command against the Devcontainer Docker host, quote if using multiple args
 docker options='':
   #!/usr/bin/env bash
   DOCKER_HOST=unix:///var/run/docker-host.sock docker {{options}}
 
-# Stop CKAN
+# CKAN logs
 ckan_logs:
   #!/usr/bin/env bash
   DOCKER_HOST=unix:///var/run/docker-host.sock docker logs ckan
@@ -33,7 +33,7 @@ ckan_logs:
 # Stop CKAN
 ckan_stop:
   #!/usr/bin/env bash
-  DOCKER_HOST=unix:///var/run/docker-host.sock docker compose -f .devcontainer/docker-compose-dev.yml stop ckan postgres solr
+  DOCKER_HOST=unix:///var/run/docker-host.sock docker compose -f .devcontainer/docker-compose-dev.yml stop ckan postgres solr redis
 
 #--------------------------------------------------------------------------------------#
 # R tooling (alternative to VS Code tasks via Ctrl-Shift-B)
@@ -75,9 +75,10 @@ check:
   devtools::check()
   devtools::run_examples()
 
+# Check on Windows
 check_win:
   #!/usr/bin/env Rscript
-	devtools::check_win_devel()
+  devtools::check_win_devel()
   devtools::check_win_release()
 
 # R: run tests

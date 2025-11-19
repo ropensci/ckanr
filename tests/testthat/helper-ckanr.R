@@ -32,7 +32,7 @@ prepare_test_ckan <- function(test_url = Sys.getenv("CKANR_TEST_URL"),
     try(
       organization_create(
         name = "ckanr_test_org",
-        title = "ckanr test org",
+        title = "ckanr Test Organisation",
         url = test_url,
         key = test_key
       ),
@@ -53,7 +53,7 @@ prepare_test_ckan <- function(test_url = Sys.getenv("CKANR_TEST_URL"),
     try(
       package_create(
         name = "ckanr_test_dataset",
-        title = "ckanr test dataset",
+        title = "ckanr Test Dataset",
         owner_org = o$id,
         tags = list(
           list("name" = "ckanr"),
@@ -72,6 +72,12 @@ prepare_test_ckan <- function(test_url = Sys.getenv("CKANR_TEST_URL"),
       name = "ckanr test resource",
       upload = path_csv,
       rcurl = "http://google.com"
+    )
+    push_resource_to_datastore(
+      resource_id = r$id,
+      csv_path = path_csv,
+      url = test_url,
+      key = test_key
     )
 
     r_parquet <- resource_create(
@@ -134,6 +140,91 @@ prepare_test_ckan <- function(test_url = Sys.getenv("CKANR_TEST_URL"),
     )
     message("CKAN test instance is set up.")
   }
+}
+
+sanitize_field_id <- function(x) {
+  cleaned <- gsub("[^A-Za-z0-9]+", "_", tolower(x))
+  cleaned <- gsub("_+", "_", cleaned)
+  cleaned <- gsub("^_+|_+$", "", cleaned)
+  if (!nzchar(cleaned) || grepl("^[0-9]", cleaned)) {
+    cleaned <- paste0("field_", cleaned)
+  }
+  cleaned
+}
+
+uniquify_ids <- function(ids) {
+  seen <- new.env(parent = emptyenv())
+  vapply(ids, function(id) {
+    base_id <- if (nzchar(id)) id else "field"
+    count <- get0(base_id, envir = seen, inherits = FALSE, ifnotfound = 0L)
+    count <- count + 1L
+    assign(base_id, count, envir = seen)
+    if (count == 1L) {
+      base_id
+    } else {
+      paste0(base_id, "_", count)
+    }
+  }, character(1), USE.NAMES = FALSE)
+}
+
+push_resource_to_datastore <- function(resource_id, csv_path, url, key) {
+  if (!nzchar(resource_id) || !file.exists(csv_path)) {
+    message("Unable to push resource to datastore; missing resource id or file")
+    return(invisible(FALSE))
+  }
+
+  data <- readr::read_csv(csv_path, show_col_types = FALSE, progress = FALSE)
+  data <- as.data.frame(data, stringsAsFactors = FALSE)
+  if (!nrow(data)) {
+    message("CSV file is empty; skipping datastore push")
+    return(invisible(FALSE))
+  }
+
+  field_ids <- vapply(names(data), sanitize_field_id, character(1))
+  field_ids <- uniquify_ids(field_ids)
+  colnames(data) <- field_ids
+
+  records <- lapply(seq_len(nrow(data)), function(i) {
+    as.list(data[i, , drop = TRUE])
+  })
+
+  payload <- list(
+    resource_id = resource_id,
+    force = TRUE,
+    fields = lapply(field_ids, function(id) list(id = id, type = "text")),
+    records = records
+  )
+  delete_body <- jsonlite::toJSON(
+    list(resource_id = resource_id, force = TRUE),
+    auto_unbox = TRUE
+  )
+  create_body <- jsonlite::toJSON(
+    payload,
+    auto_unbox = TRUE,
+    dataframe = "rows",
+    na = "null",
+    null = "null",
+    digits = NA
+  )
+
+  try(
+    ckan_action(
+      "datastore_delete",
+      body = delete_body,
+      headers = list(`Content-Type` = "application/json"),
+      url = url,
+      key = key
+    ),
+    silent = TRUE
+  )
+
+  invisible(ckan_action(
+    "datastore_create",
+    body = create_body,
+    headers = list(`Content-Type` = "application/json"),
+    url = url,
+    key = key
+  ))
 }
 
 #' Test whether the configured test CKAN is offline
