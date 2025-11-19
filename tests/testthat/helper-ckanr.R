@@ -142,11 +142,6 @@ prepare_test_ckan <- function(test_url = Sys.getenv("CKANR_TEST_URL"),
   }
 }
 
-push_resource_to_datastore <- function(resource_id, csv_path, url, key) {
-  if (!nzchar(resource_id) || !file.exists(csv_path)) {
-    message("Unable to push resource to datastore; missing resource id or file")
-    return(invisible(FALSE))
-  }
 sanitize_field_id <- function(x) {
   cleaned <- gsub("[^A-Za-z0-9]+", "_", tolower(x))
   cleaned <- gsub("_+", "_", cleaned)
@@ -172,20 +167,26 @@ uniquify_ids <- function(ids) {
   }, character(1), USE.NAMES = FALSE)
 }
 
-data <- readr::read_csv(csv_path, show_col_types = FALSE, progress = FALSE)
-data <- as.data.frame(data, stringsAsFactors = FALSE)
-if (!nrow(data)) {
-  message("CSV file is empty; skipping datastore push")
-  return(invisible(FALSE))
-}
+push_resource_to_datastore <- function(resource_id, csv_path, url, key) {
+  if (!nzchar(resource_id) || !file.exists(csv_path)) {
+    message("Unable to push resource to datastore; missing resource id or file")
+    return(invisible(FALSE))
+  }
 
-field_ids <- vapply(names(data), sanitize_field_id, character(1))
-field_ids <- uniquify_ids(field_ids)
-colnames(data) <- field_ids
+  data <- readr::read_csv(csv_path, show_col_types = FALSE, progress = FALSE)
+  data <- as.data.frame(data, stringsAsFactors = FALSE)
+  if (!nrow(data)) {
+    message("CSV file is empty; skipping datastore push")
+    return(invisible(FALSE))
+  }
 
-records <- lapply(seq_len(nrow(data)), function(i) {
-  as.list(data[i, , drop = TRUE])
-})
+  field_ids <- vapply(names(data), sanitize_field_id, character(1))
+  field_ids <- uniquify_ids(field_ids)
+  colnames(data) <- field_ids
+
+  records <- lapply(seq_len(nrow(data)), function(i) {
+    as.list(data[i, , drop = TRUE])
+  })
 
   payload <- list(
     resource_id = resource_id,
@@ -193,18 +194,18 @@ records <- lapply(seq_len(nrow(data)), function(i) {
     fields = lapply(field_ids, function(id) list(id = id, type = "text")),
     records = records
   )
-delete_body <- jsonlite::toJSON(
-  list(resource_id = resource_id, force = TRUE),
-  auto_unbox = TRUE
-)
-create_body <- jsonlite::toJSON(
-  payload,
-  auto_unbox = TRUE,
-  dataframe = "rows",
-  na = "null",
-  null = "null",
-  digits = NA
-)
+  delete_body <- jsonlite::toJSON(
+    list(resource_id = resource_id, force = TRUE),
+    auto_unbox = TRUE
+  )
+  create_body <- jsonlite::toJSON(
+    payload,
+    auto_unbox = TRUE,
+    dataframe = "rows",
+    na = "null",
+    null = "null",
+    digits = NA
+  )
 
   try(
     ckan_action(
