@@ -77,8 +77,8 @@ This checklist translates the CKAN 2.11 API review into discrete implementation 
 - [x] Exercise resource mutation helpers (`resource_update()`, `resource_patch()`, `resource_delete()`, `resource_search()`) with fixtures created by `prepare_test_ckan()` to cover the entire resource lifecycle.
 - [x] Cover organization/group mutations and destructive ops (`group_update()`, `group_patch()`, `organization_delete()`, `organization_purge()`) including permission failure expectations.
 - [x] Add user lifecycle tests around `user_create()`, `user_delete()`, `user_list()`, `user_activity_list()`, and follower counter endpoints so `followers.R` and related helpers lose their 0% coverage status.
-- [ ] Expand tag/vocabulary coverage ( `tag_create()`, `tag_list()`, `tag_search()`, `tag_show()`, `vocabulary.R` ) while ensuring skips when sysadmin rights are absent.
-- [ ] Add dashboard/activity plugin coverage for `dashboard_activity_list()`, `dashboard_count()`, and `package_activity_list()` guarded by the existing `activity_plugin_enabled()` helper.
+- [x] Expand tag/vocabulary coverage ( `tag_create()`, `tag_list()`, `tag_search()`, `tag_show()`, `vocabulary.R` ) while ensuring skips when sysadmin rights are absent.
+- [x] Add dashboard/activity plugin coverage for `dashboard_activity_list()`, `dashboard_count()`, and `package_activity_list()` guarded by the existing `activity_plugin_enabled()` helper.
 - [ ] Smoke-test the DBI/dplyr bridge (`dbi.R`, `dplyr.R`) by running a simple `collect()` pipeline via `src_ckan()` backed by the seeded datastore table.
 - [ ] Add regression tests for `ckan_fetch()` covering at least CSV and JSON downloads (and skip gracefully when optional readers like `sf`/`arrow` are missing).
 
