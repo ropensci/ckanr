@@ -1,51 +1,85 @@
-# context("ds_create_dataset")
-#
-# # Use a local example file from package ckanR
-# file <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
-#
-# # Set CKAN connection from ckanr_options
-# url <- get_test_url()
-# key <- get_test_key()
-# did <- get_test_did()
-# if (did != "" & key != "") {
-#
-#   # Dataset fields
-#   ds_title <- "ckanR test resource"
-#
-#   # Test CKAN environment
-#   test_that("The CKAN URL is set", { expect_is(url, "character") })
-#   test_that("The CKAN API key is set", { expect_is(key, "character") })
-#   test_that("The CKAN Dataset ID is set", { expect_is(did, "character") })
-#
-#   # Test ds_dataset_create
-#   test_that("ds_create_dataset gives back expected class types and output", {
-#     check_ckan(url)
-#     #check_dataset(url, did)
-#
-#     a <- ds_create_dataset(package_id = did, name = ds_title, file, key, url)
-#
-#     # class types
-#     expect_is(a, "list")
-#     expect_is(a$name, "character")
-#
-#     # expected output
-#     expect_equal(a$name, ds_title)
-#     expect_equal(a$format, "CSV")
-#     expect_true(grepl("actinidiaceae", a$url))
-#   })
-#
-#   test_that("ds_create_dataset fails well", {
-#     check_ckan(url)
-#     #check_dataset(url, did)
-#
-#     # all parameters missing
-#     expect_error(ds_create_dataset(),
-#                  "argument \"path\" is missing, with no default")
-#     # 403 forbidden error
-#     expect_error(ds_create_dataset(did, ds_title, file, "badkey", url),
-#                  "403 - Authorization Error")
-#     # bad file path
-#     expect_error(ds_create_dataset(did, ds_title, "asdfasdf", key, url))
-#   })
-# }
+context("ds_create_dataset")
 
+skip_on_cran()
+skip_on_os("windows")
+skip_on_os("mac")
+
+url <- get_test_url()
+key <- get_test_key()
+did <- get_test_did()
+path <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
+
+skip_if(!nzchar(url) || !nzchar(key) || !nzchar(did),
+	"CKAN test settings not configured"
+)
+
+unique_resource_name <- function(prefix = "ckanr-ds-create") {
+	paste(prefix, format(Sys.time(), "%Y%m%d%H%M%S"), sep = "-")
+}
+
+test_that("ds_create_dataset uploads a CSV resource", {
+	check_ckan(url)
+	check_dataset(url, did)
+
+	res_name <- unique_resource_name()
+	created <- NULL
+
+	expect_warning({
+		created <- ds_create_dataset(
+			package_id = did,
+			name = res_name,
+			path = path,
+			url = url,
+			key = key
+		)
+	}, "deprecated")
+
+	expect_is(created, "list")
+	expect_equal(created$name, res_name)
+	expect_equal(tolower(created$format), "csv")
+
+	on.exit({
+		if (!is.null(created$id)) {
+			try(resource_delete(created$id, url = url, key = key), silent = TRUE)
+		}
+	}, add = TRUE)
+
+	fetched <- resource_show(created$id, url = url, key = key)
+	expect_equal(fetched$id, created$id)
+	expect_equal(fetched$name, res_name)
+})
+
+test_that("ds_create_dataset fails with bad inputs", {
+	check_ckan(url)
+	check_dataset(url, did)
+
+	expect_error(suppressWarnings(ds_create_dataset()),
+		"argument \"path\" is missing",
+		fixed = FALSE
+	)
+
+	expect_error(
+		suppressWarnings(ds_create_dataset(
+			package_id = did,
+			name = unique_resource_name(),
+			path = path,
+			url = url,
+			key = "badkey"
+		)),
+		"Authorization Error|403",
+		ignore.case = TRUE
+	)
+
+	missing_file <- tempfile(fileext = ".csv")
+	expect_error(
+		suppressWarnings(ds_create_dataset(
+			package_id = did,
+			name = unique_resource_name(),
+			path = missing_file,
+			url = url,
+			key = key
+		)),
+		"cannot open|No such file|file\\.exists",
+		ignore.case = TRUE
+	)
+})

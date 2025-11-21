@@ -71,9 +71,9 @@ This checklist translates the CKAN 2.11 API review into discrete implementation 
 - [x] Refactor any lazyeval::interp usage (currently in `test-dplyr.R`, plus any others found during inventory) to the equivalent `rlang::expr()`/`rlang::inject()` patterns, keeping tests readable and backwards compatible with supported R versions.
 - [x] Update documentation and metadata: mention the migration in `NEWS.md`, ensure `README`/pkgdown snippets no longer reference lazyeval, and explain the new tidy-eval dependency where appropriate.
 - [x] Run `devtools::document()`, the targeted test file(s), and `devtools::check()` to ensure the refactor passes CI scaffolding before merging.
+- [x] Add datastore-focused tests ( `ds_search_sql()`, `ds_search()`, `ds_create()`, `ds_create_dataset()` ) once the CKAN datastore plugin is enabled so the critical read/write helpers gain coverage (currently 0%).
 
 ## 12. Test Coverage Follow-ups (2025-11-19)
-- [ ] Add datastore-focused tests ( `ds_search_sql()`, `ds_search()`, `ds_create()`, `ds_create_dataset()` ) once the CKAN datastore plugin is enabled so the critical read/write helpers gain coverage (currently 0%).
 - [ ] Exercise resource mutation helpers (`resource_update()`, `resource_patch()`, `resource_delete()`, `resource_search()`) with fixtures created by `prepare_test_ckan()` to cover the entire resource lifecycle.
 - [ ] Cover organization/group mutations and destructive ops (`group_update()`, `group_patch()`, `organization_delete()`, `organization_purge()`) including permission failure expectations.
 - [ ] Add user lifecycle tests around `user_create()`, `user_delete()`, `user_list()`, `user_activity_list()`, and follower counter endpoints so `followers.R` and related helpers lose their 0% coverage status.
