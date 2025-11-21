@@ -26,10 +26,16 @@ src_ckan <- function(url) {
   if (!requireNamespace("dplyr", quietly = TRUE)) {
     stop("Please install dplyr", call. = FALSE)
   }
+  if (!requireNamespace("dbplyr", quietly = TRUE)) {
+    stop("Please install dbplyr", call. = FALSE)
+  }
   drv <- new("CKANDriver")
   con <- dbConnect(drv, url = url)
   info <- dbGetInfo(con)
-  src_sql("ckan", con, info = info)
+  src <- dbplyr::src_dbi(con)
+  src$info <- info
+  class(src) <- unique(c("src_ckan", class(src)))
+  src
 }
 
 #'@export
@@ -158,5 +164,5 @@ db_query_rows.CKANConnection <- function(con, sql, ...) {
 
 #' @importFrom dplyr db_list_tables sql sql_select sql_subquery
 #' @importFrom dbplyr base_agg base_scalar base_win build_sql sql_prefix
-#' sql_translator sql_variant src_sql tbl_sql
+#' sql_translator sql_variant src_dbi tbl_sql
 NULL
