@@ -41,7 +41,7 @@ test_that("dashboard_new_activities_count returns a number", {
   skip_if_activity_plugin_disabled(url)
 
   res <- dashboard_new_activities_count(url = url, key = key)
-  expect_true(is.numeric(res) || is.integer(res))
+  expect_true(is.numeric(res))
 })
 
 test_that("dashboard_mark_activities_old completes successfully", {

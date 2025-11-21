@@ -41,7 +41,7 @@ ckan_stop:
 
 lint:
   #!/usr/bin/env bash
-  jarl check R/*
+  jarl check **/*.R
 
 # R: Document package
 doc:
