@@ -27,7 +27,7 @@ package_collaborator_list <- function(
         as = as,
         method = "GET",
         query = args,
-        opts <- list(...)
+        opts = list(...)
     )
 }
 
@@ -55,7 +55,7 @@ package_collaborator_list_for_user <- function(
         as = as,
         method = "GET",
         query = args,
-        opts <- list(...)
+        opts = list(...)
     )
 }
 
@@ -88,7 +88,7 @@ package_collaborator_create <- function(
         as = as,
         method = "POST",
         body = body,
-        opts <- list(...)
+        opts = list(...)
     )
 }
 

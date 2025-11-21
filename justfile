@@ -39,6 +39,10 @@ ckan_stop:
 # R tooling (alternative to VS Code tasks via Ctrl-Shift-B)
 #--------------------------------------------------------------------------------------#
 
+lint:
+  #!/usr/bin/env bash
+  jarl check R/*
+
 # R: Document package
 doc:
   #!/usr/bin/env Rscript
