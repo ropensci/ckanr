@@ -38,8 +38,15 @@ resource_patch <- function(x, id, url = get_default_url(),
     stop("x must be of class list", call. = FALSE)
   }
   x$id <- id$id
-  res <- ckan_POST(url, method = 'resource_patch', body = x, key = key,
-    encode = "json", headers = ctj(), opts = list(...))
+  payload <- jsonlite::toJSON(x, auto_unbox = TRUE, null = "null")
+  res <- ckan_POST(
+    url,
+    method = "resource_patch",
+    body = payload,
+    key = key,
+    headers = ctj(),
+    opts = list(...)
+  )
   switch(as, json = res, list = as_ck(jsl(res), "ckan_resource"),
     table = jsd(res))
 }

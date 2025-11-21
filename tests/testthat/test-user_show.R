@@ -51,17 +51,15 @@ test_that("user_show works with include_num_followers parameter", {
   }
 })
 
-test_that("user_show works giving back json output", {
+test_that("user_show supports list/json/table formats", {
   check_ckan(u)
 
   users <- user_list(url = u)
   if (length(users) > 0) {
     user_id <- users[[1]]$name
-    b <- user_show(user_id, url = u, as = "json")
-    b_df <- jsonlite::fromJSON(b)
-
-    expect_is(b, "character")
-    expect_is(b_df, "list")
+    expect_ckan_formats(function(fmt) {
+      user_show(user_id, url = u, as = fmt)
+    })
   } else {
     skip("No users available for testing")
   }

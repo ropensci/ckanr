@@ -52,6 +52,9 @@ test_that("ds_create creates a datastore table", {
   if (!inherits(result, "error")) {
     expect_is(result, "list")
     expect_true("resource_id" %in% names(result))
+    ds_res <- ds_search(resource_id = res$id, url = url, limit = 3)
+    expect_is(ds_res, "list")
+    expect_true(length(ds_res$records) >= 1)
   }
 
   # Clean up
@@ -94,6 +97,8 @@ test_that("ds_create with fields specification", {
   # The function may work or may have issues based on CKAN version
   if (!inherits(result, "error")) {
     expect_is(result, "list")
+    ds_res <- ds_search(resource_id = res$id, url = url, limit = 1)
+    expect_is(ds_res, "list")
   }
 
   # Clean up

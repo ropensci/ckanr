@@ -75,23 +75,24 @@ test_that("group_create fails well", {
   )
 })
 
-test_that("group_create returns json when requested", {
+test_that("group_create supports list/json/table formats", {
   check_ckan(url)
 
-  grp_name <- paste0("test_group_json_", as.integer(Sys.time()))
-
-  grp <- group_create(
-    name = grp_name,
-    title = "JSON Group",
-    url = url,
-    key = key,
-    as = "json"
-  )
-
-  expect_is(grp, "character")
-  grp_parsed <- jsonlite::fromJSON(grp)
-  expect_is(grp_parsed, "list")
-
-  # Clean up
-  group_delete(grp_parsed$result$id, url = url, key = key)
+  expect_ckan_formats(function(fmt) {
+    grp_name <- paste0("test_group_formats_", fmt, "_", as.integer(Sys.time()))
+    res <- group_create(
+      name = grp_name,
+      title = "Format Group",
+      url = url,
+      key = key,
+      as = fmt
+    )
+    grp_id <- switch(fmt,
+      json = jsonlite::fromJSON(res)$result$id,
+      table = res$id,
+      list = res$id
+    )
+    on.exit(group_delete(grp_id, url = url, key = key), add = TRUE)
+    res
+  })
 })

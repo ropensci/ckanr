@@ -53,6 +53,9 @@ test_that("resource_update gives back expected class types and output", {
   # expected output
   expect_equal(a$id, rid)
   expect_equal(a$format, "CSV")
+expect_ckan_formats(function(fmt) {
+  resource_update(rid, path = path, url = url, key = key, as = fmt)
+})
 })
 
 # html
@@ -132,10 +135,10 @@ test_that("resource_update gives back expected key:value pairs", {
 test_that("resource_update gives back expected key:value pairs even without path", {
   check_ckan(url)
   check_resource(url, rid)
-  
+
   a <- resource_update(rid, extras = list(map_type = "mapbox"),
                        url = url, key = key)
-  
+
   # expected output
   expect_equal(a$map_type, "mapbox")
 })
@@ -144,13 +147,13 @@ test_that("resource_update gives back expected key:value pairs even without path
 test_that("resource_update removes key:value pairs with empty extras", {
   check_ckan(url)
   check_resource(url, rid)
-  
+
   a <- resource_update(rid, extras = list(map_type = "mapbox"),
                        url = url, key = key)
-  
+
   b <- resource_update(rid, extras = list(),
                        url = url, key = key)
-  
+
   # expected output
   testthat::expect_null(b$map_type)
 })

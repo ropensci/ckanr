@@ -15,7 +15,9 @@ RUN apt-get update && \
     r-cran-stringr r-cran-purrr r-cran-blob r-cran-httpcode r-cran-urltools r-cran-dbi \
     r-cran-crul r-cran-jsonlite r-cran-readxl r-cran-testthat r-cran-xml2 \
     libpq-dev libcurl4-openssl-dev libssl-dev libxml2-dev && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* && \
+    curl --proto '=https' --tlsv1.2 -LsSf \
+    https://github.com/etiennebacher/jarl/releases/latest/download/jarl-installer.sh | sh
 
 RUN R -q -e 'install.packages(c("arrow", "class", "crul", "httpcode", "KernSmooth", "MASS", "purrr", "sf", "stringr", "testthat", "triebeard", "urltools", "xml2"))'
 # Install any new and updated packages into the base image to shift work from

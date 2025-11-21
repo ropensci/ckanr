@@ -75,23 +75,24 @@ test_that("organization_create fails well", {
   )
 })
 
-test_that("organization_create returns json when requested", {
+test_that("organization_create supports list/json/table formats", {
   check_ckan(url)
 
-  org_name <- paste0("test_org_json_", as.integer(Sys.time()))
-
-  org <- organization_create(
-    name = org_name,
-    title = "JSON Organization",
-    url = url,
-    key = key,
-    as = "json"
-  )
-
-  expect_is(org, "character")
-  org_parsed <- jsonlite::fromJSON(org)
-  expect_is(org_parsed, "list")
-
-  # Clean up
-  organization_delete(org_parsed$result$id, url = url, key = key)
+  expect_ckan_formats(function(fmt) {
+    org_name <- paste0("test_org_formats_", fmt, "_", as.integer(Sys.time()))
+    res <- organization_create(
+      name = org_name,
+      title = "Format Organization",
+      url = url,
+      key = key,
+      as = fmt
+    )
+    org_id <- switch(fmt,
+      json = jsonlite::fromJSON(res)$result$id,
+      table = res$id,
+      list = res$id
+    )
+    on.exit(organization_delete(org_id, url = url, key = key), add = TRUE)
+    res
+  })
 })

@@ -1,5 +1,5 @@
 #' Create a tag
-#' 
+#'
 #' IMPORTANT: You must be a sysadmin to create vocabulary tags.
 #'
 #' @export
@@ -19,10 +19,13 @@
 tag_create <- function(name, vocabulary_id,
   url = get_default_url(), key = get_default_key(), as = 'list', ...) {
 
-  warning("not tested yet, may not work", call. = FALSE)
   body <- cc(list(name = name, vocabulary_id = vocabulary_id))
   res <- ckan_POST(url, 'tag_create',
                    body = tojun(body, TRUE), key = key,
                    encode = "json", headers = ctj(), opts = list(...))
-  switch(as, json = res, list = jsl(res), table = jsd(res))
+  switch(as,
+    json = res,
+    list = as_ck(jsl(res), "ckan_tag"),
+    table = jsd(res)
+  )
 }

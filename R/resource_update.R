@@ -129,7 +129,7 @@ resource_update <- function(id, path = NULL, extras = list(),
   } else {
     body <- list()
   }
-  default_body = list(id = id$id,
+  default_body <- list(id = id$id,
     last_modified =
       format(Sys.time(), tz = "UTC", format = "%Y-%m-%d %H:%M:%OS6"),
     url = "update"

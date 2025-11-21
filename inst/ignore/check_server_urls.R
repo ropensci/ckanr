@@ -1,6 +1,6 @@
 checkem <- function(url) {
-  url = paste0(url, "/api/3/action/status_show")
-  x = crul::HttpClient$new(url, opts = list(followlocation=TRUE))
+  url <- paste0(url, "/api/3/action/status_show")
+  x <- crul::HttpClient$new(url, opts = list(followlocation = TRUE))
   crul::ok(x, verb = "get")
 }
 

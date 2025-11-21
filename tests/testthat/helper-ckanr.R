@@ -404,6 +404,26 @@ skip_if_activity_email_notifications_disabled <- function(url, key) {
   }
 }
 
+expect_ckan_formats <- function(call_with_as, formats = c("list", "json", "table")) {
+  stopifnot(is.function(call_with_as))
+  for (fmt in formats) {
+    result <- call_with_as(fmt)
+    if (fmt == "json") {
+      testthat::expect_type(result, "character")
+      testthat::expect_gt(nchar(result), 0)
+    } else if (fmt == "list") {
+      testthat::expect_true(is.list(result))
+      testthat::expect_false(is.null(result))
+    } else if (fmt == "table") {
+      testthat::expect_true(
+        is.list(result) || inherits(result, "data.frame") || is.atomic(result)
+      )
+      testthat::expect_false(is.null(result))
+    }
+  }
+  invisible(NULL)
+}
+
 u <- get_test_url()
 
 if (ping(u)) {

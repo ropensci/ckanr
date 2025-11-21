@@ -16,7 +16,7 @@ check_ckan(u)
 
 test_that("ckan_fetch doesn't write any files to working directory when session = TRUE", {
   expect_identical(list.files(test_path()), {
-    res <- resource_show(id = rid, as = "table")
+    res <- resource_show(id = rid)
     df <- ckan_fetch(res$url)
     list.files(test_path())
   })
@@ -25,7 +25,7 @@ test_that("ckan_fetch doesn't write any files to working directory when session 
 test_that("ckan_fetch doesn't retain any files in temporary directory when session = TRUE", {
   dir <- tempdir()
   expect_identical(list.files(dir), {
-    res <- resource_show(id = rid, as = "table")
+    res <- resource_show(id = rid)
     df <- ckan_fetch(res$url)
     list.files(dir)
   })

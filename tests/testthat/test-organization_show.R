@@ -38,15 +38,8 @@ test_that("organization_show gives back expected class types", {
   if (dataset_num > 0) {
     expect_true(length(a$packages) > 0)
   }
-})
 
-test_that("organization_show works giving back json output", {
-  check_ckan(u)
-  check_organization(u, o)
-  b <- organization_show(o, url=u, as='json')
-  b_df <- jsonlite::fromJSON(b)
-  expect_is(b, "character")
-  expect_is(b_df, "list")
-  expect_is(b_df$result, "list")
-  expect_true(as.integer(length(b_df$result)) >= 18L)
+  expect_ckan_formats(function(fmt) {
+    organization_show(o, url = u, as = fmt)
+  })
 })

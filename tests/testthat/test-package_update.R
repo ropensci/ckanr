@@ -32,6 +32,10 @@ test_that("package_update updates a package", {
   expect_equal(b$title, "Updated Title")
   expect_equal(b$name, pkg_name)
 
+  expect_ckan_formats(function(fmt) {
+    package_update(update_data, a$id, url = url, key = key, as = fmt)
+  })
+
   # Clean up
   package_delete(a$id, url = url, key = key)
 })
@@ -56,6 +60,10 @@ test_that("package_update updates multiple fields", {
   expect_equal(b$author, "New Author")
   expect_equal(b$notes, "New description")
 
+  expect_ckan_formats(function(fmt) {
+    package_update(update_data, a$id, url = url, key = key, as = fmt)
+  })
+
   # Clean up
   package_delete(a$id, url = url, key = key)
 })
@@ -77,23 +85,4 @@ test_that("package_update fails well", {
   expect_error(package_update(list(title = "Test"), pkg$id, url = url, key = "invalid-key"),
                "Authorization Error")
   package_delete(pkg$id, url = url, key = key)
-})
-
-test_that("package_update returns json when requested", {
-  check_ckan(url)
-
-  # Create a package
-  pkg_name <- paste0("test_pkg_update3_", as.integer(Sys.time()))
-  a <- package_create(name = pkg_name, owner_org = oid, url = url, key = key)
-
-  # Update and get json
-  update_data <- list(title = "JSON Title", name = pkg_name)
-  b <- package_update(update_data, a$id, url = url, key = key, as = "json")
-
-  expect_is(b, "character")
-  b_parsed <- jsonlite::fromJSON(b)
-  expect_is(b_parsed, "list")
-
-  # Clean up
-  package_delete(a$id, url = url, key = key)
 })
