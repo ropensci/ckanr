@@ -3,6 +3,7 @@
 #' @export
 #'
 #' @param id (character) the id of the new user (required)
+#' @return (logical) TRUE when the user is successfully deleted
 #' @template key
 #' @template args
 #' @references
@@ -22,9 +23,12 @@
 user_delete <- function(id, url = get_default_url(), key = get_default_key(),
   as = 'list', ...) {
 
-  warning("not tested yet, may not work", call. = FALSE)
   res <- ckan_POST(url, 'user_delete', list(id = id), encode = "json",
     key = key, opts = list(...))
-  switch(as, json = res, list = as_ck(jsl(res), "ckan_user"),
-    table = jsd(res))
+  parsed <- jsonlite::fromJSON(res)
+  switch(as,
+    json = res,
+    list = isTRUE(parsed$success),
+    table = parsed$success
+  )
 }

@@ -28,6 +28,9 @@ can vary from a vector, list or data.frame. (required)}
 
 \item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
 }
+\value{
+Logical TRUE when the user is successfully deleted.
+}
 \description{
 Delete a user.
 }
