@@ -54,8 +54,17 @@ test_that("ds_search_sql gives back expected class types", {
   sql <- paste0('SELECT * from "', r, '" LIMIT 2')
   a <- ds_search_sql(sql, url = u)
   expect_is(a, "list")
+  records <- a$result$records
+  skip_if(
+    is.null(records) || length(records) == 0,
+    paste(
+      "datastore_search_sql requires rows in the DataStore table (see",
+      "https://docs.ckan.org/en/2.9/maintaining/datastore.html#ckanext.datastore.logic.action.datastore_search_sql).",
+      "Load fixture data with DataPusher or datastore_create before running this test."
+    )
+  )
   expect_true("records" %in% names(a$result))
-  expect_gt(length(a$result$records), 0)
+  expect_gt(length(records), 0)
 
   expect_ckan_formats(function(fmt) {
     ds_search_sql(sql, url = u, as = fmt)
