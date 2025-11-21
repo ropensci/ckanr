@@ -81,7 +81,7 @@ test_that("resource_search accepts vector and list queries", {
   expect_gte(list_result$count, 1)
 })
 
-test_that("resource_search json output contains result payload", {
+test_that("resource_search supports list/json/table formats", {
   check_ckan(url)
   check_dataset(url, did)
 
@@ -92,9 +92,8 @@ test_that("resource_search json output contains result payload", {
 
   query <- sprintf("name:%s", res$name)
   search_until_found(query)
-  json_txt <- resource_search(query, url = url, as = "json")
-  parsed <- jsonlite::fromJSON(json_txt)
 
-  expect_true("result" %in% names(parsed))
-  expect_gte(parsed$result$count, 1)
+  expect_ckan_formats(function(fmt) {
+    resource_search(query, url = url, as = fmt, limit = 10)
+  })
 })

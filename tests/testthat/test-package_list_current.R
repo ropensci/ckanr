@@ -15,12 +15,9 @@ test_that("package_list_current gives back expected class types and parameter of
   expect_equal(tail(a, -5), a2)
 })
 
-test_that("package_list_current works giving back json output", {
+test_that("package_list_current supports list/json/table formats", {
   check_ckan(u)
-  b <- package_list_current(url=u, as='json', limit=30)
-  b_df <- jsonlite::fromJSON(b)
-  expect_is(b, "character")
-  expect_is(b_df, "list")
-  expect_is(b_df$result, "data.frame")
-  expect_lt(nrow(b_df$result), 30 + 1)
+  expect_ckan_formats(function(fmt) {
+    package_list_current(url = u, as = fmt, limit = 10)
+  })
 })

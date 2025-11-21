@@ -14,11 +14,9 @@ test_that("package_search gives back expected class types", {
   expect_equal(length(a2$results), length(a$results))
 })
 
-test_that("package_search works giving back json output", {
+test_that("package_search supports list/json/table formats", {
   check_ckan(u)
-  a <- package_search(rows=10, url=u, as="json")
-  a_df <- jsonlite::fromJSON(a)
-  expect_is(a, "character")
-  expect_is(a_df, "list")
-  expect_is(a_df$result$results, "data.frame")
+  expect_ckan_formats(function(fmt) {
+    package_search(rows = 10, url = u, as = fmt)
+  })
 })

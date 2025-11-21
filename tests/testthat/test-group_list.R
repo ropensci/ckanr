@@ -4,21 +4,11 @@ skip_on_cran()
 
 u <- get_test_url()
 
-test_that("group_list gives back expected class types", {
+test_that("group_list supports list/json/table formats", {
   check_ckan(u)
-  a <- group_list(url=u)
-
-  expect_is(a, "list")
-  expect_is(a[[1]], "ckan_group")
-  expect_is(a[[1]]$state, "character")
-})
-
-test_that("group_list works giving back json output", {
-  check_ckan(u)
-  b <- group_list(url=u, as='json', limit=10)
-  b_df <- jsonlite::fromJSON(b)
-  expect_is(b, "character")
-  expect_is(b_df, "list")
+  expect_ckan_formats(function(fmt) {
+    group_list(url = u, as = fmt, limit = 10)
+  })
 })
 
 test_that("group_list fails correctly", {

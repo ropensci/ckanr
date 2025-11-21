@@ -56,19 +56,8 @@ test_that("ds_search_sql gives back expected class types", {
   expect_is(a, "list")
   expect_true("records" %in% names(a$result))
   expect_gt(length(a$result$records), 0)
-})
 
-test_that("ds_search_sql works giving back json output", {
-  check_ckan(u)
-  check_resource(u, r)
-  if (!ckanr:::ckan_action_available("datastore_search_sql", url = u)) {
-    skip("datastore_search_sql action unavailable on this CKAN instance")
-  }
-  ensure_datastore_records(r)
-  sql <- paste0('SELECT * from "', r, '" LIMIT 2')
-  b <- ds_search_sql(sql, url = u, as = "json")
-  expect_is(b, "character")
-  b_df <- jsonlite::fromJSON(b)
-  expect_is(b_df, "list")
-  expect_true("result" %in% names(b_df))
+  expect_ckan_formats(function(fmt) {
+    ds_search_sql(sql, url = u, as = fmt)
+  })
 })

@@ -68,6 +68,9 @@ test_that("dashboard_activity_list captures new dataset activity", {
 
   expect_is(activities, "list")
   expect_true(any(vapply(activities, function(x) x$object_id == pkg$id, logical(1))))
+expect_ckan_formats(function(fmt) {
+  dashboard_activity_list(limit = 5, url = url, key = key, as = fmt)
+})
 })
 
 test_that("dashboard_activity_list respects limit and offset", {
@@ -96,32 +99,6 @@ test_that("dashboard_activity_list respects limit and offset", {
   if (length(limited) == 1 && length(offset) == 1) {
     expect_false(identical(limited[[1]]$id, offset[[1]]$id))
   }
-})
-
-test_that("dashboard_activity_list supports json output", {
-  check_ckan(url)
-  skip_if_activity_plugin_disabled(url)
-
-  pkg <- create_dashboard_dataset()
-  on.exit(
-    {
-      try(package_delete(pkg$id, url = url, key = key), silent = TRUE)
-    },
-    add = TRUE
-  )
-
-  wait_for_activity(
-    fetch_fn = function() dashboard_activity_list(limit = 5, url = url, key = key),
-    predicate = function(items) {
-      is.list(items) && any(vapply(items, function(x) identical(x$object_id, pkg$id), logical(1)))
-    }
-  )
-
-  json_txt <- dashboard_activity_list(url = url, key = key, as = "json")
-  expect_is(json_txt, "character")
-  parsed <- jsonlite::fromJSON(json_txt)
-  expect_is(parsed, "list")
-  expect_true(length(parsed$result) >= 1)
 })
 
 test_that("dashboard_activity_list errors with invalid key", {

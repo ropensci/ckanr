@@ -18,16 +18,10 @@ test_that("changes gives back expected class types", {
   expect_is(a[[1]], "list")
   expect_is(a[[1]]$user_id, "character")
   expect_is(a[[1]]$data, "list")
-})
 
-test_that("changes works giving back json output", {
-  skip_if(ver > 29)
-  b <- changes(url = u, key = k, as = 'json')
-  b_df <- jsonlite::fromJSON(b)
-
-  expect_is(b, "character")
-  expect_is(b_df, "list")
-  expect_is(b_df$result, "data.frame")
+  expect_ckan_formats(function(fmt) {
+    changes(url = u, key = k, as = fmt)
+  })
 })
 
 test_that("changes fails correctly", {

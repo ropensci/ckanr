@@ -65,6 +65,9 @@ test_that("package_activity_list lists recent changes", {
   acts <- wait_for_package_activity(pkg$id)
   expect_is(acts, "list")
   expect_true(any(vapply(acts, function(x) x$object_id == pkg$id, logical(1))))
+expect_ckan_formats(function(fmt) {
+  package_activity_list(pkg$id, limit = 5, url = url, key = key, as = fmt)
+})
 })
 
 test_that("package_activity_list enforces limit parameter", {
@@ -81,25 +84,6 @@ test_that("package_activity_list enforces limit parameter", {
 
   limited <- package_activity_list(pkg$id, limit = 1, url = url, key = key)
   expect_true(length(limited) <= 1)
-})
-
-test_that("package_activity_list supports json output", {
-  check_ckan(url)
-  skip_if_activity_plugin_disabled(url)
-
-  pkg <- create_activity_package()
-  on.exit({
-    try(package_delete(pkg$id, url = url, key = key), silent = TRUE)
-  }, add = TRUE)
-
-  trigger_package_update(pkg)
-  wait_for_package_activity(pkg$id)
-
-  txt <- package_activity_list(pkg$id, url = url, key = key, as = "json")
-  expect_is(txt, "character")
-  parsed <- jsonlite::fromJSON(txt)
-  expect_is(parsed, "list")
-  expect_true(nrow(parsed$result) >= 1)
 })
 
 test_that("package_activity_list fails for unknown packages", {

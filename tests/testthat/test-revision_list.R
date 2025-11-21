@@ -16,14 +16,8 @@ if(ver >= 29.0) {
     check_ckan(u)
     a <- revision_list(url=u)
     expect_is(a, "list")
-  })
-  
-  test_that("revision_list works giving back json output", {
-    check_ckan(u)
-    b <- revision_list(url=u, as="json")
-    expect_is(b, "character")
-    b_df <- jsonlite::fromJSON(b)
-    expect_is(b_df, "list")
+    expect_ckan_formats(function(fmt) {
+      revision_list(url = u, as = fmt)
+    })
   })
 }
-

@@ -20,10 +20,9 @@ test_that("tag_search works with many queries", {
   expect_named(a[[1]], c('vocabulary_id', 'id', 'name'), ignore.order = TRUE)
 })
 
-test_that("tag_search works giving back json output", {
+test_that("tag_search supports list/json/table formats", {
   check_ckan(u)
-  b <- tag_search(query = c('ta', 'al'), url=u, as="json")
-  expect_is(b, "character")
-  b_df <- jsonlite::fromJSON(b)
-  expect_is(b_df, "list")
+  expect_ckan_formats(function(fmt) {
+    tag_search(query = c("ta", "al"), url = u, as = fmt)
+  })
 })

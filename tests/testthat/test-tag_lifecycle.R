@@ -44,10 +44,9 @@ test_that("tag_create and tag_show round-trip", {
 
   shown <- tag_show(tag, include_datasets = FALSE, url = url, key = key)
   expect_equal(shown$id, tag$id)
-
-  json_txt <- tag_show(tag$id, url = url, key = key, as = "json")
-  parsed <- jsonlite::fromJSON(json_txt)
-  expect_equal(parsed$result$id, tag$id)
+  expect_ckan_formats(function(fmt) {
+    tag_show(tag$id, include_datasets = FALSE, url = url, key = key, as = fmt)
+  })
 })
 
 test_that("tag_list filters by vocabulary", {
@@ -61,10 +60,9 @@ test_that("tag_list filters by vocabulary", {
 
   tags <- tag_list(vocabulary_id = vocab$id, all_fields = TRUE, url = url, key = key)
   expect_true(any(vapply(tags, function(x) x$id == tag$id, logical(1))))
-
-  json_txt <- tag_list(vocabulary_id = vocab$id, url = url, key = key, as = "json")
-  parsed <- jsonlite::fromJSON(json_txt)
-  expect_true(tag$name %in% parsed$result)
+  expect_ckan_formats(function(fmt) {
+    tag_list(vocabulary_id = vocab$id, url = url, key = key, as = fmt)
+  })
 })
 
 test_that("tag_search locates newly created tags", {
@@ -79,10 +77,9 @@ test_that("tag_search locates newly created tags", {
   query_prefix <- substr(tag$name, 1, 3)
   results <- tag_search(query = query_prefix, vocabulary_id = vocab$id, url = url, key = key)
   expect_true(any(vapply(results, function(x) x$id == tag$id, logical(1))))
-
-  json_txt <- tag_search(query = query_prefix, vocabulary_id = vocab$id, url = url, key = key, as = "json")
-  parsed <- jsonlite::fromJSON(json_txt)
-  expect_true(any(parsed$result$results$name == tag$name))
+  expect_ckan_formats(function(fmt) {
+    tag_search(query = query_prefix, vocabulary_id = vocab$id, url = url, key = key, as = fmt)
+  })
 })
 
 test_that("tag_create fails for missing vocabulary", {

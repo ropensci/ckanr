@@ -51,16 +51,8 @@ test_that("ds_search gives back expected class types", {
   expect_is(a, "list")
   expect_true(is.list(a$records))
   expect_gt(length(a$records), 0)
-})
 
-test_that("ds_search works giving back json output", {
-  check_ckan(u)
-  check_resource(u, r)
-  ensure_datastore_records(r)
-  b <- ds_search(resource_id=r, url=u, as="json")
-
-  expect_is(b, "character")
-  b_df <- jsonlite::fromJSON(b)
-  expect_is(b_df, "list")
-  expect_true("result" %in% names(b_df))
+  expect_ckan_formats(function(fmt) {
+    ds_search(resource_id = r, url = u, limit = 5, as = fmt)
+  })
 })

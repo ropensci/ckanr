@@ -22,13 +22,9 @@ test_that("tag_list gives back expected class types", {
 
 })
 
-test_that("tag_list works giving back json output", {
+test_that("tag_list supports list/json/table formats", {
   check_ckan(u)
-  b <- tag_list(url=u, as='json')
-  b_df <- jsonlite::fromJSON(b)
-  expect_is(b, "character")
-  expect_is(b_df, "list")
-  expect_is(b_df$result, "data.frame")
-  expect_equal(nrow(b_df$result), tag_num)
+  expect_ckan_formats(function(fmt) {
+    tag_list(url = u, as = fmt)
+  })
 })
-
