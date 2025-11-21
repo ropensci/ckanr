@@ -60,8 +60,10 @@ ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
 
 # create a package and related item
 res <- package_create("hello-saturn2") \%>\%
-   related_create(title = "my resource",
-                  type = "visualization")
+  related_create(
+    title = "my resource",
+    type = "visualization"
+  )
 
 # update the related item
 related_update(res, title = "her resource", type = "idea")
