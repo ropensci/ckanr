@@ -30,7 +30,7 @@ test_that("organization_purge removes a deleted organization", {
 
   org <- create_temp_org()
   on.exit({
-    try(organization_purge(org$id, url = url, key = key), silent = TRUE)
+    try(organization_purge(org$id, url = url, key = key, as = "list"), silent = TRUE)
   }, add = TRUE)
 
   expect_true(organization_delete(org$id, url = url, key = key))
