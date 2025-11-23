@@ -47,11 +47,13 @@ test_that("vocabulary CRUD helpers work", {
 
 test_that("tag_autocomplete returns suggestions", {
   check_ckan(url)
-  res <- tag_autocomplete(q = "ckan", url = url)
+  res <- tag_autocomplete(q = "ckan", url = url, as="json")
 
   expect_true(is.character(res))
   expect_true(length(res) >= 1)
   expect_true(any(grepl("ckan", res)))
+
+  res_list <- res <- tag_autocomplete(q = "ckan", url = url, as="list")
 
   expect_ckan_formats(function(fmt) {
     tag_autocomplete(q = "ckan", url = url, as = fmt)

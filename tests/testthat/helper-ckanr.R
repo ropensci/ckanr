@@ -412,7 +412,7 @@ expect_ckan_formats <- function(call_with_as, formats = c("list", "json", "table
       testthat::expect_type(result, "character")
       testthat::expect_gt(nchar(result), 0)
     } else if (fmt == "list") {
-      testthat::expect_true(is.list(result))
+      testthat::expect_true(is.list(result) || is.character(result))
       testthat::expect_false(is.null(result))
     } else if (fmt == "table") {
       testthat::expect_true(

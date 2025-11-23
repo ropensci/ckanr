@@ -53,9 +53,9 @@ test_that("resource_update gives back expected class types and output", {
   # expected output
   expect_equal(a$id, rid)
   expect_equal(a$format, "CSV")
-expect_ckan_formats(function(fmt) {
-  resource_update(rid, path = path, url = url, key = key, as = fmt)
-})
+  expect_ckan_formats(function(fmt) {
+    resource_update(rid, path = path, url = url, key = key, as = fmt)
+  })
 })
 
 # html
