@@ -66,7 +66,7 @@ test_that("src_ckan collects rows from datastore resource", {
 
   tbl_obj <- dplyr::tbl(src, name = rid)
   sample <- tbl_obj |>
-    dplyr::slice_head(n = 3) |>
+    dplyr::slice_min(n = 3) |>
     dplyr::collect()
 
   expect_s3_class(sample, "tbl_df")

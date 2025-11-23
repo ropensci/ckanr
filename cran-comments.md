@@ -1,7 +1,8 @@
 ## Test environments
 
 * GitHub Codespaces using Devcontainer setup providing a disposable CKAN 2.9, 2.10, or 2.11 instance.
-* ubuntu 22.04 (on github actions), R devel
+* GitHub Actions testing against CKAN 2.9, 2.10, 2.11 on ubuntu-latest (24.04)
+* GitHub Actions testing tests not requiring CKAN on windows-latset and macOS-latest
 * win-builder
 
 ## R CMD check results
@@ -12,7 +13,7 @@ Maintainer: 'Florian Mayer <florian.wendelin.mayer@gmail.com>'
 
 New maintainer:
   Florian Mayer <florian.wendelin.mayer@gmail.com>
-Old maintainer(s):
+Old maintainer:
   Francisco Alves <fjunior.alves.oliveira@gmail.com>
 
 
