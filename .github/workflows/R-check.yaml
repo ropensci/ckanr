@@ -74,6 +74,13 @@ jobs:
       - uses: r-lib/actions/setup-r-dependencies@v2
         if: ${{ runner.os == 'macOS' }}
         with:
+          extra-packages: |
+            any::rcmdcheck
+            any::covr
+            any::xml2
+          needs: |
+            check
+            coverage
           cache: false
 
       - name: Generate CKAN API token (CKAN >= 2.9)
