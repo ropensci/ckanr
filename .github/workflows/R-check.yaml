@@ -61,6 +61,7 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@v2
 
       - uses: r-lib/actions/setup-r-dependencies@v2
+        if: ${{ runner.os != 'macOS' }}
         with:
           extra-packages: |
             any::rcmdcheck
@@ -69,6 +70,11 @@ jobs:
           needs: |
             check
             coverage
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        if: ${{ runner.os == 'macOS' }}
+        with:
+          cache: false
 
       - name: Generate CKAN API token (CKAN >= 2.9)
         run: |
