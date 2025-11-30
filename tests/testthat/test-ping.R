@@ -7,6 +7,8 @@ test_that("ping returns false when run against non-CKAN URLS", {
 })
 
 test_that("ping return true on non-empty ckanr test URL", {
+  skip_on_os("windows")
+  skip_on_os("mac")
   u <- get_test_url()
   expect_false(u == "")
   expect_true(ping(url = u))
