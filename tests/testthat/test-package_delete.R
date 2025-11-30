@@ -10,8 +10,12 @@ url <- get_test_url()
 key <- get_test_key()
 oid <- get_test_oid()
 
-test_that("The CKAN URL must be set", { expect_is(url, "character") })
-test_that("The CKAN API key must be set", { expect_is(key, "character") })
+test_that("The CKAN URL must be set", {
+  expect_is(url, "character")
+})
+test_that("The CKAN API key must be set", {
+  expect_is(key, "character")
+})
 
 test_that("package_delete deletes a package", {
   check_ckan(url)
@@ -47,10 +51,14 @@ test_that("package_delete fails well", {
   check_ckan(url)
 
   # missing id
-  expect_error(package_delete(url = url, key = key),
-               "argument \"id\" is missing, with no default")
+  expect_error(
+    package_delete(url = url, key = key),
+    "argument \"id\" is missing, with no default"
+  )
 
   # invalid id
-  expect_error(package_delete("nonexistent-package-id", url = url, key = key),
-               "Not Found Error")
+  expect_error(
+    package_delete("nonexistent-package-id", url = url, key = key),
+    "Not Found Error"
+  )
 })

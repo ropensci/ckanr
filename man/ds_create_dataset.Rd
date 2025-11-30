@@ -21,7 +21,7 @@ ds_create_dataset(
 
 \item{path}{(character) Path of the file to add (required)}
 
-\item{url}{Base url to use. Default: https://data.ontario.ca/ See
+\item{url}{Base url to use. Default: https://demo.ckan.org/ See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
 \item{key}{A privileged CKAN API key, Default: your key set with
@@ -45,19 +45,24 @@ of this package
 \dontrun{
 path <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
 ckanr_setup(url = "https://demo.ckan.org/", key = "my-demo-ckan-org-api-key")
-ds_create_dataset(package_id='testingagain', name="mydata", path = path)
+ds_create_dataset(package_id = "testingagain", name = "mydata", path = path)
 
 # Testing: see ?ckanr_setup to set test settings
-ckanr_setup(test_url = "http://my-ckan.org/",
-            test_key = "my-ckan-api-key",
-            test_did="an-existing-package-id",
-            test_rid="an-existing-resource-id")
-ds_create_dataset(package_id=get_test_pid(), name="mydata",
-                  path=system.file("examples",
-                                   "actinidiaceae.csv",
-                                   package = "ckanr"),
-                  key = get_test_key(),
-                  url = get_test_url())
+ckanr_setup(
+  test_url = "http://my-ckan.org/",
+  test_key = "my-ckan-api-key",
+  test_did = "an-existing-package-id",
+  test_rid = "an-existing-resource-id"
+)
+ds_create_dataset(
+  package_id = get_test_pid(), name = "mydata",
+  path = system.file("examples",
+    "actinidiaceae.csv",
+    package = "ckanr"
+  ),
+  key = get_test_key(),
+  url = get_test_url()
+)
 }
 }
 \references{

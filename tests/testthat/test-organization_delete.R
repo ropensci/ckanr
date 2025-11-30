@@ -9,8 +9,12 @@ skip_on_os("mac")
 url <- get_test_url()
 key <- get_test_key()
 
-test_that("The CKAN URL must be set", { expect_is(url, "character") })
-test_that("The CKAN API key must be set", { expect_is(key, "character") })
+test_that("The CKAN URL must be set", {
+  expect_is(url, "character")
+})
+test_that("The CKAN API key must be set", {
+  expect_is(key, "character")
+})
 
 test_that("organization_delete deletes an organization", {
   check_ckan(url)
@@ -46,17 +50,23 @@ test_that("organization_delete fails well", {
   check_ckan(url)
 
   # missing id
-  expect_error(organization_delete(url = url, key = key),
-               "argument \"id\" is missing, with no default")
+  expect_error(
+    organization_delete(url = url, key = key),
+    "argument \"id\" is missing, with no default"
+  )
 
   # invalid id
-  expect_error(organization_delete("nonexistent-org-id", url = url, key = key),
-               "Not Found Error")
+  expect_error(
+    organization_delete("nonexistent-org-id", url = url, key = key),
+    "Not Found Error"
+  )
 
   # bad key (use a real organization id)
   org_name <- paste0("test_org_delete_badkey_", as.integer(Sys.time()))
   org <- organization_create(name = org_name, url = url, key = key)
-  expect_error(organization_delete(org$id, url = url, key = "invalid-key"),
-               "Authorization Error")
+  expect_error(
+    organization_delete(org$id, url = url, key = "invalid-key"),
+    "Authorization Error"
+  )
   organization_delete(org$id, url = url, key = key)
 })

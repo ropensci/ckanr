@@ -19,7 +19,7 @@ group_show(
 \item{include_datasets}{(logical) Include a list of the group's datasets.
 Default: \code{TRUE}}
 
-\item{url}{Base url to use. Default: https://data.ontario.ca/ See
+\item{url}{Base url to use. Default: https://demo.ckan.org/ See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
 \item{key}{A privileged CKAN API key, Default: your key set with
@@ -51,7 +51,7 @@ group_show(res[[1]]$name)
 group_show(res[[1]])
 
 # return different data formats
-group_show(res[[1]]$name, as = 'json')
-group_show(res[[1]]$name, as = 'table')
+group_show(res[[1]]$name, as = "json")
+group_show(res[[1]]$name, as = "table")
 }
 }

@@ -12,7 +12,7 @@
 #' ckanr_setup(url = "https://demo.ckan.org", key = getOption("ckan_demo_key"))
 #'
 #' # create a group
-#' (res <- group_create("lions", description="A group about lions"))
+#' (res <- group_create("lions", description = "A group about lions"))
 #'
 #' # show the group
 #' group_show(res$id)
@@ -22,11 +22,14 @@
 #' ## or with it's id
 #' # group_delete(res$id)
 #' }
-group_delete <- function(id, url = get_default_url(), key = get_default_key(),
-  ...) {
-
+group_delete <- function(
+  id, url = get_default_url(), key = get_default_key(),
+  ...
+) {
   id <- as.ckan_group(id, url = url)
-  tmp <- ckan_POST(url, 'group_delete', body = list(id = id$id), key = key,
-    opts = list(...))
+  tmp <- ckan_POST(url, "group_delete",
+    body = list(id = id$id), key = key,
+    opts = list(...)
+  )
   jsonlite::fromJSON(tmp)$success
 }

@@ -20,14 +20,19 @@
 #' group_show(res[[1]])
 #'
 #' # return different data formats
-#' group_show(res[[1]]$name, as = 'json')
-#' group_show(res[[1]]$name, as = 'table')
+#' group_show(res[[1]]$name, as = "json")
+#' group_show(res[[1]]$name, as = "table")
 #' }
-group_show <- function(id, include_datasets = TRUE, url = get_default_url(),
-  key = get_default_key(), as = 'list', ...) {
-
+group_show <- function(
+  id, include_datasets = TRUE, url = get_default_url(),
+  key = get_default_key(), as = "list", ...
+) {
   id <- as.ckan_group(id, url = url)
   args <- cc(list(id = id$id, include_datasets = as_log(include_datasets)))
-  res <- ckan_GET(url, 'group_show', args, key = key, opts = list(...))
-  switch(as, json = res, list = as_ck(jsl(res), "ckan_group"), table = jsd(res))
+  res <- ckan_GET(url, "group_show", args, key = key, opts = list(...))
+  switch(as,
+    json = res,
+    list = as_ck(jsl(res), "ckan_group"),
+    table = jsd(res)
+  )
 }

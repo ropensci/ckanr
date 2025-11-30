@@ -29,6 +29,5 @@ my_tbl <- tbl(src = my_ckan, name = "44d7de5f-7029-4f3a-a812-d7a70895da7d")
 
 # You can use the dplyr verbs with my_tbl. For example:
 dplyr::filter(my_tbl, GABARITO == "C")
-
 }
 }

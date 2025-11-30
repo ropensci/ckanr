@@ -31,10 +31,10 @@ ckanr_setup(url = "https://demo.ckan.org/", key = Sys.getenv("CKAN_DEMO_KEY"))
 # then create a resource
 file <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
 (xx <- resource_create(res,
-                       description = "my resource",
-                       name = "bears",
-                       upload = file,
-                       rcurl = "http://google.com"
+  description = "my resource",
+  name = "bears",
+  upload = file,
+  rcurl = "http://google.com"
 ))
 
 # delete the resource

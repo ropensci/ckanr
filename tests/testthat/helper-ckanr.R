@@ -24,6 +24,7 @@ prepare_test_ckan <- function(test_url = Sys.getenv("CKANR_TEST_URL"),
     # An example CSV file which should upload fine to the datastore
     path_csv <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
     path_parquet <- system.file("examples", "iris.parquet", package = "ckanr")
+    path_txt <- system.file("examples", "words.txt", package = "ckanr")
 
 
     # Save ourselves from using test_url and test_key
@@ -88,7 +89,22 @@ prepare_test_ckan <- function(test_url = Sys.getenv("CKANR_TEST_URL"),
       rcurl = "http://google.com"
     )
 
-    # Note: The DataPusher will automatically push CSV resources to the datastore
+    r_txt <- resource_create(
+      package_id = p$id,
+      description = "Text resource",
+      name = "ckanr test text resource",
+      upload = path_txt,
+      rcurl = "http://google.com"
+    )
+
+    r_views <- resource_create_default_resource_views(
+      r_txt,
+      p$id,
+      create_datastore_views = FALSE
+    )
+
+    # Note: The DataPusher would automatically push CSV resources to the datastore
+    # The devcontainer CKAN does not have a datapusher or xloader configured
     # ds_search tests will skip if the datastore is not ready yet
 
     vocab_name <- "ckanr_test_vocabulary"
@@ -315,6 +331,7 @@ check_organization <- function(url, x) {
   }
 }
 
+# FIXME: enabled if CKAN__AUTH__ALLOW_DATASET_COLLABORATORS=true in service ckan in docker-compose-dev.yml
 collaborators_feature_enabled <- function(url, key) {
   override <- Sys.getenv("CKANR_ASSUME_COLLABORATORS")
   if (nzchar(override)) {
@@ -402,6 +419,26 @@ skip_if_activity_email_notifications_disabled <- function(url, key) {
   if (is.na(status)) {
     skip("Unable to determine activity email notification setting")
   }
+}
+
+expect_ckan_formats <- function(call_with_as, formats = c("list", "json", "table")) {
+  stopifnot(is.function(call_with_as))
+  for (fmt in formats) {
+    result <- call_with_as(fmt)
+    if (fmt == "json") {
+      testthat::expect_type(result, "character")
+      testthat::expect_gt(nchar(result), 0)
+    } else if (fmt == "list") {
+      testthat::expect_true(is.list(result) || is.character(result))
+      testthat::expect_false(is.null(result))
+    } else if (fmt == "table") {
+      testthat::expect_true(
+        is.list(result) || inherits(result, "data.frame") || is.atomic(result)
+      )
+      testthat::expect_false(is.null(result))
+    }
+  }
+  invisible(NULL)
 }
 
 u <- get_test_url()

@@ -20,17 +20,25 @@ if (inherits(tt, "error")) {
   did <- package_create(did, url = url, key = key)$id
 }
 # rid <- get_test_rid()
-rid <- resource_create(package_id = did,
-                        description = "my resource",
-                        name = "bears",
-                        upload = path,
-                        rcurl = "http://google.com",
-                        url = url, key = key)
+rid <- resource_create(
+  package_id = did,
+  description = "my resource",
+  name = "bears",
+  upload = path,
+  rcurl = "http://google.com",
+  url = url, key = key
+)
 rid <- rid$id
 
-test_that("The CKAN URL must be set", { expect_is(url, "character") })
-test_that("The CKAN API key must be set", { expect_is(key, "character") })
-test_that("A CKAN resource ID must be set", { expect_is(rid, "character") })
+test_that("The CKAN URL must be set", {
+  expect_is(url, "character")
+})
+test_that("The CKAN API key must be set", {
+  expect_is(key, "character")
+})
+test_that("A CKAN resource ID must be set", {
+  expect_is(rid, "character")
+})
 
 # Test update_resource
 test_that("resource_update gives back expected class types and output", {
@@ -53,6 +61,9 @@ test_that("resource_update gives back expected class types and output", {
   # expected output
   expect_equal(a$id, rid)
   expect_equal(a$format, "CSV")
+  expect_ckan_formats(function(fmt) {
+    resource_update(rid, path = path, url = url, key = key, as = fmt)
+  })
 })
 
 # html
@@ -61,9 +72,11 @@ test_that("resource_update gives back expected class types and output with html"
   check_resource(url, rid)
 
   path <- system.file("examples", "mapbox.html", package = "ckanr")
-  xx <- resource_create(package_id = did, description = "a map, yay",
-                        name = "mapyay", upload = path,
-                        rcurl = "http://google.com", url = url, key = key)
+  xx <- resource_create(
+    package_id = did, description = "a map, yay",
+    name = "mapyay", upload = path,
+    rcurl = "http://google.com", url = url, key = key
+  )
   dat <- readLines(path)
   dat <- sub("-111.06", "-115.06", dat)
   newpath <- tempfile(fileext = ".html")
@@ -87,18 +100,22 @@ test_that("resource_update fails well", {
   expect_error(resource_update(), "argument \"id\" is missing, with no default")
 
   # bad resource id
-  expect_error(resource_update("invalid-resource-id", path=path, url=url, key=key),
-               "Not Found Error")
+  expect_error(
+    resource_update("invalid-resource-id", path = path, url = url, key = key),
+    "Not Found Error"
+  )
 
   # bad file path: local file does not exist
-  expect_error(resource_update(rid, "invalid-file-path", url=url, key=key))
+  expect_error(resource_update(rid, "invalid-file-path", url = url, key = key))
 
   # bad url
-  expect_error(resource_update(rid, path=path, url="invalid-URL", key=key))
+  expect_error(resource_update(rid, path = path, url = "invalid-URL", key = key))
 
   # bad key
-  expect_error(resource_update(rid, path=path, url=url, key="invalid-key"),
-               "Authorization Error")
+  expect_error(
+    resource_update(rid, path = path, url = url, key = "invalid-key"),
+    "Authorization Error"
+  )
 })
 
 # extras on resource_create
@@ -107,10 +124,12 @@ test_that("resource_create gives back expected key:value pairs", {
   check_resource(url, rid)
 
   path <- system.file("examples", "mapbox.html", package = "ckanr")
-  xx <- resource_create(package_id = did, description = "a map, yay",
-                        name = "mapyay", upload = path,
-                        extras = list(map_type = "mapbox"),
-                        rcurl = "http://google.com", url = url, key = key)
+  xx <- resource_create(
+    package_id = did, description = "a map, yay",
+    name = "mapyay", upload = path,
+    extras = list(map_type = "mapbox"),
+    rcurl = "http://google.com", url = url, key = key
+  )
 
   # expected output
   expect_equal(xx$map_type, "mapbox")
@@ -121,8 +140,10 @@ test_that("resource_update gives back expected key:value pairs", {
   check_ckan(url)
   check_resource(url, rid)
 
-  a <- resource_update(rid, path = path, extras = list(map_type = "mapbox"),
-                       url = url, key = key)
+  a <- resource_update(rid,
+    path = path, extras = list(map_type = "mapbox"),
+    url = url, key = key
+  )
 
   # expected output
   expect_equal(a$map_type, "mapbox")
@@ -132,10 +153,12 @@ test_that("resource_update gives back expected key:value pairs", {
 test_that("resource_update gives back expected key:value pairs even without path", {
   check_ckan(url)
   check_resource(url, rid)
-  
-  a <- resource_update(rid, extras = list(map_type = "mapbox"),
-                       url = url, key = key)
-  
+
+  a <- resource_update(rid,
+    extras = list(map_type = "mapbox"),
+    url = url, key = key
+  )
+
   # expected output
   expect_equal(a$map_type, "mapbox")
 })
@@ -144,13 +167,17 @@ test_that("resource_update gives back expected key:value pairs even without path
 test_that("resource_update removes key:value pairs with empty extras", {
   check_ckan(url)
   check_resource(url, rid)
-  
-  a <- resource_update(rid, extras = list(map_type = "mapbox"),
-                       url = url, key = key)
-  
-  b <- resource_update(rid, extras = list(),
-                       url = url, key = key)
-  
+
+  a <- resource_update(rid,
+    extras = list(map_type = "mapbox"),
+    url = url, key = key
+  )
+
+  b <- resource_update(rid,
+    extras = list(),
+    url = url, key = key
+  )
+
   # expected output
   testthat::expect_null(b$map_type)
 })

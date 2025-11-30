@@ -72,7 +72,7 @@ a list of dictionaries each with key 'name' (string, the id or name of the
 user) and optionally 'capacity' (string, the capacity in which the user is
 a member of the group)}
 
-\item{url}{Base url to use. Default: https://data.ontario.ca/ See
+\item{url}{Base url to use. Default: https://demo.ckan.org/ See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
 \item{key}{A privileged CKAN API key, Default: your key set with
@@ -94,7 +94,7 @@ Create a group
 ckanr_setup(url = "https://demo.ckan.org", key = getOption("ckan_demo_key"))
 
 # create a group
-(res <- group_create("fruitloops2", description="A group about fruitloops"))
+(res <- group_create("fruitloops2", description = "A group about fruitloops"))
 res$users
 res$num_followers
 }

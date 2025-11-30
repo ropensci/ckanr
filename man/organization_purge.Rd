@@ -15,7 +15,7 @@ organization_purge(
 \arguments{
 \item{id}{(character) name or id of the organization}
 
-\item{url}{Base url to use. Default: https://data.ontario.ca/ See
+\item{url}{Base url to use. Default: https://demo.ckan.org/ See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
 \item{key}{A privileged CKAN API key, Default: your key set with
@@ -37,11 +37,13 @@ organization is purged, it is permanently removed from the system.
 }
 \examples{
 \dontrun{
-ckanr_setup(url = "https://demo.ckan.org", key=getOption("ckan_demo_key"))
+ckanr_setup(url = "https://demo.ckan.org", key = getOption("ckan_demo_key"))
 
 # create an organization
-(res <- organization_create("foobar", title = "Foo bars",
-  description = "love foo bars"))
+(res <- organization_create("foobar",
+  title = "Foo bars",
+  description = "love foo bars"
+))
 
 # delete the organization just created
 res$id

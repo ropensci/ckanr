@@ -23,7 +23,7 @@ user_activity_list(
 \item{limit}{(numeric) The maximum number of activities to return
 (optional, default: 31)}
 
-\item{url}{Base url to use. Default: https://data.ontario.ca/ See
+\item{url}{Base url to use. Default: https://demo.ckan.org/ See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
 \item{key}{A privileged CKAN API key, Default: your key set with
@@ -42,14 +42,16 @@ Return a list of a user's activities
 \examples{
 \dontrun{
 # Setup
-ckanr_setup(url = "https://demo.ckan.org/",
-key = getOption("ckan_demo_key"))
+ckanr_setup(
+  url = "https://demo.ckan.org/",
+  key = getOption("ckan_demo_key")
+)
 
 # list package activity
-user_activity_list('sckottie')
+user_activity_list("sckottie")
 
 # input a ckan_user object
-(x <- user_show('sckottie'))
+(x <- user_show("sckottie"))
 user_activity_list(x)
 
 # output different data formats

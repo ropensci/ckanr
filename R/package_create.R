@@ -59,36 +59,42 @@
 #'
 #' # create a package
 #' ## Example 1
-#' (res <- package_create("foobar4", author="Jane Doe"))
+#' (res <- package_create("foobar4", author = "Jane Doe"))
 #' res$author
 #'
 #' ## Example 2 - create package, add a resource
-#' (res <- package_create("helloworld", author="Jane DOe"))
-#' 
+#' (res <- package_create("helloworld", author = "Jane DOe"))
+#'
 #' # include a group
 #' # package_create("brownbear", groups = data.frame(id = "some-id"))
-#'
 #' }
-package_create <- function(name = NULL, title = NULL, private=FALSE,
+package_create <- function(
+  name = NULL, title = NULL, private = FALSE,
   author = NULL, author_email = NULL, maintainer = NULL,
   maintainer_email = NULL, license_id = NULL, notes = NULL, package_url = NULL,
   version = NULL, state = "active", type = NULL, resources = NULL, tags = NULL,
   extras = NULL, relationships_as_object = NULL,
   relationships_as_subject = NULL, groups = NULL, owner_org = NULL,
-  url = get_default_url(), key = get_default_key(), as = 'list', ...) {
-
-  body <- cc(list(name = name, title = title, private = private,
+  url = get_default_url(), key = get_default_key(), as = "list", ...
+) {
+  body <- cc(list(
+    name = name, title = title, private = private,
     author = author, author_email = author_email, maintainer = maintainer,
     maintainer_email = maintainer_email, license_id = license_id,
     notes = notes, url = package_url, version = version, state = state,
     type = type, resources = resources, tags = tags,
     relationships_as_object = relationships_as_object,
     relationships_as_subject = relationships_as_subject, groups = groups,
-    owner_org = owner_org))
+    owner_org = owner_org
+  ))
   body <- c(body, extras)
-  res <- ckan_POST(url, 'package_create',
-                   body = tojun(body, TRUE), key = key,
-                   encode = "json", headers = ctj(), opts = list(...))
-  switch(as, json = res, list = as_ck(jsl(res), "ckan_package"),
-    table = jsd(res))
+  res <- ckan_POST(url, "package_create",
+    body = tojun(body, TRUE), key = key,
+    encode = "json", headers = ctj(), opts = list(...)
+  )
+  switch(as,
+    json = res,
+    list = as_ck(jsl(res), "ckan_package"),
+    table = jsd(res)
+  )
 }

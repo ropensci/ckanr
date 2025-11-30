@@ -13,19 +13,24 @@
 #'
 #' # create a package and a related item
 #' res <- package_create("hello-venus2") %>%
-#'    related_create(title = "my resource",
-#'                   type = "visualization")
+#'   related_create(
+#'     title = "my resource",
+#'     type = "visualization"
+#'   )
 #'
 #' # show the related item
 #' related_delete(res)
 #' ## or with id itself:
 #' ## related_delete(res$id)
 #' }
-related_delete <- function(id, url = get_default_url(),
-  key = get_default_key(), ...) {
-
+related_delete <- function(
+  id, url = get_default_url(),
+  key = get_default_key(), ...
+) {
   id <- as.ckan_related(id, url = url)
-  tmp <- ckan_POST(url, 'related_delete', body = list(id = id$id),
-    key = key, opts = list(...))
+  tmp <- ckan_POST(url, "related_delete",
+    body = list(id = id$id),
+    key = key, opts = list(...)
+  )
   jsonlite::fromJSON(tmp)$success
 }

@@ -19,10 +19,10 @@ package_update(
 
 \item{id}{(character) Package identifier}
 
-\item{http_method}{(character) which HTTP method (verb) to use; one of
-"GET" or "POST". Default: "GET"}
+\item{http_method}{(character) which HTTP method (verb) to use; one of "GET" or
+"POST". Default: "GET"}
 
-\item{url}{Base url to use. Default: https://data.ontario.ca/ See
+\item{url}{Base url to use. Default: https://demo.ckan.org/ See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
 \item{key}{A privileged CKAN API key, Default: your key set with
@@ -47,12 +47,12 @@ ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
 
 # Step 1: get the dataset details as R list
 ds_id <- "my-dataset-id-md5-hash"
-ds <- ckanr::package_show(ds_id, as="table")
+ds <- ckanr::package_show(ds_id, as = "table")
 
 # Step 2: update selected fields
 ds$title <- "An updated title"
 ds$description <- "Only title and description have been updated."
-ds contains all other package data, including tags and resources
+# ds contains all other package data, including tags and resources
 
 # Step 3a: Update the dataset on CKAN with locally modified metadata `ds`
 result <- ckanr::package_update(ds, ds_id)

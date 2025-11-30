@@ -20,39 +20,48 @@
 #' @template args
 #' @references http://bit.ly/ds_create
 #' @examples \dontrun{
-#' ckanr_setup(url = "https://demo.ckan.org/",
-#'   key = getOption("ckan_demo_key"))
+#' ckanr_setup(
+#'   url = "https://demo.ckan.org/",
+#'   key = getOption("ckan_demo_key")
+#' )
 #'
 #' # create a package
-#' (res <- package_create("foobarrrrr", author="Jane Doe"))
+#' (res <- package_create("foobarrrrr", author = "Jane Doe"))
 #'
 #' # then create a resource
 #' file <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
-#' (xx <- resource_create(package_id = res$id,
-#'                        description = "my resource",
-#'                        name = "bears",
-#'                        upload = file,
-#'                        rcurl = "http://google.com"
+#' (xx <- resource_create(
+#'   package_id = res$id,
+#'   description = "my resource",
+#'   name = "bears",
+#'   upload = file,
+#'   rcurl = "http://google.com"
 #' ))
 #' ds_create(resource_id = xx$id, records = iris, force = TRUE)
 #' resource_show(xx$id)
 #' }
-
-ds_create <- function(resource_id = NULL, resource = NULL, force = FALSE,
+ds_create <- function(
+  resource_id = NULL, resource = NULL, force = FALSE,
   aliases = NULL, fields = NULL, records = NULL, primary_key = NULL,
   indexes = NULL, url = get_default_url(), key = get_default_key(),
-  as = 'list', ...) {
-
-  body <- cc(list(resource_id = resource_id, resource = resource, force = force,
-                  aliases = aliases, fields = fields, records = records,
-                  primary_key = primary_key, indexes = indexes))
+  as = "list", ...
+) {
+  body <- cc(list(
+    resource_id = resource_id, resource = resource, force = force,
+    aliases = aliases, fields = fields, records = records,
+    primary_key = primary_key, indexes = indexes
+  ))
   headers <- c(auth_headers(key), ctj())
-  con <- crul::HttpClient$new(file.path(url, 'api/action/datastore_create'),
+  con <- crul::HttpClient$new(file.path(url, "api/action/datastore_create"),
     headers = headers,
     opts = list(...)
   )
   res <- con$post(body = tojun(body, TRUE), encode = "json")
   err_handler(res)
   txt <- res$parse("UTF-8")
-  switch(as, json = txt, list = jsl(txt), table = jsd(txt))
+  switch(as,
+    json = txt,
+    list = jsl(txt),
+    table = jsd(txt)
+  )
 }

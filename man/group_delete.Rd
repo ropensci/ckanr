@@ -26,7 +26,7 @@ Delete a group
 ckanr_setup(url = "https://demo.ckan.org", key = getOption("ckan_demo_key"))
 
 # create a group
-(res <- group_create("lions", description="A group about lions"))
+(res <- group_create("lions", description = "A group about lions"))
 
 # show the group
 group_show(res$id)

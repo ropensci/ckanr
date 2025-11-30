@@ -49,7 +49,7 @@ descending (e.g., score asc), sort by two fields (e.g., score desc,
 price asc), or sort by a function (e.g., sum(x_f, y_f) desc, which sorts
 by the sum of x_f and y_f in a descending order). (optional)}
 
-\item{url}{Base url to use. Default: https://data.ontario.ca/ See
+\item{url}{Base url to use. Default: https://demo.ckan.org/ See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
 \item{key}{A privileged CKAN API key, Default: your key set with
@@ -78,16 +78,22 @@ http://www.postgresql.org/docs/9.1/static/datatype-textsearch.html#DATATYPE-TSQU
 }
 \examples{
 \dontrun{
-ckanr_setup(url = 'https://data.nhm.ac.uk/')
+ckanr_setup(url = "https://data.nhm.ac.uk/")
 
-ds_search(resource_id = '8f0784a6-82dd-44e7-b105-6194e046eb8d')
-ds_search(resource_id = '8f0784a6-82dd-44e7-b105-6194e046eb8d',
-  as = "table")
-ds_search(resource_id = '8f0784a6-82dd-44e7-b105-6194e046eb8d',
-  as = "json")
+ds_search(resource_id = "8f0784a6-82dd-44e7-b105-6194e046eb8d")
+ds_search(
+  resource_id = "8f0784a6-82dd-44e7-b105-6194e046eb8d",
+  as = "table"
+)
+ds_search(
+  resource_id = "8f0784a6-82dd-44e7-b105-6194e046eb8d",
+  as = "json"
+)
 
-ds_search(resource_id = '8f0784a6-82dd-44e7-b105-6194e046eb8d', limit = 1,
-  as = "table")
-ds_search(resource_id = '8f0784a6-82dd-44e7-b105-6194e046eb8d', q = "a*")
+ds_search(
+  resource_id = "8f0784a6-82dd-44e7-b105-6194e046eb8d", limit = 1,
+  as = "table"
+)
+ds_search(resource_id = "8f0784a6-82dd-44e7-b105-6194e046eb8d", q = "a*")
 }
 }

@@ -14,7 +14,7 @@
 ckan_info <- function(url = get_default_url(), ...) {
   ## FIX for newer CKAN instances
   ## FIXME: may need to try this and the above api route for older versions
-  jsonlite::fromJSON(ckan_GET(url, 'status_show', opts = list(...)))$result
+  jsonlite::fromJSON(ckan_GET(url, "status_show", opts = list(...)))$result
 }
 
 #' @export

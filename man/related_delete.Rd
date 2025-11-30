@@ -27,8 +27,10 @@ ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
 
 # create a package and a related item
 res <- package_create("hello-venus2") \%>\%
-   related_create(title = "my resource",
-                  type = "visualization")
+  related_create(
+    title = "my resource",
+    type = "visualization"
+  )
 
 # show the related item
 related_delete(res)

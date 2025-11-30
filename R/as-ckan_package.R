@@ -3,11 +3,13 @@
 #' @export
 #' @param x Variety of things, character, list, or ckan_package class object
 #' @param ... Further args passed on to [package_show()] if
-#' character given. In particular, if GET is not supported you can 
+#' character given. In particular, if GET is not supported you can
 #' try the `http_method` parameter to set a different HTTP verb
 #' @examples \dontrun{
-#' ckanr_setup(url = "https://demo.ckan.org/",
-#'   key = getOption("ckan_demo_key"))
+#' ckanr_setup(
+#'   url = "https://demo.ckan.org/",
+#'   key = getOption("ckan_demo_key")
+#' )
 #'
 #' (pkgs <- package_search())
 #' pkgs$results
@@ -46,7 +48,9 @@ print.ckan_package <- function(x, ...) {
   cat(paste0("<CKAN Package> ", x$id), "\n")
   cat("  Title: ", title_x(x$title), "\n", sep = "")
   cat("  Creator/Modified: ", x$metadata_created, " / ",
-    x$metadata_modified, "\n", sep = "")
+    x$metadata_modified, "\n",
+    sep = ""
+  )
   cat("  Resources (up to 5): ", sift_res(x$resources), "\n", sep = "")
   cat("  Tags (up to 5): ", sift_res(x$tags), "\n", sep = "")
   cat("  Groups (up to 5): ", sift_res(x$groups), "\n", sep = "")
@@ -65,8 +69,12 @@ sift_res <- function(z) {
     tmp <- pluck(z, "name")
     if (is.list(tmp)) {
       tmp <- unlist(lapply(tmp, function(b) {
-        if (!is.list(b)) return(b)
-        if (!haz_names(b)) return(b)
+        if (!is.list(b)) {
+          return(b)
+        }
+        if (!haz_names(b)) {
+          return(b)
+        }
         b <- unlist(b)
         b <- b[nchar(b) > 0]
         if (length(b) > 1) b <- b[1]
@@ -79,10 +87,13 @@ sift_res <- function(z) {
   }
 }
 
-get_package <- function(id, url = get_default_url(), key = get_default_key(),
-  http_method = "GET", ...) {
-
-  res <- package_show(id, http_method = http_method, url = url, key = key,
-    as = "json", ...)
+get_package <- function(
+  id, url = get_default_url(), key = get_default_key(),
+  http_method = "GET", ...
+) {
+  res <- package_show(id,
+    http_method = http_method, url = url, key = key,
+    as = "json", ...
+  )
   as_ck(jsl(res), "ckan_package")
 }

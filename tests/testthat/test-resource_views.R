@@ -10,25 +10,26 @@ oid <- get_test_oid()
 
 view_plugin_available <- function(view_type) {
   res <- tryCatch(
-    jsonlite::fromJSON(ckan_action(
-      "config_option_show",
-      body = list(key = "ckan.plugins"),
-      verb = "GET",
-      url = url,
-      key = key
-    )),
+    ckan_GET(url, "status_show", key = key),
     error = function(e) e
   )
   if (inherits(res, "error")) {
     return(FALSE)
   }
-  plugins_raw <- res$result$value
-  if (is.null(plugins_raw) || !nzchar(plugins_raw)) {
+
+  parsed <- tryCatch(
+    jsonlite::fromJSON(res),
+    error = function(e) e
+  )
+  if (inherits(parsed, "error") || !parsed$success) {
     return(FALSE)
   }
-  plugins <- unlist(strsplit(plugins_raw, "[[:space:],]+"))
-  plugins <- plugins[nzchar(plugins)]
-  view_type %in% plugins
+extensions <- parsed$result$extensions
+if (is.null(extensions) || length(extensions) == 0) {
+  return(FALSE)
+}
+
+view_type %in% extensions
 }
 
 create_dataset_with_resource <- function() {
@@ -60,13 +61,17 @@ test_that("resource view lifecycle helpers work", {
   res <- setup$resource
   on.exit(package_delete(pkg$id, url = url, key = key), add = TRUE)
 
-  view_one <- resource_view_create(res, view_type = "text_view",
+  view_one <- resource_view_create(res,
+    view_type = "text_view",
     title = "First view", description = "Primary preview",
-    url = url, key = key)
+    url = url, key = key
+  )
   expect_s3_class(view_one, "ckan_resource_view")
 
-  view_two <- resource_view_create(res, view_type = "text_view",
-    title = "Second view", url = url, key = key)
+  view_two <- resource_view_create(res,
+    view_type = "text_view",
+    title = "Second view", url = url, key = key
+  )
 
   listed <- resource_view_list(res, url = url, key = key)
   expect_true(all(vapply(listed, inherits, logical(1), "ckan_resource_view")))
@@ -76,15 +81,17 @@ test_that("resource view lifecycle helpers work", {
   shown <- resource_view_show(view_one, url = url, key = key)
   expect_equal(shown$id, view_one$id)
 
-  updated <- resource_view_update(view_one, title = "Updated view title",
-    url = url, key = key)
+  updated <- resource_view_update(view_one,
+    title = "Updated view title",
+    url = url, key = key
+  )
   expect_equal(updated$title, "Updated view title")
 
   reordered <- resource_view_reorder(res, order = rev(ids), url = url, key = key)
   expect_true(is.list(reordered))
 
   deleted <- resource_view_delete(view_two, url = url, key = key)
-  expect_equal(deleted$resource_id, res$id)
+  expect_true(deleted)
   remaining <- resource_view_list(res, url = url, key = key)
   expect_false(view_two$id %in% vapply(remaining, `[[`, character(1), "id"))
 })
@@ -97,11 +104,13 @@ test_that("default view helpers return lists", {
   on.exit(package_delete(pkg$id, url = url, key = key), add = TRUE)
 
   resource_defaults <- resource_create_default_resource_views(res,
-    url = url, key = key)
+    url = url, key = key
+  )
   expect_type(resource_defaults, "list")
 
   package_defaults <- package_create_default_resource_views(pkg,
-    url = url, key = key)
+    url = url, key = key
+  )
   expect_type(package_defaults, "list")
 })
 

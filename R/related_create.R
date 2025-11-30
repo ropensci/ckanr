@@ -28,21 +28,30 @@
 #'
 #' # pipe operations together
 #' package_create("foobbbbbarrrr") %>%
-#'    related_create(title = "my resource",
-#'                   type = "visualization")
+#'   related_create(
+#'     title = "my resource",
+#'     type = "visualization"
+#'   )
 #' }
-related_create <- function(id, title, type, description = NULL,
+related_create <- function(
+  id, title, type, description = NULL,
   related_id = NULL, related_url = NULL, image_url = NULL,
-  url = get_default_url(), key = get_default_key(), as = 'list', ...) {
-
+  url = get_default_url(), key = get_default_key(), as = "list", ...
+) {
   id <- as.ckan_package(id, url = url, key = key)
-  body <- cc(list(dataset_id = id$id, title = title,
-                  type = type, url = related_url,
-                  description = description, id = related_id,
-                  image_url = image_url))
-  res <- ckan_POST(url, 'related_create',
-                   body = tojun(body, TRUE), key = key,
-                   headers = ctj(), opts = list(...), encode = "json")
-  switch(as, json = res, list = as_ck(jsl(res), "ckan_related"),
-    table = jsd(res))
+  body <- cc(list(
+    dataset_id = id$id, title = title,
+    type = type, url = related_url,
+    description = description, id = related_id,
+    image_url = image_url
+  ))
+  res <- ckan_POST(url, "related_create",
+    body = tojun(body, TRUE), key = key,
+    headers = ctj(), opts = list(...), encode = "json"
+  )
+  switch(as,
+    json = res,
+    list = as_ck(jsl(res), "ckan_related"),
+    table = jsd(res)
+  )
 }

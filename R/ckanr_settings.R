@@ -21,16 +21,17 @@ assign("ckanr_proxy", NULL, envir = ckanr_settings_env)
 #' @examples
 #' ckanr_settings()
 ckanr_settings <- function() {
-  ops <- list(url = Sys.getenv("CKANR_DEFAULT_URL", ""),
-              key = Sys.getenv("CKANR_DEFAULT_KEY", ""),
-              test_url = Sys.getenv("CKANR_TEST_URL", ""),
-              test_key = Sys.getenv("CKANR_TEST_KEY", ""),
-              test_did = Sys.getenv("CKANR_TEST_DID", ""),
-              test_rid = Sys.getenv("CKANR_TEST_RID", ""),
-              test_gid = Sys.getenv("CKANR_TEST_GID", ""),
-              test_oid = Sys.getenv("CKANR_TEST_OID", ""),
-              test_behaviour = Sys.getenv("CKANR_TEST_BEHAVIOUR", "SKIP"),
-              proxy = get("ckanr_proxy", ckanr_settings_env)
+  ops <- list(
+    url = Sys.getenv("CKANR_DEFAULT_URL", ""),
+    key = Sys.getenv("CKANR_DEFAULT_KEY", ""),
+    test_url = Sys.getenv("CKANR_TEST_URL", ""),
+    test_key = Sys.getenv("CKANR_TEST_KEY", ""),
+    test_did = Sys.getenv("CKANR_TEST_DID", ""),
+    test_rid = Sys.getenv("CKANR_TEST_RID", ""),
+    test_gid = Sys.getenv("CKANR_TEST_GID", ""),
+    test_oid = Sys.getenv("CKANR_TEST_OID", ""),
+    test_behaviour = Sys.getenv("CKANR_TEST_BEHAVIOUR", "SKIP"),
+    proxy = get("ckanr_proxy", ckanr_settings_env)
   )
   structure(ops, class = "ckanr_settings")
 }
@@ -39,9 +40,9 @@ ckanr_settings <- function() {
 print.ckanr_settings <- function(x, ...) {
   cat("<ckanr settings>", sep = "\n")
   cat("  Base URL: ", x$url, "\n")
-  cat("  API key: ", x$key, "\n")
+  cat("  API key: ", "show with ckanr::get_default_key()", "\n")
   cat("  Test CKAN URL:", x$test_url, "\n")
-  cat("  Test CKAN API key:", x$test_key, "\n")
+  cat("  Test CKAN API key:", "show with ckanr::get_test_key()", "\n")
   cat("  Test CKAN dataset ID:", x$test_did, "\n")
   cat("  Test CKAN resource ID:", x$test_rid, "\n")
   cat("  Test CKAN group ID:", x$test_gid, "\n")
@@ -100,21 +101,23 @@ print.ckanr_settings <- function(x, ...) {
 #'
 #' @examples
 #' # CKAN users without admin/editor privileges could run:
-#' ckanr_setup(url = "https://data.ontario.ca/")
+#' ckanr_setup(url = "https://demo.ckan.org/")
 #'
 #' # Privileged CKAN editor/admin users can run:
-#' ckanr_setup(url = "https://data.ontario.ca/", key = "some-CKAN-API-key")
+#' ckanr_setup(url = "https://demo.ckan.org/", key = "some-CKAN-API-key")
 #'
 #' # ckanR developers/testers can either use the Codespaces/devcontainer test suite
 #' # which automatically sets up all test credentials, or run:
-#' ckanr_setup(url = "https://data.ontario.ca/", key = "some-CKAN-API-key",
-#'            test_url = "http://test-ckan.gov/",test_key = "test-ckan-API-key",
-#'            test_did = "test-ckan-dataset-id",test_rid = "test-ckan-resource-id",
-#'            test_gid = "test-group-name", test_oid = "test-organzation-name",
-#'            test_behaviour = "FAIL")
+#' ckanr_setup(
+#'   url = "https://demo.ckan.org/", key = "some-CKAN-API-key",
+#'   test_url = "http://test-ckan.gov/", test_key = "test-ckan-API-key",
+#'   test_did = "test-ckan-dataset-id", test_rid = "test-ckan-resource-id",
+#'   test_gid = "test-group-name", test_oid = "test-organzation-name",
+#'   test_behaviour = "FAIL"
+#' )
 #'
 #' # Not specifying the default CKAN URL will reset the CKAN URL to its default
-#' # "https://data.ontario.ca/":
+#' # "https://demo.ckan.org/":
 #' ckanr_setup()
 #'
 #' # set a proxy
@@ -124,7 +127,7 @@ print.ckanr_settings <- function(x, ...) {
 #' ckanr_setup()
 #' ckanr_settings()
 ckanr_setup <- function(
-  url = "https://data.ontario.ca/",
+  url = "https://demo.ckan.org/",
   key = NULL,
   test_url = NULL,
   test_key = NULL,
@@ -133,8 +136,8 @@ ckanr_setup <- function(
   test_gid = NULL,
   test_oid = NULL,
   test_behaviour = NULL,
-  proxy = NULL) {
-
+  proxy = NULL
+) {
   Sys.setenv("CKANR_DEFAULT_URL" = url)
   if (!is.null(key)) Sys.setenv("CKANR_DEFAULT_KEY" = key)
   if (!is.null(test_url)) Sys.setenv("CKANR_TEST_URL" = test_url)
@@ -152,36 +155,54 @@ ckanr_setup <- function(
 #
 #' @export
 #' @rdname ckanr_settings
-get_default_url <- function(){ Sys.getenv("CKANR_DEFAULT_URL") }
+get_default_url <- function() {
+  Sys.getenv("CKANR_DEFAULT_URL")
+}
 
 #' @export
 #' @rdname ckanr_settings
-get_default_key <- function(){ Sys.getenv("CKANR_DEFAULT_KEY") }
+get_default_key <- function() {
+  Sys.getenv("CKANR_DEFAULT_KEY")
+}
 
 #' @export
 #' @rdname ckanr_settings
-get_test_url <- function(){ Sys.getenv("CKANR_TEST_URL") }
+get_test_url <- function() {
+  Sys.getenv("CKANR_TEST_URL")
+}
 
 #' @export
 #' @rdname ckanr_settings
-get_test_key <- function(){ Sys.getenv("CKANR_TEST_KEY") }
+get_test_key <- function() {
+  Sys.getenv("CKANR_TEST_KEY")
+}
 
 #' @export
 #' @rdname ckanr_settings
-get_test_did <- function(){ Sys.getenv("CKANR_TEST_DID") }
+get_test_did <- function() {
+  Sys.getenv("CKANR_TEST_DID")
+}
 
 #' @export
 #' @rdname ckanr_settings
-get_test_rid <- function(){ Sys.getenv("CKANR_TEST_RID") }
+get_test_rid <- function() {
+  Sys.getenv("CKANR_TEST_RID")
+}
 
 #' @export
 #' @rdname ckanr_settings
-get_test_gid <- function(){ Sys.getenv("CKANR_TEST_GID") }
+get_test_gid <- function() {
+  Sys.getenv("CKANR_TEST_GID")
+}
 
 #' @export
 #' @rdname ckanr_settings
-get_test_oid <- function(){ Sys.getenv("CKANR_TEST_OID") }
+get_test_oid <- function() {
+  Sys.getenv("CKANR_TEST_OID")
+}
 
 #' @export
 #' @rdname ckanr_settings
-get_test_behaviour <- function(){ Sys.getenv("CKANR_TEST_BEHAVIOUR") }
+get_test_behaviour <- function() {
+  Sys.getenv("CKANR_TEST_BEHAVIOUR")
+}

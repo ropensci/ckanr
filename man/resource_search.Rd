@@ -32,7 +32,7 @@ by the sum of x_f and y_f in a descending order).}
 
 \item{limit}{Number of records to return.}
 
-\item{url}{Base url to use. Default: https://data.ontario.ca/ See
+\item{url}{Base url to use. Default: https://demo.ckan.org/ See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
 \item{key}{A privileged CKAN API key, Default: your key set with
@@ -50,10 +50,10 @@ Search for resources.
 }
 \examples{
 \dontrun{
-resource_search(q = 'name:data')
-resource_search(q = 'name:data', as = 'json')
-resource_search(q = 'name:data', as = 'table')
-resource_search(q = 'name:data', limit = 2, as = 'table')
-resource_search(q=c("description:encoded", "name:No.2"),url='demo.ckan.org')
+resource_search(q = "name:data")
+resource_search(q = "name:data", as = "json")
+resource_search(q = "name:data", as = "table")
+resource_search(q = "name:data", limit = 2, as = "table")
+resource_search(q = c("description:encoded", "name:No.2"), url = "demo.ckan.org")
 }
 }

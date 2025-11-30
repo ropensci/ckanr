@@ -27,15 +27,19 @@ jobs:
         - { os: macOS-latest, r: 'release'}
         # - { os: ubuntu-latest, r: 'release', ckan-version: '2.7', ckan-pg-version: '2.7', solr-version: 2.7}
         # - { os: ubuntu-latest, r: 'release', ckan-version: '2.8', ckan-pg-version: '2.8', solr-version:'2.8'}
-        - { os: ubuntu-latest, r: 'release', ckan-version: '2.9', ckan-pg-version: '2.9', solr-version: '2.9-solr9-spatial'}
-        - { os: ubuntu-latest, r: 'release', ckan-version: '2.10-py3.10', ckan-pg-version: '2.10', solr-version: '2.10-solr9-spatial'}
-        - { os: ubuntu-latest, r: 'release', ckan-version: '2.11', ckan-pg-version: '2.11', solr-version: '2.10-solr9-spatial'}
-        - { os: ubuntu-latest, r: 'devel', ckan-version: '2.11', ckan-pg-version: '2.11', solr-version: '2.10-solr9-spatial'}
+        - { os: ubuntu-latest, r: 'release', ckan-version: '2.9-py3.9', ckan-pg-version: '2.9', solr-version: '2.9-solr9-spatial', collab: true, plugins: "stats text_view image_view resource_proxy datastore envvars"}
+        - { os: ubuntu-latest, r: 'release', ckan-version: '2.10-py3.10', ckan-pg-version: '2.10', solr-version: '2.10-solr9-spatial', collab: true, activity: true, plugins: "stats text_view image_view resource_proxy datastore envvars activity"}
+        - { os: ubuntu-latest, r: 'release', ckan-version: '2.11', ckan-pg-version: '2.11', solr-version: '2.10-solr9-spatial', collab: true, plugins: "stats text_view image_view resource_proxy datastore envvars activity"}
+        - { os: ubuntu-latest, r: 'devel', ckan-version: '2.11', ckan-pg-version: '2.11', solr-version: '2.10-solr9-spatial', collab: true, plugins: "stats text_view image_view resource_proxy datastore envvars activity"}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       CKANR_TEST_URL: 'http://localhost:5000'
       CKANR_TEST_BEHAVIOUR: 'SKIP'
+      CKAN__PLUGINS: ${{ matrix.config.plugins }}
+      CKANR_ALLOW_PURGE_TESTS: true
+      CKAN__AUTH__ALLOW_DATASET_COLLABORATORS: ${{ matrix.config.collab }}
+      CKAN__ACTIVITY_STREAMS_EMAIL_NOTIFICATIONS: true
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       R_KEEP_PKG_SOURCE: yes
       CKAN_VERSION: ${{ matrix.config.ckan-version }}
@@ -61,6 +65,7 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@v2
 
       - uses: r-lib/actions/setup-r-dependencies@v2
+        if: ${{ runner.os != 'macOS' }}
         with:
           extra-packages: |
             any::rcmdcheck
@@ -69,6 +74,18 @@ jobs:
           needs: |
             check
             coverage
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        if: ${{ runner.os == 'macOS' }}
+        with:
+          extra-packages: |
+            any::rcmdcheck
+            any::covr
+            any::xml2
+          needs: |
+            check
+            coverage
+          cache: false
 
       - name: Generate CKAN API token (CKAN >= 2.9)
         run: |

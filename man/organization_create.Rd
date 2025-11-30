@@ -61,7 +61,7 @@ of dictionaries each with key 'name' (string, the id or name of the user)
 and optionally 'capacity' (string, the capacity in which the user is a
 member of the organization)}
 
-\item{url}{Base url to use. Default: https://data.ontario.ca/ See
+\item{url}{Base url to use. Default: https://demo.ckan.org/ See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
 \item{key}{A privileged CKAN API key, Default: your key set with
@@ -83,8 +83,10 @@ Create an organization
 ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
 
 # create an organization
-(res <- organization_create("foobar", title = "Foo bars",
-  description = "love foo bars"))
+(res <- organization_create("foobar",
+  title = "Foo bars",
+  description = "love foo bars"
+))
 res$name
 }
 }

@@ -1,4 +1,4 @@
-#' @param url Base url to use. Default: https://data.ontario.ca/ See
+#' @param url Base url to use. Default: https://demo.ckan.org/ See
 #' also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.
 #' @param as (character) One of list (default), table, or json. Parsing with
 #' table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},

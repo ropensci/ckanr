@@ -40,7 +40,7 @@ Default: \code{FALSE}}
 
 \item{indexes}{(character) Indexes on table (optional)}
 
-\item{url}{Base url to use. Default: https://data.ontario.ca/ See
+\item{url}{Base url to use. Default: https://demo.ckan.org/ See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
 \item{key}{A privileged CKAN API key, Default: your key set with
@@ -58,19 +58,22 @@ BEWARE: This function still doesn't quite work yet.
 }
 \examples{
 \dontrun{
-ckanr_setup(url = "https://demo.ckan.org/",
-  key = getOption("ckan_demo_key"))
+ckanr_setup(
+  url = "https://demo.ckan.org/",
+  key = getOption("ckan_demo_key")
+)
 
 # create a package
-(res <- package_create("foobarrrrr", author="Jane Doe"))
+(res <- package_create("foobarrrrr", author = "Jane Doe"))
 
 # then create a resource
 file <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
-(xx <- resource_create(package_id = res$id,
-                       description = "my resource",
-                       name = "bears",
-                       upload = file,
-                       rcurl = "http://google.com"
+(xx <- resource_create(
+  package_id = res$id,
+  description = "my resource",
+  name = "bears",
+  upload = file,
+  rcurl = "http://google.com"
 ))
 ds_create(resource_id = xx$id, records = iris, force = TRUE)
 resource_show(xx$id)

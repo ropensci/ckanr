@@ -4,12 +4,16 @@
 #' @param x Variety of things, character, list, or ckan_related class object
 #' @param ... Further args passed on to [related_show()] if character given
 #' @examples \dontrun{
-#' ckanr_setup(url = "https://demo.ckan.org/",
-#' key = getOption("ckan_demo_key"))
+#' ckanr_setup(
+#'   url = "https://demo.ckan.org/",
+#'   key = getOption("ckan_demo_key")
+#' )
 #'
 #' (x <- package_create("foobbbbbarrrrr") %>%
-#'    related_create(title = "my resource",
-#'                   type = "visualization"))
+#'   related_create(
+#'     title = "my resource",
+#'     type = "visualization"
+#'   ))
 #'
 #' # create item class from only an item ID
 #' as.ckan_related(x$id)
@@ -43,10 +47,13 @@ print.ckan_related <- function(x, ...) {
   cat("  Creator: ", x$created, "\n", sep = "")
 }
 
-get_related <- function(id, url = get_default_url(),
-  key = get_default_key(), ...) {
-  
-  res <- ckan_GET(url, 'related_show', list(id = id), key = key,
-    opts = list(...))
+get_related <- function(
+  id, url = get_default_url(),
+  key = get_default_key(), ...
+) {
+  res <- ckan_GET(url, "related_show", list(id = id),
+    key = key,
+    opts = list(...)
+  )
   as_ck(jsl(res), "ckan_related")
 }

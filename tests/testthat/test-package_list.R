@@ -14,28 +14,17 @@ package_num <- local({
 
 test_that("package_list gives back expected class types", {
   check_ckan(u)
-  a <- package_list(url=u, limit=30)
+  a <- package_list(url = u, limit = 30)
   expect_is(a, "list")
   expect_lt(length(a), 30 + 1)
-  a <- package_list(url=u, limit=NULL)
+  a <- package_list(url = u, limit = NULL)
   expect_is(a, "list")
   expect_equal(length(a), package_num)
 })
 
-test_that("package_list works giving back json output", {
+test_that("package_list supports list/json/table formats", {
   check_ckan(u)
-  b <- package_list(url=u, as='json', limit=30)
-  b_df <- jsonlite::fromJSON(b)
-  expect_is(b, "character")
-  expect_is(b_df, "list")
-  expect_is(b_df$result, "character")
-  expect_lt(length(b_df$result), 30 + 1)
-
-  b <- package_list(url=u, as = 'json', limit = NULL)
-  b_df <- jsonlite::fromJSON(b)
-  expect_is(b, "character")
-  expect_is(b_df, "list")
-  expect_is(b_df$result, "character")
-  expect_equal(length(b_df$result), package_num)
+  expect_ckan_formats(function(fmt) {
+    package_list(url = u, as = fmt, limit = 10)
+  })
 })
-

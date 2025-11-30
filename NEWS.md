@@ -1,18 +1,16 @@
-# ckanr (development version)
+ckanr (development version)
 ==============================
-
-### MAINTENANCE
-
-* Replace the deprecated `lazyeval` dependency with `rlang`, updating our dplyr
-  tests and development tooling accordingly so contributors only need the modern
-  tidy-eval stack (#93)
 
 ckanr 0.8.1
 ===========
 
 ### MAINTENANCE
 
+* Change the default CKAN URL to <https://demo.ckan.org/>
 * Update servers(), thanks @nn-at (#176)
+* Replace the deprecated `lazyeval` dependency with `rlang`, update dplyr tests and
+  development tooling accordingly so contributors only need the modern tidy-eval stack
+  (#93)
 
 ckanr 0.8.0
 ===========

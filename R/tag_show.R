@@ -17,16 +17,21 @@
 #' (x <- tag_show(tags[[30]]$id))
 #'
 #' # give back different data formats
-#' tag_show(tags[[30]]$id, as = 'json')
-#' tag_show(tags[[30]]$id, as = 'table')
+#' tag_show(tags[[30]]$id, as = "json")
+#' tag_show(tags[[30]]$id, as = "table")
 #' }
-tag_show <- function(id, include_datasets = FALSE, url = get_default_url(),
-  key = get_default_key(), as = 'list', ...) {
-
+tag_show <- function(
+  id, include_datasets = FALSE, url = get_default_url(),
+  key = get_default_key(), as = "list", ...
+) {
   id <- as.ckan_tag(id, url = url)
-  res <- ckan_GET(url, 'tag_show',
+  res <- ckan_GET(url, "tag_show",
     query = list(id = id$id, include_datasets = include_datasets), key = key,
-    opts = list(...))
-  switch(as, json = res, list = as_ck(jsl(res), "ckan_tag"),
-    table = jsd(res))
+    opts = list(...)
+  )
+  switch(as,
+    json = res,
+    list = as_ck(jsl(res), "ckan_tag"),
+    table = jsd(res)
+  )
 }

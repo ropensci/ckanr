@@ -74,7 +74,7 @@ added to. This should be an alphanumeric string. Required.}
 \item{http_method}{(character) which HTTP method (verb) to use; one of
 "GET" or "POST". Default: "GET"}
 
-\item{url}{Base url to use. Default: https://data.ontario.ca/ See
+\item{url}{Base url to use. Default: https://demo.ckan.org/ See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
 \item{key}{A privileged CKAN API key, Default: your key set with
@@ -93,27 +93,32 @@ Create a resource
 \examples{
 \dontrun{
 # Setup
-ckanr_setup(url = "https://demo.ckan.org/",
- key = getOption("ckan_demo_key"))
+ckanr_setup(
+  url = "https://demo.ckan.org/",
+  key = getOption("ckan_demo_key")
+)
 
 # create a package
-(res <- package_create("foobarrrr", author="Jane Doe"))
+(res <- package_create("foobarrrr", author = "Jane Doe"))
 
 # then create a resource
 file <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
-(xx <- resource_create(package_id = res$id,
-                       description = "my resource",
-                       name = "bears",
-                       upload = file,
-                       extras = list(species = "grizzly"),
-                       rcurl = "http://google.com"
+(xx <- resource_create(
+  package_id = res$id,
+  description = "my resource",
+  name = "bears",
+  upload = file,
+  extras = list(species = "grizzly"),
+  rcurl = "http://google.com"
 ))
 
 package_create("foobbbbbarrrr") \%>\%
-   resource_create(description = "my resource",
-                   name = "bearsareus",
-                   upload = file,
-                   extras = list(my_extra = "some value"),
-                   rcurl = "http://google.com")
+  resource_create(
+    description = "my resource",
+    name = "bearsareus",
+    upload = file,
+    extras = list(my_extra = "some value"),
+    rcurl = "http://google.com"
+  )
 }
 }

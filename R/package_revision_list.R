@@ -25,22 +25,32 @@
 #' package_revision_list(res$id, as = "table")
 #' package_revision_list(res$id, as = "json")
 #' }
-package_revision_list <- function(id, url = get_default_url(),
-  key = get_default_key(), as = "list", ...) {
-
+package_revision_list <- function(
+  id, url = get_default_url(),
+  key = get_default_key(), as = "list", ...
+) {
   ver <- try(ckan_version(url)$version_num, silent = TRUE)
   if (inherits(ver, "try-error")) {
     ver <- NA
   }
 
   if (ver >= 29.0) {
-    warning('The ckan.logic.action.get.package_revision_list endpoint was removed in CKAN 2.9. Returning NULL.')
+    .Deprecated(
+      "package_revision_list",
+      "ckanr",
+      msg = "package_revision_list was removed in CKAN 2.9"
+    )
     result <- NULL
   } else {
-    res <- ckan_GET(url, 'package_revision_list', list(id = id),
-    key = key, opts = list(...))
-    result <- switch(as, json = res, list = jsl(res), table = jsd(res))
+    res <- ckan_GET(url, "package_revision_list", list(id = id),
+      key = key, opts = list(...)
+    )
+    result <- switch(as,
+      json = res,
+      list = jsl(res),
+      table = jsd(res)
+    )
   }
-  
+
   result
 }

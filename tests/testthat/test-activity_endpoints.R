@@ -28,10 +28,6 @@ test_that("recently_changed_packages_activity_list skips when unsupported", {
   skip_if_activity_plugin_disabled(url)
 
   ver <- floor(ckan_version(url)$version_num)
-  if (ver > 29 && ver < 212) {
-    skip("recently_changed_packages_activity_list unavailable on CKAN 2.10-2.11")
-  }
-
   res <- recently_changed_packages_activity_list(url = url, key = key)
   expect_true(is.list(res))
 })
@@ -41,7 +37,7 @@ test_that("dashboard_new_activities_count returns a number", {
   skip_if_activity_plugin_disabled(url)
 
   res <- dashboard_new_activities_count(url = url, key = key)
-  expect_true(is.numeric(res) || is.integer(res))
+  expect_true(is.numeric(res))
 })
 
 test_that("dashboard_mark_activities_old completes successfully", {
@@ -105,7 +101,7 @@ test_that("send_email_notifications requires sysadmin", {
   check_ckan(url)
   skip_if_activity_plugin_disabled(url)
   skip_if_not_sysadmin(url, key)
-  skip_if_activity_email_notifications_disabled(url, key)
+  # skip_if_activity_email_notifications_disabled(url, key)
 
   res <- send_email_notifications(url = url, key = key)
   expect_true(isTRUE(res) || is.list(res) || is.null(res))

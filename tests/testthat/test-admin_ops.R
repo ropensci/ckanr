@@ -5,8 +5,10 @@ test_that("task status helpers roundtrip", {
   check_ckan(url)
   skip_if_not_sysadmin(url, key)
 
-  entity_id <- paste0("ckanr-status-", as.integer(Sys.time()), "-",
-    paste(sample(letters, 4), collapse = ""))
+  entity_id <- paste0(
+    "ckanr-status-", as.integer(Sys.time()), "-",
+    paste(sample(letters, 4), collapse = "")
+  )
 
   created <- task_status_update(
     entity_id = entity_id,

@@ -30,7 +30,7 @@ organizations to return. \code{NULL} returns all organizations.}
 \item{limit}{(numeric) The maximum number of organizations to return
 (optional, default: 31)}
 
-\item{url}{Base url to use. Default: https://data.ontario.ca/ See
+\item{url}{Base url to use. Default: https://demo.ckan.org/ See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
 \item{key}{A privileged CKAN API key, Default: your key set with
@@ -55,7 +55,7 @@ res <- organization_list()
 res[1:2]
 
 # Different data formats
-organization_list(as = 'json')
-organization_list(as = 'table')
+organization_list(as = "json")
+organization_list(as = "table")
 }
 }

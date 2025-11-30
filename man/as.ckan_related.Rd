@@ -19,12 +19,16 @@ ckan_related class helpers
 }
 \examples{
 \dontrun{
-ckanr_setup(url = "https://demo.ckan.org/",
-key = getOption("ckan_demo_key"))
+ckanr_setup(
+  url = "https://demo.ckan.org/",
+  key = getOption("ckan_demo_key")
+)
 
 (x <- package_create("foobbbbbarrrrr") \%>\%
-   related_create(title = "my resource",
-                  type = "visualization"))
+  related_create(
+    title = "my resource",
+    type = "visualization"
+  ))
 
 # create item class from only an item ID
 as.ckan_related(x$id)

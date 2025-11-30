@@ -27,7 +27,7 @@ datasets that are draft or private. (optional, default:False, limit:50)}
 \item{include_num_followers}{(logical) Include the number of followers
 the user has (optional, default:False)}
 
-\item{url}{Base url to use. Default: https://data.ontario.ca/ See
+\item{url}{Base url to use. Default: https://demo.ckan.org/ See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
 \item{key}{A privileged CKAN API key, Default: your key set with
@@ -49,12 +49,12 @@ Show a user.
 ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
 
 # show user
-user_show('sckottie')
+user_show("sckottie")
 
 # include datasets
-user_show('sckottie', include_datasets = TRUE)
+user_show("sckottie", include_datasets = TRUE)
 
 # include datasets
-user_show('sckottie', include_num_followers = TRUE)
+user_show("sckottie", include_num_followers = TRUE)
 }
 }

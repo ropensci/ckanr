@@ -27,7 +27,7 @@ https://docs.ropensci.org/crul/reference/verb-POST.html for options}
 
 \item{verb}{HTTP request verb, e.g., GET, POST}
 
-\item{url}{Base url to use. Default: https://data.ontario.ca/ See
+\item{url}{Base url to use. Default: https://demo.ckan.org/ See
 also \code{\link[=ckanr_setup]{ckanr_setup()}} and \code{\link[=get_default_url]{get_default_url()}}}
 
 \item{key}{A privileged CKAN API key, Default: your key set with
@@ -47,11 +47,13 @@ request headers.
 }
 \examples{
 \dontrun{
-ckanr_setup(url = "https://demo.ckan.org/",
- key = getOption("ckan_demo_key"))
+ckanr_setup(
+  url = "https://demo.ckan.org/",
+  key = getOption("ckan_demo_key")
+)
 
 ckan_action("package_list")
 ckan_action("package_list", verb = "GET")
-ckan_action("package_list", url = 'https://data.nhm.ac.uk')
+ckan_action("package_list", url = "https://data.nhm.ac.uk")
 }
 }

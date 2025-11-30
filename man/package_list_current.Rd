@@ -20,7 +20,7 @@ package_list_current(
 \item{limit}{(numeric) The maximum number of activities to return
 (optional, default: 31)}
 
-\item{url}{Base url to use. Default: https://data.ontario.ca/ See
+\item{url}{Base url to use. Default: https://demo.ckan.org/ See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
 \item{key}{A privileged CKAN API key, Default: your key set with
@@ -39,7 +39,7 @@ List current packages with resources.
 \examples{
 \dontrun{
 package_list_current()
-package_list_current(as = 'json')
-package_list_current(as = 'table')
+package_list_current(as = "json")
+package_list_current(as = "table")
 }
 }

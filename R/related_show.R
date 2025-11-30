@@ -14,23 +14,31 @@
 #'
 #' # create a package and a related item
 #' res <- package_create("hello-pluto2") %>%
-#'    related_create(title = "my resource",
-#'                   type = "visualization")
+#'   related_create(
+#'     title = "my resource",
+#'     type = "visualization"
+#'   )
 #'
 #' # show the related item
 #' related_show(res)
 #' related_show(res$id)
 #'
 #' # get data back in different formats
-#' related_show(res, as = 'json')
-#' related_show(res, as = 'table')
+#' related_show(res, as = "json")
+#' related_show(res, as = "table")
 #' }
-related_show <- function(id, url = get_default_url(), key = get_default_key(),
-  as = 'list', ...) {
-
+related_show <- function(
+  id, url = get_default_url(), key = get_default_key(),
+  as = "list", ...
+) {
   id <- as.ckan_related(id, url = url)
-  res <- ckan_GET(url, 'related_show', list(id = id$id), key = key,
-    opts = list(...))
-  switch(as, json = res, list = as_ck(jsl(res), "ckan_related"),
-    table = jsd(res))
+  res <- ckan_GET(url, "related_show", list(id = id$id),
+    key = key,
+    opts = list(...)
+  )
+  switch(as,
+    json = res,
+    list = as_ck(jsl(res), "ckan_related"),
+    table = jsd(res)
+  )
 }

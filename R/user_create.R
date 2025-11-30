@@ -18,19 +18,30 @@
 #' http://docs.ckan.org/en/latest/api/index.html#ckan.logic.action.create.user_create
 #' @examples \dontrun{
 #' # Setup
-#' ckanr_setup(url = "https://data-demo.dpaw.wa.gov.au",
-#'   key = "824e7c50-9577-4bfa-bf32-246ebed1a8a2")
+#' ckanr_setup(
+#'   url = "https://data-demo.dpaw.wa.gov.au",
+#'   key = "824e7c50-9577-4bfa-bf32-246ebed1a8a2"
+#' )
 #'
 #' # create a user
-#' user_create(name = 'stacy', email = "stacy@aaaaa.com",
-#' password = "helloworld")
+#' user_create(
+#'   name = "stacy", email = "stacy@aaaaa.com",
+#'   password = "helloworld"
+#' )
 #' }
-user_create <- function(name, email, password, id = NULL, fullname = NULL,
+user_create <- function(
+  name, email, password, id = NULL, fullname = NULL,
   about = NULL, openid = NULL, url = get_default_url(),
-  key = get_default_key(), as = 'list', ...) {
-
-  args <- cc(list(name = name, email = email, password = password, id = id,
-                  fullname = fullname, about = about, openid = openid))
-  res <- ckan_POST(url, 'user_create', args, key = key, opts = list(...))
-  switch(as, json = res, list = as_ck(jsl(res), "ckan_user"), table = jsd(res))
+  key = get_default_key(), as = "list", ...
+) {
+  args <- cc(list(
+    name = name, email = email, password = password, id = id,
+    fullname = fullname, about = about, openid = openid
+  ))
+  res <- ckan_POST(url, "user_create", args, key = key, opts = list(...))
+  switch(as,
+    json = res,
+    list = as_ck(jsl(res), "ckan_user"),
+    table = jsd(res)
+  )
 }

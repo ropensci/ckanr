@@ -20,8 +20,10 @@ ckan_resource_view class helpers
 }
 \examples{
 \dontrun{
-ckanr_setup(url = "https://demo.ckan.org/",
-  key = Sys.getenv("CKAN_DEMO_KEY"))
+ckanr_setup(
+  url = "https://demo.ckan.org/",
+  key = Sys.getenv("CKAN_DEMO_KEY")
+)
 
 res <- package_show("sample-dataset")
 views <- resource_view_list(res$resources[[1]]$id)

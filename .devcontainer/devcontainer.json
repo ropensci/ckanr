@@ -71,7 +71,8 @@
         "reditorsupport.r",
         "REditorSupport.r-lsp",
         "RDebugger.r-debugger",
-        "github.codespaces"
+        "github.codespaces",
+        "eamodio.gitlens"
       ],
       "settings": {
         "r.rterm.linux": "/usr/local/bin/radian",

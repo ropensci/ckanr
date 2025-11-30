@@ -15,7 +15,7 @@ ds_search_sql(
 \arguments{
 \item{sql}{(character) A single SQL select statement. (required)}
 
-\item{url}{Base url to use. Default: https://data.ontario.ca/ See
+\item{url}{Base url to use. Default: https://demo.ckan.org/ See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
 \item{key}{A privileged CKAN API key, Default: your key set with
@@ -33,7 +33,7 @@ Datastore - search or get a dataset from CKAN datastore
 }
 \examples{
 \dontrun{
-url <- 'https://demo.ckan.org/'
+url <- "https://demo.ckan.org/"
 sql <- 'SELECT * from "f4129802-22aa-4437-b9f9-8a8f3b7b2a53" LIMIT 2'
 ds_search_sql(sql, url = url, as = "table")
 sql2 <- 'SELECT "Species","Genus","Family" from "f4129802-22aa-4437-b9f9-8a8f3b7b2a53" LIMIT 2'

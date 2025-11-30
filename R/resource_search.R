@@ -17,23 +17,26 @@
 #' @template args
 #' @template key
 #' @examples \dontrun{
-#' resource_search(q = 'name:data')
-#' resource_search(q = 'name:data', as = 'json')
-#' resource_search(q = 'name:data', as = 'table')
-#' resource_search(q = 'name:data', limit = 2, as = 'table')
-#' resource_search(q=c("description:encoded", "name:No.2"),url='demo.ckan.org')
+#' resource_search(q = "name:data")
+#' resource_search(q = "name:data", as = "json")
+#' resource_search(q = "name:data", as = "table")
+#' resource_search(q = "name:data", limit = 2, as = "table")
+#' resource_search(q = c("description:encoded", "name:No.2"), url = "demo.ckan.org")
 #' }
-resource_search <- function(q, sort = NULL, offset = NULL, limit = NULL,
-  url = get_default_url(), key = get_default_key(), as = 'list', ...) {
-
+resource_search <- function(
+  q, sort = NULL, offset = NULL, limit = NULL,
+  url = get_default_url(), key = get_default_key(), as = "list", ...
+) {
   args <- cc(list(order_by = sort, offset = offset, limit = limit))
   args <- c(args, handle_many(q))
-  res <- ckan_GET(url, 'resource_search', args, key = key, opts = list(...))
-  switch(as, json = res,
-         list = {
-           tmp <- jsl(res)
-           tmp$results <- lapply(tmp$results, as.ckan_resource)
-           tmp
-         },
-         table = jsd(res))
+  res <- ckan_GET(url, "resource_search", args, key = key, opts = list(...))
+  switch(as,
+    json = res,
+    list = {
+      tmp <- jsl(res)
+      tmp$results <- lapply(tmp$results, as.ckan_resource)
+      tmp
+    },
+    table = jsd(res)
+  )
 }
