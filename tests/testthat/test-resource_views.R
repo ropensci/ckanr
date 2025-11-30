@@ -10,25 +10,26 @@ oid <- get_test_oid()
 
 view_plugin_available <- function(view_type) {
   res <- tryCatch(
-    jsonlite::fromJSON(ckan_action(
-      "config_option_show",
-      body = list(key = "ckan.plugins"),
-      verb = "GET",
-      url = url,
-      key = key
-    )),
+    ckan_GET(url, "status_show", key = key),
     error = function(e) e
   )
   if (inherits(res, "error")) {
     return(FALSE)
   }
-  plugins_raw <- res$result$value
-  if (is.null(plugins_raw) || !nzchar(plugins_raw)) {
+
+  parsed <- tryCatch(
+    jsonlite::fromJSON(res),
+    error = function(e) e
+  )
+  if (inherits(parsed, "error") || !parsed$success) {
     return(FALSE)
   }
-  plugins <- unlist(strsplit(plugins_raw, "[[:space:],]+"))
-  plugins <- plugins[nzchar(plugins)]
-  view_type %in% plugins
+extensions <- parsed$result$extensions
+if (is.null(extensions) || length(extensions) == 0) {
+  return(FALSE)
+}
+
+view_type %in% extensions
 }
 
 create_dataset_with_resource <- function() {

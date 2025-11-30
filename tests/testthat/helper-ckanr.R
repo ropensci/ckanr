@@ -24,6 +24,7 @@ prepare_test_ckan <- function(test_url = Sys.getenv("CKANR_TEST_URL"),
     # An example CSV file which should upload fine to the datastore
     path_csv <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
     path_parquet <- system.file("examples", "iris.parquet", package = "ckanr")
+    path_txt <- system.file("examples", "words.txt", package = "ckanr")
 
 
     # Save ourselves from using test_url and test_key
@@ -88,7 +89,22 @@ prepare_test_ckan <- function(test_url = Sys.getenv("CKANR_TEST_URL"),
       rcurl = "http://google.com"
     )
 
-    # Note: The DataPusher will automatically push CSV resources to the datastore
+    r_txt <- resource_create(
+      package_id = p$id,
+      description = "Text resource",
+      name = "ckanr test text resource",
+      upload = path_txt,
+      rcurl = "http://google.com"
+    )
+
+    r_views <- resource_create_default_resource_views(
+      r_txt,
+      p$id,
+      create_datastore_views = FALSE
+    )
+
+    # Note: The DataPusher would automatically push CSV resources to the datastore
+    # The devcontainer CKAN does not have a datapusher or xloader configured
     # ds_search tests will skip if the datastore is not ready yet
 
     vocab_name <- "ckanr_test_vocabulary"

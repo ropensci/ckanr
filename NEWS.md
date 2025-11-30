@@ -1,18 +1,35 @@
-# ckanr (development version)
+ckanr (development version)
 ==============================
-
-### MAINTENANCE
-
-* Replace the deprecated `lazyeval` dependency with `rlang`, updating our dplyr
-  tests and development tooling accordingly so contributors only need the modern
-  tidy-eval stack (#93)
 
 ckanr 0.8.1
 ===========
 
 ### MAINTENANCE
 
+* Change the default CKAN URL to <https://demo.ckan.org/>
 * Update servers(), thanks @nn-at (#176)
+* Replace the deprecated `lazyeval` dependency with `rlang`, update dplyr tests and
+  development tooling accordingly so contributors only need the modern tidy-eval stack
+  (#93)
+
+### Test coverage: CKAN 2.11
+Tests for endpoints from plugins not yet enabled in the Devcontainer CKAN instance:
+
+* Activity plugin not enabled on test CKAN instance (16): test-activity_endpoints.R,
+  test-dashboard_activity_list.R, test-dashboard_count.R, test-package_activity_list.R
+* Dataset collaborators feature disabled or unavailable (2): test-package_collaborators.R
+* user_activity_list action unavailable on this CKAN instance (6):
+  test-user_activity_list.R, test-user_lifecycle.R
+
+Tests pending dplyr backend upgrade:
+
+* datastore_search_sql action unavailable on this CKAN instance (1): test-ds_search_sql.R
+* empty test (1): No datastore resources accept SQL queries in this environment (1):
+  test-dbi_smoke.R
+
+Tests skipped for deprecated API endpoints:
+
+* ver > 29 is TRUE (2): test-changes.R:14:3, test-changes.R:28:3
 
 ckanr 0.8.0
 ===========

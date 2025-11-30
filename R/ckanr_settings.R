@@ -40,9 +40,9 @@ ckanr_settings <- function() {
 print.ckanr_settings <- function(x, ...) {
   cat("<ckanr settings>", sep = "\n")
   cat("  Base URL: ", x$url, "\n")
-  cat("  API key: ", x$key, "\n")
+  cat("  API key: ", "show with ckanr::get_default_key()", "\n")
   cat("  Test CKAN URL:", x$test_url, "\n")
-  cat("  Test CKAN API key:", x$test_key, "\n")
+  cat("  Test CKAN API key:", "show with ckanr::get_test_key()", "\n")
   cat("  Test CKAN dataset ID:", x$test_did, "\n")
   cat("  Test CKAN resource ID:", x$test_rid, "\n")
   cat("  Test CKAN group ID:", x$test_gid, "\n")
