@@ -31,6 +31,56 @@ Tests skipped for deprecated API endpoints:
 
 * ver > 29 is TRUE (2): test-changes.R:14:3, test-changes.R:28:3
 
+### Test coverage: CKAN 2.10
+• Activity plugin not enabled on test CKAN instance (16):test-activity_endpoints.R,
+  test-dashboard_activity_list.R, test-dashboard_count.R, test-package_activity_list.R
+• Dataset collaborators feature disabled or unavailable (2): test-package_collaborators.R
+• datastore_search_sql action unavailable on this CKAN instance (1): test-ds_search_sql.R
+• empty test (1):
+* user_activity_list action unavailable on this CKAN instance (6):
+  test-user_activity_list.R, test-user_lifecycle.R
+• ver > 29 is TRUE (2): 'test-changes.R:14:3', 'test-changes.R:28:3'
+
+── Failure ('test-resource_views.R:94:3'): resource view lifecycle helpers work ──
+Expected `deleted$resource_id` to equal `res$id`.
+Differences: target is NULL, current is character
+
+### Test coverage: CKAN 2.9
+══ Skipped tests (44) ══════════════════════════════════════════════════════════
+• Activity plugin not enabled on test CKAN instance (16):test-activity_endpoints.R,
+  test-dashboard_activity_list.R, test-dashboard_count.R, test-package_activity_list.R
+• Authenticated user required for API token tests (1): 'test-admin_ops.R:133:5'
+• CKAN version < 2.10 (1): 'test-changes.R:35:3'
+• Dataset collaborators feature disabled or unavailable (2):
+  'test-package_collaborators.R:20:3', 'test-package_collaborators.R:34:3'
+• On CI (2): 'test-organization_show.R:4:1', 'test-tag_show.R:4:1'
+• Set CKANR_ALLOW_PURGE_TESTS=true to exercise dataset_purge (1):
+  'test-package_dataset_extras.R:94:3'
+• Unable to determine current user; requires authenticated CKAN (12):
+  'test-admin_ops.R:6:3', 'test-admin_ops.R:49:3', 'test-admin_ops.R:80:3',
+  'test-admin_ops.R:102:3', 'test-organization_purge.R:30:3',
+  'test-organization_purge.R:50:3', 'test-tag_lifecycle.R:37:3',
+  'test-tag_lifecycle.R:55:3', 'test-tag_lifecycle.R:71:3',
+  'test-tag_lifecycle.R:88:3', 'test-user_lifecycle.R:15:1',
+  'test-vocabulary.R:21:3'
+• datastore_search_sql requires rows in the DataStore table (see
+  https://docs.ckan.org/en/2.9/maintaining/datastore.html#ckanext.datastore.logic.action.datastore_search_sql).
+  Load fixture data with DataPusher or datastore_create before running this
+  test. (1): 'test-ds_search_sql.R:58:3'
+• empty test (1):
+• user_activity_list action unavailable on this CKAN instance (5):
+  'test-user_activity_list.R:18:3', 'test-user_activity_list.R:35:3',
+  'test-user_activity_list.R:52:3', 'test-user_activity_list.R:69:3',
+  'test-user_activity_list.R:84:3'
+• user_show failed: 404 - Not Found Error (2): 'test-followers.R:69:5',
+  'test-followers.R:90:5'
+
+══ Failed tests ════════════════════════════════════════════════════════════════
+── Failure ('test-resource_views.R:94:3'): resource view lifecycle helpers work ──
+Expected `deleted$resource_id` to equal `res$id`.
+Differences:
+target is NULL, current is character
+
 ckanr 0.8.0
 ===========
 
