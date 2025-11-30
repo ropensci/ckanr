@@ -155,7 +155,7 @@ resource_view_delete <- function(
     body = list(id = view$id),
     key = key, opts = list(...)
   )
-jsonlite::fromJSON(out)$success
+  jsonlite::fromJSON(out)$success
 }
 
 #' Clear resource views

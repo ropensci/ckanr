@@ -24,12 +24,12 @@ view_plugin_available <- function(view_type) {
   if (inherits(parsed, "error") || !parsed$success) {
     return(FALSE)
   }
-extensions <- parsed$result$extensions
-if (is.null(extensions) || length(extensions) == 0) {
-  return(FALSE)
-}
+  extensions <- parsed$result$extensions
+  if (is.null(extensions) || length(extensions) == 0) {
+    return(FALSE)
+  }
 
-view_type %in% extensions
+  view_type %in% extensions
 }
 
 create_dataset_with_resource <- function() {
