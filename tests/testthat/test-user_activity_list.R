@@ -15,7 +15,7 @@ has_user_activity <- local({
 
 test_that("user_activity_list returns activities", {
   check_ckan(url)
-  skip_if_not(has_user_activity, "user_activity_list action unavailable on this CKAN instance")
+  # skip_if_not(has_user_activity, "user has no activities on this CKAN instance")
 
   # Get a user from user_list
   users <- user_list(url = url)
@@ -32,7 +32,7 @@ test_that("user_activity_list returns activities", {
 
 test_that("user_activity_list respects limit parameter", {
   check_ckan(url)
-  skip_if_not(has_user_activity, "user_activity_list action unavailable on this CKAN instance")
+  # skip_if_not(has_user_activity, "user_activity_list action unavailable on this CKAN instance")
 
   users <- user_list(url = url)
   if (length(users) > 0) {
@@ -49,7 +49,7 @@ test_that("user_activity_list respects limit parameter", {
 
 test_that("user_activity_list accepts ckan_user object", {
   check_ckan(url)
-  skip_if_not(has_user_activity, "user_activity_list action unavailable on this CKAN instance")
+  # skip_if_not(has_user_activity, "user_activity_list action unavailable on this CKAN instance")
 
   users <- user_list(url = url)
   if (length(users) > 0) {
@@ -66,7 +66,7 @@ test_that("user_activity_list accepts ckan_user object", {
 
 test_that("user_activity_list supports list/json/table formats", {
   check_ckan(url)
-  skip_if_not(has_user_activity, "user_activity_list action unavailable on this CKAN instance")
+  # skip_if_not(has_user_activity, "user_activity_list action unavailable on this CKAN instance")
 
   users <- user_list(url = url)
   if (length(users) > 0) {
@@ -81,7 +81,7 @@ test_that("user_activity_list supports list/json/table formats", {
 
 test_that("user_activity_list fails well", {
   check_ckan(url)
-  skip_if_not(has_user_activity, "user_activity_list action unavailable on this CKAN instance")
+  # skip_if_not(has_user_activity, "user_activity_list action unavailable on this CKAN instance")
 
   # non-existent user
   expect_error(

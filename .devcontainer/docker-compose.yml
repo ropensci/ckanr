@@ -6,6 +6,7 @@ services:
       - CKAN_SITE_URL=${CKANR_DEFAULT_URL:-http://localhost:5000}
       - CKAN__PLUGINS=${CKAN__PLUGINS}
       - CKAN__AUTH__ALLOW_DATASET_COLLABORATORS=${CKAN__AUTH__ALLOW_DATASET_COLLABORATORS}
+      - CKAN__ACTIVITY_STREAMS_EMAIL_NOTIFICATIONS=${CKAN__ACTIVITY_STREAMS_EMAIL_NOTIFICATIONS}
       - CKAN_SQLALCHEMY_URL=postgresql://ckan_default:pass@postgres/ckan_test
       - CKAN_DATASTORE_WRITE_URL=postgresql://datastore_write:pass@postgres/datastore_test
       - CKAN_DATASTORE_READ_URL=postgresql://datastore_read:pass@postgres/datastore_test

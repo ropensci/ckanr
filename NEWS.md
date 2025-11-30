@@ -25,22 +25,10 @@ Skipped tests (12)
 • ver > 29 is TRUE (2): test-changes.R:14:3, test-changes.R:28:3
 
 ### Test coverage: CKAN 2.10
-── Skipped tests (12) ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+── Skipped tests (3)
 • datastore_search_sql action unavailable on this CKAN instance (1): test-ds_search_sql.R:51:5
 • empty test (1):
 • No datastore resources accept SQL queries in this environment (1): test-dbi_smoke.R:58:3
-• recently_changed_packages_activity_list unavailable on CKAN 2.10-2.11 (1): test-activity_endpoints.R:32:5
-• Unable to determine activity email notification setting (1): test-activity_endpoints.R:108:3
-• user_activity_list action unavailable on this CKAN instance (5): test-user_activity_list.R:18:3,
-  test-user_activity_list.R:35:3, test-user_activity_list.R:52:3,
-  test-user_activity_list.R:69:3, test-user_activity_list.R:84:3
-• ver > 29 is TRUE (2): test-changes.R:14:3, test-changes.R:28:3
-
-══ Failed tests ════════════════════════════════════════════════════════════════
-── Failure ('test-resource_views.R:94:3'): resource view lifecycle helpers work ──
-Expected `deleted$resource_id` to equal `res$id`.
-Differences:
-target is NULL, current is character
 
 ### Test coverage: CKAN 2.9
 ══ Skipped tests (44) ══════════════════════════════════════════════════════════

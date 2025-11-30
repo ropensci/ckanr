@@ -82,9 +82,6 @@ recently_changed_packages_activity_list <- function(
   url = get_default_url(), key = get_default_key(), as = "list", ...
 ) {
   ver <- floor(ckan_version(url)$version_num)
-  if (ver > 29 && ver < 212) {
-    stop("recently_changed_packages_activity_list() is not supported on CKAN 2.10-2.11", call. = FALSE)
-  }
   args <- cc(list(offset = offset, limit = limit))
   res <- ckan_GET(url, "recently_changed_packages_activity_list", args,
     key = key, opts = list(...)
