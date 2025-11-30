@@ -10,8 +10,12 @@ url <- get_test_url()
 key <- get_test_key()
 oid <- get_test_oid()
 
-test_that("The CKAN URL must be set", { expect_is(url, "character") })
-test_that("The CKAN API key must be set", { expect_is(key, "character") })
+test_that("The CKAN URL must be set", {
+  expect_is(url, "character")
+})
+test_that("The CKAN API key must be set", {
+  expect_is(key, "character")
+})
 
 test_that("package_create creates a package with minimal parameters", {
   check_ckan(url)

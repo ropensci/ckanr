@@ -17,20 +17,23 @@
 #' # then create a resource
 #' file <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
 #' (xx <- resource_create(res,
-#'                        description = "my resource",
-#'                        name = "bears",
-#'                        upload = file,
-#'                        rcurl = "http://google.com"
+#'   description = "my resource",
+#'   name = "bears",
+#'   upload = file,
+#'   rcurl = "http://google.com"
 #' ))
 #'
 #' # delete the resource
 #' resource_delete(xx)
 #' }
-resource_delete <- function(id, url = get_default_url(),
-  key = get_default_key(), ...) {
-  
+resource_delete <- function(
+  id, url = get_default_url(),
+  key = get_default_key(), ...
+) {
   id <- as.ckan_resource(id, url = url)
-  tmp <- ckan_POST(url, 'resource_delete', body = list(id = id$id), key = key,
-    opts = list(...))
+  tmp <- ckan_POST(url, "resource_delete",
+    body = list(id = id$id), key = key,
+    opts = list(...)
+  )
   jsonlite::fromJSON(tmp)$success
 }

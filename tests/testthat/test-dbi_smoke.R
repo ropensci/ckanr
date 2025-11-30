@@ -66,14 +66,14 @@ test_that("src_ckan collects rows from datastore resource", {
   class(src)
   expect_s3_class(src, "src_CKANConnection")
 
-# tbl_obj <- dplyr::tbl(src, name = rid)
-# Error in ds_search_sql(as.character(statement), url = conn@url, as = "table") :
-# "Bad request - Action name not known: datastore_search_sql"
+  # tbl_obj <- dplyr::tbl(src, name = rid)
+  # Error in ds_search_sql(as.character(statement), url = conn@url, as = "table") :
+  # "Bad request - Action name not known: datastore_search_sql"
 
-# x <- tbl_obj |>
-# See https://github.com/ropensci/ckanr/issues/188
-# See https://dbplyr.tidyverse.org/articles/translation-function.html
-# dplyr::slice_min(n = 3, "ID") |>
+  # x <- tbl_obj |>
+  # See https://github.com/ropensci/ckanr/issues/188
+  # See https://dbplyr.tidyverse.org/articles/translation-function.html
+  # dplyr::slice_min(n = 3, "ID") |>
   # dplyr::collect()
 
   # expect_s3_class(x, "tbl_df")

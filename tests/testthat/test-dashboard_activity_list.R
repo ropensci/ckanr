@@ -68,9 +68,9 @@ test_that("dashboard_activity_list captures new dataset activity", {
 
   expect_is(activities, "list")
   expect_true(any(vapply(activities, function(x) x$object_id == pkg$id, logical(1))))
-expect_ckan_formats(function(fmt) {
-  dashboard_activity_list(limit = 5, url = url, key = key, as = fmt)
-})
+  expect_ckan_formats(function(fmt) {
+    dashboard_activity_list(limit = 5, url = url, key = key, as = fmt)
+  })
 })
 
 test_that("dashboard_activity_list respects limit and offset", {

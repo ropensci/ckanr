@@ -9,7 +9,8 @@ check_ckan(u)
 tag_test_num <- local({
   t <- "api"
   res <- crul::HttpClient$new(file.path(u, "dataset"))$get(
-    query = list(tags = t, "_tags_limit" = 0))
+    query = list(tags = t, "_tags_limit" = 0)
+  )
   res$raise_for_status()
   html <- res$parse("UTF-8")
   tmp <- regmatches(html, regexec("(\\d+) datasets? found", html))

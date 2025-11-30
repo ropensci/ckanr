@@ -20,16 +20,23 @@
 #' # Then update the packge
 #' group_update(x, id = grp)
 #' }
-group_update <- function(x, id, url = get_default_url(), key = get_default_key(),
-  as = 'list', ...) {
-  
+group_update <- function(
+  x, id, url = get_default_url(), key = get_default_key(),
+  as = "list", ...
+) {
   id <- as.ckan_group(id, url = url)
   if (!inherits(x, "list")) {
     stop("x must be of class list", call. = FALSE)
   }
   x$id <- id$id
-  res <- ckan_POST(url, method = 'group_update',
+  res <- ckan_POST(url,
+    method = "group_update",
     body = tojun(x, TRUE), key = key,
-    encode = "json", headers = ctj(), opts = list(...))
-  switch(as, json = res, list = as_ck(jsl(res), "ckan_group"), table = jsd(res))
+    encode = "json", headers = ctj(), opts = list(...)
+  )
+  switch(as,
+    json = res,
+    list = as_ck(jsl(res), "ckan_group"),
+    table = jsd(res)
+  )
 }

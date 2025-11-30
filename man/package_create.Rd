@@ -100,7 +100,7 @@ exist call \code{\link[=group_list]{group_list()}}. see example (optional)}
 see \code{\link[=organization_list]{organization_list()}} or \code{organization_list_for_user} for available
 values (optional)}
 
-\item{url}{Base url to use. Default: https://data.ontario.ca/ See
+\item{url}{Base url to use. Default: https://demo.ckan.org/ See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
 \item{key}{A privileged CKAN API key, Default: your key set with
@@ -123,14 +123,13 @@ ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
 
 # create a package
 ## Example 1
-(res <- package_create("foobar4", author="Jane Doe"))
+(res <- package_create("foobar4", author = "Jane Doe"))
 res$author
 
 ## Example 2 - create package, add a resource
-(res <- package_create("helloworld", author="Jane DOe"))
+(res <- package_create("helloworld", author = "Jane DOe"))
 
 # include a group
 # package_create("brownbear", groups = data.frame(id = "some-id"))
-
 }
 }

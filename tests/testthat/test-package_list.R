@@ -14,10 +14,10 @@ package_num <- local({
 
 test_that("package_list gives back expected class types", {
   check_ckan(u)
-  a <- package_list(url=u, limit=30)
+  a <- package_list(url = u, limit = 30)
   expect_is(a, "list")
   expect_lt(length(a), 30 + 1)
-  a <- package_list(url=u, limit=NULL)
+  a <- package_list(url = u, limit = NULL)
   expect_is(a, "list")
   expect_equal(length(a), package_num)
 })

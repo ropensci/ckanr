@@ -37,7 +37,7 @@ Optional}
 
 \item{image_url}{(character) A url to associated image. Optional}
 
-\item{url}{Base url to use. Default: https://data.ontario.ca/ See
+\item{url}{Base url to use. Default: https://demo.ckan.org/ See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
 \item{key}{A privileged CKAN API key, Default: your key set with
@@ -66,7 +66,9 @@ related_create(res, title = "asdfdaf", type = "idea")
 
 # pipe operations together
 package_create("foobbbbbarrrr") \%>\%
-   related_create(title = "my resource",
-                  type = "visualization")
+  related_create(
+    title = "my resource",
+    type = "visualization"
+  )
 }
 }

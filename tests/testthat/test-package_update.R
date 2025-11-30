@@ -10,8 +10,12 @@ url <- get_test_url()
 key <- get_test_key()
 oid <- get_test_oid()
 
-test_that("The CKAN URL must be set", { expect_is(url, "character") })
-test_that("The CKAN API key must be set", { expect_is(key, "character") })
+test_that("The CKAN URL must be set", {
+  expect_is(url, "character")
+})
+test_that("The CKAN API key must be set", {
+  expect_is(key, "character")
+})
 
 test_that("package_update updates a package", {
   check_ckan(url)
@@ -72,17 +76,23 @@ test_that("package_update fails well", {
   check_ckan(url)
 
   # not a list
-  expect_error(package_update("not-a-list", "some-id", url = url, key = key),
-               "x must be of class list")
+  expect_error(
+    package_update("not-a-list", "some-id", url = url, key = key),
+    "x must be of class list"
+  )
 
   # invalid id
-  expect_error(package_update(list(title = "Test"), "nonexistent-package-id", url = url, key = key),
-               "Not Found Error")
+  expect_error(
+    package_update(list(title = "Test"), "nonexistent-package-id", url = url, key = key),
+    "Not Found Error"
+  )
 
   # bad key (use a real package id)
   pkg_name <- paste0("test_pkg_update_badkey_", as.integer(Sys.time()))
   pkg <- package_create(name = pkg_name, owner_org = oid, url = url, key = key)
-  expect_error(package_update(list(title = "Test"), pkg$id, url = url, key = "invalid-key"),
-               "Authorization Error")
+  expect_error(
+    package_update(list(title = "Test"), pkg$id, url = url, key = "invalid-key"),
+    "Authorization Error"
+  )
   package_delete(pkg$id, url = url, key = key)
 })

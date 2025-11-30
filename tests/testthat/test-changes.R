@@ -32,6 +32,6 @@ test_that("changes fails correctly", {
 })
 
 test_that("changes returns error for CKAN >= 2.10", {
-  skip_if(ver <= 29, message="CKAN version < 2.10")
+  skip_if(ver <= 29, message = "CKAN version < 2.10")
   expect_error(changes(url = u, key = k), regexp = "ckanr::changes\\(\\) is not supported on CKAN 2.10 - 2.11")
 })

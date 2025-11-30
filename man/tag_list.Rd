@@ -24,7 +24,7 @@ only tags that belong to this vocabulary will be returned}
 \item{all_fields}{(logical) Return full tag dictionaries instead of
 just names. Default: \code{FALSE}}
 
-\item{url}{Base url to use. Default: https://data.ontario.ca/ See
+\item{url}{Base url to use. Default: https://demo.ckan.org/ See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
 \item{key}{A privileged CKAN API key, Default: your key set with
@@ -46,13 +46,13 @@ List tags.
 tag_list()
 
 # search for a specific tag
-tag_list(query = 'aviation')
+tag_list(query = "aviation")
 
 # all fields
 tag_list(all_fields = TRUE)
 
 # give back different data formats
-tag_list('aviation', as = 'json')
-tag_list('aviation', as = 'table')
+tag_list("aviation", as = "json")
+tag_list("aviation", as = "table")
 }
 }

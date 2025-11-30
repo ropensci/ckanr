@@ -10,9 +10,15 @@ url <- get_test_url()
 key <- get_test_key()
 did <- get_test_did()
 
-test_that("The CKAN URL must be set", { expect_is(url, "character") })
-test_that("The CKAN API key must be set", { expect_is(key, "character") })
-test_that("A CKAN dataset ID must be set", { expect_is(did, "character") })
+test_that("The CKAN URL must be set", {
+  expect_is(url, "character")
+})
+test_that("The CKAN API key must be set", {
+  expect_is(key, "character")
+})
+test_that("A CKAN dataset ID must be set", {
+  expect_is(did, "character")
+})
 
 test_that("resource_create creates a resource with file upload", {
   check_ckan(url)

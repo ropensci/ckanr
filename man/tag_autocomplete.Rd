@@ -18,7 +18,7 @@ tag_autocomplete(
 
 \item{vocabulary_id}{(character) Restrict matches to a specific vocabulary.}
 
-\item{url}{Base url to use. Default: https://data.ontario.ca/ See
+\item{url}{Base url to use. Default: https://demo.ckan.org/ See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
 \item{key}{A privileged CKAN API key, Default: your key set with
@@ -36,6 +36,6 @@ Autocomplete tag names.
 }
 \examples{
 \dontrun{
-tag_autocomplete(q = 'ckan')
+tag_autocomplete(q = "ckan")
 }
 }

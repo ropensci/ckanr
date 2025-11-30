@@ -49,9 +49,12 @@ test_that("resource_search finds a newly created resource", {
   check_dataset(url, did)
 
   res <- create_search_resource()
-  on.exit({
-    try(resource_delete(res$id, url = url, key = key), silent = TRUE)
-  }, add = TRUE)
+  on.exit(
+    {
+      try(resource_delete(res$id, url = url, key = key), silent = TRUE)
+    },
+    add = TRUE
+  )
 
   query <- sprintf("name:%s", res$name)
   result <- search_until_found(query)
@@ -67,9 +70,12 @@ test_that("resource_search accepts vector and list queries", {
   check_dataset(url, did)
 
   res <- create_search_resource()
-  on.exit({
-    try(resource_delete(res$id, url = url, key = key), silent = TRUE)
-  }, add = TRUE)
+  on.exit(
+    {
+      try(resource_delete(res$id, url = url, key = key), silent = TRUE)
+    },
+    add = TRUE
+  )
 
   vector_query <- c(sprintf("name:%s", res$name), "format:CSV")
   list_query <- list(sprintf("name:%s", res$name), "format:CSV")
@@ -86,9 +92,12 @@ test_that("resource_search supports list/json/table formats", {
   check_dataset(url, did)
 
   res <- create_search_resource()
-  on.exit({
-    try(resource_delete(res$id, url = url, key = key), silent = TRUE)
-  }, add = TRUE)
+  on.exit(
+    {
+      try(resource_delete(res$id, url = url, key = key), silent = TRUE)
+    },
+    add = TRUE
+  )
 
   query <- sprintf("name:%s", res$name)
   search_until_found(query)

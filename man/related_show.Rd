@@ -15,7 +15,7 @@ related_show(
 \arguments{
 \item{id}{(character) Related item identifier.}
 
-\item{url}{Base url to use. Default: https://data.ontario.ca/ See
+\item{url}{Base url to use. Default: https://demo.ckan.org/ See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
 \item{key}{A privileged CKAN API key, Default: your key set with
@@ -43,15 +43,17 @@ ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
 
 # create a package and a related item
 res <- package_create("hello-pluto2") \%>\%
-   related_create(title = "my resource",
-                  type = "visualization")
+  related_create(
+    title = "my resource",
+    type = "visualization"
+  )
 
 # show the related item
 related_show(res)
 related_show(res$id)
 
 # get data back in different formats
-related_show(res, as = 'json')
-related_show(res, as = 'table')
+related_show(res, as = "json")
+related_show(res, as = "table")
 }
 }

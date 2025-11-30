@@ -32,7 +32,7 @@ added to datasets, each extra dictionary should have keys 'key' (a string),
 \item{key}{A privileged CKAN API key, Default: your key set with
 \code{\link{ckanr_setup}}}
 
-\item{url}{Base url to use. Default: https://data.ontario.ca/ See
+\item{url}{Base url to use. Default: https://demo.ckan.org/ See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with
@@ -51,7 +51,7 @@ Update a package's metadata
 ckanr_setup(url = "https://demo.ckan.org", key = getOption("ckan_demo_key"))
 
 # Create a package
-(res <- package_create("hello-world13", author="Jane Doe"))
+(res <- package_create("hello-world13", author = "Jane Doe"))
 
 # Get a resource
 res <- package_show(res$id)

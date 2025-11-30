@@ -14,31 +14,45 @@
 #' @examples \dontrun{
 #' path <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
 #' ckanr_setup(url = "https://demo.ckan.org/", key = "my-demo-ckan-org-api-key")
-#' ds_create_dataset(package_id='testingagain', name="mydata", path = path)
+#' ds_create_dataset(package_id = "testingagain", name = "mydata", path = path)
 #'
 #' # Testing: see ?ckanr_setup to set test settings
-#' ckanr_setup(test_url = "http://my-ckan.org/",
-#'             test_key = "my-ckan-api-key",
-#'             test_did="an-existing-package-id",
-#'             test_rid="an-existing-resource-id")
-#' ds_create_dataset(package_id=get_test_pid(), name="mydata",
-#'                   path=system.file("examples",
-#'                                    "actinidiaceae.csv",
-#'                                    package = "ckanr"),
-#'                   key = get_test_key(),
-#'                   url = get_test_url())
+#' ckanr_setup(
+#'   test_url = "http://my-ckan.org/",
+#'   test_key = "my-ckan-api-key",
+#'   test_did = "an-existing-package-id",
+#'   test_rid = "an-existing-resource-id"
+#' )
+#' ds_create_dataset(
+#'   package_id = get_test_pid(), name = "mydata",
+#'   path = system.file("examples",
+#'     "actinidiaceae.csv",
+#'     package = "ckanr"
+#'   ),
+#'   key = get_test_key(),
+#'   url = get_test_url()
+#' )
 #' }
-ds_create_dataset <- function(package_id, name, path, url = get_default_url(),
-  key = get_default_key(), as = 'list', ...) {
-
+ds_create_dataset <- function(
+  package_id, name, path, url = get_default_url(),
+  key = get_default_key(), as = "list", ...
+) {
   .Deprecated("resource_create", "ckanr", msg = "deprecated, see ?resource_create")
 
   path <- path.expand(path)
   ext <- strsplit(basename(path), "\\.")[[1]]
   ext <- ext[length(ext)]
-  body <- list(package_id = package_id, name = name, format = ext,
-               url = 'upload', upload = crul::upload(path))
-  res <- ckan_POST(url, method = 'resource_create', body = body, key = key,
-    opts = list(...))
-  switch(as, json = res, list = jsl(res), table = jsd(res))
+  body <- list(
+    package_id = package_id, name = name, format = ext,
+    url = "upload", upload = crul::upload(path)
+  )
+  res <- ckan_POST(url,
+    method = "resource_create", body = body, key = key,
+    opts = list(...)
+  )
+  switch(as,
+    json = res,
+    list = jsl(res),
+    table = jsd(res)
+  )
 }

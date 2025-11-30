@@ -53,8 +53,10 @@ test_that("member_create/member_delete round-trip for users", {
   usr <- create_temp_user()
   on.exit(cleanup_temp_user(usr), add = TRUE)
 
-  res <- member_create(gid, usr, object_type = "user", capacity = "member",
-    url = url, key = key)
+  res <- member_create(gid, usr,
+    object_type = "user", capacity = "member",
+    url = url, key = key
+  )
   expect_type(res, "list")
   expect_true(member_delete(gid, usr, object_type = "user", url = url, key = key))
 })

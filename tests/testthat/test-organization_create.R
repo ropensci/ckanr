@@ -9,8 +9,12 @@ skip_on_os("mac")
 url <- get_test_url()
 key <- get_test_key()
 
-test_that("The CKAN URL must be set", { expect_is(url, "character") })
-test_that("The CKAN API key must be set", { expect_is(key, "character") })
+test_that("The CKAN URL must be set", {
+  expect_is(url, "character")
+})
+test_that("The CKAN API key must be set", {
+  expect_is(key, "character")
+})
 
 test_that("organization_create creates an organization", {
   check_ckan(url)

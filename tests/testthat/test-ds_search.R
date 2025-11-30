@@ -44,7 +44,7 @@ ensure_datastore_records(r)
 
 test_that("ds_search gives back expected class types", {
   check_ckan(u)
-  check_resource(u,r)
+  check_resource(u, r)
   ensure_datastore_records(r)
   a <- ds_search(resource_id = r, url = u, limit = 5)
 

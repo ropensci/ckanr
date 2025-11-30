@@ -94,7 +94,9 @@ test_that("follow/unfollow flows toggle state and update followee metrics", {
   on.exit(cleanup_follow_state(target), add = TRUE)
 
   int_val <- function(x) {
-    if (is.null(x) || length(x) == 0) return(0L)
+    if (is.null(x) || length(x) == 0) {
+      return(0L)
+    }
     as.integer(x)[1]
   }
 
@@ -112,27 +114,43 @@ test_that("follow/unfollow flows toggle state and update followee metrics", {
   expect_true(isTRUE(dataset_am_following(did, url = url, key = key)))
   # dataset_followee_count may lag on some CKAN builds, so only enforce that it
   # never decreases even if it fails to increment immediately.
-  expect_gte(int_val(dataset_followee_count(me$name, url = url, key = key)),
-    base_dataset_cnt)
-  expect_equal(length(dataset_followee_list(me$name, url = url, key = key)),
-    base_dataset_len + 1L)
+  expect_gte(
+    int_val(dataset_followee_count(me$name, url = url, key = key)),
+    base_dataset_cnt
+  )
+  expect_equal(
+    length(dataset_followee_list(me$name, url = url, key = key)),
+    base_dataset_len + 1L
+  )
 
   group_follow(gid, url = url, key = key)
   expect_true(isTRUE(group_am_following(gid, url = url, key = key)))
-  expect_equal(int_val(group_followee_count(me$name, url = url, key = key)),
-    base_group_cnt + 1L)
-  expect_equal(length(group_followee_list(me$name, url = url, key = key)),
-    base_group_len + 1L)
+  expect_equal(
+    int_val(group_followee_count(me$name, url = url, key = key)),
+    base_group_cnt + 1L
+  )
+  expect_equal(
+    length(group_followee_list(me$name, url = url, key = key)),
+    base_group_len + 1L
+  )
 
   follow_user(target$name, url = url, key = key)
   expect_true(isTRUE(am_following_user(target$name, url = url, key = key)))
-  expect_equal(int_val(user_followee_count(me$name, url = url, key = key)),
-    base_user_cnt + 1L)
-  expect_equal(length(user_followee_list(me$name, url = url, key = key)),
-    base_user_len + 1L)
+  expect_equal(
+    int_val(user_followee_count(me$name, url = url, key = key)),
+    base_user_cnt + 1L
+  )
+  expect_equal(
+    length(user_followee_list(me$name, url = url, key = key)),
+    base_user_len + 1L
+  )
 
-  expect_gte(int_val(followee_count(me$name, url = url, key = key)),
-    base_all + 2L)
-  expect_gte(length(followee_list(me$name, url = url, key = key)),
-    base_followee_len + 2L)
+  expect_gte(
+    int_val(followee_count(me$name, url = url, key = key)),
+    base_all + 2L
+  )
+  expect_gte(
+    length(followee_list(me$name, url = url, key = key)),
+    base_followee_len + 2L
+  )
 })

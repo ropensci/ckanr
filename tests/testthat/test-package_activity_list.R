@@ -56,18 +56,21 @@ test_that("package_activity_list lists recent changes", {
   skip_if_activity_plugin_disabled(url)
 
   pkg <- create_activity_package()
-  on.exit({
-    try(package_delete(pkg$id, url = url, key = key), silent = TRUE)
-  }, add = TRUE)
+  on.exit(
+    {
+      try(package_delete(pkg$id, url = url, key = key), silent = TRUE)
+    },
+    add = TRUE
+  )
 
   trigger_package_update(pkg)
 
   acts <- wait_for_package_activity(pkg$id)
   expect_is(acts, "list")
   expect_true(any(vapply(acts, function(x) x$object_id == pkg$id, logical(1))))
-expect_ckan_formats(function(fmt) {
-  package_activity_list(pkg$id, limit = 5, url = url, key = key, as = fmt)
-})
+  expect_ckan_formats(function(fmt) {
+    package_activity_list(pkg$id, limit = 5, url = url, key = key, as = fmt)
+  })
 })
 
 test_that("package_activity_list enforces limit parameter", {
@@ -75,9 +78,12 @@ test_that("package_activity_list enforces limit parameter", {
   skip_if_activity_plugin_disabled(url)
 
   pkg <- create_activity_package()
-  on.exit({
-    try(package_delete(pkg$id, url = url, key = key), silent = TRUE)
-  }, add = TRUE)
+  on.exit(
+    {
+      try(package_delete(pkg$id, url = url, key = key), silent = TRUE)
+    },
+    add = TRUE
+  )
 
   trigger_package_update(pkg)
   wait_for_package_activity(pkg$id)

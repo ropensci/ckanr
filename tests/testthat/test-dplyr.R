@@ -3,10 +3,9 @@ context("dplyr Interface")
 skip_on_cran()
 
 if (Sys.getenv("TEST_DPLYR_INTERFACE") != "") {
-
   u <- get_test_url()
 
-  test_that("src is created",{
+  test_that("src is created", {
     src <- src_ckan(u)
     str <- capture.output(print(src))
     expect_match(str[1], "ckan url")
@@ -60,15 +59,22 @@ if (Sys.getenv("TEST_DPLYR_INTERFACE") != "") {
 
   test_that("basic verbs: select", {
     cols <- sample(colnames(tb.raw), min(2, ncol(tb.raw)))
-    r1 <- tb %>% dplyr::select(dplyr::all_of(cols)) %>% collect()
+    r1 <- tb %>%
+      dplyr::select(dplyr::all_of(cols)) %>%
+      collect()
     r2 <- tb.raw %>% dplyr::select(dplyr::all_of(cols))
     expect_equal(r1, r2)
   })
 
   test_that("basic verbs: distinct", {
     cols <- sample(colnames(tb.raw), 1)
-    r1 <- tb %>% dplyr::select(dplyr::all_of(cols)) %>% dplyr::distinct() %>% collect()
-    r2 <- tb.raw %>% dplyr::select(dplyr::all_of(cols)) %>% dplyr::distinct()
+    r1 <- tb %>%
+      dplyr::select(dplyr::all_of(cols)) %>%
+      dplyr::distinct() %>%
+      collect()
+    r2 <- tb.raw %>%
+      dplyr::select(dplyr::all_of(cols)) %>%
+      dplyr::distinct()
     expect_equal(r1, r2)
   })
 

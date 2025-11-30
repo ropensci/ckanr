@@ -39,10 +39,13 @@ print.ckan_vocabulary <- function(x, ...) {
   cat("  Tags: ", tag_count, "\n", sep = "")
 }
 
-get_vocabulary <- function(id, url = get_default_url(), key = get_default_key(),
-  ...) {
-
-  res <- ckan_GET(url, 'vocabulary_show', list(id = id), key = key,
-    opts = list(...))
+get_vocabulary <- function(
+  id, url = get_default_url(), key = get_default_key(),
+  ...
+) {
+  res <- ckan_GET(url, "vocabulary_show", list(id = id),
+    key = key,
+    opts = list(...)
+  )
   as_ck(jsl(res), "ckan_vocabulary")
 }

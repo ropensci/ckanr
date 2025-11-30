@@ -14,7 +14,7 @@ dataset_num <- local({
     organization_create(o)
   }
   Sys.sleep(2)
-  org <- organization_show(o, url=u)
+  org <- organization_show(o, url = u)
   res <- crul::HttpClient$new(file.path(u, "organization", org$name))$get()
   res$raise_for_status()
   html <- res$parse("UTF-8")
@@ -25,13 +25,13 @@ dataset_num <- local({
 test_that("organization_show gives back expected class types", {
   check_ckan(u)
   check_organization(u, o)
-  a <- organization_show(o, url=u)
+  a <- organization_show(o, url = u)
 
   expect_is(a, "ckan_organization")
   # TODO: ckan_organization return type has changed
   expect_equal(as.integer(length(a)), 18L)
 
-  a <- organization_show(o, url=u, include_datasets = TRUE)
+  a <- organization_show(o, url = u, include_datasets = TRUE)
   expect_equal(as.integer(a$package_count), dataset_num)
   expect_true(as.integer(length(a$packages)) <= dataset_num)
   # CKAN could hide packages due to pagination or default visibility

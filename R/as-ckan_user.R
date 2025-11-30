@@ -4,8 +4,10 @@
 #' @param x Variety of things, character, list, or ckan_user class object
 #' @param ... Further args passed on to [user_show()] if character given
 #' @examples \dontrun{
-#' ckanr_setup(url = "https://demo.ckan.org/",
-#'   key = getOption("ckan_demo_key"))
+#' ckanr_setup(
+#'   url = "https://demo.ckan.org/",
+#'   key = getOption("ckan_demo_key")
+#' )
 #'
 #' (usrs <- user_list())
 #' usrs[1:3]
@@ -44,8 +46,10 @@ print.ckan_user <- function(x, ...) {
   cat("  Created: ", x$created, "\n", sep = "")
 }
 
-get_user <- function(id, url = get_default_url(), key = get_default_key(),
-    ...) {
-  res <- ckan_GET(url, 'user_show', list(id = id), key = key, opts = list(...))
+get_user <- function(
+  id, url = get_default_url(), key = get_default_key(),
+  ...
+) {
+  res <- ckan_GET(url, "user_show", list(id = id), key = key, opts = list(...))
   as_ck(jsl(res), "ckan_user")
 }

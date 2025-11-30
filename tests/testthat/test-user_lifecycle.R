@@ -7,7 +7,8 @@ skip_on_os("mac")
 url <- get_test_url()
 key <- get_test_key()
 
-skip_if(!nzchar(url) || !nzchar(key),
+skip_if(
+  !nzchar(url) || !nzchar(key),
   "CKAN test settings not configured"
 )
 
@@ -128,10 +129,13 @@ test_that("user follower helpers reflect follow/unfollow state", {
     }
 
     usr <- create_temp_user()
-    on.exit({
-      suppressWarnings(try(unfollow_user(usr$id, url = url, key = key), silent = TRUE))
-      cleanup_user(usr$id)
-    }, add = TRUE)
+    on.exit(
+      {
+        suppressWarnings(try(unfollow_user(usr$id, url = url, key = key), silent = TRUE))
+        cleanup_user(usr$id)
+      },
+      add = TRUE
+    )
 
     baseline_followers <- user_follower_count(usr$id, url = url, key = key)
     expect_true(is.numeric(baseline_followers))

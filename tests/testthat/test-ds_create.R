@@ -10,9 +10,15 @@ url <- get_test_url()
 key <- get_test_key()
 did <- get_test_did()
 
-test_that("The CKAN URL must be set", { expect_is(url, "character") })
-test_that("The CKAN API key must be set", { expect_is(key, "character") })
-test_that("A CKAN dataset ID must be set", { expect_is(did, "character") })
+test_that("The CKAN URL must be set", {
+  expect_is(url, "character")
+})
+test_that("The CKAN API key must be set", {
+  expect_is(key, "character")
+})
+test_that("A CKAN dataset ID must be set", {
+  expect_is(did, "character")
+})
 
 test_that("ds_create creates a datastore table", {
   check_ckan(url)
@@ -38,15 +44,18 @@ test_that("ds_create creates a datastore table", {
     stringsAsFactors = FALSE
   )
 
-  result <- tryCatch({
-    ds_create(
-      resource_id = res$id,
-      records = test_data,
-      force = TRUE,
-      url = url,
-      key = key
-    )
-  }, error = function(e) e)
+  result <- tryCatch(
+    {
+      ds_create(
+        resource_id = res$id,
+        records = test_data,
+        force = TRUE,
+        url = url,
+        key = key
+      )
+    },
+    error = function(e) e
+  )
 
   # The function may work or may have issues based on CKAN version
   if (!inherits(result, "error")) {
@@ -84,15 +93,18 @@ test_that("ds_create with fields specification", {
     list(id = "value", type = "numeric")
   )
 
-  result <- tryCatch({
-    ds_create(
-      resource_id = res$id,
-      fields = fields,
-      force = TRUE,
-      url = url,
-      key = key
-    )
-  }, error = function(e) e)
+  result <- tryCatch(
+    {
+      ds_create(
+        resource_id = res$id,
+        fields = fields,
+        force = TRUE,
+        url = url,
+        key = key
+      )
+    },
+    error = function(e) e
+  )
 
   # The function may work or may have issues based on CKAN version
   if (!inherits(result, "error")) {

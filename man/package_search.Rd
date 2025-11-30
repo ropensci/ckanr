@@ -74,7 +74,7 @@ custom schema defined with an IDatasetForm plugin. default: \code{FALSE}
 first CKAN version: 2.3.5; dropped from request if CKAN version is older
 or if CKAN version isn't available via \code{\link[=ckan_version]{ckan_version()}}}
 
-\item{url}{Base url to use. Default: https://data.ontario.ca/ See
+\item{url}{Base url to use. Default: https://demo.ckan.org/ See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
 \item{key}{A privileged CKAN API key, Default: your key set with
@@ -92,15 +92,15 @@ Search for packages.
 }
 \examples{
 \dontrun{
-ckanr_setup(url = "https://demo.ckan.org", key=getOption("ckan_demo_key"))
+ckanr_setup(url = "https://demo.ckan.org", key = getOption("ckan_demo_key"))
 
-package_search(q = '*:*')
-package_search(q = '*:*', rows = 2, as = 'json')
-package_search(q = '*:*', rows = 2, as = 'table')
+package_search(q = "*:*")
+package_search(q = "*:*", rows = 2, as = "json")
+package_search(q = "*:*", rows = 2, as = "table")
 
-package_search(q = '*:*', sort = 'score asc')
-package_search(q = '*:*', fq = 'num_tags:[3 TO *]')$count
-package_search(q = '*:*', fq = 'num_tags:[2 TO *]')$count
-package_search(q = '*:*', fq = 'num_tags:[1 TO *]')$count
+package_search(q = "*:*", sort = "score asc")
+package_search(q = "*:*", fq = "num_tags:[3 TO *]")$count
+package_search(q = "*:*", fq = "num_tags:[2 TO *]")$count
+package_search(q = "*:*", fq = "num_tags:[1 TO *]")$count
 }
 }

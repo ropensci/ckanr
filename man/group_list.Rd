@@ -34,7 +34,7 @@ only groups whose names are in this list will be returned}
 \item{all_fields}{(logical) Return full group dictionaries instead of just
 names. Default: \code{FALSE}}
 
-\item{url}{Base url to use. Default: https://data.ontario.ca/ See
+\item{url}{Base url to use. Default: https://demo.ckan.org/ See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
 \item{key}{A privileged CKAN API key, Default: your key set with
@@ -53,7 +53,7 @@ List groups.
 \examples{
 \dontrun{
 group_list(limit = 3)
-group_list(limit = 3, as = 'json')
-group_list(limit = 3, as = 'table')
+group_list(limit = 3, as = "json")
+group_list(limit = 3, as = "table")
 }
 }

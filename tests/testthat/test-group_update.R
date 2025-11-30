@@ -7,7 +7,8 @@ skip_on_os("mac")
 url <- get_test_url()
 key <- get_test_key()
 
-skip_if(!nzchar(url) || !nzchar(key),
+skip_if(
+  !nzchar(url) || !nzchar(key),
   "CKAN test settings not configured"
 )
 
@@ -29,9 +30,12 @@ test_that("group_update updates metadata via id string", {
   check_ckan(url)
 
   grp <- create_temp_group()
-  on.exit({
-    try(group_delete(grp$id, url = url, key = key), silent = TRUE)
-  }, add = TRUE)
+  on.exit(
+    {
+      try(group_delete(grp$id, url = url, key = key), silent = TRUE)
+    },
+    add = TRUE
+  )
 
   new_desc <- paste("updated description", sample(letters, 5, replace = TRUE), collapse = "")
   updated <- group_update(
@@ -52,9 +56,12 @@ test_that("group_update accepts ckan_group objects", {
   check_ckan(url)
 
   grp <- create_temp_group()
-  on.exit({
-    try(group_delete(grp$id, url = url, key = key), silent = TRUE)
-  }, add = TRUE)
+  on.exit(
+    {
+      try(group_delete(grp$id, url = url, key = key), silent = TRUE)
+    },
+    add = TRUE
+  )
 
   grp_obj <- group_show(grp$id, url = url, key = key)
   new_title <- paste("ckanr title", sample(letters, 6, replace = TRUE), collapse = "")
@@ -72,9 +79,12 @@ test_that("group_update fails well", {
   check_ckan(url)
 
   grp <- create_temp_group()
-  on.exit({
-    try(group_delete(grp$id, url = url, key = key), silent = TRUE)
-  }, add = TRUE)
+  on.exit(
+    {
+      try(group_delete(grp$id, url = url, key = key), silent = TRUE)
+    },
+    add = TRUE
+  )
 
   expect_error(
     group_update("not-a-list", id = grp$id, url = url, key = key),

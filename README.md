@@ -64,7 +64,7 @@ install.packages("ruODK")
 library("ckanr")
 ```
 
-Note: the default base CKAN URL is set to <https://data.ontario.ca/>
+Note: the default base CKAN URL is set to <https://demo.ckan.org/>
 Functions requiring write permissions in CKAN additionally require a privileged
 CKAN API key.
 You can change this using `ckanr_setup()`, or change the URL using the `url`
@@ -73,9 +73,9 @@ To set one or both, run:
 
 
 ``` r
-ckanr_setup() # restores default CKAN url to https://data.ontario.ca/
-ckanr_setup(url = "https://data.ontario.ca/")
-ckanr_setup(url = "https://data.ontario.ca/", key = "my-ckan-api-key")
+ckanr_setup() # restores default CKAN url to https://demo.ckan.org/
+ckanr_setup(url = "https://demo.ckan.org/")
+ckanr_setup(url = "https://demo.ckan.org/", key = "my-ckan-api-key")
 ```
 
 ## ckanr package API

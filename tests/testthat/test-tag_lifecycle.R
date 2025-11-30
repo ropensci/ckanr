@@ -7,7 +7,8 @@ skip_on_os("mac")
 url <- get_test_url()
 key <- get_test_key()
 
-skip_if(!nzchar(url) || !nzchar(key),
+skip_if(
+  !nzchar(url) || !nzchar(key),
   "CKAN test settings not configured"
 )
 

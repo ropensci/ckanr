@@ -60,13 +60,17 @@ test_that("resource view lifecycle helpers work", {
   res <- setup$resource
   on.exit(package_delete(pkg$id, url = url, key = key), add = TRUE)
 
-  view_one <- resource_view_create(res, view_type = "text_view",
+  view_one <- resource_view_create(res,
+    view_type = "text_view",
     title = "First view", description = "Primary preview",
-    url = url, key = key)
+    url = url, key = key
+  )
   expect_s3_class(view_one, "ckan_resource_view")
 
-  view_two <- resource_view_create(res, view_type = "text_view",
-    title = "Second view", url = url, key = key)
+  view_two <- resource_view_create(res,
+    view_type = "text_view",
+    title = "Second view", url = url, key = key
+  )
 
   listed <- resource_view_list(res, url = url, key = key)
   expect_true(all(vapply(listed, inherits, logical(1), "ckan_resource_view")))
@@ -76,8 +80,10 @@ test_that("resource view lifecycle helpers work", {
   shown <- resource_view_show(view_one, url = url, key = key)
   expect_equal(shown$id, view_one$id)
 
-  updated <- resource_view_update(view_one, title = "Updated view title",
-    url = url, key = key)
+  updated <- resource_view_update(view_one,
+    title = "Updated view title",
+    url = url, key = key
+  )
   expect_equal(updated$title, "Updated view title")
 
   reordered <- resource_view_reorder(res, order = rev(ids), url = url, key = key)
@@ -97,11 +103,13 @@ test_that("default view helpers return lists", {
   on.exit(package_delete(pkg$id, url = url, key = key), add = TRUE)
 
   resource_defaults <- resource_create_default_resource_views(res,
-    url = url, key = key)
+    url = url, key = key
+  )
   expect_type(resource_defaults, "list")
 
   package_defaults <- package_create_default_resource_views(pkg,
-    url = url, key = key)
+    url = url, key = key
+  )
   expect_type(package_defaults, "list")
 })
 

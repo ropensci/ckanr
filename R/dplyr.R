@@ -18,7 +18,6 @@
 #'
 #' # You can use the dplyr verbs with my_tbl. For example:
 #' dplyr::filter(my_tbl, GABARITO == "C")
-#'
 #' }
 #' @aliases dplyr-interface
 #' @export
@@ -38,15 +37,17 @@ src_ckan <- function(url) {
   src
 }
 
-#'@export
-#'@importFrom dplyr tbl
+#' @export
+#' @importFrom dplyr tbl
 tbl.src_ckan <- function(src, from, ..., name = NULL) {
   if (is.null(name)) {
     tbl_sql("ckan", src = src, from = sql(from), ...)
   } else {
-    tbl_sql(subclass = "ckan",
-            src = src,
-            from = sql(sprintf('SELECT * FROM "%s"', name)))
+    tbl_sql(
+      subclass = "ckan",
+      src = src,
+      from = sql(sprintf('SELECT * FROM "%s"', name))
+    )
   }
 }
 
@@ -72,13 +73,19 @@ format.src_ckan <- function(x, ...) {
   x1 <- sprintf("%s", db_desc(x))
   x2 <- sprintf("total tbls: %d", .metadata$total)
   if (.metadata$total > 6) {
-    x3 <- sprintf("tbls: %s, ...",
-                  paste0(sort(sapply(.metadata$records, "[[", "name")),
-                         collapse = ", "))
+    x3 <- sprintf(
+      "tbls: %s, ...",
+      paste0(sort(sapply(.metadata$records, "[[", "name")),
+        collapse = ", "
+      )
+    )
   } else {
-    x3 <- sprintf("tbls: %s",
-                  paste0(sort(sapply(.metadata$records, "[[", "name")),
-                         collapse = ", "))
+    x3 <- sprintf(
+      "tbls: %s",
+      paste0(sort(sapply(.metadata$records, "[[", "name")),
+        collapse = ", "
+      )
+    )
   }
   paste(x1, x2, x3, sep = "\n")
 }
@@ -89,17 +96,18 @@ format.src_ckan <- function(x, ...) {
 sql_translate_env.src_ckan <- function(con) {
   sql_variant(
     base_scalar,
-    sql_translator(.parent = base_agg,
-                   n = function() sql("count(*)"),
-                   cor = sql_prefix("corr"),
-                   cov = sql_prefix("covar_samp"),
-                   sd =  sql_prefix("stddev_samp"),
-                   var = sql_prefix("var_samp"),
-                   all = sql_prefix("bool_and"),
-                   any = sql_prefix("bool_or"),
-                   paste = function(x, collapse) {
-                     build_sql("string_agg(", x, ", ", collapse, ")")
-                   }
+    sql_translator(
+      .parent = base_agg,
+      n = function() sql("count(*)"),
+      cor = sql_prefix("corr"),
+      cov = sql_prefix("covar_samp"),
+      sd = sql_prefix("stddev_samp"),
+      var = sql_prefix("var_samp"),
+      all = sql_prefix("bool_and"),
+      any = sql_prefix("bool_or"),
+      paste = function(x, collapse) {
+        build_sql("string_agg(", x, ", ", collapse, ")")
+      }
     ),
     base_win
   )
@@ -128,9 +136,11 @@ db_begin.CKANConnection <- function(con, ...) {
 db_explain.CKANConnection <- function(con, sql, format = "text", ...) {
   format <- match.arg(format, c("text", "json", "yaml", "xml"))
 
-  exsql <- build_sql("EXPLAIN ",
-                     if (!is.null(format)) build_sql("(FORMAT ", sql(format), ") "),
-                     sql)
+  exsql <- build_sql(
+    "EXPLAIN ",
+    if (!is.null(format)) build_sql("(FORMAT ", sql(format), ") "),
+    sql
+  )
   expl <- dbGetQuery(con, exsql)
 
   paste(expl[[1]], collapse = "\n")

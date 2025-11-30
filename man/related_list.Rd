@@ -20,7 +20,7 @@ related_list(
 \item{limit}{(numeric) The maximum number of activities to return
 (optional, default: 31)}
 
-\item{url}{Base url to use. Default: https://data.ontario.ca/ See
+\item{url}{Base url to use. Default: https://demo.ckan.org/ See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
 \item{key}{A privileged CKAN API key, Default: your key set with
@@ -39,7 +39,7 @@ List related items
 \examples{
 \dontrun{
 related_list()
-related_list(as = 'json')
-related_list(as = 'table')
+related_list(as = "json")
+related_list(as = "table")
 }
 }

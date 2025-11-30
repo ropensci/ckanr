@@ -29,7 +29,7 @@ if give only tags that belong to this vocabulary will be returned}
 \item{limit}{(numeric) The maximum number of activities to return
 (optional, default: 31)}
 
-\item{url}{Base url to use. Default: https://data.ontario.ca/ See
+\item{url}{Base url to use. Default: https://demo.ckan.org/ See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
 \item{key}{A privileged CKAN API key, Default: your key set with
@@ -47,11 +47,11 @@ Search tags.
 }
 \examples{
 \dontrun{
-tag_search(query = 'ta')
-tag_search(query = c('ta', 'al'))
+tag_search(query = "ta")
+tag_search(query = c("ta", "al"))
 
 # different formats back
-tag_search(query = 'ta', as = 'json')
-tag_search(query = 'ta', as = 'table')
+tag_search(query = "ta", as = "json")
+tag_search(query = "ta", as = "table")
 }
 }

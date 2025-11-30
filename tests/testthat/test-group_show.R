@@ -10,14 +10,15 @@ if (g == "") {
 }
 
 test_that("group_show supports list/json/table formats", {
-  if (!ok_group(u, g))
+  if (!ok_group(u, g)) {
     group_create("ckanr_test_group", url = u, key = get_test_key())
+  }
   expect_ckan_formats(function(fmt) {
     group_show(g, url = u, as = fmt)
   })
 })
 
 test_that("group_show fails correctly", {
-  expect_error(group_show("adf", url=u), "404 - Not Found Error")
-  expect_error(group_show(limit = "Adf", url=u), "argument \"id\" is missing")
+  expect_error(group_show("adf", url = u), "404 - Not Found Error")
+  expect_error(group_show(limit = "Adf", url = u), "argument \"id\" is missing")
 })

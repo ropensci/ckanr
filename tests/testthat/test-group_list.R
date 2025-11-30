@@ -13,6 +13,6 @@ test_that("group_list supports list/json/table formats", {
 
 test_that("group_list fails correctly", {
   check_ckan(u)
-  expect_error(group_list(sort = "adf", url=u, limit=10), "Cannot sort by field `adf`")
-  expect_is(group_list(url=u, limit=10), "list")
+  expect_error(group_list(sort = "adf", url = u, limit = 10), "Cannot sort by field `adf`")
+  expect_is(group_list(url = u, limit = 10), "list")
 })

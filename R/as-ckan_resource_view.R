@@ -5,8 +5,10 @@
 #' @param ... Further arguments passed to [ckanr::resource_view_show()] when `x` is an
 #'   identifier.
 #' @examples \dontrun{
-#' ckanr_setup(url = "https://demo.ckan.org/",
-#'   key = Sys.getenv("CKAN_DEMO_KEY"))
+#' ckanr_setup(
+#'   url = "https://demo.ckan.org/",
+#'   key = Sys.getenv("CKAN_DEMO_KEY")
+#' )
 #'
 #' res <- package_show("sample-dataset")
 #' views <- resource_view_list(res$resources[[1]]$id)
@@ -40,9 +42,13 @@ print.ckan_resource_view <- function(x, ...) {
   cat("  Resource: ", x$resource_id, "\n", sep = "")
 }
 
-get_resource_view <- function(id, url = get_default_url(), key = get_default_key(),
-    ...) {
-  res <- ckan_GET(url, 'resource_view_show', list(id = id), key = key,
-    opts = list(...))
+get_resource_view <- function(
+  id, url = get_default_url(), key = get_default_key(),
+  ...
+) {
+  res <- ckan_GET(url, "resource_view_show", list(id = id),
+    key = key,
+    opts = list(...)
+  )
   as_ck(jsl(res), "ckan_resource_view")
 }

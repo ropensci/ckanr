@@ -10,7 +10,7 @@
 #' ckanr_setup(url = "https://demo.ckan.org", key = getOption("ckan_demo_key"))
 #'
 #' # create a package
-#' (res <- package_create("twist", author="Alexandria"))
+#' (res <- package_create("twist", author = "Alexandria"))
 #'
 #' # then create a resource
 #' file <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
@@ -30,9 +30,10 @@
 #' zz <- resource_patch(extra, id = res)
 #' zz$extra_key
 #' }
-resource_patch <- function(x, id, url = get_default_url(),
-  key = get_default_key(), as = 'list', ...) {
-
+resource_patch <- function(
+  x, id, url = get_default_url(),
+  key = get_default_key(), as = "list", ...
+) {
   id <- as.ckan_resource(id, url = url)
   if (!inherits(x, "list")) {
     stop("x must be of class list", call. = FALSE)
@@ -47,6 +48,9 @@ resource_patch <- function(x, id, url = get_default_url(),
     headers = ctj(),
     opts = list(...)
   )
-  switch(as, json = res, list = as_ck(jsl(res), "ckan_resource"),
-    table = jsd(res))
+  switch(as,
+    json = res,
+    list = as_ck(jsl(res), "ckan_resource"),
+    table = jsd(res)
+  )
 }

@@ -7,7 +7,8 @@ skip_on_os("mac")
 url <- get_test_url()
 key <- get_test_key()
 
-skip_if(!nzchar(url) || !nzchar(key),
+skip_if(
+  !nzchar(url) || !nzchar(key),
   "CKAN test settings not configured"
 )
 
@@ -29,9 +30,12 @@ test_that("organization_purge removes a deleted organization", {
   skip_if_not_sysadmin(url, key)
 
   org <- create_temp_org()
-  on.exit({
-    try(organization_purge(org$id, url = url, key = key, as = "list"), silent = TRUE)
-  }, add = TRUE)
+  on.exit(
+    {
+      try(organization_purge(org$id, url = url, key = key, as = "list"), silent = TRUE)
+    },
+    add = TRUE
+  )
 
   expect_true(organization_delete(org$id, url = url, key = key))
   purged <- organization_purge(org$id, url = url, key = key)
@@ -45,7 +49,8 @@ test_that("organization_purge fails well", {
   check_ckan(url)
   skip_if_not_sysadmin(url, key)
 
-  expect_error(organization_purge(url = url, key = key),
+  expect_error(
+    organization_purge(url = url, key = key),
     'argument "id" is missing, with no default'
   )
 
@@ -55,9 +60,12 @@ test_that("organization_purge fails well", {
   )
 
   org <- create_temp_org()
-  on.exit({
-    try(organization_purge(org$id, url = url, key = key), silent = TRUE)
-  }, add = TRUE)
+  on.exit(
+    {
+      try(organization_purge(org$id, url = url, key = key), silent = TRUE)
+    },
+    add = TRUE
+  )
   organization_delete(org$id, url = url, key = key)
 
   expect_error(

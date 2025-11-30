@@ -18,7 +18,7 @@ resource_patch(
 
 \item{id}{(character) Resource ID to update (required)}
 
-\item{url}{Base url to use. Default: https://data.ontario.ca/ See
+\item{url}{Base url to use. Default: https://demo.ckan.org/ See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
 \item{key}{A privileged CKAN API key, Default: your key set with
@@ -40,7 +40,7 @@ Update a resource's metadata
 ckanr_setup(url = "https://demo.ckan.org", key = getOption("ckan_demo_key"))
 
 # create a package
-(res <- package_create("twist", author="Alexandria"))
+(res <- package_create("twist", author = "Alexandria"))
 
 # then create a resource
 file <- system.file("examples", "actinidiaceae.csv", package = "ckanr")

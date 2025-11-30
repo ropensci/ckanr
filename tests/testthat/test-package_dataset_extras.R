@@ -16,7 +16,8 @@ create_dataset_with_resources <- function(n = 2) {
     key = key
   )
   paths <- system.file("examples", c("actinidiaceae.csv", "iris.parquet"),
-    package = "ckanr")
+    package = "ckanr"
+  )
   paths <- paths[file.exists(paths)]
   for (i in seq_len(min(n, length(paths)))) {
     resource_create(
@@ -75,8 +76,10 @@ test_that("package_owner_org_update moves dataset between orgs", {
   new_org <- organization_create(name = org_name, url = url, key = key)
   on.exit(suppressWarnings(organization_delete(new_org$id, url = url, key = key)), add = TRUE)
 
-  expect_true(package_owner_org_update(pkg, organization_id = new_org,
-    url = url, key = key))
+  expect_true(package_owner_org_update(pkg,
+    organization_id = new_org,
+    url = url, key = key
+  ))
   moved <- package_show(pkg$id, url = url, key = key)
   expect_equal(moved$organization$id, new_org$id)
 
@@ -88,8 +91,10 @@ test_that("package_owner_org_update moves dataset between orgs", {
 
 test_that("dataset_purge is gated behind opt-in", {
   check_ckan(url)
-  skip_if(tolower(Sys.getenv("CKANR_ALLOW_PURGE_TESTS")) %in% c("", "false", "0"),
-    "Set CKANR_ALLOW_PURGE_TESTS=true to exercise dataset_purge")
+  skip_if(
+    tolower(Sys.getenv("CKANR_ALLOW_PURGE_TESTS")) %in% c("", "false", "0"),
+    "Set CKANR_ALLOW_PURGE_TESTS=true to exercise dataset_purge"
+  )
 
   pkg <- package_create(
     name = paste0("purge_pkg_", as.integer(Sys.time()), sample.int(1000, 1)),

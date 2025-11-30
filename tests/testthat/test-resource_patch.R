@@ -9,7 +9,8 @@ key <- get_test_key()
 did <- get_test_did()
 path <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
 
-skip_if(!nzchar(url) || !nzchar(key) || !nzchar(did),
+skip_if(
+  !nzchar(url) || !nzchar(key) || !nzchar(did),
   "CKAN test settings not configured"
 )
 
@@ -34,9 +35,12 @@ test_that("resource_patch updates metadata for id string", {
   check_dataset(url, did)
 
   res <- create_temp_resource()
-  on.exit({
-    try(resource_delete(res$id, url = url, key = key), silent = TRUE)
-  }, add = TRUE)
+  on.exit(
+    {
+      try(resource_delete(res$id, url = url, key = key), silent = TRUE)
+    },
+    add = TRUE
+  )
 
   patched <- resource_patch(
     list(description = "patched description"),
@@ -55,9 +59,12 @@ test_that("resource_patch accepts ckan_resource objects", {
   check_dataset(url, did)
 
   res <- create_temp_resource()
-  on.exit({
-    try(resource_delete(res$id, url = url, key = key), silent = TRUE)
-  }, add = TRUE)
+  on.exit(
+    {
+      try(resource_delete(res$id, url = url, key = key), silent = TRUE)
+    },
+    add = TRUE
+  )
 
   res_obj <- resource_show(res$id, url = url, key = key)
   new_title <- paste0("title-", sample(letters, 5, replace = TRUE), collapse = "")
@@ -76,9 +83,12 @@ test_that("resource_patch fails well", {
   check_dataset(url, did)
 
   res <- create_temp_resource()
-  on.exit({
-    try(resource_delete(res$id, url = url, key = key), silent = TRUE)
-  }, add = TRUE)
+  on.exit(
+    {
+      try(resource_delete(res$id, url = url, key = key), silent = TRUE)
+    },
+    add = TRUE
+  )
 
   expect_error(
     resource_patch("not-a-list", id = res$id, url = url, key = key),

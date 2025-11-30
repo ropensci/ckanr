@@ -20,22 +20,30 @@
 #' res[1:2]
 #'
 #' # Different data formats
-#' organization_list(as = 'json')
-#' organization_list(as = 'table')
+#' organization_list(as = "json")
+#' organization_list(as = "table")
 #' }
-organization_list <- function(order_by = c("name", "package"),
+organization_list <- function(
+  order_by = c("name", "package"),
   decreasing = FALSE, organizations = NULL, all_fields = TRUE,
   limit = 31, url = get_default_url(), key = get_default_key(),
-  as = 'list', ...) {
-
+  as = "list", ...
+) {
   stopifnot(length(order_by) > 0)
   stopifnot(order_by[1] %in% c("name", "package"))
-  args <- cc(list(sort = sprintf("%s %s", order_by[1],
-                              ifelse(decreasing, "", "asc")),
-               all_fields = ifelse(all_fields, "True", "False"),
-               limit = limit,
-               organizations = organizations))
-  res <- ckan_GET(url, 'organization_list', args, key = key, opts = list(...))
-  switch(as, json = res, list = lapply(jsl(res), as.ckan_organization),
-    table = jsd(res))
+  args <- cc(list(
+    sort = sprintf(
+      "%s %s", order_by[1],
+      ifelse(decreasing, "", "asc")
+    ),
+    all_fields = ifelse(all_fields, "True", "False"),
+    limit = limit,
+    organizations = organizations
+  ))
+  res <- ckan_GET(url, "organization_list", args, key = key, opts = list(...))
+  switch(as,
+    json = res,
+    list = lapply(jsl(res), as.ckan_organization),
+    table = jsd(res)
+  )
 }

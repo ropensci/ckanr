@@ -9,9 +9,14 @@
 #' license_list(as = "table")
 #' license_list(as = "json")
 #' }
-license_list <- function(id, url = get_default_url(), key = get_default_key(),
-  as = "list", ...) {
-
-  res <- ckan_GET(url, 'license_list', key = key, opts = list(...))
-  switch(as, json = res, list = jsl(res), table = jsd(res))
+license_list <- function(
+  id, url = get_default_url(), key = get_default_key(),
+  as = "list", ...
+) {
+  res <- ckan_GET(url, "license_list", key = key, opts = list(...))
+  switch(as,
+    json = res,
+    list = jsl(res),
+    table = jsd(res)
+  )
 }

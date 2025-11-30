@@ -19,8 +19,10 @@ ckan_user class helpers
 }
 \examples{
 \dontrun{
-ckanr_setup(url = "https://demo.ckan.org/",
-  key = getOption("ckan_demo_key"))
+ckanr_setup(
+  url = "https://demo.ckan.org/",
+  key = getOption("ckan_demo_key")
+)
 
 (usrs <- user_list())
 usrs[1:3]

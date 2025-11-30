@@ -18,12 +18,15 @@ coerce_view <- function(res) as_ck(res, "ckan_resource_view")
 #' pkg <- package_show("sample-dataset")
 #' resource_view_list(pkg$resources[[1]]$id)
 #' }
-resource_view_list <- function(id, url = get_default_url(),
-  key = get_default_key(), as = "list", ...) {
-
+resource_view_list <- function(
+  id, url = get_default_url(),
+  key = get_default_key(), as = "list", ...
+) {
   res <- as.ckan_resource(id, url = url, key = key)
-  out <- ckan_GET(url, "resource_view_list", list(id = res$id), key = key,
-    opts = list(...))
+  out <- ckan_GET(url, "resource_view_list", list(id = res$id),
+    key = key,
+    opts = list(...)
+  )
   parse_ckan_response(out, as, list_coercer = coerce_view_list)
 }
 
@@ -33,12 +36,15 @@ resource_view_list <- function(id, url = get_default_url(),
 #' @template args
 #' @template key
 #' @export
-resource_view_show <- function(id, url = get_default_url(),
-  key = get_default_key(), as = "list", ...) {
-
+resource_view_show <- function(
+  id, url = get_default_url(),
+  key = get_default_key(), as = "list", ...
+) {
   if (inherits(id, "ckan_resource_view")) id <- id$id
-  out <- ckan_GET(url, "resource_view_show", list(id = id), key = key,
-    opts = list(...))
+  out <- ckan_GET(url, "resource_view_show", list(id = id),
+    key = key,
+    opts = list(...)
+  )
   parse_ckan_response(out, as, list_coercer = coerce_view)
 }
 
@@ -53,11 +59,12 @@ resource_view_show <- function(id, url = get_default_url(),
 #' @template args
 #' @template key
 #' @export
-resource_view_create <- function(resource, view_type, title,
+resource_view_create <- function(
+  resource, view_type, title,
   description = NULL, config = NULL, filter_fields = NULL,
   filter_values = NULL, url = get_default_url(),
-  key = get_default_key(), as = "list", ...) {
-
+  key = get_default_key(), as = "list", ...
+) {
   res <- as.ckan_resource(resource, url = url, key = key)
   body <- cc(list(
     resource_id = res$id,
@@ -68,8 +75,10 @@ resource_view_create <- function(resource, view_type, title,
     filter_fields = filter_fields,
     filter_values = filter_values
   ))
-  out <- ckan_POST(url, "resource_view_create", body = tojun(body, TRUE),
-    key = key, headers = ctj(), encode = "json", opts = list(...))
+  out <- ckan_POST(url, "resource_view_create",
+    body = tojun(body, TRUE),
+    key = key, headers = ctj(), encode = "json", opts = list(...)
+  )
   parse_ckan_response(out, as, list_coercer = coerce_view)
 }
 
@@ -80,24 +89,32 @@ resource_view_create <- function(resource, view_type, title,
 #' @template args
 #' @template key
 #' @export
-resource_view_update <- function(id, resource = NULL, title = NULL,
+resource_view_update <- function(
+  id, resource = NULL, title = NULL,
   description = NULL, config = NULL, filter_fields = NULL,
   filter_values = NULL, url = get_default_url(),
-  key = get_default_key(), as = "list", ...) {
-
+  key = get_default_key(), as = "list", ...
+) {
   view <- as.ckan_resource_view(id, url = url, key = key)
   body <- cc(list(
     id = view$id,
-    resource_id = if (!is.null(resource)) as.ckan_resource(resource,
-      url = url, key = key)$id else NULL,
+    resource_id = if (!is.null(resource)) {
+      as.ckan_resource(resource,
+        url = url, key = key
+      )$id
+    } else {
+      NULL
+    },
     title = title,
     description = description,
     config = config,
     filter_fields = filter_fields,
     filter_values = filter_values
   ))
-  out <- ckan_POST(url, "resource_view_update", body = tojun(body, TRUE),
-    key = key, headers = ctj(), encode = "json", opts = list(...))
+  out <- ckan_POST(url, "resource_view_update",
+    body = tojun(body, TRUE),
+    key = key, headers = ctj(), encode = "json", opts = list(...)
+  )
   parse_ckan_response(out, as, list_coercer = coerce_view)
 }
 
@@ -108,13 +125,16 @@ resource_view_update <- function(id, resource = NULL, title = NULL,
 #' @template args
 #' @template key
 #' @export
-resource_view_reorder <- function(id, order, url = get_default_url(),
-  key = get_default_key(), as = "list", ...) {
-
+resource_view_reorder <- function(
+  id, order, url = get_default_url(),
+  key = get_default_key(), as = "list", ...
+) {
   res <- as.ckan_resource(id, url = url, key = key)
   body <- list(id = res$id, order = as.list(order))
-  out <- ckan_POST(url, "resource_view_reorder", body = tojun(body, TRUE),
-    key = key, headers = ctj(), encode = "json", opts = list(...))
+  out <- ckan_POST(url, "resource_view_reorder",
+    body = tojun(body, TRUE),
+    key = key, headers = ctj(), encode = "json", opts = list(...)
+  )
   parse_ckan_response(out, as)
 }
 
@@ -124,12 +144,15 @@ resource_view_reorder <- function(id, order, url = get_default_url(),
 #' @template args_noas
 #' @template key
 #' @export
-resource_view_delete <- function(id, url = get_default_url(),
-  key = get_default_key(), ...) {
-
+resource_view_delete <- function(
+  id, url = get_default_url(),
+  key = get_default_key(), ...
+) {
   view <- as.ckan_resource_view(id, url = url, key = key)
-  out <- ckan_POST(url, "resource_view_delete", body = list(id = view$id),
-    key = key, opts = list(...))
+  out <- ckan_POST(url, "resource_view_delete",
+    body = list(id = view$id),
+    key = key, opts = list(...)
+  )
   jsonlite::fromJSON(out)$result
 }
 
@@ -140,12 +163,15 @@ resource_view_delete <- function(id, url = get_default_url(),
 #' @template args_noas
 #' @template key
 #' @export
-resource_view_clear <- function(view_types = NULL, url = get_default_url(),
-  key = get_default_key(), ...) {
-
+resource_view_clear <- function(
+  view_types = NULL, url = get_default_url(),
+  key = get_default_key(), ...
+) {
   body <- cc(list(view_types = as.list(view_types)))
-  out <- ckan_POST(url, "resource_view_clear", body = tojun(body, TRUE),
-    key = key, headers = ctj(), encode = "json", opts = list(...))
+  out <- ckan_POST(url, "resource_view_clear",
+    body = tojun(body, TRUE),
+    key = key, headers = ctj(), encode = "json", opts = list(...)
+  )
   jsonlite::fromJSON(out)$success
 }
 
@@ -158,14 +184,19 @@ resource_view_clear <- function(view_types = NULL, url = get_default_url(),
 #' @template args
 #' @template key
 #' @export
-resource_create_default_resource_views <- function(resource, package = NULL,
+resource_create_default_resource_views <- function(
+  resource, package = NULL,
   create_datastore_views = FALSE, url = get_default_url(),
-  key = get_default_key(), as = "list", ...) {
-
+  key = get_default_key(), as = "list", ...
+) {
   res_obj <- unclass(as.ckan_resource(resource, url = url, key = key))
-  pkg_obj <- if (is.null(package)) NULL else unclass(
-    as.ckan_package(package, url = url, key = key)
-  )
+  pkg_obj <- if (is.null(package)) {
+    NULL
+  } else {
+    unclass(
+      as.ckan_package(package, url = url, key = key)
+    )
+  }
   body <- cc(list(
     resource = res_obj,
     package = pkg_obj,
@@ -173,7 +204,8 @@ resource_create_default_resource_views <- function(resource, package = NULL,
   ))
   out <- ckan_POST(url, "resource_create_default_resource_views",
     body = tojun(body, TRUE), key = key, headers = ctj(), encode = "json",
-    opts = list(...))
+    opts = list(...)
+  )
   parse_ckan_response(out, as)
 }
 
@@ -184,10 +216,11 @@ resource_create_default_resource_views <- function(resource, package = NULL,
 #' @template args
 #' @template key
 #' @export
-package_create_default_resource_views <- function(package,
+package_create_default_resource_views <- function(
+  package,
   create_datastore_views = FALSE, url = get_default_url(),
-  key = get_default_key(), as = "list", ...) {
-
+  key = get_default_key(), as = "list", ...
+) {
   pkg_obj <- unclass(as.ckan_package(package, url = url, key = key))
   body <- cc(list(
     package = pkg_obj,
@@ -195,6 +228,7 @@ package_create_default_resource_views <- function(package,
   ))
   out <- ckan_POST(url, "package_create_default_resource_views",
     body = tojun(body, TRUE), key = key, headers = ctj(), encode = "json",
-    opts = list(...))
+    opts = list(...)
+  )
   parse_ckan_response(out, as)
 }

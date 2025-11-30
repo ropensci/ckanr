@@ -29,60 +29,87 @@ NULL
 
 #' @rdname vocabulary
 #' @export
-vocabulary_list <- function(url = get_default_url(), key = get_default_key(),
-  as = 'list', ...) {
-
-  res <- ckan_GET(url, 'vocabulary_list', list(), key = key, opts = list(...))
-  switch(as, json = res, list = lapply(jsl(res), as.ckan_vocabulary),
-    table = jsd(res))
+vocabulary_list <- function(
+  url = get_default_url(), key = get_default_key(),
+  as = "list", ...
+) {
+  res <- ckan_GET(url, "vocabulary_list", list(), key = key, opts = list(...))
+  switch(as,
+    json = res,
+    list = lapply(jsl(res), as.ckan_vocabulary),
+    table = jsd(res)
+  )
 }
 
 #' @rdname vocabulary
 #' @export
-vocabulary_show <- function(id, include_datasets = FALSE,
-  url = get_default_url(), key = get_default_key(), as = 'list', ...) {
-
+vocabulary_show <- function(
+  id, include_datasets = FALSE,
+  url = get_default_url(), key = get_default_key(), as = "list", ...
+) {
   id <- as.ckan_vocabulary(id, url = url, key = key)
   args <- cc(list(id = id$id, include_datasets = as_log(include_datasets)))
-  res <- ckan_GET(url, 'vocabulary_show', args, key = key, opts = list(...))
-  switch(as, json = res, list = as_ck(jsl(res), "ckan_vocabulary"),
-    table = jsd(res))
+  res <- ckan_GET(url, "vocabulary_show", args, key = key, opts = list(...))
+  switch(as,
+    json = res,
+    list = as_ck(jsl(res), "ckan_vocabulary"),
+    table = jsd(res)
+  )
 }
 
 #' @rdname vocabulary
 #' @export
-vocabulary_create <- function(name, tags = NULL, url = get_default_url(),
-  key = get_default_key(), as = 'list', ...) {
-
+vocabulary_create <- function(
+  name, tags = NULL, url = get_default_url(),
+  key = get_default_key(), as = "list", ...
+) {
   args <- cc(list(name = name, tags = tags))
-  res <- ckan_POST(url, 'vocabulary_create', body = args, key = key,
-    opts = list(...))
-  switch(as, json = res, list = as_ck(jsl(res), "ckan_vocabulary"),
-    table = jsd(res))
+  res <- ckan_POST(url, "vocabulary_create",
+    body = args, key = key,
+    opts = list(...)
+  )
+  switch(as,
+    json = res,
+    list = as_ck(jsl(res), "ckan_vocabulary"),
+    table = jsd(res)
+  )
 }
 
 #' @rdname vocabulary
 #' @export
-vocabulary_update <- function(id, name = NULL, tags = NULL,
-  url = get_default_url(), key = get_default_key(), as = 'list', ...) {
-
+vocabulary_update <- function(
+  id, name = NULL, tags = NULL,
+  url = get_default_url(), key = get_default_key(), as = "list", ...
+) {
   id <- as.ckan_vocabulary(id, url = url, key = key)
   args <- cc(list(id = id$id, name = name, tags = tags))
-  res <- ckan_POST(url, 'vocabulary_update', body = args, key = key,
-    opts = list(...))
-  switch(as, json = res, list = as_ck(jsl(res), "ckan_vocabulary"),
-    table = jsd(res))
+  res <- ckan_POST(url, "vocabulary_update",
+    body = args, key = key,
+    opts = list(...)
+  )
+  switch(as,
+    json = res,
+    list = as_ck(jsl(res), "ckan_vocabulary"),
+    table = jsd(res)
+  )
 }
 
 #' @rdname vocabulary
 #' @export
-vocabulary_delete <- function(id, url = get_default_url(),
-  key = get_default_key(), as = 'list', ...) {
-
+vocabulary_delete <- function(
+  id, url = get_default_url(),
+  key = get_default_key(), as = "list", ...
+) {
   id <- as.ckan_vocabulary(id, url = url, key = key)
-  res <- ckan_POST(url, 'vocabulary_delete', body = list(id = id$id), key = key,
-    opts = list(...))
-  switch(as, json = res, list = jsl(res), table = jsd(res))
+  res <- ckan_POST(url, "vocabulary_delete",
+    body = list(id = id$id), key = key,
+    opts = list(...)
+  )
+  switch(as,
+    json = res,
+    list = jsl(res),
+    table = jsd(res)
+  )
 }
 
 #' Autocomplete tag names.
@@ -93,14 +120,18 @@ vocabulary_delete <- function(id, url = get_default_url(),
 #' @template args
 #' @template key
 #' @examples \dontrun{
-#' tag_autocomplete(q = 'ckan')
+#' tag_autocomplete(q = "ckan")
 #' }
-tag_autocomplete <- function(q, vocabulary_id = NULL,
-  url = get_default_url(), key = get_default_key(), as = 'list', ...) {
-
+tag_autocomplete <- function(
+  q, vocabulary_id = NULL,
+  url = get_default_url(), key = get_default_key(), as = "list", ...
+) {
   args <- cc(list(q = q, vocabulary_id = vocabulary_id))
-  res <- ckan_GET(url, 'tag_autocomplete', args, key = key, opts = list(...))
+  res <- ckan_GET(url, "tag_autocomplete", args, key = key, opts = list(...))
   values <- unlist(jsl(res), use.names = FALSE)
-  switch(as, json = res, list = values,
-    table = data.frame(name = values, stringsAsFactors = FALSE))
+  switch(as,
+    json = res,
+    list = values,
+    table = data.frame(name = values, stringsAsFactors = FALSE)
+  )
 }

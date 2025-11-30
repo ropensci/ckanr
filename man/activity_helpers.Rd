@@ -117,7 +117,7 @@ activity, etc.).}
 \item{include_hidden_activity}{(logical) If \code{TRUE}, include private activity
 entries (requires sysadmin).}
 
-\item{url}{Base url to use. Default: https://data.ontario.ca/ See
+\item{url}{Base url to use. Default: https://demo.ckan.org/ See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
 \item{key}{A privileged CKAN API key, Default: your key set with

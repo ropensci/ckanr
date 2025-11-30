@@ -15,7 +15,7 @@ resource_show(
 \arguments{
 \item{id}{(character) Resource identifier.}
 
-\item{url}{Base url to use. Default: https://data.ontario.ca/ See
+\item{url}{Base url to use. Default: https://demo.ckan.org/ See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
 \item{key}{A privileged CKAN API key, Default: your key set with
@@ -34,19 +34,22 @@ Show a resource.
 \examples{
 \dontrun{
 # Setup
-ckanr_setup(url = "https://demo.ckan.org/",
-key = Sys.getenv("CKAN_DEMO_KEY"))
+ckanr_setup(
+  url = "https://demo.ckan.org/",
+  key = Sys.getenv("CKAN_DEMO_KEY")
+)
 
 # create a package
 (res <- package_create("yellow7"))
 
 # then create a resource
 file <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
-(xx <- resource_create(package_id = res$id,
-                       description = "my resource",
-                       name = "bears",
-                       upload = file,
-                       rcurl = "http://google.com"
+(xx <- resource_create(
+  package_id = res$id,
+  description = "my resource",
+  name = "bears",
+  upload = file,
+  rcurl = "http://google.com"
 ))
 
 # show the resource
@@ -54,7 +57,9 @@ resource_show(xx$id)
 
 
 # eg. from the NHM CKAN store
-resource_show(id = "05ff2255-c38a-40c9-b657-4ccb55ab2feb",
-              url = "http://data.nhm.ac.uk")
+resource_show(
+  id = "05ff2255-c38a-40c9-b657-4ccb55ab2feb",
+  url = "http://data.nhm.ac.uk"
+)
 }
 }

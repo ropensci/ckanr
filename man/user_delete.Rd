@@ -15,7 +15,7 @@ user_delete(
 \arguments{
 \item{id}{(character) the id of the new user (required)}
 
-\item{url}{Base url to use. Default: https://data.ontario.ca/ See
+\item{url}{Base url to use. Default: https://demo.ckan.org/ See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
 \item{key}{A privileged CKAN API key, Default: your key set with
@@ -29,7 +29,7 @@ can vary from a vector, list or data.frame. (required)}
 \item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
 }
 \value{
-Logical TRUE when the user is successfully deleted.
+(logical) TRUE when the user is successfully deleted
 }
 \description{
 Delete a user.
@@ -37,12 +37,16 @@ Delete a user.
 \examples{
 \dontrun{
 # Setup
-ckanr_setup(url = "https://data-demo.dpaw.wa.gov.au",
-key = "824e7c50-9577-4bfa-bf32-246ebed1a8a2")
+ckanr_setup(
+  url = "https://data-demo.dpaw.wa.gov.au",
+  key = "824e7c50-9577-4bfa-bf32-246ebed1a8a2"
+)
 
 # create a user
-res <- user_delete(name = 'stacy', email = "stacy@aaaaa.com",
-password = "helloworld")
+res <- user_delete(
+  name = "stacy", email = "stacy@aaaaa.com",
+  password = "helloworld"
+)
 
 # then, delete a user
 user_delete(id = "stacy")

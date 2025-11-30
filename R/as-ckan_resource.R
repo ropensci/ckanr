@@ -4,10 +4,12 @@
 #' @param x Variety of things, character, list, or ckan_package class object
 #' @param ... Further args passed on to [resource_show()] if character given
 #' @examples \dontrun{
-#' ckanr_setup(url = "https://demo.ckan.org/",
-#' key = getOption("ckan_demo_key"))
+#' ckanr_setup(
+#'   url = "https://demo.ckan.org/",
+#'   key = getOption("ckan_demo_key")
+#' )
 #'
-#' (resrcs <- resource_search(q = 'name:data'))
+#' (resrcs <- resource_search(q = "name:data"))
 #' resrcs$results
 #' resrcs$results[[3]]
 #'
@@ -43,9 +45,13 @@ print.ckan_resource <- function(x, ...) {
   cat("  Format: ", x$format, "\n", sep = "")
 }
 
-get_resource <- function(id, url = get_default_url(), key = get_default_key(),
-    ...) {
-  res <- ckan_GET(url, 'resource_show', list(id = id), key = key,
-    opts = list(...))
+get_resource <- function(
+  id, url = get_default_url(), key = get_default_key(),
+  ...
+) {
+  res <- ckan_GET(url, "resource_show", list(id = id),
+    key = key,
+    opts = list(...)
+  )
   as_ck(jsl(res), "ckan_resource")
 }
