@@ -143,6 +143,8 @@ resource_view_reorder <- function(
 #' @param id (character or `ckan_resource_view`) View identifier.
 #' @template args_noas
 #' @template key
+#' @return (bool) The result of the deletion, TRUE if the resource view was deleted
+#'   sucessfully, FALSE if not.
 #' @export
 resource_view_delete <- function(
   id, url = get_default_url(),
@@ -153,7 +155,7 @@ resource_view_delete <- function(
     body = list(id = view$id),
     key = key, opts = list(...)
   )
-  jsonlite::fromJSON(out)$result
+jsonlite::fromJSON(out)$success
 }
 
 #' Clear resource views

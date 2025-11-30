@@ -91,7 +91,7 @@ test_that("resource view lifecycle helpers work", {
   expect_true(is.list(reordered))
 
   deleted <- resource_view_delete(view_two, url = url, key = key)
-  expect_equal(deleted$resource_id, res$id)
+  expect_true(deleted)
   remaining <- resource_view_list(res, url = url, key = key)
   expect_false(view_two$id %in% vapply(remaining, `[[`, character(1), "id"))
 })

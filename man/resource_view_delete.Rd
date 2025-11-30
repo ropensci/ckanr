@@ -17,6 +17,10 @@ also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
 \item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
 }
+\value{
+(bool) The result of the deletion, TRUE if the resource view was deleted
+sucessfully, FALSE if not.
+}
 \description{
 Delete a resource view
 }
