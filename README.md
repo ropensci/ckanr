@@ -4,7 +4,7 @@ ckanr
 
 
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![R-check](https://github.com/ropensci/ckanr/workflows/R-check/badge.svg)](https://github.com/ropensci/ckanr/actions/)
+[![R-check](https://github.com/ropensci/ckanr/actions/workflows/R-check.yaml/badge.svg)](https://github.com/ropensci/ckanr/actions/workflows/R-check.yaml)
 [![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/ckanr?color=FAB657)](https://github.com/r-hub/cranlogs.app)
 [![cran version](https://www.r-pkg.org/badges/version/ckanr)](https://cran.r-project.org/package=ckanr)
 [![codecov](https://codecov.io/gh/ropensci/ckanr/branch/main/graph/badge.svg?token=96K7ZIOmCB)](https://codecov.io/gh/ropensci/ckanr)
