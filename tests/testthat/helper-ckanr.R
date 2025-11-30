@@ -331,6 +331,7 @@ check_organization <- function(url, x) {
   }
 }
 
+# FIXME: enabled if CKAN__AUTH__ALLOW_DATASET_COLLABORATORS=true in service ckan in docker-compose-dev.yml
 collaborators_feature_enabled <- function(url, key) {
   override <- Sys.getenv("CKANR_ASSUME_COLLABORATORS")
   if (nzchar(override)) {

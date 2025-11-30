@@ -13,23 +13,16 @@ ckanr 0.8.1
   (#93)
 
 ### Test coverage: CKAN 2.11
-Tests for endpoints from plugins not yet enabled in the Devcontainer CKAN instance:
-
-* Activity plugin not enabled on test CKAN instance (16): test-activity_endpoints.R,
-  test-dashboard_activity_list.R, test-dashboard_count.R, test-package_activity_list.R
-* Dataset collaborators feature disabled or unavailable (2): test-package_collaborators.R
-* user_activity_list action unavailable on this CKAN instance (6):
-  test-user_activity_list.R, test-user_lifecycle.R
-
-Tests pending dplyr backend upgrade:
-
-* datastore_search_sql action unavailable on this CKAN instance (1): test-ds_search_sql.R
-* empty test (1): No datastore resources accept SQL queries in this environment (1):
-  test-dbi_smoke.R
-
-Tests skipped for deprecated API endpoints:
-
-* ver > 29 is TRUE (2): test-changes.R:14:3, test-changes.R:28:3
+Skipped tests (12)
+• datastore_search_sql action unavailable on this CKAN instance (1): test-ds_search_sql.R:51:5
+• empty test (1):
+• No datastore resources accept SQL queries in this environment (1): test-dbi_smoke.R:58:3
+• recently_changed_packages_activity_list unavailable on CKAN 2.10-2.11 (1): test-activity_endpoints.R:32:5
+• Unable to determine activity email notification setting (1): test-activity_endpoints.R:108:3
+• user_activity_list action unavailable on this CKAN instance (5): test-user_activity_list.R:18:3,
+  test-user_activity_list.R:35:3, test-user_activity_list.R:52:3,
+  test-user_activity_list.R:69:3, test-user_activity_list.R:84:3
+• ver > 29 is TRUE (2): test-changes.R:14:3, test-changes.R:28:3
 
 ### Test coverage: CKAN 2.10
 • Activity plugin not enabled on test CKAN instance (16):test-activity_endpoints.R,
@@ -53,9 +46,6 @@ Differences: target is NULL, current is character
 • CKAN version < 2.10 (1): 'test-changes.R:35:3'
 • Dataset collaborators feature disabled or unavailable (2):
   'test-package_collaborators.R:20:3', 'test-package_collaborators.R:34:3'
-• On CI (2): 'test-organization_show.R:4:1', 'test-tag_show.R:4:1'
-• Set CKANR_ALLOW_PURGE_TESTS=true to exercise dataset_purge (1):
-  'test-package_dataset_extras.R:94:3'
 • Unable to determine current user; requires authenticated CKAN (12):
   'test-admin_ops.R:6:3', 'test-admin_ops.R:49:3', 'test-admin_ops.R:80:3',
   'test-admin_ops.R:102:3', 'test-organization_purge.R:30:3',
