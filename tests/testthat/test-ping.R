@@ -6,8 +6,6 @@ test_that("ping returns false when run against non-CKAN URLS", {
   expect_false(ping(url = "http://www.google.com"))
 })
 
-check_ckan(u)
-
 test_that("ping return true on non-empty ckanr test URL", {
   u <- get_test_url()
   expect_false(u == "")

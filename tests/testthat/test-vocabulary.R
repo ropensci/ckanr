@@ -53,7 +53,7 @@ test_that("tag_autocomplete returns suggestions", {
   expect_true(length(res) >= 1)
   expect_true(any(grepl("ckan", res)))
 
-  res_list <- res <- tag_autocomplete(q = "ckan", url = url, as = "list")
+  res <- tag_autocomplete(q = "ckan", url = url, as = "list")
 
   expect_ckan_formats(function(fmt) {
     tag_autocomplete(q = "ckan", url = url, as = fmt)
