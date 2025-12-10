@@ -32,23 +32,15 @@
 #' *table_metadata* full text search query language:
 #' http://www.postgresql.org/docs/9.1/static/datatype-textsearch.html#DATATYPE-TSQUERY
 #' @examples \dontrun{
-#' ckanr_setup(url = "https://data.nhm.ac.uk/")
+#' ckanr_setup(url = "https://data.gov.au/")
+#' rid <- "eef6a84b-ad44-446f-9cf9-fb5d135e3123"
 #'
-#' ds_search(resource_id = "8f0784a6-82dd-44e7-b105-6194e046eb8d")
-#' ds_search(
-#'   resource_id = "8f0784a6-82dd-44e7-b105-6194e046eb8d",
-#'   as = "table"
-#' )
-#' ds_search(
-#'   resource_id = "8f0784a6-82dd-44e7-b105-6194e046eb8d",
-#'   as = "json"
-#' )
+#' ds_search(resource_id = rid)
+#' ds_search(resource_id = rid, as = "table")
+#' ds_search(resource_id = rid, as = "json")
 #'
-#' ds_search(
-#'   resource_id = "8f0784a6-82dd-44e7-b105-6194e046eb8d", limit = 1,
-#'   as = "table"
-#' )
-#' ds_search(resource_id = "8f0784a6-82dd-44e7-b105-6194e046eb8d", q = "a*")
+#' ds_search(resource_id = rid, limit = 1, as = "table")
+#' ds_search(resource_id = rid, q = "a*")
 #' }
 ds_search <- function(
   resource_id = NULL, filters = NULL, q = NULL,

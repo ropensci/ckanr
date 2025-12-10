@@ -10,14 +10,15 @@ url <- get_test_url()
 
 skip_if(!nzchar(url), "CKAN test settings not configured")
 
-safe_ds_preview <- function(resource_id, preview_limit = 5) {
+safe_ds_preview <- function(resource_id, url, preview_limit = 5) {
   tryCatch(
     ds_search(resource_id = resource_id, limit = preview_limit, url = url),
     error = function(e) e
   )
 }
 
-ensure_datastore_sql <- function(resource_id) {
+ensure_datastore_sql <- function(resource_id, url) {
+
   sql <- sprintf('SELECT * FROM "%s" LIMIT 1', resource_id)
   res <- tryCatch(
     ds_search_sql(sql, url = url, as = "table"),
@@ -29,35 +30,37 @@ ensure_datastore_sql <- function(resource_id) {
   res
 }
 
-find_sql_ready_resource <- function() {
+find_sql_ready_resource <- function(url) {
   rid <- get_test_rid()
-  if (nzchar(rid)) {
-    res <- ensure_datastore_sql(rid)
-    if (!inherits(res, "error")) {
-      return(rid)
-    }
+  if (!nzchar(rid)) {
+    testthat::skip("No test resource ID configured")
   }
 
-  meta <- try(ds_search("_table_metadata", url = url, as = "table", limit = 50), silent = TRUE)
-  if (inherits(meta, "try-error") || !is.list(meta) || is.null(meta$records)) {
-    testthat::skip("Unable to list datastore metadata")
+ # First check if datastore is enabled at all
+  if (!datastore_enabled(url)) {
+    testthat::skip("Datastore extension not enabled on test CKAN instance")
   }
 
-  for (name in meta$records$name) {
-    res <- ensure_datastore_sql(name)
-    if (!inherits(res, "error")) {
-      return(name)
-    }
+  # Check if the test resource is in the datastore
+  preview <- safe_ds_preview(rid, url)
+  if (inherits(preview, "error")) {
+    testthat::skip("Test resource not available in datastore")
   }
 
-  testthat::skip("No datastore resources accept SQL queries in this environment")
+  # Check if SQL queries work on this resource
+  res <- ensure_datastore_sql(rid, url)
+  if (inherits(res, "error")) {
+    testthat::skip("Datastore SQL not available for test resource")
+  }
+
+  rid
 }
 
 test_that("src_ckan collects rows from datastore resource", {
   check_ckan(url)
-  rid <- find_sql_ready_resource()
+  rid <- find_sql_ready_resource(url)
 
-  preview <- safe_ds_preview(rid)
+  preview <- safe_ds_preview(rid, url)
   if (inherits(preview, "error") || !is.list(preview) || length(preview$records) == 0) {
     skip("Selected datastore resource did not return preview data")
   }
@@ -67,14 +70,17 @@ test_that("src_ckan collects rows from datastore resource", {
   expect_s3_class(src, "src_CKANConnection")
 
   # tbl_obj <- dplyr::tbl(src, name = rid)
+  # <CKANConnection> uses an old dbplyr interface
+  # ℹ Please install a newer version of the package or contact the maintainer
+  # This warning is displayed once every 8 hours.
   # Error in ds_search_sql(as.character(statement), url = conn@url, as = "table") :
   # "Bad request - Action name not known: datastore_search_sql"
 
   # x <- tbl_obj |>
-  # See https://github.com/ropensci/ckanr/issues/188
-  # See https://dbplyr.tidyverse.org/articles/translation-function.html
+  # # See https://github.com/ropensci/ckanr/issues/188
+  # # See https://dbplyr.tidyverse.org/articles/translation-function.html
   # dplyr::slice_min(n = 3, "ID") |>
-  # dplyr::collect()
+  #   dplyr::collect()
 
   # expect_s3_class(x, "tbl_df")
   # expect_gt(nrow(x), 0)

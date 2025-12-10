@@ -9,7 +9,7 @@ echo "Running post attach commands..."
 # CKAN from the top level docker-compose file.
 
 # If CKAN_VERSION=2.10-py3.10 or CKAN_VERSION=2.11 CKAN_VERSION=2.9
-CKANR_TEST_KEY=$(DOCKER_HOST=unix:///var/run/docker-host.sock docker exec ckan ckan user token add ckan_admin dev_token 2>/dev/null | grep -A1 'API Token created:' | tail -1 | tr -d '\n\t ')
+CKANR_TEST_KEY=$(DOCKER_HOST=unix:///var/run/docker-host.sock DOCKER_API_VERSION=1.43 docker exec ckan ckan user token add ckan_admin dev_token 2>/dev/null | grep -A1 'API Token created:' | tail -1 | tr -d '\n\t ')
 # If CKAN_VERSION=2.8
 # CKANR_TEST_KEY=$(DOCKER_HOST=unix:///var/run/docker-host.sock docker exec ckan paster --plugin=ckan user ckan_admin | grep -o -P '(?<=apikey=).*(?= created)')
 

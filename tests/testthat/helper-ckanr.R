@@ -67,13 +67,27 @@ prepare_test_ckan <- function(test_url = Sys.getenv("CKANR_TEST_URL"),
     )
     p <- package_show(id = "ckanr_test_dataset")
 
-    r <- resource_create(
-      package_id = p$id,
-      description = "CSV resource",
-      name = "ckanr test resource",
-      upload = path_csv,
-      rcurl = "http://google.com"
-    )
+    # Find existing resources by name or create new ones
+    find_resource_by_name <- function(pkg, name) {
+      for (res in pkg$resources) {
+        if (identical(res$name, name)) {
+          return(res)
+        }
+      }
+      NULL
+    }
+
+    # Get or create CSV resource
+    r <- find_resource_by_name(p, "ckanr test resource")
+    if (is.null(r)) {
+      r <- resource_create(
+        package_id = p$id,
+        description = "CSV resource",
+        name = "ckanr test resource",
+        upload = path_csv,
+        rcurl = "http://google.com"
+      )
+    }
     push_resource_to_datastore(
       resource_id = r$id,
       csv_path = path_csv,
@@ -81,27 +95,35 @@ prepare_test_ckan <- function(test_url = Sys.getenv("CKANR_TEST_URL"),
       key = test_key
     )
 
-    r_parquet <- resource_create(
-      package_id = p$id,
-      description = "Parquet resource",
-      name = "ckanr test parquet resource",
-      upload = path_parquet,
-      rcurl = "http://google.com"
-    )
+    # Get or create Parquet resource
+    r_parquet <- find_resource_by_name(p, "ckanr test parquet resource")
+    if (is.null(r_parquet)) {
+      r_parquet <- resource_create(
+        package_id = p$id,
+        description = "Parquet resource",
+        name = "ckanr test parquet resource",
+        upload = path_parquet,
+        rcurl = "http://google.com"
+      )
+    }
 
-    r_txt <- resource_create(
-      package_id = p$id,
-      description = "Text resource",
-      name = "ckanr test text resource",
-      upload = path_txt,
-      rcurl = "http://google.com"
-    )
+    # Get or create Text resource
+    r_txt <- find_resource_by_name(p, "ckanr test text resource")
+    if (is.null(r_txt)) {
+      r_txt <- resource_create(
+        package_id = p$id,
+        description = "Text resource",
+        name = "ckanr test text resource",
+        upload = path_txt,
+        rcurl = "http://google.com"
+      )
 
-    r_views <- resource_create_default_resource_views(
-      r_txt,
-      p$id,
-      create_datastore_views = FALSE
-    )
+      r_views <- resource_create_default_resource_views(
+        r_txt,
+        p$id,
+        create_datastore_views = FALSE
+      )
+    }
 
     # Note: The DataPusher would automatically push CSV resources to the datastore
     # The devcontainer CKAN does not have a datapusher or xloader configured
@@ -183,9 +205,28 @@ uniquify_ids <- function(ids) {
   }, character(1), USE.NAMES = FALSE)
 }
 
+datastore_enabled <- function(url) {
+  # Try calling datastore_search to see if it's available
+  # The status_show extensions list may not include datastore even when enabled
+ res <- tryCatch(
+    ckan_action("datastore_search",
+      body = jsonlite::toJSON(list(resource_id = "_table_metadata", limit = 0), auto_unbox = TRUE),
+      headers = list(`Content-Type` = "application/json"),
+      url = url
+    ),
+    error = function(e) e
+  )
+  !inherits(res, "error")
+}
+
 push_resource_to_datastore <- function(resource_id, csv_path, url, key) {
   if (!nzchar(resource_id) || !file.exists(csv_path)) {
     message("Unable to push resource to datastore; missing resource id or file")
+    return(invisible(FALSE))
+  }
+
+  if (!datastore_enabled(url)) {
+    message("Datastore extension not enabled; skipping datastore push")
     return(invisible(FALSE))
   }
 

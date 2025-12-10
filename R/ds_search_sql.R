@@ -5,11 +5,11 @@
 #' @template args
 #' @template key
 #' @examples \dontrun{
-#' url <- "https://demo.ckan.org/"
-#' sql <- 'SELECT * from "f4129802-22aa-4437-b9f9-8a8f3b7b2a53" LIMIT 2'
-#' ds_search_sql(sql, url = url, as = "table")
-#' sql2 <- 'SELECT "Species","Genus","Family" from "f4129802-22aa-4437-b9f9-8a8f3b7b2a53" LIMIT 2'
-#' ds_search_sql(sql2, url = url, as = "table")
+#' ckanr_setup(url = "https://data.gov.au/")
+#' sql <- 'SELECT * from "eef6a84b-ad44-446f-9cf9-fb5d135e3123" LIMIT 2'
+#' ds_search_sql(sql, as = "table")
+#' sql2 <- 'SELECT "Dog","TRI" from "eef6a84b-ad44-446f-9cf9-fb5d135e3123" LIMIT 2'
+#' ds_search_sql(sql2, as = "table")
 #' }
 ds_search_sql <- function(
   sql, url = get_default_url(), key = get_default_key(),

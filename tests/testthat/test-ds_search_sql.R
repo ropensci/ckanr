@@ -54,7 +54,8 @@ test_that("ds_search_sql gives back expected class types", {
   sql <- paste0('SELECT * from "', r, '" LIMIT 2')
   a <- ds_search_sql(sql, url = u)
   expect_is(a, "list")
-  records <- a$result$records
+  # Note: jsl() extracts the 'result' field, so records are at a$records not a$result$records
+  records <- a$records
   skip_if(
     is.null(records) || length(records) == 0,
     paste(
@@ -63,7 +64,7 @@ test_that("ds_search_sql gives back expected class types", {
       "Load fixture data with DataPusher or datastore_create before running this test."
     )
   )
-  expect_true("records" %in% names(a$result))
+  expect_true("records" %in% names(a))
   expect_gt(length(records), 0)
 
   expect_ckan_formats(function(fmt) {
