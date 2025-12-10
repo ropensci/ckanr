@@ -40,7 +40,7 @@
 #' ds_search(resource_id = rid, as = "json")
 #'
 #' ds_search(resource_id = rid, limit = 1, as = "table")
-#' ds_search(resource_id = rid, q = "a*")
+#' ds_search(resource_id = rid, q = "S*")
 #' }
 ds_search <- function(
   resource_id = NULL, filters = NULL, q = NULL,
