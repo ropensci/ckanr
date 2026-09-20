@@ -81,7 +81,6 @@ recently_changed_packages_activity_list <- function(
   offset = 0, limit = 31,
   url = get_default_url(), key = get_default_key(), as = "list", ...
 ) {
-  ver <- floor(ckan_version(url)$version_num)
   args <- cc(list(offset = offset, limit = limit))
   res <- ckan_GET(url, "recently_changed_packages_activity_list", args,
     key = key, opts = list(...)

@@ -18,7 +18,7 @@ ckanr_setup(
 )
 }
 \arguments{
-\item{url}{A CKAN URL (optional), default: https://data.ontario.ca}
+\item{url}{A CKAN URL (optional), default: https://demo.ckan.org/}
 
 \item{key}{A CKAN API key (optional, character)}
 

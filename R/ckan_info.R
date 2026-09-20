@@ -18,7 +18,7 @@ ckan_info <- function(url = get_default_url(), ...) {
 }
 
 #' @export
-#' @param url Base url to use. Default: <https://data.ontario.ca>. See
+#' @param url Base url to use. Default: <https://demo.ckan.org/>. See
 #' also [ckanr_setup()] and [get_default_url()]. (required)
 #' @rdname ckan_info
 ckan_version <- function(url = get_default_url(), ...) {

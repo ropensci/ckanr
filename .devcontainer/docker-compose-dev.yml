@@ -37,7 +37,6 @@ services:
       - CKAN_SITE_URL=${CKANR_DEFAULT_URL:-http://localhost:5000}
       - CKAN__PLUGINS=${CKAN__PLUGINS}
       - CKAN__AUTH__ALLOW_DATASET_COLLABORATORS=${CKAN__AUTH__ALLOW_DATASET_COLLABORATORS}
-      - CKAN__ACTIVITY_STREAMS_EMAIL_NOTIFICATIONS=${CKAN__ACTIVITY_STREAMS_EMAIL_NOTIFICATIONS}
       - CKAN_SQLALCHEMY_URL=postgresql://ckan_default:pass@postgres/ckan_test
       - CKAN_DATASTORE_WRITE_URL=postgresql://datastore_write:pass@postgres/datastore_test
       - CKAN_DATASTORE_READ_URL=postgresql://datastore_read:pass@postgres/datastore_test
@@ -52,7 +51,7 @@ services:
       - CKAN_SYSADMIN_PASSWORD=test1234
       - CKAN_SYSADMIN_EMAIL=mail@example.com
       - CKAN___BEAKER__SESSION__SECRET=secret
-      - CKAN__ACTIVITY_STREAMS__EMAIL_NOTIFICATIONS=true
+      - CKAN__ACTIVITY_STREAMS__EMAIL_NOTIFICATIONS=${CKAN__ACTIVITY_STREAMS__EMAIL_NOTIFICATIONS:-true}
     volumes:
       - ckan_storage:/var/lib/ckan
       # - ./src:/srv/app/src_extensions
@@ -65,7 +64,7 @@ services:
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "-qO", "/dev/null", "${CKANR_DEFAULT_URL:-http://localhost:5000}/api/action/status_show"]
-      interval: 60s
+      interval: 30s
       timeout: 30s
       retries: 5
     depends_on:
@@ -109,7 +108,7 @@ services:
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "-qO", "/dev/null", "${SOLR_URL:-http://localhost:8983/solr/ckan/admin/ping?wt=json&distrib=false}"]
-      interval: 60s
+      interval: 30s
       timeout: 10s
       retries: 3
 

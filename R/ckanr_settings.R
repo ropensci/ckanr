@@ -63,7 +63,7 @@ print.ckanr_settings <- function(x, ...) {
 #' Configure default CKAN settings
 #'
 #' @export
-#' @param url A CKAN URL (optional), default: https://data.ontario.ca
+#' @param url A CKAN URL (optional), default: https://demo.ckan.org/
 #' @param key A CKAN API key (optional, character)
 #' @param test_url (optional, character) A valid CKAN URL for testing purposes
 #' @param test_key (optional, character) A valid CKAN API key privileged to
