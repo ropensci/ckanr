@@ -78,13 +78,13 @@ jobs:
       - uses: r-lib/actions/setup-r-dependencies@v2
         if: ${{ runner.os == 'macOS' }}
         with:
+          # TODO: drop once RSPM serves a working macOS binary again.
+          # The RSPM sonoma-arm64 binary for readxl 1.5.0.1 fails to
+          # extract ("unknown archive type"), so pin the previous release.
           extra-packages: |
             any::rcmdcheck
             any::covr
             any::xml2
-            # TODO: drop once RSPM serves a working macOS binary again.
-            # The RSPM sonoma-arm64 binary for readxl 1.5.0.1 fails to
-            # extract ("unknown archive type"), so pin the previous release.
             readxl@1.5.0
           needs: |
             check
