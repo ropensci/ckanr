@@ -10,9 +10,10 @@ as.ckan_related(x, ...)
 is.ckan_related(x)
 }
 \arguments{
-\item{x}{Variety of things, character, list, or ckan_related class object}
+\item{x}{One of character, list, or ckan_related class object}
 
-\item{...}{Further args passed on to \code{\link[=related_show]{related_show()}} if character given}
+\item{...}{Extra arguments. If \code{x} is character, the function passes them
+on to \code{\link[=related_show]{related_show()}}}
 }
 \description{
 ckan_related class helpers

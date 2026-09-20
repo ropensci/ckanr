@@ -1,10 +1,10 @@
-#' List organization
+#' List organizations
 #'
 #' @export
 #'
 #' @param order_by (character, only the first element is used).
 #' The field to sort the list by, must be `name` or `packages`.
-#' @param decreasing (logical). Is the sort-order is decreasing or not.
+#' @param decreasing (logical). It shows if the sort order decreases.
 #' @param organizations (character or `NULL`). A list of names of the
 #' organizations to return. `NULL` returns all organizations.
 #' @param all_fields (logical). Return the name or all fields of the object.

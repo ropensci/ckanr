@@ -2,10 +2,10 @@
 #'
 #' @export
 #'
-#' @param id (character) The name or id of the tag
-#' @param include_datasets include a list of up to 1000 of the tag's datasets.
-#' Limit 1000 datasets, use [package_search()] for more.
-#' (optional, default: `FALSE`)
+#' @param id (character) Name or ID of the tag.
+#' @param include_datasets Include a list of up to 1000 datasets of the tag.
+#' The limit is 1000 datasets. Use [package_search()] for more.
+#' Optional. Default is `FALSE`.
 #' @template args
 #' @template key
 #' @examples \dontrun{

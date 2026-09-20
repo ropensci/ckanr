@@ -32,60 +32,60 @@ resource_create(
 )
 }
 \arguments{
-\item{package_id}{(character) id of package that the resource should be
-added to. This should be an alphanumeric string. Required.}
+\item{package_id}{(character) ID of the package. You add the resource
+to this package. The value must be an alphanumeric string. Required.}
 
-\item{rcurl}{(character) url of resource. Required.}
+\item{rcurl}{(character) URL of the resource. Required.}
 
-\item{revision_id}{(character) revision id (optional)}
+\item{revision_id}{(character) Revision ID. Optional.}
 
-\item{description}{(character) description (optional). Required.}
+\item{description}{(character) Description of the resource. Optional. Required.}
 
-\item{format}{(character) format (optional)}
+\item{format}{(character) Format. Optional.}
 
-\item{hash}{(character) hash (optional)}
+\item{hash}{(character) Hash. Optional.}
 
-\item{name}{(character) name (optional). Required.}
+\item{name}{(character) Name of the resource. Optional. Required.}
 
-\item{resource_type}{(character) resource type (optional)}
+\item{resource_type}{(character) Resource type. Optional.}
 
-\item{mimetype}{(character) mime type (optional)}
+\item{mimetype}{(character) MIME type. Optional.}
 
-\item{mimetype_inner}{(character) mime type inner (optional)}
+\item{mimetype_inner}{(character) Inner MIME type. Optional.}
 
-\item{webstore_url}{(character) webstore url (optional)}
+\item{webstore_url}{(character) Webstore URL. Optional.}
 
-\item{cache_url}{(character) cache url(optional)}
+\item{cache_url}{(character) Cache URL. Optional.}
 
-\item{size}{(integer) size (optional)}
+\item{size}{(integer) Size. Optional.}
 
-\item{created}{(character) iso date string (optional)}
+\item{created}{(character) ISO date string. Optional.}
 
-\item{last_modified}{(character) iso date string (optional)}
+\item{last_modified}{(character) ISO date string. Optional.}
 
-\item{cache_last_updated}{(character) iso date string (optional)}
+\item{cache_last_updated}{(character) ISO date string. Optional.}
 
-\item{webstore_last_updated}{(character) iso date string (optional)}
+\item{webstore_last_updated}{(character) ISO date string. Optional.}
 
-\item{upload}{(character) A path to a local file (optional)}
+\item{upload}{(character) Path to a local file. Optional.}
 
-\item{extras}{(list) - the resources' extra metadata fields (optional)}
+\item{extras}{(list) Extra metadata fields of the resource. Optional.}
 
-\item{http_method}{(character) which HTTP method (verb) to use; one of
-"GET" or "POST". Default: "GET"}
+\item{http_method}{(character) HTTP method (verb) to use.
+The value is one of "GET" or "POST". Default is "GET".}
 
-\item{url}{Base url to use. Default: https://demo.ckan.org/ See
+\item{url}{Base URL to use. Default: https://demo.ckan.org/. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
-\item{key}{A privileged CKAN API key, Default: your key set with
+\item{key}{A privileged CKAN API key. Default: your key set with
 \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with
-table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
-which attempts to parse data to data.frame's when possible, so the result
+the table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
+which attempts to parse data to data.frame's when possible. The result
 can vary from a vector, list or data.frame. (required)}
 
-\item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
+\item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
 \description{
 Create a resource

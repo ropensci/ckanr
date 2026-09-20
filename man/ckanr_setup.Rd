@@ -48,23 +48,23 @@ create datasets at \code{test_url}}
 Configure default CKAN settings
 }
 \details{
-\code{\link[=ckanr_setup]{ckanr_setup()}} sets CKAN connection details. ckanr's functions
-default to use the default URL and API key unless specified explicitly.
+\code{\link[=ckanr_setup]{ckanr_setup()}} sets CKAN connection details. If you do not specify
+a URL or key, the functions use the default URL and API key.
 
-ckanr's automated tests require a valid CKAN URL, a privileged API key
-for that URL, plus the IDs of an existing dataset and an existing resource,
-respectively.
+ckanr automated tests require a valid CKAN URL, a privileged API key
+for that URL, and the IDs of an existing dataset and an existing resource.
 
-The writing tests (create, update, delete) can fail for two reasons:
-failures in ckanr's code which the tests aim to detect,
-or failures in the configured CKAN, which are not necessarily a problem
-with ckanr's code but prevent the tests to prove otherwise.
+The writing tests (create, update, delete) can fail for two reasons.
+One reason is failures in ckanr code. The tests aim to detect these failures.
+The other reason is failures in the configured CKAN. These failures are
+not necessarily a problem with ckanr code, but they stop the tests
+from proving otherwise.
 
-Setting \code{test_behaviour} to \code{"SKIP"} will allow writing tests to skip
-if the configured test CKAN fails. This is desirable to e.g. test the other
-functions even if the tester has no write access to a CKAN instance.
+If you set \code{test_behaviour} to \code{"SKIP"}, writing tests skip
+when the configured test CKAN fails. This helps you test the other
+functions even when you have no write access to a CKAN instance.
 
-Setting \code{test_behaviour} to \code{"FAIL"} will let the tester find any
+If you set \code{test_behaviour} to \code{"FAIL"}, the tester finds
 problems with both the configured test CKAN and the writing functions.
 }
 \examples{

@@ -10,10 +10,10 @@ as.ckan_resource_view(x, ...)
 is.ckan_resource_view(x)
 }
 \arguments{
-\item{x}{Variety of things: character, list, or \code{ckan_resource_view} object}
+\item{x}{One of character, list, or \code{ckan_resource_view} object}
 
-\item{...}{Further arguments passed to \code{\link[=resource_view_show]{resource_view_show()}} when \code{x} is an
-identifier.}
+\item{...}{Extra arguments. If \code{x} is an identifier, the function passes
+them to \code{\link[=resource_view_show]{resource_view_show()}}.}
 }
 \description{
 ckan_resource_view class helpers

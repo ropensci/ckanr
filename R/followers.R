@@ -3,8 +3,8 @@
 #' Report follower totals for datasets, groups, or users.
 #'
 #' @param id (character or `ckan_*`) Identifier for the object to inspect.
-#'   For datasets pass an id/slug or `ckan_package`, for groups pass the
-#'   corresponding identifier or `ckan_group`, and for users pass a username
+#'   For datasets, pass an id/slug or `ckan_package`. For groups, pass the
+#'   corresponding identifier or `ckan_group`. For users, pass a username
 #'   or `ckan_user`.
 #' @template args
 #' @template key
@@ -52,8 +52,8 @@ user_follower_count <- function(
 
 #' Follower lists for CKAN objects
 #'
-#' Return the individual follower records for CKAN datasets, groups,
-#' or users.
+#' The function returns the individual follower records for CKAN datasets,
+#' groups, or users.
 #'
 #' @inheritParams follower_counts
 #' @template args
@@ -102,8 +102,8 @@ user_follower_list <- function(
 
 #' Follow and unfollow CKAN datasets or groups
 #'
-#' Create or remove follower relationships for a CKAN object. These helpers
-#' require an authenticated user (API key) representing the follower.
+#' Create or remove follower relationships for a CKAN object. You must
+#' authenticate as a user with an API key. The key represents the follower.
 #'
 #' @inheritParams follower_counts
 #' @template args
@@ -290,7 +290,7 @@ group_followee_count <- function(
 
 #' Followee lists for CKAN users
 #'
-#' Return the objects being followed by a user.
+#' The function returns the objects that a user follows.
 #'
 #' @inheritParams followee_counts
 #' @param q (character) Optional prefix filter for `followee_list()`.

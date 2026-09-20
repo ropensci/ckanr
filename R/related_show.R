@@ -5,9 +5,9 @@
 #' @param id (character) Related item identifier.
 #' @template args
 #' @template key
-#' @details By default the help and success slots are dropped, and only the
-#' result slot is returned. You can request raw json with `as = 'json'`
-#' then parse yourself to get the help slot.
+#' @details By default the function drops the help and success slots, and
+#' it returns only the result slot. If you want raw json, pass `as = 'json'`.
+#' Then you parse the result to get the help slot.
 #' @examples \dontrun{
 #' # Setup
 #' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))

@@ -16,26 +16,27 @@ package_revise(
 )
 }
 \arguments{
-\item{match}{(list) Key/value pairs identifying the dataset to revise. Required unless using flattened keys.}
+\item{match}{(list) Key/value pairs that identify the dataset to revise. Unless you use flattened keys,
+this parameter is required.}
 
-\item{filter}{(character or list) Patterns describing fields to remove before the update runs.}
+\item{filter}{(character or list) Patterns that describe fields to remove before the update runs.}
 
-\item{update}{(list) Values to set after filtering. Supports flattened keys.}
+\item{update}{(list) Values to set after filtering. The values support flattened keys.}
 
-\item{include}{(character or list) Optional patterns delimiting which fields are returned in the response.}
+\item{include}{(character or list) Optional patterns that delimit which fields the response returns.}
 
-\item{url}{Base url to use. Default: https://demo.ckan.org/ See
+\item{url}{Base URL to use. Default: https://demo.ckan.org/. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
-\item{key}{A privileged CKAN API key, Default: your key set with
+\item{key}{A privileged CKAN API key. Default: your key set with
 \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with
-table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
-which attempts to parse data to data.frame's when possible, so the result
+the table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
+which attempts to parse data to data.frame's when possible. The result
 can vary from a vector, list or data.frame. (required)}
 
-\item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
+\item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
 \description{
 Revise a dataset using match/filter/update semantics

@@ -15,25 +15,25 @@ organization_purge(
 \arguments{
 \item{id}{(character) name or id of the organization}
 
-\item{url}{Base url to use. Default: https://demo.ckan.org/ See
+\item{url}{Base URL to use. Default: https://demo.ckan.org/. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
-\item{key}{A privileged CKAN API key, Default: your key set with
+\item{key}{A privileged CKAN API key. Default: your key set with
 \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with
-table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
-which attempts to parse data to data.frame's when possible, so the result
+the table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
+which attempts to parse data to data.frame's when possible. The result
 can vary from a vector, list or data.frame. (required)}
 
-\item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
+\item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
 \value{
-an empty list on success
+The function returns an empty list on success
 }
 \description{
-IMPORTANT: You must be a sysadmin to purge an organization. Once an
-organization is purged, it is permanently removed from the system.
+IMPORTANT: You must be a sysadmin to purge an organization. Once you purge
+an organization, the system removes it permanently.
 }
 \examples{
 \dontrun{

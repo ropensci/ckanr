@@ -2,12 +2,12 @@
 #'
 #' @export
 #'
-#' @details The `...` argument can be used to pass additional arguments to the
-#' function that actually reads the file. It is only used when `store="session"`
-#'  and if the file is *not* a ZIP file.
+#' @details You can pass additional arguments with `...` to the function
+#' that reads the file. The function uses `...` only when `store="session"`
+#' and the file is *not* a ZIP file.
 #'
-#' This list shows what function is used to read what file format, so that you can
-#' see what additional arguments are available:
+#' This list shows the function that reads each file format. You can see
+#' what additional arguments are available:
 #' * csv: \link[utils]{read.csv}
 #' * xls, xlsx: \link[readxl]{read_excel}
 #' * xml: \link[xml2]{read_xml}
@@ -18,14 +18,15 @@
 #' * parquet: \link[arrow]{read_parquet}
 #'
 #'
-#' @param x URL for the file
-#' @param store One of session (default) or disk. session stores in R session,
-#' and disk saves the file to disk.
-#' @param path if `store="disk"`, you must give a path to store file to
-#' @param format Format of the file. Required if format is not detectable
-#' through file URL.
+#' @param x URL of the file
+#' @param store One of session (default) or disk. The session option stores
+#' the file in the R session, and the disk option saves the file to disk.
+#' @param path If `store="disk"`, give a path to store the file.
+#' @param format Format of the file. If the file URL does not show the format,
+#' pass `format`.
 #' @param key A CKAN API key (optional, character)
-#' @param ... Arguments passed on to the function used to read the file, if `store="session"`. See details.
+#' @param ... Extra arguments. If `store="session"`, the function passes them
+#' to the function that reads the file. See details.
 #' @examples \dontrun{
 #' # CSV file
 #' ckanr_setup("http://datamx.io")

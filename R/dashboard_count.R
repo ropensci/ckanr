@@ -3,9 +3,9 @@
 #' @export
 #' @template args
 #' @template key
-#' @details Activities from the user herself are not counted by CKAN even
-#' though they appear in the dashboard (users don't want to be notified about
-#' things they did themselves).
+#' @details CKAN does not count activities from the user herself, but they
+#' appear in the dashboard. Users do not want notices about things they did
+#' themselves.
 #'
 #' @examples \dontrun{
 #' # Setup

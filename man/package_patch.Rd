@@ -18,29 +18,29 @@ package_patch(
 \arguments{
 \item{x}{(list) A list with key-value pairs}
 
-\item{id}{(character) Resource ID to update (optional, required if
-x does not have an "id" field)}
+\item{id}{(character) Resource ID to update (optional). If x lacks an "id" field,
+this parameter is required.}
 
-\item{extras}{(character vector) - the dataset's extras
-(optional), extras are arbitrary (key: value) metadata items that can be
-added to datasets, each extra dictionary should have keys 'key' (a string),
+\item{extras}{(character vector) The dataset's extras
+(optional). Extras are arbitrary (key: value) metadata items for datasets.
+Each extra dictionary must have keys 'key' (a string) and
 'value' (a string)}
 
-\item{http_method}{(character) which HTTP method (verb) to use; one of
+\item{http_method}{(character) Which HTTP method (verb) to use. Use one of
 "GET" or "POST". Default: "GET"}
 
-\item{key}{A privileged CKAN API key, Default: your key set with
+\item{key}{A privileged CKAN API key. Default: your key set with
 \code{\link{ckanr_setup}}}
 
-\item{url}{Base url to use. Default: https://demo.ckan.org/ See
+\item{url}{Base URL to use. Default: https://demo.ckan.org/. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with
-table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
-which attempts to parse data to data.frame's when possible, so the result
+the table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
+which attempts to parse data to data.frame's when possible. The result
 can vary from a vector, list or data.frame. (required)}
 
-\item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
+\item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
 \description{
 Update a package's metadata

@@ -32,8 +32,8 @@ remotes::install_github("ropensci/ckanr")
 library("ckanr")
 ```
 
-Note: the default base CKAN URL is set to [http://data.techno-science.ca/](http://data.techno-science.ca/). You can change this using `ckanr_setup()`, or change the URL using the `url` 
-parameter in each function call.
+The default base CKAN URL is [https://demo.ckan.org/](https://demo.ckan.org/). 
+To change it, use `ckanr_setup()`, or use the `url` parameter in each function call.
 
 To set one or both, run:
 
@@ -237,12 +237,11 @@ resource_search(q = 'name:data', limit = 2, as = 'table')
 ```
 
 ## ckanr's dplyr interface
-`ckanr` implements a `dplyr` SQL interface to CKAN's datastore. 
-You can access any resource in the datastore directly using only the CKAN
+`ckanr` provides a `dplyr` SQL interface to CKAN's datastore. 
+You can access any resource in the datastore with only the CKAN
 resource ID.
 
-Note: this will only work for resources which were uploaded successfully to the 
-datastore - they will show the green "Data API" button in CKAN.
+This works only for resources in the datastore. They show the green "Data API" button in CKAN.
 
 
 ```r
@@ -253,7 +252,7 @@ dplyr::tbl(src = ckan$con, from = res_id) %>% as_tibble(.)
 
 ## Example of using a different CKAN API
 
-See `ckanr::servers()` for a list of CKAN servers. Ther are 127 as of 2020-07-29.
+See `ckanr::servers()` for a list of CKAN servers. There are 127 as of 2020-07-29.
 
 ### The UK Natural History Museum
 

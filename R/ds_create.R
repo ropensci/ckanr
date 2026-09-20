@@ -1,18 +1,17 @@
 #' Add a new table to a datastore
 #'
-#' BEWARE: This function still doesn't quite work yet.
+#' BEWARE: This function does not work yet.
 #'
 #' @export
-#' @param resource_id (string) Resource id that the data is going to be stored
-#' against.
-#' @param force (logical) Set to `TRUE` to edit a read-only resource.
+#' @param resource_id (string) Resource id that stores the data.
+#' @param force (logical) To edit a read-only resource, set to `TRUE`.
 #' Default: `FALSE`
-#' @param resource (dictionary) Resource dictionary that is passed to
-#' [resource_create()]. Use instead of `resource_id` (optional)
+#' @param resource (dictionary) Resource dictionary for
+#' [resource_create()]. Use it instead of `resource_id` (optional)
 #' @param aliases (character) Names for read only aliases of the resource.
 #' (optional)
 #' @param fields (list) Fields/columns and their extra metadata. (optional)
-#' @param records (list) The data, eg: `[{"dob": "2005", "some_stuff":
+#' @param records (list) The data, for example: `[{"dob": "2005", "some_stuff":
 #' ["a", "b"]}]` (optional)
 #' @param primary_key (character) Fields that represent a unique key (optional)
 #' @param indexes (character) Indexes on table (optional)

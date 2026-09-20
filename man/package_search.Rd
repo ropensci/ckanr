@@ -26,66 +26,64 @@ package_search(
 \arguments{
 \item{q}{Query terms, defaults to '\emph{:}', or everything.}
 
-\item{fq}{Filter query, this does not affect the search, only what gets
-returned}
+\item{fq}{Filter query. It does not affect the search. It only controls
+what the function returns.}
 
-\item{sort}{Field to sort on. You can specify ascending (e.g., score desc)
-or descending (e.g., score asc), sort by two fields (e.g., score desc,
-price asc), or sort by a function (e.g., sum(x_f, y_f) desc, which sorts
-by the sum of x_f and y_f in a descending order).}
+\item{sort}{Field to sort on. You can specify ascending order, for example score desc.
+You can specify descending order, for example score asc. You can sort by two fields,
+for example score desc, price asc. You can sort by a function, for example sum(x_f, y_f) desc.
+The function then sorts by the sum of x_f and y_f in descending order.}
 
 \item{rows}{Number of records to return. Defaults to 10.}
 
-\item{start}{Record to start at, default to beginning.}
+\item{start}{Record to start with. It defaults to the beginning.}
 
 \item{facet}{(logical) Whether to return facet results or not.
 Default: \code{FALSE}}
 
-\item{facet.limit}{(numeric) This param indicates the maximum number of
-constraint counts that should be returned for the facet fields.
-A negative value means unlimited. Default: 100.
-Can be specified on a per field basis.}
+\item{facet.limit}{(numeric) The maximum number of
+constraint counts for the facet fields. A negative value means unlimited. Default: 100.
+You can set it for each field.}
 
-\item{facet.field}{(character) This param allows you to specify a field which
-should be treated as a facet. It will iterate over each Term in the field
-and generate a facet count using that Term as the constraint. This parameter
-can be specified multiple times to indicate multiple facet fields. None of
-the other params in this section will have any effect without specifying at
-least one field name using this param.}
+\item{facet.field}{(character) This parameter sets a field to treat
+as a facet. It iterates over each Term in the field.
+It generates a facet count with that Term as the constraint. You
+can give this parameter multiple times for multiple facet fields. If you omit
+all field names for this parameter, the other parameters in this section have no effect.}
 
-\item{facet.mincount}{(integer) the minimum counts for facet fields should
-be included in the results}
+\item{facet.mincount}{(integer) the minimum counts for facet fields.
+The results include only fields that meet this count.}
 
-\item{include_drafts}{(logical) if \code{TRUE} draft datasets will be
-included. A user will only be returned their own draft datasets, and a
-sysadmin will be returned all draft datasets. default: \code{FALSE}.
-first CKAN version: 2.6.1; dropped from request if CKAN version is older
-or if CKAN version isn't available via \code{\link[=ckan_version]{ckan_version()}}}
+\item{include_drafts}{(logical) If \code{TRUE}, the function includes
+draft datasets. A user gets only their own draft datasets. A
+sysadmin gets all draft datasets. Default: \code{FALSE}.
+First CKAN version: 2.6.1. If the CKAN version is older, or if the version is not
+available through \code{\link[=ckan_version]{ckan_version()}}, the function drops it from the request.}
 
-\item{include_private}{(logical) if \code{TRUE} private datasets will be
-included. Only private datasets from the user’s organizations will be
-returned and sysadmins will be returned all private datasets.
-default: \code{FALSE}
-first CKAN version: 2.6.1; dropped from request if CKAN version is older
-or if CKAN version isn't available via \code{\link[=ckan_version]{ckan_version()}}}
+\item{include_private}{(logical) If \code{TRUE}, the function includes
+private datasets. It returns only private datasets from the user organizations.
+Sysadmins get all private datasets.
+Default: \code{FALSE}.
+First CKAN version: 2.6.1. If the CKAN version is older, or if the version is not
+available through \code{\link[=ckan_version]{ckan_version()}}, the function drops it from the request.}
 
-\item{use_default_schema}{(logical) use default package schema instead of a
-custom schema defined with an IDatasetForm plugin. default: \code{FALSE}
-first CKAN version: 2.3.5; dropped from request if CKAN version is older
-or if CKAN version isn't available via \code{\link[=ckan_version]{ckan_version()}}}
+\item{use_default_schema}{(logical) Use default package schema instead of a
+custom schema from an IDatasetForm plugin. Default: \code{FALSE}.
+First CKAN version: 2.3.5. If the CKAN version is older, or if the version is not
+available through \code{\link[=ckan_version]{ckan_version()}}, the function drops it from the request.}
 
-\item{url}{Base url to use. Default: https://demo.ckan.org/ See
+\item{url}{Base URL to use. Default: https://demo.ckan.org/. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
-\item{key}{A privileged CKAN API key, Default: your key set with
+\item{key}{A privileged CKAN API key. Default: your key set with
 \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with
-table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
-which attempts to parse data to data.frame's when possible, so the result
+the table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
+which attempts to parse data to data.frame's when possible. The result
 can vary from a vector, list or data.frame. (required)}
 
-\item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
+\item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
 \description{
 Search for packages.

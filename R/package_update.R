@@ -1,14 +1,14 @@
 #' Update a package
 #'
 #' @description This function updates all package metadata fields.
-#' Any update will also set the metadata key "last_updated".
-#' Any omitted metadata fields will be overwritten.
+#' Each update sets the metadata key "last_updated".
+#' The function overwrites any omitted metadata fields.
 #'
 #' @export
 #' @param x (list) A list with key-value pairs
 #' @param id (character) Package identifier
-#' @param http_method (character) which HTTP method (verb) to use; one of "GET" or
-#'   "POST". Default: "GET"
+#' @param http_method (character) Which HTTP method (verb) to use. Use one of "GET" or
+#' "POST". Default: "GET"
 #' @template args
 #' @template key
 #' @examples \dontrun{

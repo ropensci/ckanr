@@ -8,11 +8,11 @@ assign("ckanr_proxy", NULL, envir = ckanr_settings_env)
 #' @export
 #' @return `ckanr_settings` prints your base url, API key (if used), and
 #' optional test server settings (URL, API key, a dataset ID and a resource ID).
-#' `ckanr_setup` sets your production and test settings, while
-#' `get_test_*` get each of those respective settings.
-#' `test_behaviour` indicates whether the CKANR test suite will skip
-#' ("SKIP") or fail ("FAIL") writing tests in case the configured test
-#' CKAN settings don't work.
+#' `ckanr_setup` sets your production and test settings.
+#' `get_test_*` gets each of those settings.
+#' `test_behaviour` states whether the CKANR test suite skips
+#' ("SKIP") or fails ("FAIL") writing tests when the configured test
+#' CKAN settings do not work.
 #' @seealso  [ckanr_setup()],
 #' [get_default_url()], [get_default_key()], [get_test_url()],
 #' [get_test_key()], [get_test_did()], [get_test_rid()],
@@ -80,23 +80,23 @@ print.ckanr_settings <- function(x, ...) {
 #' @param proxy an object of class `request` from a call to
 #' [crul::proxy()]
 #' @details
-#' [ckanr_setup()] sets CKAN connection details. ckanr's functions
-#' default to use the default URL and API key unless specified explicitly.
+#' [ckanr_setup()] sets CKAN connection details. If you do not specify
+#' a URL or key, the functions use the default URL and API key.
 #'
-#' ckanr's automated tests require a valid CKAN URL, a privileged API key
-#' for that URL, plus the IDs of an existing dataset and an existing resource,
-#' respectively.
+#' ckanr automated tests require a valid CKAN URL, a privileged API key
+#' for that URL, and the IDs of an existing dataset and an existing resource.
 #'
-#' The writing tests (create, update, delete) can fail for two reasons:
-#' failures in ckanr's code which the tests aim to detect,
-#' or failures in the configured CKAN, which are not necessarily a problem
-#' with ckanr's code but prevent the tests to prove otherwise.
+#' The writing tests (create, update, delete) can fail for two reasons.
+#' One reason is failures in ckanr code. The tests aim to detect these failures.
+#' The other reason is failures in the configured CKAN. These failures are
+#' not necessarily a problem with ckanr code, but they stop the tests
+#' from proving otherwise.
 #'
-#' Setting `test_behaviour` to `"SKIP"` will allow writing tests to skip
-#' if the configured test CKAN fails. This is desirable to e.g. test the other
-#' functions even if the tester has no write access to a CKAN instance.
+#' If you set `test_behaviour` to `"SKIP"`, writing tests skip
+#' when the configured test CKAN fails. This helps you test the other
+#' functions even when you have no write access to a CKAN instance.
 #'
-#' Setting `test_behaviour` to `"FAIL"` will let the tester find any
+#' If you set `test_behaviour` to `"FAIL"`, the tester finds
 #' problems with both the configured test CKAN and the writing functions.
 #'
 #' @examples

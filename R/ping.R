@@ -1,12 +1,12 @@
-#' Ping a CKAN server to test that it's up or down.
+#' Ping a CKAN server to test if it is up or down.
 #'
 #' @export
 #'
 #' @template args
 #' @template key
 #' @param as (character) One of "logical" (default) or "json". With
-#'   `as = "logical"` failures return `FALSE`; with `as = "json"` failures
-#'   signal an error instead of returning a non-JSON logical.
+#' `as = "logical"` failures return `FALSE`. With `as = "json"` failures
+#' signal an error instead of returning a non-JSON logical.
 #' @examples \dontrun{
 #' ping()
 #' ping(as = "json")

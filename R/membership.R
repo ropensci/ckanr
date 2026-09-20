@@ -1,6 +1,6 @@
 #' Membership helpers
 #'
-#' Utilities for managing CKAN group and organization membership endpoints.
+#' Utilities help you manage CKAN group and organization membership endpoints.
 #'
 #' @name membership
 NULL
@@ -32,7 +32,7 @@ member_list <- function(
 #'
 #' @inheritParams member_list
 #' @param object (character) The object to add (dataset id, user name, etc.).
-#' @param object_type (character) Type of object being added (`"user"`, `"package"`, ...).
+#' @param object_type (character) Type of object you add (`"user"`, `"package"`, ...).
 #' @param capacity (character) Capacity for the membership.
 #' @template args
 #' @template key
@@ -241,8 +241,8 @@ group_list_authz <- function(
 
 #' List organizations a user can act on
 #'
-#' @param id (character or `ckan_user`) Optional user identifier; defaults to the
-#'   authenticated user.
+#' @param id (character or `ckan_user`) Optional user identifier. It defaults to the
+#' authenticated user.
 #' @param permission (character) Permission to check (defaults to `"manage_group"`).
 #' @param include_dataset_count (logical) Include dataset counts in the response.
 #' @template args

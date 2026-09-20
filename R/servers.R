@@ -1,4 +1,4 @@
-#' CKAN server URLS and other info
+#' CKAN server URLs and other info
 #'
 #' @export
 #' @details CKAN instances from https://github.com/ckan/ckan-instances/

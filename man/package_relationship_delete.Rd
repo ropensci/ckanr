@@ -14,19 +14,19 @@ package_relationship_delete(
 )
 }
 \arguments{
-\item{subject}{(character or \code{ckan_package}) Dataset acting as the subject in the relationship.}
+\item{subject}{(character or \code{ckan_package}) Dataset that acts as the subject in the relationship.}
 
-\item{object}{(character or \code{ckan_package}) Dataset acting as the object in the relationship.}
+\item{object}{(character or \code{ckan_package}) Dataset that acts as the object in the relationship.}
 
 \item{relationship_type}{(character) Relationship type (\code{"depends_on"}, \code{"derives_from"}, etc.).}
 
-\item{url}{Base url to use. Default: https://demo.ckan.org/ See
+\item{url}{Base URL to use. Default: https://demo.ckan.org/. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
-\item{key}{A privileged CKAN API key, Default: your key set with
+\item{key}{A privileged CKAN API key. Default: your key set with
 \code{\link{ckanr_setup}}}
 
-\item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
+\item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
 \description{
 Delete a dataset relationship

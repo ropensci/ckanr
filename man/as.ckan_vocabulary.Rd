@@ -10,10 +10,10 @@ as.ckan_vocabulary(x, ...)
 is.ckan_vocabulary(x)
 }
 \arguments{
-\item{x}{Variety of inputs: character, list, or ckan_vocabulary object}
+\item{x}{One of character, list, or ckan_vocabulary object}
 
-\item{...}{Additional arguments passed to \code{vocabulary_show()} when
-retrieving by identifier.}
+\item{...}{Extra arguments. If you retrieve by identifier, the function
+passes them to \code{vocabulary_show()}.}
 }
 \description{
 ckan_vocabulary class helpers

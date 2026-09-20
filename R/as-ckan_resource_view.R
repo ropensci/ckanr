@@ -1,9 +1,9 @@
 #' ckan_resource_view class helpers
 #'
 #' @export
-#' @param x Variety of things: character, list, or `ckan_resource_view` object
-#' @param ... Further arguments passed to [ckanr::resource_view_show()] when `x` is an
-#'   identifier.
+#' @param x One of character, list, or `ckan_resource_view` object
+#' @param ... Extra arguments. If `x` is an identifier, the function passes
+#'   them to [ckanr::resource_view_show()].
 #' @examples \dontrun{
 #' ckanr_setup(
 #'   url = "https://demo.ckan.org/",

@@ -15,45 +15,45 @@ resource_update(
 )
 }
 \arguments{
-\item{id}{(character) Resource ID to update (required)}
+\item{id}{(character) Resource ID to update. Required.}
 
-\item{path}{(character) Local path of the file to upload (optional)}
+\item{path}{(character) Local path of the file to upload. Optional.}
 
-\item{extras}{(list) - the resources' extra metadata fields (optional)}
+\item{extras}{(list) Extra metadata fields of the resource. Optional.}
 
-\item{url}{Base url to use. Default: https://demo.ckan.org/ See
+\item{url}{Base URL to use. Default: https://demo.ckan.org/. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
-\item{key}{A privileged CKAN API key, Default: your key set with
+\item{key}{A privileged CKAN API key. Default: your key set with
 \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with
-table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
-which attempts to parse data to data.frame's when possible, so the result
+the table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
+which attempts to parse data to data.frame's when possible. The result
 can vary from a vector, list or data.frame. (required)}
 
-\item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
+\item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
 \value{
-The HTTP response from CKAN, formatted as list (default), table,
-or JSON.
+The function returns the HTTP response from CKAN as a list (default),
+table, or JSON.
 }
 \description{
-This function can be used to update a resource's file attachment
-and "extra" metadata fields. Any update will also set the metadata key
-"last_updated". Any omitted metadata fields will be overwritten.
+You call this function to update a resource file attachment
+and "extra" metadata fields. Each update sets the metadata key
+"last_updated". The function overwrites any omitted metadata fields.
 
-To update selected metadata fields and retain all others unchanged,
-it is highly recommended to first retrieve the full resource metadata using
-\code{resource_show}, then update these metadata as required, then update the
-given resource with \code{resource_update} using the locally updated metadata.
+To update selected metadata fields and keep all other fields unchanged,
+first retrieve the full resource metadata with \code{resource_show}.
+Then update this metadata as required. Then update the resource
+with \code{resource_update} with the locally updated metadata.
 
-If a resource file is updated, then the new file must exist on a local path.
-R objects cannot directly be used to update a resource file; instead, they
-have to be written to a file, e.g. using \code{tempfile()} - see example.
+If you update a resource file, the new file must exist on a local path.
+You cannot use R objects directly to update a resource file.
+Instead, write them to a file. For example, use \code{tempfile()}. See the example.
 
-For convenience, CKAN base url and API key default to the global options,
-which are set by \code{ckanr_setup}.
+The CKAN base URL and API key default to the global options.
+\code{ckanr_setup} sets the global options.
 }
 \examples{
 \dontrun{

@@ -4,7 +4,7 @@
 #' @param id (character) The id of the group. Required.
 #' @param url Base url to use. Default: https://data.ontario.ca
 #' See also [ckanr_setup()] and [get_default_url()]
-#' @param ... Curl args passed on to [crul::verb-POST] (optional)
+#' @param ... Curl args. The function sends them to [crul::verb-POST] (optional)
 #' @template key
 #'
 #' @examples \dontrun{

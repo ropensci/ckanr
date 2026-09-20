@@ -5,7 +5,7 @@
 #' @param id (character) name or id of the organization
 #' @template key
 #' @template args
-#' @return an empty list on success
+#' @return The function returns an empty list on success
 #' @examples \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org", key = getOption("ckan_demo_key"))
 #'

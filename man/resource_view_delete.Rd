@@ -9,17 +9,17 @@ resource_view_delete(id, url = get_default_url(), key = get_default_key(), ...)
 \arguments{
 \item{id}{(character or \code{ckan_resource_view}) View identifier.}
 
-\item{url}{Base url to use. Default: https://demo.ckan.org/ See
+\item{url}{Base URL to use. Default: https://demo.ckan.org/. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
-\item{key}{A privileged CKAN API key, Default: your key set with
+\item{key}{A privileged CKAN API key. Default: your key set with
 \code{\link{ckanr_setup}}}
 
-\item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
+\item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
 \value{
-(bool) The result of the deletion, TRUE if the resource view was deleted
-sucessfully, FALSE if not.
+(bool) Result of the deletion. The value is TRUE when the function
+deletes the resource view successfully, and FALSE when it does not.
 }
 \description{
 Delete a resource view

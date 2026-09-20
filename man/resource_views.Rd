@@ -4,5 +4,5 @@
 \alias{resource_views}
 \title{Resource view management}
 \description{
-Helpers that wrap CKAN's \verb{resource_view_*} endpoints.
+These helpers wrap CKAN \verb{resource_view_*} endpoints.
 }

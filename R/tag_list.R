@@ -2,12 +2,13 @@
 #'
 #' @export
 #'
-#' @param query (character) A tag name query to search for, if given only tags
-#' whose names contain this string will be returned
-#' @param vocabulary_id (character) The id or name of a vocabulary, if given,
-#' only tags that belong to this vocabulary will be returned
-#' @param all_fields (logical) Return full tag dictionaries instead of
-#' just names. Default: `FALSE`
+#' @param query (character) Tag name query to search for. If you give a query,
+#' the function returns only tags whose names contain this string.
+#' @param vocabulary_id (character) ID or name of a vocabulary.
+#' If you give a vocabulary, the function returns only tags that belong
+#' to this vocabulary.
+#' @param all_fields (logical) The function returns full tag dictionaries
+#' instead of names. Default is `FALSE`.
 #' @template args
 #' @template key
 #' @examples \dontrun{

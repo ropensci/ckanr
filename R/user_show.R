@@ -2,13 +2,14 @@
 #'
 #' @export
 #'
-#' @param id (character) Package identifier.
-#' @param user_obj (user dictionary) The user dictionary of the user (optional)
-#' @param include_datasets (logical) Include a list of datasets the user has
-#' created. If it is the same user or a sysadmin requesting, it includes
-#' datasets that are draft or private. (optional, default:False, limit:50)
+#' @param id (character) User identifier.
+#' @param user_obj (user dictionary) User dictionary of the user. Optional.
+#' @param include_datasets (logical) Include a list of datasets that the user
+#' creates. If the same user or a sysadmin requests the data, the function
+#' includes datasets that are draft or private. Optional. Default is False.
+#' The limit is 50.
 #' @param include_num_followers (logical) Include the number of followers
-#' the user has (optional, default:False)
+#' of the user. Optional. Default is False.
 #' @template args
 #' @template key
 #' @examples \dontrun{

@@ -8,7 +8,7 @@ These functions still work but will be removed (defunct) in the next version.
 }
 \details{
 \itemize{
-\item \code{\link[=ds_create_dataset]{ds_create_dataset()}}: The functionality of this function is already in
-another function in this package. See function \code{\link[=resource_create]{resource_create()}}
+\item \code{\link[=ds_create_dataset]{ds_create_dataset()}}: Another function in this package already provides
+this functionality. See function \code{\link[=resource_create]{resource_create()}}
 }
 }

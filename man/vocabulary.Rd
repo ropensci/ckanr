@@ -53,34 +53,34 @@ vocabulary_delete(
 )
 }
 \arguments{
-\item{url}{Base url to use. Default: https://demo.ckan.org/ See
+\item{url}{Base URL to use. Default: https://demo.ckan.org/. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
-\item{key}{A privileged CKAN API key, Default: your key set with
+\item{key}{A privileged CKAN API key. Default: your key set with
 \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with
-table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
-which attempts to parse data to data.frame's when possible, so the result
+the table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
+which attempts to parse data to data.frame's when possible. The result
 can vary from a vector, list or data.frame. (required)}
 
-\item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
+\item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 
-\item{id}{(character or \code{ckan_vocabulary}) Vocabulary id or name. Can also be
-an existing \code{ckan_vocabulary} object.}
+\item{id}{(character or \code{ckan_vocabulary}) Vocabulary ID or name. You can
+also pass an existing \code{ckan_vocabulary} object.}
 
-\item{include_datasets}{(logical) Return datasets owned by the vocabulary.
-Only applies to \code{vocabulary_show()}.}
+\item{include_datasets}{(logical) The function returns datasets owned by
+the vocabulary. Only applies to \code{vocabulary_show()}.}
 
-\item{name}{(character) Unique vocabulary name.}
+\item{name}{(character) Unique name of the vocabulary.}
 
-\item{tags}{(list) Optional list of tag objects, each containing at least a
-\code{name} field. See \url{https://docs.ckan.org/en/latest/api/} for the full
+\item{tags}{(list) Optional list of tag objects. Each object contains at least
+a \code{name} field. See \url{https://docs.ckan.org/en/latest/api/} for the full
 structure.}
 }
 \description{
-CKAN restricts vocabulary creation, updates, and deletions to sysadmin
-users. Each helper wraps the matching \verb{/api/3/action/vocabulary_*} endpoint.
+CKAN allows only sysadmin users to create, update, and delete vocabularies.
+Each helper wraps the matching \verb{/api/3/action/vocabulary_*} endpoint.
 }
 \examples{
 \dontrun{

@@ -1,8 +1,9 @@
 #' ckan_resource class helpers
 #'
 #' @export
-#' @param x Variety of things, character, list, or ckan_package class object
-#' @param ... Further args passed on to [resource_show()] if character given
+#' @param x One of character, list, or ckan_package class object
+#' @param ... Extra arguments. If `x` is character, the function passes them
+#'   on to [resource_show()]
 #' @examples \dontrun{
 #' ckanr_setup(
 #'   url = "https://demo.ckan.org/",

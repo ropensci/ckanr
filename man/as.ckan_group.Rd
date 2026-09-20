@@ -10,9 +10,10 @@ as.ckan_group(x, ...)
 is.ckan_group(x)
 }
 \arguments{
-\item{x}{Variety of things, character, list, or ckan_group class object}
+\item{x}{One of character, list, or ckan_group class object}
 
-\item{...}{Further args passed on to \code{\link[=group_show]{group_show()}} if character given}
+\item{...}{Extra arguments. If \code{x} is character, the function passes them
+on to \code{\link[=group_show]{group_show()}}}
 }
 \description{
 ckan_group class helpers

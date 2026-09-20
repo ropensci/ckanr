@@ -1,9 +1,9 @@
 #' ckan_vocabulary class helpers
 #'
 #' @export
-#' @param x Variety of inputs: character, list, or ckan_vocabulary object
-#' @param ... Additional arguments passed to `vocabulary_show()` when
-#'   retrieving by identifier.
+#' @param x One of character, list, or ckan_vocabulary object
+#' @param ... Extra arguments. If you retrieve by identifier, the function
+#'   passes them to `vocabulary_show()`.
 #' @examples \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
 #'

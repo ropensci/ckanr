@@ -4,5 +4,5 @@
 \alias{package_relationships}
 \title{Package relationship helpers}
 \description{
-Utilities for managing dataset relationships via CKAN's \verb{package_relationship_*} endpoints.
+Utilities help you manage dataset relationships through CKAN's \verb{package_relationship_*} endpoints.
 }

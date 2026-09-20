@@ -1,10 +1,9 @@
 #' ckan_organization class helpers
 #'
 #' @export
-#' @param x Variety of things, character, list, or ckan_organization class
-#' object
-#' @param ... Further args passed on to [organization_show()] if character
-#' given
+#' @param x One of character, list, or ckan_organization class object
+#' @param ... Extra arguments. If `x` is character, the function passes them
+#'   on to [organization_show()]
 #' @examples \dontrun{
 #' ckanr_setup(
 #'   url = "https://demo.ckan.org/",

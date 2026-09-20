@@ -1,14 +1,14 @@
 #' Purge an organization
 #'
-#' IMPORTANT: You must be a sysadmin to purge an organization. Once an
-#' organization is purged, it is permanently removed from the system.
+#' IMPORTANT: You must be a sysadmin to purge an organization. Once you purge
+#' an organization, the system removes it permanently.
 #'
 #' @export
 #'
 #' @param id (character) name or id of the organization
 #' @template key
 #' @template args
-#' @return an empty list on success
+#' @return The function returns an empty list on success
 #' @examples \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org", key = getOption("ckan_demo_key"))
 #'
