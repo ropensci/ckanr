@@ -82,7 +82,7 @@ although, the URL may be the landing page and the base API URL.
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://docs.ropensci.org/ckanr/ (website) https://github.com/ropensci/ckanr (devel)}
+  \item \url{https://docs.ropensci.org/ckanr/} (website) \url{https://github.com/ropensci/ckanr} (devel)
   \item Report bugs at \url{https://github.com/ropensci/ckanr/issues}
 }
 

@@ -20,10 +20,9 @@ versions, or emits warnings if an endpoint is not available for that given versi
 
 ### Dev Container Setup
 
-The project runs in a devcontainer with **dual Docker support**:
-- Docker-in-Docker for managing containers from within devcontainer
+The project runs in a devcontainer with **host Docker access**:
 - Docker-outside-of-Docker (bind mount) accessing host Docker daemon via `unix:///var/run/docker-host.sock`
-- A full CKAN test instance orchestrated via `docker-compose-dev.yml` runs at `localhost:5000` alongside PostgreSQL, Redis, Solr, and DataPusher services
+- A full CKAN test instance orchestrated via `docker-compose-dev.yml` runs at `localhost:5000` alongside PostgreSQL, Redis, and Solr services
 
 **Critical**: Tests depend on a running CKAN instance. The helper function `prepare_test_ckan()` in `tests/testthat/helper-ckanr.R` auto-creates test fixtures (dataset, resource, organization, group) on first run.
 

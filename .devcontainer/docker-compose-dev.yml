@@ -15,7 +15,9 @@ services:
       context: ..
       dockerfile: .devcontainer/Dockerfile
     volumes:
-      - ../..:/workspaces:cached
+      # Mount only this repo at its workspace path instead of the whole
+      # parent directory (../.. leaks sibling checkouts into the container).
+      - ..:/workspaces/ckanr:cached
 
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity
@@ -78,15 +80,17 @@ services:
     image: ckan/ckan-postgres-dev:${CKAN_PG_VERSION:-2.11}
     container_name: postgres
     environment:
-      - POSTGRES_USER
-      - POSTGRES_PASSWORD
-      - POSTGRES_DB
-      - CKAN_DB_USER
-      - CKAN_DB_PASSWORD
-      - CKAN_DB
-      - DATASTORE_READONLY_USER
-      - DATASTORE_READONLY_PASSWORD
-      - DATASTORE_DB
+      # Defaults mirror docker-compose.yml (used by CI) so the dev stack
+      # still boots when .env is missing or a key is unset.
+      - POSTGRES_USER=${POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
+      - POSTGRES_DB=${POSTGRES_DB:-postgres}
+      - CKAN_DB_USER=${CKAN_DB_USER:-ckan_default}
+      - CKAN_DB_PASSWORD=${CKAN_DB_PASSWORD:-pass}
+      - CKAN_DB=${CKAN_DB:-ckan_test}
+      - DATASTORE_READONLY_USER=${DATASTORE_READONLY_USER:-datastore_read}
+      - DATASTORE_READONLY_PASSWORD=${DATASTORE_READONLY_PASSWORD:-pass}
+      - DATASTORE_DB=${DATASTORE_DB:-datastore_test}
       - CKAN_VERSION=${CKAN_VERSION:-2.11}
     volumes:
       - pg_data:/var/lib/postgresql/data

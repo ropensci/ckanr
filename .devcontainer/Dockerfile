@@ -1,10 +1,11 @@
 # https://rocker-project.org/images/devcontainer/images.html
-FROM ghcr.io/rocker-org/devcontainer/geospatial:4.5
+FROM ghcr.io/rocker-org/devcontainer/geospatial:4.6
 
 # Non interactive frontend
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN echo 'options(repos = c(P3M = "https://packagemanager.posit.co/cran/__linux__/jammy/latest", CRAN = "https://cloud.r-project.org"))' >>"${R_HOME}/etc/Rprofile.site"
+# rocker geospatial:4.6 is Ubuntu 24.04 (noble): P3M binaries must match it.
+RUN echo 'options(repos = c(P3M = "https://packagemanager.posit.co/cran/__linux__/noble/latest", CRAN = "https://cloud.r-project.org"))' >>"${R_HOME}/etc/Rprofile.site"
 
 # Install OS packages
 RUN apt-get update && \
@@ -14,12 +15,22 @@ RUN apt-get update && \
     libudunits2-dev libwebp-dev libx11-dev libxml2-dev r-cran-backports r-cran-rlang \
     r-cran-stringr r-cran-purrr r-cran-blob r-cran-httpcode r-cran-urltools r-cran-dbi \
     r-cran-crul r-cran-jsonlite r-cran-readxl r-cran-testthat r-cran-xml2 \
-    libpq-dev libcurl4-openssl-dev libssl-dev libxml2-dev && \
+    libpq-dev libcurl4-openssl-dev libssl-dev && \
     rm -rf /var/lib/apt/lists/* && \
     curl --proto '=https' --tlsv1.2 -LsSf \
     https://github.com/etiennebacher/jarl/releases/latest/download/jarl-installer.sh | sh
 
-RUN R -q -e 'install.packages(c("arrow", "class", "crul", "httpcode", "KernSmooth", "MASS", "purrr", "sf", "stringr", "testthat", "triebeard", "urltools", "xml2"))'
+# Install OpenCode (https://opencode.ai) system-wide so it is on PATH
+# for all users, not just root ($HOME/.opencode/bin at build time)
+RUN curl --proto '=https' --tlsv1.2 -LsSf https://opencode.ai/install | \
+    bash -s -- --no-modify-path && \
+    mv /root/.opencode/bin/opencode /usr/local/bin/opencode && \
+    rmdir -p /root/.opencode/bin 2>/dev/null || true
+
+# Only packages NOT already installed via r-cran-* above: the rest would
+# reinstall (and for sf, recompile) what apt already provides.
+# class/KernSmooth/MASS ship with R itself.
+RUN R -q -e 'install.packages(c("arrow", "sf", "triebeard"))'
 # Install any new and updated packages into the base image to shift work from
 # the uncached pak command to this cached Docker image
 # pak::local_install_dev_deps()

@@ -1,0 +1,29 @@
+{
+  "features": {
+    "ghcr.io/devcontainers-extra/features/pre-commit:2": {
+      "version": "2.0.18",
+      "resolved": "ghcr.io/devcontainers-extra/features/pre-commit@sha256:6e0bb2ce80caca1d94f44dab5d0653d88a1c00984e590adb7c6bce012d0ade6e",
+      "integrity": "sha256:6e0bb2ce80caca1d94f44dab5d0653d88a1c00984e590adb7c6bce012d0ade6e"
+    },
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+      "version": "1.10.1",
+      "resolved": "ghcr.io/devcontainers/features/docker-outside-of-docker@sha256:698f5900fac471e046c6e9d4333fec88c0e8d952c713494fa0712dce80baeca0",
+      "integrity": "sha256:698f5900fac471e046c6e9d4333fec88c0e8d952c713494fa0712dce80baeca0"
+    },
+    "ghcr.io/guiyomh/features/just:0": {
+      "version": "0.1.0",
+      "resolved": "ghcr.io/guiyomh/features/just@sha256:8311dff976bd153a54a879021353a7e149963e580022b25af49c45cfc5f13bec",
+      "integrity": "sha256:8311dff976bd153a54a879021353a7e149963e580022b25af49c45cfc5f13bec"
+    },
+    "ghcr.io/rocker-org/devcontainer-features/r-apt:0": {
+      "version": "0.5.0",
+      "resolved": "ghcr.io/rocker-org/devcontainer-features/r-apt@sha256:77b2f97468c79afa09afd7141fac0bda0f395e265f606e13365e6767949dcc55",
+      "integrity": "sha256:77b2f97468c79afa09afd7141fac0bda0f395e265f606e13365e6767949dcc55"
+    },
+    "ghcr.io/rocker-org/devcontainer-features/r-history:0": {
+      "version": "0.2.0",
+      "resolved": "ghcr.io/rocker-org/devcontainer-features/r-history@sha256:91bfc49dd11dc7fd780afc864676a51976885f2d486c1e81fb8279ce1d7afe58",
+      "integrity": "sha256:91bfc49dd11dc7fd780afc864676a51976885f2d486c1e81fb8279ce1d7afe58"
+    }
+  }
+}

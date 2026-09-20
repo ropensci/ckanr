@@ -17,7 +17,7 @@ alias cv := ckan_version
 
 # Show running CKAN status and version
 ckan_version:
-  /usr/bin/curl -s http://localhost:5000/api/3/action/status_show
+  curl -s http://localhost:5000/api/3/action/status_show
   echo "\n"
 
 # Run a Docker command against the Devcontainer Docker host, quote if using multiple args
@@ -30,10 +30,11 @@ ckan_logs:
   #!/usr/bin/env bash
   DOCKER_HOST=unix:///var/run/docker-host.sock docker logs ckan
 
-# Stop CKAN
+# Stop CKAN (stop all dev services; app shares ckan's network namespace,
+# so stopping ckan alone would leave the app container broken)
 ckan_stop:
   #!/usr/bin/env bash
-  DOCKER_HOST=unix:///var/run/docker-host.sock docker compose -f .devcontainer/docker-compose-dev.yml stop ckan postgres solr redis
+  DOCKER_HOST=unix:///var/run/docker-host.sock docker compose -f .devcontainer/docker-compose-dev.yml stop
 
 #--------------------------------------------------------------------------------------#
 # R tooling (alternative to VS Code tasks via Ctrl-Shift-B)

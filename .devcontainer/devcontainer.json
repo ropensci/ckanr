@@ -4,7 +4,9 @@
   "name": "R (r2u and bspm configured)",
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
   //"image": "mcr.microsoft.com/devcontainers/base:noble",
-  "dockerComposeFile": "docker-compose-dev.yml",
+  "dockerComposeFile": [
+    "docker-compose-dev.yml"
+  ],
   "service": "app",
   // Features to add to the dev container. More info: https://containers.dev/features.
   "features": {
@@ -28,7 +30,11 @@
     // },
     "ghcr.io/rocker-org/devcontainer-features/r-history:0": {},
     "ghcr.io/guiyomh/features/just:0": {},
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    // Single Docker strategy: use the host daemon via the shared socket
+    // (DOCKER_HOST=unix:///var/run/docker-host.sock). Do NOT add
+    // docker-in-docker alongside this: the two features fight over the
+    // Docker daemon and DOCKER_HOST, slowing creation and hiding the CKAN
+    // containers from justfile/postAttach commands.
     "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
     "ghcr.io/devcontainers-extra/features/pre-commit:2": {}
   },
@@ -43,12 +49,10 @@
     "DOCKER_HOST": "unix:///var/run/docker-host.sock"
   },
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  // Only 5000 is published by docker-compose-dev.yml; the other services
+  // share ckan's network namespace and need no host forwarding.
   "forwardPorts": [
-    5000,
-    5432,
-    6379,
-    8800,
-    8983
+    5000
   ],
   // onCreateCommand
   // Make docker executable and R library writable for devcontainer user (vscode)

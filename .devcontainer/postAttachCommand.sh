@@ -1,41 +1,59 @@
 #!/bin/bash
-# set -euo pipefail
+set -euo pipefail
 
 echo "Running post attach commands..."
-# Generate CKANR_TEST_KEY
-# This command uses the Docker host from the Devcontainer to exec into the CKAN container
-# Running "docker " would use the Devcontainer's own Docker daemon, which doesn't have access to the CKAN container
-# The devcontainer's own Docker daemon is provided by the docker-in-docker feature and allows to run
-# CKAN from the top level docker-compose file.
+# Generate CKANR_TEST_KEY via the host Docker daemon shared into the
+# devcontainer by the docker-outside-of-docker feature.
+# DOCKER_HOST is already set by devcontainer.json remoteEnv; keep an explicit
+# fallback for shells attached outside VS Code.
+export DOCKER_HOST="${DOCKER_HOST:-unix:///var/run/docker-host.sock}"
 
-# If CKAN_VERSION=2.10-py3.10 or CKAN_VERSION=2.11 CKAN_VERSION=2.9
-CKANR_TEST_KEY=$(DOCKER_HOST=unix:///var/run/docker-host.sock DOCKER_API_VERSION=1.43 docker exec ckan ckan user token add ckan_admin dev_token 2>/dev/null | grep -A1 'API Token created:' | tail -1 | tr -d '\n\t ')
-# If CKAN_VERSION=2.8
-# CKANR_TEST_KEY=$(DOCKER_HOST=unix:///var/run/docker-host.sock docker exec ckan paster --plugin=ckan user ckan_admin | grep -o -P '(?<=apikey=).*(?= created)')
-
+# Same parse as CI (.github/workflows/R-check.yaml): the token follows
+# the 'API Token created:' marker. No pinned DOCKER_API_VERSION.
+CKANR_TEST_KEY="$(docker exec ckan ckan user token add ckan_admin dev_token 2>/dev/null | sed 's/API Token created://' | tr -d '\n\t ')"
+if [ -z "${CKANR_TEST_KEY}" ]; then
+  echo "WARNING: could not mint a CKAN token (is the ckan container running?). Skipping env persistence." >&2
+  exit 0
+fi
 
 # This is the public facing URL which only works for users of the codespace.
 # Access is protected by GitHub authentication.
 # R scripts can only access CKAN via localhost port forwarding.
-#CKANR_TEST_URL=https://$CODESPACE_NAME-5000.app.github.dev
 CKANR_TEST_URL=http://localhost:5000
 CODESPACE_PUBLIC_URL=http://localhost:5000
-CODESPACE_NAME=${CODESPACE_NAME}
+CODESPACE_NAME="${CODESPACE_NAME:-}"
+
+persist_shell_var() {
+  local var="$1" val="$2" file="$3"
+  # Idempotent: drop any earlier managed line, then append once.
+  grep -v "export ${var}=" "${file}" 2>/dev/null > "${file}.tmp" || true
+  printf "export %s='%s'\n" "${var}" "${val}" >> "${file}.tmp"
+  mv "${file}.tmp" "${file}"
+}
+
+persist_renv_var() {
+  local var="$1" val="$2" file="$3"
+  grep -v "^${var}=" "${file}" 2>/dev/null > "${file}.tmp" || true
+  printf "%s=%s\n" "${var}" "${val}" >> "${file}.tmp"
+  mv "${file}.tmp" "${file}"
+}
 
 # Persist environment variables to shell profile for all future terminal sessions
-echo "export CKANR_TEST_KEY='$CKANR_TEST_KEY'" >> ~/.bashrc
-echo "export CKANR_DEFAULT_KEY='$CKANR_TEST_KEY'" >> ~/.bashrc
-echo "export CKANR_TEST_URL='$CKANR_TEST_URL'" >> ~/.bashrc
-echo "export CKANR_DEFAULT_URL='$CKANR_TEST_URL'" >> ~/.bashrc
-echo "export CKANR_BROWSER_URL='$CODESPACE_PUBLIC_URL'" >> ~/.bashrc
+touch ~/.bashrc
+persist_shell_var "CKANR_TEST_KEY" "${CKANR_TEST_KEY}" ~/.bashrc
+persist_shell_var "CKANR_DEFAULT_KEY" "${CKANR_TEST_KEY}" ~/.bashrc
+persist_shell_var "CKANR_TEST_URL" "${CKANR_TEST_URL}" ~/.bashrc
+persist_shell_var "CKANR_DEFAULT_URL" "${CKANR_TEST_URL}" ~/.bashrc
+persist_shell_var "CKANR_BROWSER_URL" "${CODESPACE_PUBLIC_URL}" ~/.bashrc
 echo "Environment variables persisted to ~/.bashrc"
 
 # Persist environment variables to R environment for R sessions
-echo "CKANR_DEFAULT_URL=$CKANR_TEST_URL" >> ~/.Renviron
-echo "CKANR_DEFAULT_KEY=$CKANR_TEST_KEY" >> ~/.Renviron
-echo "CKANR_TEST_URL=$CKANR_TEST_URL" >> ~/.Renviron
-echo "CKANR_TEST_KEY=$CKANR_TEST_KEY" >> ~/.Renviron
-echo "CODESPACE_NAME=$CODESPACE_NAME" >> ~/.Renviron
-echo "CKANR_ALLOW_PURGE_TESTS=TRUE" >> ~/.Renviron
-echo "CKANR_BROWSER_URL=$CODESPACE_PUBLIC_URL" >> ~/.Renviron
+touch ~/.Renviron
+persist_renv_var "CKANR_DEFAULT_URL" "${CKANR_TEST_URL}" ~/.Renviron
+persist_renv_var "CKANR_DEFAULT_KEY" "${CKANR_TEST_KEY}" ~/.Renviron
+persist_renv_var "CKANR_TEST_URL" "${CKANR_TEST_URL}" ~/.Renviron
+persist_renv_var "CKANR_TEST_KEY" "${CKANR_TEST_KEY}" ~/.Renviron
+persist_renv_var "CODESPACE_NAME" "${CODESPACE_NAME}" ~/.Renviron
+persist_renv_var "CKANR_ALLOW_PURGE_TESTS" "TRUE" ~/.Renviron
+persist_renv_var "CKANR_BROWSER_URL" "${CODESPACE_PUBLIC_URL}" ~/.Renviron
 echo "Environment variables persisted to ~/.Renviron for R sessions"
