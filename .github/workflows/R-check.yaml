@@ -86,7 +86,6 @@ jobs:
             any::covr
             any::xml2
             readxl@1.5.0
-            sf@1.1.2
           needs: |
             check
             coverage
