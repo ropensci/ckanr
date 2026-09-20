@@ -26,6 +26,43 @@ the devcontainer setup.
 * Submit a pull request to `ropensci/ckanr`.
   We encourage early / draft pull requests to facilitate questions, review, and collaboration.
 
+### Agentic development
+We ask to consult the rOpenSci AI guidelines and review any agentic output.
+
+To use opencode:
+
+- The provided devcontainer has opencode pre-installed. If you develop locally 
+  you need to install opencode into your local environment.
+- In a terminal, run `opencode`, enter `\connect' and enter your opencode API token.
+- The API token is not stored between sessions.
+- At the time of writing, opencode offers the best value.
+
+To run GitHub Copilot, connect VS Code to your GitHub.
+
+### Agent skills
+
+The repo vendors two agent skills under `.agents/skills/`, available to both
+opencode and GitHub Copilot in the devcontainer and in local checkouts:
+
+- `adversarial-review` (from `https://oy.adonm.dev/adversarial-review.html`):
+  independent review of changes or plans via a read-only subagent. opencode also
+  defines the required `adversarial-review` subagent in
+  `.opencode/agent/adversarial-review.md` and discovers repo skills through
+  `opencode.json`.
+- `simple-english` (from `https://github.com/AminBlg/SimpleEnglish`): write
+  docs in ASD-STE100 Simplified Technical English.
+
+After changing `opencode.json` or any skill file, quit and restart opencode.
+Copilot discovers repo skills automatically; invoke them from the chat `/` menu
+or by matching description keywords.
+
+`.github/copilot-instructions.md` is Copilot's project instructions and is also
+loaded by opencode via the `instructions` entry in `opencode.json` — keep it as
+the single source of project context.
+
+Suggestions and contributions to make agentic development easier to use 
+and the output more robust are always welcome.
+
 ### Test CKAN
 List running Docker containers with `just docker ps`.
 In general, you can run any docker command against the devcontainer with `just docker ...`.

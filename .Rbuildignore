@@ -11,6 +11,9 @@ Makefile
 .github
 .devcontainer
 .vscode
+.agents
+.opencode
+^opencode\.jsonc?$
 justfile
 ^codemeta\.json$
 notes.md

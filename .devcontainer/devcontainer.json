@@ -76,6 +76,8 @@
         "REditorSupport.r-lsp",
         "RDebugger.r-debugger",
         "github.codespaces",
+        "github.copilot",
+        "github.copilot-chat",
         "eamodio.gitlens"
       ],
       "settings": {
