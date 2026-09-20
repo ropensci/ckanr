@@ -17,7 +17,7 @@ revision_list <- function(
     ver <- NA
   }
 
-  if (ver >= 29.0) {
+  if (isTRUE(ver >= 29.0)) {
     warning("The ckan.logic.action.get.revision_list endpoint was removed in CKAN 2.9. Returning NULL.")
     result <- NULL
   } else {

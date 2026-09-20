@@ -34,7 +34,7 @@ package_revision_list <- function(
     ver <- NA
   }
 
-  if (ver >= 29.0) {
+  if (isTRUE(ver >= 29.0)) {
     .Deprecated(
       "package_revision_list",
       "ckanr",
