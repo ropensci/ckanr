@@ -155,7 +155,8 @@ ckan_fetch <- function(
 
   store <- match.arg(store, c("session", "disk"))
   derived_file_fmt <- file_fmt(x)
-  if (is.na(derived_file_fmt) && is.null(format)) {
+  if (is.na(derived_file_fmt) &&
+    (is.null(format) || length(format) != 1L || is.na(format))) {
     stop("File format is not available from URL; please specify via `format` argument.", call. = FALSE)
   }
   fmt <- ifelse(is.na(derived_file_fmt), format, derived_file_fmt)
@@ -183,6 +184,22 @@ ckan_fetch <- function(
 }
 
 read_session <- function(fmt, dat, path, ...) {
+  supported <- c(
+    "csv", "xls", "xlsx", "xml", "html", "json",
+    "shp", "geojson", "txt", "parquet"
+  )
+  if (is.null(fmt) || length(fmt) != 1L || is.na(fmt) ||
+    !(tolower(fmt) %in% supported)) {
+    stop(
+      sprintf(
+        "Unsupported file format: '%s'. Supported formats: %s.",
+        paste(fmt, collapse = ", "),
+        paste(supported, collapse = ", ")
+      ),
+      call. = FALSE
+    )
+  }
+  fmt <- tolower(fmt)
   switch(fmt,
     csv = {
       if (!is.null(dat)) {

@@ -67,3 +67,8 @@ Fix + test the `ver >= 29.0` `NA` crash in `R/revision_list.R:20` and `R/package
 - [x] 5. `R/on_load.R`: resets unset **or empty** `CKANR_DEFAULT_URL` to `https://demo.ckan.org/`. `R/ckanr_settings.R`, `R/ckan_info.R` + regenerated `.Rd`: default `https://demo.ckan.org/`. `R/activity.R`: removed dead `ver <- floor(...)`. `.devcontainer/docker-compose-dev.yml`: removed invalid single-underscore `CKAN__ACTIVITY_STREAMS_EMAIL_NOTIFICATIONS`, kept overridable `CKAN__ACTIVITY_STREAMS__EMAIL_NOTIFICATIONS=${...:-true}`; ckan + solr healthcheck `60s` → `30s`.
 
 Note: `.github/CONTRIBUTING.md` shows as modified in `git status` but was not touched by these fixes (pre-existing working-tree change); left alone, excluded from proposed commits.
+
+## Fix log — continued (2026-09-20 session)
+
+- [x] 6. `R/ckan_fetch.R` `read_session()`: explicit `stop("Unsupported file format: ...")` for unknown/`NA`/`NULL`/length != 1 `fmt` (was silent `NULL`); `tolower()` normalization so uppercase zip-entry extensions (e.g. `"CSV"`) resolve. `ckan_fetch()`: fail-fast guard now also rejects `format = NA`/non-scalar (was only `NULL`), avoiding a wasted network fetch before the silent `NULL`. `tests/testthat/test-ckan_fetch.R`: 3 new offline blocks (unsupported/`NA`/`NULL` format errors, `NA`-format fail-fast, uppercase normalization) placed before `check_ckan()` so they run without a live instance. Verified: `test-ckan_fetch.R` 9 PASS, `test-utils.R` 16 PASS (`NOT_CRAN=true`).
+- Next candidate: `tests/testthat/helper-ckanr.R:485-491` side-effecting `ping() + prepare_test_ckan()` at source time (slow/fragile; needs maintainer buy-in), then `resolve-helpers.R` fallbacks review.
