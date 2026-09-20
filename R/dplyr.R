@@ -51,7 +51,7 @@ tbl.src_ckan <- function(src, from, ..., name = NULL) {
   }
 }
 
-#' @importFrom dplyr db_desc
+#' @exportS3Method dplyr::db_desc
 db_desc.src_ckan <- function(x) {
   info <- x$info
   sprintf("ckan url: %s", x$con@url)
@@ -173,6 +173,6 @@ db_query_rows.CKANConnection <- function(con, sql, ...) {
 }
 
 #' @importFrom dplyr db_list_tables sql sql_select sql_subquery
-#' @importFrom dbplyr base_agg base_scalar base_win build_sql sql_prefix
-#' sql_translator sql_variant src_dbi tbl_sql
+#' @importFrom dbplyr base_agg base_scalar base_win build_sql sql_prefix sql_translator
+#' @importFrom dbplyr sql_variant src_dbi tbl_sql
 NULL
