@@ -30,3 +30,27 @@ test_that("parse_version_number handles edge cases without warning", {
   expect_true(is.na(parse_version_number(NULL)))
   expect_warning(parse_version_number("2"), NA)
 })
+
+test_that("identifier resolvers handle strings, id lists, and name-only lists", {
+  expect_identical(ckanr:::resolve_group_or_org_id("my-group"), "my-group")
+  expect_identical(
+    ckanr:::resolve_group_or_org_id(list(id = "gid", name = "my-group")),
+    "gid"
+  )
+  expect_identical(
+    ckanr:::resolve_group_or_org_id(list(name = "my-group")),
+    "my-group"
+  )
+  expect_identical(
+    ckanr:::resolve_object_identifier(list(name = "my-dataset")),
+    "my-dataset"
+  )
+  expect_identical(
+    ckanr:::resolve_user_identifier(list(name = "some-user")),
+    "some-user"
+  )
+  expect_identical(
+    ckanr:::resolve_username(list(name = "some-user")),
+    "some-user"
+  )
+})

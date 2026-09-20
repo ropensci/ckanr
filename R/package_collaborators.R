@@ -123,7 +123,7 @@ package_collaborator_delete <- function(
   )
 }
 
-# resolve_user_identifier is now defined in R/membership.R (shared utility).
+# resolve_user_identifier is defined in R/resolve-helpers.R (shared utility).
 
 collaborator_request <- function(endpoint, url, key, as = "list",
                                  method = c("GET", "POST"), query = NULL,

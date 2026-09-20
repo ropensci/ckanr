@@ -4,8 +4,13 @@ resolve_group_or_org_id <- function(x) {
   if (is.ckan_group(x) || is.ckan_organization(x)) {
     return(x$id)
   }
-  if (is.list(x) && !is.null(x$id)) {
-    return(x$id)
+  if (is.list(x)) {
+    if (!is.null(x$id)) {
+      return(x$id)
+    }
+    if (!is.null(x$name)) {
+      return(x$name)
+    }
   }
   x
 }
