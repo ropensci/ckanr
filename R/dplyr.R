@@ -70,7 +70,7 @@ src_tbls.src_ckan <- function(x, ..., limit = 6) {
 #' @export
 format.src_ckan <- function(x, ...) {
   .metadata <- ds_search("_table_metadata", url = x$con@url, limit = 6)
-  x1 <- sprintf("%s", db_desc(x))
+  x1 <- sprintf("%s", dplyr::db_desc(x))
   x2 <- sprintf("total tbls: %d", .metadata$total)
   if (.metadata$total > 6) {
     x3 <- sprintf(
