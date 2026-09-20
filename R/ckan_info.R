@@ -28,7 +28,17 @@ ckan_version <- function(url = get_default_url(), ...) {
 }
 
 parse_version_number <- function(x) {
+  # Returns NA for missing/malformed input instead of warning or "2NA".
+  # Encoding: CKAN "2.3.5" -> 23.5, "2.6.1" -> 26.1, "2.9" -> 29,
+  # "2.11.2" -> 211.2, "3.0.0" -> 30.0. Callers compare against
+  # 23.5 (2.3.5), 26.1 (2.6.1) and 29.0 (2.9); see package_search().
+  if (is.null(x) || length(x) != 1L || !is.character(x) || is.na(x)) {
+    return(NA_real_)
+  }
   version_components <- unlist(regmatches(x, gregexpr("[[:digit:]]+", x)))
+  if (length(version_components) < 2) {
+    return(NA_real_)
+  }
   major_minor <- paste0(version_components[1:2], collapse = "")
   if (length(version_components) == 2) {
     as.numeric(major_minor)

@@ -75,9 +75,9 @@ package_search <- function(
   ))
   if (is.na(ver)) {
     args$include_drafts <- args$use_default_schema <- args$include_private <- NULL
-  } else if (ver < 23.5) {
+  } else if (ver < 23.5) { # CKAN < 2.3.5: no use_default_schema/include_private/include_drafts
     args$include_drafts <- args$use_default_schema <- args$include_private <- NULL
-  } else if (ver < 26.1) {
+  } else if (ver < 26.1) { # CKAN < 2.6.1: no include_private/include_drafts
     args$use_default_schema <- args$include_private <- NULL
   }
   res <- ckan_GET(url, "package_search", args, key = key, opts = list(...))
