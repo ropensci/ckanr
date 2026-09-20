@@ -55,7 +55,7 @@ options(
     CRAN = "https://cloud.r-project.org"
   )
 )
-install.packages("ruODK")
+install.packages("ckanr")
 ```
 
 
