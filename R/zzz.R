@@ -309,7 +309,9 @@ handle_many <- function(x) {
 ckan_action_available <- local({
   cache <- new.env(parent = emptyenv())
   function(action, url = get_default_url(), key = get_default_key()) {
-    cache_key <- paste(url, action, sep = "|")
+    # Never include the key itself; only whether auth was supplied.
+    auth_tag <- if (is.null(key) || length(key) == 0L) "nokey" else "keyed"
+    cache_key <- paste(url, action, auth_tag, sep = "|")
     cached <- get0(cache_key, envir = cache, inherits = FALSE)
     if (!is.null(cached)) {
       return(cached)
@@ -327,6 +329,11 @@ ckan_action_available <- local({
       error = function(e) e
     )
     ok <- !inherits(res, "error")
+    if (!ok) {
+      # Transient/network failure or unknown action: do not cache so a
+      # temporary outage cannot permanently disable the action.
+      return(FALSE)
+    }
     assign(cache_key, ok, envir = cache)
     ok
   }

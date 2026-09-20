@@ -237,7 +237,8 @@ activity_email_notifications_enabled <- local({
   truthy <- c("true", "1", "yes", "on")
   falsy <- c("false", "0", "no", "off", "")
   function(url = get_default_url(), key = get_default_key()) {
-    cache_key <- notrail(url)
+    auth_tag <- if (is.null(key) || length(key) == 0L) "nokey" else "keyed"
+    cache_key <- paste(notrail(url), auth_tag, sep = "|")
     cached <- get0(cache_key, envir = cache, inherits = FALSE)
     if (!is.null(cached)) {
       return(cached)
@@ -270,6 +271,11 @@ activity_email_notifications_enabled <- local({
           status <- FALSE
         }
       }
+    }
+    if (is.na(status)) {
+      # Unknown/transient (e.g. network error): do not cache so a temporary
+      # outage cannot permanently disable notifications for the session.
+      return(status)
     }
     assign(cache_key, status, envir = cache)
     status
