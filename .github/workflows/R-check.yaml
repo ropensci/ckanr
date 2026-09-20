@@ -32,6 +32,7 @@ jobs:
         - { os: ubuntu-latest, r: 'release', ckan-version: '2.9-py3.9', ckan-pg-version: '2.9', solr-version: '2.9-solr9-spatial', collab: true, plugins: "stats text_view image_view resource_proxy datastore envvars"}
         - { os: ubuntu-latest, r: 'release', ckan-version: '2.10-py3.10', ckan-pg-version: '2.10', solr-version: '2.10-solr9-spatial', collab: true, activity: true, plugins: "stats text_view image_view resource_proxy datastore envvars activity"}
         - { os: ubuntu-latest, r: 'release', ckan-version: '2.11', ckan-pg-version: '2.11', solr-version: '2.10-solr9-spatial', collab: true, plugins: "stats text_view image_view resource_proxy datastore envvars activity"}
+        - { os: ubuntu-latest, r: 'release', ckan-version: '2.12', ckan-pg-version: '2.12', solr-version: '2.12-solr9-spatial', collab: true, plugins: "stats text_view image_view resource_proxy datastore envvars activity"}
         - { os: ubuntu-latest, r: 'devel', ckan-version: '2.11', ckan-pg-version: '2.11', solr-version: '2.10-solr9-spatial', collab: true, plugins: "stats text_view image_view resource_proxy datastore envvars activity"}
 
     env:
