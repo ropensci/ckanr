@@ -31,6 +31,7 @@ related_show <- function(
   id, url = get_default_url(), key = get_default_key(),
   as = "list", ...
 ) {
+  ensure_action_available("related_show", url = url, key = key)
   id <- as.ckan_related(id, url = url)
   res <- ckan_GET(url, "related_show", list(id = id$id),
     key = key,

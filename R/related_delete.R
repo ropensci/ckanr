@@ -27,6 +27,7 @@ related_delete <- function(
   id, url = get_default_url(),
   key = get_default_key(), ...
 ) {
+  ensure_action_available("related_delete", url = url, key = key)
   id <- as.ckan_related(id, url = url)
   tmp <- ckan_POST(url, "related_delete",
     body = list(id = id$id),

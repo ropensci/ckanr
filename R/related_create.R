@@ -38,6 +38,7 @@ related_create <- function(
   related_id = NULL, related_url = NULL, image_url = NULL,
   url = get_default_url(), key = get_default_key(), as = "list", ...
 ) {
+  ensure_action_available("related_create", url = url, key = key)
   id <- as.ckan_package(id, url = url, key = key)
   body <- cc(list(
     dataset_id = id$id, title = title,

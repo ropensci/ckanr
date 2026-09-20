@@ -13,6 +13,7 @@ related_list <- function(
   offset = 0, limit = 31, url = get_default_url(),
   key = get_default_key(), as = "list", ...
 ) {
+  ensure_action_available("related_list", url = url, key = key)
   args <- cc(list(offset = offset, limit = limit))
   res <- ckan_GET(url,
     method = "related_list", args, key = key,
