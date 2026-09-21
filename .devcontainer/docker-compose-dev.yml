@@ -52,6 +52,11 @@ services:
       - CKAN_SYSADMIN_EMAIL=mail@example.com
       - CKAN___BEAKER__SESSION__SECRET=secret
       - CKAN__ACTIVITY_STREAMS__EMAIL_NOTIFICATIONS=${CKAN__ACTIVITY_STREAMS__EMAIL_NOTIFICATIONS:-true}
+      # File API (CKAN 2.12+): filesystem storage for file_create() etc.
+      # Uses the ckan_storage volume so uploads survive container restarts.
+      - CKAN__FILES__STORAGE__DEFAULT__TYPE=ckan:fs
+      - CKAN__FILES__STORAGE__DEFAULT__PATH=/var/lib/ckan/file-storage
+      - CKAN__FILES__STORAGE__DEFAULT__INITIALIZE=true
     volumes:
       - ckan_storage:/var/lib/ckan
       # - ./src:/srv/app/src_extensions
