@@ -13,6 +13,7 @@ ckanr S3 classes
 \item ckan_resource - CKAN resource
 \item ckan_resource_view - CKAN resource view
 \item ckan_related - CKAN related item
+\item ckan_file - CKAN file (first-class file entities, CKAN 2.12+)
 }
 }
 

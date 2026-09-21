@@ -10,6 +10,8 @@
 \usage{
 job_list(
   queues = NULL,
+  limit = NULL,
+  ids_only = FALSE,
   url = get_default_url(),
   key = get_default_key(),
   as = "list",
@@ -42,6 +44,13 @@ job_cancel(
 }
 \arguments{
 \item{queues}{(character) Queue names to target.}
+
+\item{limit}{(numeric) Maximum number of jobs to return. CKAN 2.12
+returns 200 jobs by default; use \code{limit} or the
+\code{ckan.jobs.default_list_limit} config option to change it
+(\url{https://github.com/ckan/ckan/pull/8070}).}
+
+\item{ids_only}{(logical) Return only job IDs. Default: \code{FALSE}.}
 
 \item{url}{Base URL to use. Default: https://demo.ckan.org/. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}

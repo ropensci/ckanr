@@ -286,13 +286,23 @@ NULL
 #' @template args
 #' @template key
 #' @param queues (character) Queue names to target.
+#' @param limit (numeric) Maximum number of jobs to return. CKAN 2.12
+#' returns 200 jobs by default; use `limit` or the
+#' `ckan.jobs.default_list_limit` config option to change it
+#' (<https://github.com/ckan/ckan/pull/8070>).
+#' @param ids_only (logical) Return only job IDs. Default: `FALSE`.
 #' @export
 job_list <- function(
-  queues = NULL, url = get_default_url(),
+  queues = NULL, limit = NULL, ids_only = FALSE,
+  url = get_default_url(),
   key = get_default_key(), as = "list", ...
 ) {
   ensure_action_available("job_list", url = url, key = key)
-  payload <- list(queues = if (is.null(queues)) list() else queues)
+  payload <- cc(list(
+    queues = if (is.null(queues)) list() else queues,
+    limit = limit,
+    ids_only = if (isTRUE(ids_only)) TRUE else NULL
+  ))
   payload <- tojun(payload)
   res <- ckan_POST(url, "job_list",
     body = payload, key = key,

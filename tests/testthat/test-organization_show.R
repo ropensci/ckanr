@@ -27,8 +27,19 @@ test_that("organization_show gives back expected class types", {
   a <- organization_show(o, url = u)
 
   expect_is(a, "ckan_organization")
-  # TODO: ckan_organization return type has changed
-  expect_equal(as.integer(length(a)), 18L)
+  # CKAN 2.12 changed organization_show shape: `include_users` defaults to
+  # FALSE server-side (ckanr sends TRUE to preserve behavior) and the
+  # `packages` key is omitted when include_datasets = FALSE (17 keys on
+  # 2.12 vs 18 on 2.11).
+  ver <- try(ckan_version(u)$version_num, silent = TRUE)
+  if (!inherits(ver, "try-error") && !is.na(ver) && ver >= 212) {
+    expect_equal(as.integer(length(a)), 17L)
+  } else if (!inherits(ver, "try-error") && !is.na(ver) && ver < 212) {
+    expect_equal(as.integer(length(a)), 18L)
+  } else {
+    expect_true(as.integer(length(a)) %in% c(17L, 18L))
+  }
+  expect_true("users" %in% names(a))
 
   a <- organization_show(o, url = u, include_datasets = TRUE)
   expect_equal(as.integer(a$package_count), dataset_num)

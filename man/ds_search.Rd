@@ -14,6 +14,7 @@ ds_search(
   offset = NULL,
   limit = NULL,
   sort = NULL,
+  include_next_page = FALSE,
   url = get_default_url(),
   key = get_default_key(),
   as = "list",
@@ -50,6 +51,11 @@ for example score desc, price asc. You can sort by a function, for example
 sum(x_f, y_f) desc, which sorts by the sum of x_f and y_f in descending
 order. (optional)}
 
+\item{include_next_page}{(logical) If \code{TRUE}, CKAN 2.12+ returns a
+\code{next_page} value with filters for fast keyset pagination. Ignored unless
+records are sorted by the \verb{_id} field (optional, default: \code{FALSE}).
+See \url{https://docs.ckan.org/en/2.12/maintaining/datastore.html#search-pagination}.}
+
 \item{url}{Base URL to use. Default: https://demo.ckan.org/. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
@@ -71,6 +77,15 @@ From the help for this method "The datastore_search action allows
 you to search data in a resource." If a DataStore resource belongs to a
 private CKAN resource, you can read it only with access to that resource.
 You must send the appropriate authorization.
+
+CKAN 2.12+ \code{filters} accept advanced syntax: range operations (\code{lt},
+\code{lte}, \code{gt}, \code{gte}, \code{eq}), lists mixing values and ranges, nested AND/OR
+via lists, and \verb{$or} groups (see
+\url{https://docs.ckan.org/en/2.12/maintaining/datastore.html#filters}).
+The \code{filters} argument passes through untouched, so both classic
+(\code{{"key1": "a"}}) and advanced filters work. For large tables prefer
+keyset pagination (\code{include_next_page = TRUE} with \code{sort = "_id asc"})
+over large \code{offset} values.
 
 If you set \code{plain=FALSE}, you enable the entire PostgreSQL \emph{full text search
 query language}. You can find a listing of all available resources at the

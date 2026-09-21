@@ -12,6 +12,9 @@ user_create(
   fullname = NULL,
   about = NULL,
   openid = NULL,
+  image_url = NULL,
+  plugin_extras = NULL,
+  with_apitoken = NULL,
   url = get_default_url(),
   key = get_default_key(),
   as = "list",
@@ -28,13 +31,24 @@ characters, - and _. Required.}
 \item{password}{(character) Password of the new user. The password is a string
 of at least 4 characters. Required.}
 
-\item{id}{(character) ID of the new user. Optional.}
+\item{id}{(character) ID of the new user. Optional. Plugins may set user
+IDs at creation (CKAN 2.12+, \url{https://github.com/ckan/ckan/pull/8609}).}
 
 \item{fullname}{(character) Full name of the user. Optional.}
 
 \item{about}{(character) Description of the new user. Optional.}
 
 \item{openid}{(character) OpenID of the new user. Optional.}
+
+\item{image_url}{(character) URL to an image displayed on the user's page.
+Optional.}
+
+\item{plugin_extras}{(list) Private extra user data for plugins. Only
+sysadmins may set this. Plugins should namespace extras with the plugin
+name. Optional.}
+
+\item{with_apitoken}{(logical) Create an API token for the user.
+Optional.}
 
 \item{url}{Base URL to use. Default: https://demo.ckan.org/. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}

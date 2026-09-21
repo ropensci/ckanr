@@ -147,6 +147,22 @@ typically "unified".}
 
 \item{data}{(list|character) Optional structured payload that describes the
 activity body. The function encodes lists as JSON automatically.}
+
+\item{start_date}{(character) Start of the deletion range (ISO 8601,
+e.g. "YYYY-MM-DD" or "YYYY-MM-DDTHH:mm") for \code{activity_delete()}.}
+
+\item{end_date}{(character) End of the deletion range (ISO 8601) for
+\code{activity_delete()}. Provide both \code{start_date} and \code{end_date} to delete
+a date range, or use \code{offset_days} instead.}
+
+\item{offset_days}{(numeric) Delete activities older than this many days
+for \code{activity_delete()}.}
+
+\item{keep}{(numeric) Optional. When set, keep this many most recent
+activities per item and delete only older ones in the range.}
+
+\item{batch_size}{(numeric) Optional batch size for deletes on large
+tables (e.g. millions of rows) to avoid timeouts and long locks.}
 }
 \description{
 These helpers wrap CKAN's \code{ckanext.activity} endpoints. The target CKAN
