@@ -19,35 +19,35 @@ user_create(
 )
 }
 \arguments{
-\item{name}{(character) the name of the new user, a string between 2 and 100
-characters in length, containing only lowercase alphanumeric
-characters, - and _ (required)}
+\item{name}{(character) Name of the new user. The name is a string between
+2 and 100 characters in length. The name contains only lowercase alphanumeric
+characters, - and _. Required.}
 
-\item{email}{(character) the email address for the new user (required)}
+\item{email}{(character) Email address for the new user. Required.}
 
-\item{password}{(character) the password of the new user, a string of at
-least 4 characters (required)}
+\item{password}{(character) Password of the new user. The password is a string
+of at least 4 characters. Required.}
 
-\item{id}{(character) the id of the new user (optional)}
+\item{id}{(character) ID of the new user. Optional.}
 
-\item{fullname}{(character) user full name}
+\item{fullname}{(character) Full name of the user. Optional.}
 
-\item{about}{(character) a description of the new user (optional)}
+\item{about}{(character) Description of the new user. Optional.}
 
-\item{openid}{(character) an openid (optional)}
+\item{openid}{(character) OpenID of the new user. Optional.}
 
-\item{url}{Base url to use. Default: https://demo.ckan.org/ See
+\item{url}{Base URL to use. Default: https://demo.ckan.org/. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
-\item{key}{A privileged CKAN API key, Default: your key set with
+\item{key}{A privileged CKAN API key. Default: your key set with
 \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with
-table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
-which attempts to parse data to data.frame's when possible, so the result
+the table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
+which attempts to parse data to data.frame's when possible. The result
 can vary from a vector, list or data.frame. (required)}
 
-\item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
+\item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
 \description{
 Create a user.

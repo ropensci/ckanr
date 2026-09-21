@@ -24,7 +24,7 @@ ds_search(
 \item{resource_id}{(character) id or alias of the resource to be searched
 against}
 
-\item{filters}{(character) matching conditions to select, e.g
+\item{filters}{(character) Matching conditions to select, for example
 \verb{\{"key1": "a", "key2": "b"\}} (optional)}
 
 \item{q}{(character) full text query (optional)}
@@ -44,36 +44,37 @@ in original order)}
 \item{limit}{(numeric) The maximum number of activities to return
 (optional, default: 100)}
 
-\item{sort}{Field to sort on. You can specify ascending (e.g., score desc) or
-descending (e.g., score asc), sort by two fields (e.g., score desc,
-price asc), or sort by a function (e.g., sum(x_f, y_f) desc, which sorts
-by the sum of x_f and y_f in a descending order). (optional)}
+\item{sort}{Field to sort on. You can specify ascending, for example score
+desc, or descending, for example score asc. You can sort by two fields,
+for example score desc, price asc. You can sort by a function, for example
+sum(x_f, y_f) desc, which sorts by the sum of x_f and y_f in descending
+order. (optional)}
 
-\item{url}{Base url to use. Default: https://demo.ckan.org/ See
+\item{url}{Base URL to use. Default: https://demo.ckan.org/. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
-\item{key}{A privileged CKAN API key, Default: your key set with
+\item{key}{A privileged CKAN API key. Default: your key set with
 \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with
-table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
-which attempts to parse data to data.frame's when possible, so the result
+the table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
+which attempts to parse data to data.frame's when possible. The result
 can vary from a vector, list or data.frame. (required)}
 
-\item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
+\item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
 \description{
 Datastore - search or get a dataset from CKAN datastore
 }
 \details{
 From the help for this method "The datastore_search action allows
-you to search data in a resource. DataStore resources that belong to
-private CKAN resource can only be read by you if you have access to the
-CKAN resource and send the appropriate authorization."
+you to search data in a resource." If a DataStore resource belongs to a
+private CKAN resource, you can read it only with access to that resource.
+You must send the appropriate authorization.
 
-Setting \code{plain=FALSE} enables the entire PostgreSQL \emph{full text search query
-language}. A listing of all available resources can be found at the alias
-\emph{table_metadata} full text search query language:
+If you set \code{plain=FALSE}, you enable the entire PostgreSQL \emph{full text search
+query language}. You can find a listing of all available resources at the
+alias \emph{table_metadata} full text search query language:
 http://www.postgresql.org/docs/9.1/static/datatype-textsearch.html#DATATYPE-TSQUERY
 }
 \examples{

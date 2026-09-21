@@ -1,17 +1,17 @@
 #' Manage CKAN vocabularies.
 #'
-#' CKAN restricts vocabulary creation, updates, and deletions to sysadmin
-#' users. Each helper wraps the matching `/api/3/action/vocabulary_*` endpoint.
+#' CKAN allows only sysadmin users to create, update, and delete vocabularies.
+#' Each helper wraps the matching `/api/3/action/vocabulary_*` endpoint.
 #'
 #' @name vocabulary
-#' @param id (character or `ckan_vocabulary`) Vocabulary id or name. Can also be
-#'   an existing `ckan_vocabulary` object.
-#' @param name (character) Unique vocabulary name.
-#' @param tags (list) Optional list of tag objects, each containing at least a
-#'   `name` field. See <https://docs.ckan.org/en/latest/api/> for the full
-#'   structure.
-#' @param include_datasets (logical) Return datasets owned by the vocabulary.
-#'   Only applies to `vocabulary_show()`.
+#' @param id (character or `ckan_vocabulary`) Vocabulary ID or name. You can
+#' also pass an existing `ckan_vocabulary` object.
+#' @param name (character) Unique name of the vocabulary.
+#' @param tags (list) Optional list of tag objects. Each object contains at least
+#' a `name` field. See <https://docs.ckan.org/en/latest/api/> for the full
+#' structure.
+#' @param include_datasets (logical) The function returns datasets owned by
+#' the vocabulary. Only applies to `vocabulary_show()`.
 #' @template args
 #' @template key
 #' @examples \dontrun{
@@ -116,7 +116,8 @@ vocabulary_delete <- function(
 #'
 #' @export
 #' @param q (character) Partial tag name to search for. Required.
-#' @param vocabulary_id (character) Restrict matches to a specific vocabulary.
+#' @param vocabulary_id (character) The function restricts matches to
+#' this vocabulary.
 #' @template args
 #' @template key
 #' @examples \dontrun{

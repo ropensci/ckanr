@@ -14,24 +14,24 @@ tag_show(
 )
 }
 \arguments{
-\item{id}{(character) The name or id of the tag}
+\item{id}{(character) Name or ID of the tag.}
 
-\item{include_datasets}{include a list of up to 1000 of the tag's datasets.
-Limit 1000 datasets, use \code{\link[=package_search]{package_search()}} for more.
-(optional, default: \code{FALSE})}
+\item{include_datasets}{Include a list of up to 1000 datasets of the tag.
+The limit is 1000 datasets. Use \code{\link[=package_search]{package_search()}} for more.
+Optional. Default is \code{FALSE}.}
 
-\item{url}{Base url to use. Default: https://demo.ckan.org/ See
+\item{url}{Base URL to use. Default: https://demo.ckan.org/. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
-\item{key}{A privileged CKAN API key, Default: your key set with
+\item{key}{A privileged CKAN API key. Default: your key set with
 \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with
-table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
-which attempts to parse data to data.frame's when possible, so the result
+the table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
+which attempts to parse data to data.frame's when possible. The result
 can vary from a vector, list or data.frame. (required)}
 
-\item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
+\item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
 \description{
 Show a tag.

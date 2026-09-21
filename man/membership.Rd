@@ -4,5 +4,5 @@
 \alias{membership}
 \title{Membership helpers}
 \description{
-Utilities for managing CKAN group and organization membership endpoints.
+Utilities help you manage CKAN group and organization membership endpoints.
 }

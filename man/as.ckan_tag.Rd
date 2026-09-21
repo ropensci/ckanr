@@ -10,9 +10,10 @@ as.ckan_tag(x, ...)
 is.ckan_tag(x)
 }
 \arguments{
-\item{x}{Variety of things, character, list, or ckan_tag class object}
+\item{x}{One of character, list, or ckan_tag class object}
 
-\item{...}{Further args passed on to \code{\link[=tag_show]{tag_show()}} if character given}
+\item{...}{Extra arguments. If \code{x} is character, the function passes them
+on to \code{\link[=tag_show]{tag_show()}}}
 }
 \description{
 ckan_tag class helpers

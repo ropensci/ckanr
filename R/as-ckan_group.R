@@ -1,8 +1,9 @@
 #' ckan_group class helpers
 #'
 #' @export
-#' @param x Variety of things, character, list, or ckan_group class object
-#' @param ... Further args passed on to [group_show()] if character given
+#' @param x One of character, list, or ckan_group class object
+#' @param ... Extra arguments. If `x` is character, the function passes them
+#'   on to [group_show()]
 #' @examples \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
 #'

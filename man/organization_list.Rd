@@ -2,7 +2,7 @@
 % Please edit documentation in R/organization_list.R
 \name{organization_list}
 \alias{organization_list}
-\title{List organization}
+\title{List organizations}
 \usage{
 organization_list(
   order_by = c("name", "package"),
@@ -20,7 +20,7 @@ organization_list(
 \item{order_by}{(character, only the first element is used).
 The field to sort the list by, must be \code{name} or \code{packages}.}
 
-\item{decreasing}{(logical). Is the sort-order is decreasing or not.}
+\item{decreasing}{(logical). It shows if the sort order decreases.}
 
 \item{organizations}{(character or \code{NULL}). A list of names of the
 organizations to return. \code{NULL} returns all organizations.}
@@ -30,21 +30,21 @@ organizations to return. \code{NULL} returns all organizations.}
 \item{limit}{(numeric) The maximum number of organizations to return
 (optional, default: 31)}
 
-\item{url}{Base url to use. Default: https://demo.ckan.org/ See
+\item{url}{Base URL to use. Default: https://demo.ckan.org/. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
-\item{key}{A privileged CKAN API key, Default: your key set with
+\item{key}{A privileged CKAN API key. Default: your key set with
 \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with
-table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
-which attempts to parse data to data.frame's when possible, so the result
+the table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
+which attempts to parse data to data.frame's when possible. The result
 can vary from a vector, list or data.frame. (required)}
 
-\item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
+\item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
 \description{
-List organization
+List organizations
 }
 \examples{
 \dontrun{

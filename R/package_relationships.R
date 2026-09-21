@@ -1,6 +1,6 @@
 #' Package relationship helpers
 #'
-#' Utilities for managing dataset relationships via CKAN's `package_relationship_*` endpoints.
+#' Utilities help you manage dataset relationships through CKAN's `package_relationship_*` endpoints.
 #'
 #' @name package_relationships
 NULL
@@ -41,10 +41,10 @@ package_relationships_list <- function(
 
 #' Create a dataset relationship
 #'
-#' @param subject (character or `ckan_package`) Dataset acting as the subject in the relationship.
-#' @param object (character or `ckan_package`) Dataset acting as the object in the relationship.
+#' @param subject (character or `ckan_package`) Dataset that acts as the subject in the relationship.
+#' @param object (character or `ckan_package`) Dataset that acts as the object in the relationship.
 #' @param relationship_type (character) Relationship type (`"depends_on"`, `"derives_from"`, etc.).
-#' @param comment (character) Optional note attached to the relationship.
+#' @param comment (character) Optional note for the relationship.
 #' @template args
 #' @template key
 #' @export

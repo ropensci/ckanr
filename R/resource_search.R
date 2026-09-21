@@ -2,17 +2,18 @@
 #'
 #' @export
 #'
-#' @param q Query terms. It is a string of the form `field:term` or a
-#' vector/list of strings, each of the same form.  Within each string, `field`
-#' is a field or extra field on the Resource domain object. If `field` is
-#' hash, then an attempt is made to match the `term` as a *prefix* of the
-#' Resource.hash field. If `field` is an extra field, then an attempt is
-#' made to match against the extra fields stored against the Resource.
-#' @param sort Field to sort on. You can specify ascending (e.g., score desc)
-#' or descending (e.g., score asc), sort by two fields (e.g., score desc,
-#' price asc), or sort by a function (e.g., sum(x_f, y_f) desc, which sorts
-#' by the sum of x_f and y_f in a descending order).
-#' @param offset Record to start at, default to beginning.
+#' @param q Query terms. The value is a string of the form `field:term`
+#' or a vector or list of strings. Each string uses the same form.
+#' `field` is a field or extra field on the Resource domain object.
+#' If `field` is hash, the function matches the `term` as a prefix
+#' of the Resource.hash field. If `field` is an extra field, the function
+#' matches against the extra fields stored against the Resource.
+#' @param sort Field to sort on. You can specify ascending (for example,
+#' score desc) or descending (for example, score asc). You can sort by two
+#' fields (for example, score desc, price asc). You can sort by a function
+#' (for example, sum(x_f, y_f) desc). The function sorts by the sum of x_f
+#' and y_f in descending order.
+#' @param offset Record to start at. The default is the beginning.
 #' @param limit Number of records to return.
 #' @template args
 #' @template key

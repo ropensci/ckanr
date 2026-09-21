@@ -16,29 +16,30 @@ user_show(
 )
 }
 \arguments{
-\item{id}{(character) Package identifier.}
+\item{id}{(character) User identifier.}
 
-\item{user_obj}{(user dictionary) The user dictionary of the user (optional)}
+\item{user_obj}{(user dictionary) User dictionary of the user. Optional.}
 
-\item{include_datasets}{(logical) Include a list of datasets the user has
-created. If it is the same user or a sysadmin requesting, it includes
-datasets that are draft or private. (optional, default:False, limit:50)}
+\item{include_datasets}{(logical) Include a list of datasets that the user
+creates. If the same user or a sysadmin requests the data, the function
+includes datasets that are draft or private. Optional. Default is False.
+The limit is 50.}
 
 \item{include_num_followers}{(logical) Include the number of followers
-the user has (optional, default:False)}
+of the user. Optional. Default is False.}
 
-\item{url}{Base url to use. Default: https://demo.ckan.org/ See
+\item{url}{Base URL to use. Default: https://demo.ckan.org/. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
-\item{key}{A privileged CKAN API key, Default: your key set with
+\item{key}{A privileged CKAN API key. Default: your key set with
 \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with
-table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
-which attempts to parse data to data.frame's when possible, so the result
+the table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
+which attempts to parse data to data.frame's when possible. The result
 can vary from a vector, list or data.frame. (required)}
 
-\item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
+\item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
 \description{
 Show a user.

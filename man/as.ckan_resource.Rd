@@ -10,9 +10,10 @@ as.ckan_resource(x, ...)
 is.ckan_resource(x)
 }
 \arguments{
-\item{x}{Variety of things, character, list, or ckan_package class object}
+\item{x}{One of character, list, or ckan_package class object}
 
-\item{...}{Further args passed on to \code{\link[=resource_show]{resource_show()}} if character given}
+\item{...}{Extra arguments. If \code{x} is character, the function passes them
+on to \code{\link[=resource_show]{resource_show()}}}
 }
 \description{
 ckan_resource class helpers

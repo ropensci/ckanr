@@ -1,16 +1,17 @@
 #' Dataset maintenance helpers
 #'
-#' Additional CKAN 2.11 dataset endpoints for bulk edits and destructive actions.
+#' The file covers extra CKAN 2.11 dataset endpoints for bulk edits and destructive actions.
 #'
 #' @name package_dataset_extras
 NULL
 
 #' Revise a dataset using match/filter/update semantics
 #'
-#' @param match (list) Key/value pairs identifying the dataset to revise. Required unless using flattened keys.
-#' @param filter (character or list) Patterns describing fields to remove before the update runs.
-#' @param update (list) Values to set after filtering. Supports flattened keys.
-#' @param include (character or list) Optional patterns delimiting which fields are returned in the response.
+#' @param match (list) Key/value pairs that identify the dataset to revise. Unless you use flattened keys,
+#' this parameter is required.
+#' @param filter (character or list) Patterns that describe fields to remove before the update runs.
+#' @param update (list) Values to set after filtering. The values support flattened keys.
+#' @param include (character or list) Optional patterns that delimit which fields the response returns.
 #' @template args
 #' @template key
 #' @export

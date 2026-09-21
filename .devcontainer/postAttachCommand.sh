@@ -47,6 +47,21 @@ persist_shell_var "CKANR_DEFAULT_URL" "${CKANR_TEST_URL}" ~/.bashrc
 persist_shell_var "CKANR_BROWSER_URL" "${CODESPACE_PUBLIC_URL}" ~/.bashrc
 echo "Environment variables persisted to ~/.bashrc"
 
+# Provide GITHUB_TOKEN for pak (higher GitHub API rate limit) and gh usage.
+# In Codespaces it arrives via remoteEnv above; otherwise read it from the
+# user's GitHub CLI authentication when available.
+if [ -z "${GITHUB_TOKEN:-}" ] && command -v gh >/dev/null 2>&1; then
+  GITHUB_TOKEN="$(gh auth token 2>/dev/null || true)"
+fi
+if [ -n "${GITHUB_TOKEN:-}" ]; then
+  touch ~/.bashrc ~/.Renviron
+  persist_shell_var "GITHUB_TOKEN" "${GITHUB_TOKEN}" ~/.bashrc
+  persist_renv_var "GITHUB_TOKEN" "${GITHUB_TOKEN}" ~/.Renviron
+  echo "GITHUB_TOKEN persisted to ~/.bashrc and ~/.Renviron"
+else
+  echo "NOTE: GITHUB_TOKEN is not set (no remoteEnv value, gh CLI missing or logged out). Run 'gh auth login' and re-attach; pak falls back to unauthenticated GitHub API calls." >&2
+fi
+
 # Persist environment variables to R environment for R sessions
 touch ~/.Renviron
 persist_renv_var "CKANR_DEFAULT_URL" "${CKANR_TEST_URL}" ~/.Renviron

@@ -2,16 +2,16 @@
 #'
 #' @export
 #'
-#' @param name (character) the name of the new user, a string between 2 and 100
-#' characters in length, containing only lowercase alphanumeric
-#' characters, - and _ (required)
-#' @param email (character) the email address for the new user (required)
-#' @param password (character) the password of the new user, a string of at
-#' least 4 characters (required)
-#' @param id (character) the id of the new user (optional)
-#' @param fullname (character) user full name
-#' @param about (character) a description of the new user (optional)
-#' @param openid (character) an openid (optional)
+#' @param name (character) Name of the new user. The name is a string between
+#' 2 and 100 characters in length. The name contains only lowercase alphanumeric
+#' characters, - and _. Required.
+#' @param email (character) Email address for the new user. Required.
+#' @param password (character) Password of the new user. The password is a string
+#' of at least 4 characters. Required.
+#' @param id (character) ID of the new user. Optional.
+#' @param fullname (character) Full name of the user. Optional.
+#' @param about (character) Description of the new user. Optional.
+#' @param openid (character) OpenID of the new user. Optional.
 #' @template key
 #' @template args
 #' @references

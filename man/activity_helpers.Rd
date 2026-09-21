@@ -115,25 +115,25 @@ activity, etc.).}
 (optional, default: 31)}
 
 \item{include_hidden_activity}{(logical) If \code{TRUE}, include private activity
-entries (requires sysadmin).}
+entries. You must have sysadmin rights.}
 
-\item{url}{Base url to use. Default: https://demo.ckan.org/ See
+\item{url}{Base URL to use. Default: https://demo.ckan.org/. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
-\item{key}{A privileged CKAN API key, Default: your key set with
+\item{key}{A privileged CKAN API key. Default: your key set with
 \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with
-table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
-which attempts to parse data to data.frame's when possible, so the result
+the table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
+which attempts to parse data to data.frame's when possible. The result
 can vary from a vector, list or data.frame. (required)}
 
-\item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
+\item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 
-\item{object_type}{(character) Domain object affected by the activity, e.g.,
-"package", "resource", or a plugin-defined type.}
+\item{object_type}{(character) Domain object that the activity affects, for
+example "package", "resource", or a plugin-defined type.}
 
-\item{diff_type}{(character) Diff format returned by \code{activity_diff()},
+\item{diff_type}{(character) Diff format that \code{activity_diff()} returns,
 typically "unified".}
 
 \item{user_id}{(character) User identifier associated with a custom
@@ -145,10 +145,10 @@ typically "unified".}
 \item{activity_type}{(character) Activity type string to emit via
 \code{activity_create()}.}
 
-\item{data}{(list|character) Optional structured payload describing the
-activity body. Lists are JSON-encoded automatically.}
+\item{data}{(list|character) Optional structured payload that describes the
+activity body. The function encodes lists as JSON automatically.}
 }
 \description{
-These helpers wrap CKAN's \code{ckanext.activity} endpoints. They require the
-\code{activity} core plugin to be enabled on the target CKAN instance.
+These helpers wrap CKAN's \code{ckanext.activity} endpoints. The target CKAN
+instance must enable the \code{activity} core plugin.
 }

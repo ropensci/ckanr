@@ -9,7 +9,7 @@
 #' @template args
 #' @references
 #' http://docs.ckan.org/en/latest/api/index.html#ckan.logic.action.create.resource_create
-#' @details This function is deprecated - will be defunct in the next version
+#' @details This function is deprecated. It will be defunct in the next version
 #' of this package
 #' @examples \dontrun{
 #' path <- system.file("examples", "actinidiaceae.csv", package = "ckanr")

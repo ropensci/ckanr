@@ -22,8 +22,8 @@ organization_create(
 )
 }
 \arguments{
-\item{name}{(character) the name of the organization, a string between 2 and
-100 characters long, containing only lowercase alphanumeric characters,
+\item{name}{(character) the name of the organization. It is a string between 2 and
+100 characters long. It contains only lowercase alphanumeric characters,
 \itemize{
 \item and _
 }}
@@ -34,45 +34,45 @@ organization_create(
 
 \item{description}{(character) the description of the organization (optional)}
 
-\item{image_url}{(character) the URL to an image to be displayed on the
+\item{image_url}{(character) the URL of an image for the
 organization's page (optional)}
 
-\item{state}{(character) the current state of the organization, e.g.
-'active' or 'deleted', only active organization show up in search results
-and other lists of organization, this parameter will be ignored if you are
-not authorized to change the state of the organization (optional).
+\item{state}{(character) the current state of the organization, for example
+'active' or 'deleted' (optional). Only active organizations appear in search results
+and other lists of organizations. If you lack permission to change the state of the organization,
+the function ignores this parameter.
 Default: 'active'}
 
 \item{approval_status}{(character) Approval status}
 
-\item{extras}{The organization's extras (optional), extras are arbitrary
-(key: value) metadata items that can be added to organizations, each extra
-dictionary should have keys 'key' (a string), 'value' (a string)
-\code{package_relationship_create} for the format of relationship dictionaries
+\item{extras}{The organization's extras (optional). Extras are arbitrary
+(key: value) metadata items for organizations. Each extra
+dictionary must have keys 'key' (a string) and 'value' (a string).
+See \code{package_relationship_create} for the format of relationship dictionaries
 (optional)}
 
 \item{packages}{(list of dictionaries) the datasets (packages) that belong
-to the organization, a list of dictionaries each with keys 'name' (string,
+to the organization. It is a list of dictionaries. Each dictionary has keys 'name' (string,
 the id or name of the dataset) and optionally 'title' (string, the title
 of the dataset)}
 
-\item{users}{(character) the users that belong to the organization, a list
-of dictionaries each with key 'name' (string, the id or name of the user)
+\item{users}{(character) the users that belong to the organization. It is a list
+of dictionaries. Each dictionary has key 'name' (string, the id or name of the user)
 and optionally 'capacity' (string, the capacity in which the user is a
 member of the organization)}
 
-\item{url}{Base url to use. Default: https://demo.ckan.org/ See
+\item{url}{Base URL to use. Default: https://demo.ckan.org/. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
-\item{key}{A privileged CKAN API key, Default: your key set with
+\item{key}{A privileged CKAN API key. Default: your key set with
 \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with
-table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
-which attempts to parse data to data.frame's when possible, so the result
+the table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
+which attempts to parse data to data.frame's when possible. The result
 can vary from a vector, list or data.frame. (required)}
 
-\item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
+\item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
 \description{
 Create an organization

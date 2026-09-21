@@ -46,7 +46,12 @@
     // Since this is read after docker compose is run,
     // any variables for docker compose live in .env
     // To make Docker commands default to the devcontainer's Docker host
-    "DOCKER_HOST": "unix:///var/run/docker-host.sock"
+    "DOCKER_HOST": "unix:///var/run/docker-host.sock",
+    // GitHub token for pak (higher GitHub API rate limit) and gh usage.
+    // Codespaces injects GITHUB_TOKEN automatically; local VS Code users
+    // can export it before attaching. postAttachCommand.sh falls back to
+    // `gh auth token` when this arrives empty.
+    "GITHUB_TOKEN": "${localEnv:GITHUB_TOKEN}"
   },
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // Only 5000 is published by docker-compose-dev.yml; the other services

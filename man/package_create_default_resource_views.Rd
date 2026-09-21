@@ -16,21 +16,22 @@ package_create_default_resource_views(
 \arguments{
 \item{package}{(character or \code{ckan_package}) Dataset identifier.}
 
-\item{create_datastore_views}{(logical) When \code{TRUE}, only create views that
-require DataStore-backed resources (used when DataPusher finishes ingesting data).}
+\item{create_datastore_views}{(logical) When \code{TRUE}, the function creates only
+views that require DataStore-backed resources. The function uses this option
+when DataPusher finishes ingesting data.}
 
-\item{url}{Base url to use. Default: https://demo.ckan.org/ See
+\item{url}{Base URL to use. Default: https://demo.ckan.org/. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
-\item{key}{A privileged CKAN API key, Default: your key set with
+\item{key}{A privileged CKAN API key. Default: your key set with
 \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with
-table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
-which attempts to parse data to data.frame's when possible, so the result
+the table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
+which attempts to parse data to data.frame's when possible. The result
 can vary from a vector, list or data.frame. (required)}
 
-\item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
+\item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
 \description{
 Create default views for all resources in a dataset

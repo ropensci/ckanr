@@ -16,12 +16,13 @@ tag_search(
 )
 }
 \arguments{
-\item{query}{(character) A tag name query to search for, if given only tags
-whose names contain this string will be returned; one or more search
-strings}
+\item{query}{(character) Tag name query to search for. If you give a query,
+the function returns only tags whose names contain this string. The value
+is one or more search strings.}
 
-\item{vocabulary_id}{(character) The id or name of a vocabulary,
-if give only tags that belong to this vocabulary will be returned}
+\item{vocabulary_id}{(character) ID or name of a vocabulary.
+If you give a vocabulary, the function returns only tags that belong
+to this vocabulary.}
 
 \item{offset}{(numeric) Where to start getting activity items from
 (optional, default: 0)}
@@ -29,18 +30,18 @@ if give only tags that belong to this vocabulary will be returned}
 \item{limit}{(numeric) The maximum number of activities to return
 (optional, default: 31)}
 
-\item{url}{Base url to use. Default: https://demo.ckan.org/ See
+\item{url}{Base URL to use. Default: https://demo.ckan.org/. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
-\item{key}{A privileged CKAN API key, Default: your key set with
+\item{key}{A privileged CKAN API key. Default: your key set with
 \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with
-table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
-which attempts to parse data to data.frame's when possible, so the result
+the table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
+which attempts to parse data to data.frame's when possible. The result
 can vary from a vector, list or data.frame. (required)}
 
-\item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
+\item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
 \description{
 Search tags.

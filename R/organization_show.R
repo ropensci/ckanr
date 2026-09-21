@@ -3,13 +3,13 @@
 #' @export
 #'
 #' @param id (character) Organization id or name.
-#' @param include_datasets (logical). Whether to include a list of the
-#' organization datasets
+#' @param include_datasets (logical). Include a list of the
+#' organization datasets.
 #' @template args
 #' @template key
-#' @details By default the help and success slots are dropped, and only the
-#' result slot is returned. You can request raw json with `as = 'json'`
-#' then parse yourself to get the help slot.
+#' @details By default the function drops the help and success slots. It returns
+#' only the result slot. If you want raw json, request `as = 'json'`.
+#' Then you parse the result yourself to get the help slot.
 #' @examples \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
 #'

@@ -23,26 +23,27 @@ resource_view_create(
 
 \item{view_type}{(character) Plugin type registered on the CKAN site.}
 
-\item{title}{(character) Title assigned to the view.}
+\item{title}{(character) Title of the view.}
 
-\item{description}{(character) Optional description.}
+\item{description}{(character) Description. Optional.}
 
-\item{config}{(list) Arbitrary configuration list passed to the plugin.}
+\item{config}{(list) Arbitrary configuration list. The function passes it
+to the plugin.}
 
 \item{filter_fields, filter_values}{Optional filter parameters for filterable views.}
 
-\item{url}{Base url to use. Default: https://demo.ckan.org/ See
+\item{url}{Base URL to use. Default: https://demo.ckan.org/. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
-\item{key}{A privileged CKAN API key, Default: your key set with
+\item{key}{A privileged CKAN API key. Default: your key set with
 \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with
-table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
-which attempts to parse data to data.frame's when possible, so the result
+the table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
+which attempts to parse data to data.frame's when possible. The result
 can vary from a vector, list or data.frame. (required)}
 
-\item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
+\item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
 \description{
 Create a resource view

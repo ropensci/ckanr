@@ -14,30 +14,31 @@ ckan_fetch(
 )
 }
 \arguments{
-\item{x}{URL for the file}
+\item{x}{URL of the file}
 
-\item{store}{One of session (default) or disk. session stores in R session,
-and disk saves the file to disk.}
+\item{store}{One of session (default) or disk. The session option stores
+the file in the R session, and the disk option saves the file to disk.}
 
-\item{path}{if \code{store="disk"}, you must give a path to store file to}
+\item{path}{If \code{store="disk"}, give a path to store the file.}
 
-\item{format}{Format of the file. Required if format is not detectable
-through file URL.}
+\item{format}{Format of the file. If the file URL does not show the format,
+pass \code{format}.}
 
 \item{key}{A CKAN API key (optional, character)}
 
-\item{...}{Arguments passed on to the function used to read the file, if \code{store="session"}. See details.}
+\item{...}{Extra arguments. If \code{store="session"}, the function passes them
+to the function that reads the file. See details.}
 }
 \description{
 Download a file
 }
 \details{
-The \code{...} argument can be used to pass additional arguments to the
-function that actually reads the file. It is only used when \code{store="session"}
-and if the file is \emph{not} a ZIP file.
+You can pass additional arguments with \code{...} to the function
+that reads the file. The function uses \code{...} only when \code{store="session"}
+and the file is \emph{not} a ZIP file.
 
-This list shows what function is used to read what file format, so that you can
-see what additional arguments are available:
+This list shows the function that reads each file format. You can see
+what additional arguments are available:
 \itemize{
 \item csv: \link[utils]{read.csv}
 \item xls, xlsx: \link[readxl]{read_excel}

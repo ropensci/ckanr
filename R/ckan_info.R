@@ -1,10 +1,12 @@
 #' Get information on a CKAN server
 #'
 #' @export
-#' @param ... Curl args passed on to [crul::verb-GET] (optional)
-#' @return for `ckan_info` a list with many slots with various info.
-#' for `ckan_version`, list of length two, with actual version as character,
-#' and another with version converted to numeric (any dots or letters removed)
+#' @param ... Extra curl arguments. The function passes them on
+#' to [crul::verb-GET] (optional)
+#' @return For `ckan_info`, the function returns a list with many slots with
+#' various info. For `ckan_version`, the function returns a list of length two,
+#' with the actual version as character. The second item converts the version
+#' to numeric (any dots or letters removed)
 #' @examples \dontrun{
 #' ckan_info()
 #' ckan_info(servers()[5])
@@ -18,7 +20,7 @@ ckan_info <- function(url = get_default_url(), ...) {
 }
 
 #' @export
-#' @param url Base url to use. Default: <https://demo.ckan.org/>. See
+#' @param url Base URL to use. Default: <https://demo.ckan.org/>. See
 #' also [ckanr_setup()] and [get_default_url()]. (required)
 #' @rdname ckan_info
 ckan_version <- function(url = get_default_url(), ...) {

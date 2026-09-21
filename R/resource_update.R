@@ -1,30 +1,30 @@
 #' @title Update a resource
 #'
-#' @description This function can be used to update a resource's file attachment
-#' and "extra" metadata fields. Any update will also set the metadata key
-#' "last_updated". Any omitted metadata fields will be overwritten.
+#' @description You call this function to update a resource file attachment
+#' and "extra" metadata fields. Each update sets the metadata key
+#' "last_updated". The function overwrites any omitted metadata fields.
 #'
-#' To update selected metadata fields and retain all others unchanged,
-#' it is highly recommended to first retrieve the full resource metadata using
-#' `resource_show`, then update these metadata as required, then update the
-#' given resource with `resource_update` using the locally updated metadata.
+#' To update selected metadata fields and keep all other fields unchanged,
+#' first retrieve the full resource metadata with `resource_show`.
+#' Then update this metadata as required. Then update the resource
+#' with `resource_update` with the locally updated metadata.
 #'
-#' If a resource file is updated, then the new file must exist on a local path.
-#' R objects cannot directly be used to update a resource file; instead, they
-#' have to be written to a file, e.g. using `tempfile()` - see example.
+#' If you update a resource file, the new file must exist on a local path.
+#' You cannot use R objects directly to update a resource file.
+#' Instead, write them to a file. For example, use `tempfile()`. See the example.
 #'
-#' For convenience, CKAN base url and API key default to the global options,
-#' which are set by `ckanr_setup`.
+#' The CKAN base URL and API key default to the global options.
+#' `ckanr_setup` sets the global options.
 #'
 #' @export
 #'
-#' @param id (character) Resource ID to update (required)
-#' @param path (character) Local path of the file to upload (optional)
-#' @param extras (list) - the resources' extra metadata fields (optional)
+#' @param id (character) Resource ID to update. Required.
+#' @param path (character) Local path of the file to upload. Optional.
+#' @param extras (list) Extra metadata fields of the resource. Optional.
 #' @template key
 #' @template args
-#' @return The HTTP response from CKAN, formatted as list (default), table,
-#' or JSON.
+#' @return The function returns the HTTP response from CKAN as a list (default),
+#' table, or JSON.
 #' @references
 #' http://docs.ckan.org/en/latest/api/index.html#ckan.logic.action.create.resource_create
 #' @examples \dontrun{

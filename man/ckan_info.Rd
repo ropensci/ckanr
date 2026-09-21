@@ -10,15 +10,17 @@ ckan_info(url = get_default_url(), ...)
 ckan_version(url = get_default_url(), ...)
 }
 \arguments{
-\item{url}{Base url to use. Default: \url{https://demo.ckan.org/}. See
+\item{url}{Base URL to use. Default: \url{https://demo.ckan.org/}. See
 also \code{\link[=ckanr_setup]{ckanr_setup()}} and \code{\link[=get_default_url]{get_default_url()}}. (required)}
 
-\item{...}{Curl args passed on to \link[crul:verb-GET]{crul::verb-GET} (optional)}
+\item{...}{Extra curl arguments. The function passes them on
+to \link[crul:verb-GET]{crul::verb-GET} (optional)}
 }
 \value{
-for \code{ckan_info} a list with many slots with various info.
-for \code{ckan_version}, list of length two, with actual version as character,
-and another with version converted to numeric (any dots or letters removed)
+For \code{ckan_info}, the function returns a list with many slots with
+various info. For \code{ckan_version}, the function returns a list of length two,
+with the actual version as character. The second item converts the version
+to numeric (any dots or letters removed)
 }
 \description{
 Get information on a CKAN server

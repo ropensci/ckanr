@@ -1,7 +1,7 @@
 #' Activity stream helpers
 #'
-#' These helpers wrap CKAN's `ckanext.activity` endpoints. They require the
-#' `activity` core plugin to be enabled on the target CKAN instance.
+#' These helpers wrap CKAN's `ckanext.activity` endpoints. The target CKAN
+#' instance must enable the `activity` core plugin.
 #'
 #' @name activity_helpers
 #' @template paging
@@ -10,10 +10,10 @@
 #' @param id (character) Identifier of the target object (group, organization,
 #'   activity, etc.).
 #' @param include_hidden_activity (logical) If `TRUE`, include private activity
-#'   entries (requires sysadmin).
-#' @param object_type (character) Domain object affected by the activity, e.g.,
-#'   "package", "resource", or a plugin-defined type.
-#' @param diff_type (character) Diff format returned by `activity_diff()`,
+#'   entries. You must have sysadmin rights.
+#' @param object_type (character) Domain object that the activity affects, for
+#'   example "package", "resource", or a plugin-defined type.
+#' @param diff_type (character) Diff format that `activity_diff()` returns,
 #'   typically "unified".
 #' @param user_id (character) User identifier associated with a custom
 #'   `activity_create()` entry.
@@ -21,8 +21,8 @@
 #'   `activity_create()`.
 #' @param activity_type (character) Activity type string to emit via
 #'   `activity_create()`.
-#' @param data (list|character) Optional structured payload describing the
-#'   activity body. Lists are JSON-encoded automatically.
+#' @param data (list|character) Optional structured payload that describes the
+#'   activity body. The function encodes lists as JSON automatically.
 NULL
 
 #' @rdname activity_helpers

@@ -8,11 +8,11 @@
 src_ckan(url)
 }
 \arguments{
-\item{url, }{the url of the CKAN instance}
+\item{url}{The url of the CKAN instance}
 }
 \description{
-Use \code{src_ckan} to connect to an existing CKAN instance and \code{tbl} to
-connect to tables within that CKAN based on the DataStore Data API.
+Use \code{src_ckan} to connect to an existing CKAN instance. Use \code{tbl} to
+connect to tables in that CKAN through the DataStore Data API.
 }
 \examples{
 \dontrun{

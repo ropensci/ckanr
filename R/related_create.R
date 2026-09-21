@@ -2,17 +2,17 @@
 #'
 #' @export
 #'
-#' @param id (character) id of package that the related item should be added to.
-#' This should be an alphanumeric string. Required.
+#' @param id (character) ID of the package. You add the related item
+#' to this package. The value must be an alphanumeric string. Required.
 #' @param title (character) Title of the related item. Required.
-#' @param type (character) The type of the related item. One of API,
+#' @param type (character) Type of the related item. The value is one of API,
 #' application, idea, news article, paper, post or visualization. Required.
-#' @param description (character) description (optional). Optional
-#' @param related_id (character) An id to assign to the related item. If blank,
-#' an ID will be assigned for you. Optional
-#' @param related_url (character) A url to associated with the related item.
-#' Optional
-#' @param image_url (character) A url to associated image. Optional
+#' @param description (character) Description of the related item. Optional.
+#' @param related_id (character) ID to assign to the related item.
+#' If the value is blank, the function assigns an ID. Optional.
+#' @param related_url (character) URL for the related item.
+#' Optional.
+#' @param image_url (character) URL of an image for the related item. Optional.
 #' @template args
 #' @template key
 #'

@@ -10,11 +10,10 @@ as.ckan_organization(x, ...)
 is.ckan_organization(x)
 }
 \arguments{
-\item{x}{Variety of things, character, list, or ckan_organization class
-object}
+\item{x}{One of character, list, or ckan_organization class object}
 
-\item{...}{Further args passed on to \code{\link[=organization_show]{organization_show()}} if character
-given}
+\item{...}{Extra arguments. If \code{x} is character, the function passes them
+on to \code{\link[=organization_show]{organization_show()}}}
 }
 \description{
 ckan_organization class helpers

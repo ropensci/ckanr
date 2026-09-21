@@ -6,13 +6,13 @@
 #' object
 #' @param use_default_schema (logical) Use default package schema instead of a
 #' custom schema defined with an IDatasetForm plugin. Default: `FALSE`
-#' @param http_method (character) which HTTP method (verb) to use; one of
+#' @param http_method (character) Which HTTP method (verb) to use. Use one of
 #' "GET" or "POST". Default: "GET"
 #' @template args
 #' @template key
-#' @details By default the help and success slots are dropped, and only the
-#' result slot is returned. You can request raw json with `as = 'json'`
-#' then parse yourself to get the help slot.
+#' @details By default the function drops the help and success slots. It returns
+#' only the result slot. If you want raw json, request `as = 'json'`.
+#' Then you parse the result yourself to get the help slot.
 #' @examples \dontrun{
 #' # Setup
 #' ckanr_setup(

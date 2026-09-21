@@ -2,12 +2,12 @@
 % Please edit documentation in R/servers.R
 \name{servers}
 \alias{servers}
-\title{CKAN server URLS and other info}
+\title{CKAN server URLs and other info}
 \usage{
 servers()
 }
 \description{
-CKAN server URLS and other info
+CKAN server URLs and other info
 }
 \details{
 CKAN instances from https://github.com/ckan/ckan-instances/

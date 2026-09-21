@@ -2,13 +2,13 @@
 #'
 #' @export
 #'
-#' @param sort Field to sort on. You can specify ascending (e.g., score desc) or
-#' descending (e.g., score asc), sort by two fields (e.g., score desc, price asc),
-#' or sort by a function (e.g., sum(x_f, y_f) desc, which sorts by the sum of
-#' x_f and y_f in a descending order).
-#' @param groups (character) A list of names of the groups to return, if given
-#' only groups whose names are in this list will be returned
-#' @param all_fields (logical) Return full group dictionaries instead of just
+#' @param sort Field to sort on. You can specify ascending order, for example score desc.
+#' You can specify descending order, for example score asc. You can sort by two fields,
+#' for example score desc, price asc. You can sort by a function, for example sum(x_f, y_f) desc.
+#' The function then sorts by the sum of x_f and y_f in descending order.
+#' @param groups (character) A list of names of the groups to return. If you give
+#' this list, the function returns only groups with names in this list.
+#' @param all_fields (logical) Return full group dictionaries instead of
 #' names. Default: `FALSE`
 #' @template paging
 #' @template args

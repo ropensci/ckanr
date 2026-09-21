@@ -14,24 +14,24 @@ user_list(
 )
 }
 \arguments{
-\item{q}{(character) Restrict the users returned to those whose names
-contain a string}
+\item{q}{(character) String to filter user names. If you give a string,
+the function returns only users whose names contain the string.}
 
-\item{order_by}{(character) Which field to sort the list by
-(optional, default: 'name')}
+\item{order_by}{(character) Field to sort the list. Optional.
+Default is 'name'.}
 
-\item{url}{Base url to use. Default: https://demo.ckan.org/ See
+\item{url}{Base URL to use. Default: https://demo.ckan.org/. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
-\item{key}{A privileged CKAN API key, Default: your key set with
+\item{key}{A privileged CKAN API key. Default: your key set with
 \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with
-table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
-which attempts to parse data to data.frame's when possible, so the result
+the table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
+which attempts to parse data to data.frame's when possible. The result
 can vary from a vector, list or data.frame. (required)}
 
-\item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
+\item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
 \description{
 Return a list of the site's user accounts.

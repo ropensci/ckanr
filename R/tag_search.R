@@ -2,11 +2,12 @@
 #'
 #' @export
 #'
-#' @param query (character) A tag name query to search for, if given only tags
-#' whose names contain this string will be returned; one or more search
-#' strings
-#' @param vocabulary_id (character) The id or name of a vocabulary,
-#' if give only tags that belong to this vocabulary will be returned
+#' @param query (character) Tag name query to search for. If you give a query,
+#' the function returns only tags whose names contain this string. The value
+#' is one or more search strings.
+#' @param vocabulary_id (character) ID or name of a vocabulary.
+#' If you give a vocabulary, the function returns only tags that belong
+#' to this vocabulary.
 #' @template paging
 #' @template args
 #' @template key

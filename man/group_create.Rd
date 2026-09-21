@@ -24,10 +24,10 @@ group_create(
 )
 }
 \arguments{
-\item{name}{(character) the name of the new dataset, must be between 2 and
+\item{name}{(character) the name of the new dataset. It must be between 2 and
 100 characters long and contain only lowercase alphanumeric characters,
 \itemize{
-\item and _, e.g. 'warandpeace'
+\item and _, for example 'warandpeace'
 }}
 
 \item{id}{(character) The id of the group (optional)}
@@ -37,53 +37,52 @@ same as name)}
 
 \item{description}{(character) The description of the group (optional)}
 
-\item{image_url}{(character) The URL to an image to be displayed on the
+\item{image_url}{(character) The URL of an image for the
 group's page (optional)}
 
-\item{type}{(character) The type of the dataset (optional), IDatasetForm
-plugins associate themselves with different dataset types and provide custom
-dataset handling behaviour for these types}
+\item{type}{(character) The type of the dataset (optional). IDatasetForm
+plugins link to different dataset types. They provide custom behaviour
+for handling these types}
 
-\item{state}{(character) The current state of the dataset, e.g. 'active' or
-'deleted', only active datasets show up in search results and other lists
-of datasets, this parameter will be ignored if you are not authorized to
-change the state of the dataset (optional, default: 'active')}
+\item{state}{(character) The current state of the dataset, for example 'active' or
+'deleted' (optional, default: 'active'). Only active datasets appear in search results and other lists
+of datasets. If you lack permission to change the state of the dataset, the function ignores this parameter.}
 
 \item{approval_status}{(character) Approval status (optional)}
 
 \item{extras}{(list of dataset extra dictionaries) The dataset's extras
-(optional), extras are arbitrary (key: value) metadata items that can be
-added to datasets, each extra dictionary should have keys 'key' (a string),
+(optional). Extras are arbitrary (key: value) metadata items for datasets.
+Each extra dictionary must have keys 'key' (a string) and
 'value' (a string)}
 
 \item{packages}{(data.frame) The datasets (packages) that belong
-to the group, a data.frame, where each row has column 'name' (string, the id
+to the group. It is a data.frame. Each row has column 'name' (string, the id
 or name of the dataset) and optionally 'title' (string, the title of
 the dataset)}
 
 \item{groups}{(data.frame) The groups to which the dataset
-belongs (optional), each data.frame row should have one or more of the
-following columns which identify an existing group: 'id' (the id of the group,
-string), or 'name' (the name of the group, string), to see which groups
-exist call \code{\link[=group_list]{group_list()}}}
+belongs (optional). Each data.frame row must have one or more of the
+following columns that identify an existing group: 'id' (the id of the group,
+string) or 'name' (the name of the group, string). To see which groups
+exist, call \code{\link[=group_list]{group_list()}}}
 
-\item{users}{(list of dictionaries) The users that belong to the group,
-a list of dictionaries each with key 'name' (string, the id or name of the
+\item{users}{(list of dictionaries) The users that belong to the group.
+It is a list of dictionaries. Each dictionary has key 'name' (string, the id or name of the
 user) and optionally 'capacity' (string, the capacity in which the user is
 a member of the group)}
 
-\item{url}{Base url to use. Default: https://demo.ckan.org/ See
+\item{url}{Base URL to use. Default: https://demo.ckan.org/. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
-\item{key}{A privileged CKAN API key, Default: your key set with
+\item{key}{A privileged CKAN API key. Default: your key set with
 \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with
-table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
-which attempts to parse data to data.frame's when possible, so the result
+the table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
+which attempts to parse data to data.frame's when possible. The result
 can vary from a vector, list or data.frame. (required)}
 
-\item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
+\item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
 \description{
 Create a group

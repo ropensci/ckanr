@@ -2,8 +2,8 @@
 #'
 #' @export
 #'
-#' @param id (character) the id of the new user (required)
-#' @return (logical) TRUE when the user is successfully deleted
+#' @param id (character) ID of the user. Required.
+#' @return (logical) TRUE when the function deletes the user successfully.
 #' @template key
 #' @template args
 #' @references

@@ -2,25 +2,25 @@
 % Please edit documentation in R/ping.R
 \name{ping}
 \alias{ping}
-\title{Ping a CKAN server to test that it's up or down.}
+\title{Ping a CKAN server to test if it is up or down.}
 \usage{
 ping(url = get_default_url(), key = get_default_key(), as = "logical", ...)
 }
 \arguments{
-\item{url}{Base url to use. Default: https://demo.ckan.org/ See
+\item{url}{Base URL to use. Default: https://demo.ckan.org/. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
-\item{key}{A privileged CKAN API key, Default: your key set with
+\item{key}{A privileged CKAN API key. Default: your key set with
 \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of "logical" (default) or "json". With
-\code{as = "logical"} failures return \code{FALSE}; with \code{as = "json"} failures
+\code{as = "logical"} failures return \code{FALSE}. With \code{as = "json"} failures
 signal an error instead of returning a non-JSON logical.}
 
-\item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
+\item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
 \description{
-Ping a CKAN server to test that it's up or down.
+Ping a CKAN server to test if it is up or down.
 }
 \examples{
 \dontrun{

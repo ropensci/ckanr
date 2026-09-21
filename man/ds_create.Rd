@@ -20,13 +20,12 @@ ds_create(
 )
 }
 \arguments{
-\item{resource_id}{(string) Resource id that the data is going to be stored
-against.}
+\item{resource_id}{(string) Resource id that stores the data.}
 
-\item{resource}{(dictionary) Resource dictionary that is passed to
-\code{\link[=resource_create]{resource_create()}}. Use instead of \code{resource_id} (optional)}
+\item{resource}{(dictionary) Resource dictionary for
+\code{\link[=resource_create]{resource_create()}}. Use it instead of \code{resource_id} (optional)}
 
-\item{force}{(logical) Set to \code{TRUE} to edit a read-only resource.
+\item{force}{(logical) To edit a read-only resource, set to \code{TRUE}.
 Default: \code{FALSE}}
 
 \item{aliases}{(character) Names for read only aliases of the resource.
@@ -34,27 +33,27 @@ Default: \code{FALSE}}
 
 \item{fields}{(list) Fields/columns and their extra metadata. (optional)}
 
-\item{records}{(list) The data, eg: \verb{[\{"dob": "2005", "some_stuff": ["a", "b"]\}]} (optional)}
+\item{records}{(list) The data, for example: \verb{[\{"dob": "2005", "some_stuff": ["a", "b"]\}]} (optional)}
 
 \item{primary_key}{(character) Fields that represent a unique key (optional)}
 
 \item{indexes}{(character) Indexes on table (optional)}
 
-\item{url}{Base url to use. Default: https://demo.ckan.org/ See
+\item{url}{Base URL to use. Default: https://demo.ckan.org/. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
-\item{key}{A privileged CKAN API key, Default: your key set with
+\item{key}{A privileged CKAN API key. Default: your key set with
 \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with
-table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
-which attempts to parse data to data.frame's when possible, so the result
+the table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
+which attempts to parse data to data.frame's when possible. The result
 can vary from a vector, list or data.frame. (required)}
 
-\item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
+\item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
 \description{
-BEWARE: This function still doesn't quite work yet.
+BEWARE: This function does not work yet.
 }
 \examples{
 \dontrun{

@@ -33,26 +33,26 @@ user_follower_list(
 }
 \arguments{
 \item{id}{(character or \verb{ckan_*}) Identifier for the object to inspect.
-For datasets pass an id/slug or \code{ckan_package}, for groups pass the
-corresponding identifier or \code{ckan_group}, and for users pass a username
+For datasets, pass an id/slug or \code{ckan_package}. For groups, pass the
+corresponding identifier or \code{ckan_group}. For users, pass a username
 or \code{ckan_user}.}
 
-\item{url}{Base url to use. Default: https://demo.ckan.org/ See
+\item{url}{Base URL to use. Default: https://demo.ckan.org/. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
-\item{key}{A privileged CKAN API key, Default: your key set with
+\item{key}{A privileged CKAN API key. Default: your key set with
 \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with
-table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
-which attempts to parse data to data.frame's when possible, so the result
+the table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
+which attempts to parse data to data.frame's when possible. The result
 can vary from a vector, list or data.frame. (required)}
 
-\item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
+\item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
 \description{
-Return the individual follower records for CKAN datasets, groups,
-or users.
+The function returns the individual follower records for CKAN datasets,
+groups, or users.
 }
 \examples{
 \dontrun{

@@ -2,31 +2,31 @@
 #'
 #' @export
 #'
-#' @param name (character) the name of the organization, a string between 2 and
-#' 100 characters long, containing only lowercase alphanumeric characters,
+#' @param name (character) the name of the organization. It is a string between 2 and
+#' 100 characters long. It contains only lowercase alphanumeric characters,
 #' - and _
 #' @param id the id of the organization (optional)
 #' @param title (character) the title of the organization (optional)
 #' @param description (character) the description of the organization (optional)
-#' @param image_url (character) the URL to an image to be displayed on the
+#' @param image_url (character) the URL of an image for the
 #' organization's page (optional)
-#' @param state (character) the current state of the organization, e.g.
-#' 'active' or 'deleted', only active organization show up in search results
-#' and other lists of organization, this parameter will be ignored if you are
-#' not authorized to change the state of the organization (optional).
+#' @param state (character) the current state of the organization, for example
+#' 'active' or 'deleted' (optional). Only active organizations appear in search results
+#' and other lists of organizations. If you lack permission to change the state of the organization,
+#' the function ignores this parameter.
 #' Default: 'active'
 #' @param approval_status (character) Approval status
-#' @param extras The organization's extras (optional), extras are arbitrary
-#' (key: value) metadata items that can be added to organizations, each extra
-#' dictionary should have keys 'key' (a string), 'value' (a string)
-#' `package_relationship_create` for the format of relationship dictionaries
+#' @param extras The organization's extras (optional). Extras are arbitrary
+#' (key: value) metadata items for organizations. Each extra
+#' dictionary must have keys 'key' (a string) and 'value' (a string).
+#' See `package_relationship_create` for the format of relationship dictionaries
 #' (optional)
 #' @param packages (list of dictionaries) the datasets (packages) that belong
-#' to the organization, a list of dictionaries each with keys 'name' (string,
+#' to the organization. It is a list of dictionaries. Each dictionary has keys 'name' (string,
 #' the id or name of the dataset) and optionally 'title' (string, the title
 #' of the dataset)
-#' @param users (character) the users that belong to the organization, a list
-#' of dictionaries each with key 'name' (string, the id or name of the user)
+#' @param users (character) the users that belong to the organization. It is a list
+#' of dictionaries. Each dictionary has key 'name' (string, the id or name of the user)
 #' and optionally 'capacity' (string, the capacity in which the user is a
 #' member of the organization)
 #' @template args

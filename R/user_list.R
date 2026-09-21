@@ -1,10 +1,10 @@
 #' Return a list of the site's user accounts.
 #'
 #' @export
-#' @param q (character) Restrict the users returned to those whose names
-#' contain a string
-#' @param order_by (character) Which field to sort the list by
-#' (optional, default: 'name')
+#' @param q (character) String to filter user names. If you give a string,
+#' the function returns only users whose names contain the string.
+#' @param order_by (character) Field to sort the list. Optional.
+#' Default is 'name'.
 #' @template args
 #' @template key
 #' @examples \dontrun{

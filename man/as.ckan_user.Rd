@@ -10,9 +10,10 @@ as.ckan_user(x, ...)
 is.ckan_user(x)
 }
 \arguments{
-\item{x}{Variety of things, character, list, or ckan_user class object}
+\item{x}{One of character, list, or ckan_user class object}
 
-\item{...}{Further args passed on to \code{\link[=user_show]{user_show()}} if character given}
+\item{...}{Extra arguments. If \code{x} is character, the function passes them
+on to \code{\link[=user_show]{user_show()}}}
 }
 \description{
 ckan_user class helpers

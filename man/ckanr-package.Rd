@@ -6,18 +6,18 @@
 \alias{ckanr}
 \title{R client for the CKAN API}
 \description{
-ckanr is a full client for the CKAN API, wrapping all
-APIs, including for reading and writing data. Please get in touch
+ckanr is a client for the CKAN API. It wraps all
+APIs for reading and writing data. If you have problems, or
+have use cases that the package does not cover yet, get in touch
 (\url{https://github.com/ropensci/ckanr/issues} or
 \url{https://discuss.ropensci.org/})
-if you have problems, or have use cases that we don't cover yet.
 }
 \section{CKAN API}{
 
 
 Documentation for the CKAN API is at
 \url{https://docs.ckan.org/en/latest/api/index.html}.
-We'll always be following the latest version of the API.
+The package follows the latest version of the API.
 }
 
 \section{ckanr package API}{
@@ -48,9 +48,9 @@ other functions starting with \verb{user_*}
 \section{Datastore}{
 
 
-We are also working on supporting the Datastore extension
+The package supports the Datastore extension
 (\url{https://docs.ckan.org/en/latest/maintaining/datastore.html}).
-We currently have these functions:
+It provides these functions:
 \itemize{
 \item \code{\link[=ds_create]{ds_create()}}
 \item \code{\link[=ds_create_dataset]{ds_create_dataset()}}
@@ -62,21 +62,21 @@ We currently have these functions:
 \section{Fetch}{
 
 
-Data can come back in a huge variety of formats.
-We've attempted a function to help you fetch not just metadata
-but the actual data for a link to a file on a CKAN instance.
-Though if you know what you're doing, you can easily use
-whatever is your preferred tool for the job (e.g., maybe you like
-\code{\link[=read.csv]{read.csv()}} for reading csv files).
+Data comes back in a wide range of formats.
+The package provides a function to help you fetch metadata.
+The function also fetches the actual data for a link to a file
+on a CKAN instance.
+If you know what you are doing, you can use your preferred tool for the job.
+For example, you like \code{\link[=read.csv]{read.csv()}} for reading csv files.
 }
 
 \section{CKAN Instances}{
 
 
-We have a helper function (\code{\link[=servers]{servers()}}) that spits out the current
-CKAN instances we know about, with URLs to their base URLs that should work
-using this package. That is, not necessarily landing pages of each instance,
-although, the URL may be the landing page and the base API URL.
+A helper function (\code{\link[=servers]{servers()}}) lists the current
+CKAN instances that the package knows about. It gives the base URLs
+that work with this package. The URLs are not necessarily landing pages
+of each instance, but the URL can be the landing page and the base API URL.
 }
 
 \seealso{

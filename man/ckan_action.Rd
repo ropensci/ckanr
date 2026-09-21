@@ -16,34 +16,31 @@ ckan_action(
 )
 }
 \arguments{
-\item{action}{A valid CKAN API action name (e.g., "package_list", "package_show"). See the CKAN API documentation for a full list of actions: https://docs.ckan.org/en/latest/api/index.html}
+\item{action}{A valid CKAN API action name (for example, "package_list", "package_show"). See the CKAN API documentation for a full list of actions: https://docs.ckan.org/en/latest/api/index.html}
 
 \item{query}{a named list of URL query parameters}
 
-\item{body}{data to be used in the body of a request, see
+\item{body}{Data for the body of a request. See
 https://docs.ropensci.org/crul/reference/verb-POST.html for options}
 
 \item{headers}{a named list of request headers}
 
-\item{verb}{HTTP request verb, e.g., GET, POST}
+\item{verb}{HTTP request verb, for example, GET, POST}
 
 \item{url}{Base url to use. Default: https://demo.ckan.org/ See
 also \code{\link[=ckanr_setup]{ckanr_setup()}} and \code{\link[=get_default_url]{get_default_url()}}}
 
-\item{key}{A privileged CKAN API key, Default: your key set with
+\item{key}{A privileged CKAN API key. Default: your key set with
 \code{\link{ckanr_setup}}}
 
-\item{...}{Curl args passed on to the relevant \link[crul:HttpClient]{crul::HttpClient} method depending on the \code{verb} parameter (optional)}
+\item{...}{Curl args. The function sends them to the relevant \link[crul:HttpClient]{crul::HttpClient} method for the \code{verb} parameter (optional)}
 }
 \value{
-a text string. because we can't know ahead of time for sure
-what kind of data will be returned, we return text and the user
-can parse as needed.
+A text string. The function returns text because the data type is unknown ahead of time. You parse the text as needed.
 }
 \description{
-You have to set the CKAN action to use, as well as the HTTP verb,
-in addition to any query parameters, request body data, and
-request headers.
+You must set the CKAN action and the HTTP verb.
+You also set query parameters, body data, and headers.
 }
 \examples{
 \dontrun{

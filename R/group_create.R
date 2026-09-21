@@ -2,38 +2,37 @@
 #'
 #' @export
 #'
-#' @param name (character) the name of the new dataset, must be between 2 and
+#' @param name (character) the name of the new dataset. It must be between 2 and
 #' 100 characters long and contain only lowercase alphanumeric characters,
-#' - and _, e.g. 'warandpeace'
+#' - and _, for example 'warandpeace'
 #' @param id (character) The id of the group (optional)
 #' @param title (character) The title of the dataset (optional, default:
 #' same as name)
 #' @param description (character) The description of the group (optional)
-#' @param image_url (character) The URL to an image to be displayed on the
+#' @param image_url (character) The URL of an image for the
 #' group's page (optional)
-#' @param type (character) The type of the dataset (optional), IDatasetForm
-#' plugins associate themselves with different dataset types and provide custom
-#' dataset handling behaviour for these types
-#' @param state (character) The current state of the dataset, e.g. 'active' or
-#' 'deleted', only active datasets show up in search results and other lists
-#' of datasets, this parameter will be ignored if you are not authorized to
-#' change the state of the dataset (optional, default: 'active')
+#' @param type (character) The type of the dataset (optional). IDatasetForm
+#' plugins link to different dataset types. They provide custom behaviour
+#' for handling these types
+#' @param state (character) The current state of the dataset, for example 'active' or
+#' 'deleted' (optional, default: 'active'). Only active datasets appear in search results and other lists
+#' of datasets. If you lack permission to change the state of the dataset, the function ignores this parameter.
 #' @param approval_status (character) Approval status (optional)
 #' @param extras (list of dataset extra dictionaries) The dataset's extras
-#' (optional), extras are arbitrary (key: value) metadata items that can be
-#' added to datasets, each extra dictionary should have keys 'key' (a string),
+#' (optional). Extras are arbitrary (key: value) metadata items for datasets.
+#' Each extra dictionary must have keys 'key' (a string) and
 #' 'value' (a string)
 #' @param packages (data.frame) The datasets (packages) that belong
-#' to the group, a data.frame, where each row has column 'name' (string, the id
+#' to the group. It is a data.frame. Each row has column 'name' (string, the id
 #' or name of the dataset) and optionally 'title' (string, the title of
 #' the dataset)
 #' @param groups (data.frame) The groups to which the dataset
-#' belongs (optional), each data.frame row should have one or more of the
-#' following columns which identify an existing group: 'id' (the id of the group,
-#' string), or 'name' (the name of the group, string), to see which groups
-#' exist call [group_list()]
-#' @param users (list of dictionaries) The users that belong to the group,
-#' a list of dictionaries each with key 'name' (string, the id or name of the
+#' belongs (optional). Each data.frame row must have one or more of the
+#' following columns that identify an existing group: 'id' (the id of the group,
+#' string) or 'name' (the name of the group, string). To see which groups
+#' exist, call [group_list()]
+#' @param users (list of dictionaries) The users that belong to the group.
+#' It is a list of dictionaries. Each dictionary has key 'name' (string, the id or name of the
 #' user) and optionally 'capacity' (string, the capacity in which the user is
 #' a member of the group)
 #' @template args

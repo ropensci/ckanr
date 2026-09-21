@@ -1,10 +1,10 @@
 #' ckan_package class helpers
 #'
 #' @export
-#' @param x Variety of things, character, list, or ckan_package class object
-#' @param ... Further args passed on to [package_show()] if
-#' character given. In particular, if GET is not supported you can
-#' try the `http_method` parameter to set a different HTTP verb
+#' @param x One of character, list, or ckan_package class object
+#' @param ... Extra arguments. If `x` is character, the function passes them
+#'   on to [package_show()]. If GET is not supported, use the `http_method`
+#'   parameter to set a different HTTP verb
 #' @examples \dontrun{
 #' ckanr_setup(
 #'   url = "https://demo.ckan.org/",

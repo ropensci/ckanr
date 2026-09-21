@@ -1,16 +1,16 @@
 #' CKAN task status maintenance
 #'
 #' These helpers wrap the sysadmin-only task status endpoints that CKAN uses to
-#' track background operations (eg DataPusher runs).
+#' track background operations (for example DataPusher runs).
 #'
 #' @name task_status
 #' @template args
 #' @template key
 #' @param id (character) Task status identifier to inspect or mutate.
 #' @param entity_id (character) ID of the dataset/resource related to the task.
-#' @param entity_type (character) CKAN domain object type (e.g., "dataset").
+#' @param entity_type (character) CKAN domain object type (for example "dataset").
 #' @param task_type (character) Task namespace such as "datapusher".
-#' @param task_key (character) Additional task key (e.g., queue name).
+#' @param task_key (character) Additional task key (for example queue name).
 #' @param value (character) Free-form value, often notes or payload references.
 #' @param state (character) Task state such as "queued", "running", or
 #'   "finished".
@@ -272,7 +272,7 @@ config_option_update <- function(
 
 #' Background job helpers
 #'
-#' Manage CKAN's RQ/Redis job queue (requires sysadmin access).
+#' Manage the RQ/Redis job queue of CKAN. You must have sysadmin access.
 #'
 #' @name job_queue
 #' @examples

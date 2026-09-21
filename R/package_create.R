@@ -2,13 +2,13 @@
 #'
 #' @export
 #'
-#' @param name (character) the name of the new dataset, must be between 2 and
+#' @param name (character) the name of the new dataset. It must be between 2 and
 #' 100 characters long and contain only lowercase alphanumeric characters, -
-#' and _, e.g. 'warandpeace'
+#' and _, for example 'warandpeace'
 #' @param title (character) the title of the dataset (optional, default: same
 #' as name)
-#' @param private (logical) whether the dataset should be private (optional,
-#' default: `FALSE`), requires a value for `owner_org` if `TRUE`
+#' @param private (logical) whether the dataset is private (optional,
+#' default: `FALSE`). If `TRUE`, you must give a value for `owner_org`.
 #' @param author (character) the name of the dataset's author (optional)
 #' @param author_email (character) the email address of the dataset's author
 #' (optional)
@@ -16,39 +16,39 @@
 #' (optional)
 #' @param maintainer_email (character) the email address of the dataset's
 #' maintainer (optional)
-#' @param license_id (license id string) - the id of the dataset's license,
-#' see license_list() for available values (optional)
+#' @param license_id (license id string) The id of the dataset's license.
+#' See license_list() for available values (optional)
 #' @param notes (character) a description of the dataset (optional)
 #' @param package_url (character) a URL for the dataset's source (optional)
-#' @param version (string, no longer than 100 characters) - (optional)
-#' @param state (character) the current state of the dataset, e.g. 'active'
-#' or 'deleted', only active datasets show up in search results and other
-#' lists of datasets, this parameter will be ignored if you are not authorized
-#' to change the state of the dataset (optional, default: 'active')
-#' @param type (character) the type of the dataset (optional), IDatasetForm
-#' plugins associate themselves with different dataset types and provide custom
-#' dataset handling behaviour for these types
-#' @param resources (list of resource dictionaries) - the dataset's resources,
-#' see [resource_create()] for the format of resource dictionaries (optional)
-#' @param tags (list of tag dictionaries) - the dataset's tags, see
+#' @param version (string, no longer than 100 characters) (optional)
+#' @param state (character) the current state of the dataset, for example 'active'
+#' or 'deleted' (optional, default: 'active'). Only active datasets appear in search results and other
+#' lists of datasets. If you lack permission to change the state of the dataset, the function ignores
+#' this parameter.
+#' @param type (character) the type of the dataset (optional). IDatasetForm
+#' plugins link to different dataset types. They provide custom behaviour
+#' for handling these types
+#' @param resources (list of resource dictionaries) The dataset's resources.
+#' See [resource_create()] for the format of resource dictionaries (optional)
+#' @param tags (list of tag dictionaries) The dataset's tags. See
 #' [tag_create()] for the format of tag dictionaries (optional)
-#' @param extras (list of dataset extra dictionaries) - the dataset's extras
-#' (optional), extras are arbitrary (key: value) metadata items that can be
-#' added to datasets, each extra dictionary should have keys 'key' (a string),
+#' @param extras (list of dataset extra dictionaries) The dataset's extras
+#' (optional). Extras are arbitrary (key: value) metadata items for datasets.
+#' Each extra dictionary must have keys 'key' (a string) and
 #' 'value' (a string)
-#' @param relationships_as_object (list of relationship dictionaries) - see
+#' @param relationships_as_object (list of relationship dictionaries) See
 #' `package_relationship_create` for the format of relationship dictionaries
 #' (optional)
-#' @param relationships_as_subject (list of relationship dictionaries) - see
+#' @param relationships_as_subject (list of relationship dictionaries) See
 #' `package_relationship_create` for the format of relationship dictionaries
 #' (optional)
 #' @param groups (data.frame) the groups to which the dataset
-#' belongs, each row should have one or more of the
-#' following columns which identify an existing group: 'id' (the id of the group,
-#' string), or 'name' (the name of the group, string), to see which groups
-#' exist call [group_list()]. see example (optional)
-#' @param owner_org (character) the id of the dataset's owning organization,
-#' see [organization_list()] or `organization_list_for_user` for available
+#' belongs. Each row must have one or more of the
+#' following columns that identify an existing group: 'id' (the id of the group,
+#' string) or 'name' (the name of the group, string). To see which groups
+#' exist, call [group_list()]. See example (optional)
+#' @param owner_org (character) the id of the dataset's owning organization.
+#' See [organization_list()] or `organization_list_for_user` for available
 #' values (optional)
 #' @template args
 #' @template key

@@ -2,13 +2,13 @@
 #'
 #' @export
 #' @param x (list) A list with key-value pairs
-#' @param id (character) Resource ID to update (optional, required if
-#' x does not have an "id" field)
-#' @param extras (character vector) - the dataset's extras
-#' (optional), extras are arbitrary (key: value) metadata items that can be
-#' added to datasets, each extra dictionary should have keys 'key' (a string),
+#' @param id (character) Resource ID to update (optional). If x lacks an "id" field,
+#' this parameter is required.
+#' @param extras (character vector) The dataset's extras
+#' (optional). Extras are arbitrary (key: value) metadata items for datasets.
+#' Each extra dictionary must have keys 'key' (a string) and
 #' 'value' (a string)
-#' @param http_method (character) which HTTP method (verb) to use; one of
+#' @param http_method (character) Which HTTP method (verb) to use. Use one of
 #' "GET" or "POST". Default: "GET"
 #' @template args
 #' @template key

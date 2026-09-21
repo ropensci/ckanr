@@ -2,28 +2,28 @@
 #'
 #' @export
 #'
-#' @param package_id (character) id of package that the resource should be
-#' added to. This should be an alphanumeric string. Required.
-#' @param rcurl (character) url of resource. Required.
-#' @param description (character) description (optional). Required.
-#' @param name (character) name (optional). Required.
-#' @param revision_id (character) revision id (optional)
-#' @param format (character) format (optional)
-#' @param hash (character) hash (optional)
-#' @param resource_type (character) resource type (optional)
-#' @param mimetype (character) mime type (optional)
-#' @param mimetype_inner (character) mime type inner (optional)
-#' @param webstore_url (character) webstore url (optional)
-#' @param cache_url (character) cache url(optional)
-#' @param size (integer) size (optional)
-#' @param created (character) iso date string (optional)
-#' @param last_modified (character) iso date string (optional)
-#' @param cache_last_updated (character) iso date string (optional)
-#' @param webstore_last_updated (character) iso date string (optional)
-#' @param upload (character) A path to a local file (optional)
-#' @param extras (list) - the resources' extra metadata fields (optional)
-#' @param http_method (character) which HTTP method (verb) to use; one of
-#' "GET" or "POST". Default: "GET"
+#' @param package_id (character) ID of the package. You add the resource
+#' to this package. The value must be an alphanumeric string. Required.
+#' @param rcurl (character) URL of the resource. Required.
+#' @param description (character) Description of the resource. Optional. Required.
+#' @param name (character) Name of the resource. Optional. Required.
+#' @param revision_id (character) Revision ID. Optional.
+#' @param format (character) Format. Optional.
+#' @param hash (character) Hash. Optional.
+#' @param resource_type (character) Resource type. Optional.
+#' @param mimetype (character) MIME type. Optional.
+#' @param mimetype_inner (character) Inner MIME type. Optional.
+#' @param webstore_url (character) Webstore URL. Optional.
+#' @param cache_url (character) Cache URL. Optional.
+#' @param size (integer) Size. Optional.
+#' @param created (character) ISO date string. Optional.
+#' @param last_modified (character) ISO date string. Optional.
+#' @param cache_last_updated (character) ISO date string. Optional.
+#' @param webstore_last_updated (character) ISO date string. Optional.
+#' @param upload (character) Path to a local file. Optional.
+#' @param extras (list) Extra metadata fields of the resource. Optional.
+#' @param http_method (character) HTTP method (verb) to use.
+#' The value is one of "GET" or "POST". Default is "GET".
 #' @template args
 #' @template key
 #'

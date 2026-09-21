@@ -19,36 +19,36 @@ related_create(
 )
 }
 \arguments{
-\item{id}{(character) id of package that the related item should be added to.
-This should be an alphanumeric string. Required.}
+\item{id}{(character) ID of the package. You add the related item
+to this package. The value must be an alphanumeric string. Required.}
 
 \item{title}{(character) Title of the related item. Required.}
 
-\item{type}{(character) The type of the related item. One of API,
+\item{type}{(character) Type of the related item. The value is one of API,
 application, idea, news article, paper, post or visualization. Required.}
 
-\item{description}{(character) description (optional). Optional}
+\item{description}{(character) Description of the related item. Optional.}
 
-\item{related_id}{(character) An id to assign to the related item. If blank,
-an ID will be assigned for you. Optional}
+\item{related_id}{(character) ID to assign to the related item.
+If the value is blank, the function assigns an ID. Optional.}
 
-\item{related_url}{(character) A url to associated with the related item.
-Optional}
+\item{related_url}{(character) URL for the related item.
+Optional.}
 
-\item{image_url}{(character) A url to associated image. Optional}
+\item{image_url}{(character) URL of an image for the related item. Optional.}
 
-\item{url}{Base url to use. Default: https://demo.ckan.org/ See
+\item{url}{Base URL to use. Default: https://demo.ckan.org/. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
-\item{key}{A privileged CKAN API key, Default: your key set with
+\item{key}{A privileged CKAN API key. Default: your key set with
 \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with
-table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
-which attempts to parse data to data.frame's when possible, so the result
+the table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
+which attempts to parse data to data.frame's when possible. The result
 can vary from a vector, list or data.frame. (required)}
 
-\item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
+\item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
 \description{
 Create a related item

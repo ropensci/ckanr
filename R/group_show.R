@@ -7,9 +7,9 @@
 #' Default: `TRUE`
 #' @template args
 #' @template key
-#' @details By default the help and success slots are dropped, and only the
-#' result slot is returned. You can request raw json with `as = 'json'`
-#' then parse yourself to get the help slot.
+#' @details By default the function drops the help and success slots. It returns
+#' only the result slot. If you want raw json, request `as = 'json'`.
+#' Then you parse the result yourself to get the help slot.
 #' @examples \dontrun{
 #' res <- group_list()
 #'

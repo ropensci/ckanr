@@ -1,6 +1,6 @@
 #' Resource view management
 #'
-#' Helpers that wrap CKAN's `resource_view_*` endpoints.
+#' These helpers wrap CKAN `resource_view_*` endpoints.
 #'
 #' @name resource_views
 NULL
@@ -52,9 +52,10 @@ resource_view_show <- function(
 #'
 #' @param resource (character or `ckan_resource`) Parent resource identifier.
 #' @param view_type (character) Plugin type registered on the CKAN site.
-#' @param title (character) Title assigned to the view.
-#' @param description (character) Optional description.
-#' @param config (list) Arbitrary configuration list passed to the plugin.
+#' @param title (character) Title of the view.
+#' @param description (character) Description. Optional.
+#' @param config (list) Arbitrary configuration list. The function passes it
+#' to the plugin.
 #' @param filter_fields,filter_values Optional filter parameters for filterable views.
 #' @template args
 #' @template key
@@ -143,8 +144,8 @@ resource_view_reorder <- function(
 #' @param id (character or `ckan_resource_view`) View identifier.
 #' @template args_noas
 #' @template key
-#' @return (bool) The result of the deletion, TRUE if the resource view was deleted
-#'   sucessfully, FALSE if not.
+#' @return (bool) Result of the deletion. The value is TRUE when the function
+#' deletes the resource view successfully, and FALSE when it does not.
 #' @export
 resource_view_delete <- function(
   id, url = get_default_url(),
@@ -161,7 +162,7 @@ resource_view_delete <- function(
 #' Clear resource views
 #'
 #' @param view_types (character vector) Optional subset of view types to delete.
-#'   When `NULL`, all views are removed.
+#' When `NULL`, the function removes all views.
 #' @template args_noas
 #' @template key
 #' @export
@@ -181,8 +182,9 @@ resource_view_clear <- function(
 #'
 #' @param resource (character or `ckan_resource`) Resource identifier or object.
 #' @param package (optional) Dataset identifier or `ckan_package` object.
-#' @param create_datastore_views (logical) When `TRUE`, only create views that
-#'   require DataStore-backed resources (used when DataPusher finishes ingesting data).
+#' @param create_datastore_views (logical) When `TRUE`, the function creates only
+#' views that require DataStore-backed resources. The function uses this option
+#' when DataPusher finishes ingesting data.
 #' @template args
 #' @template key
 #' @export

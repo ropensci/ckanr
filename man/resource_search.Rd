@@ -16,34 +16,35 @@ resource_search(
 )
 }
 \arguments{
-\item{q}{Query terms. It is a string of the form \code{field:term} or a
-vector/list of strings, each of the same form.  Within each string, \code{field}
-is a field or extra field on the Resource domain object. If \code{field} is
-hash, then an attempt is made to match the \code{term} as a \emph{prefix} of the
-Resource.hash field. If \code{field} is an extra field, then an attempt is
-made to match against the extra fields stored against the Resource.}
+\item{q}{Query terms. The value is a string of the form \code{field:term}
+or a vector or list of strings. Each string uses the same form.
+\code{field} is a field or extra field on the Resource domain object.
+If \code{field} is hash, the function matches the \code{term} as a prefix
+of the Resource.hash field. If \code{field} is an extra field, the function
+matches against the extra fields stored against the Resource.}
 
-\item{sort}{Field to sort on. You can specify ascending (e.g., score desc)
-or descending (e.g., score asc), sort by two fields (e.g., score desc,
-price asc), or sort by a function (e.g., sum(x_f, y_f) desc, which sorts
-by the sum of x_f and y_f in a descending order).}
+\item{sort}{Field to sort on. You can specify ascending (for example,
+score desc) or descending (for example, score asc). You can sort by two
+fields (for example, score desc, price asc). You can sort by a function
+(for example, sum(x_f, y_f) desc). The function sorts by the sum of x_f
+and y_f in descending order.}
 
-\item{offset}{Record to start at, default to beginning.}
+\item{offset}{Record to start at. The default is the beginning.}
 
 \item{limit}{Number of records to return.}
 
-\item{url}{Base url to use. Default: https://demo.ckan.org/ See
+\item{url}{Base URL to use. Default: https://demo.ckan.org/. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
-\item{key}{A privileged CKAN API key, Default: your key set with
+\item{key}{A privileged CKAN API key. Default: your key set with
 \code{\link{ckanr_setup}}}
 
 \item{as}{(character) One of list (default), table, or json. Parsing with
-table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
-which attempts to parse data to data.frame's when possible, so the result
+the table option uses \code{jsonlite::fromJSON(..., simplifyDataFrame = TRUE)},
+which attempts to parse data to data.frame's when possible. The result
 can vary from a vector, list or data.frame. (required)}
 
-\item{...}{Curl args passed on to \code{\link[crul]{verb-POST}} (optional)}
+\item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
 \description{
 Search for resources.

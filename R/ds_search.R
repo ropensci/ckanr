@@ -3,7 +3,7 @@
 #' @export
 #' @param resource_id (character) id or alias of the resource to be searched
 #' against
-#' @param filters (character) matching conditions to select, e.g
+#' @param filters (character) Matching conditions to select, for example
 #' `{"key1": "a", "key2": "b"}` (optional)
 #' @param q (character) full text query (optional)
 #' @param plain (character) treat as plain text query (optional, default:
@@ -16,20 +16,21 @@
 #' (optional, default: 0)
 #' @param limit (numeric) The maximum number of activities to return
 #' (optional, default: 100)
-#' @param sort Field to sort on. You can specify ascending (e.g., score desc) or
-#' descending (e.g., score asc), sort by two fields (e.g., score desc,
-#' price asc), or sort by a function (e.g., sum(x_f, y_f) desc, which sorts
-#' by the sum of x_f and y_f in a descending order). (optional)
+#' @param sort Field to sort on. You can specify ascending, for example score
+#' desc, or descending, for example score asc. You can sort by two fields,
+#' for example score desc, price asc. You can sort by a function, for example
+#' sum(x_f, y_f) desc, which sorts by the sum of x_f and y_f in descending
+#' order. (optional)
 #' @template args
 #' @template key
 #' @details From the help for this method "The datastore_search action allows
-#' you to search data in a resource. DataStore resources that belong to
-#' private CKAN resource can only be read by you if you have access to the
-#' CKAN resource and send the appropriate authorization."
+#' you to search data in a resource." If a DataStore resource belongs to a
+#' private CKAN resource, you can read it only with access to that resource.
+#' You must send the appropriate authorization.
 #'
-#' Setting `plain=FALSE` enables the entire PostgreSQL *full text search query
-#' language*. A listing of all available resources can be found at the alias
-#' *table_metadata* full text search query language:
+#' If you set `plain=FALSE`, you enable the entire PostgreSQL *full text search
+#' query language*. You can find a listing of all available resources at the
+#' alias *table_metadata* full text search query language:
 #' http://www.postgresql.org/docs/9.1/static/datatype-textsearch.html#DATATYPE-TSQUERY
 #' @examples \dontrun{
 #' ckanr_setup(url = "https://data.gov.au/")
