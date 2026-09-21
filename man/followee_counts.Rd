@@ -6,6 +6,7 @@
 \alias{user_followee_count}
 \alias{dataset_followee_count}
 \alias{group_followee_count}
+\alias{organization_followee_count}
 \title{Followee counts for CKAN users}
 \usage{
 followee_count(
@@ -39,6 +40,14 @@ group_followee_count(
   as = "list",
   ...
 )
+
+organization_followee_count(
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{id}{(character or \code{ckan_user}) User identifier.}
@@ -58,6 +67,10 @@ can vary from a vector, list or data.frame. (required)}
 }
 \description{
 Count how many objects of each type (or overall) a user follows.
+
+See
+\url{https://docs.ckan.org/en/2.11/api/#ckan.logic.action.get.organization_followee_count}
+for the official API contract.
 }
 \examples{
 \dontrun{
@@ -65,5 +78,6 @@ ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
 followee_count("demo-user")
 user_followee_count("demo-user")
 dataset_followee_count("demo-user")
+organization_followee_count("demo-user")
 }
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/group_show.R
 \name{group_show}
 \alias{group_show}
-\title{Show a package}
+\title{Show a group}
 \usage{
 group_show(
   id,
@@ -33,7 +33,7 @@ can vary from a vector, list or data.frame. (required)}
 \item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
 \description{
-Show a package
+Show a group
 }
 \details{
 By default the function drops the help and success slots. It returns

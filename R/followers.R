@@ -1,11 +1,12 @@
 #' Follower counts for CKAN objects
 #'
-#' Report follower totals for datasets, groups, or users.
+#' Report follower totals for datasets, groups, organizations, or users.
 #'
 #' @param id (character or `ckan_*`) Identifier for the object to inspect.
 #'   For datasets, pass an id/slug or `ckan_package`. For groups, pass the
-#'   corresponding identifier or `ckan_group`. For users, pass a username
-#'   or `ckan_user`.
+#'   corresponding identifier or `ckan_group`. For organizations, pass the
+#'   corresponding identifier or `ckan_organization`. For users, pass a
+#'   username or `ckan_user`.
 #' @template args
 #' @template key
 #' @name follower_counts
@@ -13,6 +14,7 @@
 #' ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
 #' dataset_follower_count("my-dataset")
 #' group_follower_count("my-group")
+#' organization_follower_count("my-organization")
 #' user_follower_count("demo-user")
 #' }
 NULL
@@ -50,10 +52,27 @@ user_follower_count <- function(
   )
 }
 
+#' Return the number of followers of an organization.
+#'
+#' See
+#' <https://docs.ckan.org/en/2.11/api/#ckan.logic.action.get.organization_follower_count>
+#' for the official API contract.
+#'
+#' @rdname follower_counts
+#' @export
+organization_follower_count <- function(
+  id, url = get_default_url(),
+  key = get_default_key(), as = "list", ...
+) {
+  follower_count_request("organization_follower_count", id, "organization",
+    url = url, key = key, as = as, opts = list(...)
+  )
+}
+
 #' Follower lists for CKAN objects
 #'
 #' The function returns the individual follower records for CKAN datasets,
-#' groups, or users.
+#' groups, organizations, or users.
 #'
 #' @inheritParams follower_counts
 #' @template args
@@ -63,6 +82,7 @@ user_follower_count <- function(
 #' ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
 #' dataset_follower_list("my-dataset")
 #' group_follower_list("my-group")
+#' organization_follower_list("my-organization")
 #' user_follower_list("demo-user")
 #' }
 NULL
@@ -96,6 +116,23 @@ user_follower_list <- function(
   key = get_default_key(), as = "list", ...
 ) {
   follower_list_request("user_follower_list", id, "user",
+    url = url, key = key, as = as, opts = list(...)
+  )
+}
+
+#' Return the list of users that follow an organization.
+#'
+#' See
+#' <https://docs.ckan.org/en/2.11/api/#ckan.logic.action.get.organization_follower_list>
+#' for the official API contract.
+#'
+#' @rdname follower_lists
+#' @export
+organization_follower_list <- function(
+  id, url = get_default_url(),
+  key = get_default_key(), as = "list", ...
+) {
+  follower_list_request("organization_follower_list", id, "organization",
     url = url, key = key, as = as, opts = list(...)
   )
 }
@@ -245,6 +282,7 @@ am_following_user <- function(
 #' followee_count("demo-user")
 #' user_followee_count("demo-user")
 #' dataset_followee_count("demo-user")
+#' organization_followee_count("demo-user")
 #' }
 NULL
 
@@ -288,6 +326,23 @@ group_followee_count <- function(
   )
 }
 
+#' Return the number of organizations followed by a user.
+#'
+#' See
+#' <https://docs.ckan.org/en/2.11/api/#ckan.logic.action.get.organization_followee_count>
+#' for the official API contract.
+#'
+#' @rdname followee_counts
+#' @export
+organization_followee_count <- function(
+  id, url = get_default_url(),
+  key = get_default_key(), as = "list", ...
+) {
+  followee_request("organization_followee_count", id, url, key,
+    as = as, opts = list(...)
+  )
+}
+
 #' Followee lists for CKAN users
 #'
 #' The function returns the objects that a user follows.
@@ -301,6 +356,7 @@ group_followee_count <- function(
 #' ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
 #' followee_list("demo-user", q = "ckan")
 #' dataset_followee_list("demo-user")
+#' organization_followee_list("demo-user")
 #' }
 NULL
 
@@ -347,11 +403,29 @@ group_followee_list <- function(
   )
 }
 
+#' Return the list of organizations followed by a user.
+#'
+#' See
+#' <https://docs.ckan.org/en/2.11/api/#ckan.logic.action.get.organization_followee_list>
+#' for the official API contract.
+#'
+#' @rdname followee_lists
+#' @export
+organization_followee_list <- function(
+  id, url = get_default_url(),
+  key = get_default_key(), as = "list", ...
+) {
+  followee_request("organization_followee_list", id, url, key,
+    as = as, opts = list(...)
+  )
+}
+
 # Internal helpers ---------------------------------------------------------
 
 follower_coercers <- list(
   dataset = as.ckan_package,
   group = as.ckan_group,
+  organization = as.ckan_organization,
   user = as.ckan_user
 )
 

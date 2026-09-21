@@ -1,4 +1,4 @@
-#' Show a package
+#' Show a group
 #'
 #' @export
 #'

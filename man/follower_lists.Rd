@@ -5,6 +5,7 @@
 \alias{dataset_follower_list}
 \alias{group_follower_list}
 \alias{user_follower_list}
+\alias{organization_follower_list}
 \title{Follower lists for CKAN objects}
 \usage{
 dataset_follower_list(
@@ -30,12 +31,21 @@ user_follower_list(
   as = "list",
   ...
 )
+
+organization_follower_list(
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{id}{(character or \verb{ckan_*}) Identifier for the object to inspect.
 For datasets, pass an id/slug or \code{ckan_package}. For groups, pass the
-corresponding identifier or \code{ckan_group}. For users, pass a username
-or \code{ckan_user}.}
+corresponding identifier or \code{ckan_group}. For organizations, pass the
+corresponding identifier or \code{ckan_organization}. For users, pass a
+username or \code{ckan_user}.}
 
 \item{url}{Base URL to use. Default: https://demo.ckan.org/. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
@@ -52,13 +62,18 @@ can vary from a vector, list or data.frame. (required)}
 }
 \description{
 The function returns the individual follower records for CKAN datasets,
-groups, or users.
+groups, organizations, or users.
+
+See
+\url{https://docs.ckan.org/en/2.11/api/#ckan.logic.action.get.organization_follower_list}
+for the official API contract.
 }
 \examples{
 \dontrun{
 ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
 dataset_follower_list("my-dataset")
 group_follower_list("my-group")
+organization_follower_list("my-organization")
 user_follower_list("demo-user")
 }
 }

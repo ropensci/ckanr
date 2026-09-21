@@ -6,6 +6,7 @@
 \alias{user_followee_list}
 \alias{dataset_followee_list}
 \alias{group_followee_list}
+\alias{organization_followee_list}
 \title{Followee lists for CKAN users}
 \usage{
 followee_list(
@@ -40,6 +41,14 @@ group_followee_list(
   as = "list",
   ...
 )
+
+organization_followee_list(
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{id}{(character or \code{ckan_user}) User identifier.}
@@ -61,11 +70,16 @@ can vary from a vector, list or data.frame. (required)}
 }
 \description{
 The function returns the objects that a user follows.
+
+See
+\url{https://docs.ckan.org/en/2.11/api/#ckan.logic.action.get.organization_followee_list}
+for the official API contract.
 }
 \examples{
 \dontrun{
 ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
 followee_list("demo-user", q = "ckan")
 dataset_followee_list("demo-user")
+organization_followee_list("demo-user")
 }
 }
