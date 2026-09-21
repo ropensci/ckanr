@@ -51,7 +51,12 @@
     // Codespaces injects GITHUB_TOKEN automatically; local VS Code users
     // can export it before attaching. postAttachCommand.sh falls back to
     // `gh auth token` when this arrives empty.
-    "GITHUB_TOKEN": "${localEnv:GITHUB_TOKEN}"
+    "GITHUB_TOKEN": "${localEnv:GITHUB_TOKEN}",
+    // OpenCode Go API key: set an OPENCODE_GO_API_KEY Codespaces /
+    // repository secret (or local env var). postAttachCommand.sh seeds
+    // ~/.local/share/opencode/auth.json from it so fresh devspaces skip
+    // the manual `/connect` step. Empty is fine: the script prints a hint.
+    "OPENCODE_GO_API_KEY": "${localEnv:OPENCODE_GO_API_KEY}"
   },
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // Only 5000 is published by docker-compose-dev.yml; the other services
@@ -80,6 +85,7 @@
         "reditorsupport.r",
         "REditorSupport.r-lsp",
         "RDebugger.r-debugger",
+        "sst-dev.opencode",
         "github.codespaces",
         "github.copilot",
         "github.copilot-chat",

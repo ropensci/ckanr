@@ -72,3 +72,32 @@ persist_renv_var "CODESPACE_NAME" "${CODESPACE_NAME}" ~/.Renviron
 persist_renv_var "CKANR_ALLOW_PURGE_TESTS" "TRUE" ~/.Renviron
 persist_renv_var "CKANR_BROWSER_URL" "${CODESPACE_PUBLIC_URL}" ~/.Renviron
 echo "Environment variables persisted to ~/.Renviron for R sessions"
+
+# Seed OpenCode Go credentials so fresh devspaces skip /connect.
+# OPENCODE_GO_API_KEY is injected via devcontainer.json remoteEnv from a
+# Codespaces / repository secret of the same name. Auth file format:
+# {"opencode-go": {"type": "api", "key": "<token>"}}
+if [ -n "${OPENCODE_GO_API_KEY:-}" ]; then
+  mkdir -p ~/.local/share/opencode
+  OPENCODE_AUTH_FILE=~/.local/share/opencode/auth.json \
+    OPENCODE_GO_API_KEY="${OPENCODE_GO_API_KEY}" \
+    python3 -c '
+import json, os
+path = os.path.expandvars("$OPENCODE_AUTH_FILE")
+key = os.environ["OPENCODE_GO_API_KEY"]
+try:
+    with open(path) as f:
+        auth = json.load(f)
+except (FileNotFoundError, json.JSONDecodeError):
+    auth = {}
+auth["opencode-go"] = {"type": "api", "key": key}
+with open(path, "w") as f:
+    json.dump(auth, f, indent=2)
+    f.write("\n")
+os.chmod(path, 0o600)
+'
+  persist_shell_var "OPENCODE_API_KEY" "${OPENCODE_GO_API_KEY}" ~/.bashrc
+  echo "OpenCode Go credentials seeded in ~/.local/share/opencode/auth.json"
+else
+  echo "NOTE: OPENCODE_GO_API_KEY is not set. Run 'opencode /connect', select 'OpenCode Go', and paste your key; or set the OPENCODE_GO_API_KEY Codespaces secret and re-attach." >&2
+fi
