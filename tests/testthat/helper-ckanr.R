@@ -423,6 +423,41 @@ skip_if_not_sysadmin <- function(url, key) {
   }
 }
 
+#' Version number of the test CKAN instance
+#'
+#' @keywords internal
+#' Uses the [ckan_version()] encoding: CKAN "2.9" -> 29, "2.10" -> 210,
+#' "2.12" -> 212. Returns `NA` when the version cannot be determined.
+ckan_test_version <- function(url) {
+  ver <- tryCatch(ckan_version(url), error = function(e) NULL)
+  if (is.null(ver)) {
+    return(NA_real_)
+  }
+  ver$version_num
+}
+
+#' Skip a test when the test CKAN is older than a minimum version
+#'
+#' @keywords internal
+#' @param url Test CKAN instance URL.
+#' @param version Minimum CKAN version as a string, e.g. `"2.9"`.
+#' Gate tests on the endpoint's first version from the official CKAN API
+#' docs (<https://docs.ckan.org/en/2.12/api/>) back to 2.9 so they only
+#' run where the endpoint exists.
+skip_if_ckan_below <- function(url, version) {
+  min_v <- ckanr:::parse_version_number(version)
+  v <- ckan_test_version(url)
+  if (is.na(v)) {
+    skip("Unable to determine CKAN version of test instance")
+  }
+  if (v < min_v) {
+    skip(sprintf(
+      "Requires CKAN %s+ (test instance runs version number %s)",
+      version, v
+    ))
+  }
+}
+
 activity_plugin_enabled <- local({
   cache <- new.env(parent = emptyenv())
   function(url) {

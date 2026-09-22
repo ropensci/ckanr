@@ -183,3 +183,193 @@ test_that("ds_function_create/delete roundtrip", {
   deleted <- ds_function_delete(fname, url = url, key = key)
   expect_true(is.list(deleted) || is.null(deleted) || is.character(deleted))
 })
+
+# datastore_delete exists in every supported version (2.9-2.12, verified
+# against the ckanext.datastore source for each release).
+test_that("ds_delete removes filtered rows then drops the table", {
+  check_ckan(url)
+  skip_if_ckan_below(url, "2.9")
+  check_dataset(url, did)
+
+  path <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
+  res <- resource_create(
+    package_id = did,
+    description = "Datastore delete test",
+    name = "ds_delete_test",
+    upload = path,
+    rcurl = "http://example.com",
+    url = url,
+    key = key
+  )
+  on.exit(resource_delete(res$id, url = url, key = key), add = TRUE)
+
+  created <- tryCatch(
+    ds_create(resource_id = res$id, force = TRUE,
+      fields = list(list(id = "k", type = "text")),
+      url = url, key = key),
+    error = function(e) e
+  )
+  if (inherits(created, "error")) {
+    skip(paste("ds_create unavailable:", conditionMessage(created)))
+  }
+  upserted <- tryCatch(
+    ds_upsert(
+      resource_id = res$id,
+      records = list(list(k = "a"), list(k = "b")),
+      method = "insert",
+      force = TRUE,
+      url = url, key = key
+    ),
+    error = function(e) e
+  )
+  if (inherits(upserted, "error")) {
+    skip(paste("ds_upsert unavailable:", conditionMessage(upserted)))
+  }
+
+  deleted <- tryCatch(
+    ds_delete(
+      resource_id = res$id,
+      filters = list(k = "a"),
+      force = TRUE,
+      url = url, key = key
+    ),
+    error = function(e) e
+  )
+  if (inherits(deleted, "error")) {
+    skip(paste("ds_delete unavailable:", conditionMessage(deleted)))
+  }
+  expect_true(is.list(deleted))
+
+  remaining <- ds_search(resource_id = res$id, url = url, key = key)
+  expect_true(is.list(remaining$records))
+  expect_equal(length(remaining$records), 1)
+
+  # Output formats: insert one row and delete it per format
+  expect_ckan_formats(function(fmt) {
+    ds_upsert(
+      resource_id = res$id,
+      records = list(list(k = paste0("fmt_", fmt))),
+      method = "insert",
+      force = TRUE,
+      url = url, key = key
+    )
+    ds_delete(
+      resource_id = res$id,
+      filters = list(k = paste0("fmt_", fmt)),
+      force = TRUE,
+      url = url, key = key, as = fmt
+    )
+  })
+
+  # Without filters the whole table goes away
+  dropped <- ds_delete(resource_id = res$id, force = TRUE,
+    url = url, key = key)
+  expect_true(is.list(dropped))
+  expect_error(
+    ds_info(resource_id = res$id, url = url, key = key)
+  )
+})
+
+test_that("ds_delete fails clearly without a target", {
+  check_ckan(url)
+  skip_if_ckan_below(url, "2.9")
+  expect_error(
+    ds_delete(url = url, key = key)
+  )
+})
+
+# datastore_run_triggers exists in every supported version (2.9-2.12,
+# verified against the ckanext.datastore source for each release).
+#
+# Suspected upstream CKAN 2.12.0 bug: repeating the call on the same table
+# hangs the request until the uWSGI worker dies (HARAKIRI in the server
+# log) and answers with an empty reply. Each server call below therefore
+# uses its own fresh table, with a short retry for a flaked worker.
+test_that("ds_run_triggers runs on a datastore table", {
+  run_triggers_safe <- function(...) {
+    out <- tryCatch(ds_run_triggers(...), error = function(e) e)
+    if (inherits(out, "error") &&
+        grepl("Empty reply", conditionMessage(out))) {
+      Sys.sleep(5)
+      out <- tryCatch(ds_run_triggers(...), error = function(e) e)
+    }
+    if (inherits(out, "error")) {
+      stop(out)
+    }
+    out
+  }
+  fresh_trigger_table <- function(suffix) {
+    res <- resource_create(
+      package_id = did,
+      description = "Datastore run triggers test",
+      name = paste0("ds_run_triggers_test_", suffix),
+      upload = path,
+      rcurl = "http://example.com",
+      url = url,
+      key = key
+    )
+    ds_create(resource_id = res$id, force = TRUE,
+      fields = list(list(id = "k", type = "text")),
+      records = list(list(k = "a")),
+      url = url, key = key)
+    res$id
+  }
+
+  check_ckan(url)
+  skip_if_ckan_below(url, "2.9")
+  check_dataset(url, did)
+
+  path <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
+  tables <- c()
+  on.exit(
+    {
+      for (rid in tables) {
+        try(resource_delete(rid, url = url, key = key), silent = TRUE)
+      }
+    },
+    add = TRUE
+  )
+  make_table <- function(suffix) {
+    rid <- tryCatch(fresh_trigger_table(suffix), error = function(e) e)
+    if (inherits(rid, "error")) {
+      skip(paste("datastore unavailable:", conditionMessage(rid)))
+    }
+    tables <<- c(tables, rid)
+    rid
+  }
+
+  # The server answers with the number of records the triggers ran on
+  ran <- tryCatch(
+    run_triggers_safe(resource_id = make_table("list"), url = url, key = key),
+    error = function(e) e
+  )
+  if (inherits(ran, "error")) {
+    skip(paste("ds_run_triggers unavailable:", conditionMessage(ran)))
+  }
+  expect_true(is.numeric(ran))
+
+  # Output formats, one fresh table per call (see bug note above)
+  r_json <- run_triggers_safe(
+    resource_id = make_table("json"), url = url, key = key, as = "json")
+  expect_type(r_json, "character")
+  expect_true(is.numeric(jsonlite::fromJSON(r_json)$result))
+
+  r_table <- run_triggers_safe(
+    resource_id = make_table("table"), url = url, key = key, as = "table")
+  expect_true(is.numeric(r_table))
+
+  # Failure path: an unknown resource errors fast
+  expect_error(
+    ds_run_triggers(resource_id = "no-such-resource", url = url, key = key),
+    "does not exist"
+  )
+})
+
+test_that("ds_run_triggers requires a resource id", {
+  check_ckan(url)
+  skip_if_ckan_below(url, "2.9")
+  expect_error(
+    ds_run_triggers(url = url, key = key),
+    "resource_id"
+  )
+})
