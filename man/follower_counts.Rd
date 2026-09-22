@@ -5,6 +5,7 @@
 \alias{dataset_follower_count}
 \alias{group_follower_count}
 \alias{user_follower_count}
+\alias{organization_follower_count}
 \title{Follower counts for CKAN objects}
 \usage{
 dataset_follower_count(
@@ -30,12 +31,21 @@ user_follower_count(
   as = "list",
   ...
 )
+
+organization_follower_count(
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
+)
 }
 \arguments{
 \item{id}{(character or \verb{ckan_*}) Identifier for the object to inspect.
 For datasets, pass an id/slug or \code{ckan_package}. For groups, pass the
-corresponding identifier or \code{ckan_group}. For users, pass a username
-or \code{ckan_user}.}
+corresponding identifier or \code{ckan_group}. For organizations, pass the
+corresponding identifier or \code{ckan_organization}. For users, pass a
+username or \code{ckan_user}.}
 
 \item{url}{Base URL to use. Default: https://demo.ckan.org/. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
@@ -51,13 +61,18 @@ can vary from a vector, list or data.frame. (required)}
 \item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
 \description{
-Report follower totals for datasets, groups, or users.
+Report follower totals for datasets, groups, organizations, or users.
+
+See
+\url{https://docs.ckan.org/en/2.11/api/#ckan.logic.action.get.organization_follower_count}
+for the official API contract.
 }
 \examples{
 \dontrun{
 ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
 dataset_follower_count("my-dataset")
 group_follower_count("my-group")
+organization_follower_count("my-organization")
 user_follower_count("demo-user")
 }
 }

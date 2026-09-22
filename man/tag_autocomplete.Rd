@@ -14,7 +14,8 @@ tag_autocomplete(
 )
 }
 \arguments{
-\item{q}{(character) Partial tag name to search for. Required.}
+\item{q}{(character) Partial string to search for. The function returns
+entries whose name or title contains this string. (required)}
 
 \item{vocabulary_id}{(character) The function restricts matches to
 this vocabulary.}
@@ -33,7 +34,8 @@ can vary from a vector, list or data.frame. (required)}
 \item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
 \description{
-Autocomplete tag names.
+Return a list of tag names that contain a query string. See
+\url{https://docs.ckan.org/en/latest/api/} for the official API contract.
 }
 \examples{
 \dontrun{

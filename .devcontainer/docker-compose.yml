@@ -1,6 +1,6 @@
 services:
   ckan:
-    image: ckan/ckan-base:${CKAN_VERSION:-2.11}
+    image: ckan/ckan-base:${CKAN_VERSION:-2.12}
     container_name: ckan
     environment:
       - CKAN_SITE_URL=${CKANR_DEFAULT_URL:-http://localhost:5000}
@@ -22,6 +22,15 @@ services:
       - CKAN_SYSADMIN_EMAIL=mail@example.com
       - CKAN___BEAKER__SESSION__SECRET=secret
       - CKAN__ACTIVITY_STREAMS__EMAIL_NOTIFICATIONS=true
+      # File API (CKAN 2.12+): filesystem storage for file_create() etc.
+      # overwrite_existing lets resource_update() replace an uploaded file
+      # (the resources storage inherits these settings from default).
+      - CKAN__FILES__STORAGE__DEFAULT__TYPE=ckan:fs
+      - CKAN__FILES__STORAGE__DEFAULT__PATH=/var/lib/ckan/file-storage
+      - CKAN__FILES__STORAGE__DEFAULT__INITIALIZE=true
+      - CKAN__FILES__STORAGE__DEFAULT__OVERWRITE_EXISTING=true
+      # Resource download routes use ckan.storage_path to resolve uploaded files.
+      - CKAN_STORAGE_PATH=/var/lib/ckan/file-storage
     ports:
       - "5000:5000"
     restart: unless-stopped
@@ -39,7 +48,7 @@ services:
         condition: service_healthy
 
   postgres:
-    image: ckan/ckan-postgres-dev:${CKAN_PG_VERSION:-2.11}
+    image: ckan/ckan-postgres-dev:${CKAN_PG_VERSION:-2.12}
     container_name: postgres
     environment:
       - POSTGRES_USER=postgres
@@ -51,7 +60,7 @@ services:
       - DATASTORE_READONLY_USER=datastore_read
       - DATASTORE_READONLY_PASSWORD=pass
       - DATASTORE_DB=datastore_test
-      - CKAN_VERSION=${CKAN_VERSION:-2.11}
+      - CKAN_VERSION=${CKAN_VERSION:-2.12}
     restart: unless-stopped
     healthcheck:
       test: ["CMD","pg_isready","-U","ckan_default","-d","ckan_test"]
@@ -60,7 +69,7 @@ services:
       retries: 5
 
   solr:
-    image: ckan/ckan-solr:${SOLR_VERSION:-2.10-solr9-spatial}
+    image: ckan/ckan-solr:${SOLR_VERSION:-2.12-solr9-spatial}
     container_name: solr
     restart: unless-stopped
     healthcheck:

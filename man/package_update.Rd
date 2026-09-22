@@ -38,7 +38,19 @@ can vary from a vector, list or data.frame. (required)}
 \description{
 This function updates all package metadata fields.
 Each update sets the metadata key "last_updated".
-The function overwrites any omitted metadata fields.
+
+On CKAN < 2.12 the function overwrites any omitted metadata fields:
+any metadata fields missing from \code{x} are deleted in the package. On
+CKAN 2.12 and later the internal \code{allow_partial_update} context was
+removed (\url{https://github.com/ckan/ckan/pull/8155}): calling
+\code{package_update()} without \code{resources} now keeps existing resources
+instead of wiping them. To partially update nested fields on any
+version, prefer \code{\link[=package_patch]{package_patch()}} or \code{\link[=package_revise]{package_revise()}}.
+
+CKAN 2.12+ also reports whether the update made a real change via a
+\code{changed_entities} envelope value
+(\url{https://github.com/ckan/ckan/pull/8407}); the value is part of the
+returned payload when the server provides it.
 }
 \examples{
 \dontrun{
@@ -58,8 +70,10 @@ ds$description <- "Only title and description have been updated."
 result <- ckanr::package_update(ds, ds_id)
 # Replace existing package metadata
 
-# Step 3b: Possible or intended data loss
+# Step 3b: Possible or intended data loss on CKAN < 2.12
 # Any metadata fields missing from `ds` will be deleted in the package
+# (on CKAN 2.12+ omitted `resources` are kept; use package_patch() or
+# package_revise() for partial updates on any version)
 del(ds$description)
 result_with_deleted_description <- ckanr::package_update(ds, ds_id)
 }

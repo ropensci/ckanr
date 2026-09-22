@@ -16,6 +16,16 @@ versions, or emits warnings if an endpoint is not available for that given versi
 
 **Key Architecture**: Functions follow a consistent pattern using HTTP verb wrappers (`ckan_GET`, `ckan_POST`, `ckan_PATCH`, `ckan_DELETE`) defined in `R/zzz.R` that use `crul::HttpClient` for all API requests. Each CKAN resource type has dedicated S3 classes (e.g., `ckan_package`, `ckan_resource`) with coercion functions (`as.ckan_*`).
 
+## Development Rules
+
+These rules are binding for all changes to `ckanr`:
+
+1. **Retain all existing functions.** Every exported function was developed and tested against its respective CKAN version — never remove or rename one. If a newer CKAN API version breaks an existing function, do not change its behavior for older versions; instead add a gate check for the maximum supported CKAN version (warn or branch behavior based on the configured CKAN version, following the version-toggle pattern described in Project Overview).
+2. **The official CKAN API docs are the point of truth for API contracts.** Parameter names, request shapes, and response structures must follow the docs for the supported CKAN versions (2.9, 2.10, 2.11). When in doubt, check the docs before the implementation.
+3. **Gate new CKAN versions.** When introducing support for a new CKAN version, add a gate check that warns when a function is called while an unsupported CKAN version is configured.
+4. **Test every new function.** All added functions must ship with tests in `tests/testthat/` following the Test Quality Standards below (skip on CRAN, check CKAN availability, clean up fixtures, cover success/failure paths and output formats).
+5. **Document every new function comprehensively.** Write full roxygen2 docstrings: re-use existing `man-roxygen/` fragments, create new fragments for shared content, refactor older docstrings to use the new fragments where applicable, and incorporate the official CKAN API documentation into the docstring where feasible.
+
 ## Development Environment
 
 ### Dev Container Setup

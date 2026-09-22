@@ -73,6 +73,12 @@ package_resource_reorder <- function(
 
 #' Move a dataset to another organization
 #'
+#' On CKAN 2.12 `package_owner_org_update` may report success without moving
+#' the dataset; when the verification shows the dataset is still owned by
+#' the previous organization, the function falls back to
+#' [package_patch()] with `owner_org`, which moves the dataset reliably on
+#' all supported versions.
+#'
 #' @param id (character or `ckan_package`) Dataset identifier.
 #' @param organization_id (character or `ckan_organization`) Owning organization identifier.
 #' @template args_noas
@@ -92,7 +98,58 @@ package_owner_org_update <- function(
     body = tojun(body, TRUE), key = key, headers = ctj(), encode = "json",
     opts = list(...)
   )
-  jsonlite::fromJSON(res)$success
+  ok <- jsonlite::fromJSON(res)$success
+  if (!isTRUE(ok)) {
+    return(ok)
+  }
+  # CKAN 2.12 may report success without moving the dataset (verified
+  # against 2.12.0); on 2.9-2.11 the native action is sufficient, so only
+  # verify outside that range (or when the version is unknown).
+  ver <- try(ckan_version(url)$version_num, silent = TRUE)
+  if (!inherits(ver, "try-error") && !is.na(ver) && ver >= 29 && ver < 212) {
+    return(ok)
+  }
+  target_id <- tryCatch(
+    as.ckan_organization(organization_id, url = url, key = key)$id,
+    error = function(e) NULL
+  )
+  if (is.null(target_id)) {
+    # Cannot resolve the target: report the native result; the caller can
+    # verify via package_show().
+    return(ok)
+  }
+  current_id <- package_owner_org_id(pkg$id, url = url, key = key)
+  if (is.null(current_id) || identical(current_id, target_id)) {
+    return(ok)
+  }
+  patched <- tryCatch(
+    package_patch(list(id = pkg$id, owner_org = target_id),
+      url = url, key = key),
+    error = function(e) e
+  )
+  if (inherits(patched, "error")) {
+    stop(conditionMessage(patched), call. = FALSE)
+  }
+  verified_id <- package_owner_org_id(pkg$id, url = url, key = key)
+  identical(verified_id, target_id)
+}
+
+package_owner_org_id <- function(pkg_id, url, key) {
+  moved <- tryCatch(
+    package_show(pkg_id, url = url, key = key),
+    error = function(e) NULL
+  )
+  if (!is.list(moved)) {
+    return(NULL)
+  }
+  if (!is.null(moved$owner_org) && nzchar(as.character(moved$owner_org)[1])) {
+    return(as.character(moved$owner_org)[1])
+  }
+  org <- moved$organization
+  if (is.list(org) && !is.null(org$id)) {
+    return(as.character(org$id)[1])
+  }
+  NULL
 }
 
 #' Permanently purge a dataset

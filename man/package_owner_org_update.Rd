@@ -26,7 +26,11 @@ also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 \item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
 \description{
-Move a dataset to another organization
+On CKAN 2.12 \code{package_owner_org_update} may report success without moving
+the dataset; when the verification shows the dataset is still owned by
+the previous organization, the function falls back to
+\code{\link[=package_patch]{package_patch()}} with \code{owner_org}, which moves the dataset reliably on
+all supported versions.
 }
 \examples{
 \dontrun{

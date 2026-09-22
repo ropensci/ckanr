@@ -2,8 +2,13 @@
 #'
 #' @description You call this function to update a resource file attachment
 #' and "extra" metadata fields. Each update sets the metadata key
-#' "last_updated". The function overwrites any omitted metadata fields.
+#' "last_updated".
 #'
+#' On CKAN < 2.12 omitted metadata fields could be overwritten; on
+#' CKAN 2.12+ unchanged resources are no longer revalidated and
+#' `package_update()` without `resources` keeps existing resources
+#' (<https://github.com/ckan/ckan/pull/8155>,
+#' <https://github.com/ckan/ckan/pull/5713>).
 #' To update selected metadata fields and keep all other fields unchanged,
 #' first retrieve the full resource metadata with `resource_show`.
 #' Then update this metadata as required. Then update the resource

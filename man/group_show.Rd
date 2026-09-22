@@ -2,11 +2,12 @@
 % Please edit documentation in R/group_show.R
 \name{group_show}
 \alias{group_show}
-\title{Show a package}
+\title{Show a group}
 \usage{
 group_show(
   id,
   include_datasets = TRUE,
+  include_users = TRUE,
   url = get_default_url(),
   key = get_default_key(),
   as = "list",
@@ -18,6 +19,13 @@ group_show(
 
 \item{include_datasets}{(logical) Include a list of the group's datasets.
 Default: \code{TRUE}}
+
+\item{include_users}{(logical) Include the group's users. CKAN 2.12 changed
+the server default to \code{FALSE} regardless of the
+\code{ckan.auth.public_user_details} setting
+(\url{https://github.com/ckan/ckan/pull/9232}); ckanr defaults to \code{TRUE} to
+preserve the historical behavior. The parameter is accepted on all
+supported CKAN versions (2.9, 2.10, 2.11, 2.12).}
 
 \item{url}{Base URL to use. Default: https://demo.ckan.org/. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
@@ -33,7 +41,7 @@ can vary from a vector, list or data.frame. (required)}
 \item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
 \description{
-Show a package
+Show a group
 }
 \details{
 By default the function drops the help and success slots. It returns

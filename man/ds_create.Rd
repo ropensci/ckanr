@@ -13,6 +13,7 @@ ds_create(
   records = NULL,
   primary_key = NULL,
   indexes = NULL,
+  include_records = FALSE,
   url = get_default_url(),
   key = get_default_key(),
   as = "list",
@@ -38,6 +39,14 @@ Default: \code{FALSE}}
 \item{primary_key}{(character) Fields that represent a unique key (optional)}
 
 \item{indexes}{(character) Indexes on table (optional)}
+
+\item{include_records}{(logical) If \code{TRUE}, CKAN 2.12+ returns the actual
+inserted records (including \verb{_id} values and transformations) in the
+response. Default: \code{FALSE}. See
+\url{https://github.com/ckan/ckan/pull/8684}. Note: bulk inserts with
+\code{include_records = TRUE} can hit a server-side error on CKAN 2.12.0; use
+a single record or \code{\link[=ds_upsert]{ds_upsert()}} with \code{include_records = TRUE} instead
+when affected.}
 
 \item{url}{Base URL to use. Default: https://demo.ckan.org/. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}

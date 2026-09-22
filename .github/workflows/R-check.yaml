@@ -32,7 +32,7 @@ jobs:
         - { os: ubuntu-latest, r: 'release', ckan-version: '2.9-py3.9', ckan-pg-version: '2.9', solr-version: '2.9-solr9-spatial', collab: true, plugins: "stats text_view image_view resource_proxy datastore envvars"}
         - { os: ubuntu-latest, r: 'release', ckan-version: '2.10-py3.10', ckan-pg-version: '2.10', solr-version: '2.10-solr9-spatial', collab: true, activity: true, plugins: "stats text_view image_view resource_proxy datastore envvars activity"}
         - { os: ubuntu-latest, r: 'release', ckan-version: '2.11', ckan-pg-version: '2.11', solr-version: '2.10-solr9-spatial', collab: true, plugins: "stats text_view image_view resource_proxy datastore envvars activity"}
-        #- { os: ubuntu-latest, r: 'release', ckan-version: '2.12', ckan-pg-version: '2.12', solr-version: '2.12-solr9-spatial', collab: true, plugins: "stats text_view image_view resource_proxy datastore envvars activity"}
+        - { os: ubuntu-latest, r: 'release', ckan-version: '2.12', ckan-pg-version: '2.12', solr-version: '2.12-solr9-spatial', collab: true, plugins: "stats text_view image_view resource_proxy datastore envvars activity"}
         - { os: ubuntu-latest, r: 'devel', ckan-version: '2.11', ckan-pg-version: '2.11', solr-version: '2.10-solr9-spatial', collab: true, plugins: "stats text_view image_view resource_proxy datastore envvars activity"}
 
     env:
@@ -113,7 +113,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Test coverage
-        if: matrix.config.os == 'ubuntu-latest' && matrix.config.r == 'release' &&  matrix.config.ckan-version == '2.11'
+        if: matrix.config.os == 'ubuntu-latest' && matrix.config.r == 'release' &&  matrix.config.ckan-version == '2.12'
         run: |
           cov <- covr::package_coverage(
             quiet = FALSE,
@@ -125,7 +125,7 @@ jobs:
         shell: Rscript {0}
 
       - uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7
-        if: matrix.config.os == 'ubuntu-latest' && matrix.config.r == 'release' &&  matrix.config.ckan-version == '2.11'
+        if: matrix.config.os == 'ubuntu-latest' && matrix.config.r == 'release' &&  matrix.config.ckan-version == '2.12'
         with:
           # Fail if error if not on PR, or if on PR and token is given
           fail_ci_if_error: ${{ github.event_name != 'pull_request' || secrets.CODECOV_TOKEN }}
@@ -142,7 +142,7 @@ jobs:
         shell: bash
 
       - name: Upload test results
-        if: failure() && matrix.config.os == 'ubuntu-latest' && matrix.config.r == 'release' &&  matrix.config.ckan-version == '2.11'
+        if: failure() && matrix.config.os == 'ubuntu-latest' && matrix.config.r == 'release' &&  matrix.config.ckan-version == '2.12'
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: coverage-test-failures

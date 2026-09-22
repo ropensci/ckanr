@@ -8,6 +8,7 @@
 #' - ckan_resource - CKAN resource
 #' - ckan_resource_view - CKAN resource view
 #' - ckan_related - CKAN related item
+#' - ckan_file - CKAN file (first-class file entities, CKAN 2.12+)
 #'
 #' @section Coercion:
 #' The `as.ckan_*()` functions for each CKAN object type coerce an object

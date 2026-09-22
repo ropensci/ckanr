@@ -114,8 +114,11 @@ vocabulary_delete <- function(
 
 #' Autocomplete tag names.
 #'
+#' Return a list of tag names that contain a query string. See
+#' <https://docs.ckan.org/en/latest/api/> for the official API contract.
+#'
 #' @export
-#' @param q (character) Partial tag name to search for. Required.
+#' @template autocomplete
 #' @param vocabulary_id (character) The function restricts matches to
 #' this vocabulary.
 #' @template args

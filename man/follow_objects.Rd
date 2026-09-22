@@ -49,8 +49,9 @@ group_am_following(id, url = get_default_url(), key = get_default_key(), ...)
 \arguments{
 \item{id}{(character or \verb{ckan_*}) Identifier for the object to inspect.
 For datasets, pass an id/slug or \code{ckan_package}. For groups, pass the
-corresponding identifier or \code{ckan_group}. For users, pass a username
-or \code{ckan_user}.}
+corresponding identifier or \code{ckan_group}. For organizations, pass the
+corresponding identifier or \code{ckan_organization}. For users, pass a
+username or \code{ckan_user}.}
 
 \item{url}{Base URL to use. Default: https://demo.ckan.org/. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}

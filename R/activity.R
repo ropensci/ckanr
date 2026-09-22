@@ -231,6 +231,86 @@ send_email_notifications <- function(
   )
 }
 
+#' Activity purge helpers (CKAN 2.12+)
+#'
+#' These helpers wrap the CKAN 2.12 activity purge feature
+#' (<https://github.com/ckan/ckan/pull/8189>). You must have sysadmin
+#' rights and the target instance must enable the `activity` plugin with
+#' CKAN 2.12 or later. Each wrapper calls `ensure_action_available()` so
+#' it fails clearly on older instances.
+#'
+#' @name activity_purge
+#' @template args
+#' @template key
+#' @param id (character) Activity identifier to delete via
+#'   `activity_delete()`. Alternatively provide `start_date` + `end_date`
+#'   or `offset_days`.
+#' @param start_date (character) Start of the deletion range (ISO 8601).
+#' @param end_date (character) End of the deletion range (ISO 8601).
+#' @param offset_days (numeric) Delete activities older than this many days.
+#' @param keep (numeric) Optional. Keep this many most recent activities per
+#'   item; delete only older ones in the range.
+#' @param batch_size (numeric) Optional batch size for large tables.
+#' @examples \dontrun{
+#' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+#' activity_delete_counts()
+#' activity_delete(offset_days = 365)
+#' }
+NULL
+
+#' @rdname activity_purge
+#' @export
+activity_delete <- function(
+  id = NULL, start_date = NULL, end_date = NULL, offset_days = NULL,
+  keep = NULL, batch_size = NULL,
+  url = get_default_url(), key = get_default_key(), as = "list", ...
+) {
+  ensure_action_available("activity_delete", url = url, key = key)
+  if (is.null(id) && is.null(offset_days) &&
+      (is.null(start_date) || is.null(end_date))) {
+    stop(
+      "Provide `id`, `offset_days`, or both `start_date` and `end_date`",
+      call. = FALSE
+    )
+  }
+  body <- cc(list(
+    id = id, start_date = start_date, end_date = end_date,
+    offset_days = offset_days, keep = keep, batch_size = batch_size
+  ))
+  res <- ckan_POST(url, "activity_delete",
+    body = tojun(body, TRUE), key = key,
+    headers = ctj(), encode = "json", opts = list(...)
+  )
+  parse_ckan_response(res, as)
+}
+
+#' @rdname activity_purge
+#' @export
+activity_delete_all <- function(
+  batch_size = NULL,
+  url = get_default_url(), key = get_default_key(), as = "list", ...
+) {
+  ensure_action_available("activity_delete_all", url = url, key = key)
+  body <- cc(list(batch_size = batch_size))
+  res <- ckan_POST(url, "activity_delete_all",
+    body = tojun(body, TRUE), key = key,
+    headers = ctj(), encode = "json", opts = list(...)
+  )
+  parse_ckan_response(res, as)
+}
+
+#' @rdname activity_purge
+#' @export
+activity_delete_counts <- function(
+  url = get_default_url(), key = get_default_key(), as = "list", ...
+) {
+  ensure_action_available("activity_delete_counts", url = url, key = key)
+  res <- ckan_POST(url, "activity_delete_counts",
+    body = list(), key = key, opts = list(...)
+  )
+  parse_ckan_response(res, as)
+}
+
 activity_email_notifications_enabled <- local({
   cache <- new.env(parent = emptyenv())
   truthy <- c("true", "1", "yes", "on")
