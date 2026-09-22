@@ -18,7 +18,9 @@ RUN apt-get update && \
     libpq-dev libcurl4-openssl-dev libssl-dev && \
     rm -rf /var/lib/apt/lists/* && \
     curl --proto '=https' --tlsv1.2 -LsSf \
-    https://github.com/etiennebacher/jarl/releases/latest/download/jarl-installer.sh | sh
+    https://github.com/etiennebacher/jarl/releases/latest/download/jarl-installer.sh | sh && \
+    mv /root/.local/bin/jarl /usr/local/bin/jarl && \
+    rmdir -p /root/.local/bin 2>/dev/null || true
 
 # Install OpenCode (https://opencode.ai) system-wide so it is on PATH
 # for all users, not just root ($HOME/.opencode/bin at build time)

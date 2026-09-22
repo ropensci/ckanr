@@ -7,6 +7,7 @@
 resource_patch(
   x,
   id,
+  rcurl = NULL,
   url = get_default_url(),
   key = get_default_key(),
   as = "list",
@@ -17,6 +18,11 @@ resource_patch(
 \item{x}{(list) A list with key-value pairs}
 
 \item{id}{(character) Resource ID to update (required)}
+
+\item{rcurl}{(character) New external URL of the resource, for example
+an ArcGIS link. The function sends it as the resource \code{url} and sets
+\code{url_type} to \code{link}, so CKAN stores a true external link. If \code{x} holds
+its own \code{url_type} item, that value wins. Optional.}
 
 \item{url}{Base URL to use. Default: https://demo.ckan.org/. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
@@ -32,7 +38,8 @@ can vary from a vector, list or data.frame. (required)}
 \item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
 \description{
-Update a resource's metadata
+To point an existing resource at a new external URL, pass the link
+through \code{rcurl}. If \code{x} also holds a \code{url} item, \code{rcurl} wins.
 }
 \examples{
 \dontrun{
@@ -59,5 +66,9 @@ z$description
 extra <- list("extra_key" = "my special value")
 zz <- resource_patch(extra, id = res)
 zz$extra_key
+
+# Point the resource at a new external URL
+zzz <- resource_patch(list(), id = res, rcurl = "https://example.com/data.geojson")
+zzz$url
 }
 }
