@@ -78,6 +78,7 @@ ds_search <- function(
   url = get_default_url(), key = get_default_key(),
   as = "list", ...
 ) {
+  validate_ckan_url(url)
   args <- cc(list(
     resource_id = resource_id, filters = filters, q = q,
     plain = plain, language = language, fields = fields,

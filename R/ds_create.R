@@ -53,6 +53,7 @@ ds_create <- function(
   url = get_default_url(), key = get_default_key(),
   as = "list", ...
 ) {
+  validate_ckan_url(url)
   body <- cc(list(
     resource_id = resource_id, resource = resource, force = force,
     aliases = aliases, fields = fields, records = records,

@@ -54,6 +54,7 @@
 NULL
 
 datastore_body_post <- function(action, body, url, key, as, opts) {
+  validate_ckan_url(url)
   headers <- c(auth_headers(key), ctj())
   con <- crul::HttpClient$new(file.path(notrail(url), "api/action", action),
     headers = headers,

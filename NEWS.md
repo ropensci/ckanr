@@ -21,6 +21,8 @@ ckanr 0.9.0
 * The `related_*()` helpers stop with a clear message when the CKAN instance lacks the related API.
 * Startup resets an empty `CKANR_DEFAULT_URL` to the default. Docs name the correct default URL.
 * Add `ds_upsert()` for inserting or updating records in an existing DataStore resource.
+* Requests now stop early with a clear message when the CKAN URL is empty or
+  does not start with `http://` or `https://`.
 
 ### DOCS
 

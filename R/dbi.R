@@ -38,6 +38,7 @@ setMethod("initialize", "CKANConnection", function(
 
 setMethod("dbConnect", "CKANDriver",
   def = function(drv, url, key = get_default_key(), ...) {
+    validate_ckan_url(url)
     new("CKANConnection", url = url, key = key)
   },
   valueClass = "CKANConnection"

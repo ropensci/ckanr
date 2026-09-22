@@ -15,6 +15,7 @@ ds_search_sql <- function(
   sql, url = get_default_url(), key = get_default_key(),
   as = "list", ...
 ) {
+  validate_ckan_url(url)
   con <- crul::HttpClient$new(
     url = file.path(notrail(url), "api/action/datastore_search_sql"),
     headers = c(list(Authorization = key), ctj()),

@@ -84,3 +84,18 @@ test_that("ckanr_settings default to set default CKAN URL", {
   ckanr_setup(url = x)
   expect_equal(get_default_url(), x)
 })
+
+test_that("empty and malformed CKAN URLs fail with clear messages", {
+  expect_error(
+    package_list(url = ""),
+    "The CKAN URL is empty"
+  )
+  expect_error(
+    package_list(url = "demo.ckan.org"),
+    "must start with `http://` or `https://`"
+  )
+  expect_error(
+    dbConnect(new("CKANDriver"), url = ""),
+    "The CKAN URL is empty"
+  )
+})

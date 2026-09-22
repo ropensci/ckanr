@@ -34,6 +34,7 @@ ckan_VERB <- function(
   verb, url, method, body, key, query = list(),
   headers = list(), opts = list(), ...
 ) {
+  validate_ckan_url(url)
   url <- notrail(url)
 
   # check if proxy set
@@ -75,6 +76,26 @@ ckan_VERB <- function(
   }
   err_handler(res)
   res$parse("UTF-8")
+}
+
+validate_ckan_url <- function(url) {
+  if (length(url) != 1L || is.na(url) || !nzchar(trimws(url))) {
+    stop(
+      paste(
+        "The CKAN URL is empty.",
+        "Set it with ckanr_setup(url = 'https://your-ckan.example/')",
+        "or pass a non-empty `url` argument."
+      ),
+      call. = FALSE
+    )
+  }
+  if (!grepl("^https?://[^[:space:]]+$", url, ignore.case = TRUE)) {
+    stop(
+      "The CKAN URL must start with `http://` or `https://`.",
+      call. = FALSE
+    )
+  }
+  invisible(url)
 }
 
 # GET fxn for fetch()
