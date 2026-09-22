@@ -9,6 +9,9 @@ ckanr 0.9.0
 * Refresh the DataStore DBI and dbplyr integration for the dbplyr 2nd-edition
   interface. Use `dplyr::tbl()` with a `CKANConnection` as the primary
   interface. The connection remains read-only.
+* Mark `median()` and `quantile()` as unsupported DataStore translations.
+  Add execution tests for joins, semi-joins, set operations, wrapped queries,
+  and the supported custom aggregate translations.
 * `revision_list()` and `package_revision_list()` no longer crash when the CKAN version is unknown. An unknown version passes through to the API call.
 * `parse_version_number()` returns `NA` with no warning for short or missing input.
 * `ping()` validates the `as` argument. `as = "logical"` returns `FALSE` on failure. `as = "json"` signals an error on failure.

@@ -82,11 +82,17 @@ sql_translation.sql_dialect_ckan <- function(con) {
       var = dbplyr::sql_aggregate("VAR_SAMP", "var"),
       all = dbplyr::sql_aggregate("BOOL_AND", "all"),
       any = dbplyr::sql_aggregate("BOOL_OR", "any"),
-      paste = dbplyr::sql_paste(" ")
+      paste = function(x, collapse = " ") {
+        dbplyr::sql_glue("STRING_AGG({x}, {collapse})")
+      },
+      median = dbplyr::sql_not_supported("median"),
+      quantile = dbplyr::sql_not_supported("quantile")
     ),
     dbplyr::sql_translator(
       .parent = dbplyr::base_win,
-      paste = dbplyr::win_aggregate("STRING_AGG")
+      paste = dbplyr::win_aggregate("STRING_AGG"),
+      median = dbplyr::sql_not_supported("median"),
+      quantile = dbplyr::sql_not_supported("quantile")
     )
   )
 }
@@ -155,7 +161,7 @@ format.src_ckan <- function(x, ...) {
 }
 
 #' @importFrom dplyr src_tbls
-#' @importFrom dbplyr base_agg base_scalar base_win sql_aggregate sql_aggregate_2 sql_paste win_aggregate
+#' @importFrom dbplyr base_agg base_scalar base_win sql_aggregate sql_aggregate_2 sql_glue sql_not_supported win_aggregate
 #' @importFrom dbplyr new_sql_dialect sql_dialect sql_query_explain sql_query_save
 #' @importFrom dbplyr sql_translation sql_translator sql_variant
 NULL

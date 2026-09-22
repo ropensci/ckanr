@@ -123,3 +123,28 @@ test_that("CKAN DBI write operations fail clearly", {
   )
   expect_error(dbBegin(con), "read-only")
 })
+
+test_that("DBI quoting and connection methods work across supported CKAN versions", {
+  check_ckan(url)
+  skip_if_ckan_below(url, "2.9")
+
+  con <- dbConnect(new("CKANDriver"), url = url, key = get_test_key())
+  on.exit(dbDisconnect(con), add = TRUE)
+  rid <- get_test_rid()
+
+  expect_equal(
+    as.character(dbQuoteIdentifier(con, rid)),
+    paste0('"', rid, '"')
+  )
+  expect_equal(
+    as.character(dbQuoteIdentifier(con, 'field"name')),
+    '"field""name"'
+  )
+  expect_equal(as.character(dbQuoteString(con, "O'Reilly")), "'O''Reilly'")
+
+  expect_true(is.character(dbListTables(con)))
+  expect_true(dbExistsTable(con, rid))
+  expect_false(dbExistsTable(con, "not-a-datastore-table"))
+  expect_gt(length(dbListFields(con, rid)), 0)
+  expect_true(is.data.frame(dbReadTable(con, rid)))
+})
