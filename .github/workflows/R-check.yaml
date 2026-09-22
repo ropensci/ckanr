@@ -39,6 +39,7 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       CKANR_TEST_URL: 'http://localhost:5000'
       CKANR_TEST_BEHAVIOUR: 'SKIP'
+      TEST_DPLYR_INTERFACE: true
       CKAN__PLUGINS: ${{ matrix.config.plugins }}
       CKANR_ALLOW_PURGE_TESTS: true
       CKAN__AUTH__ALLOW_DATASET_COLLABORATORS: ${{ matrix.config.collab }}

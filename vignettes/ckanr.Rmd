@@ -264,18 +264,62 @@ resource_search(q = 'name:data', limit = 2, as = 'table')
 ```
 
 ## ckanr's dplyr interface
-`ckanr` provides a `dplyr` SQL interface to CKAN's datastore. 
-You can access any resource in the datastore with only the CKAN
-resource ID.
+`ckanr` provides a `dplyr` SQL interface to CKAN's datastore.
+The primary interface uses the DBI connection directly. You can access any
+resource in the datastore with its CKAN resource ID.
 
 This works only for resources in the datastore. They show the green "Data API" button in CKAN.
 
 
 ```r
 ckan <- ckanr::src_ckan("https://my.ckan.org/")
+con <- ckan$con
 res_id <- "my-ckan-resource-id"
-dplyr::tbl(src = ckan$con, from = res_id) |> as_tibble(.)
+dplyr::tbl(con, res_id) |> dplyr::collect()
 ```
+
+The interface is read-only. Filter or limit large resources before you call
+`collect()`, because the DataStore returns the query result to R.
+
+## Worked dbplyr example
+
+This example builds a query for a resource and then sends it to CKAN. Replace
+the URL, key, resource ID, and column names with values from your CKAN site.
+
+First create a connection and list the resources that have a DataStore table.
+
+```{r, eval=FALSE}
+ckan <- ckanr::src_ckan(
+  url = "https://my.ckan.org/",
+  key = Sys.getenv("CKAN_API_KEY")
+)
+con <- ckan$con
+
+DBI::dbListTables(con)
+```
+
+Choose a resource ID from that list. The query stays in R until
+`dplyr::collect()` runs.
+
+```{r, eval=FALSE}
+resource_id <- "my-resource-id"
+data <- dplyr::tbl(con, resource_id)
+
+query <- data |>
+  dplyr::filter(status == "active") |>
+  dplyr::select(name, amount) |>
+  dplyr::mutate(amount_thousands = amount / 1000) |>
+  dplyr::arrange(dplyr::desc(amount)) |>
+  head(10)
+
+dplyr::show_query(query)
+result <- dplyr::collect(query)
+result
+```
+
+The verbs build SQL on the server. `collect()` runs the SQL and returns the
+rows as an R tibble. Do not use `copy_to()`, `compute()`, or write functions
+with this connection. The CKAN DataStore interface is read-only.
 
 ## Example of using a different CKAN API
 

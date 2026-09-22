@@ -1,8 +1,14 @@
 ckanr (development version)
 ==============================
 
+ckanr 0.9.0
+===========
+
 ### BUG FIXES
 
+* Refresh the DataStore DBI and dbplyr integration for the dbplyr 2nd-edition
+  interface. Use `dplyr::tbl()` with a `CKANConnection` as the primary
+  interface. The connection remains read-only.
 * `revision_list()` and `package_revision_list()` no longer crash when the CKAN version is unknown. An unknown version passes through to the API call.
 * `parse_version_number()` returns `NA` with no warning for short or missing input.
 * `ping()` validates the `as` argument. `as = "logical"` returns `FALSE` on failure. `as = "json"` signals an error on failure.
