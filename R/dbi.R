@@ -235,8 +235,12 @@ setMethod("dbRemoveTable",
 setMethod("dbListFields",
   signature(conn = "CKANConnection", name = "character"),
   def = function(conn, name, ...) {
-    info <- ds_info(name, url = conn@url, key = conn@key, as = "list", ...)
-    vapply(info$fields, function(field) field$id, character(1))
+    identifier <- as.character(DBI::dbQuoteIdentifier(conn, name))
+    sql <- sprintf("SELECT * FROM %s LIMIT 0", identifier)
+    result <- ds_search_sql(
+      sql, url = conn@url, key = conn@key, as = "table", ...
+    )
+    as.character(result$fields$id)
   },
   valueClass = "character"
 )
