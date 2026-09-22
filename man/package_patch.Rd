@@ -16,15 +16,17 @@ package_patch(
 )
 }
 \arguments{
-\item{x}{(list) A list with key-value pairs}
+\item{x}{(list) A list with key-value pairs. Put \code{ckanext-scheming}
+custom fields here as named items.}
 
 \item{id}{(character) Resource ID to update (optional). If x lacks an "id" field,
 this parameter is required.}
 
-\item{extras}{(character vector) The dataset's extras
+\item{extras}{(list) The dataset's extras
 (optional). Extras are arbitrary (key: value) metadata items for datasets.
 Each extra dictionary must have keys 'key' (a string) and
-'value' (a string)}
+'value' (a string). Use this only for plain CKAN extras, not for
+\code{ckanext-scheming} custom fields.}
 
 \item{http_method}{(character) Which HTTP method (verb) to use. Use one of
 "GET" or "POST". Default: "GET"}
@@ -43,7 +45,9 @@ can vary from a vector, list or data.frame. (required)}
 \item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
 \description{
-Update a package's metadata
+If the portal uses the \code{ckanext-scheming} extension for custom schema
+fields, put each custom field directly in \code{x}. Do not pass custom fields
+through \code{extras}. CKAN rejects custom fields in \code{extras} with an error.
 }
 \examples{
 \dontrun{
@@ -60,5 +64,8 @@ res$title
 # patch
 package_patch(res, extras = list(list(key = "foo", value = "bar")))
 unclass(package_show(res))
+
+# Update a ckanext-scheming custom field: put the field in `x`
+package_patch(list(id = res$id, internal_notes = "New internal notes"))
 }
 }
