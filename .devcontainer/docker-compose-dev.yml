@@ -54,9 +54,14 @@ services:
       - CKAN__ACTIVITY_STREAMS__EMAIL_NOTIFICATIONS=${CKAN__ACTIVITY_STREAMS__EMAIL_NOTIFICATIONS:-true}
       # File API (CKAN 2.12+): filesystem storage for file_create() etc.
       # Uses the ckan_storage volume so uploads survive container restarts.
+      # overwrite_existing lets resource_update() replace an uploaded file
+      # (the resources storage inherits these settings from default).
       - CKAN__FILES__STORAGE__DEFAULT__TYPE=ckan:fs
       - CKAN__FILES__STORAGE__DEFAULT__PATH=/var/lib/ckan/file-storage
       - CKAN__FILES__STORAGE__DEFAULT__INITIALIZE=true
+      - CKAN__FILES__STORAGE__DEFAULT__OVERWRITE_EXISTING=true
+      # Resource download routes use ckan.storage_path to resolve uploaded files.
+      - CKAN__STORAGE_PATH=/var/lib/ckan/file-storage
     volumes:
       - ckan_storage:/var/lib/ckan
       # - ./src:/srv/app/src_extensions

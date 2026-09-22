@@ -23,9 +23,14 @@ services:
       - CKAN___BEAKER__SESSION__SECRET=secret
       - CKAN__ACTIVITY_STREAMS__EMAIL_NOTIFICATIONS=true
       # File API (CKAN 2.12+): filesystem storage for file_create() etc.
+      # overwrite_existing lets resource_update() replace an uploaded file
+      # (the resources storage inherits these settings from default).
       - CKAN__FILES__STORAGE__DEFAULT__TYPE=ckan:fs
       - CKAN__FILES__STORAGE__DEFAULT__PATH=/var/lib/ckan/file-storage
       - CKAN__FILES__STORAGE__DEFAULT__INITIALIZE=true
+      - CKAN__FILES__STORAGE__DEFAULT__OVERWRITE_EXISTING=true
+      # Resource download routes use ckan.storage_path to resolve uploaded files.
+      - CKAN__STORAGE_PATH=/var/lib/ckan/file-storage
     ports:
       - "5000:5000"
     restart: unless-stopped
