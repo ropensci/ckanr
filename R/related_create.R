@@ -27,7 +27,7 @@
 #' related_create(res, title = "asdfdaf", type = "idea")
 #'
 #' # pipe operations together
-#' package_create("foobbbbbarrrr") %>%
+#' package_create("foobbbbbarrrr") |>
 #'   related_create(
 #'     title = "my resource",
 #'     type = "visualization"

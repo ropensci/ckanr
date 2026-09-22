@@ -10,7 +10,7 @@
 #'   key = getOption("ckan_demo_key")
 #' )
 #'
-#' (x <- package_create("foobbbbbarrrrr") %>%
+#' (x <- package_create("foobbbbbarrrrr") |>
 #'   related_create(
 #'     title = "my resource",
 #'     type = "visualization"

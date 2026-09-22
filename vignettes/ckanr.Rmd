@@ -274,7 +274,7 @@ This works only for resources in the datastore. They show the green "Data API" b
 ```r
 ckan <- ckanr::src_ckan("https://my.ckan.org/")
 res_id <- "my-ckan-resource-id"
-dplyr::tbl(src = ckan$con, from = res_id) %>% as_tibble(.)
+dplyr::tbl(src = ckan$con, from = res_id) |> as_tibble(.)
 ```
 
 ## Example of using a different CKAN API

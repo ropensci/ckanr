@@ -112,7 +112,7 @@ file <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
   rcurl = "http://google.com"
 ))
 
-package_create("foobbbbbarrrr") \%>\%
+package_create("foobbbbbarrrr") |>
   resource_create(
     description = "my resource",
     name = "bearsareus",

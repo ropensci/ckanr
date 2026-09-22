@@ -39,6 +39,7 @@ Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
 Depends:
+    R (>= 4.1.0),
     DBI (>= 0.3.1)
 Imports:
     methods,
@@ -47,8 +48,7 @@ Imports:
     crul,
     jsonlite (>= 0.9.17),
     dplyr (>= 0.7.0),
-    dbplyr,
-    magrittr
+    dbplyr
 Suggests:
     arrow,
     sf,

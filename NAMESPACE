@@ -53,7 +53,6 @@ S3method(sql_translate_env,CKANConnection)
 S3method(sql_translate_env,src_ckan)
 S3method(src_tbls,src_ckan)
 S3method(tbl,src_ckan)
-export("%>%")
 export(activity_create)
 export(activity_data_show)
 export(activity_delete)
@@ -303,7 +302,6 @@ importFrom(dplyr,
   tbl
 )
 importFrom(jsonlite,fromJSON)
-importFrom(magrittr,"%>%")
 importFrom(methods,new)
 importFrom(stats,na.omit)
 importFrom(utils,
