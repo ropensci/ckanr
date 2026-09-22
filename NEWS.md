@@ -8,11 +8,11 @@ ckanr 0.9.0
 
 * Refresh the DataStore DBI and dbplyr integration for the dbplyr 2nd-edition
   interface. Use `dplyr::tbl()` with a `CKANConnection` as the primary
-  interface. The connection remains read-only.
+  interface. The connection remains read-only (#187, #240).
 * Mark `median()` and `quantile()` as unsupported DataStore translations.
   Add execution tests for joins, semi-joins, set operations, wrapped queries,
-  and the supported custom aggregate translations.
-* `revision_list()` and `package_revision_list()` no longer crash when the CKAN version is unknown. An unknown version passes through to the API call.
+  and the supported custom aggregate translations (#188).
+* `revision_list()` and `package_revision_list()` no longer crash when the CKAN version is unknown. An unknown version passes through to the API call (#200).
 * `parse_version_number()` returns `NA` with no warning for short or missing input.
 * `ping()` validates the `as` argument. `as = "logical"` returns `FALSE` on failure. `as = "json"` signals an error on failure.
 * Availability checks (`ckan_action_available()`, `activity_email_notifications_enabled()`) no longer cache transient failures.
@@ -20,15 +20,26 @@ ckanr 0.9.0
 * `resolve_group_or_org_id()` returns the name for name-only lists, matching the sibling helpers.
 * The `related_*()` helpers stop with a clear message when the CKAN instance lacks the related API.
 * Startup resets an empty `CKANR_DEFAULT_URL` to the default. Docs name the correct default URL.
-* Add `ds_upsert()` for inserting or updating records in an existing DataStore resource.
+* Add `ds_upsert()` for inserting or updating records in an existing DataStore resource (#98).
 * Requests now stop early with a clear message when the CKAN URL is empty or
-  does not start with `http://` or `https://`.
+  does not start with `http://` or `https://` (#154).
 
 ### DOCS
 
 * Rewrote package prose (help pages, README, vignette, NEWS) in plain language. No facts changed.
-* Added `ds_search()` examples for selecting fields and filtering several fields.
-  Added migration guidance for deprecated `ds_create_dataset()` users.
+* Added `ds_search()` examples for selecting fields and filtering several fields
+  (#101). Added migration guidance for deprecated `ds_create_dataset()` users
+  (#214).
+* Added guidance for `package_patch()` with ckanext-scheming custom fields
+  (#233), thanks @sboots.
+* Added a vignette example for listing all datasets in an organization (#183).
+
+### MAINTENANCE
+
+* Replaced the `magrittr` dependency with the native R pipe (#213).
+* Added support for external resource URLs in `resource_update()` and
+  `resource_patch()` (#232).
+* Added the remaining CKAN 2.11 and 2.12 API wrappers (#238).
 
 ckanr 0.8.1
 ===========
@@ -109,7 +120,7 @@ ckanr 0.6.0
 
 ### NEW FEATURES
 
-* `resource_create()`, `package_update()`, and `package_patch()` gain parameter `http_method`. It passes to `as.ckan_package()` internally, but it does not affect the HTTP request for the main point of the function (#163) thanks @hannaboe
+* `resource_create()`, `package_update()`, and `package_patch()` gain parameter `http_method`. It passes to `as.ckan_package()` internally, but it does not affect the HTTP request for the main point of the function (#163), thanks @hannaboe
 * gains new function `organization_purge()` to purge an organization (which requires sysadmin) (#166) thanks @nicholsn
 
 ### MINOR IMPROVEMENTS
@@ -151,17 +162,17 @@ ckanr 0.4.0
 
 ### NEW FEATURES
 
-* `ckan_fetch()` gains parameter `key` for a CKAN API key. If given, the API key is now included in the request headers (#133) see also (#122) by @sharlagelfand
-* `ckan_fetch()` gains ability to read xls/xlsx files with multiple sheets (#135) by @sharlagelfand
+* `ckan_fetch()` gains parameter `key` for a CKAN API key. If given, the API key is now included in the request headers (#133, #122), thanks @sharlagelfand
+* `ckan_fetch()` gains ability to read xls/xlsx files with multiple sheets (#135), thanks @sharlagelfand
 
 ### MINOR IMPROVEMENTS
 
 * `ckan_fetch()` now sets `stringsAsFactors = FALSE` when reading data (#141) (#142) thanks @LVG77 @sharlagelfand
-* in `ckan_fetch()`, use `basename(x)` instead of `gsub(paste0(tempdir(), "/"), "", x)`, to get file path (#140) by @sharlagelfand
-* in `package_search()` handle better cases where the CKAN version can not be determined (#139) && fix logic for when `default_schema` and `include_private` parameters are included based on the CKAN version (#137) by @sharlagelfand
-* `ckan_fetch()` works with more zip files. Old behavior works only with zip files with shp files. It now works with other files, for example a zip file with a csv file (#132) by @sharlagelfand
-* Fix `ckan_fetch()` examples that were not working (#134) by @sharlagelfand
-* Fix parsing of CKAN version numbers with new internal fxn `parse_version_number()`. It parses CKAN version numbers with patch and dev versions (#136) by @sharlagelfand
+* in `ckan_fetch()`, use `basename(x)` instead of `gsub(paste0(tempdir(), "/"), "", x)`, to get file path (#140), thanks @sharlagelfand
+* in `package_search()` handle better cases where the CKAN version can not be determined (#139) and fix logic for when `default_schema` and `include_private` parameters are included based on the CKAN version (#137), thanks @sharlagelfand
+* `ckan_fetch()` works with more zip files. Old behavior works only with zip files with shp files. It now works with other files, for example a zip file with a csv file (#132), thanks @sharlagelfand
+* Fix `ckan_fetch()` examples that were not working (#134), thanks @sharlagelfand
+* Fix parsing of CKAN version numbers with new internal fxn `parse_version_number()`. It parses CKAN version numbers with patch and dev versions (#136), thanks @sharlagelfand
 
 
 ckanr 0.3.0
@@ -197,7 +208,7 @@ ckanr 0.3.0
 ### BUG FIXES
 
 * fix to `resource_create()`: `upload` param was inappropriately a required param (#75) thanks @mingbogo
-* Fix `resource_update()`. The date in `last_modified` in the request body converts to character (#96) (thanks @jasonajones73). The date format is fixed (#119) (thanks @florianm)
+* Fix `resource_update()`. The date in `last_modified` in the request body converts to character (#96), thanks @jasonajones73. The date format is fixed (#119), by @florianm
 * Fix `ckan_fetch()`. It uses `sf` instead of `maptools`. `ckan_fetch` parses xlsx files and xls files (#114) (#115) thanks @sharlagelfand
 * Fix `package_search()`. This route fails if parameters that did not exist in the CKAN instance are given. The code removes parameters as needed from query params. It pings the CKAN instance for its version (#120)
 
