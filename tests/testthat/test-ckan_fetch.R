@@ -39,6 +39,25 @@ test_that("read_session normalizes uppercase format", {
   expect_equal(nrow(res), 1L)
 })
 
+test_that("read_session falls back for malformed quoted CSV", {
+  csv <- paste(
+    "id,name,value",
+    "1,one,10",
+    "2,\"an unmatched quote,20",
+    "3,three,30",
+    sep = "\n"
+  )
+  result <- ckanr:::read_session("csv", csv, tempfile())
+  expect_equal(nrow(result), 3L)
+  expect_equal(result$id, c(1, 2, 3))
+})
+
+test_that("read_session keeps quoted commas in valid CSV", {
+  csv <- "id,name\n1,\"one, two\"\n"
+  result <- ckanr:::read_session("csv", csv, tempfile())
+  expect_equal(result$name, "one, two")
+})
+
 u <- get_test_url()
 check_ckan(u)
 

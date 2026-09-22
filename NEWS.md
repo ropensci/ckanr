@@ -25,6 +25,9 @@ ckanr 0.9.0
   does not start with `http://` or `https://` (#154).
 * HTTP API calls now report a clear error when CKAN or a proxy returns a
   non-JSON response instead of exposing a JSON parsing error (#92).
+* CSV downloads that trigger `EOF within quoted string` now use a base R
+  fallback that preserves the remaining rows without adding a dependency
+  (#180).
 
 ### DOCS
 

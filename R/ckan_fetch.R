@@ -203,17 +203,11 @@ read_session <- function(fmt, dat, path, ...) {
   fmt <- tolower(fmt)
   switch(fmt,
     csv = {
-      if (!is.null(dat)) {
-        read.csv(
-          text = dat, stringsAsFactors = FALSE,
-          fileEncoding = "latin1", ...
-        )
-      } else {
-        read.csv(path,
-          stringsAsFactors = FALSE,
-          fileEncoding = "latin1", ...
-        )
-      }
+      read_csv_base(
+        text = dat,
+        path = if (is.null(dat)) path else NULL,
+        ...
+      )
     },
     xls = {
       check4X("readxl")
@@ -254,6 +248,44 @@ read_session <- function(fmt, dat, path, ...) {
       arrow::read_parquet(path, ...)
     }
   )
+}
+
+read_csv_base <- function(text = NULL, path = NULL, ...) {
+  if (is.null(text) == is.null(path)) {
+    stop("Provide exactly one CSV source: `text` or `path`", call. = FALSE)
+  }
+
+  args <- c(
+    list(stringsAsFactors = FALSE, fileEncoding = "latin1"),
+    list(...)
+  )
+  if (!is.null(text)) {
+    args$text <- text
+  } else {
+    args$file <- path
+  }
+
+  eof_quote <- FALSE
+  result <- withCallingHandlers(
+    tryCatch(do.call(read.csv, args), error = function(e) e),
+    warning = function(w) {
+      if (grepl("EOF within quoted string", conditionMessage(w))) {
+        eof_quote <<- TRUE
+        invokeRestart("muffleWarning")
+      }
+    }
+  )
+
+  if (!inherits(result, "error") && !eof_quote) {
+    return(result)
+  }
+
+  args$quote <- ""
+  args$header <- TRUE
+  args$sep <- ","
+  args$fill <- TRUE
+  args$comment.char <- ""
+  do.call(read.table, args)
 }
 
 read_all_excel_sheets <- function(x, ...) {
