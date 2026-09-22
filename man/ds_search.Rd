@@ -103,5 +103,20 @@ ds_search(resource_id = rid, as = "json")
 
 ds_search(resource_id = rid, limit = 1, as = "table")
 ds_search(resource_id = rid, q = "S*")
+
+# Return selected fields
+ds_search(
+  resource_id = rid,
+  fields = c("name", "amount"),
+  as = "table"
+)
+
+# Match more than one field. CKAN applies the conditions together.
+ds_search(
+  resource_id = rid,
+  filters = list(status = "active", category = "water"),
+  fields = c("name", "status", "category"),
+  as = "table"
+)
 }
 }

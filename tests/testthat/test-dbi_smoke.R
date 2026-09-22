@@ -69,27 +69,82 @@ test_that("src_ckan collects rows from datastore resource", {
   class(src)
   expect_s3_class(src, "src_CKANConnection")
 
-  # tbl_obj <- dplyr::tbl(src, name = rid)
-  # <CKANConnection> uses an old dbplyr interface
-  # ℹ Please install a newer version of the package or contact the maintainer
-  # This warning is displayed once every 8 hours.
-  # Error in ds_search_sql(as.character(statement), url = conn@url, as = "table") :
-  # "Bad request - Action name not known: datastore_search_sql"
+  con <- src$con
+  expect_equal(dbplyr::dbplyr_edition(con), 2L)
+  expect_true(dbExistsTable(con, rid))
+  expect_false(dbExistsTable(con, "not-a-datastore-table"))
+  field_names <- vapply(preview$fields, `[[`, character(1), "id")
+  expect_true(all(dbListFields(con, rid) %in% c(field_names, "_id", "_full_text")))
 
-  # x <- tbl_obj |>
-  # # See https://github.com/ropensci/ckanr/issues/188
-  # # See https://dbplyr.tidyverse.org/articles/translation-function.html
-  # dplyr::slice_min(n = 3, "ID") |>
-  #   dplyr::collect()
+  tbl_obj <- dplyr::tbl(con, rid)
+  rows <- dplyr::collect(head(tbl_obj, 3))
+  expect_s3_class(rows, "data.frame")
+  expect_gt(nrow(rows), 0)
+  expect_true(all(names(rows) %in% c(field_names, "_id", "_full_text")))
 
-  # expect_s3_class(x, "tbl_df")
-  # expect_gt(nrow(x), 0)
-  # expect_true(all(names(x) %in% vapply(preview$fields, `[[`, character(1), "id")))
+  sql_tbl <- dplyr::tbl(
+    con,
+    from = dbplyr::sql(sprintf('SELECT "_id" FROM "%s" LIMIT 2', rid))
+  )
+  sql_rows <- dplyr::collect(sql_tbl)
+  expect_true("_id" %in% names(sql_rows))
+})
 
-  # sql_tbl <- dplyr::tbl(
-  #   src,
-  #   from = sprintf('SELECT "_id", "family" FROM "%s" LIMIT 2', rid)
-  # )
-  # sql_rows <- sql_tbl |> dplyr::collect()
-  # expect_true(all(c("_id", "family") %in% names(sql_rows)))
+test_that("CKAN DBI results follow the DBI lifecycle", {
+  check_ckan(url)
+  rid <- find_sql_ready_resource(url)
+  con <- dbConnect(new("CKANDriver"), url = url, key = get_test_key())
+  result <- dbSendQuery(
+    con, sprintf('SELECT * FROM "%s" LIMIT 2', rid)
+  )
+  on.exit(dbClearResult(result), add = TRUE)
+
+  expect_equal(dbGetStatement(result), sprintf(
+    'SELECT * FROM "%s" LIMIT 2', rid
+  ))
+  expect_false(dbHasCompleted(result))
+  first <- dbFetch(result, 1)
+  expect_equal(nrow(first), 1)
+  expect_false(dbHasCompleted(result))
+  second <- dbFetch(result)
+  expect_equal(nrow(second), 1)
+  expect_true(dbHasCompleted(result))
+  expect_equal(dbGetRowCount(result), 2)
+  expect_equal(nrow(dbColumnInfo(result)), length(names(first)))
+  expect_error(dbBind(result, list()), "does not support parameter binding")
+})
+
+test_that("CKAN DBI write operations fail clearly", {
+  check_ckan(url)
+  con <- dbConnect(new("CKANDriver"), url = url, key = get_test_key())
+  expect_error(
+    dbCreateTable(con, "new-table", fields = list(value = "text")),
+    "read-only"
+  )
+  expect_error(dbBegin(con), "read-only")
+})
+
+test_that("DBI quoting and connection methods work across supported CKAN versions", {
+  check_ckan(url)
+  skip_if_ckan_below(url, "2.9")
+
+  con <- dbConnect(new("CKANDriver"), url = url, key = get_test_key())
+  on.exit(dbDisconnect(con), add = TRUE)
+  rid <- get_test_rid()
+
+  expect_equal(
+    as.character(dbQuoteIdentifier(con, rid)),
+    paste0('"', rid, '"')
+  )
+  expect_equal(
+    as.character(dbQuoteIdentifier(con, 'field"name')),
+    '"field""name"'
+  )
+  expect_equal(as.character(dbQuoteString(con, "O'Reilly")), "'O''Reilly'")
+
+  expect_true(is.character(dbListTables(con)))
+  expect_true(dbExistsTable(con, rid))
+  expect_false(dbExistsTable(con, "not-a-datastore-table"))
+  expect_gt(length(dbListFields(con, rid)), 0)
+  expect_true(is.data.frame(dbReadTable(con, rid)))
 })

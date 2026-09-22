@@ -9,8 +9,10 @@
 #' @template args
 #' @references
 #' http://docs.ckan.org/en/latest/api/index.html#ckan.logic.action.create.resource_create
-#' @details This function is deprecated. It will be defunct in the next version
-#' of this package
+#' @details This function is deprecated and will be defunct in the next
+#' version of this package. Use [resource_create()] instead. For example,
+#' replace `ds_create_dataset(package_id, name, path)` with
+#' `resource_create(package_id, name = name, upload = path)`.
 #' @examples \dontrun{
 #' path <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
 #' ckanr_setup(url = "https://demo.ckan.org/", key = "my-demo-ckan-org-api-key")
@@ -37,7 +39,13 @@ ds_create_dataset <- function(
   package_id, name, path, url = get_default_url(),
   key = get_default_key(), as = "list", ...
 ) {
-  .Deprecated("resource_create", "ckanr", msg = "deprecated, see ?resource_create")
+  .Deprecated(
+    "resource_create", "ckanr",
+    msg = paste(
+      "`ds_create_dataset()` is deprecated.",
+      "Use `resource_create(package_id, name = name, upload = path)` instead."
+    )
+  )
 
   path <- path.expand(path)
   ext <- strsplit(basename(path), "\\.")[[1]]

@@ -1,8 +1,17 @@
 ckanr (development version)
 ==============================
 
+ckanr 0.9.0
+===========
+
 ### BUG FIXES
 
+* Refresh the DataStore DBI and dbplyr integration for the dbplyr 2nd-edition
+  interface. Use `dplyr::tbl()` with a `CKANConnection` as the primary
+  interface. The connection remains read-only.
+* Mark `median()` and `quantile()` as unsupported DataStore translations.
+  Add execution tests for joins, semi-joins, set operations, wrapped queries,
+  and the supported custom aggregate translations.
 * `revision_list()` and `package_revision_list()` no longer crash when the CKAN version is unknown. An unknown version passes through to the API call.
 * `parse_version_number()` returns `NA` with no warning for short or missing input.
 * `ping()` validates the `as` argument. `as = "logical"` returns `FALSE` on failure. `as = "json"` signals an error on failure.
@@ -11,10 +20,13 @@ ckanr (development version)
 * `resolve_group_or_org_id()` returns the name for name-only lists, matching the sibling helpers.
 * The `related_*()` helpers stop with a clear message when the CKAN instance lacks the related API.
 * Startup resets an empty `CKANR_DEFAULT_URL` to the default. Docs name the correct default URL.
+* Add `ds_upsert()` for inserting or updating records in an existing DataStore resource.
 
 ### DOCS
 
 * Rewrote package prose (help pages, README, vignette, NEWS) in plain language. No facts changed.
+* Added `ds_search()` examples for selecting fields and filtering several fields.
+  Added migration guidance for deprecated `ds_create_dataset()` users.
 
 ckanr 0.8.1
 ===========

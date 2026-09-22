@@ -4,24 +4,37 @@
 #' connect to tables in that CKAN through the DataStore Data API.
 #'
 #' @param url The url of the CKAN instance
+#' @param key An optional CKAN API key
 #' @examples \dontrun{
 #' library("dplyr")
 #'
 #' # To connect to a CKAN instance first create a src:
 #' my_ckan <- src_ckan("http://demo.ckan.org")
 #'
-#' # List all tables in the CKAN instance
-#' db_list_tables(my_ckan$con)
+#' # The primary dbplyr interface uses the DBI connection directly
+#' con <- my_ckan$con
+#' dplyr::tbl(con, "resource-id") |>
+#'   dplyr::filter(status == "active") |>
+#'   dplyr::collect()
 #'
-#' # Then reference a tbl within that src
-#' my_tbl <- tbl(src = my_ckan, name = "44d7de5f-7029-4f3a-a812-d7a70895da7d")
+#' # List all tables in the CKAN instance
+#' DBI::dbListTables(con)
+#'
+#' # `src_ckan()` remains available for existing code
+#' my_tbl <- dplyr::tbl(
+#'   my_ckan,
+#'   name = "44d7de5f-7029-4f3a-a812-d7a70895da7d"
+#' )
 #'
 #' # You can use the dplyr verbs with my_tbl. For example:
 #' dplyr::filter(my_tbl, GABARITO == "C")
+#'
+#' # The DataStore interface is read-only. `collect()` retrieves the result
+#' # from CKAN. Filter or limit large tables before collecting them.
 #' }
 #' @aliases dplyr-interface
 #' @export
-src_ckan <- function(url) {
+src_ckan <- function(url, key = get_default_key()) {
   if (!requireNamespace("dplyr", quietly = TRUE)) {
     stop("Please install dplyr", call. = FALSE)
   }
@@ -29,7 +42,7 @@ src_ckan <- function(url) {
     stop("Please install dbplyr", call. = FALSE)
   }
   drv <- new("CKANDriver")
-  con <- dbConnect(drv, url = url)
+  con <- dbConnect(drv, url = url, key = key)
   info <- dbGetInfo(con)
   src <- dbplyr::src_dbi(con)
   src$info <- info
@@ -37,17 +50,72 @@ src_ckan <- function(url) {
   src
 }
 
+# dbplyr's second-edition backend API is selected by this method.
+# The DataStore speaks a restricted, read-only PostgreSQL dialect.
+#' @exportS3Method dbplyr::dbplyr_edition
+dbplyr_edition.CKANConnection <- function(con) 2L
+
+#' @exportS3Method dbplyr::sql_dialect
+sql_dialect.CKANConnection <- function(con) {
+  dbplyr::new_sql_dialect(
+    "ckan",
+    quote_identifier = function(x) DBI::dbQuoteIdentifier(con, x)
+  )
+}
+
+#' @exportS3Method dbplyr::db_connection_describe
+db_connection_describe.CKANConnection <- function(con, ...) {
+  sprintf("CKAN DataStore (%s)", con@url)
+}
+
+#' @exportS3Method dbplyr::sql_translation
+sql_translation.sql_dialect_ckan <- function(con) {
+  dbplyr::sql_variant(
+    dbplyr::sql_translator(
+      .parent = dbplyr::base_scalar
+    ),
+    dbplyr::sql_translator(
+      .parent = dbplyr::base_agg,
+      cor = dbplyr::sql_aggregate_2("CORR"),
+      cov = dbplyr::sql_aggregate_2("COVAR_SAMP"),
+      sd = dbplyr::sql_aggregate("STDDEV_SAMP", "sd"),
+      var = dbplyr::sql_aggregate("VAR_SAMP", "var"),
+      all = dbplyr::sql_aggregate("BOOL_AND", "all"),
+      any = dbplyr::sql_aggregate("BOOL_OR", "any"),
+      paste = function(x, collapse = " ") {
+        dbplyr::sql_glue("STRING_AGG({x}, {collapse})")
+      },
+      median = dbplyr::sql_not_supported("median"),
+      quantile = dbplyr::sql_not_supported("quantile")
+    ),
+    dbplyr::sql_translator(
+      .parent = dbplyr::base_win,
+      paste = dbplyr::win_aggregate("STRING_AGG"),
+      median = dbplyr::sql_not_supported("median"),
+      quantile = dbplyr::sql_not_supported("quantile")
+    )
+  )
+}
+
+# The DataStore Action API does not accept EXPLAIN or CREATE TABLE statements.
+# Fail before sending those statements to CKAN.
+#' @exportS3Method dbplyr::sql_query_explain
+sql_query_explain.sql_dialect_ckan <- function(con, sql, ...) {
+  stop("EXPLAIN is not supported by the CKAN DataStore SQL API", call. = FALSE)
+}
+
+#' @exportS3Method dbplyr::sql_query_save
+sql_query_save.sql_dialect_ckan <- function(con, sql, name, temporary = TRUE, ...) {
+  stop("The CKAN DataStore interface is read-only", call. = FALSE)
+}
+
 #' @export
 #' @importFrom dplyr tbl
 tbl.src_ckan <- function(src, from, ..., name = NULL) {
   if (is.null(name)) {
-    tbl_sql("ckan", src = src, from = sql(from), ...)
+    dplyr::tbl(src$con, from = dbplyr::sql(from), ...)
   } else {
-    tbl_sql(
-      subclass = "ckan",
-      src = src,
-      from = sql(sprintf('SELECT * FROM "%s"', name))
-    )
+    dplyr::tbl(src$con, name, ...)
   }
 }
 
@@ -69,7 +137,9 @@ src_tbls.src_ckan <- function(x, ..., limit = 6) {
 
 #' @export
 format.src_ckan <- function(x, ...) {
-  .metadata <- ds_search("_table_metadata", url = x$con@url, limit = 6)
+  .metadata <- ds_search(
+    "_table_metadata", url = x$con@url, key = x$con@key, limit = 6
+  )
   x1 <- sprintf("%s", dplyr::db_desc(x))
   x2 <- sprintf("total tbls: %d", .metadata$total)
   if (.metadata$total > 6) {
@@ -90,89 +160,8 @@ format.src_ckan <- function(x, ...) {
   paste(x1, x2, x3, sep = "\n")
 }
 
-#' @export
-#' @importFrom dplyr sql_translate_env
-#' @importFrom dbplyr base_agg build_sql
-sql_translate_env.src_ckan <- function(con) {
-  sql_variant(
-    base_scalar,
-    sql_translator(
-      .parent = base_agg,
-      n = function() sql("count(*)"),
-      cor = sql_prefix("corr"),
-      cov = sql_prefix("covar_samp"),
-      sd = sql_prefix("stddev_samp"),
-      var = sql_prefix("var_samp"),
-      all = sql_prefix("bool_and"),
-      any = sql_prefix("bool_or"),
-      paste = function(x, collapse) {
-        build_sql("string_agg(", x, ", ", collapse, ")")
-      }
-    ),
-    base_win
-  )
-}
-
-#' @export
-sql_translate_env.CKANConnection <- function(con) {
-  sql_translate_env.src_ckan(con)
-}
-
-#' @export
-#' @importFrom dplyr db_has_table
-db_has_table.CKANConnection <- function(con, table, ...) {
-  table %in% db_list_tables(con)
-}
-
-#' @export
-#' @importFrom dplyr db_begin
-db_begin.CKANConnection <- function(con, ...) {
-  dbGetQuery(con, "BEGIN TRANSACTION")
-}
-
-# http://www.postgresql.org/docs/9.3/static/sql-explain.html
-#' @export
-#' @importFrom dplyr db_explain
-db_explain.CKANConnection <- function(con, sql, format = "text", ...) {
-  format <- match.arg(format, c("text", "json", "yaml", "xml"))
-
-  exsql <- build_sql(
-    "EXPLAIN ",
-    if (!is.null(format)) build_sql("(FORMAT ", sql(format), ") "),
-    sql
-  )
-  expl <- dbGetQuery(con, exsql)
-
-  paste(expl[[1]], collapse = "\n")
-}
-
-#' @export
-#' @importFrom dplyr db_insert_into
-db_insert_into.CKANConnection <- function(con, table, values, ...) {
-  .read_only("db_insert_into.CKANConnection")
-}
-
-#' @export
-#' @importFrom dplyr db_query_fields
-db_query_fields.CKANConnection <- function(con, sql, ...) {
-  sql <- sql_select(con, sql("*"), sql_subquery(con, sql), where = sql("0 = 1"))
-  qry <- dbSendQuery(con, sql)
-  on.exit(dbClearResult(qry))
-
-  res <- fetch(qry, 0)
-  names(res)
-}
-
-#' @export
-#' @importFrom dplyr db_query_rows
-db_query_rows.CKANConnection <- function(con, sql, ...) {
-  from <- sql_subquery(con, sql, "master")
-  # rows <- build_sql("SELECT count(*) FROM ", from, con = con)
-  rows <- sprintf("SELECT count(*) FROM (%s)", unclass(sql))
-  as.integer(dbGetQuery(con$con, rows)[[1]])
-}
-
-#' @importFrom dplyr db_list_tables sql sql_select sql_subquery
-#' @importFrom dbplyr base_agg base_scalar base_win build_sql sql_prefix sql_translator
-#' @importFrom dbplyr sql_variant src_dbi tbl_sql
+#' @importFrom dplyr src_tbls
+#' @importFrom dbplyr base_agg base_scalar base_win sql_aggregate sql_aggregate_2 sql_glue sql_not_supported win_aggregate
+#' @importFrom dbplyr new_sql_dialect sql_dialect sql_query_explain sql_query_save
+#' @importFrom dbplyr sql_translation sql_translator sql_variant
 NULL

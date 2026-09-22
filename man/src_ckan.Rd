@@ -5,10 +5,12 @@
 \alias{dplyr-interface}
 \title{Connect to CKAN with dplyr}
 \usage{
-src_ckan(url)
+src_ckan(url, key = get_default_key())
 }
 \arguments{
 \item{url}{The url of the CKAN instance}
+
+\item{key}{An optional CKAN API key}
 }
 \description{
 Use \code{src_ckan} to connect to an existing CKAN instance. Use \code{tbl} to
@@ -21,13 +23,25 @@ library("dplyr")
 # To connect to a CKAN instance first create a src:
 my_ckan <- src_ckan("http://demo.ckan.org")
 
-# List all tables in the CKAN instance
-db_list_tables(my_ckan$con)
+# The primary dbplyr interface uses the DBI connection directly
+con <- my_ckan$con
+dplyr::tbl(con, "resource-id") |>
+  dplyr::filter(status == "active") |>
+  dplyr::collect()
 
-# Then reference a tbl within that src
-my_tbl <- tbl(src = my_ckan, name = "44d7de5f-7029-4f3a-a812-d7a70895da7d")
+# List all tables in the CKAN instance
+DBI::dbListTables(con)
+
+# `src_ckan()` remains available for existing code
+my_tbl <- dplyr::tbl(
+  my_ckan,
+  name = "44d7de5f-7029-4f3a-a812-d7a70895da7d"
+)
 
 # You can use the dplyr verbs with my_tbl. For example:
 dplyr::filter(my_tbl, GABARITO == "C")
+
+# The DataStore interface is read-only. `collect()` retrieves the result
+# from CKAN. Filter or limit large tables before collecting them.
 }
 }

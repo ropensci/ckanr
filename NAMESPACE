@@ -30,12 +30,12 @@ S3method(as.ckan_user,list)
 S3method(as.ckan_vocabulary,character)
 S3method(as.ckan_vocabulary,ckan_vocabulary)
 S3method(as.ckan_vocabulary,list)
-S3method(db_begin,CKANConnection)
-S3method(db_explain,CKANConnection)
-S3method(db_has_table,CKANConnection)
-S3method(db_insert_into,CKANConnection)
-S3method(db_query_fields,CKANConnection)
-S3method(db_query_rows,CKANConnection)
+S3method(dbplyr::db_connection_describe,CKANConnection)
+S3method(dbplyr::dbplyr_edition,CKANConnection)
+S3method(dbplyr::sql_dialect,CKANConnection)
+S3method(dbplyr::sql_query_explain,sql_dialect_ckan)
+S3method(dbplyr::sql_query_save,sql_dialect_ckan)
+S3method(dbplyr::sql_translation,sql_dialect_ckan)
 S3method(dplyr::db_desc,src_ckan)
 S3method(format,src_ckan)
 S3method(print,ckan_file)
@@ -49,8 +49,6 @@ S3method(print,ckan_tag)
 S3method(print,ckan_user)
 S3method(print,ckan_vocabulary)
 S3method(print,ckanr_settings)
-S3method(sql_translate_env,CKANConnection)
-S3method(sql_translate_env,src_ckan)
 S3method(src_tbls,src_ckan)
 S3method(tbl,src_ckan)
 export(activity_create)
@@ -279,25 +277,20 @@ importFrom(dbplyr,
   base_agg,
   base_scalar,
   base_win,
-  build_sql,
-  sql_prefix,
+  new_sql_dialect,
+  sql_aggregate,
+  sql_aggregate_2,
+  sql_dialect,
+  sql_glue,
+  sql_not_supported,
+  sql_query_explain,
+  sql_query_save,
+  sql_translation,
   sql_translator,
   sql_variant,
-  src_dbi,
-  tbl_sql
+  win_aggregate
 )
 importFrom(dplyr,
-  db_begin,
-  db_explain,
-  db_has_table,
-  db_insert_into,
-  db_list_tables,
-  db_query_fields,
-  db_query_rows,
-  sql,
-  sql_select,
-  sql_subquery,
-  sql_translate_env,
   src_tbls,
   tbl
 )

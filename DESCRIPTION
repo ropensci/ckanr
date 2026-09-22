@@ -48,7 +48,7 @@ Imports:
     crul,
     jsonlite (>= 0.9.17),
     dplyr (>= 0.7.0),
-    dbplyr
+    dbplyr (>= 2.6.0)
 Suggests:
     arrow,
     sf,

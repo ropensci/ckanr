@@ -237,6 +237,11 @@ push_resource_to_datastore <- function(resource_id, csv_path, url, key) {
     return(invisible(FALSE))
   }
 
+  # Keep numeric columns in the shared fixture so dbplyr tests can exercise
+  # arithmetic and aggregate translations against every test CKAN version.
+  data$ckanr_test_integer <- seq_len(nrow(data))
+  data$ckanr_test_numeric <- seq_len(nrow(data)) / 10
+
   field_ids <- vapply(names(data), sanitize_field_id, character(1))
   field_ids <- uniquify_ids(field_ids)
   colnames(data) <- field_ids
@@ -248,7 +253,10 @@ push_resource_to_datastore <- function(resource_id, csv_path, url, key) {
   payload <- list(
     resource_id = resource_id,
     force = TRUE,
-    fields = lapply(field_ids, function(id) list(id = id, type = "text")),
+    fields = lapply(field_ids, function(id) {
+      type <- if (is.numeric(data[[id]])) "numeric" else "text"
+      list(id = id, type = type)
+    }),
     records = records
   )
   delete_body <- jsonlite::toJSON(
