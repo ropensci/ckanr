@@ -204,6 +204,33 @@ out[, !names(out) %in% 'resources'][, 1:10]
 #> 2 2016-06-14T18:59:17.786219
 ```
 
+## List all datasets of one organization
+
+`organization_show()` with `include_datasets = TRUE` returns only the first
+10 datasets. The server caps that embedded list, and the endpoint takes no
+`limit` parameter. To get every dataset of an organization, search for them
+with `package_search()` and page through the results. Each request returns
+at most 1000 rows, so repeat the search with `start` until you hold them all.
+
+
+```r
+org <- "my-organization-name"
+
+page <- package_search(q = "*:*", fq = sprintf("organization:%s", org), rows = 1000)
+total <- page$count
+
+results <- page$results
+start <- 1000
+while (length(results) < total) {
+  page <- package_search(q = "*:*", fq = sprintf("organization:%s", org),
+    rows = 1000, start = start)
+  results <- c(results, page$results)
+  start <- start + 1000
+}
+
+length(results)
+```
+
 ## Search for resources
 
 
