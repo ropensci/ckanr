@@ -271,34 +271,42 @@ export(vocabulary_list)
 export(vocabulary_show)
 export(vocabulary_update)
 import(DBI)
-importFrom(crul,HttpClient)
-importFrom(crul,proxy)
-importFrom(crul,upload)
-importFrom(dbplyr,base_agg)
-importFrom(dbplyr,base_scalar)
-importFrom(dbplyr,base_win)
-importFrom(dbplyr,build_sql)
-importFrom(dbplyr,sql_prefix)
-importFrom(dbplyr,sql_translator)
-importFrom(dbplyr,sql_variant)
-importFrom(dbplyr,src_dbi)
-importFrom(dbplyr,tbl_sql)
-importFrom(dplyr,db_begin)
-importFrom(dplyr,db_explain)
-importFrom(dplyr,db_has_table)
-importFrom(dplyr,db_insert_into)
-importFrom(dplyr,db_list_tables)
-importFrom(dplyr,db_query_fields)
-importFrom(dplyr,db_query_rows)
-importFrom(dplyr,sql)
-importFrom(dplyr,sql_select)
-importFrom(dplyr,sql_subquery)
-importFrom(dplyr,sql_translate_env)
-importFrom(dplyr,src_tbls)
-importFrom(dplyr,tbl)
+importFrom(crul,
+  HttpClient,
+  proxy,
+  upload
+)
+importFrom(dbplyr,
+  base_agg,
+  base_scalar,
+  base_win,
+  build_sql,
+  sql_prefix,
+  sql_translator,
+  sql_variant,
+  src_dbi,
+  tbl_sql
+)
+importFrom(dplyr,
+  db_begin,
+  db_explain,
+  db_has_table,
+  db_insert_into,
+  db_list_tables,
+  db_query_fields,
+  db_query_rows,
+  sql,
+  sql_select,
+  sql_subquery,
+  sql_translate_env,
+  src_tbls,
+  tbl
+)
 importFrom(jsonlite,fromJSON)
 importFrom(magrittr,"%>%")
 importFrom(methods,new)
 importFrom(stats,na.omit)
-importFrom(utils,read.csv)
-importFrom(utils,unzip)
+importFrom(utils,
+  read.csv,
+  unzip
+)

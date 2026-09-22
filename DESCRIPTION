@@ -60,4 +60,4 @@ Suggests:
 X-schema.org-keywords: database, open-data, ckan, api, data, dataset
 X-schema.org-applicationCategory: Data Access
 X-schema.org-isPartOf: "https://ropensci.org"
-Config/roxygen2/version: 8.0.0
+Config/roxygen2/version: 8.1.0

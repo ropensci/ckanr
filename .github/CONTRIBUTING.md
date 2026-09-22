@@ -66,11 +66,36 @@ and improve the output.
 List running Docker containers with `just docker ps`.
 You can run any docker command against the devcontainer with `just docker ...`.
 
-To change Test CKAN versions, update `.devcontainer/.env`. Enable the variables for the
-desired CKAN version, then rebuild the Codespace. The first run takes longer.
-Downloaded Docker images stay cached, so later rebuilds run fast.
+The file `.devcontainer/.env` controls the CKAN version in the devcontainer.
+The file contains one block for each tested CKAN version.
+Each block sets `CKAN_VERSION`, `CKAN_PG_VERSION`, `SOLR_VERSION`, and `CKAN__PLUGINS`.
+The file `.github/workflows/R-check.yaml` is the source of truth for working combinations.
 
-Verify the version and status of the running CKAN with `just ckan_version` (alias: `just cv`).
+Working combinations are:
+
+- CKAN 2.12: `CKAN_VERSION=2.12`, `CKAN_PG_VERSION=2.12`, `SOLR_VERSION=2.12-solr9-spatial`.
+- CKAN 2.11: `CKAN_VERSION=2.11`, `CKAN_PG_VERSION=2.11`, `SOLR_VERSION=2.10-solr9-spatial`.
+- CKAN 2.10: `CKAN_VERSION=2.10-py3.10`, `CKAN_PG_VERSION=2.10`, `SOLR_VERSION=2.10-solr9-spatial`.
+- CKAN 2.9: `CKAN_VERSION=2.9-py3.9`, `CKAN_PG_VERSION=2.9`, `SOLR_VERSION=2.9-solr9-spatial`.
+
+CKAN 2.9 does not include the `activity` plugin.
+For CKAN 2.9, remove `activity` from `CKAN__PLUGINS`.
+For CKAN 2.10 and later, keep `activity` in `CKAN__PLUGINS`.
+
+To switch versions, follow these steps:
+
+1. Open `.devcontainer/.env` in the editor.
+2. Add `#` to the start of each line in the active version block.
+3. Remove `#` from the start of each line in the wanted version block.
+4. If you use Codespaces, open the command palette and select Rebuild Container.
+5. If you use local VS Code, use Dev Containers Rebuild Container.
+6. Run `just ckan_version` (alias: `just cv`) to make sure that the wanted version runs.
+
+The first rebuild takes longer because it downloads new images.
+Downloaded Docker images stay cached, so later rebuilds run fast.
+If CKAN does not start after a version switch, stop the stack and delete the data volumes.
+Run `just docker "compose -f .devcontainer/docker-compose-dev.yml down -v"` from the repository root.
+Then rebuild the container again.
 
 ### Also, check out our [discussion forum](https://discuss.ropensci.org)
 
