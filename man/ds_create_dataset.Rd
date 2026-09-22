@@ -38,8 +38,10 @@ can vary from a vector, list or data.frame. (required)}
 Datastore - create a new resource on an existing dataset
 }
 \details{
-This function is deprecated. It will be defunct in the next version
-of this package
+This function is deprecated and will be defunct in the next
+version of this package. Use \code{\link[=resource_create]{resource_create()}} instead. For example,
+replace \code{ds_create_dataset(package_id, name, path)} with
+\code{resource_create(package_id, name = name, upload = path)}.
 }
 \examples{
 \dontrun{

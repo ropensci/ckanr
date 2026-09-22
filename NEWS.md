@@ -17,10 +17,13 @@ ckanr 0.9.0
 * `resolve_group_or_org_id()` returns the name for name-only lists, matching the sibling helpers.
 * The `related_*()` helpers stop with a clear message when the CKAN instance lacks the related API.
 * Startup resets an empty `CKANR_DEFAULT_URL` to the default. Docs name the correct default URL.
+* Add `ds_upsert()` for inserting or updating records in an existing DataStore resource.
 
 ### DOCS
 
 * Rewrote package prose (help pages, README, vignette, NEWS) in plain language. No facts changed.
+* Added `ds_search()` examples for selecting fields and filtering several fields.
+  Added migration guidance for deprecated `ds_create_dataset()` users.
 
 ckanr 0.8.1
 ===========
