@@ -181,3 +181,67 @@ test_that("resource_update removes key:value pairs with empty extras", {
   # expected output
   testthat::expect_null(b$map_type)
 })
+
+# rcurl on resource_update points the resource at a new external URL
+test_that("resource_update changes the external URL through rcurl", {
+  check_ckan(url)
+  check_dataset(url, did)
+
+  xx <- resource_create(
+    package_id = did, description = "rcurl update test",
+    name = "rcurl-update-test", upload = path,
+    rcurl = "http://example.com", url = url, key = key
+  )
+  on.exit(
+    {
+      try(resource_delete(xx$id, url = url, key = key), silent = TRUE)
+    },
+    add = TRUE
+  )
+
+  new_url <- "https://example.com/arcgis/item.html?id=abc123"
+  a <- resource_update(xx$id, rcurl = new_url, url = url, key = key)
+
+  expect_is(a, "ckan_resource")
+  expect_equal(a$url, new_url)
+  expect_equal(a$url_type, "link")
+
+  shown <- resource_show(xx$id, url = url, key = key)
+  expect_equal(shown$url, new_url)
+
+  # S3 input: a ckan_resource object works like an ID string
+  b <- resource_update(a, rcurl = "https://example.com/other", url = url, key = key)
+  expect_equal(b$url, "https://example.com/other")
+
+  # Output formats
+  expect_ckan_formats(function(fmt) {
+    resource_update(xx$id,
+      rcurl = "https://example.com/fmt", url = url, key = key, as = fmt)
+  })
+})
+
+# an uploaded file wins over rcurl on resource_update
+test_that("resource_update prefers an uploaded file over rcurl", {
+  check_ckan(url)
+  check_dataset(url, did)
+
+  xx <- resource_create(
+    package_id = did, description = "rcurl upload test",
+    name = "rcurl-upload-test", upload = path,
+    rcurl = "http://example.com", url = url, key = key
+  )
+  on.exit(
+    {
+      try(resource_delete(xx$id, url = url, key = key), silent = TRUE)
+    },
+    add = TRUE
+  )
+
+  a <- resource_update(xx$id,
+    path = path, rcurl = "https://example.com/ignored",
+    url = url, key = key
+  )
+
+  expect_equal(a$url_type, "upload")
+  expect_match(a$url, "actinidiaceae.csv$", fixed = FALSE)
+})

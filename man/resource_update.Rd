@@ -8,6 +8,7 @@ resource_update(
   id,
   path = NULL,
   extras = list(),
+  rcurl = NULL,
   url = get_default_url(),
   key = get_default_key(),
   as = "list",
@@ -20,6 +21,13 @@ resource_update(
 \item{path}{(character) Local path of the file to upload. Optional.}
 
 \item{extras}{(list) Extra metadata fields of the resource. Optional.}
+
+\item{rcurl}{(character) New external URL of the resource, for example
+an ArcGIS link. The function sends it as the resource \code{url} and sets
+\code{url_type} to \code{link}, so CKAN stores a true external link. Use this
+without \code{path} to point an existing resource at a new external URL.
+If you also pass \code{path}, the uploaded file wins on the server.
+Optional.}
 
 \item{url}{Base URL to use. Default: https://demo.ckan.org/. See
 also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
@@ -56,6 +64,9 @@ with \code{resource_update} with the locally updated metadata.
 If you update a resource file, the new file must exist on a local path.
 You cannot use R objects directly to update a resource file.
 Instead, write them to a file. For example, use \code{tempfile()}. See the example.
+
+To point an existing resource at a new external URL, pass the link
+through \code{rcurl}. Do not put the link in \code{extras}.
 
 The CKAN base URL and API key default to the global options.
 \code{ckanr_setup} sets the global options.
@@ -101,6 +112,9 @@ resource_update(xx$id,
 resource_update(id,
   extras = list(some = "metadata")
 )
+
+# Point an existing resource at a new external URL
+resource_update(xx$id, rcurl = "https://example.com/data.geojson")
 
 ## or remove all extra tags
 resource_update(id, extras = list())

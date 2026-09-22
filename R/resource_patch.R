@@ -1,8 +1,15 @@
 #' Update a resource's metadata
 #'
+#' To point an existing resource at a new external URL, pass the link
+#' through `rcurl`. If `x` also holds a `url` item, `rcurl` wins.
+#'
 #' @export
 #' @param x (list) A list with key-value pairs
 #' @param id (character) Resource ID to update (required)
+#' @param rcurl (character) New external URL of the resource, for example
+#' an ArcGIS link. The function sends it as the resource `url` and sets
+#' `url_type` to `link`, so CKAN stores a true external link. If `x` holds
+#' its own `url_type` item, that value wins. Optional.
 #' @template args
 #' @template key
 #' @examples \dontrun{
@@ -29,9 +36,13 @@
 #' extra <- list("extra_key" = "my special value")
 #' zz <- resource_patch(extra, id = res)
 #' zz$extra_key
+#'
+#' # Point the resource at a new external URL
+#' zzz <- resource_patch(list(), id = res, rcurl = "https://example.com/data.geojson")
+#' zzz$url
 #' }
 resource_patch <- function(
-  x, id, url = get_default_url(),
+  x, id, rcurl = NULL, url = get_default_url(),
   key = get_default_key(), as = "list", ...
 ) {
   id <- as.ckan_resource(id, url = url)
@@ -39,6 +50,12 @@ resource_patch <- function(
     stop("x must be of class list", call. = FALSE)
   }
   x$id <- id$id
+  if (!is.null(rcurl)) {
+    x$url <- rcurl
+    if (is.null(x$url_type)) {
+      x$url_type <- "link"
+    }
+  }
   payload <- jsonlite::toJSON(x, auto_unbox = TRUE, null = "null")
   res <- ckan_POST(
     url,

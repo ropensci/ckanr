@@ -18,6 +18,9 @@
 #' You cannot use R objects directly to update a resource file.
 #' Instead, write them to a file. For example, use `tempfile()`. See the example.
 #'
+#' To point an existing resource at a new external URL, pass the link
+#' through `rcurl`. Do not put the link in `extras`.
+#'
 #' The CKAN base URL and API key default to the global options.
 #' `ckanr_setup` sets the global options.
 #'
@@ -26,6 +29,12 @@
 #' @param id (character) Resource ID to update. Required.
 #' @param path (character) Local path of the file to upload. Optional.
 #' @param extras (list) Extra metadata fields of the resource. Optional.
+#' @param rcurl (character) New external URL of the resource, for example
+#' an ArcGIS link. The function sends it as the resource `url` and sets
+#' `url_type` to `link`, so CKAN stores a true external link. Use this
+#' without `path` to point an existing resource at a new external URL.
+#' If you also pass `path`, the uploaded file wins on the server.
+#' Optional.
 #' @template key
 #' @template args
 #' @return The function returns the HTTP response from CKAN as a list (default),
@@ -72,6 +81,9 @@
 #' resource_update(id,
 #'   extras = list(some = "metadata")
 #' )
+#'
+#' # Point an existing resource at a new external URL
+#' resource_update(xx$id, rcurl = "https://example.com/data.geojson")
 #'
 #' ## or remove all extra tags
 #' resource_update(id, extras = list())
@@ -131,7 +143,7 @@
 #' browseURL(xxx$url)
 #' }
 resource_update <- function(
-  id, path = NULL, extras = list(),
+  id, path = NULL, extras = list(), rcurl = NULL,
   url = get_default_url(), key = get_default_key(),
   as = "list", ...
 ) {
@@ -149,8 +161,12 @@ resource_update <- function(
     id = id$id,
     last_modified =
       format(Sys.time(), tz = "UTC", format = "%Y-%m-%d %H:%M:%OS6"),
-    url = "update"
+    url = if (is.null(rcurl)) "update" else rcurl
   )
+  if (!is.null(rcurl) && !is.character(path) &&
+      !("url_type" %in% names(extras))) {
+    default_body$url_type <- "link"
+  }
   body <- c(default_body, body, extras)
   res <- ckan_POST(url, "resource_update",
     body = body, key = key,
