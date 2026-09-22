@@ -23,17 +23,6 @@
 #'   `activity_create()`.
 #' @param data (list|character) Optional structured payload that describes the
 #'   activity body. The function encodes lists as JSON automatically.
-#' @param start_date (character) Start of the deletion range (ISO 8601,
-#'   e.g. "YYYY-MM-DD" or "YYYY-MM-DDTHH:mm") for `activity_delete()`.
-#' @param end_date (character) End of the deletion range (ISO 8601) for
-#'   `activity_delete()`. Provide both `start_date` and `end_date` to delete
-#'   a date range, or use `offset_days` instead.
-#' @param offset_days (numeric) Delete activities older than this many days
-#'   for `activity_delete()`.
-#' @param keep (numeric) Optional. When set, keep this many most recent
-#'   activities per item and delete only older ones in the range.
-#' @param batch_size (numeric) Optional batch size for deletes on large
-#'   tables (e.g. millions of rows) to avoid timeouts and long locks.
 NULL
 
 #' @rdname activity_helpers
