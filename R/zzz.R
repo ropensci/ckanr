@@ -75,7 +75,22 @@ ckan_VERB <- function(
     }
   }
   err_handler(res)
-  res$parse("UTF-8")
+  parse_ckan_http_response(res)
+}
+
+parse_ckan_http_response <- function(res) {
+  txt <- res$parse("UTF-8")
+  if (!isTRUE(tryCatch(jsonlite::validate(txt), error = function(e) FALSE))) {
+    status <- tryCatch(res$status_http()$message, error = function(e) "HTTP error")
+    stop(
+      sprintf(
+        "%s - CKAN returned a non-JSON response. Check the CKAN URL and API key.",
+        status
+      ),
+      call. = FALSE
+    )
+  }
+  txt
 }
 
 validate_ckan_url <- function(url) {

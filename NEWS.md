@@ -23,6 +23,8 @@ ckanr 0.9.0
 * Add `ds_upsert()` for inserting or updating records in an existing DataStore resource (#98).
 * Requests now stop early with a clear message when the CKAN URL is empty or
   does not start with `http://` or `https://` (#154).
+* HTTP API calls now report a clear error when CKAN or a proxy returns a
+  non-JSON response instead of exposing a JSON parsing error (#92).
 
 ### DOCS
 

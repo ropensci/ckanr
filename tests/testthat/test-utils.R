@@ -18,6 +18,17 @@ test_that("handle_many", {
   expect_error(handle_many(5))
 })
 
+test_that("non-JSON HTTP responses produce a clear error", {
+  response <- new.env(parent = emptyenv())
+  response$parse <- function(...) "<!doctype html><html>Unauthorized</html>"
+  response$status_http <- function() list(message = "Unauthorized")
+
+  expect_error(
+    ckanr:::parse_ckan_http_response(response),
+    "Unauthorized - CKAN returned a non-JSON response"
+  )
+})
+
 test_that("parse_version_number handles edge cases without warning", {
   expect_identical(parse_version_number("2.9"), 29)
   expect_identical(parse_version_number("2.3.5"), 23.5)
