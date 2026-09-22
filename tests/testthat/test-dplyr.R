@@ -36,9 +36,10 @@ if (Sys.getenv("TEST_DPLYR_INTERFACE") != "") {
   tb.raw <- dplyr::collect(tb)
 
   test_that("basic verbs: filter", {
-    col_name <- sample(colnames(tb.raw), 1)
+    col_name <- "ckanr_test_integer"
+    skip_if(!col_name %in% names(tb.raw), "Numeric fixture column is missing")
     col_sym <- rlang::sym(col_name)
-    col_value <- tb.raw[[col_name]][1]
+    col_value <- 1
 
     r1 <- tb |>
       dplyr::filter(!!col_sym == !!col_value) |>
