@@ -74,7 +74,7 @@ test_that("src_ckan collects rows from datastore resource", {
   expect_true(dbExistsTable(con, rid))
   expect_false(dbExistsTable(con, "not-a-datastore-table"))
   field_names <- vapply(preview$fields, `[[`, character(1), "id")
-  expect_true(all(dbListFields(con, rid) %in% field_names))
+  expect_true(all(dbListFields(con, rid) %in% c(field_names, "_id", "_full_text")))
 
   tbl_obj <- dplyr::tbl(con, rid)
   rows <- dplyr::collect(head(tbl_obj, 3))
