@@ -30,7 +30,7 @@ services:
       - CKAN__FILES__STORAGE__DEFAULT__INITIALIZE=true
       - CKAN__FILES__STORAGE__DEFAULT__OVERWRITE_EXISTING=true
       # Resource download routes use ckan.storage_path to resolve uploaded files.
-      - CKAN__STORAGE_PATH=/var/lib/ckan/file-storage
+      - CKAN_STORAGE_PATH=/var/lib/ckan/file-storage
     ports:
       - "5000:5000"
     restart: unless-stopped
