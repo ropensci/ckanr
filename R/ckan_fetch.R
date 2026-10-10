@@ -268,12 +268,15 @@ read_csv_base <- function(text = NULL, path = NULL, ...) {
   eof_quote <- FALSE
   result <- withCallingHandlers(
     tryCatch(do.call(read.csv, args), error = function(e) e),
+    # nocov start - "EOF within quoted string" warning is R-version dependent;
+    # modern R raises "incomplete final line" error instead (covered via error path)
     warning = function(w) {
       if (grepl("EOF within quoted string", conditionMessage(w))) {
         eof_quote <<- TRUE
         invokeRestart("muffleWarning")
       }
     }
+    # nocov end
   )
 
   if (!inherits(result, "error") && !eof_quote) {
