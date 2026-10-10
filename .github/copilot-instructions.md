@@ -1,5 +1,8 @@
 # Copilot Instructions for ckanr
 
+Agent entry point is `AGENTS.md` (operational quick-start). This file is the
+deep R reference for ckanr conventions.
+
 ## Project Overview
 
 `ckanr` is an R client package for the [CKAN API](https://ckan.org/), enabling R users to interact with CKAN data portals for reading, writing, and managing datasets. The package wraps the entire CKAN REST API with R functions organized by resource type (packages, resources, organizations, groups, users, tags).
@@ -22,7 +25,7 @@ versions, or emits warnings if an endpoint is not available for that given versi
 These rules are binding for all changes to `ckanr`:
 
 1. **Retain all existing functions.** Every exported function was developed and tested against its respective CKAN version — never remove or rename one. If a newer CKAN API version breaks an existing function, do not change its behavior for older versions; instead add a gate check for the maximum supported CKAN version (warn or branch behavior based on the configured CKAN version, following the version-toggle pattern described in Project Overview).
-2. **The official CKAN API docs are the point of truth for API contracts.** Parameter names, request shapes, and response structures must follow the docs for the supported CKAN versions (2.9, 2.10, 2.11). When in doubt, check the docs before the implementation.
+2. **The official CKAN API docs are the point of truth for API contracts.** Parameter names, request shapes, and response structures must follow the docs for the supported CKAN versions (2.9, 2.10, 2.11, 2.12). When in doubt, check the docs before the implementation.
 3. **Gate new CKAN versions.** When introducing support for a new CKAN version, add a gate check that warns when a function is called while an unsupported CKAN version is configured.
 4. **Test every new function.** All added functions must ship with tests in `tests/testthat/` following the Test Quality Standards below (skip on CRAN, check CKAN availability, clean up fixtures, cover success/failure paths and output formats).
 5. **Document every new function comprehensively.** Write full roxygen2 docstrings: re-use existing `man-roxygen/` fragments, create new fragments for shared content, refactor older docstrings to use the new fragments where applicable, and incorporate the official CKAN API documentation into the docstring where feasible.
@@ -34,6 +37,7 @@ These rules are binding for all changes to `ckanr`:
 The project runs in a devcontainer with **host Docker access**:
 - Docker-outside-of-Docker (bind mount) accessing host Docker daemon via `unix:///var/run/docker-host.sock`
 - A full CKAN test instance orchestrated via `docker-compose-dev.yml` runs at `localhost:5000` alongside PostgreSQL, Redis, and Solr services
+- Plain `docker` commands need `DOCKER_HOST=unix:///var/run/docker-host.sock` in the environment (the `just docker` recipe sets it for you)
 
 **Critical**: Tests depend on a running CKAN instance. The helper function `prepare_test_ckan()` in `tests/testthat/helper-ckanr.R` auto-creates test fixtures (dataset, resource, organization, group) on first run.
 
@@ -45,7 +49,13 @@ just doc          # Document package with roxygen2
 just build        # Build package
 just test         # Run test suite
 just deps         # Install dev dependencies
+just lint         # Lint R sources with jarl
 ```
+
+Code hygiene is enforced by pre-commit (`.pre-commit-config.yaml`): the
+Air `air-format` hook plus standard whitespace/file-ending hooks run on
+changed files. Run `pre-commit install` once per clone. Never commit
+secrets (API keys stay in environment variables).
 
 VS Code tasks (Ctrl+Shift+B) also available: "R: Document", "R: Build", "R: Test", "R: Check".
 
@@ -136,11 +146,19 @@ Coverage now includes 14 additional CRUD-focused files (`tests/testthat/test-*.R
 
 ### Remaining Gaps
 
-Untested areas worth prioritizing: `group_update()`, `group_patch()`, `resource_patch()`, `organization_purge()`, `user_create()`, `user_delete()`, follower/followee counters (`user_followee_count()`, `user_follower_count()`, `user_follower_list()`), `dashboard_count()`, `tag_create()`, and legacy related-item helpers (`related_*`). Lower-level helpers (S3 coercion, DBI/dplyr bridge, HTTP glue in `R/zzz.R`) are only exercised indirectly.
+Coverage is at 100% (via `covr::package_coverage()`): mocked offline tests
+(`tests/testthat/test-*_offline.R`, `tests/testthat/test-coverage100_*.R`)
+cover the `as=json/list/table` branches and error paths without a CKAN
+instance, and live-CKAN integration tests cover the rest. Keep it there:
+every new function needs its output-format branches and failure paths
+covered, not just the happy path.
 
 ### Running Targeted Suites
 
 Use `devtools::test(filter = "package")` (or `resource`, `organization`, `group`, `user`) to focus on a resource family, `devtools::test()` for the entire suite, and `covr::package_coverage()` to gauge progress. DataStore+dashboard tests may skip if the DataPusher lags or the CKAN version lacks those endpoints.
+
+Local runs need `NOT_CRAN=true` in the environment, otherwise
+`skip_on_cran()` skips every test file.
 
 ## Special Features
 
@@ -182,6 +200,9 @@ Use templates for consistent documentation:
 ## Documentation Standards
 
 - All exported functions must have roxygen2 documentation with `@export`
+- Never hand-edit `NAMESPACE` or `man/*.Rd` — roxygen2 owns them. Declare
+  imports/exports in docstrings (`@export`, `@importFrom`) and regenerate
+  with `devtools::document()` (or `just doc`)
 - Use `@importFrom` for specific imports (avoid full package imports)
 - Include examples wrapped in `\dontrun{}` (they require live CKAN instance)
 - Document return value structure, especially for S3 classes
@@ -190,6 +211,7 @@ Use templates for consistent documentation:
 ## CI/CD Notes
 
 - GitHub Actions workflow tests against Windows, macOS, Ubuntu
-- Ubuntu tests run against CKAN 2.9, 2.10, 2.11 in docker-compose
+- Ubuntu tests run against CKAN 2.9, 2.10, 2.11, 2.12 in docker-compose
+  (plus R-devel against CKAN 2.11)
 - API keys generated via `docker exec ckan ckan user token add` for CKAN 2.9+
 - Coverage reported via codecov for Ubuntu R-release + CKAN 2.11 only
