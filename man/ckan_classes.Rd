@@ -38,4 +38,3 @@ The class tells functions what to do with the object. Functions accept
 flexible inputs and return flexible outputs. You can edit one of these
 classes yourself by changing values in the list.
 }
-

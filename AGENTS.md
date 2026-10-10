@@ -16,7 +16,7 @@ datastore). Tested against CKAN 2.9–2.12. Deep R conventions live in
 ## Commands (`justfile`)
 
 - `just doc` (roxygen2), `just build`, `just test`, `just check`,
-  `just deps`, `just lint` (jarl). Filter tests:
+  `just deps`, `just lint` (jarl and pre-commit hooks). Filter tests:
   `devtools::test(filter = "package")`.
 
 ## Binding rules
