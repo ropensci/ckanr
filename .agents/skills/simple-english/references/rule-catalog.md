@@ -162,4 +162,3 @@ One word, one meaning, one part of speech, for the whole document (Rules 1.11, 9
 - The settings file is `configuration`, never config, settings, or options in the same document.
 - The verify concept is `make sure that`, never check, verify, confirm, validate, or ensure as verbs. Strict mode routes the rest with `references/strict-vocabulary.md`.
 - Common swaps: however → but, therefore → as a result, since (= because) → because, perform → do, avoid → prevent, repeat → do again, acceptable → permitted, now → delete it.
-

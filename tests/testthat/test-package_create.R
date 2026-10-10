@@ -91,13 +91,23 @@ test_that("package_create fails well", {
 
   # invalid characters in name
   expect_error(
-    package_create(name = "Invalid Name With Spaces", owner_org = oid, url = url, key = key),
+    package_create(
+      name = "Invalid Name With Spaces",
+      owner_org = oid,
+      url = url,
+      key = key
+    ),
     "Validation Error"
   )
 
   # bad key
   expect_error(
-    package_create(name = "test_pkg", owner_org = oid, url = url, key = "invalid-key"),
+    package_create(
+      name = "test_pkg",
+      owner_org = oid,
+      url = url,
+      key = "invalid-key"
+    ),
     "Authorization Error"
   )
 })
@@ -107,8 +117,15 @@ test_that("package_create supports list/json/table formats", {
 
   expect_ckan_formats(function(fmt) {
     pkg_name <- paste0("test_pkg_formats_", fmt, "_", as.integer(Sys.time()))
-    res <- package_create(name = pkg_name, owner_org = oid, url = url, key = key, as = fmt)
-    pkg_id <- switch(fmt,
+    res <- package_create(
+      name = pkg_name,
+      owner_org = oid,
+      url = url,
+      key = key,
+      as = fmt
+    )
+    pkg_id <- switch(
+      fmt,
       json = jsonlite::fromJSON(res)$result$id,
       table = res$id,
       list = res$id

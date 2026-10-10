@@ -15,7 +15,12 @@ skip_if(
 skip_if_not_sysadmin(url, key)
 
 unique_user_name <- function(prefix = "ckanr-user") {
-  paste(prefix, format(Sys.time(), "%Y%m%d%H%M%S"), sprintf("%04d", sample(10000, 1)), sep = "-")
+  paste(
+    prefix,
+    format(Sys.time(), "%Y%m%d%H%M%S"),
+    sprintf("%04d", sample(10000, 1)),
+    sep = "-"
+  )
 }
 
 create_temp_user <- function(name = unique_user_name()) {
@@ -84,7 +89,9 @@ test_that("user_activity_list handles fresh users", {
   usr <- create_temp_user()
   on.exit(cleanup_user(usr$id), add = TRUE)
 
-  if (!ckanr:::ckan_action_available("user_activity_list", url = url, key = key)) {
+  if (
+    !ckanr:::ckan_action_available("user_activity_list", url = url, key = key)
+  ) {
     skip("user_activity_list action unavailable on this CKAN instance")
   }
 
@@ -97,7 +104,12 @@ test_that("user_create and user_delete fail well", {
   check_ckan(url)
 
   expect_error(
-    user_create(email = "tester@example.com", password = "pass", url = url, key = key),
+    user_create(
+      email = "tester@example.com",
+      password = "pass",
+      url = url,
+      key = key
+    ),
     'argument "name" is missing'
   )
 
@@ -131,7 +143,10 @@ test_that("user follower helpers reflect follow/unfollow state", {
     usr <- create_temp_user()
     on.exit(
       {
-        suppressWarnings(try(unfollow_user(usr$id, url = url, key = key), silent = TRUE))
+        suppressWarnings(try(
+          unfollow_user(usr$id, url = url, key = key),
+          silent = TRUE
+        ))
         cleanup_user(usr$id)
       },
       add = TRUE

@@ -23,4 +23,3 @@
 |vctrs   |NA    |0.5.2 |*  |
 
 # Revdeps
-

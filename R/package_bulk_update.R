@@ -34,33 +34,57 @@ NULL
 #' @rdname bulk_update
 #' @export
 bulk_update_private <- function(
-  datasets, org_id, url = get_default_url(),
-  key = get_default_key(), ...
+  datasets,
+  org_id,
+  url = get_default_url(),
+  key = get_default_key(),
+  ...
 ) {
-  bulk_update_request("bulk_update_private", datasets, org_id,
-    url = url, key = key, opts = list(...)
+  bulk_update_request(
+    "bulk_update_private",
+    datasets,
+    org_id,
+    url = url,
+    key = key,
+    opts = list(...)
   )
 }
 
 #' @rdname bulk_update
 #' @export
 bulk_update_public <- function(
-  datasets, org_id, url = get_default_url(),
-  key = get_default_key(), ...
+  datasets,
+  org_id,
+  url = get_default_url(),
+  key = get_default_key(),
+  ...
 ) {
-  bulk_update_request("bulk_update_public", datasets, org_id,
-    url = url, key = key, opts = list(...)
+  bulk_update_request(
+    "bulk_update_public",
+    datasets,
+    org_id,
+    url = url,
+    key = key,
+    opts = list(...)
   )
 }
 
 #' @rdname bulk_update
 #' @export
 bulk_update_delete <- function(
-  datasets, org_id, url = get_default_url(),
-  key = get_default_key(), ...
+  datasets,
+  org_id,
+  url = get_default_url(),
+  key = get_default_key(),
+  ...
 ) {
-  bulk_update_request("bulk_update_delete", datasets, org_id,
-    url = url, key = key, opts = list(...)
+  bulk_update_request(
+    "bulk_update_delete",
+    datasets,
+    org_id,
+    url = url,
+    key = key,
+    opts = list(...)
   )
 }
 
@@ -76,21 +100,27 @@ resolve_bulk_dataset_ids <- function(datasets) {
   } else if (is.character(datasets)) {
     ids <- unname(datasets)
   } else if (is.list(datasets)) {
-    ids <- vapply(datasets, function(x) {
-      if (is.ckan_package(x)) {
-        x$id
-      } else if (is.list(x) && !is.null(x$id)) {
-        as.character(x$id)
-      } else if (is.character(x) && length(x) == 1) {
-        x
-      } else {
-        stop("each entry of 'datasets' must be a dataset id or ckan_package",
-          call. = FALSE
-        )
-      }
-    }, character(1))
+    ids <- vapply(
+      datasets,
+      function(x) {
+        if (is.ckan_package(x)) {
+          x$id
+        } else if (is.list(x) && !is.null(x$id)) {
+          as.character(x$id)
+        } else if (is.character(x) && length(x) == 1) {
+          x
+        } else {
+          stop(
+            "each entry of 'datasets' must be a dataset id or ckan_package",
+            call. = FALSE
+          )
+        }
+      },
+      character(1)
+    )
   } else {
-    stop("datasets must be a character vector or a (list of) ckan_package",
+    stop(
+      "datasets must be a character vector or a (list of) ckan_package",
       call. = FALSE
     )
   }
@@ -105,9 +135,14 @@ bulk_update_request <- function(endpoint, datasets, org_id, url, key, opts) {
   dataset_ids <- resolve_bulk_dataset_ids(datasets)
   org <- resolve_bulk_org_id(org_id, url)
   body <- list(datasets = as.list(dataset_ids), org_id = org)
-  res <- ckan_POST(url, endpoint,
-    body = tojun(body, TRUE), key = key,
-    encode = "json", headers = ctj(), opts = opts
+  res <- ckan_POST(
+    url,
+    endpoint,
+    body = tojun(body, TRUE),
+    key = key,
+    encode = "json",
+    headers = ctj(),
+    opts = opts
   )
   isTRUE(jsonlite::fromJSON(res)$success)
 }

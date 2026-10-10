@@ -26,20 +26,22 @@
 #' user_show("sckottie", include_num_followers = TRUE)
 #' }
 user_show <- function(
-  id, user_obj = NULL, include_datasets = FALSE,
-  include_num_followers = FALSE, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  id,
+  user_obj = NULL,
+  include_datasets = FALSE,
+  include_num_followers = FALSE,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   id <- as.ckan_user(id, url = url)
   args <- cc(list(
-    id = id$id, user_obj = user_obj,
+    id = id$id,
+    user_obj = user_obj,
     include_datasets = include_datasets,
     include_num_followers = include_num_followers
   ))
   res <- ckan_GET(url, "user_show", query = args, key = key, opts = list(...))
-  switch(as,
-    json = res,
-    list = as_ck(jsl(res), "ckan_user"),
-    table = jsd(res)
-  )
+  switch(as, json = res, list = as_ck(jsl(res), "ckan_user"), table = jsd(res))
 }

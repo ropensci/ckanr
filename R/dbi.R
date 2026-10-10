@@ -6,37 +6,51 @@
 
 setClass("CKANDriver", representation("DBIDriver"))
 
-setMethod("dbUnloadDriver", "CKANDriver",
+setMethod(
+  "dbUnloadDriver",
+  "CKANDriver",
   def = function(drv, ...) invisible(NULL),
   valueClass = "logical"
 )
 
-setMethod("dbGetInfo", "CKANDriver",
-  def = function(dbObj, ...) {
-    cat("DBI Interface for CKAN\n")
-  }
-)
+setMethod("dbGetInfo", "CKANDriver", def = function(dbObj, ...) {
+  cat("DBI Interface for CKAN\n")
+})
 
-setMethod("summary", "CKANDriver",
-  def = function(object, ...) dbGetInfo(object, ...)
-)
+setMethod("summary", "CKANDriver", def = function(object, ...) {
+  dbGetInfo(object, ...)
+})
 
 ##
 ## Class: DBIConnection
 ##
-setClass("CKANConnection", representation(
-  "DBIConnection", "url" = "character", "key" = "character"
-))
+setClass(
+  "CKANConnection",
+  representation(
+    "DBIConnection",
+    "url" = "character",
+    "key" = "character"
+  )
+)
 
-setMethod("initialize", "CKANConnection", function(
-  .Object, url, key = get_default_key(), ...
-) {
-  .Object@url <- url
-  .Object@key <- key
-  .Object
-})
+setMethod(
+  "initialize",
+  "CKANConnection",
+  function(
+    .Object,
+    url,
+    key = get_default_key(),
+    ...
+  ) {
+    .Object@url <- url
+    .Object@key <- key
+    .Object
+  }
+)
 
-setMethod("dbConnect", "CKANDriver",
+setMethod(
+  "dbConnect",
+  "CKANDriver",
   def = function(drv, url, key = get_default_key(), ...) {
     validate_ckan_url(url)
     new("CKANConnection", url = url, key = key)
@@ -45,20 +59,28 @@ setMethod("dbConnect", "CKANDriver",
 )
 
 ## clone a connection
-setMethod("dbConnect", "CKANConnection",
+setMethod(
+  "dbConnect",
+  "CKANConnection",
   def = function(drv, ...) drv,
   valueClass = "CKANConnection"
 )
 
-setMethod("dbDisconnect", "CKANConnection",
+setMethod(
+  "dbDisconnect",
+  "CKANConnection",
   def = function(conn, ...) invisible(TRUE),
   valueClass = "logical"
 )
 
-setClass("CKANResult", representation("DBIResult", value = "list", cache = "environment"))
+setClass(
+  "CKANResult",
+  representation("DBIResult", value = "list", cache = "environment")
+)
 
 fieldMapping <- Vectorize(function(type) {
-  switch(type,
+  switch(
+    type,
     "bigint" = "integer",
     "bigserial" = "integer",
     "bytea" = "raw",
@@ -82,7 +104,8 @@ setMethod("initialize", "CKANResult", function(.Object, value, ...) {
   types <- fieldMapping(value$fields$type)
   if (!is.data.frame(value$records)) {
     args <- lapply(seq_len(nrow(value$fields)), function(i) {
-      switch(types[i],
+      switch(
+        types[i],
         "character" = character(0),
         "integer" = integer(0),
         "logical" = logical(0),
@@ -97,7 +120,8 @@ setMethod("initialize", "CKANResult", function(.Object, value, ...) {
   } else {
     df <- value$records
     for (i in seq_len(nrow(value$fields))) {
-      f <- switch(types[i],
+      f <- switch(
+        types[i],
         "character" = as.character,
         "integer" = as.integer,
         "logical" = as.logical,
@@ -114,31 +138,38 @@ setMethod("initialize", "CKANResult", function(.Object, value, ...) {
   .Object
 })
 
-setMethod("dbSendQuery",
+setMethod(
+  "dbSendQuery",
   signature(conn = "CKANConnection", statement = "character"),
   def = function(conn, statement, ...) {
     retval <- ds_search_sql(
-      as.character(statement), url = conn@url, key = conn@key, as = "table"
+      as.character(statement),
+      url = conn@url,
+      key = conn@key,
+      as = "table"
     )
     new("CKANResult", value = retval)
   },
   valueClass = "CKANResult"
 )
 
-setMethod("dbFetch",
+setMethod(
+  "dbFetch",
   signature(res = "CKANResult", n = "numeric"),
   def = function(res, n = -1, ...) fetch(res, n),
   valueClass = "data.frame"
 )
 
-setMethod("dbFetch",
+setMethod(
+  "dbFetch",
   signature(res = "CKANResult", n = "missing"),
   def = function(res, n, ...) fetch(res, -1),
   valueClass = "data.frame"
 )
 
 
-setMethod("dbGetQuery",
+setMethod(
+  "dbGetQuery",
   signature(conn = "CKANConnection", statement = "character"),
   def = function(conn, statement, ...) {
     retval <- dbSendQuery(conn, statement, ...)
@@ -147,45 +178,56 @@ setMethod("dbGetQuery",
   }
 )
 
-setMethod("dbGetException", "CKANConnection",
+setMethod(
+  "dbGetException",
+  "CKANConnection",
   def = function(conn, ...) {
     list()
   },
   valueClass = "list"
 )
 
-setMethod("dbGetInfo", "CKANConnection",
-  def = function(dbObj, ...) {
-    list(url = dbObj@url)
-  }
-)
+setMethod("dbGetInfo", "CKANConnection", def = function(dbObj, ...) {
+  list(url = dbObj@url)
+})
 
-setMethod("dbListResults", "CKANConnection",
-  def = function(conn, ...) dbGetInfo(conn, "rsId")[[1]]
-)
+setMethod("dbListResults", "CKANConnection", def = function(conn, ...) {
+  dbGetInfo(conn, "rsId")[[1]]
+})
 
-setMethod("summary", "CKANConnection",
-  def = function(object, ...) dbGetInfo(object)
-)
+setMethod("summary", "CKANConnection", def = function(object, ...) {
+  dbGetInfo(object)
+})
 
 ## convenience methods
-setMethod("dbListTables", "CKANConnection",
+setMethod(
+  "dbListTables",
+  "CKANConnection",
   def = function(conn, ...) {
     dots <- list(...)
     limit <- if (is.null(dots$limit)) NULL else dots$limit
     if (is.null(limit)) {
-       out1 <- ds_search(
-         "_table_metadata", url = conn@url, key = conn@key,
-         as = "table", limit = 1
-       )
-       out <- ds_search(
-         "_table_metadata", url = conn@url, key = conn@key,
-         as = "table", limit = out1$total
-       )
+      out1 <- ds_search(
+        "_table_metadata",
+        url = conn@url,
+        key = conn@key,
+        as = "table",
+        limit = 1
+      )
+      out <- ds_search(
+        "_table_metadata",
+        url = conn@url,
+        key = conn@key,
+        as = "table",
+        limit = out1$total
+      )
     } else {
       out <- ds_search(
-        "_table_metadata", url = conn@url, key = conn@key,
-        as = "table", limit = limit
+        "_table_metadata",
+        url = conn@url,
+        key = conn@key,
+        as = "table",
+        limit = limit
       )
     }
     out$records$name
@@ -193,7 +235,9 @@ setMethod("dbListTables", "CKANConnection",
   valueClass = "character"
 )
 
-setMethod("dbReadTable", signature(conn = "CKANConnection", name = "character"),
+setMethod(
+  "dbReadTable",
+  signature(conn = "CKANConnection", name = "character"),
   def = function(conn, name, ...) {
     sql <- sprintf('SELECT * FROM "%s"', name)
     dbGetQuery(conn, sql)
@@ -201,7 +245,8 @@ setMethod("dbReadTable", signature(conn = "CKANConnection", name = "character"),
   valueClass = "data.frame"
 )
 
-setMethod("dbWriteTable",
+setMethod(
+  "dbWriteTable",
   signature(conn = "CKANConnection", name = "character", value = "data.frame"),
   def = function(conn, name, value, ...) {
     .read_only("dbWriteTable")
@@ -209,14 +254,17 @@ setMethod("dbWriteTable",
   valueClass = "logical"
 )
 
-setMethod("dbCreateTable", "CKANConnection",
+setMethod(
+  "dbCreateTable",
+  "CKANConnection",
   def = function(conn, name, fields, ...) {
     .read_only("dbCreateTable")
   },
   valueClass = "logical"
 )
 
-setMethod("dbExistsTable",
+setMethod(
+  "dbExistsTable",
   signature(conn = "CKANConnection", name = "character"),
   def = function(conn, name, ...) {
     name %in% dbListTables(conn, ...)
@@ -224,7 +272,8 @@ setMethod("dbExistsTable",
   valueClass = "logical"
 )
 
-setMethod("dbRemoveTable",
+setMethod(
+  "dbRemoveTable",
   signature(conn = "CKANConnection", name = "character"),
   def = function(conn, name, ...) {
     .read_only("dbRemoveTable")
@@ -233,13 +282,18 @@ setMethod("dbRemoveTable",
 )
 
 ## return field names (no metadata)
-setMethod("dbListFields",
+setMethod(
+  "dbListFields",
   signature(conn = "CKANConnection", name = "character"),
   def = function(conn, name, ...) {
     identifier <- as.character(DBI::dbQuoteIdentifier(conn, name))
     sql <- sprintf("SELECT * FROM %s LIMIT 0", identifier)
     result <- ds_search_sql(
-      sql, url = conn@url, key = conn@key, as = "table", ...
+      sql,
+      url = conn@url,
+      key = conn@key,
+      as = "table",
+      ...
     )
     as.character(result$fields$id)
   },
@@ -247,30 +301,28 @@ setMethod("dbListFields",
 )
 
 
-setMethod("dbCallProc", "CKANConnection",
-  def = function(conn, ...) {
-    stop("TODO: dbCallProc")
-  }
-)
+setMethod("dbCallProc", "CKANConnection", def = function(conn, ...) {
+  stop("TODO: dbCallProc")
+})
 
-setMethod("dbBegin", "CKANConnection",
+setMethod(
+  "dbBegin",
+  "CKANConnection",
   def = function(conn, ...) .read_only("dbBegin"),
   valueClass = "logical"
 )
 
-setMethod("dbCommit", "CKANConnection",
-  def = function(conn, ...) {
-    stop("TODO: dbCommit")
-  }
-)
+setMethod("dbCommit", "CKANConnection", def = function(conn, ...) {
+  stop("TODO: dbCommit")
+})
 
-setMethod("dbRollback", "CKANConnection",
-  def = function(conn, ...) {
-    stop("TODO: dbRollback")
-  }
-)
+setMethod("dbRollback", "CKANConnection", def = function(conn, ...) {
+  stop("TODO: dbRollback")
+})
 
-setMethod("dbClearResult", "CKANResult",
+setMethod(
+  "dbClearResult",
+  "CKANResult",
   def = function(res, ...) {
     res@cache$fetch <- nrow(res@value$records)
     TRUE
@@ -278,7 +330,9 @@ setMethod("dbClearResult", "CKANResult",
   valueClass = "logical"
 )
 
-setMethod("fetch", signature(res = "CKANResult", n = "numeric"),
+setMethod(
+  "fetch",
+  signature(res = "CKANResult", n = "numeric"),
   def = function(res, n, ...) {
     if (n == 0) {
       res@cache$fetch <- nrow(res@value$records)
@@ -300,7 +354,8 @@ setMethod("fetch", signature(res = "CKANResult", n = "numeric"),
   valueClass = "data.frame"
 )
 
-setMethod("fetch",
+setMethod(
+  "fetch",
   signature(res = "CKANResult", n = "missing"),
   def = function(res, n, ...) {
     res@value$records
@@ -308,21 +363,26 @@ setMethod("fetch",
   valueClass = "data.frame"
 )
 
-setMethod("dbGetInfo", "CKANResult",
+setMethod(
+  "dbGetInfo",
+  "CKANResult",
   def = function(dbObj, ...) {
     dbObj@value
   },
   valueClass = "list"
 )
 
-setMethod("dbGetStatement", "CKANResult",
+setMethod(
+  "dbGetStatement",
+  "CKANResult",
   def = function(res, ...) {
     dbGetInfo(res)$sql
   },
   valueClass = "character"
 )
 
-setMethod("dbListFields",
+setMethod(
+  "dbListFields",
   signature(conn = "CKANResult", name = "missing"),
   def = function(conn, name, ...) {
     retval <- as.character(conn@value$fields$id)
@@ -331,7 +391,9 @@ setMethod("dbListFields",
   valueClass = "character"
 )
 
-setMethod("dbColumnInfo", "CKANResult",
+setMethod(
+  "dbColumnInfo",
+  "CKANResult",
   def = function(res, ...) {
     fields <- res@value$fields
     data.frame(
@@ -344,37 +406,43 @@ setMethod("dbColumnInfo", "CKANResult",
   valueClass = "data.frame"
 )
 
-setMethod("dbGetRowsAffected", "CKANResult",
+setMethod(
+  "dbGetRowsAffected",
+  "CKANResult",
   def = function(res, ...) nrow(res@value$records),
   valueClass = "numeric"
 )
 
-setMethod("dbGetRowCount", "CKANResult",
+setMethod(
+  "dbGetRowCount",
+  "CKANResult",
   def = function(res, ...) nrow(res@value$records),
   valueClass = "numeric"
 )
 
-setMethod("dbHasCompleted", "CKANResult",
+setMethod(
+  "dbHasCompleted",
+  "CKANResult",
   def = function(res, ...) res@cache$fetch >= nrow(res@value$records),
   valueClass = "logical"
 )
 
-setMethod("dbGetException", "CKANResult",
+setMethod(
+  "dbGetException",
+  "CKANResult",
   def = function(conn, ...) {
     list()
   },
   valueClass = "list" ## TODO: should be a DBIException?
 )
 
-setMethod("dbBind", "CKANResult",
-  def = function(res, params, ...) {
-    stop(
-      "CKAN DataStore SQL does not support parameter binding",
-      call. = FALSE
-    )
-  }
-)
+setMethod("dbBind", "CKANResult", def = function(res, params, ...) {
+  stop(
+    "CKAN DataStore SQL does not support parameter binding",
+    call. = FALSE
+  )
+})
 
-setMethod("summary", "CKANResult",
-  def = function(object, ...) stop("TODO: summary.CKANResult")
-)
+setMethod("summary", "CKANResult", def = function(object, ...) {
+  stop("TODO: summary.CKANResult")
+})

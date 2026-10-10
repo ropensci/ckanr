@@ -33,20 +33,29 @@
 #' organization_update(x, id = org)
 #' }
 organization_update <- function(
-  x, id, url = get_default_url(), key = get_default_key(),
-  as = "list", ...
+  x,
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   id <- as.ckan_organization(id, url = url)
   if (!inherits(x, "list")) {
     stop("x must be of class list", call. = FALSE)
   }
   x$id <- id$id
-  res <- ckan_POST(url,
+  res <- ckan_POST(
+    url,
     method = "organization_update",
-    body = tojun(x, TRUE), key = key,
-    encode = "json", headers = ctj(), opts = list(...)
+    body = tojun(x, TRUE),
+    key = key,
+    encode = "json",
+    headers = ctj(),
+    opts = list(...)
   )
-  switch(as,
+  switch(
+    as,
     json = res,
     list = as_ck(jsl(res), "ckan_organization"),
     table = jsd(res)

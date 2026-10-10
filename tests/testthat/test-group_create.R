@@ -91,7 +91,8 @@ test_that("group_create supports list/json/table formats", {
       key = key,
       as = fmt
     )
-    grp_id <- switch(fmt,
+    grp_id <- switch(
+      fmt,
       json = jsonlite::fromJSON(res)$result$id,
       table = res$id,
       list = res$id

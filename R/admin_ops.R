@@ -36,9 +36,15 @@ NULL
 #' @template key
 #' @export
 task_status_show <- function(
-  id = NULL, entity_id = NULL, entity_type = NULL,
-  task_type = NULL, task_key = NULL, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  id = NULL,
+  entity_id = NULL,
+  entity_type = NULL,
+  task_type = NULL,
+  task_key = NULL,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   ensure_action_available("task_status_show", url = url, key = key)
   args <- cc(list(
@@ -57,10 +63,19 @@ task_status_show <- function(
 #' @template key
 #' @export
 task_status_update <- function(
-  id = NULL, entity_id = NULL,
-  entity_type = NULL, task_type = NULL, task_key = NULL, value = NULL,
-  state = NULL, last_updated = NULL, error = NULL,
-  url = get_default_url(), key = get_default_key(), as = "list", ...
+  id = NULL,
+  entity_id = NULL,
+  entity_type = NULL,
+  task_type = NULL,
+  task_key = NULL,
+  value = NULL,
+  state = NULL,
+  last_updated = NULL,
+  error = NULL,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   ensure_action_available("task_status_update", url = url, key = key)
   body <- cc(list(
@@ -74,8 +89,11 @@ task_status_update <- function(
     last_updated = last_updated,
     error = error
   ))
-  res <- ckan_POST(url, "task_status_update",
-    body = body, key = key,
+  res <- ckan_POST(
+    url,
+    "task_status_update",
+    body = body,
+    key = key,
     opts = list(...)
   )
   parse_ckan_response(res, as)
@@ -88,17 +106,24 @@ task_status_update <- function(
 #'   dictionaries to update.
 #' @export
 task_status_update_many <- function(
-  data, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  data,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   if (!is.list(data) || !length(data)) {
     stop("`data` must be a non-empty list of task dictionaries", call. = FALSE)
   }
   ensure_action_available("task_status_update_many", url = url, key = key)
   payload <- tojun(list(data = data))
-  res <- ckan_POST(url, "task_status_update_many",
-    body = payload, key = key,
-    headers = ctj(), opts = list(...)
+  res <- ckan_POST(
+    url,
+    "task_status_update_many",
+    body = payload,
+    key = key,
+    headers = ctj(),
+    opts = list(...)
   )
   parse_ckan_response(res, as)
 }
@@ -108,9 +133,15 @@ task_status_update_many <- function(
 #' @template key
 #' @export
 task_status_delete <- function(
-  id = NULL, entity_id = NULL,
-  entity_type = NULL, task_type = NULL, task_key = NULL,
-  url = get_default_url(), key = get_default_key(), as = "list", ...
+  id = NULL,
+  entity_id = NULL,
+  entity_type = NULL,
+  task_type = NULL,
+  task_key = NULL,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   ensure_action_available("task_status_delete", url = url, key = key)
   body <- cc(list(
@@ -120,8 +151,11 @@ task_status_delete <- function(
     task_type = task_type,
     key = task_key
   ))
-  res <- ckan_POST(url, "task_status_delete",
-    body = body, key = key,
+  res <- ckan_POST(
+    url,
+    "task_status_delete",
+    body = body,
+    key = key,
     opts = list(...)
   )
   parse_ckan_response(res, as)
@@ -147,12 +181,19 @@ NULL
 #' @param lang_codes (character) Language codes to include.
 #' @export
 term_translation_show <- function(
-  terms, lang_codes = NULL,
-  url = get_default_url(), key = get_default_key(), as = "list", ...
+  terms,
+  lang_codes = NULL,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   ensure_action_available("term_translation_show", url = url, key = key)
   args <- cc(list(terms = as.list(terms), lang_codes = as.list(lang_codes)))
-  res <- ckan_GET(url, "term_translation_show", args,
+  res <- ckan_GET(
+    url,
+    "term_translation_show",
+    args,
     key = key,
     opts = list(...)
   )
@@ -167,16 +208,25 @@ term_translation_show <- function(
 #' @param lang_code (character) Target language code.
 #' @export
 term_translation_update <- function(
-  term, term_translation, lang_code,
-  url = get_default_url(), key = get_default_key(), as = "list", ...
+  term,
+  term_translation,
+  lang_code,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   ensure_action_available("term_translation_update", url = url, key = key)
   body <- list(
-    term = term, term_translation = term_translation,
+    term = term,
+    term_translation = term_translation,
     lang_code = lang_code
   )
-  res <- ckan_POST(url, "term_translation_update",
-    body = body, key = key,
+  res <- ckan_POST(
+    url,
+    "term_translation_update",
+    body = body,
+    key = key,
     opts = list(...)
   )
   parse_ckan_response(res, as)
@@ -189,17 +239,27 @@ term_translation_update <- function(
 #'   `term_translation`, and `lang_code` entries.
 #' @export
 term_translation_update_many <- function(
-  data, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  data,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   if (!is.list(data) || !length(data)) {
-    stop("`data` must be a non-empty list of translation dictionaries", call. = FALSE)
+    stop(
+      "`data` must be a non-empty list of translation dictionaries",
+      call. = FALSE
+    )
   }
   ensure_action_available("term_translation_update_many", url = url, key = key)
   payload <- tojun(list(data = data))
-  res <- ckan_POST(url, "term_translation_update_many",
+  res <- ckan_POST(
+    url,
+    "term_translation_update_many",
     body = payload,
-    key = key, headers = ctj(), opts = list(...)
+    key = key,
+    headers = ctj(),
+    opts = list(...)
   )
   parse_ckan_response(res, as)
 }
@@ -223,10 +283,15 @@ NULL
 #' @export
 config_option_list <- function(
   url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   ensure_action_available("config_option_list", url = url, key = key)
-  res <- ckan_GET(url, "config_option_list", list(),
+  res <- ckan_GET(
+    url,
+    "config_option_list",
+    list(),
     key = key,
     opts = list(...)
   )
@@ -239,11 +304,17 @@ config_option_list <- function(
 #' @param option_key (character) Configuration option identifier.
 #' @export
 config_option_show <- function(
-  option_key, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  option_key,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   ensure_action_available("config_option_show", url = url, key = key)
-  res <- ckan_GET(url, "config_option_show", list(key = option_key),
+  res <- ckan_GET(
+    url,
+    "config_option_show",
+    list(key = option_key),
     key = key,
     opts = list(...)
   )
@@ -256,15 +327,21 @@ config_option_show <- function(
 #' @param options (list) Named list of configuration options to update.
 #' @export
 config_option_update <- function(
-  options, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  options,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   if (missing(options) || !length(options)) {
     stop("options must be a named list", call. = FALSE)
   }
   ensure_action_available("config_option_update", url = url, key = key)
-  res <- ckan_POST(url, "config_option_update",
-    body = options, key = key,
+  res <- ckan_POST(
+    url,
+    "config_option_update",
+    body = options,
+    key = key,
     opts = list(...)
   )
   parse_ckan_response(res, as)
@@ -293,9 +370,13 @@ NULL
 #' @param ids_only (logical) Return only job IDs. Default: `FALSE`.
 #' @export
 job_list <- function(
-  queues = NULL, limit = NULL, ids_only = FALSE,
+  queues = NULL,
+  limit = NULL,
+  ids_only = FALSE,
   url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   ensure_action_available("job_list", url = url, key = key)
   payload <- cc(list(
@@ -304,9 +385,13 @@ job_list <- function(
     ids_only = if (isTRUE(ids_only)) TRUE else NULL
   ))
   payload <- tojun(payload)
-  res <- ckan_POST(url, "job_list",
-    body = payload, key = key,
-    headers = ctj(), opts = list(...)
+  res <- ckan_POST(
+    url,
+    "job_list",
+    body = payload,
+    key = key,
+    headers = ctj(),
+    opts = list(...)
   )
   parse_ckan_response(res, as)
 }
@@ -317,8 +402,11 @@ job_list <- function(
 #' @param id (character) Job identifier.
 #' @export
 job_show <- function(
-  id, url = get_default_url(), key = get_default_key(),
-  as = "list", ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   ensure_action_available("job_show", url = url, key = key)
   res <- ckan_GET(url, "job_show", list(id = id), key = key, opts = list(...))
@@ -330,15 +418,22 @@ job_show <- function(
 #' @template key
 #' @export
 job_clear <- function(
-  queues = NULL, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  queues = NULL,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   ensure_action_available("job_clear", url = url, key = key)
   payload <- list(queues = if (is.null(queues)) list() else queues)
   payload <- tojun(payload)
-  res <- ckan_POST(url, "job_clear",
-    body = payload, key = key,
-    headers = ctj(), opts = list(...)
+  res <- ckan_POST(
+    url,
+    "job_clear",
+    body = payload,
+    key = key,
+    headers = ctj(),
+    opts = list(...)
   )
   parse_ckan_response(res, as)
 }
@@ -348,14 +443,21 @@ job_clear <- function(
 #' @template key
 #' @export
 job_cancel <- function(
-  id, url = get_default_url(), key = get_default_key(),
-  as = "list", ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   ensure_action_available("job_cancel", url = url, key = key)
   payload <- tojun(list(id = id))
-  res <- ckan_POST(url, "job_cancel",
-    body = payload, key = key,
-    headers = ctj(), opts = list(...)
+  res <- ckan_POST(
+    url,
+    "job_cancel",
+    body = payload,
+    key = key,
+    headers = ctj(),
+    opts = list(...)
   )
   parse_ckan_response(res, as)
 }
@@ -378,8 +480,11 @@ NULL
 #' @param user_id (character) User identifier to filter tokens.
 #' @export
 api_token_list <- function(
-  user_id = NULL, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  user_id = NULL,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   ensure_action_available("api_token_list", url = url, key = key)
   args <- cc(list(user_id = user_id))
@@ -396,8 +501,13 @@ api_token_list <- function(
 #'   by CKAN or extensions.
 #' @export
 api_token_create <- function(
-  user, name, extra_fields = NULL,
-  url = get_default_url(), key = get_default_key(), as = "list", ...
+  user,
+  name,
+  extra_fields = NULL,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   ensure_action_available("api_token_create", url = url, key = key)
   body <- list(user = user, name = name)
@@ -405,8 +515,11 @@ api_token_create <- function(
     stopifnot(is.list(extra_fields))
     body <- c(body, extra_fields)
   }
-  res <- ckan_POST(url, "api_token_create",
-    body = body, key = key,
+  res <- ckan_POST(
+    url,
+    "api_token_create",
+    body = body,
+    key = key,
     opts = list(...)
   )
   parse_ckan_response(res, as)
@@ -419,16 +532,23 @@ api_token_create <- function(
 #' @param jti (character) Token identifier (overrides `token` when provided).
 #' @export
 api_token_revoke <- function(
-  token = NULL, jti = NULL,
-  url = get_default_url(), key = get_default_key(), as = "list", ...
+  token = NULL,
+  jti = NULL,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   if (is.null(token) && is.null(jti)) {
     stop("Provide either token or jti", call. = FALSE)
   }
   ensure_action_available("api_token_revoke", url = url, key = key)
   body <- cc(list(token = token, jti = jti))
-  res <- ckan_POST(url, "api_token_revoke",
-    body = body, key = key,
+  res <- ckan_POST(
+    url,
+    "api_token_revoke",
+    body = body,
+    key = key,
     opts = list(...)
   )
   parse_ckan_response(res, as)
@@ -452,8 +572,10 @@ NULL
 #' @template key
 #' @export
 status_show <- function(
-  url = get_default_url(), key = get_default_key(),
-  as = "list", ...
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   res <- ckan_GET(url, "status_show", list(), key = key, opts = list(...))
   parse_ckan_response(res, as)
@@ -465,10 +587,16 @@ status_show <- function(
 #' @param name (character) CKAN action name to describe.
 #' @export
 help_show <- function(
-  name, url = get_default_url(), key = get_default_key(),
-  as = "list", ...
+  name,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
-  res <- ckan_GET(url, "help_show", list(name = name),
+  res <- ckan_GET(
+    url,
+    "help_show",
+    list(name = name),
     key = key,
     opts = list(...)
   )

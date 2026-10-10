@@ -9,7 +9,13 @@ test_that("activity_delete_counts responds", {
   check_ckan(url)
   skip_if_activity_plugin_disabled(url)
   skip_if_not_sysadmin(url, key)
-  if (!ckanr:::ckan_action_available("activity_delete_counts", url = url, key = key)) {
+  if (
+    !ckanr:::ckan_action_available(
+      "activity_delete_counts",
+      url = url,
+      key = key
+    )
+  ) {
     skip("activity_delete_counts unavailable (requires CKAN 2.12+)")
   }
   res <- activity_delete_counts(url = url, key = key)
@@ -36,7 +42,13 @@ test_that("activity_delete validates input", {
 test_that("activity_delete fails clearly on CKAN < 2.12", {
   check_ckan(url)
   skip_if_activity_plugin_disabled(url)
-  if (ckanr:::ckan_action_available("activity_delete_counts", url = url, key = key)) {
+  if (
+    ckanr:::ckan_action_available(
+      "activity_delete_counts",
+      url = url,
+      key = key
+    )
+  ) {
     skip("CKAN supports activity purge; guard test only for older CKAN")
   }
   expect_error(

@@ -20,17 +20,24 @@
 #' tag_search(query = "ta", as = "table")
 #' }
 tag_search <- function(
-  query = NULL, vocabulary_id = NULL,
-  offset = 0, limit = 31, url = get_default_url(), key = get_default_key(),
-  as = "list", ...
+  query = NULL,
+  vocabulary_id = NULL,
+  offset = 0,
+  limit = 31,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   args <- cc(list(
-    vocabulary_id = vocabulary_id, offset = offset,
+    vocabulary_id = vocabulary_id,
+    offset = offset,
     limit = limit
   ))
   args <- c(args, handle_many(query))
   res <- ckan_GET(url, "tag_search", args, key = key, opts = list(...))
-  switch(as,
+  switch(
+    as,
     json = res,
     list = lapply(jsl(res)$results, as.ckan_tag),
     table = jsd(res)

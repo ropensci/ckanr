@@ -36,15 +36,22 @@
 #' )
 #' }
 resource_show <- function(
-  id, url = get_default_url(), key = get_default_key(),
-  as = "list", ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   id <- as.ckan_resource(id, url = url, key = key)
-  res <- ckan_GET(url, "resource_show", list(id = id$id),
+  res <- ckan_GET(
+    url,
+    "resource_show",
+    list(id = id$id),
     key = key,
     opts = list(...)
   )
-  switch(as,
+  switch(
+    as,
     json = res,
     list = as_ck(jsl(res), "ckan_resource"),
     table = jsd(res)

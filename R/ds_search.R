@@ -72,17 +72,32 @@
 #' )
 #' }
 ds_search <- function(
-  resource_id = NULL, filters = NULL, q = NULL,
-  plain = NULL, language = NULL, fields = NULL, offset = NULL,
-  limit = NULL, sort = NULL, include_next_page = FALSE,
-  url = get_default_url(), key = get_default_key(),
-  as = "list", ...
+  resource_id = NULL,
+  filters = NULL,
+  q = NULL,
+  plain = NULL,
+  language = NULL,
+  fields = NULL,
+  offset = NULL,
+  limit = NULL,
+  sort = NULL,
+  include_next_page = FALSE,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   validate_ckan_url(url)
   args <- cc(list(
-    resource_id = resource_id, filters = filters, q = q,
-    plain = plain, language = language, fields = fields,
-    offset = offset, limit = limit, sort = sort,
+    resource_id = resource_id,
+    filters = filters,
+    q = q,
+    plain = plain,
+    language = language,
+    fields = fields,
+    offset = offset,
+    limit = limit,
+    sort = sort,
     include_next_page = if (isTRUE(include_next_page)) TRUE else NULL
   ))
   con <- crul::HttpClient$new(
@@ -93,9 +108,5 @@ ds_search <- function(
   res <- con$post(query = args)
   res$raise_for_status()
   txt <- res$parse("UTF-8")
-  switch(as,
-    json = txt,
-    list = jsl(txt),
-    table = jsd(txt)
-  )
+  switch(as, json = txt, list = jsl(txt), table = jsd(txt))
 }

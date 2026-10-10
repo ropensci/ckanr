@@ -29,7 +29,12 @@ cleanup_vocabulary <- function(id) {
 }
 
 create_temp_tag <- function(vocab_id) {
-  tag_create(name = unique_tag_name(), vocabulary_id = vocab_id, url = url, key = key)
+  tag_create(
+    name = unique_tag_name(),
+    vocabulary_id = vocab_id,
+    url = url,
+    key = key
+  )
 }
 
 test_that("tag_create and tag_show round-trip", {
@@ -59,7 +64,12 @@ test_that("tag_list filters by vocabulary", {
 
   tag <- create_temp_tag(vocab$id)
 
-  tags <- tag_list(vocabulary_id = vocab$id, all_fields = TRUE, url = url, key = key)
+  tags <- tag_list(
+    vocabulary_id = vocab$id,
+    all_fields = TRUE,
+    url = url,
+    key = key
+  )
   expect_true(any(vapply(tags, function(x) x$id == tag$id, logical(1))))
   expect_ckan_formats(function(fmt) {
     tag_list(vocabulary_id = vocab$id, url = url, key = key, as = fmt)
@@ -76,10 +86,21 @@ test_that("tag_search locates newly created tags", {
   tag <- create_temp_tag(vocab$id)
 
   query_prefix <- substr(tag$name, 1, 3)
-  results <- tag_search(query = query_prefix, vocabulary_id = vocab$id, url = url, key = key)
+  results <- tag_search(
+    query = query_prefix,
+    vocabulary_id = vocab$id,
+    url = url,
+    key = key
+  )
   expect_true(any(vapply(results, function(x) x$id == tag$id, logical(1))))
   expect_ckan_formats(function(fmt) {
-    tag_search(query = query_prefix, vocabulary_id = vocab$id, url = url, key = key, as = fmt)
+    tag_search(
+      query = query_prefix,
+      vocabulary_id = vocab$id,
+      url = url,
+      key = key,
+      as = fmt
+    )
   })
 })
 
@@ -88,7 +109,12 @@ test_that("tag_create fails for missing vocabulary", {
   skip_if_not_sysadmin(url, key)
 
   expect_error(
-    tag_create(name = unique_tag_name(), vocabulary_id = "missing-vocab", url = url, key = key),
+    tag_create(
+      name = unique_tag_name(),
+      vocabulary_id = "missing-vocab",
+      url = url,
+      key = key
+    ),
     "Validation Error"
   )
 })

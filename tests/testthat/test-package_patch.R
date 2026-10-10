@@ -22,7 +22,13 @@ test_that("package_patch with simple title update", {
 
   # Create a package
   pkg_name <- paste0("test_pkg_patch_", as.integer(Sys.time()))
-  a <- package_create(name = pkg_name, title = "Original Title", owner_org = oid, url = url, key = key)
+  a <- package_create(
+    name = pkg_name,
+    title = "Original Title",
+    owner_org = oid,
+    url = url,
+    key = key
+  )
 
   # Patch just the title - use a minimal object
   pkg_obj <- list(id = a$id, title = "Patched Title")

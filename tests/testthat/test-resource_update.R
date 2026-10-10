@@ -26,7 +26,8 @@ rid <- resource_create(
   name = "bears",
   upload = path,
   rcurl = "http://google.com",
-  url = url, key = key
+  url = url,
+  key = key
 )
 rid <- rid$id
 
@@ -73,9 +74,13 @@ test_that("resource_update gives back expected class types and output with html"
 
   path <- system.file("examples", "mapbox.html", package = "ckanr")
   xx <- resource_create(
-    package_id = did, description = "a map, yay",
-    name = "mapyay", upload = path,
-    rcurl = "http://google.com", url = url, key = key
+    package_id = did,
+    description = "a map, yay",
+    name = "mapyay",
+    upload = path,
+    rcurl = "http://google.com",
+    url = url,
+    key = key
   )
   dat <- readLines(path)
   dat <- sub("-111.06", "-115.06", dat)
@@ -109,7 +114,12 @@ test_that("resource_update fails well", {
   expect_error(resource_update(rid, "invalid-file-path", url = url, key = key))
 
   # bad url
-  expect_error(resource_update(rid, path = path, url = "invalid-URL", key = key))
+  expect_error(resource_update(
+    rid,
+    path = path,
+    url = "invalid-URL",
+    key = key
+  ))
 
   # bad key
   expect_error(
@@ -125,10 +135,14 @@ test_that("resource_create gives back expected key:value pairs", {
 
   path <- system.file("examples", "mapbox.html", package = "ckanr")
   xx <- resource_create(
-    package_id = did, description = "a map, yay",
-    name = "mapyay", upload = path,
+    package_id = did,
+    description = "a map, yay",
+    name = "mapyay",
+    upload = path,
     extras = list(map_type = "mapbox"),
-    rcurl = "http://google.com", url = url, key = key
+    rcurl = "http://google.com",
+    url = url,
+    key = key
   )
 
   # expected output
@@ -140,9 +154,12 @@ test_that("resource_update gives back expected key:value pairs", {
   check_ckan(url)
   check_resource(url, rid)
 
-  a <- resource_update(rid,
-    path = path, extras = list(map_type = "mapbox"),
-    url = url, key = key
+  a <- resource_update(
+    rid,
+    path = path,
+    extras = list(map_type = "mapbox"),
+    url = url,
+    key = key
   )
 
   # expected output
@@ -154,9 +171,11 @@ test_that("resource_update gives back expected key:value pairs even without path
   check_ckan(url)
   check_resource(url, rid)
 
-  a <- resource_update(rid,
+  a <- resource_update(
+    rid,
     extras = list(map_type = "mapbox"),
-    url = url, key = key
+    url = url,
+    key = key
   )
 
   # expected output
@@ -168,15 +187,14 @@ test_that("resource_update removes key:value pairs with empty extras", {
   check_ckan(url)
   check_resource(url, rid)
 
-  a <- resource_update(rid,
+  a <- resource_update(
+    rid,
     extras = list(map_type = "mapbox"),
-    url = url, key = key
+    url = url,
+    key = key
   )
 
-  b <- resource_update(rid,
-    extras = list(),
-    url = url, key = key
-  )
+  b <- resource_update(rid, extras = list(), url = url, key = key)
 
   # expected output
   testthat::expect_null(b$map_type)
@@ -188,9 +206,13 @@ test_that("resource_update changes the external URL through rcurl", {
   check_dataset(url, did)
 
   xx <- resource_create(
-    package_id = did, description = "rcurl update test",
-    name = "rcurl-update-test", upload = path,
-    rcurl = "http://example.com", url = url, key = key
+    package_id = did,
+    description = "rcurl update test",
+    name = "rcurl-update-test",
+    upload = path,
+    rcurl = "http://example.com",
+    url = url,
+    key = key
   )
   on.exit(
     {
@@ -210,13 +232,23 @@ test_that("resource_update changes the external URL through rcurl", {
   expect_equal(shown$url, new_url)
 
   # S3 input: a ckan_resource object works like an ID string
-  b <- resource_update(a, rcurl = "https://example.com/other", url = url, key = key)
+  b <- resource_update(
+    a,
+    rcurl = "https://example.com/other",
+    url = url,
+    key = key
+  )
   expect_equal(b$url, "https://example.com/other")
 
   # Output formats
   expect_ckan_formats(function(fmt) {
-    resource_update(xx$id,
-      rcurl = "https://example.com/fmt", url = url, key = key, as = fmt)
+    resource_update(
+      xx$id,
+      rcurl = "https://example.com/fmt",
+      url = url,
+      key = key,
+      as = fmt
+    )
   })
 })
 
@@ -226,9 +258,13 @@ test_that("resource_update prefers an uploaded file over rcurl", {
   check_dataset(url, did)
 
   xx <- resource_create(
-    package_id = did, description = "rcurl upload test",
-    name = "rcurl-upload-test", upload = path,
-    rcurl = "http://example.com", url = url, key = key
+    package_id = did,
+    description = "rcurl upload test",
+    name = "rcurl-upload-test",
+    upload = path,
+    rcurl = "http://example.com",
+    url = url,
+    key = key
   )
   on.exit(
     {
@@ -237,9 +273,12 @@ test_that("resource_update prefers an uploaded file over rcurl", {
     add = TRUE
   )
 
-  a <- resource_update(xx$id,
-    path = path, rcurl = "https://example.com/ignored",
-    url = url, key = key
+  a <- resource_update(
+    xx$id,
+    path = path,
+    rcurl = "https://example.com/ignored",
+    url = url,
+    key = key
   )
 
   expect_equal(a$url_type, "upload")

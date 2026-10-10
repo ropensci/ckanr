@@ -21,14 +21,45 @@ MOCK_HTTP <- function(code) {
 test_that("activity switches cover json/list/table", {
   MOCK_HTTP({
     for (fmt in c("json", "list", "table")) {
-      expect_false(is.null(group_activity_list(list(id = "g1"), as = fmt, url = "https://example.com")))
-      expect_false(is.null(organization_activity_list(list(id = "o1"), as = fmt, url = "https://example.com")))
-      expect_false(is.null(recently_changed_packages_activity_list(as = fmt, url = "https://example.com")))
-      expect_false(is.null(dashboard_new_activities_count(as = fmt, url = "https://example.com")))
-      expect_false(is.null(dashboard_mark_activities_old(as = fmt, url = "https://example.com")))
-      expect_false(is.null(activity_show("a1", as = fmt, url = "https://example.com")))
-      expect_false(is.null(activity_data_show("a1", "package", as = fmt, url = "https://example.com")))
-      expect_false(is.null(activity_diff("a1", "package", as = fmt, url = "https://example.com")))
+      expect_false(is.null(group_activity_list(
+        list(id = "g1"),
+        as = fmt,
+        url = "https://example.com"
+      )))
+      expect_false(is.null(organization_activity_list(
+        list(id = "o1"),
+        as = fmt,
+        url = "https://example.com"
+      )))
+      expect_false(is.null(recently_changed_packages_activity_list(
+        as = fmt,
+        url = "https://example.com"
+      )))
+      expect_false(is.null(dashboard_new_activities_count(
+        as = fmt,
+        url = "https://example.com"
+      )))
+      expect_false(is.null(dashboard_mark_activities_old(
+        as = fmt,
+        url = "https://example.com"
+      )))
+      expect_false(is.null(activity_show(
+        "a1",
+        as = fmt,
+        url = "https://example.com"
+      )))
+      expect_false(is.null(activity_data_show(
+        "a1",
+        "package",
+        as = fmt,
+        url = "https://example.com"
+      )))
+      expect_false(is.null(activity_diff(
+        "a1",
+        "package",
+        as = fmt,
+        url = "https://example.com"
+      )))
     }
   })
 })
@@ -41,14 +72,37 @@ test_that("vocabulary switches cover json/list/table", {
     .package = "ckanr",
     {
       for (fmt in c("json", "list", "table")) {
-        expect_false(is.null(vocabulary_list(as = fmt, url = "https://example.com")))
-        expect_false(is.null(vocabulary_show(list(id = "v1"), as = fmt, url = "https://example.com")))
-        expect_false(is.null(vocabulary_create("voc", as = fmt, url = "https://example.com")))
-        expect_false(is.null(vocabulary_update(list(id = "v1"), as = fmt, url = "https://example.com")))
-        expect_false(is.null(vocabulary_delete(list(id = "v1"), as = fmt, url = "https://example.com")))
+        expect_false(is.null(vocabulary_list(
+          as = fmt,
+          url = "https://example.com"
+        )))
+        expect_false(is.null(vocabulary_show(
+          list(id = "v1"),
+          as = fmt,
+          url = "https://example.com"
+        )))
+        expect_false(is.null(vocabulary_create(
+          "voc",
+          as = fmt,
+          url = "https://example.com"
+        )))
+        expect_false(is.null(vocabulary_update(
+          list(id = "v1"),
+          as = fmt,
+          url = "https://example.com"
+        )))
+        expect_false(is.null(vocabulary_delete(
+          list(id = "v1"),
+          as = fmt,
+          url = "https://example.com"
+        )))
       }
       for (fmt in c("json", "list", "table")) {
-        expect_false(is.null(tag_autocomplete("q", as = fmt, url = "https://example.com")))
+        expect_false(is.null(tag_autocomplete(
+          "q",
+          as = fmt,
+          url = "https://example.com"
+        )))
       }
     }
   )
@@ -57,21 +111,52 @@ test_that("vocabulary switches cover json/list/table", {
 test_that("related switches cover json/list/table", {
   MOCK_HTTP({
     for (fmt in c("json", "list", "table")) {
-      expect_false(is.null(related_create(list(id = "p1"), title = "t", type = "idea", as = fmt, url = "https://example.com", key = "k")))
+      expect_false(is.null(related_create(
+        list(id = "p1"),
+        title = "t",
+        type = "idea",
+        as = fmt,
+        url = "https://example.com",
+        key = "k"
+      )))
       expect_false(is.null(related_list(as = fmt, url = "https://example.com")))
-      expect_false(is.null(related_show("r1", as = fmt, url = "https://example.com")))
+      expect_false(is.null(related_show(
+        "r1",
+        as = fmt,
+        url = "https://example.com"
+      )))
     }
-    expect_true(is.list(related_delete("r1", url = "https://example.com", key = "k")) || !is.null(related_delete("r1", url = "https://example.com", key = "k")))
+    expect_true(
+      is.list(related_delete("r1", url = "https://example.com", key = "k")) ||
+        !is.null(related_delete("r1", url = "https://example.com", key = "k"))
+    )
   })
 })
 
 test_that("package extras switches", {
   MOCK_HTTP({
     for (fmt in c("json", "list", "table")) {
-      expect_false(is.null(package_revise(match = list(name = "x"), update = list(notes = "y"), as = fmt, url = "https://example.com")))
-      expect_false(is.null(package_resource_reorder(list(id = "p1"), order = c("r1"), as = fmt, url = "https://example.com")))
-      expect_false(is.null(package_search(as = fmt, url = "https://example.com")))
-      expect_false(is.null(package_show("p1", as = fmt, url = "https://example.com")))
+      expect_false(is.null(package_revise(
+        match = list(name = "x"),
+        update = list(notes = "y"),
+        as = fmt,
+        url = "https://example.com"
+      )))
+      expect_false(is.null(package_resource_reorder(
+        list(id = "p1"),
+        order = c("r1"),
+        as = fmt,
+        url = "https://example.com"
+      )))
+      expect_false(is.null(package_search(
+        as = fmt,
+        url = "https://example.com"
+      )))
+      expect_false(is.null(package_show(
+        "p1",
+        as = fmt,
+        url = "https://example.com"
+      )))
     }
   })
 })
@@ -79,18 +164,74 @@ test_that("package extras switches", {
 test_that("group/org/user patch/update/purge/delete switches", {
   MOCK_HTTP({
     for (fmt in c("json", "list", "table")) {
-      expect_false(is.null(group_patch(list(id = "g1"), id = "g1", as = fmt, url = "https://example.com")))
-      expect_false(is.null(group_update(list(id = "g1"), id = "g1", as = fmt, url = "https://example.com")))
-      expect_false(is.null(group_purge("g1", as = fmt, url = "https://example.com")))
-      expect_false(is.null(organization_update(list(id = "o1"), id = "o1", as = fmt, url = "https://example.com")))
-      expect_false(is.null(organization_purge("o1", as = fmt, url = "https://example.com")))
-      expect_false(is.null(organization_delete("o1", as = fmt, url = "https://example.com")))
-      expect_false(is.null(user_create("u", "e@e.com", "pw", as = fmt, url = "https://example.com")))
-      expect_false(is.null(user_delete("u1", as = fmt, url = "https://example.com")))
-      expect_false(is.null(user_update(list(id = "u1"), id = "u1", as = fmt, url = "https://example.com")))
-      expect_false(is.null(resource_patch(list(id = "r1"), id = "r1", as = fmt, url = "https://example.com")))
-      expect_false(is.null(tag_create("t", vocabulary_id = "v1", as = fmt, url = "https://example.com")))
-      expect_false(is.null(tag_delete("t1", as = fmt, url = "https://example.com")))
+      expect_false(is.null(group_patch(
+        list(id = "g1"),
+        id = "g1",
+        as = fmt,
+        url = "https://example.com"
+      )))
+      expect_false(is.null(group_update(
+        list(id = "g1"),
+        id = "g1",
+        as = fmt,
+        url = "https://example.com"
+      )))
+      expect_false(is.null(group_purge(
+        "g1",
+        as = fmt,
+        url = "https://example.com"
+      )))
+      expect_false(is.null(organization_update(
+        list(id = "o1"),
+        id = "o1",
+        as = fmt,
+        url = "https://example.com"
+      )))
+      expect_false(is.null(organization_purge(
+        "o1",
+        as = fmt,
+        url = "https://example.com"
+      )))
+      expect_false(is.null(organization_delete(
+        "o1",
+        as = fmt,
+        url = "https://example.com"
+      )))
+      expect_false(is.null(user_create(
+        "u",
+        "e@e.com",
+        "pw",
+        as = fmt,
+        url = "https://example.com"
+      )))
+      expect_false(is.null(user_delete(
+        "u1",
+        as = fmt,
+        url = "https://example.com"
+      )))
+      expect_false(is.null(user_update(
+        list(id = "u1"),
+        id = "u1",
+        as = fmt,
+        url = "https://example.com"
+      )))
+      expect_false(is.null(resource_patch(
+        list(id = "r1"),
+        id = "r1",
+        as = fmt,
+        url = "https://example.com"
+      )))
+      expect_false(is.null(tag_create(
+        "t",
+        vocabulary_id = "v1",
+        as = fmt,
+        url = "https://example.com"
+      )))
+      expect_false(is.null(tag_delete(
+        "t1",
+        as = fmt,
+        url = "https://example.com"
+      )))
     }
   })
 })
@@ -98,13 +239,29 @@ test_that("group/org/user patch/update/purge/delete switches", {
 test_that("membership and relationships switches", {
   MOCK_HTTP({
     for (fmt in c("json", "list", "table")) {
-      expect_false(is.null(group_list_authz(as = fmt, url = "https://example.com")))
-      expect_false(is.null(organization_list_for_user(as = fmt, url = "https://example.com")))
-      expect_false(is.null(package_relationship_create("s", "o", "child_of", as = fmt, url = "https://example.com")))
+      expect_false(is.null(group_list_authz(
+        as = fmt,
+        url = "https://example.com"
+      )))
+      expect_false(is.null(organization_list_for_user(
+        as = fmt,
+        url = "https://example.com"
+      )))
+      expect_false(is.null(package_relationship_create(
+        "s",
+        "o",
+        "child_of",
+        as = fmt,
+        url = "https://example.com"
+      )))
     }
     # relationships list/update/delete paths
     for (fmt in c("json", "list", "table")) {
-      expect_false(is.null(package_relationships_list("p1", as = fmt, url = "https://example.com")))
+      expect_false(is.null(package_relationships_list(
+        "p1",
+        as = fmt,
+        url = "https://example.com"
+      )))
     }
   })
 })
@@ -121,16 +278,25 @@ test_that("ping json branch and error paths", {
 })
 
 test_that("follow target unsupported errors", {
-  expect_error(ckanr:::resolve_follow_target("x", "bogus-type", "https://example.com"), "Unsupported object type")
+  expect_error(
+    ckanr:::resolve_follow_target("x", "bogus-type", "https://example.com"),
+    "Unsupported object type"
+  )
 })
 
 test_that("print methods for all classes", {
-  expect_output(print(as.ckan_organization(list(id = "o1", name = "n"))), "CKAN")
+  expect_output(
+    print(as.ckan_organization(list(id = "o1", name = "n"))),
+    "CKAN"
+  )
   expect_output(print(as.ckan_resource(list(id = "r1", name = "n"))), "CKAN")
   expect_output(print(as.ckan_tag(list(id = "t1", name = "n"))), "CKAN")
   expect_output(print(as.ckan_user(list(id = "u1", name = "n"))), "CKAN")
   expect_output(print(as.ckan_vocabulary(list(id = "v1", name = "n"))), "CKAN")
-  expect_output(print(ckanr:::as_ck(list(url = "u", key = "k"), "ckanr_settings")), "ckanr|Base|<|settings")
+  expect_output(
+    print(ckanr:::as_ck(list(url = "u", key = "k"), "ckanr_settings")),
+    "ckanr|Base|<|settings"
+  )
   # ckanr_settings print
   expect_output(print(ckanr_settings()), "ckanr settings|Base URL")
 })
@@ -141,7 +307,12 @@ test_that("sift_res branches", {
   # tmp as list with unnamed list element (haz_names FALSE)
   expect_false(is.null(ckanr:::sift_res(list(list(list("x", "y"))))))
   # named list element with empty strings filtered
-  expect_true(is.character(ckanr:::sift_res(list(list(name = list(a = "", b = "val"))))) || is.null(ckanr:::sift_res(list(list(name = list(a = "", b = "val"))))))
+  expect_true(
+    is.character(ckanr:::sift_res(list(list(
+      name = list(a = "", b = "val")
+    )))) ||
+      is.null(ckanr:::sift_res(list(list(name = list(a = "", b = "val")))))
+  )
   # multi-value named list takes first
   r <- ckanr:::sift_res(list(list(name = list(a = "1", b = "2"))))
   expect_true(is.character(r) || is.null(r))

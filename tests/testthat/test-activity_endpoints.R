@@ -69,7 +69,12 @@ test_that("activity inspection helpers work", {
   expect_true(is.list(shown))
   expect_equal(shown$id, activity_id)
 
-  data_res <- activity_data_show(activity_id, object_type = "package", url = url, key = key)
+  data_res <- activity_data_show(
+    activity_id,
+    object_type = "package",
+    url = url,
+    key = key
+  )
   expect_true(is.list(data_res))
 
   diff_res <- tryCatch(

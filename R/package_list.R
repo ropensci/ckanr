@@ -12,14 +12,14 @@
 #' package_list(url = "https://data.nhm.ac.uk")
 #' }
 package_list <- function(
-  offset = 0, limit = 31, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  offset = 0,
+  limit = 31,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   args <- cc(list(offset = offset, limit = limit))
   res <- ckan_GET(url, "package_list", args, key = key, opts = list(...))
-  switch(as,
-    json = res,
-    list = jsl(res),
-    table = jsd(res)
-  )
+  switch(as, json = res, list = jsl(res), table = jsd(res))
 }

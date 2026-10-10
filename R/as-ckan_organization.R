@@ -47,10 +47,15 @@ print.ckan_organization <- function(x, ...) {
 }
 
 get_organization <- function(
-  id, url = get_default_url(),
-  key = get_default_key(), ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  ...
 ) {
-  res <- ckan_GET(url, "organization_show", list(id = id),
+  res <- ckan_GET(
+    url,
+    "organization_show",
+    list(id = id),
     key = key,
     opts = list(...)
   )

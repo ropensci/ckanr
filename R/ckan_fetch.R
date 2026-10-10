@@ -147,8 +147,12 @@
 #' head(x)
 #' }
 ckan_fetch <- function(
-  x, store = "session", path = "file", format = NULL,
-  key = get_default_key(), ...
+  x,
+  store = "session",
+  path = "file",
+  format = NULL,
+  key = get_default_key(),
+  ...
 ) {
   if (length(x) != 1) {
     stop("`x` must be length 1.", call. = FALSE)
@@ -156,9 +160,14 @@ ckan_fetch <- function(
 
   store <- match.arg(store, c("session", "disk"))
   derived_file_fmt <- file_fmt(x)
-  if (is.na(derived_file_fmt) &&
-    (is.null(format) || length(format) != 1L || is.na(format))) {
-    stop("File format is not available from URL; please specify via `format` argument.", call. = FALSE)
+  if (
+    is.na(derived_file_fmt) &&
+      (is.null(format) || length(format) != 1L || is.na(format))
+  ) {
+    stop(
+      "File format is not available from URL; please specify via `format` argument.",
+      call. = FALSE
+    )
   }
   fmt <- ifelse(is.na(derived_file_fmt), format, derived_file_fmt)
   fmt <- tolower(fmt)
@@ -168,7 +177,9 @@ ckan_fetch <- function(
       temp_res <- vector(mode = "list", length = length(res$path))
       for (i in seq_along(res$path)) {
         temp_res[[i]] <- read_session(
-          file_fmt(res$path[[i]]), res$data, res$path[[i]]
+          file_fmt(res$path[[i]]),
+          res$data,
+          res$path[[i]]
         )
       }
       temp_names <- res$path
@@ -186,11 +197,23 @@ ckan_fetch <- function(
 
 read_session <- function(fmt, dat, path, ...) {
   supported <- c(
-    "csv", "xls", "xlsx", "xml", "html", "json",
-    "shp", "geojson", "txt", "parquet"
+    "csv",
+    "xls",
+    "xlsx",
+    "xml",
+    "html",
+    "json",
+    "shp",
+    "geojson",
+    "txt",
+    "parquet"
   )
-  if (is.null(fmt) || length(fmt) != 1L || is.na(fmt) ||
-    !(tolower(fmt) %in% supported)) {
+  if (
+    is.null(fmt) ||
+      length(fmt) != 1L ||
+      is.na(fmt) ||
+      !(tolower(fmt) %in% supported)
+  ) {
     stop(
       sprintf(
         "Unsupported file format: '%s'. Supported formats: %s.",
@@ -201,7 +224,8 @@ read_session <- function(fmt, dat, path, ...) {
     )
   }
   fmt <- tolower(fmt)
-  switch(fmt,
+  switch(
+    fmt,
     csv = {
       read_csv_base(
         text = dat,
@@ -238,7 +262,10 @@ read_session <- function(fmt, dat, path, ...) {
       txt_res <- try(utils::read.table(path, ...), silent = TRUE)
 
       if (inherits(txt_res, "try-error")) {
-        stop("File cannot be read via `read.table()`. Please download and import into R manually.", call. = FALSE)
+        stop(
+          "File cannot be read via `read.table()`. Please download and import into R manually.",
+          call. = FALSE
+        )
       } else {
         txt_res
       }

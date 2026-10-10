@@ -1,38 +1,62 @@
 # crul helpers -----------------------
 ckan_POST <- function(
-  url, method, body = NULL, key = NULL,
-  headers = list(), opts = list(), ...
+  url,
+  method,
+  body = NULL,
+  key = NULL,
+  headers = list(),
+  opts = list(),
+  ...
 ) {
   ckan_VERB("post", url, method, body, key, list(), headers, opts, ...)
 }
 
 ckan_PATCH <- function(
-  url, method, body = NULL, key = NULL,
-  headers = list(), opts = list(), ...
+  url,
+  method,
+  body = NULL,
+  key = NULL,
+  headers = list(),
+  opts = list(),
+  ...
 ) {
   ckan_VERB("patch", url, method, body, key, list(), headers, opts, ...)
 }
 
 ckan_GET <- function(
-  url, method, query = NULL, key = NULL,
-  headers = list(), opts = list(), ...
+  url,
+  method,
+  query = NULL,
+  key = NULL,
+  headers = list(),
+  opts = list(),
+  ...
 ) {
-  ckan_VERB("get", url, method,
-    body = NULL, key, query,
-    headers, opts, ...
-  )
+  ckan_VERB("get", url, method, body = NULL, key, query, headers, opts, ...)
 }
 
 ckan_DELETE <- function(
-  url, method, body = NULL, key = NULL,
-  headers = list(), opts = list(), ...
+  url,
+  method,
+  body = NULL,
+  key = NULL,
+  headers = list(),
+  opts = list(),
+  ...
 ) {
   ckan_VERB("delete", url, method, body, key, list(), headers, opts, ...)
 }
 
 ckan_VERB <- function(
-  verb, url, method, body, key, query = list(),
-  headers = list(), opts = list(), ...
+  verb,
+  url,
+  method,
+  body,
+  key,
+  query = list(),
+  headers = list(),
+  opts = list(),
+  ...
 ) {
   validate_ckan_url(url)
   url <- notrail(url)
@@ -49,17 +73,22 @@ ckan_VERB <- function(
 
   con <- crul::HttpClient$new(
     url = file.path(url, ck(), method),
-    opts = opts, headers = headers
+    opts = opts,
+    headers = headers
   )
 
   if (is.null(key)) {
     # no authentication
     if (is.null(body) || length(body) == 0) {
       con$headers <- c(con$headers, ctj())
-      if (!is.null(proxy)) con$proxies <- proxy
+      if (!is.null(proxy)) {
+        con$proxies <- proxy
+      }
       res <- con$verb(verb, query = query)
     } else {
-      if (!is.null(proxy)) con$proxies <- proxy
+      if (!is.null(proxy)) {
+        con$proxies <- proxy
+      }
       res <- con$verb(verb, body = body, query = query)
     }
   } else {
@@ -67,10 +96,14 @@ ckan_VERB <- function(
     con$headers <- c(con$headers, auth_headers(key))
     if (is.null(body) || length(body) == 0) {
       con$headers <- c(con$headers, ctj())
-      if (!is.null(proxy)) con$proxies <- proxy
+      if (!is.null(proxy)) {
+        con$proxies <- proxy
+      }
       res <- con$verb(verb, query = query)
     } else {
-      if (!is.null(proxy)) con$proxies <- proxy
+      if (!is.null(proxy)) {
+        con$proxies <- proxy
+      }
       res <- con$verb(verb, body = body, query = query)
     }
   }
@@ -81,7 +114,9 @@ ckan_VERB <- function(
 parse_ckan_http_response <- function(res) {
   txt <- res$parse("UTF-8")
   if (!isTRUE(tryCatch(jsonlite::validate(txt), error = function(e) FALSE))) {
-    status <- tryCatch(res$status_http()$message, error = function(e) "HTTP error")
+    status <- tryCatch(res$status_http()$message, error = function(e) {
+      "HTTP error"
+    })
     stop(
       sprintf(
         "%s - CKAN returned a non-JSON response. Check the CKAN URL and API key.",
@@ -114,7 +149,15 @@ validate_ckan_url <- function(url) {
 }
 
 # GET fxn for fetch()
-fetch_GET <- function(x, store, path, args = NULL, format = NULL, key = NULL, ...) {
+fetch_GET <- function(
+  x,
+  store,
+  path,
+  args = NULL,
+  format = NULL,
+  key = NULL,
+  ...
+) {
   # check if proxy set
   proxy <- get("ckanr_proxy", ckanr_settings_env)
   if (!is.null(proxy)) {
@@ -134,8 +177,12 @@ fetch_GET <- function(x, store, path, args = NULL, format = NULL, key = NULL, ..
 
   # initialize client, and set headers and proxy
   con <- crul::HttpClient$new(url = x, opts = list(...))
-  if (!is.null(key)) con$headers <- auth_headers(key)
-  if (!is.null(proxy)) con$proxies <- proxy
+  if (!is.null(key)) {
+    con$headers <- auth_headers(key)
+  }
+  if (!is.null(proxy)) {
+    con$proxies <- proxy
+  }
 
   if (store == "session") {
     if (fmt %in% c("xls", "xlsx", "geojson", "txt", "parquet")) {
@@ -168,7 +215,10 @@ fetch_GET <- function(x, store, path, args = NULL, format = NULL, key = NULL, ..
       dat <- res$parse("UTF-8")
     }
     list(
-      store = store, fmt = fmt, data = dat, path = path,
+      store = store,
+      fmt = fmt,
+      data = dat,
+      path = path,
       temp_files = temp_files
     )
   } else {
@@ -202,7 +252,8 @@ parse_ckan_response <- function(resp, as = "list", list_coercer = NULL) {
   if (!as %in% c("json", "list", "table")) {
     stop(sprintf("Unsupported `as` value: %s", as), call. = FALSE)
   }
-  switch(as,
+  switch(
+    as,
     json = resp,
     list = {
       out <- jsl(resp)
@@ -310,7 +361,9 @@ notrail <- function(x) {
 assert <- function(x, y) {
   if (!is.null(x)) {
     if (!inherits(x, y)) {
-      stop(deparse(substitute(x)), " must be of class ",
+      stop(
+        deparse(substitute(x)),
+        " must be of class ",
         paste0(y, collapse = ", "),
         call. = FALSE
       )
@@ -320,7 +373,9 @@ assert <- function(x, y) {
 
 check_http_method <- function(http_method, methods) {
   if (!http_method %in% methods) {
-    stop("'http_method' must be one of: ", paste0(methods, collapse = ", "),
+    stop(
+      "'http_method' must be one of: ",
+      paste0(methods, collapse = ", "),
       call. = FALSE
     )
   }
@@ -376,13 +431,17 @@ ckan_action_available <- local({
 })
 
 ensure_action_available <- function(
-  action, url = get_default_url(),
+  action,
+  url = get_default_url(),
   key = get_default_key()
 ) {
   if (!ckan_action_available(action, url = url, key = key)) {
-    stop(sprintf(
-      "The '%s' action is unavailable on this CKAN instance",
-      action
-    ), call. = FALSE)
+    stop(
+      sprintf(
+        "The '%s' action is unavailable on this CKAN instance",
+        action
+      ),
+      call. = FALSE
+    )
   }
 }

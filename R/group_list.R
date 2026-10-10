@@ -19,16 +19,26 @@
 #' group_list(limit = 3, as = "table")
 #' }
 group_list <- function(
-  offset = 0, limit = 31, sort = NULL, groups = NULL,
-  all_fields = FALSE, url = get_default_url(), key = get_default_key(),
-  as = "list", ...
+  offset = 0,
+  limit = 31,
+  sort = NULL,
+  groups = NULL,
+  all_fields = FALSE,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   args <- cc(list(
-    offset = offset, limit = limit, sort = sort,
-    groups = groups, all_fields = as_log(all_fields)
+    offset = offset,
+    limit = limit,
+    sort = sort,
+    groups = groups,
+    all_fields = as_log(all_fields)
   ))
   res <- ckan_GET(url, "group_list", args, key = key, opts = list(...))
-  switch(as,
+  switch(
+    as,
     json = res,
     list = lapply(jsl(res), as.ckan_group, url = url),
     table = jsd(res)

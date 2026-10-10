@@ -12,10 +12,19 @@ test_that("files accept ckan_file objects", {
     {
       f <- as.ckan_file(list(id = "f1", name = "a.csv"))
       expect_false(is.null(file_delete(f, url = "https://example.com")))
-      expect_false(is.null(file_rename(f, "b.csv", url = "https://example.com")))
+      expect_false(is.null(file_rename(
+        f,
+        "b.csv",
+        url = "https://example.com"
+      )))
       expect_false(is.null(file_pin(f, url = "https://example.com")))
       expect_false(is.null(file_unpin(f, url = "https://example.com")))
-      expect_false(is.null(file_ownership_transfer(f, "o1", "package", url = "https://example.com")))
+      expect_false(is.null(file_ownership_transfer(
+        f,
+        "o1",
+        "package",
+        url = "https://example.com"
+      )))
     }
   )
 })
@@ -35,7 +44,9 @@ test_that("src_ckan missing dep branches", {
   # mock requireNamespace in base namespace
   testthat::with_mocked_bindings(
     requireNamespace = function(package, ...) {
-      if (identical(package, "dplyr")) return(FALSE)
+      if (identical(package, "dplyr")) {
+        return(FALSE)
+      }
       TRUE
     },
     .package = "base",
@@ -43,7 +54,9 @@ test_that("src_ckan missing dep branches", {
   )
   testthat::with_mocked_bindings(
     requireNamespace = function(package, ...) {
-      if (identical(package, "dbplyr")) return(FALSE)
+      if (identical(package, "dbplyr")) {
+        return(FALSE)
+      }
       TRUE
     },
     .package = "base",
@@ -59,10 +72,13 @@ test_that("sql_translation paste branch", {
   paste_fn <- tr$scalar$paste %||% tr$aggregate$paste
   # aggregate paste
   agg_paste <- NULL
-  try({
-    # sql_variant structure: $scalar, $aggregate, $window
-    agg_paste <- tr$aggregate$paste
-  }, silent = TRUE)
+  try(
+    {
+      # sql_variant structure: $scalar, $aggregate, $window
+      agg_paste <- tr$aggregate$paste
+    },
+    silent = TRUE
+  )
   if (!is.null(agg_paste) && is.function(agg_paste)) {
     # set dbplyr current connection so sql_glue has context (covers dplyr.R:86)
     ctx <- getFromNamespace("sql_context", "dbplyr")
@@ -82,7 +98,10 @@ test_that("activity cache hit branch", {
     config_option_show = function(...) list(value = "yes"),
     .package = "ckanr",
     {
-      first <- ckanr:::activity_email_notifications_enabled(url = url, key = "k")
+      first <- ckanr:::activity_email_notifications_enabled(
+        url = url,
+        key = "k"
+      )
       expect_true(isTRUE(first))
       # second call should hit cache (line 323) even if backend now errors
     }
@@ -91,7 +110,10 @@ test_that("activity cache hit branch", {
     config_option_show = function(...) stop("should not be called"),
     .package = "ckanr",
     {
-      second <- ckanr:::activity_email_notifications_enabled(url = url, key = "k")
+      second <- ckanr:::activity_email_notifications_enabled(
+        url = url,
+        key = "k"
+      )
       expect_true(isTRUE(second))
     }
   )
@@ -103,7 +125,10 @@ test_that("organization_delete list branch and package_show ckan object", {
     ckan_GET = function(...) C,
     .package = "ckanr",
     {
-      expect_true(isTRUE(organization_delete(list(id = "o1"), url = "https://example.com")))
+      expect_true(isTRUE(organization_delete(
+        list(id = "o1"),
+        url = "https://example.com"
+      )))
       pkg <- structure(list(id = "p1"), class = "ckan_package")
       expect_false(is.null(package_show(pkg, url = "https://example.com")))
     }
@@ -112,13 +137,21 @@ test_that("organization_delete list branch and package_show ckan object", {
 
 test_that("package_owner_org_update already-correct branch", {
   testthat::with_mocked_bindings(
-    as.ckan_package = function(x, ...) structure(list(id = "p1"), class = "ckan_package"),
-    as.ckan_organization = function(x, ...) structure(list(id = "org1"), class = "ckan_organization"),
+    as.ckan_package = function(x, ...) {
+      structure(list(id = "p1"), class = "ckan_package")
+    },
+    as.ckan_organization = function(x, ...) {
+      structure(list(id = "org1"), class = "ckan_organization")
+    },
     ckan_POST = function(...) '{"success":true}',
     ckan_version = function(...) list(version_num = 212),
     package_owner_org_id = function(...) "org1",
     .package = "ckanr",
-    expect_true(package_owner_org_update("p1", "org1", url = "https://example.com"))
+    expect_true(package_owner_org_update(
+      "p1",
+      "org1",
+      url = "https://example.com"
+    ))
   )
 })
 
@@ -128,7 +161,11 @@ test_that("resource_view_update with resource object", {
     ckan_PATCH = function(...) C,
     ckan_POST = function(...) C,
     .package = "ckanr",
-    expect_false(is.null(resource_view_update(list(id = "v1"), resource = list(id = "r1"), url = "https://example.com")))
+    expect_false(is.null(resource_view_update(
+      list(id = "v1"),
+      resource = list(id = "r1"),
+      url = "https://example.com"
+    )))
   )
 })
 
@@ -139,8 +176,14 @@ test_that("revision_list try-error branch", {
     .package = "ckanr",
     {
       # ver try-error -> NA -> else branch with as variants
-      expect_false(is.null(revision_list(url = "https://example.com", as = "json")))
-      expect_false(is.null(revision_list(url = "https://example.com", as = "table")))
+      expect_false(is.null(revision_list(
+        url = "https://example.com",
+        as = "json"
+      )))
+      expect_false(is.null(revision_list(
+        url = "https://example.com",
+        as = "table"
+      )))
     }
   )
 })
@@ -149,13 +192,26 @@ test_that("tag_delete table branch", {
   testthat::with_mocked_bindings(
     ckan_POST = function(...) '{"success":true}',
     .package = "ckanr",
-    expect_true(isTRUE(tag_delete("t1", url = "https://example.com", as = "table")))
+    expect_true(isTRUE(tag_delete(
+      "t1",
+      url = "https://example.com",
+      as = "table"
+    )))
   )
 })
 
 test_that("organization_delete and tag_delete invalid id errors", {
-  expect_error(organization_delete(123, url = "https://example.com"), "must be a string")
-  expect_error(organization_delete(list(foo = 1), url = "https://example.com"), "must be a string")
+  expect_error(
+    organization_delete(123, url = "https://example.com"),
+    "must be a string"
+  )
+  expect_error(
+    organization_delete(list(foo = 1), url = "https://example.com"),
+    "must be a string"
+  )
   expect_error(tag_delete(123, url = "https://example.com"), "must be a string")
-  expect_error(tag_delete(list(foo = 1), url = "https://example.com"), "must be a string")
+  expect_error(
+    tag_delete(list(foo = 1), url = "https://example.com"),
+    "must be a string"
+  )
 })

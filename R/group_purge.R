@@ -34,12 +34,16 @@
 #' group_purge(id = res$id)
 #' }
 group_purge <- function(
-  id, url = get_default_url(), key = get_default_key(),
-  as = "list", ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   id <- as.ckan_group(id, url = url)
   res <- ckan_POST(url, "group_purge", list(id = id$id), key = key, ...)
-  switch(as,
+  switch(
+    as,
     json = res,
     list = lapply(jsl(res), as.ckan_group),
     table = jsd(res)

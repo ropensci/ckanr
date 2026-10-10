@@ -8,7 +8,10 @@ ver <- try(ckan_version(u)$version_num, silent = TRUE)
 if (ver >= 29.0) {
   test_that("removal of revision_list endpoint", {
     check_ckan(u)
-    a <- expect_warning(revision_list(url = u), "The ckan.logic.action.get.revision_list endpoint was removed in CKAN 2.9. Returning NULL.")
+    a <- expect_warning(
+      revision_list(url = u),
+      "The ckan.logic.action.get.revision_list endpoint was removed in CKAN 2.9. Returning NULL."
+    )
     expect_null(a)
   })
 } else {

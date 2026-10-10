@@ -8,7 +8,12 @@ test_that("activity_create validates data argument offline", {
     "`data` must be a named list or JSON string"
   )
   expect_error(
-    activity_create("u1", "o1", "changed package", data = c('{"a":1}', '{"b":2}')),
+    activity_create(
+      "u1",
+      "o1",
+      "changed package",
+      data = c('{"a":1}', '{"b":2}')
+    ),
     "`data` must be a named list or JSON string"
   )
 })
@@ -22,8 +27,14 @@ test_that("activity_create serialises list data (mocked POST)", {
       '{"success": true, "result": {"id": "act-1", "user_id": "u1"}}'
     },
     .package = "ckanr",
-    out <- activity_create("u1", "o1", "changed package",
-      data = list(message = "hi"), url = "https://example.com", key = "k")
+    out <- activity_create(
+      "u1",
+      "o1",
+      "changed package",
+      data = list(message = "hi"),
+      url = "https://example.com",
+      key = "k"
+    )
   )
   expect_true(is.list(out))
   expect_identical(out$id, "act-1")
@@ -36,8 +47,14 @@ test_that("activity_create serialises list data (mocked POST)", {
       '{"success": true, "result": {"id": "act-2"}}'
     },
     .package = "ckanr",
-    out2 <- activity_create("u1", "o1", "changed package",
-      data = '{"message":"hi"}', url = "https://example.com", key = "k")
+    out2 <- activity_create(
+      "u1",
+      "o1",
+      "changed package",
+      data = '{"message":"hi"}',
+      url = "https://example.com",
+      key = "k"
+    )
   )
   expect_identical(out2$id, "act-2")
 })
@@ -81,6 +98,8 @@ test_that("send_email_notifications stops when disabled (mocked)", {
 test_that("activity_email_notifications_enabled parses truthy/falsy", {
   # unknown host returns NA without caching a wrong value
   v1 <- ckanr:::activity_email_notifications_enabled(
-    url = "https://127.0.0.1:9", key = NULL)
+    url = "https://127.0.0.1:9",
+    key = NULL
+  )
   expect_true(is.na(v1) || is.logical(v1))
 })

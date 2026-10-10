@@ -105,7 +105,13 @@ sql_query_explain.sql_dialect_ckan <- function(con, sql, ...) {
 }
 
 #' @exportS3Method dbplyr::sql_query_save
-sql_query_save.sql_dialect_ckan <- function(con, sql, name, temporary = TRUE, ...) {
+sql_query_save.sql_dialect_ckan <- function(
+  con,
+  sql,
+  name,
+  temporary = TRUE,
+  ...
+) {
   stop("The CKAN DataStore interface is read-only", call. = FALSE)
 }
 
@@ -138,23 +144,22 @@ src_tbls.src_ckan <- function(x, ..., limit = 6) {
 #' @export
 format.src_ckan <- function(x, ...) {
   .metadata <- ds_search(
-    "_table_metadata", url = x$con@url, key = x$con@key, limit = 6
+    "_table_metadata",
+    url = x$con@url,
+    key = x$con@key,
+    limit = 6
   )
   x1 <- sprintf("%s", dplyr::db_desc(x))
   x2 <- sprintf("total tbls: %d", .metadata$total)
   if (.metadata$total > 6) {
     x3 <- sprintf(
       "tbls: %s, ...",
-      paste0(sort(sapply(.metadata$records, "[[", "name")),
-        collapse = ", "
-      )
+      paste0(sort(sapply(.metadata$records, "[[", "name")), collapse = ", ")
     )
   } else {
     x3 <- sprintf(
       "tbls: %s",
-      paste0(sort(sapply(.metadata$records, "[[", "name")),
-        collapse = ", "
-      )
+      paste0(sort(sapply(.metadata$records, "[[", "name")), collapse = ", ")
     )
   }
   paste(x1, x2, x3, sep = "\n")

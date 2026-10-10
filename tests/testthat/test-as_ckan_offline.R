@@ -34,14 +34,24 @@ test_that("as.ckan_package list coercion, predicates and print work offline", {
     "a"
   )
   # sift_res handles unnamed / empty entries
-  expect_true(is.character(
-    ckanr:::sift_res(list(list(name = ""), list(other = "x")))
-  ) || is.null(ckanr:::sift_res(list(list(name = ""), list(other = "x")))))
+  expect_true(
+    is.character(
+      ckanr:::sift_res(list(list(name = ""), list(other = "x")))
+    ) ||
+      is.null(ckanr:::sift_res(list(list(name = ""), list(other = "x"))))
+  )
 })
 
 test_that("as.ckan_group / organization / resource / tag / user / vocabulary work offline", {
-  g <- as.ckan_group(list(id = "g1", name = "gname", display_name = "G",
-    users = list(), package_count = 2, num_followers = 1, created = "2024-01-01"))
+  g <- as.ckan_group(list(
+    id = "g1",
+    name = "gname",
+    display_name = "G",
+    users = list(),
+    package_count = 2,
+    num_followers = 1,
+    created = "2024-01-01"
+  ))
   expect_true(is.ckan_group(g))
   expect_identical(as.ckan_group(g), g)
   expect_false(is.ckan_group(list()))
@@ -74,22 +84,38 @@ test_that("as.ckan_group / organization / resource / tag / user / vocabulary wor
 })
 
 test_that("as.ckan_related and as.ckan_resource_view behave offline", {
-  rel <- as.ckan_related(list(id = "rel1", title = "T", description = "D",
-    type = "idea", view_count = 3, created = "2024-01-01"))
+  rel <- as.ckan_related(list(
+    id = "rel1",
+    title = "T",
+    description = "D",
+    type = "idea",
+    view_count = 3,
+    created = "2024-01-01"
+  ))
   expect_true(is.ckan_related(rel))
   expect_identical(as.ckan_related(rel), rel)
   expect_false(is.ckan_related(list()))
   expect_output(print(rel), "<CKAN Related Item> rel1")
 
-  rv <- as.ckan_resource_view(list(id = "rv1", title = "V",
-    view_type = "recline_view", resource_id = "res1"))
+  rv <- as.ckan_resource_view(list(
+    id = "rv1",
+    title = "V",
+    view_type = "recline_view",
+    resource_id = "res1"
+  ))
   expect_true(is.ckan_resource_view(rv))
   expect_identical(as.ckan_resource_view(rv), rv)
   expect_false(is.ckan_resource_view(list()))
   expect_output(print(rv), "<CKAN Resource View> rv1")
 
-  f <- as.ckan_file(list(id = "f1", name = "a.csv", storage = "default",
-    size = 10, owner_type = "package", owner_id = "p1"))
+  f <- as.ckan_file(list(
+    id = "f1",
+    name = "a.csv",
+    storage = "default",
+    size = 10,
+    owner_type = "package",
+    owner_id = "p1"
+  ))
   expect_true(is.ckan_file(f))
   expect_identical(as.ckan_file(f), f)
   expect_output(print(f), "<CKAN File> f1")

@@ -40,9 +40,12 @@ test_that("related_create fails clearly when the action is unavailable", {
     "related_create is available on this CKAN instance"
   )
   expect_error(
-    related_create(did,
-      title = "ckanr test related", type = "idea",
-      url = url, key = key
+    related_create(
+      did,
+      title = "ckanr test related",
+      type = "idea",
+      url = url,
+      key = key
     ),
     "unavailable on this CKAN instance"
   )
@@ -72,25 +75,35 @@ test_that("related_create/delete roundtrip where the actions exist", {
     skip("related_delete unavailable (absent from CKAN 2.9-2.12 core)")
   }
 
-  rel <- related_create(did,
-    title = "ckanr test related", type = "idea",
-    url = url, key = key
+  rel <- related_create(
+    did,
+    title = "ckanr test related",
+    type = "idea",
+    url = url,
+    key = key
   )
   expect_is(rel, "ckan_related")
 
   # S3 input: a ckan_package object works like an ID string
   pkg <- package_show(did, url = url)
-  rel2 <- related_create(pkg,
-    title = "ckanr test related 2", type = "idea",
-    url = url, key = key
+  rel2 <- related_create(
+    pkg,
+    title = "ckanr test related 2",
+    type = "idea",
+    url = url,
+    key = key
   )
   expect_is(rel2, "ckan_related")
 
   # Output formats
   for (fmt in c("json", "table")) {
-    r <- related_create(did,
-      title = paste0("ckanr test related ", fmt), type = "idea",
-      url = url, key = key, as = fmt
+    r <- related_create(
+      did,
+      title = paste0("ckanr test related ", fmt),
+      type = "idea",
+      url = url,
+      key = key,
+      as = fmt
     )
     if (fmt == "json") {
       expect_type(r, "character")
@@ -104,9 +117,12 @@ test_that("related_create/delete roundtrip where the actions exist", {
 
   # Failure path: the server rejects an unknown related type
   expect_error(
-    related_create(did,
-      title = "ckanr test related", type = "bogus-type",
-      url = url, key = key
+    related_create(
+      did,
+      title = "ckanr test related",
+      type = "bogus-type",
+      url = url,
+      key = key
     )
   )
 

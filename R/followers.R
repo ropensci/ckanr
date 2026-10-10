@@ -22,33 +22,60 @@ NULL
 #' @rdname follower_counts
 #' @export
 dataset_follower_count <- function(
-  id, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
-  follower_count_request("dataset_follower_count", id, "dataset",
-    url = url, key = key, as = as, opts = list(...)
+  follower_count_request(
+    "dataset_follower_count",
+    id,
+    "dataset",
+    url = url,
+    key = key,
+    as = as,
+    opts = list(...)
   )
 }
 
 #' @rdname follower_counts
 #' @export
 group_follower_count <- function(
-  id, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
-  follower_count_request("group_follower_count", id, "group",
-    url = url, key = key, as = as, opts = list(...)
+  follower_count_request(
+    "group_follower_count",
+    id,
+    "group",
+    url = url,
+    key = key,
+    as = as,
+    opts = list(...)
   )
 }
 
 #' @rdname follower_counts
 #' @export
 user_follower_count <- function(
-  id, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
-  follower_count_request("user_follower_count", id, "user",
-    url = url, key = key, as = as, opts = list(...)
+  follower_count_request(
+    "user_follower_count",
+    id,
+    "user",
+    url = url,
+    key = key,
+    as = as,
+    opts = list(...)
   )
 }
 
@@ -61,11 +88,20 @@ user_follower_count <- function(
 #' @rdname follower_counts
 #' @export
 organization_follower_count <- function(
-  id, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
-  follower_count_request("organization_follower_count", id, "organization",
-    url = url, key = key, as = as, opts = list(...)
+  follower_count_request(
+    "organization_follower_count",
+    id,
+    "organization",
+    url = url,
+    key = key,
+    as = as,
+    opts = list(...)
   )
 }
 
@@ -90,33 +126,60 @@ NULL
 #' @rdname follower_lists
 #' @export
 dataset_follower_list <- function(
-  id, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
-  follower_list_request("dataset_follower_list", id, "dataset",
-    url = url, key = key, as = as, opts = list(...)
+  follower_list_request(
+    "dataset_follower_list",
+    id,
+    "dataset",
+    url = url,
+    key = key,
+    as = as,
+    opts = list(...)
   )
 }
 
 #' @rdname follower_lists
 #' @export
 group_follower_list <- function(
-  id, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
-  follower_list_request("group_follower_list", id, "group",
-    url = url, key = key, as = as, opts = list(...)
+  follower_list_request(
+    "group_follower_list",
+    id,
+    "group",
+    url = url,
+    key = key,
+    as = as,
+    opts = list(...)
   )
 }
 
 #' @rdname follower_lists
 #' @export
 user_follower_list <- function(
-  id, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
-  follower_list_request("user_follower_list", id, "user",
-    url = url, key = key, as = as, opts = list(...)
+  follower_list_request(
+    "user_follower_list",
+    id,
+    "user",
+    url = url,
+    key = key,
+    as = as,
+    opts = list(...)
   )
 }
 
@@ -129,11 +192,20 @@ user_follower_list <- function(
 #' @rdname follower_lists
 #' @export
 organization_follower_list <- function(
-  id, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
-  follower_list_request("organization_follower_list", id, "organization",
-    url = url, key = key, as = as, opts = list(...)
+  follower_list_request(
+    "organization_follower_list",
+    id,
+    "organization",
+    url = url,
+    key = key,
+    as = as,
+    opts = list(...)
   )
 }
 
@@ -157,66 +229,116 @@ NULL
 #' @rdname follow_objects
 #' @export
 dataset_follow <- function(
-  id, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
-  follower_mutation_request("follow_dataset", id, "dataset",
-    url = url, key = key, as = as, opts = list(...)
+  follower_mutation_request(
+    "follow_dataset",
+    id,
+    "dataset",
+    url = url,
+    key = key,
+    as = as,
+    opts = list(...)
   )
 }
 
 #' @rdname follow_objects
 #' @export
 dataset_unfollow <- function(
-  id, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
-  follower_mutation_request("unfollow_dataset", id, "dataset",
-    url = url, key = key, as = as, opts = list(...)
+  follower_mutation_request(
+    "unfollow_dataset",
+    id,
+    "dataset",
+    url = url,
+    key = key,
+    as = as,
+    opts = list(...)
   )
 }
 
 #' @rdname follow_objects
 #' @export
 dataset_am_following <- function(
-  id, url = get_default_url(),
-  key = get_default_key(), ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  ...
 ) {
-  follower_flag_request("am_following_dataset", id, "dataset",
-    url = url, key = key, opts = list(...)
+  follower_flag_request(
+    "am_following_dataset",
+    id,
+    "dataset",
+    url = url,
+    key = key,
+    opts = list(...)
   )
 }
 
 #' @rdname follow_objects
 #' @export
 group_follow <- function(
-  id, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
-  follower_mutation_request("follow_group", id, "group",
-    url = url, key = key, as = as, opts = list(...)
+  follower_mutation_request(
+    "follow_group",
+    id,
+    "group",
+    url = url,
+    key = key,
+    as = as,
+    opts = list(...)
   )
 }
 
 #' @rdname follow_objects
 #' @export
 group_unfollow <- function(
-  id, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
-  follower_mutation_request("unfollow_group", id, "group",
-    url = url, key = key, as = as, opts = list(...)
+  follower_mutation_request(
+    "unfollow_group",
+    id,
+    "group",
+    url = url,
+    key = key,
+    as = as,
+    opts = list(...)
   )
 }
 
 #' @rdname follow_objects
 #' @export
 group_am_following <- function(
-  id, url = get_default_url(),
-  key = get_default_key(), ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  ...
 ) {
-  follower_flag_request("am_following_group", id, "group",
-    url = url, key = key, opts = list(...)
+  follower_flag_request(
+    "am_following_group",
+    id,
+    "group",
+    url = url,
+    key = key,
+    opts = list(...)
   )
 }
 
@@ -239,33 +361,58 @@ NULL
 #' @rdname follow_users
 #' @export
 follow_user <- function(
-  id, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
-  follower_mutation_request("follow_user", id, "user",
-    url = url, key = key, as = as, opts = list(...)
+  follower_mutation_request(
+    "follow_user",
+    id,
+    "user",
+    url = url,
+    key = key,
+    as = as,
+    opts = list(...)
   )
 }
 
 #' @rdname follow_users
 #' @export
 unfollow_user <- function(
-  id, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
-  follower_mutation_request("unfollow_user", id, "user",
-    url = url, key = key, as = as, opts = list(...)
+  follower_mutation_request(
+    "unfollow_user",
+    id,
+    "user",
+    url = url,
+    key = key,
+    as = as,
+    opts = list(...)
   )
 }
 
 #' @rdname follow_users
 #' @export
 am_following_user <- function(
-  id, url = get_default_url(),
-  key = get_default_key(), ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  ...
 ) {
-  follower_flag_request("am_following_user", id, "user",
-    url = url, key = key, opts = list(...)
+  follower_flag_request(
+    "am_following_user",
+    id,
+    "user",
+    url = url,
+    key = key,
+    opts = list(...)
   )
 }
 
@@ -289,8 +436,11 @@ NULL
 #' @rdname followee_counts
 #' @export
 followee_count <- function(
-  id, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   followee_request("followee_count", id, url, key, as = as, opts = list(...))
 }
@@ -298,31 +448,57 @@ followee_count <- function(
 #' @rdname followee_counts
 #' @export
 user_followee_count <- function(
-  id, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
-  followee_request("user_followee_count", id, url, key, as = as, opts = list(...))
+  followee_request(
+    "user_followee_count",
+    id,
+    url,
+    key,
+    as = as,
+    opts = list(...)
+  )
 }
 
 #' @rdname followee_counts
 #' @export
 dataset_followee_count <- function(
-  id, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
-  followee_request("dataset_followee_count", id, url, key,
-    as = as, opts = list(...)
+  followee_request(
+    "dataset_followee_count",
+    id,
+    url,
+    key,
+    as = as,
+    opts = list(...)
   )
 }
 
 #' @rdname followee_counts
 #' @export
 group_followee_count <- function(
-  id, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
-  followee_request("group_followee_count", id, url, key,
-    as = as, opts = list(...)
+  followee_request(
+    "group_followee_count",
+    id,
+    url,
+    key,
+    as = as,
+    opts = list(...)
   )
 }
 
@@ -335,11 +511,19 @@ group_followee_count <- function(
 #' @rdname followee_counts
 #' @export
 organization_followee_count <- function(
-  id, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
-  followee_request("organization_followee_count", id, url, key,
-    as = as, opts = list(...)
+  followee_request(
+    "organization_followee_count",
+    id,
+    url,
+    key,
+    as = as,
+    opts = list(...)
   )
 }
 
@@ -363,43 +547,78 @@ NULL
 #' @rdname followee_lists
 #' @export
 followee_list <- function(
-  id, q = NULL, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  id,
+  q = NULL,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
-  followee_request("followee_list", id, url, key,
+  followee_request(
+    "followee_list",
+    id,
+    url,
+    key,
     as = as,
-    query = list(q = q), opts = list(...)
+    query = list(q = q),
+    opts = list(...)
   )
 }
 
 #' @rdname followee_lists
 #' @export
 user_followee_list <- function(
-  id, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
-  followee_request("user_followee_list", id, url, key, as = as, opts = list(...))
+  followee_request(
+    "user_followee_list",
+    id,
+    url,
+    key,
+    as = as,
+    opts = list(...)
+  )
 }
 
 #' @rdname followee_lists
 #' @export
 dataset_followee_list <- function(
-  id, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
-  followee_request("dataset_followee_list", id, url, key,
-    as = as, opts = list(...)
+  followee_request(
+    "dataset_followee_list",
+    id,
+    url,
+    key,
+    as = as,
+    opts = list(...)
   )
 }
 
 #' @rdname followee_lists
 #' @export
 group_followee_list <- function(
-  id, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
-  followee_request("group_followee_list", id, url, key,
-    as = as, opts = list(...)
+  followee_request(
+    "group_followee_list",
+    id,
+    url,
+    key,
+    as = as,
+    opts = list(...)
   )
 }
 
@@ -412,11 +631,19 @@ group_followee_list <- function(
 #' @rdname followee_lists
 #' @export
 organization_followee_list <- function(
-  id, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
-  followee_request("organization_followee_list", id, url, key,
-    as = as, opts = list(...)
+  followee_request(
+    "organization_followee_list",
+    id,
+    url,
+    key,
+    as = as,
+    opts = list(...)
   )
 }
 
@@ -438,56 +665,92 @@ resolve_follow_target <- function(id, object_type, url) {
 }
 
 follower_count_request <- function(
-  endpoint, id, object_type, url, key,
-  as = "list", opts = list()
+  endpoint,
+  id,
+  object_type,
+  url,
+  key,
+  as = "list",
+  opts = list()
 ) {
   target <- resolve_follow_target(id, object_type, url)
-  resp <- ckan_GET(url, endpoint,
-    query = list(id = target$id), key = key,
+  resp <- ckan_GET(
+    url,
+    endpoint,
+    query = list(id = target$id),
+    key = key,
     opts = opts
   )
   parse_ckan_response(resp, as)
 }
 
 follower_list_request <- function(
-  endpoint, id, object_type, url, key,
-  as = "list", opts = list()
+  endpoint,
+  id,
+  object_type,
+  url,
+  key,
+  as = "list",
+  opts = list()
 ) {
   target <- resolve_follow_target(id, object_type, url)
-  resp <- ckan_GET(url, endpoint,
-    query = list(id = target$id), key = key,
+  resp <- ckan_GET(
+    url,
+    endpoint,
+    query = list(id = target$id),
+    key = key,
     opts = opts
   )
   parse_ckan_response(resp, as)
 }
 
 follower_mutation_request <- function(
-  endpoint, id, object_type, url, key,
-  as = "list", opts = list()
+  endpoint,
+  id,
+  object_type,
+  url,
+  key,
+  as = "list",
+  opts = list()
 ) {
   target <- resolve_follow_target(id, object_type, url)
-  resp <- ckan_POST(url, endpoint,
-    body = list(id = target$id), key = key,
+  resp <- ckan_POST(
+    url,
+    endpoint,
+    body = list(id = target$id),
+    key = key,
     opts = opts
   )
   parse_ckan_response(resp, as)
 }
 
 follower_flag_request <- function(
-  endpoint, id, object_type, url, key,
+  endpoint,
+  id,
+  object_type,
+  url,
+  key,
   opts = list()
 ) {
   target <- resolve_follow_target(id, object_type, url)
-  resp <- ckan_GET(url, endpoint,
-    query = list(id = target$id), key = key,
+  resp <- ckan_GET(
+    url,
+    endpoint,
+    query = list(id = target$id),
+    key = key,
     opts = opts
   )
   parse_ckan_response(resp, as = "list")
 }
 
 followee_request <- function(
-  endpoint, id, url, key, as = "list",
-  query = list(), opts = list()
+  endpoint,
+  id,
+  url,
+  key,
+  as = "list",
+  query = list(),
+  opts = list()
 ) {
   user <- as.ckan_user(id, url = url)
   args <- cc(c(list(id = user$id), query))

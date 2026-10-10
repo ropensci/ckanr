@@ -30,7 +30,7 @@ Consult the rOpenSci AI guidelines. Review any agentic output.
 
 To use opencode:
 
-- The provided devcontainer has opencode pre-installed. If you develop locally, 
+- The provided devcontainer has opencode pre-installed. If you develop locally,
   install opencode in your local environment.
 - In a terminal, run `opencode`, enter `\connect' and enter your opencode API token.
 - The system does not store the API token between sessions.
@@ -55,7 +55,7 @@ After changing `opencode.json` or any skill file, quit and restart opencode.
 Copilot finds repo skills automatically. Invoke them from the chat `/` menu
 or by matching description keywords.
 
-`.github/copilot-instructions.md` is Copilot's project instructions and opencode 
+`.github/copilot-instructions.md` is Copilot's project instructions and opencode
 loads it through the `instructions` entry in `opencode.json`. Keep it as
 the single source of project context.
 

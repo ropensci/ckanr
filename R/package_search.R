@@ -53,33 +53,53 @@
 #' package_search(q = "*:*", fq = "num_tags:[1 TO *]")$count
 #' }
 package_search <- function(
-  q = "*:*", fq = NULL, sort = NULL, rows = NULL,
-  start = NULL, facet = FALSE, facet.limit = NULL, facet.field = NULL,
-  facet.mincount = NULL, include_drafts = FALSE, include_private = FALSE,
-  use_default_schema = FALSE, url = get_default_url(), key = get_default_key(),
-  as = "list", ...
+  q = "*:*",
+  fq = NULL,
+  sort = NULL,
+  rows = NULL,
+  start = NULL,
+  facet = FALSE,
+  facet.limit = NULL,
+  facet.field = NULL,
+  facet.mincount = NULL,
+  include_drafts = FALSE,
+  include_private = FALSE,
+  use_default_schema = FALSE,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   ver <- try(ckan_version(url)$version_num, silent = TRUE)
   if (inherits(ver, "try-error")) {
     ver <- NA
   }
   args <- cc(list(
-    q = q, fq = fq, sort = sort, rows = rows, start = start,
-    facet = as_log(facet), facet.limit = facet.limit,
-    facet.field = facet.field, facet.mincount = facet.mincount,
+    q = q,
+    fq = fq,
+    sort = sort,
+    rows = rows,
+    start = start,
+    facet = as_log(facet),
+    facet.limit = facet.limit,
+    facet.field = facet.field,
+    facet.mincount = facet.mincount,
     include_drafts = as_log(include_drafts),
     include_private = as_log(include_private),
     use_default_schema = as_log(use_default_schema)
   ))
   if (is.na(ver)) {
     args$include_drafts <- args$use_default_schema <- args$include_private <- NULL
-  } else if (ver < 23.5) { # CKAN < 2.3.5: no use_default_schema/include_private/include_drafts
+  } else if (ver < 23.5) {
+    # CKAN < 2.3.5: no use_default_schema/include_private/include_drafts
     args$include_drafts <- args$use_default_schema <- args$include_private <- NULL
-  } else if (ver < 26.1) { # CKAN < 2.6.1: no include_private/include_drafts
+  } else if (ver < 26.1) {
+    # CKAN < 2.6.1: no include_private/include_drafts
     args$use_default_schema <- args$include_private <- NULL
   }
   res <- ckan_GET(url, "package_search", args, key = key, opts = list(...))
-  switch(as,
+  switch(
+    as,
     json = res,
     list = {
       tmp <- jsl(res)

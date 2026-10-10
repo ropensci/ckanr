@@ -143,9 +143,14 @@
 #' browseURL(xxx$url)
 #' }
 resource_update <- function(
-  id, path = NULL, extras = list(), rcurl = NULL,
-  url = get_default_url(), key = get_default_key(),
-  as = "list", ...
+  id,
+  path = NULL,
+  extras = list(),
+  rcurl = NULL,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   assert(extras, "list")
   id <- as.ckan_resource(id, url = url)
@@ -159,20 +164,28 @@ resource_update <- function(
   }
   default_body <- list(
     id = id$id,
-    last_modified =
-      format(Sys.time(), tz = "UTC", format = "%Y-%m-%d %H:%M:%OS6"),
+    last_modified = format(
+      Sys.time(),
+      tz = "UTC",
+      format = "%Y-%m-%d %H:%M:%OS6"
+    ),
     url = if (is.null(rcurl)) "update" else rcurl
   )
-  if (!is.null(rcurl) && !is.character(path) &&
-      !("url_type" %in% names(extras))) {
+  if (
+    !is.null(rcurl) && !is.character(path) && !("url_type" %in% names(extras))
+  ) {
     default_body$url_type <- "link"
   }
   body <- c(default_body, body, extras)
-  res <- ckan_POST(url, "resource_update",
-    body = body, key = key,
+  res <- ckan_POST(
+    url,
+    "resource_update",
+    body = body,
+    key = key,
     opts = list(...)
   )
-  switch(as,
+  switch(
+    as,
     json = res,
     list = as_ck(jsl(res), "ckan_resource"),
     table = jsd(res)
@@ -180,7 +193,8 @@ resource_update <- function(
 }
 
 pick_type <- function(x) {
-  switch(x,
+  switch(
+    x,
     `text/html` = "html",
     `text/csv` = "csv",
     `text/plain` = "txt",

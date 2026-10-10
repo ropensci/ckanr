@@ -58,32 +58,67 @@
 #'   )
 #' }
 resource_create <- function(
-  package_id = NULL, rcurl = NULL,
-  revision_id = NULL, description = NULL, format = NULL, hash = NULL,
-  name = NULL, resource_type = NULL, mimetype = NULL,
-  mimetype_inner = NULL, webstore_url = NULL, cache_url = NULL, size = NULL,
-  created = NULL, last_modified = NULL, cache_last_updated = NULL,
-  webstore_last_updated = NULL, upload = NULL, extras = NULL, http_method = "GET",
-  url = get_default_url(), key = get_default_key(), as = "list", ...
+  package_id = NULL,
+  rcurl = NULL,
+  revision_id = NULL,
+  description = NULL,
+  format = NULL,
+  hash = NULL,
+  name = NULL,
+  resource_type = NULL,
+  mimetype = NULL,
+  mimetype_inner = NULL,
+  webstore_url = NULL,
+  cache_url = NULL,
+  size = NULL,
+  created = NULL,
+  last_modified = NULL,
+  cache_last_updated = NULL,
+  webstore_last_updated = NULL,
+  upload = NULL,
+  extras = NULL,
+  http_method = "GET",
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
-  id <- as.ckan_package(package_id, url = url, key = key, http_method = http_method)
+  id <- as.ckan_package(
+    package_id,
+    url = url,
+    key = key,
+    http_method = http_method
+  )
   body <- cc(list(
-    package_id = id$id, url = rcurl, revision_id = revision_id,
-    description = description, format = format, hash = hash,
-    name = name, resource_type = resource_type, mimetype = mimetype,
-    mimetype_inner = mimetype_inner, webstore_url = webstore_url,
-    cache_url = cache_url, size = size, created = created,
+    package_id = id$id,
+    url = rcurl,
+    revision_id = revision_id,
+    description = description,
+    format = format,
+    hash = hash,
+    name = name,
+    resource_type = resource_type,
+    mimetype = mimetype,
+    mimetype_inner = mimetype_inner,
+    webstore_url = webstore_url,
+    cache_url = cache_url,
+    size = size,
+    created = created,
     last_modified = last_modified,
     cache_last_updated = cache_last_updated,
     webstore_last_updated = webstore_last_updated,
     upload = upfile(upload)
   ))
   body <- c(body, extras)
-  res <- ckan_POST(url, "resource_create",
-    body = body, key = key,
+  res <- ckan_POST(
+    url,
+    "resource_create",
+    body = body,
+    key = key,
     opts = list(...)
   )
-  switch(as,
+  switch(
+    as,
     json = res,
     list = as_ck(jsl(res), "ckan_resource"),
     table = jsd(res)

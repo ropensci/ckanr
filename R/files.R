@@ -48,8 +48,13 @@ coerce_file <- function(res) as_ck(res, "ckan_file")
 #' file_show(f$id)
 #' }
 file_create <- function(
-  upload, name = NULL, storage = NULL,
-  url = get_default_url(), key = get_default_key(), as = "list", ...
+  upload,
+  name = NULL,
+  storage = NULL,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   ensure_action_available("file_create", url = url, key = key)
   if (missing(upload) || is.null(upload)) {
@@ -69,26 +74,33 @@ file_create <- function(
     storage = storage,
     upload = upfile(upload)
   ))
-  out <- ckan_POST(url, "file_create",
-    body = body, key = key, opts = list(...)
-  )
+  out <- ckan_POST(url, "file_create", body = body, key = key, opts = list(...))
   parse_ckan_response(out, as, list_coercer = coerce_file)
 }
 
 #' @rdname files
 #' @export
 file_register <- function(
-  location = NULL, storage = NULL,
-  url = get_default_url(), key = get_default_key(), as = "list", ...
+  location = NULL,
+  storage = NULL,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   ensure_action_available("file_register", url = url, key = key)
   if (is.null(location) || !nzchar(location[1])) {
     stop("`location` must be a non-empty string", call. = FALSE)
   }
   body <- cc(list(location = location, storage = storage))
-  out <- ckan_POST(url, "file_register",
-    body = tojun(body, TRUE), key = key,
-    headers = ctj(), encode = "json", opts = list(...)
+  out <- ckan_POST(
+    url,
+    "file_register",
+    body = tojun(body, TRUE),
+    key = key,
+    headers = ctj(),
+    encode = "json",
+    opts = list(...)
   )
   parse_ckan_response(out, as, list_coercer = coerce_file)
 }
@@ -96,26 +108,41 @@ file_register <- function(
 #' @rdname files
 #' @export
 file_show <- function(
-  id, url = get_default_url(), key = get_default_key(), as = "list", ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   ensure_action_available("file_show", url = url, key = key)
-  if (inherits(id, "ckan_file")) id <- id$id
-  out <- ckan_GET(url, "file_show", list(id = id),
-    key = key, opts = list(...)
-  )
+  if (inherits(id, "ckan_file")) {
+    id <- id$id
+  }
+  out <- ckan_GET(url, "file_show", list(id = id), key = key, opts = list(...))
   parse_ckan_response(out, as, list_coercer = coerce_file)
 }
 
 #' @rdname files
 #' @export
 file_delete <- function(
-  id, url = get_default_url(), key = get_default_key(), as = "list", ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   ensure_action_available("file_delete", url = url, key = key)
-  if (inherits(id, "ckan_file")) id <- id$id
-  out <- ckan_POST(url, "file_delete",
-    body = tojun(list(id = id), TRUE), key = key,
-    headers = ctj(), encode = "json", opts = list(...)
+  if (inherits(id, "ckan_file")) {
+    id <- id$id
+  }
+  out <- ckan_POST(
+    url,
+    "file_delete",
+    body = tojun(list(id = id), TRUE),
+    key = key,
+    headers = ctj(),
+    encode = "json",
+    opts = list(...)
   )
   parse_ckan_response(out, as, list_coercer = coerce_file)
 }
@@ -123,15 +150,26 @@ file_delete <- function(
 #' @rdname files
 #' @export
 file_rename <- function(
-  id, name, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  id,
+  name,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   ensure_action_available("file_rename", url = url, key = key)
-  if (inherits(id, "ckan_file")) id <- id$id
+  if (inherits(id, "ckan_file")) {
+    id <- id$id
+  }
   body <- list(id = id, name = name)
-  out <- ckan_POST(url, "file_rename",
-    body = tojun(body, TRUE), key = key,
-    headers = ctj(), encode = "json", opts = list(...)
+  out <- ckan_POST(
+    url,
+    "file_rename",
+    body = tojun(body, TRUE),
+    key = key,
+    headers = ctj(),
+    encode = "json",
+    opts = list(...)
   )
   parse_ckan_response(out, as, list_coercer = coerce_file)
 }
@@ -139,13 +177,24 @@ file_rename <- function(
 #' @rdname files
 #' @export
 file_pin <- function(
-  id, url = get_default_url(), key = get_default_key(), as = "list", ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   ensure_action_available("file_pin", url = url, key = key)
-  if (inherits(id, "ckan_file")) id <- id$id
-  out <- ckan_POST(url, "file_pin",
-    body = tojun(list(id = id), TRUE), key = key,
-    headers = ctj(), encode = "json", opts = list(...)
+  if (inherits(id, "ckan_file")) {
+    id <- id$id
+  }
+  out <- ckan_POST(
+    url,
+    "file_pin",
+    body = tojun(list(id = id), TRUE),
+    key = key,
+    headers = ctj(),
+    encode = "json",
+    opts = list(...)
   )
   parse_ckan_response(out, as, list_coercer = coerce_file)
 }
@@ -153,13 +202,24 @@ file_pin <- function(
 #' @rdname files
 #' @export
 file_unpin <- function(
-  id, url = get_default_url(), key = get_default_key(), as = "list", ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   ensure_action_available("file_unpin", url = url, key = key)
-  if (inherits(id, "ckan_file")) id <- id$id
-  out <- ckan_POST(url, "file_unpin",
-    body = tojun(list(id = id), TRUE), key = key,
-    headers = ctj(), encode = "json", opts = list(...)
+  if (inherits(id, "ckan_file")) {
+    id <- id$id
+  }
+  out <- ckan_POST(
+    url,
+    "file_unpin",
+    body = tojun(list(id = id), TRUE),
+    key = key,
+    headers = ctj(),
+    encode = "json",
+    opts = list(...)
   )
   parse_ckan_response(out, as, list_coercer = coerce_file)
 }
@@ -167,18 +227,35 @@ file_unpin <- function(
 #' @rdname files
 #' @export
 file_ownership_transfer <- function(
-  id, owner_id, owner_type, force = FALSE, pin = FALSE,
-  url = get_default_url(), key = get_default_key(), as = "list", ...
+  id,
+  owner_id,
+  owner_type,
+  force = FALSE,
+  pin = FALSE,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   ensure_action_available("file_ownership_transfer", url = url, key = key)
-  if (inherits(id, "ckan_file")) id <- id$id
+  if (inherits(id, "ckan_file")) {
+    id <- id$id
+  }
   body <- list(
-    id = id, owner_id = owner_id, owner_type = owner_type,
-    force = force, pin = pin
+    id = id,
+    owner_id = owner_id,
+    owner_type = owner_type,
+    force = force,
+    pin = pin
   )
-  out <- ckan_POST(url, "file_ownership_transfer",
-    body = tojun(body, TRUE), key = key,
-    headers = ctj(), encode = "json", opts = list(...)
+  out <- ckan_POST(
+    url,
+    "file_ownership_transfer",
+    body = tojun(body, TRUE),
+    key = key,
+    headers = ctj(),
+    encode = "json",
+    opts = list(...)
   )
   parse_ckan_response(out, as, list_coercer = coerce_file)
 }
@@ -186,16 +263,24 @@ file_ownership_transfer <- function(
 #' @rdname files
 #' @export
 file_owner_scan <- function(
-  owner_id, owner_type, start = NULL, rows = NULL, sort = NULL,
-  url = get_default_url(), key = get_default_key(), as = "list", ...
+  owner_id,
+  owner_type,
+  start = NULL,
+  rows = NULL,
+  sort = NULL,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   ensure_action_available("file_owner_scan", url = url, key = key)
   args <- cc(list(
-    owner_id = owner_id, owner_type = owner_type,
-    start = start, rows = rows, sort = sort
+    owner_id = owner_id,
+    owner_type = owner_type,
+    start = start,
+    rows = rows,
+    sort = sort
   ))
-  out <- ckan_GET(url, "file_owner_scan", args,
-    key = key, opts = list(...)
-  )
+  out <- ckan_GET(url, "file_owner_scan", args, key = key, opts = list(...))
   parse_ckan_response(out, as)
 }

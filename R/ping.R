@@ -12,20 +12,23 @@
 #' ping(as = "json")
 #' }
 ping <- function(
-  url = get_default_url(), key = get_default_key(),
-  as = "logical", ...
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "logical",
+  ...
 ) {
   as <- match.arg(as, c("logical", "json"))
   tryCatch(
     {
       res <- ckan_GET(url, "status_show", key = key, opts = list(...))
-      switch(as,
-        json = res,
-        logical = isTRUE(jsonlite::fromJSON(res)$success)
-      )
+      switch(as, json = res, logical = isTRUE(jsonlite::fromJSON(res)$success))
     },
     error = function(e) {
-      if (identical(as, "logical")) FALSE else stop(conditionMessage(e), call. = FALSE)
+      if (identical(as, "logical")) {
+        FALSE
+      } else {
+        stop(conditionMessage(e), call. = FALSE)
+      }
     }
   )
 }

@@ -90,7 +90,9 @@ test_that("organization_autocomplete matches the test organization", {
 test_that("user_autocomplete returns user dictionaries", {
   check_ckan(url)
 
-  if (!ckanr:::ckan_action_available("user_autocomplete", url = url, key = key)) {
+  if (
+    !ckanr:::ckan_action_available("user_autocomplete", url = url, key = key)
+  ) {
     skip("user_autocomplete action unavailable on this CKAN instance")
   }
 

@@ -23,8 +23,11 @@ test_that("package_update updates a package", {
   # Create a package
   pkg_name <- paste0("test_pkg_update_", as.integer(Sys.time()))
   a <- package_create(
-    name = pkg_name, title = "Original Title",
-    owner_org = oid, url = url, key = key
+    name = pkg_name,
+    title = "Original Title",
+    owner_org = oid,
+    url = url,
+    key = key
   )
 
   # Update it
@@ -83,7 +86,12 @@ test_that("package_update fails well", {
 
   # invalid id
   expect_error(
-    package_update(list(title = "Test"), "nonexistent-package-id", url = url, key = key),
+    package_update(
+      list(title = "Test"),
+      "nonexistent-package-id",
+      url = url,
+      key = key
+    ),
     "Not Found Error"
   )
 
@@ -91,7 +99,12 @@ test_that("package_update fails well", {
   pkg_name <- paste0("test_pkg_update_badkey_", as.integer(Sys.time()))
   pkg <- package_create(name = pkg_name, owner_org = oid, url = url, key = key)
   expect_error(
-    package_update(list(title = "Test"), pkg$id, url = url, key = "invalid-key"),
+    package_update(
+      list(title = "Test"),
+      pkg$id,
+      url = url,
+      key = "invalid-key"
+    ),
     "Authorization Error"
   )
   package_delete(pkg$id, url = url, key = key)

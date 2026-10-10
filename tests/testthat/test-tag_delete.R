@@ -30,9 +30,19 @@ test_that("tag_delete deletes a vocabulary tag", {
     add = TRUE
   )
 
-  tag <- tag_create(name = unique_tag_name(), vocabulary_id = vocab$id, url = url, key = key)
+  tag <- tag_create(
+    name = unique_tag_name(),
+    vocabulary_id = vocab$id,
+    url = url,
+    key = key
+  )
 
-  expect_true(tag_delete(tag$id, vocabulary_id = vocab$id, url = url, key = key))
+  expect_true(tag_delete(
+    tag$id,
+    vocabulary_id = vocab$id,
+    url = url,
+    key = key
+  ))
 
   expect_error(
     tag_show(tag$id, url = url, key = key),
@@ -50,10 +60,20 @@ test_that("tag_delete accepts ckan_tag objects", {
     add = TRUE
   )
 
-  tag <- tag_create(name = unique_tag_name(), vocabulary_id = vocab$id, url = url, key = key)
+  tag <- tag_create(
+    name = unique_tag_name(),
+    vocabulary_id = vocab$id,
+    url = url,
+    key = key
+  )
   tag_obj <- tag_show(tag$id, url = url, key = key)
 
-  expect_true(tag_delete(tag_obj, vocabulary_id = vocab$id, url = url, key = key))
+  expect_true(tag_delete(
+    tag_obj,
+    vocabulary_id = vocab$id,
+    url = url,
+    key = key
+  ))
 })
 
 test_that("tag_delete fails well", {
@@ -70,14 +90,27 @@ test_that("tag_delete fails well", {
     try(vocabulary_delete(vocab$id, url = url, key = key), silent = TRUE),
     add = TRUE
   )
-  tag <- tag_create(name = unique_tag_name(), vocabulary_id = vocab$id, url = url, key = key)
+  tag <- tag_create(
+    name = unique_tag_name(),
+    vocabulary_id = vocab$id,
+    url = url,
+    key = key
+  )
   on.exit(
-    try(tag_delete(tag$id, vocabulary_id = vocab$id, url = url, key = key), silent = TRUE),
+    try(
+      tag_delete(tag$id, vocabulary_id = vocab$id, url = url, key = key),
+      silent = TRUE
+    ),
     add = TRUE
   )
 
   expect_error(
-    tag_delete(tag$id, vocabulary_id = vocab$id, url = url, key = "invalid-key"),
+    tag_delete(
+      tag$id,
+      vocabulary_id = vocab$id,
+      url = url,
+      key = "invalid-key"
+    ),
     "Authorization Error"
   )
 })

@@ -15,8 +15,12 @@ NULL
 #' package_collaborator_list("my-dataset")
 #' }
 package_collaborator_list <- function(
-  id, capacity = NULL,
-  url = get_default_url(), key = get_default_key(), as = "list", ...
+  id,
+  capacity = NULL,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   pkg <- as.ckan_package(id, url = url, key = key)
   args <- cc(list(id = pkg$id, capacity = capacity))
@@ -43,8 +47,12 @@ package_collaborator_list <- function(
 #' package_collaborator_list_for_user("sckottie")
 #' }
 package_collaborator_list_for_user <- function(
-  id, capacity = NULL,
-  url = get_default_url(), key = get_default_key(), as = "list", ...
+  id,
+  capacity = NULL,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   user_id <- resolve_user_identifier(id)
   args <- cc(list(id = user_id, capacity = capacity))
@@ -72,8 +80,13 @@ package_collaborator_list_for_user <- function(
 #' package_collaborator_create("my-dataset", "new-user", capacity = "editor")
 #' }
 package_collaborator_create <- function(
-  id, user_id, capacity,
-  url = get_default_url(), key = get_default_key(), as = "list", ...
+  id,
+  user_id,
+  capacity,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   pkg <- as.ckan_package(id, url = url, key = key)
   body <- list(
@@ -104,8 +117,11 @@ package_collaborator_create <- function(
 #' package_collaborator_delete("my-dataset", "new-user")
 #' }
 package_collaborator_delete <- function(
-  id, user_id,
-  url = get_default_url(), key = get_default_key(), ...
+  id,
+  user_id,
+  url = get_default_url(),
+  key = get_default_key(),
+  ...
 ) {
   pkg <- as.ckan_package(id, url = url, key = key)
   body <- list(
@@ -125,10 +141,17 @@ package_collaborator_delete <- function(
 
 # resolve_user_identifier is defined in R/resolve-helpers.R (shared utility).
 
-collaborator_request <- function(endpoint, url, key, as = "list",
-                                 method = c("GET", "POST"), query = NULL,
-                                 body = NULL, success = FALSE,
-                                 opts = list()) {
+collaborator_request <- function(
+  endpoint,
+  url,
+  key,
+  as = "list",
+  method = c("GET", "POST"),
+  query = NULL,
+  body = NULL,
+  success = FALSE,
+  opts = list()
+) {
   method <- match.arg(method)
   resp <- if (method == "GET") {
     ckan_GET(url, endpoint, query = query, key = key, opts = opts)

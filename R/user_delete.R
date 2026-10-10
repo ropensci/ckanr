@@ -25,17 +25,20 @@
 #' user_delete(id = "stacy")
 #' }
 user_delete <- function(
-  id, url = get_default_url(), key = get_default_key(),
-  as = "list", ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
-  res <- ckan_POST(url, "user_delete", list(id = id),
+  res <- ckan_POST(
+    url,
+    "user_delete",
+    list(id = id),
     encode = "json",
-    key = key, opts = list(...)
+    key = key,
+    opts = list(...)
   )
   parsed <- jsonlite::fromJSON(res)
-  switch(as,
-    json = res,
-    list = isTRUE(parsed$success),
-    table = parsed$success
-  )
+  switch(as, json = res, list = isTRUE(parsed$success), table = parsed$success)
 }

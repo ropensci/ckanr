@@ -6,14 +6,19 @@ rid <- get_test_rid()
 
 test_that("ckan_fetch returns error when file format can't be determined from URL", {
   expect_error(
-    ckan_fetch("https://ckan0.cf.opendata.inter.sandbox-toronto.ca/datastore/dump/75c69a49-8573-4dda-b41a-d312a33b2e05"),
+    ckan_fetch(
+      "https://ckan0.cf.opendata.inter.sandbox-toronto.ca/datastore/dump/75c69a49-8573-4dda-b41a-d312a33b2e05"
+    ),
     "File format is not available from URL; please specify via `format` argument."
   )
 })
 
 test_that("ckan_fetch errors fast when format is NA", {
   expect_error(
-    ckan_fetch("https://example.com/datastore/dump/75c69a49-8573-4dda-b41a-d312a33b2e05", format = NA),
+    ckan_fetch(
+      "https://example.com/datastore/dump/75c69a49-8573-4dda-b41a-d312a33b2e05",
+      format = NA
+    ),
     "File format is not available from URL"
   )
 })

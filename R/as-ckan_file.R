@@ -47,17 +47,23 @@ print.ckan_file <- function(x, ...) {
   cat("  Name: ", field("name"), "\n", sep = "")
   cat("  Storage: ", field("storage"), "\n", sep = "")
   cat("  Size: ", field("size"), "\n", sep = "")
-  cat("  Owner: ", field("owner_type"), " / ", field("owner_id"), "\n", sep = "")
+  cat(
+    "  Owner: ",
+    field("owner_type"),
+    " / ",
+    field("owner_id"),
+    "\n",
+    sep = ""
+  )
 }
 
 get_file <- function(
-  id, url = get_default_url(), key = get_default_key(),
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
   ...
 ) {
   ensure_action_available("file_show", url = url, key = key)
-  res <- ckan_GET(url, "file_show", list(id = id),
-    key = key,
-    opts = list(...)
-  )
+  res <- ckan_GET(url, "file_show", list(id = id), key = key, opts = list(...))
   as_ck(jsl(res), "ckan_file")
 }

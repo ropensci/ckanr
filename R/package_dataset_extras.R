@@ -22,23 +22,31 @@ NULL
 #' )
 #' }
 package_revise <- function(
-  match = NULL, filter = NULL, update = NULL,
-  include = NULL, url = get_default_url(), key = get_default_key(),
-  as = "list", ...
+  match = NULL,
+  filter = NULL,
+  update = NULL,
+  include = NULL,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   body <- cc(list(
-    match = match, filter = filter, update = update,
+    match = match,
+    filter = filter,
+    update = update,
     include = include
   ))
-  res <- ckan_POST(url, "package_revise",
+  res <- ckan_POST(
+    url,
+    "package_revise",
     body = tojun(body, TRUE),
-    key = key, headers = ctj(), encode = "json", opts = list(...)
+    key = key,
+    headers = ctj(),
+    encode = "json",
+    opts = list(...)
   )
-  switch(as,
-    json = res,
-    list = jsl(res),
-    table = jsd(res)
-  )
+  switch(as, json = res, list = jsl(res), table = jsd(res))
 }
 
 #' Reorder resources for a dataset
@@ -55,20 +63,25 @@ package_revise <- function(
 #' )
 #' }
 package_resource_reorder <- function(
-  id, order,
-  url = get_default_url(), key = get_default_key(), as = "list", ...
+  id,
+  order,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   pkg <- as.ckan_package(id, url = url, key = key)
   body <- list(id = pkg$id, order = as.list(order))
-  res <- ckan_POST(url, "package_resource_reorder",
-    body = tojun(body, TRUE), key = key, headers = ctj(), encode = "json",
+  res <- ckan_POST(
+    url,
+    "package_resource_reorder",
+    body = tojun(body, TRUE),
+    key = key,
+    headers = ctj(),
+    encode = "json",
     opts = list(...)
   )
-  switch(as,
-    json = res,
-    list = jsl(res),
-    table = jsd(res)
-  )
+  switch(as, json = res, list = jsl(res), table = jsd(res))
 }
 
 #' Move a dataset to another organization
@@ -88,14 +101,22 @@ package_resource_reorder <- function(
 #' package_owner_org_update("dataset-id", organization_id = "target-org")
 #' }
 package_owner_org_update <- function(
-  id, organization_id,
-  url = get_default_url(), key = get_default_key(), ...
+  id,
+  organization_id,
+  url = get_default_url(),
+  key = get_default_key(),
+  ...
 ) {
   pkg <- as.ckan_package(id, url = url, key = key)
   org <- resolve_group_or_org_id(organization_id)
   body <- list(id = pkg$id, organization_id = org)
-  res <- ckan_POST(url, "package_owner_org_update",
-    body = tojun(body, TRUE), key = key, headers = ctj(), encode = "json",
+  res <- ckan_POST(
+    url,
+    "package_owner_org_update",
+    body = tojun(body, TRUE),
+    key = key,
+    headers = ctj(),
+    encode = "json",
     opts = list(...)
   )
   ok <- jsonlite::fromJSON(res)$success
@@ -123,8 +144,11 @@ package_owner_org_update <- function(
     return(ok)
   }
   patched <- tryCatch(
-    package_patch(list(id = pkg$id, owner_org = target_id),
-      url = url, key = key),
+    package_patch(
+      list(id = pkg$id, owner_org = target_id),
+      url = url,
+      key = key
+    ),
     error = function(e) e
   )
   if (inherits(patched, "error")) {
@@ -162,13 +186,20 @@ package_owner_org_id <- function(pkg_id, url, key) {
 #' dataset_purge("dataset-id")
 #' }
 dataset_purge <- function(
-  id, url = get_default_url(), key = get_default_key(),
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
   ...
 ) {
   pkg <- as.ckan_package(id, url = url, key = key)
-  res <- ckan_POST(url, "dataset_purge",
+  res <- ckan_POST(
+    url,
+    "dataset_purge",
     body = tojun(list(id = pkg$id), TRUE),
-    key = key, headers = ctj(), encode = "json", opts = list(...)
+    key = key,
+    headers = ctj(),
+    encode = "json",
+    opts = list(...)
   )
   jsonlite::fromJSON(res)$success
 }

@@ -18,13 +18,16 @@ test_that("servers output has no trailing slash issues and no NAs", {
 
 test_that(".onLoad sets default URL when env is empty", {
   old <- Sys.getenv("CKANR_DEFAULT_URL", unset = NA)
-  on.exit({
-    if (is.na(old)) {
-      Sys.unsetenv("CKANR_DEFAULT_URL")
-    } else {
-      Sys.setenv(CKANR_DEFAULT_URL = old)
-    }
-  }, add = TRUE)
+  on.exit(
+    {
+      if (is.na(old)) {
+        Sys.unsetenv("CKANR_DEFAULT_URL")
+      } else {
+        Sys.setenv(CKANR_DEFAULT_URL = old)
+      }
+    },
+    add = TRUE
+  )
 
   Sys.unsetenv("CKANR_DEFAULT_URL")
   ckanr:::.onLoad(NULL, NULL)

@@ -268,36 +268,28 @@ export(vocabulary_list)
 export(vocabulary_show)
 export(vocabulary_update)
 import(DBI)
-importFrom(crul,
-  HttpClient,
-  proxy,
-  upload
-)
-importFrom(dbplyr,
-  base_agg,
-  base_scalar,
-  base_win,
-  new_sql_dialect,
-  sql_aggregate,
-  sql_aggregate_2,
-  sql_dialect,
-  sql_glue,
-  sql_not_supported,
-  sql_query_explain,
-  sql_query_save,
-  sql_translation,
-  sql_translator,
-  sql_variant,
-  win_aggregate
-)
-importFrom(dplyr,
-  src_tbls,
-  tbl
-)
+importFrom(crul,HttpClient)
+importFrom(crul,proxy)
+importFrom(crul,upload)
+importFrom(dbplyr,base_agg)
+importFrom(dbplyr,base_scalar)
+importFrom(dbplyr,base_win)
+importFrom(dbplyr,new_sql_dialect)
+importFrom(dbplyr,sql_aggregate)
+importFrom(dbplyr,sql_aggregate_2)
+importFrom(dbplyr,sql_dialect)
+importFrom(dbplyr,sql_glue)
+importFrom(dbplyr,sql_not_supported)
+importFrom(dbplyr,sql_query_explain)
+importFrom(dbplyr,sql_query_save)
+importFrom(dbplyr,sql_translation)
+importFrom(dbplyr,sql_translator)
+importFrom(dbplyr,sql_variant)
+importFrom(dbplyr,win_aggregate)
+importFrom(dplyr,src_tbls)
+importFrom(dplyr,tbl)
 importFrom(jsonlite,fromJSON)
 importFrom(methods,new)
 importFrom(stats,na.omit)
-importFrom(utils,
-  read.csv,
-  unzip
-)
+importFrom(utils,read.csv)
+importFrom(utils,unzip)

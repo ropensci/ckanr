@@ -38,21 +38,33 @@
 #' )
 #' }
 user_create <- function(
-  name, email, password, id = NULL, fullname = NULL,
-  about = NULL, openid = NULL, image_url = NULL, plugin_extras = NULL,
-  with_apitoken = NULL, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  name,
+  email,
+  password,
+  id = NULL,
+  fullname = NULL,
+  about = NULL,
+  openid = NULL,
+  image_url = NULL,
+  plugin_extras = NULL,
+  with_apitoken = NULL,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   args <- cc(list(
-    name = name, email = email, password = password, id = id,
-    fullname = fullname, about = about, openid = openid,
-    image_url = image_url, plugin_extras = plugin_extras,
+    name = name,
+    email = email,
+    password = password,
+    id = id,
+    fullname = fullname,
+    about = about,
+    openid = openid,
+    image_url = image_url,
+    plugin_extras = plugin_extras,
     with_apitoken = with_apitoken
   ))
   res <- ckan_POST(url, "user_create", args, key = key, opts = list(...))
-  switch(as,
-    json = res,
-    list = as_ck(jsl(res), "ckan_user"),
-    table = jsd(res)
-  )
+  switch(as, json = res, list = as_ck(jsl(res), "ckan_user"), table = jsd(res))
 }

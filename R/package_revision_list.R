@@ -26,8 +26,11 @@
 #' package_revision_list(res$id, as = "json")
 #' }
 package_revision_list <- function(
-  id, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   ver <- try(ckan_version(url)$version_num, silent = TRUE)
   if (inherits(ver, "try-error")) {
@@ -42,14 +45,14 @@ package_revision_list <- function(
     )
     result <- NULL
   } else {
-    res <- ckan_GET(url, "package_revision_list", list(id = id),
-      key = key, opts = list(...)
+    res <- ckan_GET(
+      url,
+      "package_revision_list",
+      list(id = id),
+      key = key,
+      opts = list(...)
     )
-    result <- switch(as,
-      json = res,
-      list = jsl(res),
-      table = jsd(res)
-    )
+    result <- switch(as, json = res, list = jsl(res), table = jsd(res))
   }
 
   result

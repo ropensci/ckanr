@@ -47,30 +47,40 @@
 #' resource_show(xx$id)
 #' }
 ds_create <- function(
-  resource_id = NULL, resource = NULL, force = FALSE,
-  aliases = NULL, fields = NULL, records = NULL, primary_key = NULL,
-  indexes = NULL, include_records = FALSE,
-  url = get_default_url(), key = get_default_key(),
-  as = "list", ...
+  resource_id = NULL,
+  resource = NULL,
+  force = FALSE,
+  aliases = NULL,
+  fields = NULL,
+  records = NULL,
+  primary_key = NULL,
+  indexes = NULL,
+  include_records = FALSE,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   validate_ckan_url(url)
   body <- cc(list(
-    resource_id = resource_id, resource = resource, force = force,
-    aliases = aliases, fields = fields, records = records,
-    primary_key = primary_key, indexes = indexes,
+    resource_id = resource_id,
+    resource = resource,
+    force = force,
+    aliases = aliases,
+    fields = fields,
+    records = records,
+    primary_key = primary_key,
+    indexes = indexes,
     include_records = if (isTRUE(include_records)) TRUE else NULL
   ))
   headers <- c(auth_headers(key), ctj())
-  con <- crul::HttpClient$new(file.path(url, "api/action/datastore_create"),
+  con <- crul::HttpClient$new(
+    file.path(url, "api/action/datastore_create"),
     headers = headers,
     opts = list(...)
   )
   res <- con$post(body = tojun(body, TRUE), encode = "json")
   err_handler(res)
   txt <- res$parse("UTF-8")
-  switch(as,
-    json = txt,
-    list = jsl(txt),
-    table = jsd(txt)
-  )
+  switch(as, json = txt, list = jsl(txt), table = jsd(txt))
 }

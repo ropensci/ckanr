@@ -27,7 +27,10 @@ assume_follow_target <- function() {
       error = function(e) e
     )
     if (inherits(created, "error")) {
-      testthat::skip(paste("Unable to provision follow target user:", conditionMessage(created)))
+      testthat::skip(paste(
+        "Unable to provision follow target user:",
+        conditionMessage(created)
+      ))
     }
     usr <- created
   }
@@ -35,10 +38,19 @@ assume_follow_target <- function() {
 }
 
 cleanup_follow_state <- function(target_user) {
-  try(suppressWarnings(dataset_unfollow(did, url = url, key = key)), silent = TRUE)
-  try(suppressWarnings(group_unfollow(gid, url = url, key = key)), silent = TRUE)
+  try(
+    suppressWarnings(dataset_unfollow(did, url = url, key = key)),
+    silent = TRUE
+  )
+  try(
+    suppressWarnings(group_unfollow(gid, url = url, key = key)),
+    silent = TRUE
+  )
   if (!is.null(target_user)) {
-    try(suppressWarnings(unfollow_user(target_user$name, url = url, key = key)), silent = TRUE)
+    try(
+      suppressWarnings(unfollow_user(target_user$name, url = url, key = key)),
+      silent = TRUE
+    )
   }
 }
 
@@ -101,12 +113,20 @@ test_that("follow/unfollow flows toggle state and update followee metrics", {
   }
 
   base_all <- int_val(followee_count(me$name, url = url, key = key))
-  base_dataset_cnt <- int_val(dataset_followee_count(me$name, url = url, key = key))
+  base_dataset_cnt <- int_val(dataset_followee_count(
+    me$name,
+    url = url,
+    key = key
+  ))
   base_group_cnt <- int_val(group_followee_count(me$name, url = url, key = key))
   base_user_cnt <- int_val(user_followee_count(me$name, url = url, key = key))
 
   base_followee_len <- length(followee_list(me$name, url = url, key = key))
-  base_dataset_len <- length(dataset_followee_list(me$name, url = url, key = key))
+  base_dataset_len <- length(dataset_followee_list(
+    me$name,
+    url = url,
+    key = key
+  ))
   base_group_len <- length(group_followee_list(me$name, url = url, key = key))
   base_user_len <- length(user_followee_list(me$name, url = url, key = key))
 

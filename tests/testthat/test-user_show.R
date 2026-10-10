@@ -30,7 +30,9 @@ test_that("user_show works with include_datasets parameter", {
     a <- user_show(user_id, include_datasets = TRUE, url = u)
 
     expect_is(a, "ckan_user")
-    expect_true("datasets" %in% names(a) || "number_created_packages" %in% names(a))
+    expect_true(
+      "datasets" %in% names(a) || "number_created_packages" %in% names(a)
+    )
   } else {
     skip("No users available for testing")
   }
@@ -45,7 +47,9 @@ test_that("user_show works with include_num_followers parameter", {
     a <- user_show(user_id, include_num_followers = TRUE, url = u)
 
     expect_is(a, "ckan_user")
-    expect_true("num_followers" %in% names(a) || "number_of_followers" %in% names(a))
+    expect_true(
+      "num_followers" %in% names(a) || "number_of_followers" %in% names(a)
+    )
   } else {
     skip("No users available for testing")
   }

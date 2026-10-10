@@ -36,11 +36,17 @@
 #' )
 #' }
 ds_create_dataset <- function(
-  package_id, name, path, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  package_id,
+  name,
+  path,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   .Deprecated(
-    "resource_create", "ckanr",
+    "resource_create",
+    "ckanr",
     msg = paste(
       "`ds_create_dataset()` is deprecated.",
       "Use `resource_create(package_id, name = name, upload = path)` instead."
@@ -51,16 +57,18 @@ ds_create_dataset <- function(
   ext <- strsplit(basename(path), "\\.")[[1]]
   ext <- ext[length(ext)]
   body <- list(
-    package_id = package_id, name = name, format = ext,
-    url = "upload", upload = crul::upload(path)
+    package_id = package_id,
+    name = name,
+    format = ext,
+    url = "upload",
+    upload = crul::upload(path)
   )
-  res <- ckan_POST(url,
-    method = "resource_create", body = body, key = key,
+  res <- ckan_POST(
+    url,
+    method = "resource_create",
+    body = body,
+    key = key,
     opts = list(...)
   )
-  switch(as,
-    json = res,
-    list = jsl(res),
-    table = jsd(res)
-  )
+  switch(as, json = res, list = jsl(res), table = jsd(res))
 }

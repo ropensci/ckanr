@@ -61,13 +61,22 @@ test_that("dashboard_activity_list captures new dataset activity", {
       dashboard_activity_list(limit = 10, url = url, key = key)
     },
     predicate = function(items) {
-      is.list(items) && length(items) > 0 &&
-        any(vapply(items, function(x) identical(x$object_id, pkg$id), logical(1)))
+      is.list(items) &&
+        length(items) > 0 &&
+        any(vapply(
+          items,
+          function(x) identical(x$object_id, pkg$id),
+          logical(1)
+        ))
     }
   )
 
   expect_is(activities, "list")
-  expect_true(any(vapply(activities, function(x) x$object_id == pkg$id, logical(1))))
+  expect_true(any(vapply(
+    activities,
+    function(x) x$object_id == pkg$id,
+    logical(1)
+  )))
   expect_ckan_formats(function(fmt) {
     dashboard_activity_list(limit = 5, url = url, key = key, as = fmt)
   })
@@ -86,9 +95,16 @@ test_that("dashboard_activity_list respects limit and offset", {
   )
 
   wait_for_activity(
-    fetch_fn = function() dashboard_activity_list(limit = 5, url = url, key = key),
+    fetch_fn = function() {
+      dashboard_activity_list(limit = 5, url = url, key = key)
+    },
     predicate = function(items) {
-      is.list(items) && any(vapply(items, function(x) identical(x$object_id, pkg$id), logical(1)))
+      is.list(items) &&
+        any(vapply(
+          items,
+          function(x) identical(x$object_id, pkg$id),
+          logical(1)
+        ))
     }
   )
 

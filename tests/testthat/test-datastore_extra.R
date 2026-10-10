@@ -14,16 +14,23 @@ test_that("ds_info responds with meta controls", {
   r <- get_test_rid()
   check_resource(url, r)
 
-  info <- tryCatch(ds_info(resource_id = r, url = url, key = key),
-    error = function(e) e)
+  info <- tryCatch(
+    ds_info(resource_id = r, url = url, key = key),
+    error = function(e) e
+  )
   if (inherits(info, "error")) {
     skip(paste("ds_info unavailable:", conditionMessage(info)))
   }
   expect_true(is.list(info))
 
   info_nominal <- tryCatch(
-    ds_info(resource_id = r, include_meta = FALSE,
-      include_fields_schema = FALSE, url = url, key = key),
+    ds_info(
+      resource_id = r,
+      include_meta = FALSE,
+      include_fields_schema = FALSE,
+      url = url,
+      key = key
+    ),
     error = function(e) e
   )
   expect_false(inherits(info_nominal, "error"))
@@ -58,9 +65,13 @@ test_that("ds_upsert roundtrip with include_records", {
   on.exit(resource_delete(res$id, url = url, key = key), add = TRUE)
 
   created <- tryCatch(
-    ds_create(resource_id = res$id, force = TRUE,
+    ds_create(
+      resource_id = res$id,
+      force = TRUE,
       fields = list(list(id = "k", type = "text")),
-      url = url, key = key),
+      url = url,
+      key = key
+    ),
     error = function(e) e
   )
   if (inherits(created, "error")) {
@@ -74,7 +85,8 @@ test_that("ds_upsert roundtrip with include_records", {
       method = "insert",
       force = TRUE,
       include_records = TRUE,
-      url = url, key = key
+      url = url,
+      key = key
     ),
     error = function(e) e
   )
@@ -90,7 +102,8 @@ test_that("ds_upsert roundtrip with include_records", {
       resource_id = res$id,
       filters = list(k = "a"),
       force = TRUE,
-      url = url, key = key
+      url = url,
+      key = key
     ),
     error = function(e) e
   )
@@ -128,7 +141,8 @@ test_that("ds_create include_records and ds_search include_next_page", {
       records = list(list(k = "1", v = "x")),
       force = TRUE,
       include_records = TRUE,
-      url = url, key = key
+      url = url,
+      key = key
     ),
     error = function(e) e
   )
@@ -137,11 +151,18 @@ test_that("ds_create include_records and ds_search include_next_page", {
   }
   expect_true(is.list(created))
   # include_records asks the server to echo the inserted rows
-  expect_true("records" %in% names(created) || "resource_id" %in% names(created))
+  expect_true(
+    "records" %in% names(created) || "resource_id" %in% names(created)
+  )
 
   searched <- tryCatch(
-    ds_search(resource_id = res$id, limit = 2, sort = "_id asc",
-      include_next_page = TRUE, url = url),
+    ds_search(
+      resource_id = res$id,
+      limit = 2,
+      sort = "_id asc",
+      include_next_page = TRUE,
+      url = url
+    ),
     error = function(e) e
   )
   if (!inherits(searched, "error")) {
@@ -168,7 +189,9 @@ test_that("ds_function_create/delete roundtrip", {
   skip_if_not_sysadmin(url, key)
   fname <- paste0(
     "ckanr_test_trigger_",
-    as.integer(Sys.time()), "_", sample.int(1000, 1)
+    as.integer(Sys.time()),
+    "_",
+    sample.int(1000, 1)
   )
   on.exit(
     try(ds_function_delete(fname, url = url, key = key), silent = TRUE),
@@ -177,7 +200,8 @@ test_that("ds_function_create/delete roundtrip", {
   created <- ds_function_create(
     name = fname,
     definition = "BEGIN RETURN NEW; END;",
-    url = url, key = key
+    url = url,
+    key = key
   )
   expect_true(is.list(created) || is.null(created) || is.character(created))
   deleted <- ds_function_delete(fname, url = url, key = key)
@@ -204,9 +228,13 @@ test_that("ds_delete removes filtered rows then drops the table", {
   on.exit(resource_delete(res$id, url = url, key = key), add = TRUE)
 
   created <- tryCatch(
-    ds_create(resource_id = res$id, force = TRUE,
+    ds_create(
+      resource_id = res$id,
+      force = TRUE,
       fields = list(list(id = "k", type = "text")),
-      url = url, key = key),
+      url = url,
+      key = key
+    ),
     error = function(e) e
   )
   if (inherits(created, "error")) {
@@ -218,7 +246,8 @@ test_that("ds_delete removes filtered rows then drops the table", {
       records = list(list(k = "a"), list(k = "b")),
       method = "insert",
       force = TRUE,
-      url = url, key = key
+      url = url,
+      key = key
     ),
     error = function(e) e
   )
@@ -231,7 +260,8 @@ test_that("ds_delete removes filtered rows then drops the table", {
       resource_id = res$id,
       filters = list(k = "a"),
       force = TRUE,
-      url = url, key = key
+      url = url,
+      key = key
     ),
     error = function(e) e
   )
@@ -251,19 +281,21 @@ test_that("ds_delete removes filtered rows then drops the table", {
       records = list(list(k = paste0("fmt_", fmt))),
       method = "insert",
       force = TRUE,
-      url = url, key = key
+      url = url,
+      key = key
     )
     ds_delete(
       resource_id = res$id,
       filters = list(k = paste0("fmt_", fmt)),
       force = TRUE,
-      url = url, key = key, as = fmt
+      url = url,
+      key = key,
+      as = fmt
     )
   })
 
   # Without filters the whole table goes away
-  dropped <- ds_delete(resource_id = res$id, force = TRUE,
-    url = url, key = key)
+  dropped <- ds_delete(resource_id = res$id, force = TRUE, url = url, key = key)
   expect_true(is.list(dropped))
   expect_error(
     ds_info(resource_id = res$id, url = url, key = key)
@@ -288,8 +320,10 @@ test_that("ds_delete fails clearly without a target", {
 test_that("ds_run_triggers runs on a datastore table", {
   run_triggers_safe <- function(...) {
     out <- tryCatch(ds_run_triggers(...), error = function(e) e)
-    if (inherits(out, "error") &&
-        grepl("Empty reply", conditionMessage(out))) {
+    if (
+      inherits(out, "error") &&
+        grepl("Empty reply", conditionMessage(out))
+    ) {
       Sys.sleep(5)
       out <- tryCatch(ds_run_triggers(...), error = function(e) e)
     }
@@ -308,10 +342,14 @@ test_that("ds_run_triggers runs on a datastore table", {
       url = url,
       key = key
     )
-    ds_create(resource_id = res$id, force = TRUE,
+    ds_create(
+      resource_id = res$id,
+      force = TRUE,
       fields = list(list(id = "k", type = "text")),
       records = list(list(k = "a")),
-      url = url, key = key)
+      url = url,
+      key = key
+    )
     res$id
   }
 
@@ -350,12 +388,20 @@ test_that("ds_run_triggers runs on a datastore table", {
 
   # Output formats, one fresh table per call (see bug note above)
   r_json <- run_triggers_safe(
-    resource_id = make_table("json"), url = url, key = key, as = "json")
+    resource_id = make_table("json"),
+    url = url,
+    key = key,
+    as = "json"
+  )
   expect_type(r_json, "character")
   expect_true(is.numeric(jsonlite::fromJSON(r_json)$result))
 
   r_table <- run_triggers_safe(
-    resource_id = make_table("table"), url = url, key = key, as = "table")
+    resource_id = make_table("table"),
+    url = url,
+    key = key,
+    as = "table"
+  )
   expect_true(is.numeric(r_table))
 
   # Failure path: an unknown resource errors fast

@@ -42,8 +42,13 @@
 #' zzz$url
 #' }
 resource_patch <- function(
-  x, id, rcurl = NULL, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  x,
+  id,
+  rcurl = NULL,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   id <- as.ckan_resource(id, url = url)
   if (!inherits(x, "list")) {
@@ -65,7 +70,8 @@ resource_patch <- function(
     headers = ctj(),
     opts = list(...)
   )
-  switch(as,
+  switch(
+    as,
     json = res,
     list = as_ck(jsl(res), "ckan_resource"),
     table = jsd(res)

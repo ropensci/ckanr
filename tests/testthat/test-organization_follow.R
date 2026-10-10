@@ -17,7 +17,11 @@ test_that("organization follower count and list return data", {
   check_ckan(url)
   check_organization(url, oid)
 
-  expect_true(is.numeric(organization_follower_count(oid, url = url, key = key)))
+  expect_true(is.numeric(organization_follower_count(
+    oid,
+    url = url,
+    key = key
+  )))
   expect_type(organization_follower_list(oid, url = url, key = key), "list")
 
   # counts come back as bare numbers in every parsed format
@@ -39,7 +43,11 @@ test_that("organization follower helpers accept ckan_organization objects", {
   check_organization(url, oid)
 
   org <- organization_show(oid, url = url, key = key)
-  expect_true(is.numeric(organization_follower_count(org, url = url, key = key)))
+  expect_true(is.numeric(organization_follower_count(
+    org,
+    url = url,
+    key = key
+  )))
   expect_type(organization_follower_list(org, url = url, key = key), "list")
 })
 
@@ -51,7 +59,11 @@ test_that("organization followee count and list return data", {
     skip("Unable to determine current user")
   }
 
-  expect_true(is.numeric(organization_followee_count(me$name, url = url, key = key)))
+  expect_true(is.numeric(organization_followee_count(
+    me$name,
+    url = url,
+    key = key
+  )))
   expect_type(organization_followee_list(me$name, url = url, key = key), "list")
 })
 

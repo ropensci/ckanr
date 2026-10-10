@@ -23,8 +23,13 @@
 #' organization_show(res$id)
 #' }
 organization_show <- function(
-  id, include_datasets = FALSE, include_users = TRUE,
-  url = get_default_url(), key = get_default_key(), as = "list", ...
+  id,
+  include_datasets = FALSE,
+  include_users = TRUE,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   id <- as.ckan_organization(id, url = url)
   args <- cc(list(
@@ -33,7 +38,8 @@ organization_show <- function(
     include_users = as_log(include_users)
   ))
   res <- ckan_GET(url, "organization_show", args, key = key, opts = list(...))
-  switch(as,
+  switch(
+    as,
     json = res,
     list = as_ck(jsl(res), "ckan_organization"),
     table = jsd(res)

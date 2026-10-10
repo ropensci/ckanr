@@ -37,7 +37,11 @@ test_that("organization_update updates metadata via id string", {
   org <- create_temp_org()
   on.exit(cleanup_org(org$id), add = TRUE)
 
-  new_desc <- paste("updated description", sample(letters, 5, replace = TRUE), collapse = "")
+  new_desc <- paste(
+    "updated description",
+    sample(letters, 5, replace = TRUE),
+    collapse = ""
+  )
   updated <- organization_update(
     list(description = new_desc),
     id = org$id,
@@ -59,7 +63,11 @@ test_that("organization_update accepts ckan_organization objects", {
   on.exit(cleanup_org(org$id), add = TRUE)
 
   org_obj <- organization_show(org$id, url = url, key = key)
-  new_title <- paste("ckanr title", sample(letters, 6, replace = TRUE), collapse = "")
+  new_title <- paste(
+    "ckanr title",
+    sample(letters, 6, replace = TRUE),
+    collapse = ""
+  )
   updated <- organization_update(
     list(title = new_title),
     id = org_obj,
@@ -76,7 +84,11 @@ test_that("organization_patch patches metadata", {
   org <- create_temp_org()
   on.exit(cleanup_org(org$id), add = TRUE)
 
-  new_title <- paste("ckanr patched", sample(letters, 6, replace = TRUE), collapse = "")
+  new_title <- paste(
+    "ckanr patched",
+    sample(letters, 6, replace = TRUE),
+    collapse = ""
+  )
   patched <- organization_patch(
     list(title = new_title),
     id = org$id,
@@ -90,7 +102,10 @@ test_that("organization_patch patches metadata", {
   expect_ckan_formats(function(fmt) {
     organization_patch(
       list(title = new_title),
-      id = org$id, url = url, key = key, as = fmt
+      id = org$id,
+      url = url,
+      key = key,
+      as = fmt
     )
   })
 })

@@ -18,7 +18,6 @@ safe_ds_preview <- function(resource_id, url, preview_limit = 5) {
 }
 
 ensure_datastore_sql <- function(resource_id, url) {
-
   sql <- sprintf('SELECT * FROM "%s" LIMIT 1', resource_id)
   res <- tryCatch(
     ds_search_sql(sql, url = url, as = "table"),
@@ -36,7 +35,7 @@ find_sql_ready_resource <- function(url) {
     testthat::skip("No test resource ID configured")
   }
 
- # First check if datastore is enabled at all
+  # First check if datastore is enabled at all
   if (!datastore_enabled(url)) {
     testthat::skip("Datastore extension not enabled on test CKAN instance")
   }
@@ -61,7 +60,11 @@ test_that("src_ckan collects rows from datastore resource", {
   rid <- find_sql_ready_resource(url)
 
   preview <- safe_ds_preview(rid, url)
-  if (inherits(preview, "error") || !is.list(preview) || length(preview$records) == 0) {
+  if (
+    inherits(preview, "error") ||
+      !is.list(preview) ||
+      length(preview$records) == 0
+  ) {
     skip("Selected datastore resource did not return preview data")
   }
 
@@ -74,7 +77,9 @@ test_that("src_ckan collects rows from datastore resource", {
   expect_true(dbExistsTable(con, rid))
   expect_false(dbExistsTable(con, "not-a-datastore-table"))
   field_names <- vapply(preview$fields, `[[`, character(1), "id")
-  expect_true(all(dbListFields(con, rid) %in% c(field_names, "_id", "_full_text")))
+  expect_true(all(
+    dbListFields(con, rid) %in% c(field_names, "_id", "_full_text")
+  ))
 
   tbl_obj <- dplyr::tbl(con, rid)
   rows <- dplyr::collect(head(tbl_obj, 3))
@@ -95,13 +100,18 @@ test_that("CKAN DBI results follow the DBI lifecycle", {
   rid <- find_sql_ready_resource(url)
   con <- dbConnect(new("CKANDriver"), url = url, key = get_test_key())
   result <- dbSendQuery(
-    con, sprintf('SELECT * FROM "%s" LIMIT 2', rid)
+    con,
+    sprintf('SELECT * FROM "%s" LIMIT 2', rid)
   )
   on.exit(dbClearResult(result), add = TRUE)
 
-  expect_equal(dbGetStatement(result), sprintf(
-    'SELECT * FROM "%s" LIMIT 2', rid
-  ))
+  expect_equal(
+    dbGetStatement(result),
+    sprintf(
+      'SELECT * FROM "%s" LIMIT 2',
+      rid
+    )
+  )
   expect_false(dbHasCompleted(result))
   first <- dbFetch(result, 1)
   expect_equal(nrow(first), 1)

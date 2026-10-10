@@ -68,7 +68,11 @@ test_that("organization_create fails well", {
 
   # invalid characters in name
   expect_error(
-    organization_create(name = "Invalid Name With Spaces", url = url, key = key),
+    organization_create(
+      name = "Invalid Name With Spaces",
+      url = url,
+      key = key
+    ),
     "Validation Error"
   )
 
@@ -91,7 +95,8 @@ test_that("organization_create supports list/json/table formats", {
       key = key,
       as = fmt
     )
-    org_id <- switch(fmt,
+    org_id <- switch(
+      fmt,
       json = jsonlite::fromJSON(res)$result$id,
       table = res$id,
       list = res$id

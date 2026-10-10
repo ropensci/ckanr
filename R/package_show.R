@@ -37,19 +37,24 @@
 #' package_show(res$id, TRUE)
 #' }
 package_show <- function(
-  id, use_default_schema = FALSE, http_method = "GET",
-  url = get_default_url(), key = get_default_key(), as = "list", ...
+  id,
+  use_default_schema = FALSE,
+  http_method = "GET",
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   assert(id, c("character", "ckan_package"))
   check_http_method(http_method, c("GET", "POST"))
-  if (inherits(id, "ckan_package")) id <- id$id
+  if (inherits(id, "ckan_package")) {
+    id <- id$id
+  }
   args <- cc(list(id = id, use_default_schema = use_default_schema))
-  fun <- switch(http_method,
-    GET = ckan_GET,
-    POST = ckan_POST
-  )
+  fun <- switch(http_method, GET = ckan_GET, POST = ckan_POST)
   res <- fun(url, "package_show", args, key = key, opts = list(...))
-  switch(as,
+  switch(
+    as,
     json = res,
     list = as_ck(jsl(res), "ckan_package"),
     table = jsd(res)

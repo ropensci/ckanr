@@ -48,25 +48,45 @@
 #' res$num_followers
 #' }
 group_create <- function(
-  name = NULL, id = NULL, title = NULL,
-  description = NULL, image_url = NULL, type = NULL, state = "active",
-  approval_status = NULL, extras = NULL, packages = NULL, groups = NULL,
-  users = NULL, url = get_default_url(), key = get_default_key(),
-  as = "list", ...
+  name = NULL,
+  id = NULL,
+  title = NULL,
+  description = NULL,
+  image_url = NULL,
+  type = NULL,
+  state = "active",
+  approval_status = NULL,
+  extras = NULL,
+  packages = NULL,
+  groups = NULL,
+  users = NULL,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   body <- cc(list(
-    name = name, id = id, title = title,
-    description = description, image_url = image_url, type = type,
-    state = state, approval_status = approval_status, extras = extras,
-    packages = packages, groups = groups, users = users
+    name = name,
+    id = id,
+    title = title,
+    description = description,
+    image_url = image_url,
+    type = type,
+    state = state,
+    approval_status = approval_status,
+    extras = extras,
+    packages = packages,
+    groups = groups,
+    users = users
   ))
-  res <- ckan_POST(url, "group_create",
-    body = tojun(body, TRUE), key = key,
-    encode = "json", ctj(), opts = list(...)
+  res <- ckan_POST(
+    url,
+    "group_create",
+    body = tojun(body, TRUE),
+    key = key,
+    encode = "json",
+    ctj(),
+    opts = list(...)
   )
-  switch(as,
-    json = res,
-    list = as_ck(jsl(res), "ckan_group"),
-    table = jsd(res)
-  )
+  switch(as, json = res, list = as_ck(jsl(res), "ckan_group"), table = jsd(res))
 }

@@ -42,6 +42,7 @@ ckan_stop:
 
 lint:
   #!/usr/bin/env bash
+  pre-commit run --all-files
   jarl check **/*.R
 
 # R: Document package

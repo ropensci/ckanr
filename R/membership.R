@@ -17,14 +17,28 @@ NULL
 #' # ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
 #' # member_list("my-group", object_type = "user")
 member_list <- function(
-  id, object_type = NULL, capacity = NULL,
-  url = get_default_url(), key = get_default_key(), as = "list", ...
+  id,
+  object_type = NULL,
+  capacity = NULL,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   group_id <- resolve_group_or_org_id(id)
-  args <- cc(list(id = group_id, object_type = object_type, capacity = capacity))
-  membership_request("member_list",
-    url = url, key = key, as = as,
-    method = "GET", query = args, opts = list(...)
+  args <- cc(list(
+    id = group_id,
+    object_type = object_type,
+    capacity = capacity
+  ))
+  membership_request(
+    "member_list",
+    url = url,
+    key = key,
+    as = as,
+    method = "GET",
+    query = args,
+    opts = list(...)
   )
 }
 
@@ -38,8 +52,14 @@ member_list <- function(
 #' @template key
 #' @export
 member_create <- function(
-  id, object, object_type, capacity,
-  url = get_default_url(), key = get_default_key(), as = "list", ...
+  id,
+  object,
+  object_type,
+  capacity,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   group_id <- resolve_group_or_org_id(id)
   body <- list(
@@ -48,9 +68,14 @@ member_create <- function(
     object_type = object_type,
     capacity = capacity
   )
-  membership_request("member_create",
-    url = url, key = key, as = as,
-    method = "POST", body = body, opts = list(...)
+  membership_request(
+    "member_create",
+    url = url,
+    key = key,
+    as = as,
+    method = "POST",
+    body = body,
+    opts = list(...)
   )
 }
 
@@ -59,8 +84,12 @@ member_create <- function(
 #' @inheritParams member_create
 #' @export
 member_delete <- function(
-  id, object, object_type,
-  url = get_default_url(), key = get_default_key(), ...
+  id,
+  object,
+  object_type,
+  url = get_default_url(),
+  key = get_default_key(),
+  ...
 ) {
   group_id <- resolve_group_or_org_id(id)
   body <- list(
@@ -68,9 +97,14 @@ member_delete <- function(
     object = resolve_object_identifier(object),
     object_type = object_type
   )
-  membership_request("member_delete",
-    url = url, key = key,
-    method = "POST", body = body, success = TRUE, opts = list(...)
+  membership_request(
+    "member_delete",
+    url = url,
+    key = key,
+    method = "POST",
+    body = body,
+    success = TRUE,
+    opts = list(...)
   )
 }
 
@@ -82,12 +116,20 @@ member_delete <- function(
 #' @export
 member_roles_list <- function(
   group_type = "organization",
-  url = get_default_url(), key = get_default_key(), as = "list", ...
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   args <- cc(list(group_type = group_type))
-  membership_request("member_roles_list",
-    url = url, key = key, as = as,
-    method = "GET", query = args, opts = list(...)
+  membership_request(
+    "member_roles_list",
+    url = url,
+    key = key,
+    as = as,
+    method = "GET",
+    query = args,
+    opts = list(...)
   )
 }
 
@@ -100,8 +142,13 @@ member_roles_list <- function(
 #' @template key
 #' @export
 group_member_create <- function(
-  id, username, role,
-  url = get_default_url(), key = get_default_key(), as = "list", ...
+  id,
+  username,
+  role,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   group_id <- resolve_group_or_org_id(id)
   body <- list(
@@ -109,9 +156,14 @@ group_member_create <- function(
     username = resolve_username(username),
     role = role
   )
-  membership_request("group_member_create",
-    url = url, key = key, as = as,
-    method = "POST", body = body, opts = list(...)
+  membership_request(
+    "group_member_create",
+    url = url,
+    key = key,
+    as = as,
+    method = "POST",
+    body = body,
+    opts = list(...)
   )
 }
 
@@ -120,17 +172,25 @@ group_member_create <- function(
 #' @inheritParams group_member_create
 #' @export
 group_member_delete <- function(
-  id, username,
-  url = get_default_url(), key = get_default_key(), ...
+  id,
+  username,
+  url = get_default_url(),
+  key = get_default_key(),
+  ...
 ) {
   group_id <- resolve_group_or_org_id(id)
   body <- list(
     id = group_id,
     username = resolve_username(username)
   )
-  membership_request("group_member_delete",
-    url = url, key = key,
-    method = "POST", body = body, success = TRUE, opts = list(...)
+  membership_request(
+    "group_member_delete",
+    url = url,
+    key = key,
+    method = "POST",
+    body = body,
+    success = TRUE,
+    opts = list(...)
   )
 }
 
@@ -139,8 +199,13 @@ group_member_delete <- function(
 #' @inheritParams group_member_create
 #' @export
 organization_member_create <- function(
-  id, username, role,
-  url = get_default_url(), key = get_default_key(), as = "list", ...
+  id,
+  username,
+  role,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   org_id <- resolve_group_or_org_id(id)
   body <- list(
@@ -148,9 +213,14 @@ organization_member_create <- function(
     username = resolve_username(username),
     role = role
   )
-  membership_request("organization_member_create",
-    url = url, key = key,
-    as = as, method = "POST", body = body, opts = list(...)
+  membership_request(
+    "organization_member_create",
+    url = url,
+    key = key,
+    as = as,
+    method = "POST",
+    body = body,
+    opts = list(...)
   )
 }
 
@@ -159,17 +229,25 @@ organization_member_create <- function(
 #' @inheritParams group_member_delete
 #' @export
 organization_member_delete <- function(
-  id, username,
-  url = get_default_url(), key = get_default_key(), ...
+  id,
+  username,
+  url = get_default_url(),
+  key = get_default_key(),
+  ...
 ) {
   org_id <- resolve_group_or_org_id(id)
   body <- list(
     id = org_id,
     username = resolve_username(username)
   )
-  membership_request("organization_member_delete",
-    url = url, key = key,
-    method = "POST", body = body, success = TRUE, opts = list(...)
+  membership_request(
+    "organization_member_delete",
+    url = url,
+    key = key,
+    method = "POST",
+    body = body,
+    success = TRUE,
+    opts = list(...)
   )
 }
 
@@ -182,14 +260,24 @@ organization_member_delete <- function(
 #' @template key
 #' @export
 user_invite <- function(
-  email, group_id, role = "member",
-  url = get_default_url(), key = get_default_key(), as = "list", ...
+  email,
+  group_id,
+  role = "member",
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   grp <- resolve_group_or_org_id(group_id)
   body <- list(email = email, group_id = grp, role = role)
-  membership_request("user_invite",
-    url = url, key = key, as = as,
-    method = "POST", body = body, opts = list(...)
+  membership_request(
+    "user_invite",
+    url = url,
+    key = key,
+    as = as,
+    method = "POST",
+    body = body,
+    opts = list(...)
   )
 }
 
@@ -207,11 +295,22 @@ user_invite <- function(
 #' @template key
 #' @export
 group_list_authz <- function(
-  type = "group", groups = NULL, all_fields = FALSE,
-  include_dataset_count = TRUE, include_extras = FALSE, include_tags = FALSE,
-  include_groups = FALSE, include_users = FALSE, available_only = FALSE,
-  am_member = FALSE, offset = NULL, limit = NULL,
-  url = get_default_url(), key = get_default_key(), as = "list", ...
+  type = "group",
+  groups = NULL,
+  all_fields = FALSE,
+  include_dataset_count = TRUE,
+  include_extras = FALSE,
+  include_tags = FALSE,
+  include_groups = FALSE,
+  include_users = FALSE,
+  available_only = FALSE,
+  am_member = FALSE,
+  offset = NULL,
+  limit = NULL,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   bool <- function(x) if (is.null(x)) NULL else as_log(x)
   args <- cc(list(
@@ -228,11 +327,15 @@ group_list_authz <- function(
     offset = offset,
     limit = limit
   ))
-  res <- ckan_GET(url, "group_list_authz",
-    query = args, key = key,
+  res <- ckan_GET(
+    url,
+    "group_list_authz",
+    query = args,
+    key = key,
     opts = list(...)
   )
-  switch(as,
+  switch(
+    as,
     json = res,
     list = lapply(jsl(res), as.ckan_group, url = url),
     table = jsd(res)
@@ -249,20 +352,28 @@ group_list_authz <- function(
 #' @template key
 #' @export
 organization_list_for_user <- function(
-  id = NULL, permission = "manage_group",
-  include_dataset_count = FALSE, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  id = NULL,
+  permission = "manage_group",
+  include_dataset_count = FALSE,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   args <- cc(list(
     id = if (is.null(id)) NULL else resolve_user_identifier(id),
     permission = permission,
     include_dataset_count = as_log(include_dataset_count)
   ))
-  res <- ckan_GET(url, "organization_list_for_user",
+  res <- ckan_GET(
+    url,
+    "organization_list_for_user",
     query = args,
-    key = key, opts = list(...)
+    key = key,
+    opts = list(...)
   )
-  switch(as,
+  switch(
+    as,
     json = res,
     list = lapply(jsl(res), as.ckan_organization, url = url),
     table = jsd(res)
@@ -270,9 +381,16 @@ organization_list_for_user <- function(
 }
 
 membership_request <- function(
-  endpoint, url, key, as = "list",
-  method = c("GET", "POST"), query = NULL, body = NULL,
-  success = FALSE, list_coercer = NULL, opts = list()
+  endpoint,
+  url,
+  key,
+  as = "list",
+  method = c("GET", "POST"),
+  query = NULL,
+  body = NULL,
+  success = FALSE,
+  list_coercer = NULL,
+  opts = list()
 ) {
   method <- match.arg(method)
   resp <- if (method == "GET") {

@@ -121,7 +121,13 @@ test_that("resource_create fails well", {
 
   # missing package_id - this will fail during coercion
   expect_error(
-    resource_create(description = "Test", name = "test", rcurl = "http://example.com", url = url, key = key)
+    resource_create(
+      description = "Test",
+      name = "test",
+      rcurl = "http://example.com",
+      url = url,
+      key = key
+    )
   )
 
   # invalid package_id
@@ -181,7 +187,8 @@ test_that("resource_create supports list/json/table formats", {
       key = key,
       as = fmt
     )
-    rid <- switch(fmt,
+    rid <- switch(
+      fmt,
       json = jsonlite::fromJSON(res)$result$id,
       table = res$id,
       list = res$id

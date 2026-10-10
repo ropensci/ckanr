@@ -13,7 +13,7 @@ vignette: >
 knitr::opts_chunk$set(
   collapse  =  TRUE,
   comment  =  "#>",
-  warning = FALSE, 
+  warning = FALSE,
   message = FALSE
 )
 library("knitr")
@@ -31,8 +31,8 @@ knitr::knit_hooks$set(output = function(x, options) {
        x <- c(head(x, lines), more)
      }
    } else {
-     x <- c(if (abs(lines[1])>1) more else NULL, 
-            x[lines], 
+     x <- c(if (abs(lines[1])>1) more else NULL,
+            x[lines],
             if (length(x)>lines[abs(length(lines))]) more else NULL
            )
    }
@@ -60,14 +60,14 @@ remotes::install_github("ropensci/ckanr")
 library("ckanr")
 ```
 
-Note: the default base CKAN URL is set to [http://data.techno-science.ca/](http://data.techno-science.ca/). You can change this using `ckanr_setup()`, or change the URL using the `url` 
+Note: the default base CKAN URL is set to [http://data.techno-science.ca/](http://data.techno-science.ca/). You can change this using `ckanr_setup()`, or change the URL using the `url`
 parameter in each function call.
 
 To set one or both, run:
 
 ```{r eval=FALSE}
 # restores default CKAN url to http://data.techno-science.ca/
-ckanr_setup() 
+ckanr_setup()
 # Just set url
 ckanr_setup(url = "http://data.techno-science.ca/")
 # set url and key
@@ -134,11 +134,11 @@ resource_search(q = 'name:data', limit = 2, as = 'table')
 ```
 
 ## ckanr's dplyr interface
-`ckanr` implements a `dplyr` SQL interface to CKAN's datastore. 
+`ckanr` implements a `dplyr` SQL interface to CKAN's datastore.
 You can access any resource in the datastore directly using only the CKAN
 resource ID.
 
-Note: this will only work for resources which were uploaded successfully to the 
+Note: this will only work for resources which were uploaded successfully to the
 datastore - they will show the green "Data API" button in CKAN.
 
 ```{r eval=FALSE}

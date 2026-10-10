@@ -49,10 +49,15 @@ print.ckan_related <- function(x, ...) {
 }
 
 get_related <- function(
-  id, url = get_default_url(),
-  key = get_default_key(), ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  ...
 ) {
-  res <- ckan_GET(url, "related_show", list(id = id),
+  res <- ckan_GET(
+    url,
+    "related_show",
+    list(id = id),
     key = key,
     opts = list(...)
   )

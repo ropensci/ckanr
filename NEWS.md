@@ -1,6 +1,16 @@
 ckanr (development version)
 ==============================
 
+ckanr 0.9.1
+===========
+### MAINTENANCE
+
+* Add a pre-commit configuration that runs the Air R formatter
+  (`air-format`) and standard hygiene hooks on changed files.
+  Run `pre-commit install` once per clone to enable it.
+* Format the R sources, tests, and vignettes with Air.
+* Add tests to increase test coverage. This prepares ckanr for the 
+
 ckanr 0.9.0
 ===========
 

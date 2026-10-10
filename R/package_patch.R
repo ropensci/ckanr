@@ -37,8 +37,14 @@
 #' package_patch(list(id = res$id, internal_notes = "New internal notes"))
 #' }
 package_patch <- function(
-  x, id = NULL, extras = NULL, http_method = "GET",
-  key = get_default_key(), url = get_default_url(), as = "list", ...
+  x,
+  id = NULL,
+  extras = NULL,
+  http_method = "GET",
+  key = get_default_key(),
+  url = get_default_url(),
+  as = "list",
+  ...
 ) {
   x <- as.ckan_package(x, url = url, key = key, http_method = http_method)
   x <- unclass(x)
@@ -47,18 +53,26 @@ package_patch <- function(
   }
   if (!"id" %in% names(x)) {
     if (is.null(id)) {
-      stop("`id` field not found in `x`; provide a value to `id` param",
+      stop(
+        "`id` field not found in `x`; provide a value to `id` param",
         call. = FALSE
       )
     }
     x$id <- id$id
   }
-  if (!is.null(extras)) x$extras <- extras
-  res <- ckan_POST(url,
-    method = "package_patch", body = x, key = key,
-    encode = "json", opts = list(...)
+  if (!is.null(extras)) {
+    x$extras <- extras
+  }
+  res <- ckan_POST(
+    url,
+    method = "package_patch",
+    body = x,
+    key = key,
+    encode = "json",
+    opts = list(...)
   )
-  switch(as,
+  switch(
+    as,
     json = res,
     list = as_ck(jsl(res), "ckan_package"),
     table = jsd(res)

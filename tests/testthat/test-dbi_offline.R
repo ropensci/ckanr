@@ -44,8 +44,11 @@ test_that("CKANResult initialize/fetch lifecycle works offline", {
   )
   value <- list(
     fields = fields,
-    records = data.frame(name = c("a", "b"), count = c(1L, 2L),
-      stringsAsFactors = FALSE),
+    records = data.frame(
+      name = c("a", "b"),
+      count = c(1L, 2L),
+      stringsAsFactors = FALSE
+    ),
     sql = 'SELECT * FROM "tbl" LIMIT 2'
   )
   res <- new("CKANResult", value = value)
@@ -83,7 +86,10 @@ test_that("CKAN read-only DBI methods fail clearly offline", {
   con <- DBI::dbConnect(drv, url = "https://demo.ckan.org")
   df <- data.frame(a = 1)
   expect_error(DBI::dbWriteTable(con, "t", df), "read-only")
-  expect_error(DBI::dbCreateTable(con, "t", fields = list(a = "text")), "read-only")
+  expect_error(
+    DBI::dbCreateTable(con, "t", fields = list(a = "text")),
+    "read-only"
+  )
   expect_error(DBI::dbRemoveTable(con, "t"), "read-only")
   expect_error(DBI::dbBegin(con), "read-only")
   expect_error(suppressWarnings(DBI::dbCallProc(con)), "TODO")
@@ -98,10 +104,22 @@ test_that("file validation helpers work offline (mocked availability)", {
     ensure_action_available = function(...) invisible(NULL),
     .package = "ckanr",
     {
-      expect_error(file_create(url = "https://example.com", key = "k"), "`upload` must be")
-      expect_error(file_create(upload = 123, url = "https://example.com"), "single file path")
-      expect_error(file_create(upload = tempfile(), url = "https://example.com"), "does not exist")
-      expect_error(file_register(url = "https://example.com"), "`location` must be")
+      expect_error(
+        file_create(url = "https://example.com", key = "k"),
+        "`upload` must be"
+      )
+      expect_error(
+        file_create(upload = 123, url = "https://example.com"),
+        "single file path"
+      )
+      expect_error(
+        file_create(upload = tempfile(), url = "https://example.com"),
+        "does not exist"
+      )
+      expect_error(
+        file_register(url = "https://example.com"),
+        "`location` must be"
+      )
     }
   )
   expect_true(is.function(ckanr:::coerce_file))

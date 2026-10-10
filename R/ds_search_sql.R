@@ -12,8 +12,11 @@
 #' ds_search_sql(sql2, as = "table")
 #' }
 ds_search_sql <- function(
-  sql, url = get_default_url(), key = get_default_key(),
-  as = "list", ...
+  sql,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   validate_ckan_url(url)
   con <- crul::HttpClient$new(
@@ -24,13 +27,11 @@ ds_search_sql <- function(
   res <- con$get(query = list(sql = sql))
   if (res$status_code > 299) {
     res$raise_for_ct_json()
-    if (grepl("html", res$response_headers$`content-type`)) res$raise_for_status()
+    if (grepl("html", res$response_headers$`content-type`)) {
+      res$raise_for_status()
+    }
     stop(res$parse("UTF-8"))
   }
   txt <- res$parse("UTF-8")
-  switch(as,
-    json = txt,
-    list = jsl(txt),
-    table = jsd(txt)
-  )
+  switch(as, json = txt, list = jsl(txt), table = jsd(txt))
 }

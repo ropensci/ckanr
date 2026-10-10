@@ -26,12 +26,23 @@
 #' ckan_action("package_list", url = "https://data.nhm.ac.uk")
 #' }
 ckan_action <- function(
-  action, query = NULL, body = NULL,
-  headers = list(), verb = "POST", url = get_default_url(),
-  key = get_default_key(), ...
+  action,
+  query = NULL,
+  body = NULL,
+  headers = list(),
+  verb = "POST",
+  url = get_default_url(),
+  key = get_default_key(),
+  ...
 ) {
-  ckan_VERB(verb, url, action,
-    body = body, key = key,
-    query = query, headers = headers, opts = list(...)
+  ckan_VERB(
+    verb,
+    url,
+    action,
+    body = body,
+    key = key,
+    query = query,
+    headers = headers,
+    opts = list(...)
   )
 }

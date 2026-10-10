@@ -139,14 +139,30 @@ ckanr_setup <- function(
   proxy = NULL
 ) {
   Sys.setenv("CKANR_DEFAULT_URL" = url)
-  if (!is.null(key)) Sys.setenv("CKANR_DEFAULT_KEY" = key)
-  if (!is.null(test_url)) Sys.setenv("CKANR_TEST_URL" = test_url)
-  if (!is.null(test_key)) Sys.setenv("CKANR_TEST_KEY" = test_key)
-  if (!is.null(test_did)) Sys.setenv("CKANR_TEST_DID" = test_did)
-  if (!is.null(test_rid)) Sys.setenv("CKANR_TEST_RID" = test_rid)
-  if (!is.null(test_gid)) Sys.setenv("CKANR_TEST_GID" = test_gid)
-  if (!is.null(test_oid)) Sys.setenv("CKANR_TEST_OID" = test_oid)
-  if (!is.null(test_behaviour)) Sys.setenv("CKANR_TEST_BEHAVIOUR" = test_behaviour)
+  if (!is.null(key)) {
+    Sys.setenv("CKANR_DEFAULT_KEY" = key)
+  }
+  if (!is.null(test_url)) {
+    Sys.setenv("CKANR_TEST_URL" = test_url)
+  }
+  if (!is.null(test_key)) {
+    Sys.setenv("CKANR_TEST_KEY" = test_key)
+  }
+  if (!is.null(test_did)) {
+    Sys.setenv("CKANR_TEST_DID" = test_did)
+  }
+  if (!is.null(test_rid)) {
+    Sys.setenv("CKANR_TEST_RID" = test_rid)
+  }
+  if (!is.null(test_gid)) {
+    Sys.setenv("CKANR_TEST_GID" = test_gid)
+  }
+  if (!is.null(test_oid)) {
+    Sys.setenv("CKANR_TEST_OID" = test_oid)
+  }
+  if (!is.null(test_behaviour)) {
+    Sys.setenv("CKANR_TEST_BEHAVIOUR" = test_behaviour)
+  }
   assign("ckanr_proxy", proxy, envir = ckanr_settings_env)
 }
 

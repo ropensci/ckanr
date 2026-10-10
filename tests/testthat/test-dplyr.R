@@ -18,9 +18,12 @@ if (Sys.getenv("TEST_DPLYR_INTERFACE") != "") {
   })
 
   src <- src_ckan(u)
-  name_list <- Filter(f = function(name) {
-    !is.null(ds_search(name, limit = 1, url = u))
-  }, dbListTables(src$con, limit = 20))
+  name_list <- Filter(
+    f = function(name) {
+      !is.null(ds_search(name, limit = 1, url = u))
+    },
+    dbListTables(src$con, limit = 20)
+  )
 
   test_that("tb is created by name", {
     tb <- tbl(src, name = sample(name_list, 1))
@@ -28,7 +31,10 @@ if (Sys.getenv("TEST_DPLYR_INTERFACE") != "") {
   })
 
   test_that("tb is created by sql", {
-    tb <- tbl(src, from = sprintf('SELECT * FROM "%s" LIMIT 100', sample(name_list, 1)))
+    tb <- tbl(
+      src,
+      from = sprintf('SELECT * FROM "%s" LIMIT 100', sample(name_list, 1))
+    )
     expect_s3_class(tb, "tbl_lazy")
   })
 
@@ -123,7 +129,10 @@ if (Sys.getenv("TEST_DPLYR_INTERFACE") != "") {
 
   test_that("semi joins and set operations use valid DataStore SQL", {
     numeric_name <- "ckanr_test_integer"
-    skip_if(!numeric_name %in% names(tb.raw), "Numeric fixture column is missing")
+    skip_if(
+      !numeric_name %in% names(tb.raw),
+      "Numeric fixture column is missing"
+    )
 
     lhs <- tb |> dplyr::select(id)
     rhs <- tb |>
@@ -220,22 +229,32 @@ if (Sys.getenv("TEST_DPLYR_INTERFACE") != "") {
     }
   })
 
-  tb1 <- tbl(src, from = sprintf(
-    'SELECT * FROM "%s" ORDER BY _id LIMIT 100', get_test_rid()
-  ))
+  tb1 <- tbl(
+    src,
+    from = sprintf(
+      'SELECT * FROM "%s" ORDER BY _id LIMIT 100',
+      get_test_rid()
+    )
+  )
   tb2 <- tbl(src, name = name_list[1])
   tb1.raw <- dplyr::collect(tb1)
   tb2.raw <- dplyr::collect(tb2)
 
   test_that("join: left_join", {
-    skip_if(!"_id" %in% intersect(colnames(tb1.raw), colnames(tb2.raw)), "_id column missing")
+    skip_if(
+      !"_id" %in% intersect(colnames(tb1.raw), colnames(tb2.raw)),
+      "_id column missing"
+    )
     r1 <- dplyr::left_join(tb1, tb2, by = "_id") |> dplyr::collect()
     r2 <- dplyr::left_join(tb1.raw, tb2.raw, by = "_id")
     expect_equal(r1, r2)
   })
 
   test_that("join: inner_join", {
-    skip_if(!"_id" %in% intersect(colnames(tb1.raw), colnames(tb2.raw)), "_id column missing")
+    skip_if(
+      !"_id" %in% intersect(colnames(tb1.raw), colnames(tb2.raw)),
+      "_id column missing"
+    )
     r1 <- dplyr::inner_join(tb1, tb2, by = "_id") |> dplyr::collect()
     r2 <- dplyr::inner_join(tb1.raw, tb2.raw, by = "_id")
     expect_equal(r1, r2)

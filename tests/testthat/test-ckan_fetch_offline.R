@@ -42,14 +42,23 @@ test_that("read_csv_base reads text and file sources", {
 })
 
 test_that("read_csv_base falls back on EOF quoted string", {
-  csv <- paste("id,name,value", "1,one,10", "2,\"bad quote,20", "3,three,30", sep = "\n")
+  csv <- paste(
+    "id,name,value",
+    "1,one,10",
+    "2,\"bad quote,20",
+    "3,three,30",
+    sep = "\n"
+  )
   df <- ckanr:::read_csv_base(text = csv)
   expect_equal(nrow(df), 3L)
 })
 
 test_that("read_session rejects unsupported formats", {
   for (fmt in list("pdf", "docx", NA_character_, NULL)) {
-    expect_error(ckanr:::read_session(fmt, "x", tempfile()), "Unsupported file format")
+    expect_error(
+      ckanr:::read_session(fmt, "x", tempfile()),
+      "Unsupported file format"
+    )
   }
 })
 
@@ -74,7 +83,11 @@ test_that("read_session reads xml/html when xml2 available", {
   testthat::skip_if_not_installed("xml2")
   xml <- ckanr:::read_session("xml", "<root><a>1</a></root>", tempfile())
   expect_true(inherits(xml, "xml_document"))
-  html <- ckanr:::read_session("html", "<html><body><p>hi</p></body></html>", tempfile())
+  html <- ckanr:::read_session(
+    "html",
+    "<html><body><p>hi</p></body></html>",
+    tempfile()
+  )
   expect_true(inherits(html, "xml_document"))
 })
 
@@ -83,7 +96,12 @@ test_that("read_all_excel_sheets single sheet returns data.frame", {
   f <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
   skip_if(!file.exists(f), "example CSV missing")
   # exercise the csv path through read_session with extra args
-  df <- ckanr:::read_session("csv", paste(readLines(f), collapse = "\n"), tempfile(), sep = ",")
+  df <- ckanr:::read_session(
+    "csv",
+    paste(readLines(f), collapse = "\n"),
+    tempfile(),
+    sep = ","
+  )
   expect_s3_class(df, "data.frame")
   expect_gt(nrow(df), 0)
 })

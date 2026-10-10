@@ -4,7 +4,11 @@ skip_on_cran()
 
 test_that("package_patch requires id when x lacks one", {
   expect_error(
-    package_patch(list(title = "no id"), url = "https://example.com", key = "k"),
+    package_patch(
+      list(title = "no id"),
+      url = "https://example.com",
+      key = "k"
+    ),
     "`id` field not found"
   )
 })
@@ -17,8 +21,11 @@ test_that("package_patch builds body from list (mocked POST)", {
       '{"success": true, "result": {"id": "pkg-1", "title": "T"}}'
     },
     .package = "ckanr",
-    out <- package_patch(list(id = "pkg-1", title = "T"),
-      url = "https://example.com", key = "k")
+    out <- package_patch(
+      list(id = "pkg-1", title = "T"),
+      url = "https://example.com",
+      key = "k"
+    )
   )
   expect_true(is.ckan_package(out) || is.list(out))
   # invalid `as` falls through switch to NULL (no crash)
@@ -27,8 +34,12 @@ test_that("package_patch builds body from list (mocked POST)", {
       '{"success": true, "result": {"id": "pkg-1", "title": "T"}}'
     },
     .package = "ckanr",
-    out_bad <- package_patch(list(id = "pkg-1"), url = "https://example.com",
-      key = "k", as = "bogus")
+    out_bad <- package_patch(
+      list(id = "pkg-1"),
+      url = "https://example.com",
+      key = "k",
+      as = "bogus"
+    )
   )
   expect_null(out_bad)
 })
@@ -60,15 +71,20 @@ test_that("package_revision_list deprecates on CKAN >= 2.9 (mocked version)", {
       )
       # deprecated path returns NULL
       expect_null(suppressWarnings(
-        package_revision_list("pkg-1", url = "https://example.com")))
+        package_revision_list("pkg-1", url = "https://example.com")
+      ))
     }
   )
 })
 
 test_that("resource_update rejects non-list extras offline", {
   expect_error(
-    resource_update("res-id", extras = "not-a-list",
-      url = "https://example.com", key = "k"),
+    resource_update(
+      "res-id",
+      extras = "not-a-list",
+      url = "https://example.com",
+      key = "k"
+    ),
     "must be of class"
   )
 })

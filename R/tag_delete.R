@@ -26,8 +26,12 @@
 #' vocabulary_delete(vocab$id)
 #' }
 tag_delete <- function(
-  id, vocabulary_id = NULL, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  id,
+  vocabulary_id = NULL,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   tag_id <- NULL
   if (is.ckan_tag(id)) {
@@ -40,14 +44,15 @@ tag_delete <- function(
     stop("id must be a string or ckan_tag", call. = FALSE)
   }
   body <- cc(list(id = tag_id, vocabulary_id = vocabulary_id))
-  res <- ckan_POST(url, "tag_delete",
-    body = tojun(body, TRUE), key = key,
-    encode = "json", headers = ctj(), opts = list(...)
+  res <- ckan_POST(
+    url,
+    "tag_delete",
+    body = tojun(body, TRUE),
+    key = key,
+    encode = "json",
+    headers = ctj(),
+    opts = list(...)
   )
   parsed <- jsonlite::fromJSON(res)
-  switch(as,
-    json = res,
-    list = isTRUE(parsed$success),
-    table = parsed$success
-  )
+  switch(as, json = res, list = isTRUE(parsed$success), table = parsed$success)
 }

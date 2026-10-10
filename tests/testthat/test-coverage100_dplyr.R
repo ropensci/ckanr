@@ -25,11 +25,21 @@ test_that("CKANResult initialize logical and unknown types", {
   testthat::with_mocked_bindings(
     fieldMapping = function(type) rep("bogus", length(type)),
     .package = "ckanr",
-    expect_error(new("CKANResult", value = list(fields = fields, records = list())), "Unknown type")
+    expect_error(
+      new("CKANResult", value = list(fields = fields, records = list())),
+      "Unknown type"
+    )
   )
   # empty records with known types creates empty frame
-  fields2 <- data.frame(id = c("a", "b"), type = c("text", "integer"), stringsAsFactors = FALSE)
-  r <- new("CKANResult", value = list(fields = fields2, records = list(), sql = "x"))
+  fields2 <- data.frame(
+    id = c("a", "b"),
+    type = c("text", "integer"),
+    stringsAsFactors = FALSE
+  )
+  r <- new(
+    "CKANResult",
+    value = list(fields = fields2, records = list(), sql = "x")
+  )
   expect_equal(nrow(r@value$records), 0)
 })
 
@@ -37,10 +47,17 @@ test_that("dbListResults and dbListTables limit branch", {
   drv <- new("CKANDriver")
   con <- DBI::dbConnect(drv, url = "https://demo.ckan.org")
   # dbListResults calls dbGetInfo(conn, 'rsId')
-  expect_true(is.null(DBI::dbListResults(con)) || length(DBI::dbListResults(con)) >= 0)
+  expect_true(
+    is.null(DBI::dbListResults(con)) || length(DBI::dbListResults(con)) >= 0
+  )
   # dbListTables with limit uses mocked ds_search
   testthat::with_mocked_bindings(
-    ds_search = function(...) list(total = 1, records = data.frame(name = "t1", stringsAsFactors = FALSE)),
+    ds_search = function(...) {
+      list(
+        total = 1,
+        records = data.frame(name = "t1", stringsAsFactors = FALSE)
+      )
+    },
     .package = "ckanr",
     {
       expect_identical(DBI::dbListTables(con, limit = 1), "t1")
@@ -51,7 +68,11 @@ test_that("dbListResults and dbListTables limit branch", {
 
 test_that("fetch n=0 and missing branches", {
   fields <- data.frame(id = c("a"), type = c("text"), stringsAsFactors = FALSE)
-  value <- list(fields = fields, records = data.frame(a = c("x", "y"), stringsAsFactors = FALSE), sql = "s")
+  value <- list(
+    fields = fields,
+    records = data.frame(a = c("x", "y"), stringsAsFactors = FALSE),
+    sql = "s"
+  )
   res <- new("CKANResult", value = value)
   out0 <- DBI::dbFetch(res, 0)
   expect_equal(nrow(out0), 2)
@@ -85,16 +106,26 @@ test_that("dplyr backend methods", {
   src <- list(con = con, info = list(url = "https://demo.ckan.org"))
   class(src) <- c("src_ckan", "src_dbi", "src")
   testthat::with_mocked_bindings(
-    ds_search = function(...) list(total = 1, records = data.frame(name = "t1", stringsAsFactors = FALSE)),
+    ds_search = function(...) {
+      list(
+        total = 1,
+        records = data.frame(name = "t1", stringsAsFactors = FALSE)
+      )
+    },
     .package = "ckanr",
     {
       expect_match(dplyr::db_desc(src), "ckan url")
-      expect_true(is.character(dplyr::src_tbls(src, limit = 1)) || is.character(dplyr::src_tbls(src, limit = NULL)))
+      expect_true(
+        is.character(dplyr::src_tbls(src, limit = 1)) ||
+          is.character(dplyr::src_tbls(src, limit = NULL))
+      )
     }
   )
   # tbl with name and without
   testthat::with_mocked_bindings(
-    ds_search = function(...) list(total = 1, records = list(list(name = "t1"))),
+    ds_search = function(...) {
+      list(total = 1, records = list(list(name = "t1")))
+    },
     .package = "ckanr",
     {
       # format.src_ckan with total 0
@@ -105,9 +136,22 @@ test_that("dplyr backend methods", {
 
 test_that("resource_update pick_type remaining", {
   expect_identical(ckanr:::pick_type("text/plain"), "txt")
-  expect_identical(ckanr:::pick_type("application/vnd.openxmlformats-officedocument.wordprocessingml.document"), "docx")
-  expect_identical(ckanr:::pick_type("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"), "xlsx")
-  expect_identical(ckanr:::pick_type("application/vnd.ms-excel.sheet.macroEnabled.12"), "xlsm")
+  expect_identical(
+    ckanr:::pick_type(
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    ),
+    "docx"
+  )
+  expect_identical(
+    ckanr:::pick_type(
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    ),
+    "xlsx"
+  )
+  expect_identical(
+    ckanr:::pick_type("application/vnd.ms-excel.sheet.macroEnabled.12"),
+    "xlsm"
+  )
   expect_identical(ckanr:::pick_type("application/vnd.geo+json"), "geojson")
   expect_identical(ckanr:::pick_type("image/png"), "png")
   expect_identical(ckanr:::pick_type("image/bmp"), "bmp")
@@ -122,14 +166,50 @@ test_that("files as variants", {
     .package = "ckanr",
     {
       for (fmt in c("json", "table")) {
-        expect_false(is.null(file_show("f1", as = fmt, url = "https://example.com")))
-        expect_false(is.null(file_delete("f1", as = fmt, url = "https://example.com")))
-        expect_false(is.null(file_rename("f1", "n2", as = fmt, url = "https://example.com")))
-        expect_false(is.null(file_pin("f1", as = fmt, url = "https://example.com")))
-        expect_false(is.null(file_unpin("f1", as = fmt, url = "https://example.com")))
-        expect_false(is.null(file_register(location = "loc", as = fmt, url = "https://example.com")))
-        expect_false(is.null(file_ownership_transfer("f1", "o1", "package", as = fmt, url = "https://example.com")))
-        expect_false(is.null(file_owner_scan("o1", "package", as = fmt, url = "https://example.com")))
+        expect_false(is.null(file_show(
+          "f1",
+          as = fmt,
+          url = "https://example.com"
+        )))
+        expect_false(is.null(file_delete(
+          "f1",
+          as = fmt,
+          url = "https://example.com"
+        )))
+        expect_false(is.null(file_rename(
+          "f1",
+          "n2",
+          as = fmt,
+          url = "https://example.com"
+        )))
+        expect_false(is.null(file_pin(
+          "f1",
+          as = fmt,
+          url = "https://example.com"
+        )))
+        expect_false(is.null(file_unpin(
+          "f1",
+          as = fmt,
+          url = "https://example.com"
+        )))
+        expect_false(is.null(file_register(
+          location = "loc",
+          as = fmt,
+          url = "https://example.com"
+        )))
+        expect_false(is.null(file_ownership_transfer(
+          "f1",
+          "o1",
+          "package",
+          as = fmt,
+          url = "https://example.com"
+        )))
+        expect_false(is.null(file_owner_scan(
+          "o1",
+          "package",
+          as = fmt,
+          url = "https://example.com"
+        )))
       }
     }
   )
@@ -143,8 +223,14 @@ test_that("as-ckan character and get_* with mocked GET", {
     .package = "ckanr",
     {
       expect_true(is.ckan_file(as.ckan_file("f1", url = "https://example.com")))
-      expect_true(is.ckan_related(as.ckan_related("r1", url = "https://example.com")))
-      expect_true(is.ckan_resource_view(as.ckan_resource_view("v1", url = "https://example.com")))
+      expect_true(is.ckan_related(as.ckan_related(
+        "r1",
+        url = "https://example.com"
+      )))
+      expect_true(is.ckan_resource_view(as.ckan_resource_view(
+        "v1",
+        url = "https://example.com"
+      )))
     }
   )
 })

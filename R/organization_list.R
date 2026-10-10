@@ -25,15 +25,21 @@
 #' }
 organization_list <- function(
   order_by = c("name", "package"),
-  decreasing = FALSE, organizations = NULL, all_fields = TRUE,
-  limit = 31, url = get_default_url(), key = get_default_key(),
-  as = "list", ...
+  decreasing = FALSE,
+  organizations = NULL,
+  all_fields = TRUE,
+  limit = 31,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   stopifnot(length(order_by) > 0)
   stopifnot(order_by[1] %in% c("name", "package"))
   args <- cc(list(
     sort = sprintf(
-      "%s %s", order_by[1],
+      "%s %s",
+      order_by[1],
       ifelse(decreasing, "", "asc")
     ),
     all_fields = ifelse(all_fields, "True", "False"),
@@ -41,7 +47,8 @@ organization_list <- function(
     organizations = organizations
   ))
   res <- ckan_GET(url, "organization_list", args, key = key, opts = list(...))
-  switch(as,
+  switch(
+    as,
     json = res,
     list = lapply(jsl(res), as.ckan_organization),
     table = jsd(res)

@@ -15,8 +15,10 @@
 #' dashboard_new_activities_count()
 #' }
 dashboard_count <- function(
-  url = get_default_url(), key = get_default_key(),
-  as = "list", ...
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   dashboard_new_activities_count(url = url, key = key, as = as, ...)
 }

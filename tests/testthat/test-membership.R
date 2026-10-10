@@ -11,7 +11,11 @@ oid <- get_test_oid()
 
 create_temp_user <- function() {
   suffix <- paste(sample(letters, 4, TRUE), collapse = "")
-  username <- paste0("ckanr_member_", format(Sys.time(), "%Y%m%d%H%M%S"), suffix)
+  username <- paste0(
+    "ckanr_member_",
+    format(Sys.time(), "%Y%m%d%H%M%S"),
+    suffix
+  )
   usr <- tryCatch(
     user_create(
       name = username,
@@ -29,7 +33,10 @@ create_temp_user <- function() {
 }
 
 cleanup_temp_user <- function(usr) {
-  try(suppressWarnings(user_delete(usr$id, url = url, key = key)), silent = TRUE)
+  try(
+    suppressWarnings(user_delete(usr$id, url = url, key = key)),
+    silent = TRUE
+  )
 }
 
 # configuration sanity
@@ -53,12 +60,22 @@ test_that("member_create/member_delete round-trip for users", {
   usr <- create_temp_user()
   on.exit(cleanup_temp_user(usr), add = TRUE)
 
-  res <- member_create(gid, usr,
-    object_type = "user", capacity = "member",
-    url = url, key = key
+  res <- member_create(
+    gid,
+    usr,
+    object_type = "user",
+    capacity = "member",
+    url = url,
+    key = key
   )
   expect_type(res, "list")
-  expect_true(member_delete(gid, usr, object_type = "user", url = url, key = key))
+  expect_true(member_delete(
+    gid,
+    usr,
+    object_type = "user",
+    url = url,
+    key = key
+  ))
 })
 
 test_that("group_member_create/delete manage membership", {
@@ -78,7 +95,13 @@ test_that("organization_member_create/delete manage membership", {
   usr <- create_temp_user()
   on.exit(cleanup_temp_user(usr), add = TRUE)
 
-  om <- organization_member_create(oid, usr, role = "member", url = url, key = key)
+  om <- organization_member_create(
+    oid,
+    usr,
+    role = "member",
+    url = url,
+    key = key
+  )
   expect_type(om, "list")
   expect_true(organization_member_delete(oid, usr, url = url, key = key))
 })
@@ -97,7 +120,12 @@ test_that("organization_list_for_user defaults to current user", {
   res <- organization_list_for_user(url = url, key = key)
   expect_type(res, "list")
   if (length(res)) {
-    expect_true(all(vapply(res, inherits, logical(1), what = "ckan_organization")))
+    expect_true(all(vapply(
+      res,
+      inherits,
+      logical(1),
+      what = "ckan_organization"
+    )))
   }
 })
 

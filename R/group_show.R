@@ -30,9 +30,13 @@
 #' group_show(res[[1]]$name, as = "table")
 #' }
 group_show <- function(
-  id, include_datasets = TRUE, include_users = TRUE,
+  id,
+  include_datasets = TRUE,
+  include_users = TRUE,
   url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   id <- as.ckan_group(id, url = url)
   args <- cc(list(
@@ -41,9 +45,5 @@ group_show <- function(
     include_users = as_log(include_users)
   ))
   res <- ckan_GET(url, "group_show", args, key = key, opts = list(...))
-  switch(as,
-    json = res,
-    list = as_ck(jsl(res), "ckan_group"),
-    table = jsd(res)
-  )
+  switch(as, json = res, list = as_ck(jsl(res), "ckan_group"), table = jsd(res))
 }

@@ -44,21 +44,44 @@
 #' res$name
 #' }
 organization_create <- function(
-  name = NULL, id = NULL, title = NULL,
-  description = NULL, image_url = NULL, state = "active", approval_status = NULL,
-  extras = NULL, packages = NULL, users = NULL, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  name = NULL,
+  id = NULL,
+  title = NULL,
+  description = NULL,
+  image_url = NULL,
+  state = "active",
+  approval_status = NULL,
+  extras = NULL,
+  packages = NULL,
+  users = NULL,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   body <- cc(list(
-    name = name, id = id, title = title, description = description,
-    image_url = image_url, state = state, approval_status = approval_status,
-    extras = extras, packages = packages, users = users
+    name = name,
+    id = id,
+    title = title,
+    description = description,
+    image_url = image_url,
+    state = state,
+    approval_status = approval_status,
+    extras = extras,
+    packages = packages,
+    users = users
   ))
-  res <- ckan_POST(url, "organization_create",
+  res <- ckan_POST(
+    url,
+    "organization_create",
     body = tojun(body, TRUE),
-    key = key, encode = "json", headers = ctj(), opts = list(...)
+    key = key,
+    encode = "json",
+    headers = ctj(),
+    opts = list(...)
   )
-  switch(as,
+  switch(
+    as,
     json = res,
     list = as_ck(jsl(res), "ckan_organization"),
     table = jsd(res)

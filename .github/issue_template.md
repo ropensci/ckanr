@@ -1,6 +1,6 @@
-<!-- If this issue reports package use, a question, a bug, or a similar topic, add your query. 
-     Add your devtools::session_info() or sessionInfo() in the code block below. 
-     If ckanr throws an error, also add the traceback() of the error. If not, delete this text and continue. 
+<!-- If this issue reports package use, a question, a bug, or a similar topic, add your query.
+     Add your devtools::session_info() or sessionInfo() in the code block below.
+     If ckanr throws an error, also add the traceback() of the error. If not, delete this text and continue.
 -->
 
 <details>

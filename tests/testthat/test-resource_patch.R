@@ -67,7 +67,11 @@ test_that("resource_patch accepts ckan_resource objects", {
   )
 
   res_obj <- resource_show(res$id, url = url, key = key)
-  new_title <- paste0("title-", sample(letters, 5, replace = TRUE), collapse = "")
+  new_title <- paste0(
+    "title-",
+    sample(letters, 5, replace = TRUE),
+    collapse = ""
+  )
   patched <- resource_patch(
     list(title = new_title),
     id = res_obj,
@@ -119,8 +123,13 @@ test_that("resource_patch changes the external URL through rcurl", {
   )
 
   new_url <- "https://example.com/arcgis/item.html?id=abc123"
-  patched <- resource_patch(list(), id = res$id, rcurl = new_url,
-    url = url, key = key)
+  patched <- resource_patch(
+    list(),
+    id = res$id,
+    rcurl = new_url,
+    url = url,
+    key = key
+  )
 
   expect_is(patched, "ckan_resource")
   expect_equal(patched$url, new_url)
@@ -130,16 +139,22 @@ test_that("resource_patch changes the external URL through rcurl", {
   expect_equal(shown$url, new_url)
 
   # rcurl wins over a url item in x
-  patched2 <- resource_patch(list(url = "https://example.com/body"),
-    id = res$id, rcurl = "https://example.com/param",
-    url = url, key = key)
+  patched2 <- resource_patch(
+    list(url = "https://example.com/body"),
+    id = res$id,
+    rcurl = "https://example.com/param",
+    url = url,
+    key = key
+  )
   expect_equal(patched2$url, "https://example.com/param")
 
   # an explicit url_type item in x wins over the rcurl default
   patched3 <- resource_patch(
     list(url = "https://example.com/kept", url_type = "link"),
     id = res$id,
-    url = url, key = key)
+    url = url,
+    key = key
+  )
   expect_equal(patched3$url, "https://example.com/kept")
   expect_equal(patched3$url_type, "link")
 })

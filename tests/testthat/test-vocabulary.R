@@ -9,7 +9,10 @@ url <- get_test_url()
 key <- get_test_key()
 
 random_vocab_name <- function() {
-  paste0("ckanr_vocab_", paste(sample(c(letters, 0:9), 10, TRUE), collapse = ""))
+  paste0(
+    "ckanr_vocab_",
+    paste(sample(c(letters, 0:9), 10, TRUE), collapse = "")
+  )
 }
 
 cleanup_vocabulary <- function(id) {

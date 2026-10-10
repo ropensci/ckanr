@@ -34,7 +34,10 @@ view_plugin_available <- function(view_type) {
 
 create_dataset_with_resource <- function() {
   pkg <- package_create(
-    name = sprintf("resource_views_%s", paste0(as.integer(Sys.time()), sample.int(1000, 1))),
+    name = sprintf(
+      "resource_views_%s",
+      paste0(as.integer(Sys.time()), sample.int(1000, 1))
+    ),
     owner_org = oid,
     url = url,
     key = key
@@ -54,23 +57,32 @@ create_dataset_with_resource <- function() {
 
 test_that("resource view lifecycle helpers work", {
   check_ckan(url)
-  skip_if(!view_plugin_available("text_view"), "text_view plugin unavailable on this CKAN")
+  skip_if(
+    !view_plugin_available("text_view"),
+    "text_view plugin unavailable on this CKAN"
+  )
 
   setup <- create_dataset_with_resource()
   pkg <- setup$package
   res <- setup$resource
   on.exit(package_delete(pkg$id, url = url, key = key), add = TRUE)
 
-  view_one <- resource_view_create(res,
+  view_one <- resource_view_create(
+    res,
     view_type = "text_view",
-    title = "First view", description = "Primary preview",
-    url = url, key = key
+    title = "First view",
+    description = "Primary preview",
+    url = url,
+    key = key
   )
   expect_s3_class(view_one, "ckan_resource_view")
 
-  view_two <- resource_view_create(res,
+  view_two <- resource_view_create(
+    res,
     view_type = "text_view",
-    title = "Second view", url = url, key = key
+    title = "Second view",
+    url = url,
+    key = key
   )
 
   listed <- resource_view_list(res, url = url, key = key)
@@ -81,13 +93,20 @@ test_that("resource view lifecycle helpers work", {
   shown <- resource_view_show(view_one, url = url, key = key)
   expect_equal(shown$id, view_one$id)
 
-  updated <- resource_view_update(view_one,
+  updated <- resource_view_update(
+    view_one,
     title = "Updated view title",
-    url = url, key = key
+    url = url,
+    key = key
   )
   expect_equal(updated$title, "Updated view title")
 
-  reordered <- resource_view_reorder(res, order = rev(ids), url = url, key = key)
+  reordered <- resource_view_reorder(
+    res,
+    order = rev(ids),
+    url = url,
+    key = key
+  )
   expect_true(is.list(reordered))
 
   deleted <- resource_view_delete(view_two, url = url, key = key)
@@ -103,13 +122,17 @@ test_that("default view helpers return lists", {
   res <- setup$resource
   on.exit(package_delete(pkg$id, url = url, key = key), add = TRUE)
 
-  resource_defaults <- resource_create_default_resource_views(res,
-    url = url, key = key
+  resource_defaults <- resource_create_default_resource_views(
+    res,
+    url = url,
+    key = key
   )
   expect_type(resource_defaults, "list")
 
-  package_defaults <- package_create_default_resource_views(pkg,
-    url = url, key = key
+  package_defaults <- package_create_default_resource_views(
+    pkg,
+    url = url,
+    key = key
   )
   expect_type(package_defaults, "list")
 })

@@ -23,16 +23,22 @@
 #' package_autocomplete(q = "spending", limit = 5, as = "table")
 #' }
 package_autocomplete <- function(
-  q, limit = 10, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  q,
+  limit = 10,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   args <- cc(list(q = q, limit = limit))
-  res <- ckan_GET(url, "package_autocomplete", args, key = key, opts = list(...))
-  switch(as,
-    json = res,
-    list = jsl(res),
-    table = jsd(res)
+  res <- ckan_GET(
+    url,
+    "package_autocomplete",
+    args,
+    key = key,
+    opts = list(...)
   )
+  switch(as, json = res, list = jsl(res), table = jsd(res))
 }
 
 #' Autocomplete resource formats.
@@ -57,13 +63,18 @@ package_autocomplete <- function(
 #' format_autocomplete(q = "csv")
 #' }
 format_autocomplete <- function(
-  q, limit = 5, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  q,
+  limit = 5,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   args <- cc(list(q = q, limit = limit))
   res <- ckan_GET(url, "format_autocomplete", args, key = key, opts = list(...))
   values <- unlist(jsl(res), use.names = FALSE)
-  switch(as,
+  switch(
+    as,
     json = res,
     list = values,
     table = data.frame(name = values, stringsAsFactors = FALSE)
@@ -93,16 +104,16 @@ format_autocomplete <- function(
 #' user_autocomplete(q = "admin")
 #' }
 user_autocomplete <- function(
-  q, limit = 20, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  q,
+  limit = 20,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   args <- cc(list(q = q, limit = limit))
   res <- ckan_GET(url, "user_autocomplete", args, key = key, opts = list(...))
-  switch(as,
-    json = res,
-    list = jsl(res),
-    table = jsd(res)
-  )
+  switch(as, json = res, list = jsl(res), table = jsd(res))
 }
 
 #' Autocomplete group names.
@@ -128,16 +139,16 @@ user_autocomplete <- function(
 #' group_autocomplete(q = "data")
 #' }
 group_autocomplete <- function(
-  q, limit = 20, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  q,
+  limit = 20,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   args <- cc(list(q = q, limit = limit))
   res <- ckan_GET(url, "group_autocomplete", args, key = key, opts = list(...))
-  switch(as,
-    json = res,
-    list = jsl(res),
-    table = jsd(res)
-  )
+  switch(as, json = res, list = jsl(res), table = jsd(res))
 }
 
 #' Autocomplete organization names.
@@ -163,16 +174,20 @@ group_autocomplete <- function(
 #' organization_autocomplete(q = "data")
 #' }
 organization_autocomplete <- function(
-  q, limit = 20, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  q,
+  limit = 20,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   args <- cc(list(q = q, limit = limit))
-  res <- ckan_GET(url, "organization_autocomplete", args,
-    key = key, opts = list(...)
+  res <- ckan_GET(
+    url,
+    "organization_autocomplete",
+    args,
+    key = key,
+    opts = list(...)
   )
-  switch(as,
-    json = res,
-    list = jsl(res),
-    table = jsd(res)
-  )
+  switch(as, json = res, list = jsl(res), table = jsd(res))
 }

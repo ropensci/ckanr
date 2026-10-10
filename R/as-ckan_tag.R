@@ -46,7 +46,9 @@ print.ckan_tag <- function(x, ...) {
 }
 
 get_tag <- function(
-  id, url = get_default_url(), key = get_default_key(),
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
   ...
 ) {
   res <- ckan_GET(url, "tag_show", list(id = id), key = key, opts = list(...))

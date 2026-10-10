@@ -25,10 +25,16 @@ test_that("parse_ckan_response handles as variants and errors", {
   json <- '{"success": true, "result": {"id": "abc"}}'
   expect_type(ckanr:::parse_ckan_response(json, as = "json"), "character")
   expect_true(is.list(ckanr:::parse_ckan_response(json, as = "list")))
-  expect_error(ckanr:::parse_ckan_response(json, as = "bogus"), "Unsupported `as`")
+  expect_error(
+    ckanr:::parse_ckan_response(json, as = "bogus"),
+    "Unsupported `as`"
+  )
   # list_coercer is applied
-  out <- ckanr:::parse_ckan_response(json, as = "list",
-    list_coercer = function(x) ckanr:::as_ck(x, "ckan_file"))
+  out <- ckanr:::parse_ckan_response(
+    json,
+    as = "list",
+    list_coercer = function(x) ckanr:::as_ck(x, "ckan_file")
+  )
   expect_true(inherits(out, "ckan_file"))
 })
 
@@ -43,8 +49,14 @@ test_that("ctj and auth_headers shape", {
 })
 
 test_that("notrail strips trailing slashes", {
-  expect_identical(ckanr:::notrail("https://example.com///"), "https://example.com")
-  expect_identical(ckanr:::notrail("https://example.com"), "https://example.com")
+  expect_identical(
+    ckanr:::notrail("https://example.com///"),
+    "https://example.com"
+  )
+  expect_identical(
+    ckanr:::notrail("https://example.com"),
+    "https://example.com"
+  )
 })
 
 test_that("assert checks class when non-NULL", {
@@ -55,7 +67,10 @@ test_that("assert checks class when non-NULL", {
 
 test_that("check_http_method validates", {
   expect_silent(ckanr:::check_http_method("GET", c("GET", "POST")))
-  expect_error(ckanr:::check_http_method("PUT", c("GET", "POST")), "'http_method' must be")
+  expect_error(
+    ckanr:::check_http_method("PUT", c("GET", "POST")),
+    "'http_method' must be"
+  )
 })
 
 test_that("haz_names checks named lists", {
@@ -78,13 +93,19 @@ test_that("tojun serialises with auto_unbox", {
 
 test_that("check4X errors for missing packages and passes for installed", {
   expect_silent(ckanr:::check4X("jsonlite"))
-  expect_error(ckanr:::check4X("definitely-not-a-real-pkg-xyz"), "Please install")
+  expect_error(
+    ckanr:::check4X("definitely-not-a-real-pkg-xyz"),
+    "Please install"
+  )
 })
 
 test_that("validate_ckan_url rejects bad input", {
   expect_error(ckanr:::validate_ckan_url(""), "empty")
   expect_error(ckanr:::validate_ckan_url(NA_character_), "empty")
-  expect_error(ckanr:::validate_ckan_url("ftp://example.com"), "must start with")
+  expect_error(
+    ckanr:::validate_ckan_url("ftp://example.com"),
+    "must start with"
+  )
   expect_silent(ckanr:::validate_ckan_url("https://demo.ckan.org"))
 })
 
@@ -95,7 +116,9 @@ test_that("err_handler passes through 2xx and errors on failures", {
 
   bad_json <- new.env(parent = emptyenv())
   bad_json$status_code <- 404
-  bad_json$parse <- function(...) '{"error": {"__type": "Not Found Error", "message": ["nope"]}}'
+  bad_json$parse <- function(...) {
+    '{"error": {"__type": "Not Found Error", "message": ["nope"]}}'
+  }
   expect_error(ckanr:::err_handler(bad_json), "404 - Not Found Error")
 
   bad_text <- new.env(parent = emptyenv())
@@ -131,8 +154,11 @@ test_that("asl maps logical-likes", {
 
 test_that("ensure_action_available fails clearly when offline", {
   expect_error(
-    ckanr:::ensure_action_available("definitely_missing_action_xyz",
-      url = "https://127.0.0.1:9", key = NULL),
+    ckanr:::ensure_action_available(
+      "definitely_missing_action_xyz",
+      url = "https://127.0.0.1:9",
+      key = NULL
+    ),
     "unavailable on this CKAN instance"
   )
 })

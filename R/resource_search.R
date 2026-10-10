@@ -25,13 +25,20 @@
 #' resource_search(q = c("description:encoded", "name:No.2"), url = "demo.ckan.org")
 #' }
 resource_search <- function(
-  q, sort = NULL, offset = NULL, limit = NULL,
-  url = get_default_url(), key = get_default_key(), as = "list", ...
+  q,
+  sort = NULL,
+  offset = NULL,
+  limit = NULL,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   args <- cc(list(order_by = sort, offset = offset, limit = limit))
   args <- c(args, handle_many(q))
   res <- ckan_GET(url, "resource_search", args, key = key, opts = list(...))
-  switch(as,
+  switch(
+    as,
     json = res,
     list = {
       tmp <- jsl(res)

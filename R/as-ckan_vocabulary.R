@@ -24,7 +24,9 @@ as.ckan_vocabulary.character <- function(x, ...) get_vocabulary(x, ...)
 as.ckan_vocabulary.ckan_vocabulary <- function(x, ...) x
 
 #' @export
-as.ckan_vocabulary.list <- function(x, ...) structure(x, class = "ckan_vocabulary")
+as.ckan_vocabulary.list <- function(x, ...) {
+  structure(x, class = "ckan_vocabulary")
+}
 
 #' @export
 #' @rdname as.ckan_vocabulary
@@ -40,10 +42,15 @@ print.ckan_vocabulary <- function(x, ...) {
 }
 
 get_vocabulary <- function(
-  id, url = get_default_url(), key = get_default_key(),
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
   ...
 ) {
-  res <- ckan_GET(url, "vocabulary_show", list(id = id),
+  res <- ckan_GET(
+    url,
+    "vocabulary_show",
+    list(id = id),
     key = key,
     opts = list(...)
   )

@@ -79,8 +79,12 @@ test_that("file lifecycle roundtrip", {
   shown2 <- file_show(as.ckan_file(created), url = url, key = key)
   expect_equal(shown2$id, created$id)
 
-  renamed <- file_rename(created$id, name = "ckanr-renamed.txt",
-    url = url, key = key)
+  renamed <- file_rename(
+    created$id,
+    name = "ckanr-renamed.txt",
+    url = url,
+    key = key
+  )
   expect_equal(renamed$name, "ckanr-renamed.txt")
 
   pinned <- file_pin(created$id, url = url, key = key)
@@ -104,8 +108,10 @@ test_that("file_owner_scan and ownership transfer validate", {
     "file_owner_scan unavailable on this CKAN instance"
   )
   res <- file_owner_scan(
-    owner_id = get_test_oid(), owner_type = "organization",
-    url = url, key = key
+    owner_id = get_test_oid(),
+    owner_type = "organization",
+    url = url,
+    key = key
   )
   expect_true(is.list(res))
 

@@ -23,14 +23,13 @@
 #' get_site_user()
 #' }
 get_site_user <- function(
-  defer_commit = FALSE, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  defer_commit = FALSE,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   args <- cc(list(defer_commit = as_log(defer_commit)))
   res <- ckan_GET(url, "get_site_user", args, key = key, opts = list(...))
-  switch(as,
-    json = res,
-    list = as_ck(jsl(res), "ckan_user"),
-    table = jsd(res)
-  )
+  switch(as, json = res, list = as_ck(jsl(res), "ckan_user"), table = jsd(res))
 }

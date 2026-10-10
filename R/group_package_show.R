@@ -22,13 +22,18 @@
 #' group_package_show(res[[1]], limit = 5, as = "table")
 #' }
 group_package_show <- function(
-  id, limit = NULL, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  id,
+  limit = NULL,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   id <- as.ckan_group(id, url = url)
   args <- cc(list(id = id$id, limit = limit))
   res <- ckan_GET(url, "group_package_show", args, key = key, opts = list(...))
-  switch(as,
+  switch(
+    as,
     json = res,
     list = lapply(jsl(res), as.ckan_package),
     table = jsd(res)

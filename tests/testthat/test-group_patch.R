@@ -37,7 +37,11 @@ test_that("group_patch updates metadata via id string", {
     add = TRUE
   )
 
-  new_title <- paste("patched title", sample(letters, 5, replace = TRUE), collapse = "")
+  new_title <- paste(
+    "patched title",
+    sample(letters, 5, replace = TRUE),
+    collapse = ""
+  )
   patched <- group_patch(
     list(title = new_title),
     id = grp$id,
@@ -64,7 +68,11 @@ test_that("group_patch accepts ckan_group objects", {
   )
 
   grp_obj <- group_show(grp$id, url = url, key = key)
-  new_desc <- paste("patched description", sample(letters, 6, replace = TRUE), collapse = "")
+  new_desc <- paste(
+    "patched description",
+    sample(letters, 6, replace = TRUE),
+    collapse = ""
+  )
   patched <- group_patch(
     list(description = new_desc),
     id = grp_obj,

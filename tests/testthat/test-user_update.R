@@ -15,7 +15,12 @@ skip_if(
 skip_if_not_sysadmin(url, key)
 
 unique_user_name <- function(prefix = "ckanr-user-update") {
-  paste(prefix, format(Sys.time(), "%Y%m%d%H%M%S"), sprintf("%04d", sample(10000, 1)), sep = "-")
+  paste(
+    prefix,
+    format(Sys.time(), "%Y%m%d%H%M%S"),
+    sprintf("%04d", sample(10000, 1)),
+    sep = "-"
+  )
 }
 
 create_temp_user <- function(name = unique_user_name()) {
@@ -42,7 +47,11 @@ test_that("user_update updates metadata via id string", {
 
   # user_update replaces the whole account: fetch the full object first
   full <- unclass(user_show(usr$id, url = url, key = key))
-  new_about <- paste("updated about", sample(letters, 5, replace = TRUE), collapse = "")
+  new_about <- paste(
+    "updated about",
+    sample(letters, 5, replace = TRUE),
+    collapse = ""
+  )
   full$about <- new_about
   updated <- user_update(full, id = usr$id, url = url, key = key)
 
@@ -61,7 +70,11 @@ test_that("user_update accepts ckan_user objects", {
 
   usr_obj <- user_show(usr$id, url = url, key = key)
   full <- unclass(usr_obj)
-  new_fullname <- paste("ckanr user", sample(letters, 6, replace = TRUE), collapse = "")
+  new_fullname <- paste(
+    "ckanr user",
+    sample(letters, 6, replace = TRUE),
+    collapse = ""
+  )
   full$fullname <- new_fullname
   updated <- user_update(full, id = usr_obj, url = url, key = key)
 
@@ -74,7 +87,11 @@ test_that("user_patch patches metadata", {
   usr <- create_temp_user()
   on.exit(cleanup_user(usr$id), add = TRUE)
 
-  new_about <- paste("patched about", sample(letters, 5, replace = TRUE), collapse = "")
+  new_about <- paste(
+    "patched about",
+    sample(letters, 5, replace = TRUE),
+    collapse = ""
+  )
   patched <- user_patch(
     list(about = new_about),
     id = usr$id,
@@ -88,7 +105,10 @@ test_that("user_patch patches metadata", {
   expect_ckan_formats(function(fmt) {
     user_patch(
       list(about = new_about),
-      id = usr$id, url = url, key = key, as = fmt
+      id = usr$id,
+      url = url,
+      key = key,
+      as = fmt
     )
   })
 })

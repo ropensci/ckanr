@@ -32,7 +32,10 @@ test_that("organization_purge removes a deleted organization", {
   org <- create_temp_org()
   on.exit(
     {
-      try(organization_purge(org$id, url = url, key = key, as = "list"), silent = TRUE)
+      try(
+        organization_purge(org$id, url = url, key = key, as = "list"),
+        silent = TRUE
+      )
     },
     add = TRUE
   )
@@ -42,7 +45,10 @@ test_that("organization_purge removes a deleted organization", {
 
   expect_true(is.list(purged))
   expect_true(all(vapply(purged, inherits, logical(1), "ckan_organization")))
-  expect_error(organization_show(org$id, url = url, key = key), "Not Found Error")
+  expect_error(
+    organization_show(org$id, url = url, key = key),
+    "Not Found Error"
+  )
 })
 
 test_that("organization_purge fails well", {

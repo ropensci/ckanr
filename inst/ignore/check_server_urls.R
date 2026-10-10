@@ -5,7 +5,7 @@ checkem <- function(url) {
 }
 
 out <- lapply(servers(), function(w) {
-  data.frame(url=w, ok=checkem(w))
+  data.frame(url = w, ok = checkem(w))
 })
 df <- dplyr::bind_rows(out)
 df

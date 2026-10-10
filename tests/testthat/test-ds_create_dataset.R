@@ -60,7 +60,8 @@ test_that("ds_create_dataset fails with bad inputs", {
   check_ckan(url)
   check_dataset(url, did)
 
-  expect_error(suppressWarnings(ds_create_dataset()),
+  expect_error(
+    suppressWarnings(ds_create_dataset()),
     "argument \"path\" is missing",
     fixed = FALSE
   )

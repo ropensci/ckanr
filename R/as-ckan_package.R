@@ -47,8 +47,12 @@ is.ckan_package <- function(x) inherits(x, "ckan_package")
 print.ckan_package <- function(x, ...) {
   cat(paste0("<CKAN Package> ", x$id), "\n")
   cat("  Title: ", title_x(x$title), "\n", sep = "")
-  cat("  Creator/Modified: ", x$metadata_created, " / ",
-    x$metadata_modified, "\n",
+  cat(
+    "  Creator/Modified: ",
+    x$metadata_created,
+    " / ",
+    x$metadata_modified,
+    "\n",
     sep = ""
   )
   cat("  Resources (up to 5): ", sift_res(x$resources), "\n", sep = "")
@@ -77,7 +81,9 @@ sift_res <- function(z) {
         }
         b <- unlist(b)
         b <- b[nchar(b) > 0]
-        if (length(b) > 1) b <- b[1]
+        if (length(b) > 1) {
+          b <- b[1]
+        }
         paste(names(b), unlist(unname(b)), sep = ": ")
       }))
     }
@@ -88,12 +94,19 @@ sift_res <- function(z) {
 }
 
 get_package <- function(
-  id, url = get_default_url(), key = get_default_key(),
-  http_method = "GET", ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  http_method = "GET",
+  ...
 ) {
-  res <- package_show(id,
-    http_method = http_method, url = url, key = key,
-    as = "json", ...
+  res <- package_show(
+    id,
+    http_method = http_method,
+    url = url,
+    key = key,
+    as = "json",
+    ...
   )
   as_ck(jsl(res), "ckan_package")
 }

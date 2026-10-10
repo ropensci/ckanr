@@ -28,9 +28,14 @@ NULL
 #' @rdname activity_helpers
 #' @export
 group_activity_list <- function(
-  id, offset = 0, limit = 31,
-  include_hidden_activity = FALSE, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  id,
+  offset = 0,
+  limit = 31,
+  include_hidden_activity = FALSE,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   id <- as.ckan_group(id, url = url, key = key)
   args <- cc(list(
@@ -39,23 +44,21 @@ group_activity_list <- function(
     limit = limit,
     include_hidden_activity = as_log(include_hidden_activity)
   ))
-  res <- ckan_GET(url, "group_activity_list", args,
-    key = key,
-    opts = list(...)
-  )
-  switch(as,
-    json = res,
-    list = jsl(res),
-    table = jsd(res)
-  )
+  res <- ckan_GET(url, "group_activity_list", args, key = key, opts = list(...))
+  switch(as, json = res, list = jsl(res), table = jsd(res))
 }
 
 #' @rdname activity_helpers
 #' @export
 organization_activity_list <- function(
-  id, offset = 0, limit = 31,
-  include_hidden_activity = FALSE, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  id,
+  offset = 0,
+  limit = 31,
+  include_hidden_activity = FALSE,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   id <- as.ckan_organization(id, url = url, key = key)
   args <- cc(list(
@@ -64,123 +67,134 @@ organization_activity_list <- function(
     limit = limit,
     include_hidden_activity = as_log(include_hidden_activity)
   ))
-  res <- ckan_GET(url, "organization_activity_list", args,
+  res <- ckan_GET(
+    url,
+    "organization_activity_list",
+    args,
     key = key,
     opts = list(...)
   )
-  switch(as,
-    json = res,
-    list = jsl(res),
-    table = jsd(res)
-  )
+  switch(as, json = res, list = jsl(res), table = jsd(res))
 }
 
 #' @rdname activity_helpers
 #' @export
 recently_changed_packages_activity_list <- function(
-  offset = 0, limit = 31,
-  url = get_default_url(), key = get_default_key(), as = "list", ...
+  offset = 0,
+  limit = 31,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   args <- cc(list(offset = offset, limit = limit))
-  res <- ckan_GET(url, "recently_changed_packages_activity_list", args,
-    key = key, opts = list(...)
+  res <- ckan_GET(
+    url,
+    "recently_changed_packages_activity_list",
+    args,
+    key = key,
+    opts = list(...)
   )
-  switch(as,
-    json = res,
-    list = jsl(res),
-    table = jsd(res)
-  )
+  switch(as, json = res, list = jsl(res), table = jsd(res))
 }
 
 #' @rdname activity_helpers
 #' @export
 dashboard_new_activities_count <- function(
   url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
-  res <- ckan_GET(url, "dashboard_new_activities_count", list(),
+  res <- ckan_GET(
+    url,
+    "dashboard_new_activities_count",
+    list(),
     key = key,
     opts = list(...)
   )
-  switch(as,
-    json = res,
-    list = jsl(res),
-    table = jsd(res)
-  )
+  switch(as, json = res, list = jsl(res), table = jsd(res))
 }
 
 #' @rdname activity_helpers
 #' @export
 dashboard_mark_activities_old <- function(
   url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
-  res <- ckan_POST(url, "dashboard_mark_activities_old",
+  res <- ckan_POST(
+    url,
+    "dashboard_mark_activities_old",
     body = list(),
-    key = key, opts = list(...)
+    key = key,
+    opts = list(...)
   )
-  switch(as,
-    json = res,
-    list = jsl(res),
-    table = jsd(res)
-  )
+  switch(as, json = res, list = jsl(res), table = jsd(res))
 }
 
 #' @rdname activity_helpers
 #' @export
 activity_show <- function(
-  id, url = get_default_url(), key = get_default_key(),
-  as = "list", ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
-  res <- ckan_GET(url, "activity_show", list(id = id),
+  res <- ckan_GET(
+    url,
+    "activity_show",
+    list(id = id),
     key = key,
     opts = list(...)
   )
-  switch(as,
-    json = res,
-    list = jsl(res),
-    table = jsd(res)
-  )
+  switch(as, json = res, list = jsl(res), table = jsd(res))
 }
 
 #' @rdname activity_helpers
 #' @export
 activity_data_show <- function(
-  id, object_type, url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  id,
+  object_type,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   args <- cc(list(id = id, object_type = object_type))
-  res <- ckan_GET(url, "activity_data_show", args,
-    key = key,
-    opts = list(...)
-  )
-  switch(as,
-    json = res,
-    list = jsl(res),
-    table = jsd(res)
-  )
+  res <- ckan_GET(url, "activity_data_show", args, key = key, opts = list(...))
+  switch(as, json = res, list = jsl(res), table = jsd(res))
 }
 
 #' @rdname activity_helpers
 #' @export
 activity_diff <- function(
-  id, object_type, diff_type = "unified",
-  url = get_default_url(), key = get_default_key(), as = "list", ...
+  id,
+  object_type,
+  diff_type = "unified",
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   args <- cc(list(id = id, object_type = object_type, diff_type = diff_type))
   res <- ckan_GET(url, "activity_diff", args, key = key, opts = list(...))
-  switch(as,
-    json = res,
-    list = jsl(res),
-    table = jsd(res)
-  )
+  switch(as, json = res, list = jsl(res), table = jsd(res))
 }
 
 #' @rdname activity_helpers
 #' @export
 activity_create <- function(
-  user_id, object_id, activity_type, data = NULL,
-  url = get_default_url(), key = get_default_key(), as = "list", ...
+  user_id,
+  object_id,
+  activity_type,
+  data = NULL,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   if (!is.null(data)) {
     if (is.list(data)) {
@@ -196,22 +210,23 @@ activity_create <- function(
     activity_type = activity_type,
     data = data
   ))
-  res <- ckan_POST(url, "activity_create",
-    body = body, key = key,
+  res <- ckan_POST(
+    url,
+    "activity_create",
+    body = body,
+    key = key,
     opts = list(...)
   )
-  switch(as,
-    json = res,
-    list = jsl(res),
-    table = jsd(res)
-  )
+  switch(as, json = res, list = jsl(res), table = jsd(res))
 }
 
 #' @rdname activity_helpers
 #' @export
 send_email_notifications <- function(
   url = get_default_url(),
-  key = get_default_key(), as = "list", ...
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   notif_enabled <- activity_email_notifications_enabled(url, key)
   if (identical(notif_enabled, FALSE)) {
@@ -220,15 +235,14 @@ send_email_notifications <- function(
       call. = FALSE
     )
   }
-  res <- ckan_POST(url, "send_email_notifications",
+  res <- ckan_POST(
+    url,
+    "send_email_notifications",
     body = list(),
-    key = key, opts = list(...)
+    key = key,
+    opts = list(...)
   )
-  switch(as,
-    json = res,
-    list = jsl(res),
-    table = jsd(res)
-  )
+  switch(as, json = res, list = jsl(res), table = jsd(res))
 }
 
 #' Activity purge helpers (CKAN 2.12+)
@@ -261,25 +275,44 @@ NULL
 #' @rdname activity_purge
 #' @export
 activity_delete <- function(
-  id = NULL, start_date = NULL, end_date = NULL, offset_days = NULL,
-  keep = NULL, batch_size = NULL,
-  url = get_default_url(), key = get_default_key(), as = "list", ...
+  id = NULL,
+  start_date = NULL,
+  end_date = NULL,
+  offset_days = NULL,
+  keep = NULL,
+  batch_size = NULL,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   ensure_action_available("activity_delete", url = url, key = key)
-  if (is.null(id) && is.null(offset_days) &&
-      (is.null(start_date) || is.null(end_date))) {
+  if (
+    is.null(id) &&
+      is.null(offset_days) &&
+      (is.null(start_date) || is.null(end_date))
+  ) {
     stop(
       "Provide `id`, `offset_days`, or both `start_date` and `end_date`",
       call. = FALSE
     )
   }
   body <- cc(list(
-    id = id, start_date = start_date, end_date = end_date,
-    offset_days = offset_days, keep = keep, batch_size = batch_size
+    id = id,
+    start_date = start_date,
+    end_date = end_date,
+    offset_days = offset_days,
+    keep = keep,
+    batch_size = batch_size
   ))
-  res <- ckan_POST(url, "activity_delete",
-    body = tojun(body, TRUE), key = key,
-    headers = ctj(), encode = "json", opts = list(...)
+  res <- ckan_POST(
+    url,
+    "activity_delete",
+    body = tojun(body, TRUE),
+    key = key,
+    headers = ctj(),
+    encode = "json",
+    opts = list(...)
   )
   parse_ckan_response(res, as)
 }
@@ -288,13 +321,21 @@ activity_delete <- function(
 #' @export
 activity_delete_all <- function(
   batch_size = NULL,
-  url = get_default_url(), key = get_default_key(), as = "list", ...
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   ensure_action_available("activity_delete_all", url = url, key = key)
   body <- cc(list(batch_size = batch_size))
-  res <- ckan_POST(url, "activity_delete_all",
-    body = tojun(body, TRUE), key = key,
-    headers = ctj(), encode = "json", opts = list(...)
+  res <- ckan_POST(
+    url,
+    "activity_delete_all",
+    body = tojun(body, TRUE),
+    key = key,
+    headers = ctj(),
+    encode = "json",
+    opts = list(...)
   )
   parse_ckan_response(res, as)
 }
@@ -302,11 +343,18 @@ activity_delete_all <- function(
 #' @rdname activity_purge
 #' @export
 activity_delete_counts <- function(
-  url = get_default_url(), key = get_default_key(), as = "list", ...
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   ensure_action_available("activity_delete_counts", url = url, key = key)
-  res <- ckan_POST(url, "activity_delete_counts",
-    body = list(), key = key, opts = list(...)
+  res <- ckan_POST(
+    url,
+    "activity_delete_counts",
+    body = list(),
+    key = key,
+    opts = list(...)
   )
   parse_ckan_response(res, as)
 }

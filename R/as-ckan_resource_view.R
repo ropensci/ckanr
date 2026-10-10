@@ -28,7 +28,9 @@ as.ckan_resource_view.character <- function(x, ...) get_resource_view(x, ...)
 as.ckan_resource_view.ckan_resource_view <- function(x, ...) x
 
 #' @export
-as.ckan_resource_view.list <- function(x, ...) structure(x, class = "ckan_resource_view")
+as.ckan_resource_view.list <- function(x, ...) {
+  structure(x, class = "ckan_resource_view")
+}
 
 #' @export
 #' @rdname as.ckan_resource_view
@@ -43,10 +45,15 @@ print.ckan_resource_view <- function(x, ...) {
 }
 
 get_resource_view <- function(
-  id, url = get_default_url(), key = get_default_key(),
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
   ...
 ) {
-  res <- ckan_GET(url, "resource_view_show", list(id = id),
+  res <- ckan_GET(
+    url,
+    "resource_view_show",
+    list(id = id),
     key = key,
     opts = list(...)
   )

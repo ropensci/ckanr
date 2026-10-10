@@ -21,12 +21,17 @@
 #' package_delete(res)
 #' }
 package_delete <- function(
-  id, url = get_default_url(),
-  key = get_default_key(), ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  ...
 ) {
   id <- as.ckan_package(id, url = url, key = key)
-  tmp <- ckan_POST(url, "package_delete",
-    body = list(id = id$id), key = key,
+  tmp <- ckan_POST(
+    url,
+    "package_delete",
+    body = list(id = id$id),
+    key = key,
     opts = list(...)
   )
   jsonlite::fromJSON(tmp)$success

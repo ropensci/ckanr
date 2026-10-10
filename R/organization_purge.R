@@ -27,11 +27,15 @@
 #' organization_purge(id = res$id)
 #' }
 organization_purge <- function(
-  id, url = get_default_url(), key = get_default_key(),
-  as = "list", ...
+  id,
+  url = get_default_url(),
+  key = get_default_key(),
+  as = "list",
+  ...
 ) {
   res <- ckan_POST(url, "organization_purge", list(id = id), key = key, ...)
-  switch(as,
+  switch(
+    as,
     json = res,
     list = lapply(jsl(res), as.ckan_organization),
     table = jsd(res)

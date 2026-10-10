@@ -41,7 +41,14 @@ wait_for_package_activity <- function(pkg_id, timeout = 20, interval = 1) {
   deadline <- Sys.time() + timeout
   repeat {
     acts <- package_activity_list(pkg_id, limit = 10, url = url, key = key)
-    if (is.list(acts) && any(vapply(acts, function(x) identical(x$object_id, pkg_id), logical(1)))) {
+    if (
+      is.list(acts) &&
+        any(vapply(
+          acts,
+          function(x) identical(x$object_id, pkg_id),
+          logical(1)
+        ))
+    ) {
       return(acts)
     }
     if (Sys.time() >= deadline) {

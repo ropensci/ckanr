@@ -6,7 +6,9 @@ test_that("task status helpers roundtrip", {
   skip_if_not_sysadmin(url, key)
 
   entity_id <- paste0(
-    "ckanr-status-", as.integer(Sys.time()), "-",
+    "ckanr-status-",
+    as.integer(Sys.time()),
+    "-",
     paste(sample(letters, 4), collapse = "")
   )
 
@@ -26,15 +28,19 @@ test_that("task status helpers roundtrip", {
   entry <- task_status_show(id = created$id, url = url, key = key)
   expect_equal(entry$id, created$id)
 
-  batch <- task_status_update_many(list(list(
-    id = created$id,
-    entity_id = entity_id,
-    entity_type = "dataset",
-    task_type = "ckanr_test",
-    key = "ckanr",
-    state = "finished",
-    value = "complete"
-  )), url = url, key = key)
+  batch <- task_status_update_many(
+    list(list(
+      id = created$id,
+      entity_id = entity_id,
+      entity_type = "dataset",
+      task_type = "ckanr_test",
+      key = "ckanr",
+      state = "finished",
+      value = "complete"
+    )),
+    url = url,
+    key = key
+  )
   expect_type(batch, "list")
 
   deleted <- task_status_delete(id = created$id, url = url, key = key)
@@ -60,15 +66,28 @@ test_that("term translation helpers work", {
   )
   expect_type(res, "list")
 
-  fetched <- term_translation_show(term, lang_codes = lang, url = url, key = key)
+  fetched <- term_translation_show(
+    term,
+    lang_codes = lang,
+    url = url,
+    key = key
+  )
   expect_type(fetched, "list")
-  expect_true(any(vapply(fetched, function(x) identical(x$term, term), logical(1))))
+  expect_true(any(vapply(
+    fetched,
+    function(x) identical(x$term, term),
+    logical(1)
+  )))
 
-  many <- term_translation_update_many(list(list(
-    term = term,
-    term_translation = "ckanr term updated",
-    lang_code = lang
-  )), url = url, key = key)
+  many <- term_translation_update_many(
+    list(list(
+      term = term,
+      term_translation = "ckanr term updated",
+      lang_code = lang
+    )),
+    url = url,
+    key = key
+  )
   expect_type(many, "list")
 })
 

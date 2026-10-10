@@ -14,10 +14,14 @@
 #' This function aims to simplify using \code{localhost:5000} as test instance.
 #' @param test_url A test CKAN instance where we are allowed to create dummy resources
 #' @param test_key A working API key for an account on the test instance
-prepare_test_ckan <- function(test_url = Sys.getenv("CKANR_TEST_URL"),
-                              test_key = Sys.getenv("CKANR_TEST_KEY")) {
+prepare_test_ckan <- function(
+  test_url = Sys.getenv("CKANR_TEST_URL"),
+  test_key = Sys.getenv("CKANR_TEST_KEY")
+) {
   if (test_key == "") {
-    message("Please provide your API key as parameter 'test_key' or via Sys.setenv(CKANR_TEST_KEY = \"my-api-key\")")
+    message(
+      "Please provide your API key as parameter 'test_key' or via Sys.setenv(CKANR_TEST_KEY = \"my-api-key\")"
+    )
     ckanr_setup(test_url = test_url)
   } else {
     message("Setting up test CKAN instance...")
@@ -25,7 +29,6 @@ prepare_test_ckan <- function(test_url = Sys.getenv("CKANR_TEST_URL"),
     path_csv <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
     path_parquet <- system.file("examples", "iris.parquet", package = "ckanr")
     path_txt <- system.file("examples", "words.txt", package = "ckanr")
-
 
     # Save ourselves from using test_url and test_key
     ckanr_setup(url = test_url, key = test_key)
@@ -131,11 +134,13 @@ prepare_test_ckan <- function(test_url = Sys.getenv("CKANR_TEST_URL"),
 
     vocab_name <- "ckanr_test_vocabulary"
     vocab_tags <- c("ckanr_vocab_alpha", "ckanr_vocab_beta")
-    user_info <- tryCatch(current_test_user(test_url, test_key),
+    user_info <- tryCatch(
+      current_test_user(test_url, test_key),
       error = function(e) e
     )
     if (!inherits(user_info, "error") && isTRUE(user_info$sysadmin)) {
-      try(vocabulary_delete(vocab_name, url = test_url, key = test_key),
+      try(
+        vocabulary_delete(vocab_name, url = test_url, key = test_key),
         silent = TRUE
       )
       vocab <- tryCatch(
@@ -192,25 +197,34 @@ sanitize_field_id <- function(x) {
 
 uniquify_ids <- function(ids) {
   seen <- new.env(parent = emptyenv())
-  vapply(ids, function(id) {
-    base_id <- if (nzchar(id)) id else "field"
-    count <- get0(base_id, envir = seen, inherits = FALSE, ifnotfound = 0L)
-    count <- count + 1L
-    assign(base_id, count, envir = seen)
-    if (count == 1L) {
-      base_id
-    } else {
-      paste0(base_id, "_", count)
-    }
-  }, character(1), USE.NAMES = FALSE)
+  vapply(
+    ids,
+    function(id) {
+      base_id <- if (nzchar(id)) id else "field"
+      count <- get0(base_id, envir = seen, inherits = FALSE, ifnotfound = 0L)
+      count <- count + 1L
+      assign(base_id, count, envir = seen)
+      if (count == 1L) {
+        base_id
+      } else {
+        paste0(base_id, "_", count)
+      }
+    },
+    character(1),
+    USE.NAMES = FALSE
+  )
 }
 
 datastore_enabled <- function(url) {
   # Try calling datastore_search to see if it's available
   # The status_show extensions list may not include datastore even when enabled
- res <- tryCatch(
-    ckan_action("datastore_search",
-      body = jsonlite::toJSON(list(resource_id = "_table_metadata", limit = 0), auto_unbox = TRUE),
+  res <- tryCatch(
+    ckan_action(
+      "datastore_search",
+      body = jsonlite::toJSON(
+        list(resource_id = "_table_metadata", limit = 0),
+        auto_unbox = TRUE
+      ),
       headers = list(`Content-Type` = "application/json"),
       url = url
     ),
@@ -310,7 +324,9 @@ check_ckan <- function(url) {
     skip(paste(
       "CKAN is offline.",
       "Did you set CKAN test settings with ?ckanr_setup ?",
-      "Does the test CKAN server run at", url, "?"
+      "Does the test CKAN server run at",
+      url,
+      "?"
     ))
   }
 }
@@ -325,7 +341,11 @@ check_resource <- function(url, x) {
     skip(paste(
       "The CKAN test resource wasn't found.",
       "Did you set CKAN test settings with ?ckanr_setup ?",
-      "Does a resource with ID", x, "exist on", url, "?"
+      "Does a resource with ID",
+      x,
+      "exist on",
+      url,
+      "?"
     ))
   }
 }
@@ -340,7 +360,11 @@ check_dataset <- function(url, x) {
     skip(paste(
       "The CKAN test dataset wasn't found.",
       "Did you set CKAN test settings with ?ckanr_setup ?",
-      "Does a dataset with ID", x, "exist on", url, "?"
+      "Does a dataset with ID",
+      x,
+      "exist on",
+      url,
+      "?"
     ))
   }
 }
@@ -355,7 +379,11 @@ check_group <- function(url, x) {
     skip(paste(
       "The CKAN test group wasn't found.",
       "Did you set CKAN test settings with ?ckanr_setup ?",
-      "Does a dataset with slug", x, "exist on", url, "?"
+      "Does a dataset with slug",
+      x,
+      "exist on",
+      url,
+      "?"
     ))
   }
 }
@@ -375,7 +403,11 @@ check_organization <- function(url, x) {
     skip(paste(
       "The CKAN test group wasn't found.",
       "Did you set CKAN test settings with ?ckanr_setup ?",
-      "Does an organization with slug", x, "exist on", url, "?"
+      "Does an organization with slug",
+      x,
+      "exist on",
+      url,
+      "?"
     ))
   }
 }
@@ -403,8 +435,11 @@ collaborators_feature_enabled <- function(url, key) {
     return(FALSE)
   }
   val <- res$result$value
-  isTRUE(val) || identical(val, "True") || identical(val, "true") ||
-    identical(val, 1L) || identical(val, "1")
+  isTRUE(val) ||
+    identical(val, "True") ||
+    identical(val, "true") ||
+    identical(val, 1L) ||
+    identical(val, "1")
 }
 
 skip_if_collaborators_disabled <- function(url, key) {
@@ -461,7 +496,8 @@ skip_if_ckan_below <- function(url, version) {
   if (v < min_v) {
     skip(sprintf(
       "Requires CKAN %s+ (test instance runs version number %s)",
-      version, v
+      version,
+      v
     ))
   }
 }
@@ -505,7 +541,10 @@ skip_if_activity_email_notifications_disabled <- function(url, key) {
   }
 }
 
-expect_ckan_formats <- function(call_with_as, formats = c("list", "json", "table")) {
+expect_ckan_formats <- function(
+  call_with_as,
+  formats = c("list", "json", "table")
+) {
   stopifnot(is.function(call_with_as))
   for (fmt in formats) {
     result <- call_with_as(fmt)

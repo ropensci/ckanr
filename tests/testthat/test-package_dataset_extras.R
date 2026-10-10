@@ -15,7 +15,9 @@ create_dataset_with_resources <- function(n = 2) {
     url = url,
     key = key
   )
-  paths <- system.file("examples", c("actinidiaceae.csv", "iris.parquet"),
+  paths <- system.file(
+    "examples",
+    c("actinidiaceae.csv", "iris.parquet"),
     package = "ckanr"
   )
   paths <- paths[file.exists(paths)]
@@ -74,11 +76,16 @@ test_that("package_owner_org_update moves dataset between orgs", {
 
   org_name <- paste0("temp_org_", as.integer(Sys.time()), sample.int(1000, 1))
   new_org <- organization_create(name = org_name, url = url, key = key)
-  on.exit(suppressWarnings(organization_delete(new_org$id, url = url, key = key)), add = TRUE)
+  on.exit(
+    suppressWarnings(organization_delete(new_org$id, url = url, key = key)),
+    add = TRUE
+  )
 
-  expect_true(package_owner_org_update(pkg,
+  expect_true(package_owner_org_update(
+    pkg,
     organization_id = new_org,
-    url = url, key = key
+    url = url,
+    key = key
   ))
   moved <- package_show(pkg$id, url = url, key = key)
   expect_equal(moved$organization$id, new_org$id)

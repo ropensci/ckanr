@@ -37,7 +37,11 @@ test_that("group_update updates metadata via id string", {
     add = TRUE
   )
 
-  new_desc <- paste("updated description", sample(letters, 5, replace = TRUE), collapse = "")
+  new_desc <- paste(
+    "updated description",
+    sample(letters, 5, replace = TRUE),
+    collapse = ""
+  )
   updated <- group_update(
     list(description = new_desc),
     id = grp$id,
@@ -64,7 +68,11 @@ test_that("group_update accepts ckan_group objects", {
   )
 
   grp_obj <- group_show(grp$id, url = url, key = key)
-  new_title <- paste("ckanr title", sample(letters, 6, replace = TRUE), collapse = "")
+  new_title <- paste(
+    "ckanr title",
+    sample(letters, 6, replace = TRUE),
+    collapse = ""
+  )
   updated <- group_update(
     list(title = new_title),
     id = grp_obj,
