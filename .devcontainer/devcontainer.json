@@ -12,8 +12,9 @@
   "features": {
     // A Feature to configure R on Ubuntu.
     // Moved to Dockerfile to speed up Codespace rebuilds for switching CKAN versions.
+    // (R packages come from P3M binaries, not r-cran-* debs; see Dockerfile.)
     // "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
-    //   "packages": "cmake,gdal-bin,libfontconfig1-dev,libfreetype6-dev,libfribidi-dev,libabsl-dev,libgdal-dev,libgeos-dev,libharfbuzz-dev,libproj-dev,libsqlite3-dev,libtiff-dev,libudunits2-dev,libwebp-dev,libx11-dev,libxml2-dev,r-cran-backports,r-cran-tidyverse,r-cran-stringr,r-cran-purrr,r-cran-blob,r-cran-httpcode,r-cran-urltools,r-cran-dbi,r-cran-crul,r-cran-jsonlite,r-cran-sf,r-cran-readxl,r-cran-testthat,r-cran-xml2,r-cran-rlang,libpq-dev,libcurl4-openssl-dev,libssl-dev,libxml2-dev"
+    //   "packages": "libfontconfig1-dev,libfreetype6-dev,libfribidi-dev,libharfbuzz-dev,libgdal-dev,libgeos-dev,libproj-dev,libsqlite3-dev,libudunits2-dev,libxml2-dev,pandoc,r-cran-backports,r-cran-blob,r-cran-dbi,r-cran-crul,r-cran-httpcode,r-cran-jsonlite,r-cran-purrr,r-cran-readxl,r-cran-rlang,r-cran-stringr,r-cran-testthat,r-cran-urltools,r-cran-xml2"
     // },
     // More info: https://github.com/rocker-org/devcontainer-features/tree/main/src/r-apt.
     "ghcr.io/rocker-org/devcontainer-features/r-apt:0": {

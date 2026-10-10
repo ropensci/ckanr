@@ -1,53 +1,57 @@
 # https://rocker-project.org/images/devcontainer/images.html
-FROM ghcr.io/rocker-org/devcontainer/geospatial:4.6
+# Pinned by digest for reproducible, tamper-evident builds
+# (tag documents the intent: R 4.6 on Ubuntu 24.04 noble).
+# Uses the slim r-ver variant instead of geospatial: the geospatial image
+# ships gigabytes of unused spatial/tidyverse/shiny packages (the previous
+# image was 5.75 GB). The geo system libraries ckanr needs (sf -> GDAL/GEOS/
+# PROJ) are installed explicitly below instead.
+FROM ghcr.io/rocker-org/devcontainer/r-ver:4.6@sha256:1660ee0beba698f16c84b9bdeba7014c09c9e9588ee307174f6b9f53a6276c4f
 
 # Non interactive frontend
 ENV DEBIAN_FRONTEND=noninteractive
 
-# rocker geospatial:4.6 is Ubuntu 24.04 (noble): P3M binaries must match it.
+# rocker r-ver:4.6 is Ubuntu 24.04 (noble): P3M binaries must match it.
 RUN echo 'options(repos = c(P3M = "https://packagemanager.posit.co/cran/__linux__/noble/latest", CRAN = "https://cloud.r-project.org"))' >>"${R_HOME}/etc/Rprofile.site"
 
-# Install OS packages
+# Install OS packages: only what ckanr needs (see DESCRIPTION, tests,
+# vignettes, justfile). These are runtime system libraries backing the R
+# dependency closure: libgdal/libgeos/libproj/libsqlite3 (sf), libudunits2
+# (units, via sf), libxml2 (xml2), fontconfig/freetype/fribidi/harfbuzz
+# (systemfonts/textshaping, via rmarkdown), pandoc (vignettes, README.Rmd).
+# Deliberately NOT installed: r-cran-* debs (dead weight: R only looks in
+# /usr/local/lib/R/site-library, so every R package comes from P3M below),
+# cmake (no source builds; P3M binaries verified), gdal-bin (CLI tools
+# unused; sf links libgdal), libabsl-dev (arrow bundles its own C++),
+# libpq-dev (no Postgres client use; CKAN's Postgres is a separate
+# service), libtiff/libwebp/libx11 -dev (pulled in as libgdal dependencies),
+# libcurl/libssl -dev (no compilation; the runtimes ship in the base image).
 RUN apt-get update && \
     apt-get -y install --no-install-recommends \
-    cmake gdal-bin libfontconfig1-dev libfreetype6-dev libfribidi-dev libabsl-dev \
-    libgdal-dev libgeos-dev libharfbuzz-dev libproj-dev libsqlite3-dev libtiff-dev \
-    libudunits2-dev libwebp-dev libx11-dev libxml2-dev r-cran-backports r-cran-rlang \
-    r-cran-stringr r-cran-purrr r-cran-blob r-cran-httpcode r-cran-urltools r-cran-dbi \
-    r-cran-crul r-cran-jsonlite r-cran-readxl r-cran-testthat r-cran-xml2 \
-    libpq-dev libcurl4-openssl-dev libssl-dev && \
-    rm -rf /var/lib/apt/lists/* && \
-    curl --proto '=https' --tlsv1.2 -LsSf \
-    https://github.com/etiennebacher/jarl/releases/latest/download/jarl-installer.sh | sh && \
+    libfontconfig1-dev libfreetype6-dev libfribidi-dev libharfbuzz-dev \
+    libgdal-dev libgeos-dev libproj-dev libsqlite3-dev libudunits2-dev \
+    libxml2-dev pandoc && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install R packages from P3M binaries into /usr/local/lib/R/site-library
+# (the only library on R's path): package Imports/Suggests (DESCRIPTION),
+# vignette builders (knitr, rmarkdown), dev tooling (devtools, roxygen2,
+# pak, covr, testthat), and editor support (languageserver, httpgd, tinytex).
+# Transitive dependencies resolve automatically. Verified binary (no
+# compilation); the uncached pak step in onCreateCommand.sh then has almost
+# nothing left to do.
+RUN R -q -e 'install.packages(c("arrow", "covr", "crul", "DBI", "dbplyr", "devtools", "dplyr", "httpgd", "jsonlite", "knitr", "languageserver", "pak", "readr", "readxl", "rlang", "rmarkdown", "roxygen2", "sf", "testthat", "tinytex", "xml2"))'
+
+# Install jarl (R linter used by `just lint`) system-wide so it is on PATH
+# for all users. Version-pinned for reproducible builds.
+RUN curl --proto '=https' --tlsv1.2 -LsSf \
+    https://github.com/etiennebacher/jarl/releases/download/0.6.0/jarl-installer.sh | sh && \
     mv /root/.local/bin/jarl /usr/local/bin/jarl && \
     rmdir -p /root/.local/bin 2>/dev/null || true
 
 # Install OpenCode (https://opencode.ai) system-wide so it is on PATH
-# for all users, not just root ($HOME/.opencode/bin at build time)
+# for all users, not just root ($HOME/.opencode/bin at build time).
+# Version-pinned for reproducible builds.
 RUN curl --proto '=https' --tlsv1.2 -LsSf https://opencode.ai/install | \
-    bash -s -- --no-modify-path && \
+    bash -s -- --no-modify-path --version 1.18.35 && \
     mv /root/.opencode/bin/opencode /usr/local/bin/opencode && \
     rmdir -p /root/.opencode/bin 2>/dev/null || true
-
-# Only packages NOT already installed via r-cran-* above: the rest would
-# reinstall (and for sf, recompile) what apt already provides.
-# class/KernSmooth/MASS ship with R itself.
-RUN R -q -e 'install.packages(c("arrow", "sf", "triebeard"))'
-# Install any new and updated packages into the base image to shift work from
-# the uncached pak command to this cached Docker image
-# pak::local_install_dev_deps()
-# → Will update 5 packages.
-# → Will download 12 CRAN packages (12.60 MB).
-# → Will download 1 package with unknown size.
-# + class               7.3-23  [bld][cmp][dl] (22.06 kB)
-# + crul                1.6.0   [bld][dl] (531.05 kB)
-# + httpcode            0.3.0   [bld][dl] (17.82 kB)
-# + KernSmooth          2.23-26 [bld][cmp][dl] (27.61 kB)
-# + MASS                7.3-65  [bld][cmp][dl] (510.32 kB)
-# + purrr      1.1.0  → 1.2.0   [bld][cmp][dl] (278.25 kB)
-# + sf         1.0-21 → 1.0-22  [bld][cmp][dl] (9.87 MB) + ✔ libgdal-dev, ✔ gdal-bin, ✔ libgeos-dev, ✔ libproj-dev, ✔ libsqlite3-dev
-# + stringr    1.5.2  → 1.6.0   [bld][dl] (195.83 kB)
-# + testthat   3.2.3  → 3.3.0   [bld][cmp][dl] (828.22 kB)
-# + triebeard           0.4.1   [bld][cmp][dl] (31.45 kB)
-# + urltools            1.7.3.1 [bld][cmp][dl] (124.11 kB)
-# + xml2       1.4.1  → 1.5.0   [bld][cmp][dl] (154.51 kB) + ✔ libxml2-dev
