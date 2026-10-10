@@ -9,7 +9,7 @@ ckanr 0.9.1
   (`air-format`) and standard hygiene hooks on changed files.
   Run `pre-commit install` once per clone to enable it.
 * Format the R sources, tests, and vignettes with Air.
-* Add tests to increase test coverage. This prepares ckanr for the 
+* Add tests to increase test coverage. This prepares ckanr for moving the testing target to CKAN 3.0.
 
 ckanr 0.9.0
 ===========
