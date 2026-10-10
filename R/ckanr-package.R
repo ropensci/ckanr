@@ -63,7 +63,7 @@
 #'
 #' @importFrom methods new
 #' @importFrom stats na.omit
-#' @importFrom utils read.csv unzip
+#' @importFrom utils read.csv read.table unzip
 #' @importFrom crul HttpClient proxy upload
 #' @importFrom jsonlite fromJSON
 #' @import DBI

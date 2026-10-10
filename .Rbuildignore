@@ -28,3 +28,4 @@ TODO.md
 ^TODO-dbplyr\.md$
 ^codecov\.yml$
 ^\.github$
+^\.pre-commit-config.yaml$
