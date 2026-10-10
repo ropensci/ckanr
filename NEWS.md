@@ -10,6 +10,10 @@ ckanr 0.9.1
   Run `pre-commit install` once per clone to enable it.
 * Format the R sources, tests, and vignettes with Air.
 * Add tests to increase test coverage. This prepares ckanr for moving the testing target to CKAN 3.0.
+* Slim the devcontainer image by switching to the r-ver base, removing
+  unused system packages, and pinning the base image and tool versions.
+* Import `read.table()` from utils to fix an R CMD check NOTE.
+* Pin the Imports and Suggests versions to the versions currently installed.
 
 ckanr 0.9.0
 ===========
