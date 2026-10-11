@@ -97,7 +97,7 @@ If CKAN does not start after a version switch, stop the stack and delete the dat
 Run `just docker "compose -f .devcontainer/docker-compose-dev.yml down -v"` from the repository root.
 Then rebuild the container again.
 
-### Also, check out our [discussion forum](https://discuss.ropensci.org)
+### Also, check out our [Community resources](https://ropensci.org/community/)
 
 ### Email
 Do not send email. Open an issue instead.
