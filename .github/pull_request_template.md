@@ -16,11 +16,12 @@ methods/functions, include an example in brief form if you can -->
 <!--- The devcontainer provides the full toolchain plus a test CKAN
 instance at http://localhost:5000. Run these before you submit.
 Delete lines that do not apply. -->
-- [ ] Installed with the "Install" VS Code task or `just install`
-- [ ] Docs regenerated with `just doc` (updates `man/` and `README.md`)
-- [ ] Tests pass with the "Test" task or `just test`
-- [ ] Test CKAN version checked with `just ckan_version`
-- [ ] `R CMD check` shows 0 errors, 0 warnings, 0 notes
+- [ ] Installed with `just install`.
+- [ ] Docs regenerated with `just doc` (updates `man/` and `README.md`).
+- [ ] Tests pass with `just test`.
+- [ ] Test CKAN version checked with `just ckan_version`.
+- [ ] Pre-commit passes with `just lint`.
+- [ ] `R CMD check` (`just check`) shows 0 errors, 0 warnings, 0 notes.
 
 ## R package checklist
 - [ ] New behavior has tests. Tests skip cleanly when the test CKAN lacks the feature.
