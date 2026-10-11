@@ -87,6 +87,8 @@ jobs:
           # TODO: drop once RSPM serves a working macOS binary again.
           # The RSPM sonoma-arm64 binary for readxl 1.5.0.1 fails to
           # extract ("unknown archive type"), so pin the previous release.
+          # NOTE: keep DESCRIPTION's readxl minimum at <= 1.5.0 while this
+          # pin lives, or pak cannot solve dependencies.
           extra-packages: |
             any::rcmdcheck
             any::covr
