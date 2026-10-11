@@ -31,6 +31,7 @@ datasets. Users search and download existing data. Users then analyze the data i
 R (stats/plotting/etc.). It works with any CKAN instance.
 
 `ckanr` works for and is tested against
+- the [CKAN v2.12 API](https://docs.ckan.org/en/2.12/api/),
 - the [CKAN v2.11 API](https://docs.ckan.org/en/2.11/api/),
 - the [CKAN v2.10 API](https://docs.ckan.org/en/2.10/api/), and
 - the [CKAN v2.9 API](https://docs.ckan.org/en/2.9/api/).

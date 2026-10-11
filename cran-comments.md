@@ -9,10 +9,10 @@
 
 0 errors | 0 warnings | 0 notes
 
-Maintainer: 'Florian Mayer <florian.wendelin.mayer@gmail.com>'
+Maintainer: 'Florian Mayer <Florian.Wendelin.Mayer@gmail.com>'
 
 New maintainer:
-  Florian Mayer <florian.wendelin.mayer@gmail.com>
+  Florian Mayer <Florian.Wendelin.Mayer@gmail.com>
 Old maintainer:
   Francisco Alves <fjunior.alves.oliveira@gmail.com>
 
@@ -22,7 +22,14 @@ Old maintainer:
 We checked 1 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
  * We saw 0 new problems
- * We failed to check 0 packages
+  * We failed to check 0 packages
+
+## Method references
+
+There are no published references describing the methods in this package.
+The package is an API client that wraps the public CKAN REST API; the
+relevant documentation is the CKAN API reference linked from the package
+documentation.
 
 --------
 
