@@ -15,6 +15,9 @@ is.ckan_group(x)
 \item{...}{Extra arguments. If \code{x} is character, the function passes them
 on to \code{\link[=group_show]{group_show()}}}
 }
+\value{
+A \code{ckan_group} object, a list with S3 class \code{ckan_group}.
+}
 \description{
 ckan_group class helpers
 }

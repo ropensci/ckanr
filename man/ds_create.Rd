@@ -61,6 +61,10 @@ can vary from a vector, list or data.frame. (required)}
 
 \item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
+\value{
+A list (default), table, or JSON string with the CKAN response,
+controlled by the \code{as} parameter.
+}
 \description{
 BEWARE: This function does not work yet.
 }
@@ -86,7 +90,4 @@ file <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
 ds_create(resource_id = xx$id, records = iris, force = TRUE)
 resource_show(xx$id)
 }
-}
-\references{
-http://bit.ly/ds_create
 }

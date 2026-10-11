@@ -44,6 +44,10 @@ can vary from a vector, list or data.frame. (required)}
 
 \item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
+\value{
+A list (default), table, or JSON string with the CKAN response,
+controlled by the \code{as} parameter.
+}
 \description{
 If the portal uses the \code{ckanext-scheming} extension for custom schema
 fields, put each custom field directly in \code{x}. Do not pass custom fields

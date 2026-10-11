@@ -15,6 +15,9 @@ is.ckan_file(x)
 \item{...}{Extra arguments. If \code{x} is character, the function passes them
 on to \code{\link[=file_show]{file_show()}}}
 }
+\value{
+A \code{ckan_file} object, a list with S3 class \code{ckan_file}.
+}
 \description{
 ckan_file class helpers
 }

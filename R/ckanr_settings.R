@@ -99,6 +99,8 @@ print.ckanr_settings <- function(x, ...) {
 #' If you set `test_behaviour` to `"FAIL"`, the tester finds
 #' problems with both the configured test CKAN and the writing functions.
 #'
+#' @return (invisible) Called for its side effects; sets default and test
+#' CKAN settings in environment variables and returns invisibly.
 #' @examples
 #' # CKAN users without admin/editor privileges could run:
 #' ckanr_setup(url = "https://demo.ckan.org/")

@@ -16,6 +16,9 @@ is.ckan_package(x)
 on to \code{\link[=package_show]{package_show()}}. If GET is not supported, use the \code{http_method}
 parameter to set a different HTTP verb}
 }
+\value{
+A \code{ckan_package} object, a list with S3 class \code{ckan_package}.
+}
 \description{
 ckan_package class helpers
 }

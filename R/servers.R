@@ -2,6 +2,7 @@
 #'
 #' @export
 #' @details CKAN instances from https://github.com/ckan/ckan-instances/
+#' @return (character) A character vector of CKAN server URLs.
 #'
 #' @examples \dontrun{
 #' servers()

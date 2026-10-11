@@ -11,6 +11,7 @@
 #' instead of names. Default is `FALSE`.
 #' @template args
 #' @template key
+#' @template return
 #' @examples \dontrun{
 #' # list all tags
 #' tag_list()

@@ -15,6 +15,9 @@ is.ckan_related(x)
 \item{...}{Extra arguments. If \code{x} is character, the function passes them
 on to \code{\link[=related_show]{related_show()}}}
 }
+\value{
+A \code{ckan_related} object, a list with S3 class \code{ckan_related}.
+}
 \description{
 ckan_related class helpers
 }

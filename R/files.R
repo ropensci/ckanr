@@ -36,6 +36,7 @@
 #' @param sort (character) `File` column used for sorting in
 #'   `file_owner_scan()`. Optional; when `NULL` the server default
 #'   (`"name"`) applies.
+#' @template return
 NULL
 
 coerce_file <- function(res) as_ck(res, "ckan_file")

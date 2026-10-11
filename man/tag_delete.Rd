@@ -34,7 +34,8 @@ can vary from a vector, list or data.frame. (required)}
 \item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
 \value{
-(logical) \code{TRUE} when the function deletes the tag successfully.
+A list (default), table, or JSON string with the CKAN response,
+controlled by the \code{as} parameter.
 }
 \description{
 Delete a tag. You must be a sysadmin to delete tags. See

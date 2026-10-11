@@ -40,6 +40,7 @@
 #' available through [ckan_version()], the function drops it from the request.
 #' @template args
 #' @template key
+#' @template return
 #' @examples \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org", key = getOption("ckan_demo_key"))
 #'

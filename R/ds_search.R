@@ -27,6 +27,7 @@
 #' See <https://docs.ckan.org/en/2.12/maintaining/datastore.html#search-pagination>.
 #' @template args
 #' @template key
+#' @template return
 #' @details From the help for this method "The datastore_search action allows
 #' you to search data in a resource." If a DataStore resource belongs to a
 #' private CKAN resource, you can read it only with access to that resource.
@@ -44,7 +45,7 @@
 #' If you set `plain=FALSE`, you enable the entire PostgreSQL *full text search
 #' query language*. You can find a listing of all available resources at the
 #' alias *table_metadata* full text search query language:
-#' http://www.postgresql.org/docs/9.1/static/datatype-textsearch.html#DATATYPE-TSQUERY
+#' https://www.postgresql.org/docs/9.1/static/datatype-textsearch.html#DATATYPE-TSQUERY
 #' @examples \dontrun{
 #' ckanr_setup(url = "https://data.gov.au/")
 #' rid <- "eef6a84b-ad44-446f-9cf9-fb5d135e3123"

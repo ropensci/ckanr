@@ -145,6 +145,10 @@ transfer to stop future transfers. Default: \code{FALSE}.}
 \code{file_owner_scan()}. Optional; when \code{NULL} the server default
 (\code{"name"}) applies.}
 }
+\value{
+A list (default), table, or JSON string with the CKAN response,
+controlled by the \code{as} parameter.
+}
 \description{
 These helpers wrap CKAN 2.12 \verb{file_*} endpoints. Files are first-class
 entities in CKAN 2.12 (see

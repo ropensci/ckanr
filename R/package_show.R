@@ -10,6 +10,7 @@
 #' "GET" or "POST". Default: "GET"
 #' @template args
 #' @template key
+#' @template return
 #' @details By default the function drops the help and success slots. It returns
 #' only the result slot. If you want raw json, request `as = 'json'`.
 #' Then you parse the result yourself to get the help slot.

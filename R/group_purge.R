@@ -13,7 +13,7 @@
 #' purge, or a `ckan_group` object.
 #' @template key
 #' @template args
-#' @return The function returns an empty list on success
+#' @template return
 #' @references
 #' https://docs.ckan.org/en/2.11/api/#ckan.logic.action.delete.group_purge
 #' @examples \dontrun{

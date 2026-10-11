@@ -45,6 +45,7 @@
 #' @param argmode (character) Argument mode for custom DataStore SQL
 #' function parameters, e.g. `"in"`, `"inout"`, `"out"` (CKAN 2.12+,
 #' <https://github.com/ckan/ckan/pull/8279>). Optional.
+#' @template return
 #' @examples \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
 #' ds_info(resource_id = "my-resource-id")

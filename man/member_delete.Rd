@@ -28,6 +28,15 @@ also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
 \item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
+\value{
+(logical) TRUE on success
+}
 \description{
 Remove a membership via member_* endpoints
+}
+\examples{
+\dontrun{
+ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+member_delete("my-group", object = "demo-user", object_type = "user")
+}
 }

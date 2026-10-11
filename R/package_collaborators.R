@@ -9,6 +9,7 @@ NULL
 #' @param capacity (character) Optional capacity filter (`"member"`, `"editor"`, `"admin"`).
 #' @template key
 #' @template args
+#' @template return
 #' @export
 #' @examples \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
@@ -41,6 +42,7 @@ package_collaborator_list <- function(
 #' @param capacity (character) Optional capacity filter.
 #' @template key
 #' @template args
+#' @template return
 #' @export
 #' @examples \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
@@ -74,6 +76,7 @@ package_collaborator_list_for_user <- function(
 #' @param capacity (character) Collaborator role (`"member"`, `"editor"`, `"admin"`).
 #' @template key
 #' @template args
+#' @template return
 #' @export
 #' @examples \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
@@ -111,6 +114,7 @@ package_collaborator_create <- function(
 #' @param user_id (character or `ckan_user`) User identifier or object.
 #' @template key
 #' @template args_noas
+#' @return (logical) TRUE when the function deletes the collaborator successfully.
 #' @export
 #' @examples \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")

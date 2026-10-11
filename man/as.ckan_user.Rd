@@ -15,6 +15,9 @@ is.ckan_user(x)
 \item{...}{Extra arguments. If \code{x} is character, the function passes them
 on to \code{\link[=user_show]{user_show()}}}
 }
+\value{
+A \code{ckan_user} object, a list with S3 class \code{ckan_user}.
+}
 \description{
 ckan_user class helpers
 }

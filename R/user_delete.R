@@ -7,7 +7,7 @@
 #' @template key
 #' @template args
 #' @references
-#' http://docs.ckan.org/en/latest/api/index.html#ckan.logic.action.delete.user_delete
+#' https://docs.ckan.org/en/2.12/api/index.html#ckan.logic.action.delete.user_delete
 #' @examples \dontrun{
 #' # Setup
 #' ckanr_setup(

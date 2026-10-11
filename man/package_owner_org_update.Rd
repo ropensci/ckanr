@@ -25,6 +25,9 @@ also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
 \item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
+\value{
+(logical) TRUE when CKAN moves the dataset to the new organization successfully.
+}
 \description{
 On CKAN 2.12 \code{package_owner_org_update} may report success without moving
 the dataset; when the verification shows the dataset is still owned by

@@ -8,12 +8,13 @@
 #' also pass an existing `ckan_vocabulary` object.
 #' @param name (character) Unique name of the vocabulary.
 #' @param tags (list) Optional list of tag objects. Each object contains at least
-#' a `name` field. See <https://docs.ckan.org/en/latest/api/> for the full
+#' a `name` field. See <https://docs.ckan.org/en/2.12/api/> for the full
 #' structure.
 #' @param include_datasets (logical) The function returns datasets owned by
 #' the vocabulary. Only applies to `vocabulary_show()`.
 #' @template args
 #' @template key
+#' @template return
 #' @examples \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
 #'
@@ -142,7 +143,7 @@ vocabulary_delete <- function(
 #' Autocomplete tag names.
 #'
 #' Return a list of tag names that contain a query string. See
-#' <https://docs.ckan.org/en/latest/api/> for the official API contract.
+#' <https://docs.ckan.org/en/2.12/api/> for the official API contract.
 #'
 #' @export
 #' @template autocomplete
@@ -150,6 +151,7 @@ vocabulary_delete <- function(
 #' this vocabulary.
 #' @template args
 #' @template key
+#' @template return
 #' @examples \dontrun{
 #' tag_autocomplete(q = "ckan")
 #' }

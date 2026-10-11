@@ -69,6 +69,10 @@ can vary from a vector, list or data.frame. (required)}
 
 \item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
+\value{
+A list (default), table, or JSON string with the CKAN response,
+controlled by the \code{as} parameter.
+}
 \description{
 Datastore - search or get a dataset from CKAN datastore
 }
@@ -90,7 +94,7 @@ over large \code{offset} values.
 If you set \code{plain=FALSE}, you enable the entire PostgreSQL \emph{full text search
 query language}. You can find a listing of all available resources at the
 alias \emph{table_metadata} full text search query language:
-http://www.postgresql.org/docs/9.1/static/datatype-textsearch.html#DATATYPE-TSQUERY
+https://www.postgresql.org/docs/9.1/static/datatype-textsearch.html#DATATYPE-TSQUERY
 }
 \examples{
 \dontrun{

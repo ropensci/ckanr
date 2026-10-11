@@ -3,13 +3,12 @@
 #' @description ckanr is a client for the CKAN API. It wraps all
 #' APIs for reading and writing data. If you have problems, or
 #' have use cases that the package does not cover yet, get in touch
-#' (<https://github.com/ropensci/ckanr/issues> or
-#' <https://discuss.ropensci.org/>)
+#' (<https://github.com/ropensci/ckanr/issues>)
 #'
 #' @section CKAN API:
 #'
 #' Documentation for the CKAN API is at
-#' <https://docs.ckan.org/en/latest/api/index.html>.
+#' <https://docs.ckan.org/en/2.12/api/index.html>.
 #' The package follows the latest version of the API.
 #'
 #' @section ckanr package API:
@@ -37,7 +36,7 @@
 #' @section Datastore:
 #'
 #' The package supports the Datastore extension
-#' (<https://docs.ckan.org/en/latest/maintaining/datastore.html>).
+#' (<https://docs.ckan.org/en/2.12/maintaining/datastore.html>).
 #' It provides these functions:
 #'
 #' - [ds_create()]

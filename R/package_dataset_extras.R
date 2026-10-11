@@ -14,6 +14,7 @@ NULL
 #' @param include (character or list) Optional patterns that delimit which fields the response returns.
 #' @template args
 #' @template key
+#' @template return
 #' @export
 #' @examples \dontrun{
 #' package_revise(
@@ -55,6 +56,7 @@ package_revise <- function(
 #' @param order (character vector) Resource IDs in the desired order.
 #' @template args
 #' @template key
+#' @template return
 #' @export
 #' @examples \dontrun{
 #' pkg <- package_show("my-dataset")
@@ -96,6 +98,7 @@ package_resource_reorder <- function(
 #' @param organization_id (character or `ckan_organization`) Owning organization identifier.
 #' @template args_noas
 #' @template key
+#' @return (logical) TRUE when CKAN moves the dataset to the new organization successfully.
 #' @export
 #' @examples \dontrun{
 #' package_owner_org_update("dataset-id", organization_id = "target-org")
@@ -181,6 +184,7 @@ package_owner_org_id <- function(pkg_id, url, key) {
 #' @param id (character or `ckan_package`) Dataset identifier.
 #' @template args_noas
 #' @template key
+#' @return (logical) TRUE when the function purges the dataset successfully.
 #' @export
 #' @examples \dontrun{
 #' dataset_purge("dataset-id")

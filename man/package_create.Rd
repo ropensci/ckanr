@@ -113,6 +113,10 @@ can vary from a vector, list or data.frame. (required)}
 
 \item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
+\value{
+A list (default), table, or JSON string with the CKAN response,
+controlled by the \code{as} parameter.
+}
 \description{
 Create a package
 }
@@ -130,6 +134,6 @@ res$author
 (res <- package_create("helloworld", author = "Jane DOe"))
 
 # include a group
-# package_create("brownbear", groups = data.frame(id = "some-id"))
+package_create("brownbear", groups = data.frame(id = "some-id"))
 }
 }

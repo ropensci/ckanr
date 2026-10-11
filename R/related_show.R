@@ -5,6 +5,7 @@
 #' @param id (character) Related item identifier.
 #' @template args
 #' @template key
+#' @template return
 #' @details By default the function drops the help and success slots, and
 #' it returns only the result slot. If you want raw json, pass `as = 'json'`.
 #' Then you parse the result to get the help slot.

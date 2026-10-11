@@ -11,6 +11,7 @@
 #' to this vocabulary. For example, the ID of vocabulary 'Genre'.
 #' @template args
 #' @template key
+#' @template return
 #' @examples \dontrun{
 #' ckanr_setup(
 #'   url = "https://demo.ckan.org/",

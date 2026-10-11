@@ -67,6 +67,10 @@ can vary from a vector, list or data.frame. (required)}
 
 \item{id}{(character) Job identifier.}
 }
+\value{
+A list (default), table, or JSON string with the CKAN response,
+controlled by the \code{as} parameter.
+}
 \description{
 Manage the RQ/Redis job queue of CKAN. You must have sysadmin access.
 }

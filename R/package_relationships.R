@@ -12,6 +12,7 @@ NULL
 #' @param relationship_type (character) Filter on relationship type (see [package_relationship_create()]).
 #' @template args
 #' @template key
+#' @template return
 #' @export
 #' @examples \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
@@ -55,6 +56,7 @@ package_relationships_list <- function(
 #' @param comment (character) Optional note for the relationship.
 #' @template args
 #' @template key
+#' @template return
 #' @export
 #' @examples \dontrun{
 #' package_relationship_create("dataset-a", "dataset-b", relationship_type = "derives_from")
@@ -92,7 +94,13 @@ package_relationship_create <- function(
 #' Update an existing dataset relationship
 #'
 #' @inheritParams package_relationship_create
+#' @return A list (default), table, or JSON string with the CKAN response,
+#' controlled by the `as` parameter.
 #' @export
+#' @examples \dontrun{
+#' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+#' package_relationship_update("dataset-a", "dataset-b", relationship_type = "derives_from")
+#' }
 package_relationship_update <- function(
   subject,
   object,
@@ -126,7 +134,12 @@ package_relationship_update <- function(
 #' Delete a dataset relationship
 #'
 #' @inheritParams package_relationship_create
+#' @return (logical) TRUE when the function deletes the relationship successfully.
 #' @export
+#' @examples \dontrun{
+#' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+#' package_relationship_delete("dataset-a", "dataset-b", relationship_type = "derives_from")
+#' }
 package_relationship_delete <- function(
   subject,
   object,

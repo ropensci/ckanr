@@ -34,6 +34,16 @@ can vary from a vector, list or data.frame. (required)}
 
 \item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
+\value{
+A list (default), table, or JSON string with the CKAN response,
+controlled by the \code{as} parameter.
+}
 \description{
 Make a user a member of an organization
+}
+\examples{
+\dontrun{
+ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+organization_member_create("my-organization", username = "demo-user", role = "member")
+}
 }

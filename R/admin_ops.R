@@ -16,6 +16,7 @@
 #'   "finished".
 #' @param last_updated (character) Timestamp string for the last state change.
 #' @param error (character) Optional serialized error blob attached to the task.
+#' @template return
 #' @examples
 #' \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org/", key = "my-ckan-key")
@@ -166,6 +167,7 @@ task_status_delete <- function(
 #' Manage localized UI strings stored in CKAN's term translation table.
 #'
 #' @name term_translation
+#' @template return
 #' @examples
 #' \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org/", key = "my-ckan-key")
@@ -269,6 +271,7 @@ term_translation_update_many <- function(
 #' Inspect and update CKAN's runtime-editable configuration keys.
 #'
 #' @name config_options
+#' @template return
 #' @examples
 #' \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org/", key = "my-ckan-key")
@@ -352,6 +355,7 @@ config_option_update <- function(
 #' Manage the RQ/Redis job queue of CKAN. You must have sysadmin access.
 #'
 #' @name job_queue
+#' @template return
 #' @examples
 #' \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org/", key = "my-ckan-key")
@@ -467,6 +471,7 @@ job_cancel <- function(
 #' Inspect, create, and revoke API tokens for a user.
 #'
 #' @name api_tokens
+#' @template return
 #' @examples
 #' \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org/", key = "my-ckan-key")
@@ -559,6 +564,7 @@ api_token_revoke <- function(
 #' Lightweight wrappers for CKAN's `status_show` and `help_show` actions.
 #'
 #' @name diagnostics
+#' @template return
 #' @examples
 #' \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org/")

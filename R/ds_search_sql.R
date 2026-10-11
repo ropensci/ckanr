@@ -4,6 +4,7 @@
 #' @param sql (character) A single SQL select statement. (required)
 #' @template args
 #' @template key
+#' @template return
 #' @examples \dontrun{
 #' ckanr_setup(url = "https://data.gov.au/")
 #' sql <- 'SELECT * from "eef6a84b-ad44-446f-9cf9-fb5d135e3123" LIMIT 2'

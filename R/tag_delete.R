@@ -11,7 +11,7 @@
 #' the tag belongs to. Omit it (default `NULL`) for free tags (optional).
 #' @template key
 #' @template args
-#' @return (logical) `TRUE` when the function deletes the tag successfully.
+#' @template return
 #' @references
 #' https://docs.ckan.org/en/2.11/api/#ckan.logic.action.delete.tag_delete
 #' @examples \dontrun{

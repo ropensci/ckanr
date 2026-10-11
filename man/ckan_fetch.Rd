@@ -29,6 +29,12 @@ pass \code{format}.}
 \item{...}{Extra arguments. If \code{store="session"}, the function passes them
 to the function that reads the file. See details.}
 }
+\value{
+With \code{store = "session"} (default), the file contents, usually a
+data.frame (Excel files with multiple sheets and ZIP files return a named
+list). With \code{store = "disk"}, a list with download details including the
+file \code{path}.
+}
 \description{
 Download a file
 }
@@ -53,7 +59,7 @@ what additional arguments are available:
 \examples{
 \dontrun{
 # CSV file
-ckanr_setup("http://datamx.io")
+ckanr_setup("https://datamx.io")
 res <- resource_show(
   id = "6145a539-cbde-4b0d-a3d3-d1a5eb013f5c",
   as = "table"
@@ -72,7 +78,7 @@ res$format
 head(ckan_fetch(res$url, format = res$format))
 
 # Excel file - requires readxl package
-ckanr_setup("http://datamx.io")
+ckanr_setup("https://datamx.io")
 res <- resource_show(
   id = "e883510e-a082-435c-872a-c5b915857ae1",
   as = "table"
@@ -90,13 +96,13 @@ names(x)
 head(x[["Mayor - Maire"]])
 
 # XML file - requires xml2 package
-# ckanr_setup("http://data.ottawa.ca")
-# res <- resource_show(id = "380061c1-6c46-4da6-a01b-7ab0f49a881e",
-# as = "table")
-# ckan_fetch(res$url)
+ckanr_setup("https://data.ottawa.ca")
+res <- resource_show(id = "380061c1-6c46-4da6-a01b-7ab0f49a881e",
+as = "table")
+ckan_fetch(res$url)
 
 # HTML file - requires xml2 package
-ckanr_setup("http://open.canada.ca/data/en")
+ckanr_setup("https://open.canada.ca/data/en")
 res <- resource_show(
   id = "80321bac-4283-487c-93bd-c65acaa660f5",
   as = "table"
@@ -106,7 +112,7 @@ library("xml2")
 xml_text(xml_find_first(xml_children(ckan_fetch(res$url))[[1]], "title"))
 
 # JSON file, by default reads in to a data.frame for ease of use
-ckanr_setup("http://data.surrey.ca")
+ckanr_setup("https://data.surrey.ca")
 res <- resource_show(
   id = "8d07c662-800d-4977-9e3e-5a3d2d1e99ab",
   as = "table"
@@ -124,7 +130,7 @@ class(x)
 plot(x[, c("AREA_NAME", "geometry")])
 
 # GeoJSON file - requires sf package
-ckanr_setup("http://datamx.io")
+ckanr_setup("https://datamx.io")
 res <- resource_show(
   id = "b1cd35b7-479e-4fa0-86e9-e897d3c617e6",
   as = "table"

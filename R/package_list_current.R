@@ -5,6 +5,7 @@
 #' @template paging
 #' @template args
 #' @template key
+#' @template return
 #' @examples \dontrun{
 #' package_list_current()
 #' package_list_current(as = "json")

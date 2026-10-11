@@ -55,6 +55,16 @@ can vary from a vector, list or data.frame. (required)}
 
 \item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
+\value{
+A list (default), table, or JSON string with the CKAN response,
+controlled by the \code{as} parameter.
+}
 \description{
 List groups the current user can edit
+}
+\examples{
+\dontrun{
+ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+group_list_authz()
+}
 }

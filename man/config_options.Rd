@@ -48,6 +48,10 @@ can vary from a vector, list or data.frame. (required)}
 
 \item{options}{(list) Named list of configuration options to update.}
 }
+\value{
+A list (default), table, or JSON string with the CKAN response,
+controlled by the \code{as} parameter.
+}
 \description{
 Inspect and update CKAN's runtime-editable configuration keys.
 }

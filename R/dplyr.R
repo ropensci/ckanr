@@ -5,11 +5,13 @@
 #'
 #' @param url The url of the CKAN instance
 #' @param key An optional CKAN API key
+#' @return A `src_ckan` object wrapping a `CKANConnection`; use it with
+#' `dplyr::tbl()` to query DataStore tables.
 #' @examples \dontrun{
 #' library("dplyr")
 #'
 #' # To connect to a CKAN instance first create a src:
-#' my_ckan <- src_ckan("http://demo.ckan.org")
+#' my_ckan <- src_ckan("https://demo.ckan.org")
 #'
 #' # The primary dbplyr interface uses the DBI connection directly
 #' con <- my_ckan$con

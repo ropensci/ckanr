@@ -3,6 +3,7 @@
 #' @export
 #' @template args
 #' @template key
+#' @template return
 #' @details CKAN does not count activities from the user herself, but they
 #' appear in the dashboard. Users do not want notices about things they did
 #' themselves.

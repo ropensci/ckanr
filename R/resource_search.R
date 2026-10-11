@@ -17,6 +17,7 @@
 #' @param limit Number of records to return.
 #' @template args
 #' @template key
+#' @template return
 #' @examples \dontrun{
 #' resource_search(q = "name:data")
 #' resource_search(q = "name:data", as = "json")

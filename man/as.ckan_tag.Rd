@@ -15,6 +15,9 @@ is.ckan_tag(x)
 \item{...}{Extra arguments. If \code{x} is character, the function passes them
 on to \code{\link[=tag_show]{tag_show()}}}
 }
+\value{
+A \code{ckan_tag} object, a list with S3 class \code{ckan_tag}.
+}
 \description{
 ckan_tag class helpers
 }

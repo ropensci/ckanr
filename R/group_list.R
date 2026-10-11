@@ -13,6 +13,7 @@
 #' @template paging
 #' @template args
 #' @template key
+#' @template return
 #' @examples \dontrun{
 #' group_list(limit = 3)
 #' group_list(limit = 3, as = "json")

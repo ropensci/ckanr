@@ -3,6 +3,7 @@
 #' @export
 #' @template args
 #' @template key
+#' @template return
 #' @examples \dontrun{
 #' revision_list()
 #' revision_list(as = "table")

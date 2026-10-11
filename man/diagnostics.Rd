@@ -32,6 +32,10 @@ can vary from a vector, list or data.frame. (required)}
 
 \item{name}{(character) CKAN action name to describe.}
 }
+\value{
+A list (default), table, or JSON string with the CKAN response,
+controlled by the \code{as} parameter.
+}
 \description{
 Lightweight wrappers for CKAN's \code{status_show} and \code{help_show} actions.
 }

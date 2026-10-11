@@ -5,6 +5,7 @@
 #' @param ... Extra arguments. If `x` is character, the function passes them
 #'   on to [package_show()]. If GET is not supported, use the `http_method`
 #'   parameter to set a different HTTP verb
+#' @return A `ckan_package` object, a list with S3 class `ckan_package`.
 #' @examples \dontrun{
 #' ckanr_setup(
 #'   url = "https://demo.ckan.org/",

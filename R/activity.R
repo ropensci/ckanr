@@ -23,6 +23,12 @@
 #'   `activity_create()`.
 #' @param data (list|character) Optional structured payload that describes the
 #'   activity body. The function encodes lists as JSON automatically.
+#' @template return
+#' @examples \dontrun{
+#' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+#' activity_show(id = "my-activity-id")
+#' group_activity_list(id = "my-group")
+#' }
 NULL
 
 #' @rdname activity_helpers
@@ -265,6 +271,7 @@ send_email_notifications <- function(
 #' @param keep (numeric) Optional. Keep this many most recent activities per
 #'   item; delete only older ones in the range.
 #' @param batch_size (numeric) Optional batch size for large tables.
+#' @template return
 #' @examples \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
 #' activity_delete_counts()

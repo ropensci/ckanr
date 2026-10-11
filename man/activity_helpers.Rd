@@ -148,7 +148,18 @@ typically "unified".}
 \item{data}{(list|character) Optional structured payload that describes the
 activity body. The function encodes lists as JSON automatically.}
 }
+\value{
+A list (default), table, or JSON string with the CKAN response,
+controlled by the \code{as} parameter.
+}
 \description{
 These helpers wrap CKAN's \code{ckanext.activity} endpoints. The target CKAN
 instance must enable the \code{activity} core plugin.
+}
+\examples{
+\dontrun{
+ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+activity_show(id = "my-activity-id")
+group_activity_list(id = "my-group")
+}
 }

@@ -28,6 +28,10 @@ can vary from a vector, list or data.frame. (required)}
 
 \item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
+\value{
+A list (default), table, or JSON string with the CKAN response,
+controlled by the \code{as} parameter.
+}
 \description{
 Show a resource.
 }
@@ -49,7 +53,7 @@ file <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
   description = "my resource",
   name = "bears",
   upload = file,
-  rcurl = "http://google.com"
+  rcurl = "https://google.com"
 ))
 
 # show the resource
@@ -59,7 +63,7 @@ resource_show(xx$id)
 # eg. from the NHM CKAN store
 resource_show(
   id = "05ff2255-c38a-40c9-b657-4ccb55ab2feb",
-  url = "http://data.nhm.ac.uk"
+  url = "https://data.nhm.ac.uk"
 )
 }
 }

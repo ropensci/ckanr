@@ -40,7 +40,7 @@
 #' @return The function returns the HTTP response from CKAN as a list (default),
 #' table, or JSON.
 #' @references
-#' http://docs.ckan.org/en/latest/api/index.html#ckan.logic.action.create.resource_create
+#' https://docs.ckan.org/en/2.12/api/index.html#ckan.logic.action.create.resource_create
 #' @examples \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
 #'
@@ -90,13 +90,13 @@
 #'
 #' #######
 #' # Using default settings
-#' ckanr_setup(url = "http://demo.ckan.org/", key = "my-demo-ckan-org-api-key")
+#' ckanr_setup(url = "https://demo.ckan.org/", key = "my-demo-ckan-org-api-key")
 #' path <- system.file("examples", "actinidiaceae.csv", package = "ckanr")
 #' resource_update(id = "an-existing-resource-id", path = path)
 #'
 #' # Using an R object written to a tempfile, and implicit CKAN URL and API key
 #' write.csv(data <- installed.packages(), path <- tempfile(fileext = ".csv"))
-#' ckanr_setup(url = "http://demo.ckan.org/", key = "my-demo-ckan-org-api-key")
+#' ckanr_setup(url = "https://demo.ckan.org/", key = "my-demo-ckan-org-api-key")
 #' resource_update(id = "an-existing-resource-id", path = path)
 #'
 #' # Testing: see ?ckanr_setup to set default test CKAN url, key, package id

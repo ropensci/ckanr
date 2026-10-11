@@ -25,6 +25,9 @@ also \code{\link{ckanr_setup}} and \code{\link{get_default_url}}.}
 
 \item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
+\value{
+(logical) TRUE when the function deletes the collaborator successfully.
+}
 \description{
 Delete a dataset collaborator
 }

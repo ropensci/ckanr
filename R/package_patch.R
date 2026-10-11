@@ -18,6 +18,7 @@
 #' "GET" or "POST". Default: "GET"
 #' @template args
 #' @template key
+#' @template return
 #' @examples \dontrun{
 #' # Setup
 #' ckanr_setup(url = "https://demo.ckan.org", key = getOption("ckan_demo_key"))

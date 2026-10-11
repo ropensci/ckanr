@@ -17,6 +17,9 @@ See also \code{\link[=ckanr_setup]{ckanr_setup()}} and \code{\link[=get_default_
 
 \item{...}{Curl args passed on to \link[crul:verb-POST]{crul::verb-POST} (optional)}
 }
+\value{
+(logical) TRUE when the function deletes the resource successfully.
+}
 \description{
 Delete a resource.
 }

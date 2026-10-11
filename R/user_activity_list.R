@@ -5,6 +5,7 @@
 #' @template paging
 #' @template args
 #' @template key
+#' @template return
 #' @examples \dontrun{
 #' # Setup
 #' ckanr_setup(

@@ -13,6 +13,7 @@ coerce_view <- function(res) as_ck(res, "ckan_resource_view")
 #' @param id (character or `ckan_resource`) Resource identifier.
 #' @template args
 #' @template key
+#' @template return
 #' @export
 #' @examples \dontrun{
 #' pkg <- package_show("sample-dataset")
@@ -41,7 +42,12 @@ resource_view_list <- function(
 #' @param id (character or `ckan_resource_view`) View identifier.
 #' @template args
 #' @template key
+#' @template return
 #' @export
+#' @examples \dontrun{
+#' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+#' resource_view_show("view-id")
+#' }
 resource_view_show <- function(
   id,
   url = get_default_url(),
@@ -73,7 +79,12 @@ resource_view_show <- function(
 #' @param filter_fields,filter_values Optional filter parameters for filterable views.
 #' @template args
 #' @template key
+#' @template return
 #' @export
+#' @examples \dontrun{
+#' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+#' resource_view_create("resource-id", view_type = "image_view", title = "My view")
+#' }
 resource_view_create <- function(
   resource,
   view_type,
@@ -115,7 +126,12 @@ resource_view_create <- function(
 #' @inheritParams resource_view_create
 #' @template args
 #' @template key
+#' @template return
 #' @export
+#' @examples \dontrun{
+#' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+#' resource_view_update("view-id", title = "Updated title")
+#' }
 resource_view_update <- function(
   id,
   resource = NULL,
@@ -161,7 +177,12 @@ resource_view_update <- function(
 #' @param order (character vector) View IDs in the desired order.
 #' @template args
 #' @template key
+#' @template return
 #' @export
+#' @examples \dontrun{
+#' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+#' resource_view_reorder("resource-id", order = c("view-id-1", "view-id-2"))
+#' }
 resource_view_reorder <- function(
   id,
   order,
@@ -192,6 +213,10 @@ resource_view_reorder <- function(
 #' @return (bool) Result of the deletion. The value is TRUE when the function
 #' deletes the resource view successfully, and FALSE when it does not.
 #' @export
+#' @examples \dontrun{
+#' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+#' resource_view_delete("view-id")
+#' }
 resource_view_delete <- function(
   id,
   url = get_default_url(),
@@ -215,7 +240,12 @@ resource_view_delete <- function(
 #' When `NULL`, the function removes all views.
 #' @template args_noas
 #' @template key
+#' @return (logical) TRUE when the function clears the resource views successfully.
 #' @export
+#' @examples \dontrun{
+#' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+#' resource_view_clear()
+#' }
 resource_view_clear <- function(
   view_types = NULL,
   url = get_default_url(),
@@ -244,7 +274,12 @@ resource_view_clear <- function(
 #' when DataPusher finishes ingesting data.
 #' @template args
 #' @template key
+#' @template return
 #' @export
+#' @examples \dontrun{
+#' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+#' resource_create_default_resource_views("resource-id")
+#' }
 resource_create_default_resource_views <- function(
   resource,
   package = NULL,
@@ -285,7 +320,12 @@ resource_create_default_resource_views <- function(
 #' @inheritParams resource_create_default_resource_views
 #' @template args
 #' @template key
+#' @template return
 #' @export
+#' @examples \dontrun{
+#' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+#' package_create_default_resource_views("dataset-id")
+#' }
 package_create_default_resource_views <- function(
   package,
   create_datastore_views = FALSE,

@@ -4,6 +4,7 @@
 #' @template paging
 #' @template args
 #' @template key
+#' @template return
 #' @examples \dontrun{
 #' related_list()
 #' related_list(as = "json")

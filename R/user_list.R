@@ -7,6 +7,7 @@
 #' Default is 'name'.
 #' @template args
 #' @template key
+#' @template return
 #' @examples \dontrun{
 #' # all users
 #' user_list()

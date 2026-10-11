@@ -4,6 +4,7 @@
 #' @param x One of character, list, or ckan_tag class object
 #' @param ... Extra arguments. If `x` is character, the function passes them
 #'   on to [tag_show()]
+#' @return A `ckan_tag` object, a list with S3 class `ckan_tag`.
 #' @examples \dontrun{
 #' ckanr_setup(
 #'   url = "https://demo.ckan.org/",

@@ -52,6 +52,7 @@
 #' values (optional)
 #' @template args
 #' @template key
+#' @template return
 #'
 #' @examples \dontrun{
 #' # Setup
@@ -66,7 +67,7 @@
 #' (res <- package_create("helloworld", author = "Jane DOe"))
 #'
 #' # include a group
-#' # package_create("brownbear", groups = data.frame(id = "some-id"))
+#' package_create("brownbear", groups = data.frame(id = "some-id"))
 #' }
 package_create <- function(
   name = NULL,

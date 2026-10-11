@@ -4,6 +4,7 @@
 #' @param x One of character, list, or ckan_related class object
 #' @param ... Extra arguments. If `x` is character, the function passes them
 #'   on to [related_show()]
+#' @return A `ckan_related` object, a list with S3 class `ckan_related`.
 #' @examples \dontrun{
 #' ckanr_setup(
 #'   url = "https://demo.ckan.org/",

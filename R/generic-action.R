@@ -4,7 +4,7 @@
 #' You also set query parameters, body data, and headers.
 #'
 #' @export
-#' @param action A valid CKAN API action name (for example, "package_list", "package_show"). See the CKAN API documentation for a full list of actions: https://docs.ckan.org/en/latest/api/index.html
+#' @param action A valid CKAN API action name (for example, "package_list", "package_show"). See the CKAN API documentation for a full list of actions: https://docs.ckan.org/en/2.12/api/
 #' @param query a named list of URL query parameters
 #' @param body Data for the body of a request. See
 #' https://docs.ropensci.org/crul/reference/verb-POST.html for options

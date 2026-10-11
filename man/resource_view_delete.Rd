@@ -24,3 +24,9 @@ deletes the resource view successfully, and FALSE when it does not.
 \description{
 Delete a resource view
 }
+\examples{
+\dontrun{
+ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+resource_view_delete("view-id")
+}
+}

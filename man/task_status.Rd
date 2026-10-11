@@ -92,6 +92,10 @@ can vary from a vector, list or data.frame. (required)}
 \item{data}{(list) For \code{task_status_update_many()}, a list of task status
 dictionaries to update.}
 }
+\value{
+A list (default), table, or JSON string with the CKAN response,
+controlled by the \code{as} parameter.
+}
 \description{
 These helpers wrap the sysadmin-only task status endpoints that CKAN uses to
 track background operations (for example DataPusher runs).

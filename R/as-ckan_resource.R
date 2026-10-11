@@ -4,6 +4,7 @@
 #' @param x One of character, list, or ckan_package class object
 #' @param ... Extra arguments. If `x` is character, the function passes them
 #'   on to [resource_show()]
+#' @return A `ckan_resource` object, a list with S3 class `ckan_resource`.
 #' @examples \dontrun{
 #' ckanr_setup(
 #'   url = "https://demo.ckan.org/",

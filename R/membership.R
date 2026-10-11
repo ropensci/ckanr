@@ -12,10 +12,12 @@ NULL
 #' @param capacity (character) Optional capacity filter (`"member"`, `"editor"`, `"admin"`).
 #' @template args
 #' @template key
+#' @template return
 #' @export
-#' @examples
-#' # ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
-#' # member_list("my-group", object_type = "user")
+#' @examples \dontrun{
+#' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+#' member_list("my-group", object_type = "user")
+#' }
 member_list <- function(
   id,
   object_type = NULL,
@@ -50,7 +52,12 @@ member_list <- function(
 #' @param capacity (character) Capacity for the membership.
 #' @template args
 #' @template key
+#' @template return
 #' @export
+#' @examples \dontrun{
+#' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+#' member_create("my-group", object = "demo-user", object_type = "user", capacity = "member")
+#' }
 member_create <- function(
   id,
   object,
@@ -82,7 +89,12 @@ member_create <- function(
 #' Remove a membership via member_* endpoints
 #'
 #' @inheritParams member_create
+#' @return (logical) TRUE on success
 #' @export
+#' @examples \dontrun{
+#' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+#' member_delete("my-group", object = "demo-user", object_type = "user")
+#' }
 member_delete <- function(
   id,
   object,
@@ -113,7 +125,12 @@ member_delete <- function(
 #' @param group_type (character) Either `"group"` or `"organization"`.
 #' @template args
 #' @template key
+#' @template return
 #' @export
+#' @examples \dontrun{
+#' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+#' member_roles_list(group_type = "organization")
+#' }
 member_roles_list <- function(
   group_type = "organization",
   url = get_default_url(),
@@ -140,7 +157,12 @@ member_roles_list <- function(
 #' @param role (character) Desired role (`"member"`, `"editor"`, `"admin"`).
 #' @template args
 #' @template key
+#' @template return
 #' @export
+#' @examples \dontrun{
+#' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+#' group_member_create("my-group", username = "demo-user", role = "member")
+#' }
 group_member_create <- function(
   id,
   username,
@@ -170,7 +192,12 @@ group_member_create <- function(
 #' Remove a user from a group
 #'
 #' @inheritParams group_member_create
+#' @return (logical) TRUE on success
 #' @export
+#' @examples \dontrun{
+#' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+#' group_member_delete("my-group", username = "demo-user")
+#' }
 group_member_delete <- function(
   id,
   username,
@@ -197,7 +224,12 @@ group_member_delete <- function(
 #' Make a user a member of an organization
 #'
 #' @inheritParams group_member_create
+#' @template return
 #' @export
+#' @examples \dontrun{
+#' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+#' organization_member_create("my-organization", username = "demo-user", role = "member")
+#' }
 organization_member_create <- function(
   id,
   username,
@@ -227,7 +259,12 @@ organization_member_create <- function(
 #' Remove a user from an organization
 #'
 #' @inheritParams group_member_delete
+#' @return (logical) TRUE on success
 #' @export
+#' @examples \dontrun{
+#' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+#' organization_member_delete("my-organization", username = "demo-user")
+#' }
 organization_member_delete <- function(
   id,
   username,
@@ -258,7 +295,12 @@ organization_member_delete <- function(
 #' @param role (character) Desired role (`"member"`, `"editor"`, `"admin"`).
 #' @template args
 #' @template key
+#' @template return
 #' @export
+#' @examples \dontrun{
+#' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+#' user_invite("user@example.com", group_id = "my-group", role = "member")
+#' }
 user_invite <- function(
   email,
   group_id,
@@ -293,7 +335,12 @@ user_invite <- function(
 #' @template paging
 #' @template args
 #' @template key
+#' @template return
 #' @export
+#' @examples \dontrun{
+#' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+#' group_list_authz()
+#' }
 group_list_authz <- function(
   type = "group",
   groups = NULL,
@@ -350,7 +397,12 @@ group_list_authz <- function(
 #' @param include_dataset_count (logical) Include dataset counts in the response.
 #' @template args
 #' @template key
+#' @template return
 #' @export
+#' @examples \dontrun{
+#' ckanr_setup(url = "https://demo.ckan.org/", key = getOption("ckan_demo_key"))
+#' organization_list_for_user()
+#' }
 organization_list_for_user <- function(
   id = NULL,
   permission = "manage_group",

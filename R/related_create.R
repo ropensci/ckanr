@@ -15,6 +15,7 @@
 #' @param image_url (character) URL of an image for the related item. Optional.
 #' @template args
 #' @template key
+#' @template return
 #'
 #' @examples \dontrun{
 #' # Setup

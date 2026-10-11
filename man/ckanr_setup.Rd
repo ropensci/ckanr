@@ -44,6 +44,10 @@ create datasets at \code{test_url}}
 \item{proxy}{an object of class \code{request} from a call to
 \code{\link[crul:proxy]{crul::proxy()}}}
 }
+\value{
+(invisible) Called for its side effects; sets default and test
+CKAN settings in environment variables and returns invisibly.
+}
 \description{
 Configure default CKAN settings
 }

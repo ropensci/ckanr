@@ -5,6 +5,7 @@
 #' @param id (character) Resource identifier.
 #' @template args
 #' @template key
+#' @template return
 #' @examples \dontrun{
 #' # Setup
 #' ckanr_setup(
@@ -22,7 +23,7 @@
 #'   description = "my resource",
 #'   name = "bears",
 #'   upload = file,
-#'   rcurl = "http://google.com"
+#'   rcurl = "https://google.com"
 #' ))
 #'
 #' # show the resource
@@ -32,7 +33,7 @@
 #' # eg. from the NHM CKAN store
 #' resource_show(
 #'   id = "05ff2255-c38a-40c9-b657-4ccb55ab2feb",
-#'   url = "http://data.nhm.ac.uk"
+#'   url = "https://data.nhm.ac.uk"
 #' )
 #' }
 resource_show <- function(

@@ -9,6 +9,7 @@
 #'   username or `ckan_user`.
 #' @template args
 #' @template key
+#' @template return
 #' @name follower_counts
 #' @examples \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
@@ -113,6 +114,7 @@ organization_follower_count <- function(
 #' @inheritParams follower_counts
 #' @template args
 #' @template key
+#' @template return
 #' @name follower_lists
 #' @examples \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
@@ -217,6 +219,7 @@ organization_follower_list <- function(
 #' @inheritParams follower_counts
 #' @template args
 #' @template key
+#' @template return
 #' @name follow_objects
 #' @examples \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
@@ -349,6 +352,7 @@ group_am_following <- function(
 #' @param id (character or `ckan_user`) The user to follow or inspect.
 #' @template args
 #' @template key
+#' @template return
 #' @name follow_users
 #' @examples \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
@@ -423,6 +427,7 @@ am_following_user <- function(
 #' @param id (character or `ckan_user`) User identifier.
 #' @template args
 #' @template key
+#' @template return
 #' @name followee_counts
 #' @examples \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")
@@ -535,6 +540,7 @@ organization_followee_count <- function(
 #' @param q (character) Optional prefix filter for `followee_list()`.
 #' @template args
 #' @template key
+#' @template return
 #' @name followee_lists
 #' @examples \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org/", key = "my-key")

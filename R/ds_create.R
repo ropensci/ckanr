@@ -24,7 +24,7 @@
 #' when affected.
 #' @template key
 #' @template args
-#' @references http://bit.ly/ds_create
+#' @template return
 #' @examples \dontrun{
 #' ckanr_setup(
 #'   url = "https://demo.ckan.org/",

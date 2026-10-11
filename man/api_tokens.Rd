@@ -61,6 +61,10 @@ by CKAN or extensions.}
 
 \item{jti}{(character) Token identifier (overrides \code{token} when provided).}
 }
+\value{
+A list (default), table, or JSON string with the CKAN response,
+controlled by the \code{as} parameter.
+}
 \description{
 Inspect, create, and revoke API tokens for a user.
 }

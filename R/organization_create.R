@@ -31,6 +31,7 @@
 #' member of the organization)
 #' @template args
 #' @template key
+#' @template return
 #'
 #' @examples \dontrun{
 #' # Setup

@@ -7,6 +7,8 @@
 #' @param as (character) One of "logical" (default) or "json". With
 #' `as = "logical"` failures return `FALSE`. With `as = "json"` failures
 #' signal an error instead of returning a non-JSON logical.
+#' @return (logical) TRUE when the CKAN server is up, FALSE when it is down.
+#' With `as = "json"`, the raw JSON response string instead.
 #' @examples \dontrun{
 #' ping()
 #' ping(as = "json")

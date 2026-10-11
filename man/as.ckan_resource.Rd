@@ -15,6 +15,9 @@ is.ckan_resource(x)
 \item{...}{Extra arguments. If \code{x} is character, the function passes them
 on to \code{\link[=resource_show]{resource_show()}}}
 }
+\value{
+A \code{ckan_resource} object, a list with S3 class \code{ckan_resource}.
+}
 \description{
 ckan_resource class helpers
 }

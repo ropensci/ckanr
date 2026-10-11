@@ -7,8 +7,9 @@
 #' @param path (character) Path of the file to add (required)
 #' @template key
 #' @template args
+#' @template return
 #' @references
-#' http://docs.ckan.org/en/latest/api/index.html#ckan.logic.action.create.resource_create
+#' https://docs.ckan.org/en/2.12/api/index.html#ckan.logic.action.create.resource_create
 #' @details This function is deprecated and will be defunct in the next
 #' version of this package. Use [resource_create()] instead. For example,
 #' replace `ds_create_dataset(package_id, name, path)` with

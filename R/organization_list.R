@@ -12,6 +12,7 @@
 #' (optional, default: 31)
 #' @template args
 #' @template key
+#' @template return
 #' @examples \dontrun{
 #' ckanr_setup(url = "https://demo.ckan.org/")
 #'

@@ -25,4 +25,7 @@
 #' The class tells functions what to do with the object. Functions accept
 #' flexible inputs and return flexible outputs. You can edit one of these
 #' classes yourself by changing values in the list.
+#'
+#' @seealso [as.ckan_package()], [as.ckan_resource()],
+#' [as.ckan_resource_view()], [as.ckan_related()], [as.ckan_file()]
 NULL

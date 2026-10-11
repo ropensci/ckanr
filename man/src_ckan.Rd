@@ -12,6 +12,10 @@ src_ckan(url, key = get_default_key())
 
 \item{key}{An optional CKAN API key}
 }
+\value{
+A \code{src_ckan} object wrapping a \code{CKANConnection}; use it with
+\code{dplyr::tbl()} to query DataStore tables.
+}
 \description{
 Use \code{src_ckan} to connect to an existing CKAN instance. Use \code{tbl} to
 connect to tables in that CKAN through the DataStore Data API.
@@ -21,7 +25,7 @@ connect to tables in that CKAN through the DataStore Data API.
 library("dplyr")
 
 # To connect to a CKAN instance first create a src:
-my_ckan <- src_ckan("http://demo.ckan.org")
+my_ckan <- src_ckan("https://demo.ckan.org")
 
 # The primary dbplyr interface uses the DBI connection directly
 con <- my_ckan$con

@@ -8,6 +8,7 @@
 #' Optional. Default is `FALSE`.
 #' @template args
 #' @template key
+#' @template return
 #' @examples \dontrun{
 #' # get tags with tag_list()
 #' tags <- tag_list()

@@ -37,6 +37,7 @@
 #' a member of the group)
 #' @template args
 #' @template key
+#' @template return
 #'
 #' @examples \dontrun{
 #' # Setup

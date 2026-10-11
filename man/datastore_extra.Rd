@@ -150,6 +150,10 @@ Default: \code{FALSE}.}
 function parameters, e.g. \code{"in"}, \code{"inout"}, \code{"out"} (CKAN 2.12+,
 \url{https://github.com/ckan/ckan/pull/8279}). Optional.}
 }
+\value{
+A list (default), table, or JSON string with the CKAN response,
+controlled by the \code{as} parameter.
+}
 \description{
 Wrappers for \code{datastore_upsert}, \code{datastore_delete},
 \code{datastore_records_delete}, \code{datastore_info}, \code{datastore_function_create},

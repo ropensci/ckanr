@@ -75,8 +75,12 @@ the vocabulary. Only applies to \code{vocabulary_show()}.}
 \item{name}{(character) Unique name of the vocabulary.}
 
 \item{tags}{(list) Optional list of tag objects. Each object contains at least
-a \code{name} field. See \url{https://docs.ckan.org/en/latest/api/} for the full
+a \code{name} field. See \url{https://docs.ckan.org/en/2.12/api/} for the full
 structure.}
+}
+\value{
+A list (default), table, or JSON string with the CKAN response,
+controlled by the \code{as} parameter.
 }
 \description{
 CKAN allows only sysadmin users to create, update, and delete vocabularies.

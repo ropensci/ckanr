@@ -4,6 +4,7 @@
 #' @param id (character) Package identifier.
 #' @template args
 #' @template key
+#' @template return
 #' @examples \dontrun{
 #' license_list()
 #' license_list(as = "table")

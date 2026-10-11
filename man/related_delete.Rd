@@ -17,6 +17,9 @@ also \code{\link[=ckanr_setup]{ckanr_setup()}} and \code{\link[=get_default_url]
 
 \item{...}{Curl args passed on to \link[crul:verb-POST]{crul::verb-POST} (optional)}
 }
+\value{
+(logical) TRUE when the function deletes the related item successfully.
+}
 \description{
 Delete a related item.
 }

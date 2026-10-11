@@ -6,6 +6,9 @@
 \usage{
 servers()
 }
+\value{
+(character) A character vector of CKAN server URLs.
+}
 \description{
 CKAN server URLs and other info
 }

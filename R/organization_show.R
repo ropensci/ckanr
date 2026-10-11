@@ -13,6 +13,7 @@
 #' supported CKAN versions (2.9, 2.10, 2.11, 2.12).
 #' @template args
 #' @template key
+#' @template return
 #' @details By default the function drops the help and success slots. It returns
 #' only the result slot. If you want raw json, request `as = 'json'`.
 #' Then you parse the result yourself to get the help slot.

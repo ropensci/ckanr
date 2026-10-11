@@ -11,6 +11,7 @@
 #' @template paging
 #' @template args
 #' @template key
+#' @template return
 #' @examples \dontrun{
 #' tag_search(query = "ta")
 #' tag_search(query = c("ta", "al"))

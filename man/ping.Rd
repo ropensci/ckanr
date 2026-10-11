@@ -19,6 +19,10 @@ signal an error instead of returning a non-JSON logical.}
 
 \item{...}{Extra curl arguments. The function passes them to \code{\link[crul]{verb-POST}} (optional)}
 }
+\value{
+(logical) TRUE when the CKAN server is up, FALSE when it is down.
+With \code{as = "json"}, the raw JSON response string instead.
+}
 \description{
 Ping a CKAN server to test if it is up or down.
 }

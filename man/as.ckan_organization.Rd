@@ -15,6 +15,9 @@ is.ckan_organization(x)
 \item{...}{Extra arguments. If \code{x} is character, the function passes them
 on to \code{\link[=organization_show]{organization_show()}}}
 }
+\value{
+A \code{ckan_organization} object, a list with S3 class \code{ckan_organization}.
+}
 \description{
 ckan_organization class helpers
 }

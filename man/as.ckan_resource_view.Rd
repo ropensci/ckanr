@@ -15,6 +15,9 @@ is.ckan_resource_view(x)
 \item{...}{Extra arguments. If \code{x} is an identifier, the function passes
 them to \code{\link[=resource_view_show]{resource_view_show()}}.}
 }
+\value{
+A \code{ckan_resource_view} object, a list with S3 class \code{ckan_resource_view}.
+}
 \description{
 ckan_resource_view class helpers
 }

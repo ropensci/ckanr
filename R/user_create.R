@@ -22,8 +22,9 @@
 #' Optional.
 #' @template key
 #' @template args
+#' @template return
 #' @references
-#' http://docs.ckan.org/en/latest/api/index.html#ckan.logic.action.create.user_create
+#' https://docs.ckan.org/en/2.12/api/index.html#ckan.logic.action.create.user_create
 #' @examples \dontrun{
 #' # Setup
 #' ckanr_setup(

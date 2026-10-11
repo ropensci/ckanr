@@ -61,6 +61,10 @@ can vary from a vector, list or data.frame. (required)}
 \item{data}{(list) List of translation dictionaries with \code{term},
 \code{term_translation}, and \code{lang_code} entries.}
 }
+\value{
+A list (default), table, or JSON string with the CKAN response,
+controlled by the \code{as} parameter.
+}
 \description{
 Manage localized UI strings stored in CKAN's term translation table.
 }

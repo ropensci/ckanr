@@ -7,6 +7,7 @@
 #' See also [ckanr_setup()] and [get_default_url()].
 #' @param ... Curl args passed on to [crul::verb-POST] (optional)
 #' @template key
+#' @return (logical) TRUE when the function deletes the resource successfully.
 #' @examples \dontrun{
 #' # Setup
 #' ckanr_setup(url = "https://demo.ckan.org/", key = Sys.getenv("CKAN_DEMO_KEY"))

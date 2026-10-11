@@ -6,6 +6,7 @@
 #' See also [ckanr_setup()] and [get_default_url()]
 #' @param ... Curl args. The function sends them to [crul::verb-POST] (optional)
 #' @template key
+#' @return (logical) TRUE when the function deletes the package successfully.
 #'
 #' @examples \dontrun{
 #' # Setup

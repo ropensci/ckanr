@@ -26,6 +26,7 @@
 #' The value is one of "GET" or "POST". Default is "GET".
 #' @template args
 #' @template key
+#' @template return
 #'
 #' @examples \dontrun{
 #' # Setup

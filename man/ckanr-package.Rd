@@ -9,14 +9,13 @@
 ckanr is a client for the CKAN API. It wraps all
 APIs for reading and writing data. If you have problems, or
 have use cases that the package does not cover yet, get in touch
-(\url{https://github.com/ropensci/ckanr/issues} or
-\url{https://discuss.ropensci.org/})
+(\url{https://github.com/ropensci/ckanr/issues})
 }
 \section{CKAN API}{
 
 
 Documentation for the CKAN API is at
-\url{https://docs.ckan.org/en/latest/api/index.html}.
+\url{https://docs.ckan.org/en/2.12/api/index.html}.
 The package follows the latest version of the API.
 }
 
@@ -49,7 +48,7 @@ other functions starting with \verb{user_*}
 
 
 The package supports the Datastore extension
-(\url{https://docs.ckan.org/en/latest/maintaining/datastore.html}).
+(\url{https://docs.ckan.org/en/2.12/maintaining/datastore.html}).
 It provides these functions:
 \itemize{
 \item \code{\link[=ds_create]{ds_create()}}

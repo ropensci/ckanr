@@ -15,6 +15,9 @@ is.ckan_vocabulary(x)
 \item{...}{Extra arguments. If you retrieve by identifier, the function
 passes them to \code{vocabulary_show()}.}
 }
+\value{
+A \code{ckan_vocabulary} object, a list with S3 class \code{ckan_vocabulary}.
+}
 \description{
 ckan_vocabulary class helpers
 }

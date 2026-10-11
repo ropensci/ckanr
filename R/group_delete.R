@@ -6,6 +6,7 @@
 #' See also [ckanr_setup()] and [get_default_url()]
 #' @param ... Curl args. The function sends them to [crul::verb-POST] (optional)
 #' @template key
+#' @return (logical) TRUE on success
 #'
 #' @examples \dontrun{
 #' # Setup
@@ -19,8 +20,6 @@
 #'
 #' # delete the group
 #' group_delete(res)
-#' ## or with it's id
-#' # group_delete(res$id)
 #' }
 group_delete <- function(
   id,

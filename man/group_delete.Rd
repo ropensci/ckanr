@@ -17,6 +17,9 @@ See also \code{\link[=ckanr_setup]{ckanr_setup()}} and \code{\link[=get_default_
 
 \item{...}{Curl args. The function sends them to \link[crul:verb-POST]{crul::verb-POST} (optional)}
 }
+\value{
+(logical) TRUE on success
+}
 \description{
 Delete a group
 }
@@ -33,7 +36,5 @@ group_show(res$id)
 
 # delete the group
 group_delete(res)
-## or with it's id
-# group_delete(res$id)
 }
 }

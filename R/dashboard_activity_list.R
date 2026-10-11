@@ -8,6 +8,7 @@
 #' Default: 0
 #' @template args
 #' @template key
+#' @template return
 #'
 #' @examples \dontrun{
 #' # Setup

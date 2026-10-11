@@ -39,3 +39,7 @@ flexible inputs and return flexible outputs. You can edit one of these
 classes yourself by changing values in the list.
 }
 
+\seealso{
+\code{\link[=as.ckan_package]{as.ckan_package()}}, \code{\link[=as.ckan_resource]{as.ckan_resource()}},
+\code{\link[=as.ckan_resource_view]{as.ckan_resource_view()}}, \code{\link[=as.ckan_related]{as.ckan_related()}}, \code{\link[=as.ckan_file]{as.ckan_file()}}
+}
